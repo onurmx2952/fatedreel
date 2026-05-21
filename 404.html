@@ -1311,7 +1311,7 @@ function setPageSeo(movie) {
   const summary = decodeText(movie?.summary || '').replace(/\s+/g, ' ').trim();
   const isMovieUrl = requestedMovieId && requestedMovieId === movieId;
 
-  document.title = movieTitle ? `${movieTitle}${year ? ` (${year})` : ''} - FatedReel` : 'FatedReel';
+  document.title = 'FatedReel';
   if (description) {
     description.setAttribute('content', summary || 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.');
   }
@@ -1322,7 +1322,7 @@ function setPageSeo(movie) {
 
 function renderMovieNotFound(movieId) {
   currentIdx = -1;
-  document.title = movieId ? `${decodeText(movieId)} not found - FatedReel` : 'Movie not found - FatedReel';
+  document.title = 'FatedReel';
   document.querySelector('link[rel="canonical"]')?.setAttribute('href', 'https://fatedreel.com/');
   document.getElementById('heroBg').style.opacity = 0;
   document.getElementById('genreTags').innerHTML = '';

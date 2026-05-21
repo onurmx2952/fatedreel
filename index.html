@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>FatedReel</title>
 <meta name="description" content="Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.">
-<meta name="yandex-verification" content="cafbb79d0d7f285a" />
 <link rel="canonical" href="https://fatedreel.com/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.2 13.5a6.7 6.7 0 1 1-3.1-7.65' fill='none' stroke='%2354575f' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M19.05 4.75v5h-5' fill='none' stroke='%2354575f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -1312,7 +1311,7 @@ function setPageSeo(movie) {
   const summary = decodeText(movie?.summary || '').replace(/\s+/g, ' ').trim();
   const isMovieUrl = requestedMovieId && requestedMovieId === movieId;
 
-  document.title = movieTitle ? `${movieTitle}${year ? ` (${year})` : ''} - FatedReel` : 'FatedReel';
+  document.title = 'FatedReel';
   if (description) {
     description.setAttribute('content', summary || 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.');
   }
@@ -1323,7 +1322,7 @@ function setPageSeo(movie) {
 
 function renderMovieNotFound(movieId) {
   currentIdx = -1;
-  document.title = movieId ? `${decodeText(movieId)} not found - FatedReel` : 'Movie not found - FatedReel';
+  document.title = 'FatedReel';
   document.querySelector('link[rel="canonical"]')?.setAttribute('href', 'https://fatedreel.com/');
   document.getElementById('heroBg').style.opacity = 0;
   document.getElementById('genreTags').innerHTML = '';
