@@ -1303,17 +1303,36 @@ function findMovieIndexById(movieId) {
   return movies.findIndex((movie) => decodeText(movie.tt || '').toLowerCase() === movieId);
 }
 
+function metaDescriptionText(text, maxLength = 155) {
+  const cleanText = decodeText(text || '').replace(/\s+/g, ' ').trim();
+  if (cleanText.length <= maxLength) return cleanText;
+
+  const trimmed = cleanText.slice(0, maxLength - 3).trimEnd();
+  const lastSpace = trimmed.lastIndexOf(' ');
+  const sentence = lastSpace > maxLength * 0.65 ? trimmed.slice(0, lastSpace) : trimmed;
+  return `${sentence.replace(/[.,;:!?-]+$/, '')}...`;
+}
+
+function movieMetaDescription(movie) {
+  const title = decodeText(movie?.title || 'Movie').trim();
+  const year = decodeText(movie?.year || '').trim();
+  const label = year ? `${title} (${year})` : title;
+  const summary = decodeText(movie?.summary || '').replace(/\s+/g, ' ').trim();
+  const context = 'Explore reviews, scenes, trailers, and IMDb links for this movie on FatedReel.';
+  const copy = summary ? `${label}: ${summary} ${context}` : `${label}. ${context}`;
+  return metaDescriptionText(copy);
+}
+
 function setPageSeo(movie) {
   const canonical = document.querySelector('link[rel="canonical"]');
   const description = document.querySelector('meta[name="description"]');
   const requestedMovieId = getRequestedMovieId();
   const movieId = decodeText(movie?.tt || '').toLowerCase();
-  const summary = decodeText(movie?.summary || '').replace(/\s+/g, ' ').trim();
   const isMovieUrl = requestedMovieId && requestedMovieId === movieId;
   const siteDescription = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
 
   if (description) {
-    description.setAttribute('content', isMovieUrl && summary ? summary : siteDescription);
+    description.setAttribute('content', isMovieUrl ? movieMetaDescription(movie) : siteDescription);
   }
   if (canonical) {
     canonical.setAttribute('href', isMovieUrl ? `https://fatedreel.com/${movieId}` : 'https://fatedreel.com/');
