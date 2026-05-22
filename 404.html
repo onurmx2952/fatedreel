@@ -1307,14 +1307,13 @@ function setPageSeo(movie) {
   const description = document.querySelector('meta[name="description"]');
   const requestedMovieId = getRequestedMovieId();
   const movieId = decodeText(movie?.tt || '').toLowerCase();
-  const movieTitle = decodeText(movie?.title || '');
-  const year = decodeText(movie?.year || '');
   const summary = decodeText(movie?.summary || '').replace(/\s+/g, ' ').trim();
   const isMovieUrl = requestedMovieId && requestedMovieId === movieId;
+  const siteDescription = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
 
   document.title = 'FatedReel';
   if (description) {
-    description.setAttribute('content', summary || 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.');
+    description.setAttribute('content', isMovieUrl && summary ? summary : siteDescription);
   }
   if (canonical) {
     canonical.setAttribute('href', isMovieUrl ? `https://fatedreel.com/${movieId}` : 'https://fatedreel.com/');
