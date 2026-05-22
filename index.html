@@ -1162,7 +1162,7 @@
 
 <script>
 const MOVIES_URL = 'movies.json';
-const REVIEWS_URL = 'reviews.json';
+const REVIEWS_DIR = 'reviews';
 const TRAILERS_URL = 'trailers.json';
 const ROLL_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwQ2eVGnNnRm0GnItyDf3F3tvHrB-sCIzcwrj8-ju7RK0qPhBKYXRYm-5YRzQfsKBcC/exec';
 const UI_TEXT = {
@@ -1178,7 +1178,7 @@ const UI_TEXT = {
 };
 let movies = [];
 let reviewsByMovie = {};
-let reviewsLoadPromise = null;
+let reviewLoadPromises = {};
 let trailers = {};
 let currentIdx = 0;
 let currentSceneIndex = 0;
@@ -1438,28 +1438,30 @@ function renderReviews(movie, reviews) {
   });
 }
 
-async function ensureReviewsLoaded() {
-  if (Object.keys(reviewsByMovie).length) return reviewsByMovie;
-  if (reviewsLoadPromise) return reviewsLoadPromise;
+async function loadReviewsForTitle(tt) {
+  if (!tt) return [];
+  if (reviewsByMovie[tt]) return reviewsByMovie[tt];
+  if (reviewLoadPromises[tt]) return reviewLoadPromises[tt];
 
-  reviewsLoadPromise = (async () => {
-    const candidates = [REVIEWS_URL, './reviews.json'];
+  reviewLoadPromises[tt] = (async () => {
+    const reviewFile = `${REVIEWS_DIR}/${encodeURIComponent(tt)}.json`;
+    const candidates = [reviewFile, `./${reviewFile}`];
     for (const file of candidates) {
       try {
         const res = await fetch(file, { cache: 'no-store' });
         if (!res.ok) continue;
         const parsed = await res.json();
-        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
-          reviewsByMovie = parsed;
-          return reviewsByMovie;
+        if (Array.isArray(parsed)) {
+          reviewsByMovie[tt] = parsed;
+          return parsed;
         }
       } catch (_) {}
     }
-    reviewsByMovie = {};
-    return reviewsByMovie;
+    reviewsByMovie[tt] = [];
+    return reviewsByMovie[tt];
   })();
 
-  return reviewsLoadPromise;
+  return reviewLoadPromises[tt];
 }
 
 async function renderReviewsForMovie(movie) {
@@ -1482,9 +1484,9 @@ async function renderReviewsForMovie(movie) {
     </div>
   `;
 
-  const loaded = await ensureReviewsLoaded();
+  const loaded = await loadReviewsForTitle(tt);
   if (currentIdx >= 0 && movies[currentIdx]?.tt !== tt) return;
-  renderReviews(movie, loaded[tt] || []);
+  renderReviews(movie, loaded);
 }
 
 function renderMovie(idx) {
