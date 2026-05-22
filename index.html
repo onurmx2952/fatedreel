@@ -1311,7 +1311,6 @@ function setPageSeo(movie) {
   const isMovieUrl = requestedMovieId && requestedMovieId === movieId;
   const siteDescription = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
 
-  document.title = 'FatedReel';
   if (description) {
     description.setAttribute('content', isMovieUrl && summary ? summary : siteDescription);
   }
@@ -1322,7 +1321,6 @@ function setPageSeo(movie) {
 
 function renderMovieNotFound(movieId) {
   currentIdx = -1;
-  document.title = 'FatedReel';
   document.querySelector('link[rel="canonical"]')?.setAttribute('href', 'https://fatedreel.com/');
   document.getElementById('heroBg').style.opacity = 0;
   document.getElementById('genreTags').innerHTML = '';
