@@ -1,1 +1,4 @@
+http://fatedreel.com/* https://fatedreel.com/:splat 301!
+http://www.fatedreel.com/* https://fatedreel.com/:splat 301!
+https://www.fatedreel.com/* https://fatedreel.com/:splat 301!
 /tt* / 200
