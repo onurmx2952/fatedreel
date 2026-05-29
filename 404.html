@@ -1045,7 +1045,7 @@
 
 
 
-<main class="app-layout">
+<main class="app-layout" id="appLayout" data-nosnippet>
 <section class="app-column roll-column">
 <!-- Hero -->
 <div id="hero">
@@ -1331,6 +1331,7 @@ function movieMetaDescription(movie) {
 }
 
 function setPageSeo(movie) {
+  const appLayout = document.getElementById('appLayout');
   const canonical = document.querySelector('link[rel="canonical"]');
   const description = document.querySelector('meta[name="description"]');
   const requestedMovieId = getRequestedMovieId();
@@ -1338,6 +1339,9 @@ function setPageSeo(movie) {
   const isMovieUrl = requestedMovieId && requestedMovieId === movieId;
   const siteDescription = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
 
+  if (appLayout) {
+    appLayout.toggleAttribute('data-nosnippet', !isMovieUrl);
+  }
   if (description) {
     description.setAttribute('content', isMovieUrl ? movieMetaDescription(movie) : siteDescription);
   }
