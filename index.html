@@ -12,6 +12,7 @@
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
+<script id="structuredData" type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"FatedReel","url":"https://fatedreel.com/","description":"Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links."}</script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="48463d55-4c8b-4825-9d2c-773e5e5d4e47"></script>
 <style>
@@ -1330,6 +1331,53 @@ function movieMetaDescription(movie) {
   return metaDescriptionText(copy);
 }
 
+function structuredDataForMovie(movie) {
+  const movieId = decodeText(movie?.tt || '').toLowerCase();
+  const title = decodeText(movie?.title || '').trim();
+  const year = decodeText(movie?.year || '').trim();
+  const rating = Number(movie?.rating);
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'Movie',
+    name: title,
+    url: `https://fatedreel.com/${movieId}`,
+    sameAs: `https://www.imdb.com/title/${movieId}/`,
+    description: movieMetaDescription(movie),
+    image: movie?.poster ? new URL(movie.poster, window.location.origin).href : undefined,
+    datePublished: year || undefined,
+    genre: Array.isArray(movie?.genres) ? movie.genres.map(decodeText).filter(Boolean) : undefined
+  };
+
+  if (Number.isFinite(rating) && rating > 0) {
+    data.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: rating,
+      bestRating: 10,
+      worstRating: 1
+    };
+  }
+
+  Object.keys(data).forEach((key) => data[key] === undefined && delete data[key]);
+  return data;
+}
+
+function updateStructuredData(movie, isMovieUrl) {
+  const structuredData = document.getElementById('structuredData');
+  if (!structuredData) return;
+  const siteDescription = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
+  const data = isMovieUrl
+    ? structuredDataForMovie(movie)
+    : {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'FatedReel',
+        url: 'https://fatedreel.com/',
+        description: siteDescription
+      };
+
+  structuredData.textContent = JSON.stringify(data);
+}
+
 function setPageSeo(movie) {
   const appLayout = document.getElementById('appLayout');
   const canonical = document.querySelector('link[rel="canonical"]');
@@ -1345,6 +1393,7 @@ function setPageSeo(movie) {
   if (description) {
     description.setAttribute('content', isMovieUrl ? movieMetaDescription(movie) : siteDescription);
   }
+  updateStructuredData(movie, isMovieUrl);
   if (canonical) {
     canonical.setAttribute('href', isMovieUrl ? `https://fatedreel.com/${movieId}` : 'https://fatedreel.com/');
   }
