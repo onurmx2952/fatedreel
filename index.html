@@ -7,11 +7,11 @@
 <meta name="description" content="Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.">
 <meta name="yandex-verification" content="ceb9161a75b5f5db">
 <link rel="canonical" href="https://fatedreel.com/">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon-v20260530-96x96.png">
-<link rel="icon" href="/favicon-v20260530.ico" sizes="any">
-<link rel="shortcut icon" href="/favicon-v20260530.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-v20260530.png">
-<link rel="manifest" href="/site-v20260530.webmanifest">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-v20260530-96x96.png?v=20260530">
+<link rel="icon" href="/favicon-v20260530.ico?v=20260530" sizes="any">
+<link rel="shortcut icon" href="/favicon.ico?v=20260530">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260530">
+<link rel="manifest" href="/site-v20260530.webmanifest?v=20260530">
 <script id="structuredData" type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"FatedReel","url":"https://fatedreel.com/","description":"Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links."}</script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="48463d55-4c8b-4825-9d2c-773e5e5d4e47"></script>
@@ -1528,7 +1528,7 @@ async function loadReviewsForTitle(tt) {
     const candidates = [reviewFile, `./${reviewFile}`];
     for (const file of candidates) {
       try {
-        const res = await fetch(file, { cache: 'no-store' });
+        const res = await fetch(file);
         if (!res.ok) continue;
         const parsed = await res.json();
         if (Array.isArray(parsed)) {
@@ -2044,7 +2044,7 @@ async function tryFetchJson() {
   const candidates = [MOVIES_URL, './movies.json'];
   for (const file of candidates) {
     try {
-      const res = await fetch(file, { cache: 'no-store' });
+      const res = await fetch(file);
       if (!res.ok) continue;
       const parsed = await res.json();
       if (Array.isArray(parsed) && parsed.length) {
@@ -2068,7 +2068,7 @@ async function tryFetchTrailers() {
   const candidates = [TRAILERS_URL, './trailers.json'];
   for (const file of candidates) {
     try {
-      const res = await fetch(file, { cache: 'no-store' });
+      const res = await fetch(file);
       if (!res.ok) continue;
       const parsed = await res.json();
       if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
