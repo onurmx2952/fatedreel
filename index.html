@@ -1174,6 +1174,10 @@ const MOVIES_URL = 'movies.json';
 const REVIEWS_DIR = 'reviews';
 const TRAILERS_URL = 'trailers.json';
 const ROLL_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwQ2eVGnNnRm0GnItyDf3F3tvHrB-sCIzcwrj8-ju7RK0qPhBKYXRYm-5YRzQfsKBcC/exec';
+const SITE_DESCRIPTION = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
+const TRACK_CENTER_PERCENT = -33.3333;
+const TRACK_NEXT_PERCENT = -66.6667;
+const LIGHTBOX_SHIFT_FALLBACK_MS = 520;
 const UI_TEXT = {
   more: 'More',
   less: 'Less',
@@ -1308,7 +1312,7 @@ function getRequestedMovieId() {
 
 function findMovieIndexById(movieId) {
   if (!movieId) return -1;
-  return movies.findIndex((movie) => decodeText(movie.tt || '').toLowerCase() === movieId);
+  return movies.findIndex((movie) => (movie.tt || '').toLowerCase() === movieId);
 }
 
 function metaDescriptionText(text, maxLength = 155) {
@@ -1364,7 +1368,6 @@ function structuredDataForMovie(movie) {
 function updateStructuredData(movie, isMovieUrl) {
   const structuredData = document.getElementById('structuredData');
   if (!structuredData) return;
-  const siteDescription = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
   const data = isMovieUrl
     ? structuredDataForMovie(movie)
     : {
@@ -1372,7 +1375,7 @@ function updateStructuredData(movie, isMovieUrl) {
         '@type': 'WebSite',
         name: 'FatedReel',
         url: 'https://fatedreel.com/',
-        description: siteDescription
+        description: SITE_DESCRIPTION
       };
 
   structuredData.textContent = JSON.stringify(data);
@@ -1383,15 +1386,14 @@ function setPageSeo(movie) {
   const canonical = document.querySelector('link[rel="canonical"]');
   const description = document.querySelector('meta[name="description"]');
   const requestedMovieId = getRequestedMovieId();
-  const movieId = decodeText(movie?.tt || '').toLowerCase();
+  const movieId = (movie?.tt || '').toLowerCase();
   const isMovieUrl = requestedMovieId && requestedMovieId === movieId;
-  const siteDescription = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
 
   if (appLayout) {
     appLayout.toggleAttribute('data-nosnippet', !isMovieUrl);
   }
   if (description) {
-    description.setAttribute('content', isMovieUrl ? movieMetaDescription(movie) : siteDescription);
+    description.setAttribute('content', isMovieUrl ? movieMetaDescription(movie) : SITE_DESCRIPTION);
   }
   updateStructuredData(movie, isMovieUrl);
   if (canonical) {
@@ -1466,7 +1468,7 @@ function renderTrailer(movie) {
   const trailerFrame = document.getElementById('trailerFrame');
   const trailerTitle = document.getElementById('trailerTitle');
   const trailerSearchLink = document.getElementById('trailerSearchLink');
-  const trailerId = trailers[decodeText(movie.tt)];
+  const trailerId = trailers[movie.tt];
 
   if (!trailerId) {
     trailerTitle.textContent = `${decodeText(movie.title)} Trailer Search`;
@@ -1615,11 +1617,6 @@ function renderMovie(idx) {
   imdbLink.querySelector('.imdb-title').textContent = `${decodeText(m.title)} ${UI_TEXT.imdbTitleSuffix}`;
 
   renderTrailer(m);
-
-  // Trigger fade-ups
-  setTimeout(() => {
-    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
-  }, 100);
 
   preloadRollPosters(idx);
 }
@@ -1904,21 +1901,28 @@ function showSceneAt(index) {
   if (!sceneList.length) return;
   currentSceneIndex = normalizeSceneIndex(index);
   syncLightboxImages();
-  setTrackPosition(-33.3333, false);
+  setTrackPosition(TRACK_CENTER_PERCENT, false);
 }
 
 function animateSceneShift(direction) {
   if (lightboxAnimating || zoomState.scale > 1) return;
   lightboxAnimating = true;
   const track = document.getElementById('sceneLightboxTrack');
-  const target = direction === 'next' ? -66.6667 : 0;
-  setTrackPosition(target, true);
-  track.addEventListener('transitionend', () => {
+  const target = direction === 'next' ? TRACK_NEXT_PERCENT : 0;
+  let fallbackTimer = null;
+
+  const finishShift = () => {
+    if (!lightboxAnimating) return;
+    if (fallbackTimer) clearTimeout(fallbackTimer);
     currentSceneIndex = normalizeSceneIndex(currentSceneIndex + (direction === 'next' ? 1 : -1));
     syncLightboxImages();
-    setTrackPosition(-33.3333, false);
+    setTrackPosition(TRACK_CENTER_PERCENT, false);
     lightboxAnimating = false;
-  }, { once: true });
+  };
+
+  setTrackPosition(target, true);
+  track.addEventListener('transitionend', finishShift, { once: true });
+  fallbackTimer = setTimeout(finishShift, LIGHTBOX_SHIFT_FALLBACK_MS);
 }
 
 function getTouchDistance(touchA, touchB) {
@@ -1976,7 +1980,7 @@ function beginPinch(touchA, touchB) {
 function resetSceneZoom() {
   if (zoomState.scale <= 1.02) return;
   resetZoom(true);
-  setTrackPosition(-33.3333, true);
+  setTrackPosition(TRACK_CENTER_PERCENT, true);
 }
 
 function maybeResetZoomOnDoubleTap(touch) {
