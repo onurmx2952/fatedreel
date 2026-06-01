@@ -1426,9 +1426,7 @@ function renderMovieNotFound(movieId) {
 }
 
 function getDisplaySceneList(movie) {
-  return [...new Set((movie?.scenes || [])
-    .filter(Boolean)
-    .filter((src) => src.includes('image.tmdb.org')))];
+  return [...new Set((movie?.scenes || []).filter(Boolean))];
 }
 
 function starsHTML(rating) {
@@ -1477,10 +1475,10 @@ function renderTrailer(movie) {
   const trailerId = trailers[movie.tt];
 
   if (!trailerId) {
+    trailerTitle.textContent = `${decodeText(movie.title)} Trailer Search`;
     trailerFrame.src = '';
-    trailerTitle.textContent = '';
     trailerSearchLink.href = trailerSearchUrl(movie);
-    trailerCard.classList.remove('visible', 'search-mode');
+    trailerCard.classList.add('visible', 'search-mode');
     return;
   }
 
@@ -1610,7 +1608,7 @@ function renderMovie(idx) {
   const scenesSection = document.getElementById('scenes-section');
   const divider = document.querySelector('.divider');
   const scenes = document.getElementById('scenesScroll');
-  const hasEnoughScenes = sceneUrls.length >= 3;
+  const hasEnoughScenes = sceneUrls.length > 0;
   scenesSection.hidden = !hasEnoughScenes;
   if (divider) divider.hidden = !hasEnoughScenes;
   scenes.innerHTML = hasEnoughScenes ? sceneUrls.map((s, sceneIndex) => `
