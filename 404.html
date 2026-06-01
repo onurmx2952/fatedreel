@@ -1425,6 +1425,12 @@ function renderMovieNotFound(movieId) {
   trailerCard.classList.add('visible', 'search-mode');
 }
 
+function getDisplaySceneList(movie) {
+  return [...new Set((movie?.scenes || [])
+    .filter(Boolean)
+    .filter((src) => src.includes('image.tmdb.org')))];
+}
+
 function starsHTML(rating) {
   const full = Math.round(rating / 2);
   let html = '';
@@ -1471,10 +1477,10 @@ function renderTrailer(movie) {
   const trailerId = trailers[movie.tt];
 
   if (!trailerId) {
-    trailerTitle.textContent = `${decodeText(movie.title)} Trailer Search`;
     trailerFrame.src = '';
+    trailerTitle.textContent = '';
     trailerSearchLink.href = trailerSearchUrl(movie);
-    trailerCard.classList.add('visible', 'search-mode');
+    trailerCard.classList.remove('visible', 'search-mode');
     return;
   }
 
@@ -1600,12 +1606,18 @@ function renderMovie(idx) {
   document.getElementById('heroSummary').innerHTML = renderExpandableText(m.summary, 180);
 
   // Scenes
+  const sceneUrls = getDisplaySceneList(m);
+  const scenesSection = document.getElementById('scenes-section');
+  const divider = document.querySelector('.divider');
   const scenes = document.getElementById('scenesScroll');
-  scenes.innerHTML = m.scenes.map((s, sceneIndex) => `
+  const hasEnoughScenes = sceneUrls.length >= 3;
+  scenesSection.hidden = !hasEnoughScenes;
+  if (divider) divider.hidden = !hasEnoughScenes;
+  scenes.innerHTML = hasEnoughScenes ? sceneUrls.map((s, sceneIndex) => `
     <div class="scene-card" data-scene-index="${sceneIndex}">
       <img src="${s}" alt="scene" loading="lazy" onerror="this.parentElement.style.display='none'">
     </div>
-  `).join('');
+  `).join('') : '';
   scenes.scrollLeft = 0;
   requestAnimationFrame(updateSceneScrollButtons);
 
@@ -1796,7 +1808,7 @@ async function rollToNextMovie() {
 }
 
 function getSceneList() {
-  return movies[currentIdx]?.scenes || [];
+  return getDisplaySceneList(movies[currentIdx]);
 }
 
 function normalizeSceneIndex(index) {
