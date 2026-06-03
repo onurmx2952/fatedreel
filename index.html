@@ -1175,6 +1175,7 @@ const REVIEWS_DIR = 'reviews';
 const TRAILERS_URL = 'trailers.json';
 const ROLL_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwQ2eVGnNnRm0GnItyDf3F3tvHrB-sCIzcwrj8-ju7RK0qPhBKYXRYm-5YRzQfsKBcC/exec';
 const SITE_DESCRIPTION = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
+const CRAWLER_USER_AGENT_PATTERN = /googlebot|bingbot|yandex|duckduckbot|baiduspider|slurp|facebookexternalhit|twitterbot|linkedinbot|pinterest|whatsapp|telegrambot|applebot|ia_archiver/i;
 const TRACK_CENTER_PERCENT = -33.3333;
 const TRACK_NEXT_PERCENT = -66.6667;
 const LIGHTBOX_SHIFT_FALLBACK_MS = 520;
@@ -1310,9 +1311,23 @@ function getRequestedMovieId() {
   return match ? match[0].toLowerCase() : '';
 }
 
+function isCrawlerRequest() {
+  return CRAWLER_USER_AGENT_PATTERN.test(navigator.userAgent || '');
+}
+
 function findMovieIndexById(movieId) {
   if (!movieId) return -1;
   return movies.findIndex((movie) => (movie.tt || '').toLowerCase() === movieId);
+}
+
+function setRobotsMeta(content) {
+  let robots = document.querySelector('meta[name="robots"]');
+  if (!robots) {
+    robots = document.createElement('meta');
+    robots.setAttribute('name', 'robots');
+    document.head.appendChild(robots);
+  }
+  robots.setAttribute('content', content);
 }
 
 function metaDescriptionText(text, maxLength = 155) {
@@ -1389,6 +1404,7 @@ function setPageSeo(movie) {
   const movieId = (movie?.tt || '').toLowerCase();
   const isMovieUrl = requestedMovieId && requestedMovieId === movieId;
 
+  setRobotsMeta('index,follow');
   if (appLayout) {
     appLayout.toggleAttribute('data-nosnippet', !isMovieUrl);
   }
@@ -1399,6 +1415,32 @@ function setPageSeo(movie) {
   if (canonical) {
     canonical.setAttribute('href', isMovieUrl ? `https://fatedreel.com/${movieId}` : 'https://fatedreel.com/');
   }
+}
+
+function renderCrawlerHome() {
+  currentIdx = -1;
+  setRobotsMeta('index,follow,noimageindex');
+  document.querySelector('link[rel="canonical"]')?.setAttribute('href', 'https://fatedreel.com/');
+  document.querySelector('meta[name="description"]')?.setAttribute('content', SITE_DESCRIPTION);
+  updateStructuredData(null, false);
+
+  const appLayout = document.getElementById('appLayout');
+  if (appLayout) appLayout.setAttribute('data-nosnippet', '');
+
+  const heroBg = document.getElementById('heroBg');
+  heroBg.style.opacity = 0;
+  heroBg.style.backgroundImage = '';
+  document.getElementById('genreTags').innerHTML = '';
+  document.getElementById('heroTitle').textContent = 'FatedReel';
+  document.getElementById('heroYear').textContent = '';
+  document.getElementById('heroRating').textContent = '';
+  document.getElementById('heroSummary').textContent = SITE_DESCRIPTION;
+  document.getElementById('scenesScroll').innerHTML = '';
+
+  ['scenes-section', 'reviews-section', 'trailer-section', 'links-section'].forEach((id) => {
+    document.getElementById(id)?.setAttribute('hidden', '');
+  });
+  document.querySelector('.divider')?.setAttribute('hidden', '');
 }
 
 function renderMovieNotFound(movieId) {
@@ -2101,7 +2143,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (loaded) {
     const requestedMovieId = getRequestedMovieId();
     const requestedIdx = findMovieIndexById(requestedMovieId);
-    if (requestedMovieId && requestedIdx < 0) {
+    if (!requestedMovieId && isCrawlerRequest()) {
+      renderCrawlerHome();
+    } else if (requestedMovieId && requestedIdx < 0) {
       renderMovieNotFound(requestedMovieId);
     } else {
       renderMovie(requestedIdx >= 0 ? requestedIdx : getRandom());
