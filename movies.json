@@ -59172,10 +59172,15 @@
   {
     "tt": "tt3021360",
     "title": "Faults",
-    "summary": null,
-    "year": null,
-    "genres": null,
-    "rating": null,
+    "summary": "A cult deprogrammer is hired to help a couple whose daughter is under the influence of a mysterious cult.",
+    "year": "2014",
+    "genres": [
+      "Comedy",
+      "Drama",
+      "Mystery",
+      "Thriller"
+    ],
+    "rating": 6.7,
     "poster": "tmdb-posters-webp-50kb/tt3021360.webp",
     "scenes": [
       "https://image.tmdb.org/t/p/w780/abB9jtr9QBdzPa5H2ZGzbqMwJ3.jpg",
@@ -76991,39 +76996,6 @@
     "scenes": [
       "https://m.media-amazon.com/images/M/MV5BNDE5MjQ5ODQtZjQxNi00M2MxLTk3NDMtMGI3YjczYjMyN2EwXkEyXkFqcGc@._V1_.jpg",
       "https://m.media-amazon.com/images/M/MV5BZGVhMTE4MzQtOGUxNC00MWUwLWI0N2UtNjI1OWJmY2U1MmYwXkEyXkFqcGc@._V1_.jpg"
-    ]
-  },
-  {
-    "tt": "tt29332321",
-    "title": "Wendigo",
-    "summary": "What seems to be the ideal setting for fun and relaxation quickly turns deadly when six vacationing college students encounter a cursed spirit with an insatiable appetite.",
-    "year": "None",
-    "genres": [
-      "Horror"
-    ],
-    "rating": 7.7,
-    "poster": "tmdb-posters-webp-50kb/tt29332321.webp",
-    "scenes": [
-      "https://m.media-amazon.com/images/M/MV5BZDRkNDUzMjctYWE0Ny00OGM3LWE1ODktOWEwMWNjYjc1YWZmXkEyXkFqcGc@._V1_.jpg",
-      "https://m.media-amazon.com/images/M/MV5BNDVlNjI1MjktYjEzOC00M2VhLWE2MzItNDE3NmJiMjg0NTNjXkEyXkFqcGc@._V1_.jpg"
-    ]
-  },
-  {
-    "tt": "tt29341882",
-    "title": "Strawberry Melancholy",
-    "summary": "None",
-    "year": "None",
-    "genres": [
-      "Comedy"
-    ],
-    "rating": 8.3,
-    "poster": "tmdb-posters-webp-50kb/tt29341882.webp",
-    "scenes": [
-      "https://m.media-amazon.com/images/M/MV5BOGMzNmRjYzgtMWQ4OC00ZDM1LWE3MGYtYWFiM2ZiMjlmNDU0XkEyXkFqcGc@._V1_.jpg",
-      "https://m.media-amazon.com/images/M/MV5BNDBjODk5NGItOGE0Ni00MTAyLTk1MjEtMGM0NDNlMzM0MTVjXkEyXkFqcGc@._V1_.jpg",
-      "https://m.media-amazon.com/images/M/MV5BNjhmZmE1MTQtNjM3Yi00MmRlLWFiMDAtN2JmNzM2MjQ0YTliXkEyXkFqcGc@._V1_.jpg",
-      "https://m.media-amazon.com/images/M/MV5BZmZiMDgxYWItZTA3Zi00Mzg4LTk4ZTQtMmM5MmFhMjA2MGUyXkEyXkFqcGc@._V1_.jpg",
-      "https://m.media-amazon.com/images/M/MV5BMjY0ODEyMzk0NV5BMl5BanBnXkFtZTcwNTU4OTI1Mg@@._V1_.jpg"
     ]
   },
   {

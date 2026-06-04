@@ -31,7 +31,7 @@ export async function onRequest(context) {
     : null;
 
   if (!movie) {
-    return context.env.ASSETS.fetch(context.request);
+    return movieNotFoundResponse(movieId);
   }
 
   const reviewsRes = await fetchAsset(context, `/reviews/${encodeURIComponent(movieId)}.json`);
@@ -49,6 +49,31 @@ export async function onRequest(context) {
 function fetchAsset(context, pathname) {
   const assetUrl = new URL(pathname, context.request.url);
   return context.env.ASSETS.fetch(new Request(assetUrl.toString(), { method: 'GET' }));
+}
+
+function movieNotFoundResponse(movieId) {
+  return new Response(`<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<title>Movie not found - FatedReel</title>
+<link rel="canonical" href="https://fatedreel.com/">
+</head>
+<body>
+<main>
+<h1>Movie not found</h1>
+<p>${escapeHtml(movieId)} is not in the FatedReel movie list.</p>
+</main>
+</body>
+</html>`, {
+    status: 404,
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'public, max-age=0, must-revalidate'
+    }
+  });
 }
 
 function renderMovieHtml(template, movie, reviews, trailerId, origin) {
