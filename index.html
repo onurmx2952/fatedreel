@@ -1200,6 +1200,7 @@ let currentIdx = 0;
 let currentSceneIndex = 0;
 let lightboxAnimating = false;
 let rollAnimating = false;
+let lastHistoryMovieId = '';
 let rollPosterBank = [];
 let sceneScrollAnimation = null;
 let lockedScrollY = 0;
@@ -1341,7 +1342,11 @@ function setMovieHistory(idx, mode = 'push') {
 
   const url = movieUrlForIndex(idx);
   const state = { movieId };
-  if (mode === 'replace') {
+  const currentMovieId = getRequestedMovieId();
+  const isDuplicateMovie = lastHistoryMovieId === movieId || currentMovieId === movieId;
+  lastHistoryMovieId = movieId;
+
+  if (mode === 'replace' || isDuplicateMovie) {
     window.history.replaceState(state, '', url);
     return;
   }
@@ -1357,16 +1362,19 @@ function renderFromCurrentUrl() {
   const requestedMovieId = getRequestedMovieId();
   const requestedIdx = findMovieIndexById(requestedMovieId);
   if (requestedMovieId && requestedIdx >= 0) {
+    lastHistoryMovieId = requestedMovieId;
     renderMovie(requestedIdx);
     window.scrollTo({ top: 0, behavior: 'auto' });
     return;
   }
   if (requestedMovieId) {
+    lastHistoryMovieId = '';
     renderMovieNotFound(requestedMovieId);
     return;
   }
   const fallbackIdx = currentIdx >= 0 && movies[currentIdx] ? currentIdx : getRandom();
   renderMovie(fallbackIdx);
+  lastHistoryMovieId = decodeText(movies[fallbackIdx]?.tt || '').toLowerCase();
 }
 
 function setRobotsMeta(content) {
