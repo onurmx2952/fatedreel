@@ -1,0 +1,13 @@
+{
+  "minPublicScenes": 4,
+  "minPublicReviews": 2,
+  "allowMissingTrailer": true,
+  "blockedMovieIds": {
+    "tt2667550": "Manual review: one scene and one review; keep in archive until completed.",
+    "tt21626774": "Manual review: one scene; keep in archive until completed.",
+    "tt13451410": "Manual review: outside current public curation scope.",
+    "tt27922706": "Manual review: three scenes; keep in archive until completed.",
+    "tt2401621": "Manual review: one scene and missing trailer; keep in archive until completed.",
+    "tt3142764": "Manual review: outside current public curation scope."
+  }
+}

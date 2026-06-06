@@ -10,27 +10,29 @@ export async function onRequest(context) {
   }
 
   const movieId = match[1].toLowerCase();
-  const [templateRes, moviesRes, trailersRes] = await Promise.all([
+  const [templateRes, moviesRes, trailersRes, qualityRes] = await Promise.all([
     fetchAsset(context, '/index.html'),
     fetchAsset(context, '/movies.json'),
-    fetchAsset(context, '/trailers.json')
+    fetchAsset(context, '/trailers.json'),
+    fetchAsset(context, '/movie-quality.json')
   ]);
 
   if (!templateRes.ok || !moviesRes.ok) {
     return context.env.ASSETS.fetch(context.request);
   }
 
-  const [template, movies, trailers] = await Promise.all([
+  const [template, movies, trailers, qualityDoc] = await Promise.all([
     templateRes.text(),
     moviesRes.json(),
-    trailersRes.ok ? trailersRes.json() : {}
+    trailersRes.ok ? trailersRes.json() : {},
+    qualityRes.ok ? qualityRes.json() : {}
   ]);
 
   const movie = Array.isArray(movies)
     ? movies.find((item) => String(item?.tt || '').toLowerCase() === movieId)
     : null;
 
-  if (!movie) {
+  if (!movie || !isPublicMovie(movie, qualityDoc)) {
     return movieNotFoundResponse(movieId);
   }
 
@@ -49,6 +51,13 @@ export async function onRequest(context) {
 function fetchAsset(context, pathname) {
   const assetUrl = new URL(pathname, context.request.url);
   return context.env.ASSETS.fetch(new Request(assetUrl.toString(), { method: 'GET' }));
+}
+
+function isPublicMovie(movie, qualityDoc) {
+  const movieId = decodeText(movie?.tt || '').toLowerCase();
+  const quality = qualityDoc?.movies?.[movieId];
+  if (quality && quality.public === false) return false;
+  return displayScenes(movie).length >= 4;
 }
 
 function movieNotFoundResponse(movieId) {

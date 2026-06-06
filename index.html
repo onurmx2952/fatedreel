@@ -1173,6 +1173,7 @@
 const MOVIES_URL = 'movies.json';
 const REVIEWS_DIR = 'reviews';
 const TRAILERS_URL = 'trailers.json';
+const QUALITY_URL = 'movie-quality.json';
 const ROLL_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwQ2eVGnNnRm0GnItyDf3F3tvHrB-sCIzcwrj8-ju7RK0qPhBKYXRYm-5YRzQfsKBcC/exec';
 const SITE_DESCRIPTION = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
 const CRAWLER_USER_AGENT_PATTERN = /googlebot|bingbot|yandex|duckduckbot|baiduspider|slurp|facebookexternalhit|twitterbot|linkedinbot|pinterest|whatsapp|telegrambot|applebot|ia_archiver/i;
@@ -1194,6 +1195,7 @@ let movies = [];
 let reviewsByMovie = {};
 let reviewLoadPromises = {};
 let trailers = {};
+let movieQuality = {};
 let currentIdx = 0;
 let currentSceneIndex = 0;
 let lightboxAnimating = false;
@@ -1318,6 +1320,13 @@ function isCrawlerRequest() {
 function findMovieIndexById(movieId) {
   if (!movieId) return -1;
   return movies.findIndex((movie) => (movie.tt || '').toLowerCase() === movieId);
+}
+
+function isPublicMovie(movie) {
+  const movieId = decodeText(movie?.tt || '').toLowerCase();
+  const quality = movieQuality[movieId];
+  if (quality && quality.public === false) return false;
+  return Array.isArray(movie?.scenes) && movie.scenes.filter(Boolean).length >= 4;
 }
 
 function setRobotsMeta(content) {
@@ -2111,12 +2120,29 @@ async function tryFetchJson() {
           year: decodeText(movie.year),
           tt: decodeText(movie.tt),
           genres: Array.isArray(movie.genres) ? movie.genres.map(decodeText) : []
-        }));
+        })).filter(isPublicMovie);
         resetShuffle(currentIdx);
         return true;
       }
     } catch (_) {}
   }
+  return false;
+}
+
+async function tryFetchQuality() {
+  const candidates = [QUALITY_URL, './movie-quality.json'];
+  for (const file of candidates) {
+    try {
+      const res = await fetch(file);
+      if (!res.ok) continue;
+      const parsed = await res.json();
+      if (parsed && typeof parsed === 'object' && parsed.movies) {
+        movieQuality = parsed.movies;
+        return true;
+      }
+    } catch (_) {}
+  }
+  movieQuality = {};
   return false;
 }
 
@@ -2139,7 +2165,13 @@ async function tryFetchTrailers() {
 
 // Init
 document.addEventListener('DOMContentLoaded', async () => {
-  const [loaded] = await Promise.all([tryFetchJson(), tryFetchTrailers()]);
+  const [loaded] = await Promise.all([
+    (async () => {
+      await tryFetchQuality();
+      return tryFetchJson();
+    })(),
+    tryFetchTrailers()
+  ]);
   if (loaded) {
     const requestedMovieId = getRequestedMovieId();
     const requestedIdx = findMovieIndexById(requestedMovieId);
