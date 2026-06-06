@@ -1350,13 +1350,14 @@ function setMovieHistory(idx, mode = 'push') {
   }
 }
 
-function renderFromCurrentUrl() {
+function renderFromCurrentUrl(event) {
   const lightbox = document.getElementById('sceneLightbox');
   if (lightbox?.classList.contains('open')) {
     closeSceneLightbox();
   }
 
-  const requestedMovieId = getRequestedMovieId();
+  const stateMovieId = decodeText(event?.state?.movieId || '').toLowerCase();
+  const requestedMovieId = stateMovieId || getRequestedMovieId();
   const requestedIdx = findMovieIndexById(requestedMovieId);
   if (requestedMovieId && requestedIdx >= 0) {
     renderMovie(requestedIdx);
@@ -1886,8 +1887,9 @@ async function rollToNextMovie() {
     await sleep(frameDelay);
   }
 
-  renderMovie(nextIdx);
+  setMovieHistory(currentIdx, 'replace');
   setMovieHistory(nextIdx, 'push');
+  renderMovie(nextIdx);
   trackRoll(movies[nextIdx]);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   posterStage.classList.remove('spinning');
