@@ -1348,14 +1348,13 @@ function setMovieHistory(idx, mode = 'push') {
   window.history.pushState(state, '', url);
 }
 
-function renderFromCurrentUrl(event) {
+function renderFromCurrentUrl() {
   const lightbox = document.getElementById('sceneLightbox');
   if (lightbox?.classList.contains('open')) {
     closeSceneLightbox();
   }
 
-  const stateMovieId = decodeText(event?.state?.movieId || '').toLowerCase();
-  const requestedMovieId = stateMovieId || getRequestedMovieId();
+  const requestedMovieId = getRequestedMovieId();
   const requestedIdx = findMovieIndexById(requestedMovieId);
   if (requestedMovieId && requestedIdx >= 0) {
     renderMovie(requestedIdx);
