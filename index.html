@@ -1203,8 +1203,6 @@ let rollAnimating = false;
 let rollPosterBank = [];
 let sceneScrollAnimation = null;
 let lockedScrollY = 0;
-let movieHistoryStack = [];
-let movieHistoryPosition = -1;
 
 // Shuffle (Fisher-Yates) tabanlı sıra — aynı film arka arkaya gelmez,
 // tüm filmler bitmeden tekrar başlamaz.
@@ -1342,28 +1340,12 @@ function setMovieHistory(idx, mode = 'push') {
   if (!movieId) return;
 
   const url = movieUrlForIndex(idx);
-  if (mode === 'replace') {
-    if (movieHistoryPosition < 0) {
-      movieHistoryStack = [idx];
-      movieHistoryPosition = 0;
-    } else {
-      movieHistoryStack[movieHistoryPosition] = idx;
-    }
-  } else {
-    if (movieHistoryStack[movieHistoryPosition] === idx) return;
-    movieHistoryStack = movieHistoryStack.slice(0, movieHistoryPosition + 1);
-    movieHistoryStack.push(idx);
-    movieHistoryPosition = movieHistoryStack.length - 1;
-  }
-
-  const state = { movieId, movieHistoryPosition };
+  const state = { movieId };
   if (mode === 'replace') {
     window.history.replaceState(state, '', url);
     return;
   }
-  if (window.location.pathname.toLowerCase() !== url) {
-    window.history.pushState(state, '', url);
-  }
+  window.history.pushState(state, '', url);
 }
 
 function renderFromCurrentUrl(event) {
@@ -1372,34 +1354,10 @@ function renderFromCurrentUrl(event) {
     closeSceneLightbox();
   }
 
-  let statePosition = Number(event?.state?.movieHistoryPosition);
-  if (
-    Number.isInteger(statePosition) &&
-    statePosition === movieHistoryPosition &&
-    movieHistoryPosition > 0
-  ) {
-    statePosition -= 1;
-  }
-
-  if (Number.isInteger(statePosition) && movies[movieHistoryStack[statePosition]]) {
-    movieHistoryPosition = statePosition;
-    renderMovie(movieHistoryStack[statePosition]);
-    window.history.replaceState(
-      {
-        movieId: decodeText(movies[movieHistoryStack[statePosition]].tt || '').toLowerCase(),
-        movieHistoryPosition
-      },
-      '',
-      movieUrlForIndex(movieHistoryStack[statePosition])
-    );
-    window.scrollTo({ top: 0, behavior: 'auto' });
-    return;
-  }
-
-  const requestedMovieId = getRequestedMovieId();
+  const stateMovieId = decodeText(event?.state?.movieId || '').toLowerCase();
+  const requestedMovieId = stateMovieId || getRequestedMovieId();
   const requestedIdx = findMovieIndexById(requestedMovieId);
   if (requestedMovieId && requestedIdx >= 0) {
-    setMovieHistory(requestedIdx, 'replace');
     renderMovie(requestedIdx);
     window.scrollTo({ top: 0, behavior: 'auto' });
     return;
@@ -1927,8 +1885,17 @@ async function rollToNextMovie() {
     await sleep(frameDelay);
   }
 
+  setMovieHistory(nextIdx, 'push');
+  renderMovie(nextIdx);
   trackRoll(movies[nextIdx]);
-  window.location.assign(movieUrlForIndex(nextIdx));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  posterStage.classList.remove('spinning');
+  await sleep(30);
+  overlay.classList.remove('visible');
+  overlay.setAttribute('aria-hidden', 'true');
+  poster.removeAttribute('src');
+  button.classList.remove('rolling');
+  rollAnimating = false;
 }
 
 function getSceneList() {
