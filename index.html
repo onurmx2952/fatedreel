@@ -1927,18 +1927,8 @@ async function rollToNextMovie() {
     await sleep(frameDelay);
   }
 
-  setMovieHistory(currentIdx, 'replace');
-  setMovieHistory(nextIdx, 'push');
-  renderMovie(nextIdx);
   trackRoll(movies[nextIdx]);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  posterStage.classList.remove('spinning');
-  await sleep(30);
-  overlay.classList.remove('visible');
-  overlay.setAttribute('aria-hidden', 'true');
-  poster.removeAttribute('src');
-  button.classList.remove('rolling');
-  rollAnimating = false;
+  window.location.assign(movieUrlForIndex(nextIdx));
 }
 
 function getSceneList() {
