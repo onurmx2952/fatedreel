@@ -1329,6 +1329,48 @@ function isPublicMovie(movie) {
   return Array.isArray(movie?.scenes) && movie.scenes.filter(Boolean).length >= 4;
 }
 
+function movieUrlForIndex(idx) {
+  const movieId = decodeText(movies[idx]?.tt || '').toLowerCase();
+  return movieId ? `/${movieId}` : '/';
+}
+
+function setMovieHistory(idx, mode = 'push') {
+  if (!movies[idx]) return;
+  const movieId = decodeText(movies[idx].tt || '').toLowerCase();
+  if (!movieId) return;
+
+  const url = movieUrlForIndex(idx);
+  const state = { movieId };
+  if (mode === 'replace') {
+    window.history.replaceState(state, '', url);
+    return;
+  }
+  if (window.location.pathname.toLowerCase() !== url) {
+    window.history.pushState(state, '', url);
+  }
+}
+
+function renderFromCurrentUrl() {
+  const lightbox = document.getElementById('sceneLightbox');
+  if (lightbox?.classList.contains('open')) {
+    closeSceneLightbox();
+  }
+
+  const requestedMovieId = getRequestedMovieId();
+  const requestedIdx = findMovieIndexById(requestedMovieId);
+  if (requestedMovieId && requestedIdx >= 0) {
+    renderMovie(requestedIdx);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    return;
+  }
+  if (requestedMovieId) {
+    renderMovieNotFound(requestedMovieId);
+    return;
+  }
+  const fallbackIdx = currentIdx >= 0 && movies[currentIdx] ? currentIdx : getRandom();
+  renderMovie(fallbackIdx);
+}
+
 function setRobotsMeta(content) {
   let robots = document.querySelector('meta[name="robots"]');
   if (!robots) {
@@ -1845,6 +1887,7 @@ async function rollToNextMovie() {
   }
 
   renderMovie(nextIdx);
+  setMovieHistory(nextIdx, 'push');
   trackRoll(movies[nextIdx]);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   posterStage.classList.remove('spinning');
@@ -2103,6 +2146,7 @@ function closeSceneLightbox() {
 }
 
 document.getElementById('randomBtn').addEventListener('click', rollToNextMovie);
+window.addEventListener('popstate', renderFromCurrentUrl);
 
 // Try to load movies.json from same folder (works when served locally)
 async function tryFetchJson() {
@@ -2180,7 +2224,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else if (requestedMovieId && requestedIdx < 0) {
       renderMovieNotFound(requestedMovieId);
     } else {
-      renderMovie(requestedIdx >= 0 ? requestedIdx : getRandom());
+      const initialIdx = requestedIdx >= 0 ? requestedIdx : getRandom();
+      renderMovie(initialIdx);
+      setMovieHistory(initialIdx, 'replace');
     }
   } else {
     document.getElementById('heroTitle').textContent = UI_TEXT.moviesLoadErrorTitle;
