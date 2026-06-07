@@ -1518,7 +1518,7 @@ function renderMovieNotFound(movieId) {
   imdbLink.querySelector('.imdb-title').textContent = movieId ? `${movieId} ${UI_TEXT.imdbTitleSuffix}` : UI_TEXT.imdbTitleSuffix;
 
   const trailerCard = document.getElementById('trailerCard');
-  document.getElementById('trailerFrame').src = '';
+  setTrailerFrameSrc(document.getElementById('trailerFrame'), '');
   document.getElementById('trailerTitle').textContent = 'No local movie record';
   document.getElementById('trailerSearchLink').href = imdbLink.href;
   trailerCard.classList.add('visible', 'search-mode');
@@ -1566,6 +1566,27 @@ function trailerSearchUrl(movie) {
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
 }
 
+function setTrailerFrameSrc(frame, url) {
+  if (!frame) return;
+  const currentUrl = frame.dataset.currentSrc || frame.getAttribute('src') || '';
+  if (currentUrl === url) return;
+
+  frame.dataset.currentSrc = url;
+  try {
+    if (frame.contentWindow) {
+      frame.contentWindow.location.replace(url || 'about:blank');
+      if (!url) frame.removeAttribute('src');
+      return;
+    }
+  } catch (_) {}
+
+  if (url) {
+    frame.setAttribute('src', url);
+  } else {
+    frame.removeAttribute('src');
+  }
+}
+
 function renderTrailer(movie) {
   const trailerCard = document.getElementById('trailerCard');
   const trailerFrame = document.getElementById('trailerFrame');
@@ -1575,14 +1596,14 @@ function renderTrailer(movie) {
 
   if (!trailerId) {
     trailerTitle.textContent = `${decodeText(movie.title)} Trailer Search`;
-    trailerFrame.src = '';
+    setTrailerFrameSrc(trailerFrame, '');
     trailerSearchLink.href = trailerSearchUrl(movie);
     trailerCard.classList.add('visible', 'search-mode');
     return;
   }
 
   trailerTitle.textContent = `${decodeText(movie.title)} ${UI_TEXT.trailerTitleSuffix}`;
-  trailerFrame.src = trailerEmbedUrl(trailerId);
+  setTrailerFrameSrc(trailerFrame, trailerEmbedUrl(trailerId));
   trailerSearchLink.href = trailerSearchUrl(movie);
   trailerCard.classList.remove('search-mode');
   trailerCard.classList.add('visible');
