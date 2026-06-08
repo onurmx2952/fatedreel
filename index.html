@@ -1566,6 +1566,26 @@ function trailerSearchUrl(movie) {
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
 }
 
+function getTrailerRecord(movie) {
+  return trailers[decodeText(movie.tt || '')] || null;
+}
+
+function getTrailerVideoId(record) {
+  if (typeof record === 'string') return record.trim();
+  if (record && typeof record === 'object') return String(record.videoId || '').trim();
+  return '';
+}
+
+function isTrailerEmbeddable(record) {
+  if (!record) return false;
+  if (typeof record === 'string') return Boolean(record.trim());
+  if (typeof record !== 'object') return false;
+  const status = String(record.status || '').toLowerCase();
+  if (status && status !== 'verified') return false;
+  if (record.blocked === true) return false;
+  return Boolean(getTrailerVideoId(record));
+}
+
 function setTrailerFrameSrc(frame, url) {
   if (!frame) return;
   const currentUrl = frame.dataset.currentSrc || frame.getAttribute('src') || '';
@@ -1592,9 +1612,10 @@ function renderTrailer(movie) {
   const trailerFrame = document.getElementById('trailerFrame');
   const trailerTitle = document.getElementById('trailerTitle');
   const trailerSearchLink = document.getElementById('trailerSearchLink');
-  const trailerId = trailers[movie.tt];
+  const trailerRecord = getTrailerRecord(movie);
+  const trailerId = getTrailerVideoId(trailerRecord);
 
-  if (!trailerId) {
+  if (!isTrailerEmbeddable(trailerRecord)) {
     trailerTitle.textContent = `${decodeText(movie.title)} Trailer Search`;
     setTrailerFrameSrc(trailerFrame, '');
     trailerSearchLink.href = trailerSearchUrl(movie);
