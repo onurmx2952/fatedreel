@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>FatedReel — Let Fate Pick Your Next Movie</title>
 <meta name="description" content="Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.">
 <meta name="yandex-verification" content="ceb9161a75b5f5db">
@@ -1550,12 +1551,12 @@ function renderTrailer(movie) {
   }
 
   trailerTitle.textContent = `${decodeText(movie.title)} ${UI_TEXT.trailerTitleSuffix}`;
-  trailerFrame.removeAttribute('src');
-  trailerSearchLink.href = `https://www.youtube.com/watch?v=${encodeURIComponent(trailerId)}`;
-  trailerSearchLink.dataset.trailerEmbedUrl = trailerEmbedUrl(trailerId);
-  trailerSearchLink.dataset.trailerVideoId = trailerId;
-  trailerSearchLink.querySelector('span').textContent = 'Watch trailer';
-  trailerCard.classList.add('search-mode');
+  trailerFrame.src = trailerEmbedUrl(trailerId);
+  trailerSearchLink.href = trailerSearchUrl(movie);
+  trailerSearchLink.dataset.trailerEmbedUrl = '';
+  trailerSearchLink.dataset.trailerVideoId = '';
+  trailerSearchLink.querySelector('span').textContent = 'Find trailer';
+  trailerCard.classList.remove('search-mode');
   trailerCard.classList.add('visible');
 }
 
@@ -2359,14 +2360,6 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.addEventListener('click', (event) => {
-  const trailerLink = event.target.closest('#trailerSearchLink');
-  if (trailerLink && trailerLink.dataset.trailerEmbedUrl) {
-    event.preventDefault();
-    document.getElementById('trailerFrame')?.setAttribute('src', trailerLink.dataset.trailerEmbedUrl);
-    document.getElementById('trailerCard')?.classList.remove('search-mode');
-    return;
-  }
-
   const button = event.target.closest('.expandable-toggle');
   if (!button) return;
   const copy = button.previousElementSibling;
