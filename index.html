@@ -1558,7 +1558,8 @@ function renderExpandableText(text, maxLength) {
 
 function trailerEmbedUrl(videoId) {
   const safeId = encodeURIComponent(String(videoId || '').trim());
-  return `https://www.youtube-nocookie.com/embed/${safeId}?rel=0&modestbranding=1&playsinline=1`;
+  const origin = encodeURIComponent(window.location.origin || 'https://fatedreel.com');
+  return `https://www.youtube-nocookie.com/embed/${safeId}?rel=0&modestbranding=1&playsinline=1&origin=${origin}`;
 }
 
 function trailerSearchUrl(movie) {
@@ -1619,14 +1620,20 @@ function renderTrailer(movie) {
     trailerTitle.textContent = `${decodeText(movie.title)} Trailer Search`;
     setTrailerFrameSrc(trailerFrame, '');
     trailerSearchLink.href = trailerSearchUrl(movie);
+    trailerSearchLink.dataset.trailerEmbedUrl = '';
+    trailerSearchLink.dataset.trailerVideoId = '';
+    trailerSearchLink.querySelector('span').textContent = 'Find trailer';
     trailerCard.classList.add('visible', 'search-mode');
     return;
   }
 
   trailerTitle.textContent = `${decodeText(movie.title)} ${UI_TEXT.trailerTitleSuffix}`;
-  setTrailerFrameSrc(trailerFrame, trailerEmbedUrl(trailerId));
-  trailerSearchLink.href = trailerSearchUrl(movie);
-  trailerCard.classList.remove('search-mode');
+  setTrailerFrameSrc(trailerFrame, '');
+  trailerSearchLink.href = `https://www.youtube.com/watch?v=${encodeURIComponent(trailerId)}`;
+  trailerSearchLink.dataset.trailerEmbedUrl = trailerEmbedUrl(trailerId);
+  trailerSearchLink.dataset.trailerVideoId = trailerId;
+  trailerSearchLink.querySelector('span').textContent = 'Watch trailer';
+  trailerCard.classList.add('search-mode');
   trailerCard.classList.add('visible');
 }
 
@@ -2457,6 +2464,14 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.addEventListener('click', (event) => {
+  const trailerLink = event.target.closest('#trailerSearchLink');
+  if (trailerLink && trailerLink.dataset.trailerEmbedUrl) {
+    event.preventDefault();
+    setTrailerFrameSrc(document.getElementById('trailerFrame'), trailerLink.dataset.trailerEmbedUrl);
+    document.getElementById('trailerCard')?.classList.remove('search-mode');
+    return;
+  }
+
   const button = event.target.closest('.expandable-toggle');
   if (!button) return;
   const copy = button.previousElementSibling;
