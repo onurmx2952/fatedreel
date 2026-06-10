@@ -1355,7 +1355,6 @@ function structuredDataForMovie(movie) {
   const movieId = decodeText(movie?.tt || '').toLowerCase();
   const title = decodeText(movie?.title || '').trim();
   const year = decodeText(movie?.year || '').trim();
-  const rating = Number(movie?.rating);
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Movie',
@@ -1367,15 +1366,6 @@ function structuredDataForMovie(movie) {
     datePublished: year || undefined,
     genre: Array.isArray(movie?.genres) ? movie.genres.map(decodeText).filter(Boolean) : undefined
   };
-
-  if (Number.isFinite(rating) && rating > 0) {
-    data.aggregateRating = {
-      '@type': 'AggregateRating',
-      ratingValue: rating,
-      bestRating: 10,
-      worstRating: 1
-    };
-  }
 
   Object.keys(data).forEach((key) => data[key] === undefined && delete data[key]);
   return data;
