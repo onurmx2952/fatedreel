@@ -135,7 +135,6 @@ function renderMovieHtml(template, movie, reviews, trailerId, origin) {
 
 function structuredDataForMovie(movie, origin) {
   const movieId = decodeText(movie?.tt || '').toLowerCase();
-  const rating = Number(movie?.rating);
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Movie',
@@ -147,15 +146,6 @@ function structuredDataForMovie(movie, origin) {
     datePublished: decodeText(movie?.year || '').trim() || undefined,
     genre: Array.isArray(movie?.genres) ? movie.genres.map(decodeText).filter(Boolean) : undefined
   };
-
-  if (Number.isFinite(rating) && rating > 0) {
-    data.aggregateRating = {
-      '@type': 'AggregateRating',
-      ratingValue: rating,
-      bestRating: 10,
-      worstRating: 1
-    };
-  }
 
   Object.keys(data).forEach((key) => data[key] === undefined && delete data[key]);
   return data;
