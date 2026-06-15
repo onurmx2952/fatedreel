@@ -1584,19 +1584,6 @@ function setTrailerFrameSrc(frame, url) {
   if (currentUrl === url) return;
 
   frame.dataset.currentSrc = url;
-  if (url && !currentUrl) {
-    frame.setAttribute('src', url);
-    return;
-  }
-
-  try {
-    if (frame.contentWindow) {
-      frame.contentWindow.location.replace(url || 'about:blank');
-      if (!url) frame.removeAttribute('src');
-      return;
-    }
-  } catch (_) {}
-
   if (url) {
     frame.setAttribute('src', url);
   } else {
