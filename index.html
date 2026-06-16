@@ -2232,7 +2232,7 @@ async function tryFetchTrailers() {
   const candidates = [TRAILERS_URL, './trailers.json'];
   for (const file of candidates) {
     try {
-      const res = await fetch(file);
+      const res = await fetch(file, { cache: 'no-store' });
       if (!res.ok) continue;
       const parsed = await res.json();
       if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {

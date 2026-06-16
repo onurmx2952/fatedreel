@@ -157,7 +157,21 @@
   "tt0323944": "LTeK1v6Qx_I",
   "tt0325805": "WgsmEhnIy7I",
   "tt0326208": "6f_yZ7gXaVw",
-  "tt0326449": "k4LARxZv9to",
+  "tt0326449": {
+    "videoId": "k4LARxZv9to",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "Zona Zamfirova part 2 - Official Trailer",
+    "channel": "ZoneGrad Production",
+    "reasons": [
+      "title_exact",
+      "title_extension_candidate:part,2",
+      "trailer_terms",
+      "sequel_marker_conflict:part,2"
+    ]
+  },
   "tt0328589": "aURoPYu_29w",
   "tt0328802": "yg-be2r7ouc",
   "tt0328844": "xNHde_M62y0",
@@ -256,7 +270,21 @@
   "tt0407246": "PdmM4SJApqk",
   "tt0407265": "1F4Dckw274Q",
   "tt0407851": "bZdR1OQqTIY",
-  "tt0408017": "KHPDaTy6grI",
+  "tt0408017": {
+    "videoId": "KHPDaTy6grI",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "MUSTAFA HAKKINDA HERŞEY-ACDC MOVIE NIGHT TRAILER",
+    "channel": "grdhk",
+    "reasons": [
+      "title_exact",
+      "title_extension_candidate:acdc,night",
+      "trailer_terms",
+      "compound_title_extension:acdc"
+    ]
+  },
   "tt0408664": "ThksKmIMGAM",
   "tt0408777": "QR9tHEKR5Dw",
   "tt0409072": "Ei-Onx9wlfw",
@@ -331,7 +359,21 @@
   "tt0461694": "MacC9dgFjoY",
   "tt0462477": "W5zf8Xb7Wbc",
   "tt0462570": "riIldYpsqzc",
-  "tt0464029": "9s2r6L3-OpA",
+  "tt0464029": {
+    "videoId": "9s2r6L3-OpA",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "GRBAVICA 3 TRAILER",
+    "channel": "gostalo",
+    "reasons": [
+      "title_exact",
+      "title_extension_candidate:3",
+      "trailer_terms",
+      "sequel_marker_conflict:3"
+    ]
+  },
   "tt0464913": "dS8l9SMSgtw",
   "tt0466399": "m_0UNKVKZOM",
   "tt0468489": "o5Argx2c7tY",
@@ -727,7 +769,21 @@
   "tt1921043": "H5qReKA8sD0",
   "tt1924394": "4TocXsjw400",
   "tt1925421": "drDu9Ta1JWc",
-  "tt1927077": "EIgOjyK_us8",
+  "tt1927077": {
+    "videoId": "EIgOjyK_us8",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "LISTY DO M. 3 - Zwiastun PL (Official Trailer)",
+    "channel": "Kino Helios Polska",
+    "reasons": [
+      "title_exact",
+      "title_extension_candidate:3,zwiastun,pl",
+      "trailer_terms",
+      "sequel_marker_conflict:3,zwiastun,pl"
+    ]
+  },
   "tt1931470": "k4wUH4lpedI",
   "tt1932767": "TmvojT6yX9A",
   "tt1937118": "HRBe0Qu7kSc",
@@ -1144,7 +1200,21 @@
   "tt7691572": "9wG7VZyKeGw",
   "tt7736478": "7nvYMRpKzak",
   "tt7738450": "JTjYRFZOf4I",
-  "tt7748244": "PnQrVt3Vvxc",
+  "tt7748244": {
+    "videoId": "PnQrVt3Vvxc",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "Ölümlü Dünya 2 Resmi Fragman | 1 Aralık'ta Sadece Sinemalarda!",
+    "channel": "TAFF Pictures",
+    "reasons": [
+      "title_exact",
+      "title_extension_candidate:2,resmi,fragman,1",
+      "trailer_terms",
+      "sequel_marker_conflict:2,resmi,fragman,1"
+    ]
+  },
   "tt7818580": "EP_LlHqmwmg",
   "tt7886936": "GGRzpw5cz3E",
   "tt7937168": "NatjBb6EU4I",
@@ -1310,7 +1380,21 @@
   "tt0277027": "ir6_2EkhzAc",
   "tt0277434": "_fe21S9CckU",
   "tt0278504": "brHA3CF4_Mw",
-  "tt0278731": "t06RUxPbp_c",
+  "tt0278731": {
+    "videoId": "JJwNpld762E",
+    "status": "verified",
+    "confidence": 100,
+    "source": "manual-youtube-verification",
+    "checkedAt": "2026-06-15",
+    "title": "Spider (2002) ORIGINAL TRAILER [HD]",
+    "channel": "Unseen Trailers",
+    "reasons": [
+      "title_exact",
+      "year_match",
+      "trailer_terms",
+      "manual_verified"
+    ]
+  },
   "tt0280707": "o0m00hg1PKY",
   "tt0280990": "f5GGEj6B5cI",
   "tt0281358": "k3B2XBcp7vA",
@@ -1356,7 +1440,21 @@
   "tt0317705": "LuzZaP-TCqA",
   "tt0317919": "4oVva0muTE8",
   "tt0318462": "ANh2wB65J7c",
-  "tt0319061": "k5eUasNF4AU",
+  "tt0319061": {
+    "videoId": "k5eUasNF4AU",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "Big Fish & Begonia [Coming Soon] - Official Trailer [English Sub] (HD)",
+    "channel": "Shout! Studios",
+    "reasons": [
+      "title_exact",
+      "title_extension_candidate:begonia,coming,soon",
+      "trailer_terms",
+      "compound_title_extension:begonia"
+    ]
+  },
   "tt0319343": "gW9wRNqQ_P8",
   "tt0320661": "YAr6So7e_08",
   "tt0324133": "x7HeF3EAmGU",
@@ -1516,7 +1614,22 @@
   "tt0436697": "mqL42sjb96I",
   "tt0437857": "7RiJDEZywlw",
   "tt0440963": "ZT2ZxjUjSo0",
-  "tt0441773": "_inKs4eeHiI",
+  "tt0441773": {
+    "videoId": "_inKs4eeHiI",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "KUNG FU PANDA 4 | Official Trailer",
+    "channel": "Universal Pictures",
+    "reasons": [
+      "title_exact",
+      "title_extension_candidate:4",
+      "trailer_terms",
+      "trusted_channel",
+      "sequel_marker_conflict:4"
+    ]
+  },
   "tt0441909": "ABSvppyQGdE",
   "tt0443272": "KJVuqYkI2jQ",
   "tt0443543": "QngdF-55AGc",
@@ -2602,7 +2715,22 @@
   "tt7775720": "G9qIwkAi_Zk",
   "tt7778680": "hlF8NMw2b8g",
   "tt7784604": "YHxcDbai7aU",
-  "tt7798634": "jczr0KCloXk",
+  "tt7798634": {
+    "videoId": "jczr0KCloXk",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "READY OR NOT 2: HERE I COME | Official Trailer | Searchlight Pictures",
+    "channel": "SearchlightPictures",
+    "reasons": [
+      "title_exact",
+      "title_extension_candidate:2,here,i,come",
+      "trailer_terms",
+      "trusted_channel",
+      "sequel_marker_conflict:2,here,i,come"
+    ]
+  },
   "tt7888964": "oE5Q7-2wVfA",
   "tt7914416": "BauXic-YmCY",
   "tt7941892": "B2kq4YMz6io",
@@ -2635,7 +2763,21 @@
   "tt8503618": "WWOPdwCSgto",
   "tt8526872": "A6Ar4EZA6DU",
   "tt8574252": "kQ5Z9xrpLwk",
-  "tt8579674": "id-ys2He9d0",
+  "tt8579674": {
+    "videoId": "id-ys2He9d0",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "1917 - Part (II) | 2021 | YouTube Movie Trailers",
+    "channel": "YouTube Movie Trailers",
+    "reasons": [
+      "title_exact",
+      "year_match",
+      "title_extension_candidate:part,ii,youtube,trailers",
+      "sequel_marker_conflict:part,ii,youtube,trailers"
+    ]
+  },
   "tt8589698": "IHvzw4Ibuho",
   "tt8613070": "2fztXdpQci0",
   "tt8637428": "A0yh_ZIqq0c",
@@ -2721,7 +2863,21 @@
   "tt0288861": "JbLTqfTTusQ",
   "tt0298856": "wIRJvksrSLM",
   "tt0300015": "UmFz0gzrLzU",
-  "tt0303184": "vgpNtrqZf34",
+  "tt0303184": {
+    "videoId": "vgpNtrqZf34",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "Valami Amerika 3. - Romanian Official Trailer - Un fel de America 3.",
+    "channel": "Taylor Projects",
+    "reasons": [
+      "title_exact",
+      "title_extension_candidate:3,romanian",
+      "trailer_terms",
+      "sequel_marker_conflict:3,romanian"
+    ]
+  },
   "tt0304229": "n1rKG6jshtw",
   "tt0308055": "dakDA3bY_6E",
   "tt0309912": "lYcmxq1BjAo",
@@ -2965,7 +3121,21 @@
   "tt2185022": "wE3oDEOwzFA",
   "tt2210441": "UV8sk2pg8BA",
   "tt2223990": "xpvInmz-EJM",
-  "tt2244947": "4yo3v9O0KEk",
+  "tt2244947": {
+    "videoId": "4yo3v9O0KEk",
+    "status": "rejected",
+    "confidence": 0,
+    "source": "youtube-oembed-audit",
+    "checkedAt": "2026-06-15",
+    "title": "الإعلان الرسمي لفيلم كده رضا 2 - أحمد حلمي | Keda Reda 2 - Official Trailer",
+    "channel": "Marawan Mohamed",
+    "reasons": [
+      "title_exact",
+      "title_extension_candidate:2",
+      "trailer_terms",
+      "sequel_marker_conflict:2"
+    ]
+  },
   "tt2245003": "QtdVWsA3ctI",
   "tt2260850": "jK8kT3wC-Wo",
   "tt2261287": "21QghKb5mpQ",
