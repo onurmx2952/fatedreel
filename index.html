@@ -1583,12 +1583,14 @@ function setTrailerFrameSrc(frame, url) {
   const currentUrl = frame.dataset.currentSrc || frame.getAttribute('src') || '';
   if (currentUrl === url) return;
 
-  frame.dataset.currentSrc = url;
+  const nextFrame = frame.cloneNode(false);
+  nextFrame.dataset.currentSrc = url;
   if (url) {
-    frame.setAttribute('src', url);
+    nextFrame.setAttribute('src', url);
   } else {
-    frame.removeAttribute('src');
+    nextFrame.removeAttribute('src');
   }
+  frame.replaceWith(nextFrame);
 }
 
 function renderTrailer(movie) {
