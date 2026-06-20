@@ -1,0 +1,31 @@
+FatedReel URL indexing manual run
+Started at: 2026-06-19 17:46:21 +03:00
+
+Workspace:
+C:\Users\aa\Documents\github\fatedreel
+
+Sitemap URL count:
+3124
+
+IndexNow:
+First attempt:
+- Command: python submit_indexnow.py
+- Result: failed
+- Reason: Windows python alias opened Microsoft Store shim instead of Python.
+
+Second attempt:
+- Command: C:\Users\aa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe submit_indexnow.py
+- Result: success
+- IndexNow status: 200
+- Submitted URLs: 3124
+
+Google Search Console:
+- Browser/session found.
+- Claimed open Search Console URL Inspection tab.
+- Attempted URL: https://fatedreel.com/tt0185014
+- Live test state visible: URL can be used by Google.
+- Indexing request result: stopped by Google quota.
+- Google dialog text: Kota Aşıldı. Maalesef günlük kotanızı aştığınız için bu isteği işleyemedik. Lütfen bunu yarın tekrar göndermeyi deneyin.
+- New Google indexing requests submitted in this manual run: 0
+- Stop reason: Google daily quota exceeded.
+- Quota dialog closed.
