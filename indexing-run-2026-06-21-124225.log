@@ -1,0 +1,58 @@
+﻿FatedReel indexing manual run
+Started: 2026-06-21T12:42:25.5394720+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Reason: user requested immediate 6-hour workflow run
+
+IndexNow script: submit_indexnow.py
+IndexNow started: 2026-06-21T12:43:39.7565179+03:00
+python.exe : Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut 
+from Settings > Apps > Advanced app settings > App execution aliases.
+At line:2 char:383
++ ... ''; $exit=0; try { $output = & python submit_indexnow.py 2>&1; $exit= ...
++                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Python was not ...cution aliases.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+IndexNow exit code: 9009
+IndexNow finished: 2026-06-21T12:43:40.5568999+03:00
+Retry with bundled Python: C:\Users\aa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe
+IndexNow retry started: 2026-06-21T12:44:46.8189159+03:00
+IndexNow status: 200
+Submitted URLs: 3124
+
+IndexNow retry exit code: 0
+IndexNow retry finished: 2026-06-21T12:44:49.9632975+03:00
+
+Final summary
+Finished: 2026-06-21T12:46:16.0552620+03:00
+Sitemap URL count: 3124
+IndexNow: SUCCESS status 200, submitted 3124 URLs
+Live checks: sitemap.xml 200, IndexNow key file 200, sample movie URLs 200
+Google Search Console: BLOCKED - Chrome remote debugging session not available at 127.0.0.1:9222, so authenticated UI could not be controlled in this run
+Bing Webmaster UI: BLOCKED - Chrome remote debugging session not available; IndexNow was submitted successfully instead
+Yandex Webmaster UI: BLOCKED - Chrome remote debugging session not available; IndexNow was submitted successfully instead
+Log path: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-21-124225.log
+
+[2026-06-21 13:24:18 +03:00] Manual browser indexing run
+Google Search Console UI:
+  Requested successfully:
+    https://fatedreel.com/tt0185014
+    https://fatedreel.com/tt0118852
+    https://fatedreel.com/tt0120263
+    https://fatedreel.com/tt0122459
+    https://fatedreel.com/tt0165982
+    https://fatedreel.com/tt0168629
+    https://fatedreel.com/tt0168786
+    https://fatedreel.com/tt0177858
+    https://fatedreel.com/tt0183659
+  Not requested / UI button not found:
+    https://fatedreel.com/tt0161860
+    https://fatedreel.com/tt0183790
+    https://fatedreel.com/tt0189998
+Bing Webmaster UI:
+  Blocked: redirected to Bing Webmaster about/sign-in page, not authenticated in the visible Chrome session.
+  Separate IndexNow submission in this run already returned status 200 for 3124 URLs.
+Yandex Webmaster UI:
+  Session is accessible on Check page, but URL check automation timed out/reconnected during submission.
+  No Yandex UI success was recorded. IndexNow submission already covers Yandex-compatible discovery path.

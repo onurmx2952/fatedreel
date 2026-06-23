@@ -1,0 +1,64 @@
+﻿FatedReel webmaster post-submission check
+Timestamp local: 2026-06-21 19:37:06 +03:00
+
+Chrome tabs checked:
+- Google Search Console: open and authenticated
+- Bing Webmaster Tools: open and authenticated
+- Yandex Webmaster: open and authenticated
+
+Google Search Console:
+- Overview: 98 total web search clicks.
+- Page indexing: 21 indexed pages, 3.3K not indexed.
+- Not-indexed reasons in page report:
+  - Redirect page: 3, validation failed.
+  - Crawled - currently not indexed: 3, validation not started.
+  - Discovered - currently not indexed: 3,297, validation started.
+  - Alternate page with proper canonical: 0, validation successful.
+- Video indexing: 37 pages with no indexed video, 0 indexed videos.
+- Video reason: Video is not on a watch page.
+- Review snippets: 1 invalid item.
+- Review snippet issue: ratingCount or reviewCount must be specified.
+- Local repo check: aggregateRating is absent in current index.html, so this looks like a stale Search Console issue from an older version.
+
+Bing Webmaster Tools:
+- Home shows Search Performance: 16 clicks, 65 impressions.
+- Top recommendations visible:
+  - Some recently published pages were not submitted via IndexNow.
+  - Not enough inbound links from high quality domains.
+  - Meta descriptions on many pages are too short.
+  - Too many pages with insufficient content.
+- URL Inspection for https://fatedreel.com/:
+  - Indexed successfully.
+  - URL can appear on Bing.
+  - No SEO/GEO issues found.
+  - 1 markup type found.
+
+Yandex Webmaster:
+- Dashboard: No errors, 3 recommendations.
+- Search queries visible:
+  - fatedreel: 44 impressions / 21 clicks.
+  - fatedreel.com: 12 impressions / 2 clicks.
+  - site: fatedreel.com/tt0425601: 2 impressions / 1 click.
+- Search updates to June 21: 0 added / 0 removed.
+- Crawl statistics last 10 changes: Yandex crawled 10 tt URLs on June 21, all changed N/A -> 200.
+- Recommendations detail:
+  - Specify a region.
+  - Add site to Yandex Business.
+  - Add a favicon file in SVG format or up to 120x120 pixels, relevant since 2026-06-17.
+
+Favicon live checks:
+- https://fatedreel.com/favicon.ico: 200 image/vnd.microsoft.icon
+- https://fatedreel.com/favicon.svg: 200 image/svg+xml
+- https://fatedreel.com/favicon-96x96.png: 200 image/png
+- https://fatedreel.com/apple-touch-icon.png: 200 image/png
+- https://fatedreel.com/site.webmanifest: 200 application/manifest+json
+- Live https://fatedreel.com/tt0430576 currently does not include favicon.svg link in HTML.
+- Local index.html was updated in this run to add: <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+Local changes:
+- index.html: added SVG favicon link after favicon.ico links.
+- Current local index.html has no aggregateRating string.
+
+Blockers / quota / login:
+- No login, captcha, MFA, or quota blocker observed during this check.
+- git command is not available in this PowerShell PATH, so git diff/status could not be run from this environment.

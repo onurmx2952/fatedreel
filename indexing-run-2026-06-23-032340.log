@@ -1,0 +1,1873 @@
+RUN START: 2026-06-23T03:23:40.579Z
+CWD: C:/Users/aa/Documents/github/fatedreel
+SCHEDULE NOTE: manual continue Google/Yandex/Bing URL submission
+GOOGLE TAB: https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com&id=wThP7_RzBaWSXrMYTXENzQ&alt_id=5tef2cU_HoPckB99YGYRHg
+BING TAB: https://www.bing.com/webmasters/submiturl?siteUrl=https://fatedreel.com/
+YANDEX TAB: https://webmaster.yandex.com/site/https:fatedreel.com:443/indexing/reindex/
+BING INITIAL TEXT:
+
+Skip to main content
+
+URL Submission
+Submit URLs
+
+Did you know?
+You can automate URL submission by using our IndexNow API or Submission API and stay updated on Microsoft Bing!
+Submitted Urls list
+Download all
+
+select all items
+URL
+Submitted
+
+Action
+
+https://fatedreel.com/tt0283900
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0286516
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0287803
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0291172
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0292242
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0291350
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0285441
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0283832
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0281718
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0282698
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0286261
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0284363
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0283139
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0285861
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0286244
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0293416
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0289181
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0293508
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0282599
+
+
+
+Today at 17:17
+
+
+https://fatedreel.com/tt0291579
+
+
+
+Today at 17:17
+
+Rows per page
+25
+
+
+
+Quota left for today (URL Submission Only)
+0
+Quota will reset in 8 hrs. Learn mor
+YANDEX INITIAL TEXT:
+Summary
+Website optimization
+Efficiency
+Indexing
+Tools
+Display in the search
+Links
+Tutorials
+Useful services
+7
+11
+Reindex pages
+Add URL to your list of important pages in order to track its indexing and get notified about changes to its status in Search. Find out more
+Your daily limit is 150 URLs per site, including the main domain and all subdomains.
+You have reached your daily limit of added URLs.
+Send
+Sent pages
+Updates aren't immediate. They appear after a few database refreshes.
+Page URL	Status	Sent	
+https://fatedreel.com/tt0292242	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0292542	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0293416	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0293508	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0294870	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0296166	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0297721	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0297884	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0298228	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0298845	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0299117	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0299658	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0300140	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://fatedreel.com/tt0300214	
+In queue
+	06/22/2026 5:02 PM	
+Track
+
+https://f
+BING SNAPSHOT HEAD:
+- banner:
+  - button "Show navigation panel":
+    - generic: 
+  - link "Skip to main content":
+    - /url: "#content"
+  - img "white bwt logo microsoft bing mobile"
+  - button "More":
+    - generic: 
+  - button "Profile":
+- main:
+  - heading "URL Submission" [level=2]
+  - button "Submit URLs" [active]:
+    - generic: Submit URLs
+  - complementary "Did you know? You can automate URL submission by using our IndexNow API or Submission API and stay updated on Microsoft Bing!":
+    - generic: 
+    - generic: Did you know?
+    - text: You can automate URL submission by using our
+    - link "IndexNow API":
+      - /url: /indexnow
+    - text: or
+    - link "Submission API":
+      - /url: /webmasters/url-submission-api#APIs
+    - text: and stay updated on Microsoft Bing!
+  - heading "Submitted Urls list" [level=3]
+  - button "Download all":
+    - generic: Download all
+    - generic: 
+  - grid "Submitted Urls list":
+    - row "select all items URL, sortable Submitted, sortable, sorted descending order Action":
+      - columnheader "select all items":
+        - checkbox "select all items":
+          - generic: 
+      - generic: select all items
+      - columnheader "URL, sortable":
+        - button "URL, sortable":
+          - generic: URL
+      - columnheader "Submitted, sortable, sorted descending order":
+        - button "Submitted, sortable, sorted descending order":
+          - generic: Submitted
+          - generic: 
+      - columnheader "Action":
+        - generic: Action
+    - row "select item https://fatedreel.com/tt0283900 URL actions Today at 17:17 More":
+      - gridcell "select item":
+        - checkbox "select item":
+          - generic: 
+      - gridcell "https://fatedreel.com/tt0283900 URL actions":
+        - generic: https://fatedreel.com/tt0283900
+        - group "URL actions":
+          - button "Copy":
+            - generic: 
+          - button "Open in new tab":
+            - generic: 
+          - button "Inspect URL":
+            - generic: 
+   
+BING Submit URLs button count: 1
+BING AFTER SUBMIT CLICK:
+
+Skip to main content
+
+URL Submission
+Submit URLs
+
+Did you know?
+You can automate URL submission by using our IndexNow API or Submission API and stay updated on Microsoft Bing!
+Submitted Urls list
+Download all
+
+select all items
+URL
+Submitted
+
+Action
+
+https://fatedreel.com/tt0283900
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0286516
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0287803
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0291172
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0292242
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0291350
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0285441
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0283832
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0281718
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0282698
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0286261
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0284363
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0283139
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0285861
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0286244
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0293416
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0289181
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0293508
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0282599
+
+
+
+Yesterday at 17:17
+
+
+https://fatedreel.com/tt0291579
+
+
+
+Yesterday at 17:17
+
+Rows per page
+25
+
+
+
+Quota left for today (URL Submission Only)
+0
+Quota will reset in 21 hrs. Learn more
+URLs submitted today
+100
+Submit URLs
+
+Quota left for today : 0 URLs
+We have updated our quota allocation policy. Learn more
+Cancel
+Submit
+GOOGLE INITIAL TEXT:
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0240419
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 22 Haz 2026, 17:33
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+GOOGLE SNAPSHOT HEAD:
+- banner:
+  - button "Ana menü":
+  - link "Google Search Console":
+    - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+  - search:
+    - textbox [disabled]: "\"fatedreel.com\" içindeki tüm URL'leri denetleyin"
+    - combobox "fatedreel.com adresindeki tüm URL'leri inceleyin"
+    - button "Arama":
+  - button "Yardım":
+    - generic: 
+  - button "Kullanıcı ayarları":
+  - 'button "Okunmamış mesaj sayısı: 6"':
+    - generic: 
+    - generic: "6"
+  - button "Google uygulamaları":
+  - 'button "Google Hesabı: onur yılmaz (onurmx2@gmail.com)"':
+- dialog "navigational drawer":
+  - navigation "Birincil":
+    - button "Arama özelliği":
+      - img "site simgesi"
+      - combobox "fatedreel.com"
+      - generic: 
+    - link "Genel Bakış":
+      - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+      - generic: home
+      - generic: Genel Bakış
+    - link "Analizler":
+      - /url: ./search-console/performance/insights?resource_id=sc-domain%3Afatedreel.com
+      - generic: lightbulb_2
+      - generic: Analizler
+    - link "Performans":
+      - /url: ./search-console/performance/search-analytics?resource_id=sc-domain%3Afatedreel.com
+      - generic: trending_up
+      - generic: Performans
+    - button "URL denetimi":
+      - generic: search
+      - generic: URL denetimi
+    - generic: Dizin oluşturma
+    - button "Dizin oluşturma rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Sayfa sayısı":
+      - /url: ./search-console/index?resource_id=sc-domain%3Afatedreel.com
+      - generic: file_copy
+      - generic: Sayfa sayısı
+    - link "Videolar":
+      - /url: ./search-console/video-index?resource_id=sc-domain%3Afatedreel.com
+      - generic: video_library
+      - generic: Videolar
+    - link "Site Haritaları":
+      - /url: ./search-console/sitemaps?resource_id=sc-domain%3Afatedreel.com
+      - generic: account_tree
+      - generic: Site Haritaları
+    - link "URL Kaldırma":
+      - /url: ./search-console/removals?resource_id=sc-domain%3Afatedreel.com
+      - generic: visibility_off
+      - generic: URL Kaldırma
+    - generic: Deneyim
+    - button "Deneyim rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Önemli Web Verileri":
+      - /url: ./search-console/core-web-vitals?resource_id=sc-domain%3Afatedreel.com
+      - generic: speed
+      - generic: Önemli Web Verileri
+    - link "HTTPS":
+      - /url: ./search-console/https?resource_id=sc-domain%3Afatedreel.com
+      - generic: lock
+      - gen
+GOOGLE request indexing text count: 0
+GOOGLE VISIBLE DOM:
+"<div node_id=1 aria-label=\"Ana menü\" role=\"button\" />\n<a node_id=2 aria-label=\"Google Search Console\" href=\"./search-console?resource_id=sc-domain%3Afatedreel.com\" />\n<input node_id=3 aria-label=\"fatedreel.com adresindeki tüm URL'leri inceleyin\" role=\"combobox\" type=\"text\" />\n<button node_id=4 aria-label=\"Arama\" role=\"button\" />\n<div node_id=5 aria-disabled=\"false\" aria-label=\"Yardım\" role=\"button\"></div>\n<div node_id=6 aria-disabled=\"false\" aria-label=\"Kullanıcı ayarları\" role=\"button\" />\n<div node_id=7 aria-disabled=\"false\" aria-label=\"Okunmamış mesaj sayısı: 6\" role=\"button\"> 6</div>\n<a node_id=8 aria-label=\"Google uygulamaları\" href=\"https://www.google.com.tr/intl/tr/about/products\" role=\"button\" />\n<a node_id=9 aria-label=\"Google Hesabı: onur yılmaz   (onurmx2@gmail.com)\" href=\"https://accounts.google.com/SignOutOptions?hl=tr&amp;continue=https://search.google.com/search-console/inspect%3Fresource_id%3Dsc-domain:fatedreel.com%26id%3DwThP7_RzBaWSXrMYTXENzQ%26alt_id%3D5tef2cU_HoPckB99YGYRHg&amp;ec=GBRA1AI\" role=\"button\" />\n<div node_id=10 aria-label=\"Arama özelliği\" role=\"button\">Arama özelliği </div>\n<input node_id=11 aria-disabled=\"false\" aria-label=\"fatedreel.com\" role=\"combobox\" type=\"text\" value=\"fatedreel.com\" readonly=\"true\" />\n<a node_id=12 href=\"./search-console?resource_id=sc-domain%3Afatedreel.com\" role=\"link\">home Genel Bakış</a>\n<a node_id=13 href=\"./search-console/performance/insights?resource_id=sc-domain%3Afatedreel.com\" role=\"link\">lightbulb_2 Analizler</a>\n<a node_id=14 href=\"./search-console/performance/search-analytics?resource_id=sc-domain%3Afatedreel.com\" role=\"link\">trending_up Performans</a>\n<a node_id=15 role=\"button\">search URL denetimi</a>\n<div node_id=16 aria-label=\"Dizin oluşturma rapor bölümü\" role=\"button\">keyboard_arrow_down keyboard_arrow_up</div>\n<a node_id=17 href=\"./search-console/index?resource_id=sc-domain%3Afatedreel.com\" role=\"link\">file_copy Sayfa sayısı</a>\n<a node_id=18 href=\"./search-console/video-index?resource_id=sc-domain%3Afatedreel.com\" role=\"link\">video_library Videolar</a>\n<a node_id=19 href=\"./search-console/sitemaps?resource_id=sc-domain%3Afatedreel.com\" role=\"link\">account_tree Site Haritaları</a>\n<a node_id=20 href=\"./search-console/removals?resource_id=sc-domain%3Afatedreel.com\" role=\"link\">visibility_off URL Kaldırma</a>\n<a node_id=21 href=\"./search-console/inspect?resource_id=sc-domain%3Afatedreel.com&amp;id=5tef2cU_HoPckB99YGYRHg&amp;alt_id=wThP7_RzBaWSXrMYTXENzQ\">Google dizini</a>\n<div node_id=22 aria-disabled=\"true\" role=\"button\">Canlı test</div>\n<div node_id=23 aria-disabled=\"false\" aria-label=\"URL'yi yeniden test edin\" role=\"button\"></div>\n<a node_id=24 href=\"https://support.google.com/webmasters/answer/9012289#url_can_be_on_google\">Daha fazla bilgi</a>\n<div node_id=25 aria-disabled=\"false\" aria-label=\"Test edilen sayfayı göster\" role=\"bu
+--- RESUME STATE 2026-06-23T03:29:00.266Z ---
+{
+  "runLog": "C:/Users/aa/Documents/github/fatedreel/indexing-run-2026-06-23-032340.log",
+  "google": {
+    "title": "URL Denetimi",
+    "url": "https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com&id=wThP7_RzBaWSXrMYTXENzQ&alt_id=5tef2cU_HoPckB99YGYRHg",
+    "text": "\n\t\n6\n\nhome\nGenel Bakış\nlightbulb_2\nAnalizler\ntrending_up\nPerformans\nsearch\nURL denetimi\nDizin oluşturma\nkeyboard_arrow_up\nfile_copy\nSayfa sayısı\nvideo_library\nVideolar\naccount_tree\nSite Haritaları\nvisibility_off\nURL Kaldırma\nDeneyim\nkeyboard_arrow_up\nspeed\nÖnemli Web Verileri\nlock\nHTTPS\nGeliştirmeler\nkeyboard_arrow_up\nlayers\nYorum snippet'leri\nGüvenlik ve Manuel İşlemler\nkeyboard_arrow_down\nlink_2\nBağlantılar\ntrophy\nBaşarılar\nsettings\nAyarlar\nfeedback\nGeri bildirim gönder\ninfo\nSearch Console hakkında\nGizlilikŞartlar\nhttps://fatedreel.com/tt0240419\nURL Denetimi\nGOOGLE DİZİNİ\nCANLI TEST\nTest zamanı: 22 Haz 2026, 17:33\n\ncheck_circle\nURL, Google tarafından kullanılabilir\nDizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi\nTEST EDİLEN SAYFAYI GÖSTER\nSayfa değişti mi?\nDİZİNE EKLENMESİNİ İSTE\ncheck_circle\nSayfa kullanılabilirliği\nSayfa dizine eklenebilir\n\ncheck_circle\nVideo keşfi\nVideo algılandı\nGeliştirmeler ve Deneyim\nURL'de geliştirme yok"
+  },
+  "bing": {
+    "title": "URL Submission - Bing Webmaster Tools",
+    "url": "https://www.bing.com/webmasters/submiturl?siteUrl=https://fatedreel.com/",
+    "text": "\nSkip to main content\n\nURL Submission\nSubmit URLs\n\nDid you know?\nYou can automate URL submission by using our IndexNow API or Submission API and stay updated on Microsoft Bing!\nSubmitted Urls list\nDownload all\n\nselect all items\nURL\nSubmitted\n\nAction\n\nhttps://fatedreel.com/tt0283900\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0286516\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0287803\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0291172\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0292242\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0291350\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0285441\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0283832\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0281718\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0282698\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0286261\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0284363\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0283139\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0285861\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0286244\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0293416\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0289181\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0293508\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0282599\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0291579\n\n\n\nYesterday at 17:17\n\nRows per page\n25\n\n\n\nQ"
+  },
+  "yandex": {
+    "title": "Reindex pages — https://fatedreel.com — Yandex Webmaster",
+    "url": "https://webmaster.yandex.com/site/https:fatedreel.com:443/indexing/reindex/",
+    "text": "Summary\nWebsite optimization\nEfficiency\nIndexing\nTools\nDisplay in the search\nLinks\nTutorials\nUseful services\n7\n11\nReindex pages\nAdd URL to your list of important pages in order to track its indexing and get notified about changes to its status in Search. Find out more\nYour daily limit is 150 URLs per site, including the main domain and all subdomains.\nYou have reached your daily limit of added URLs.\nSend\nSent pages\nUpdates aren't immediate. They appear after a few database refreshes.\nPage URL\tStatus\tSent\t\nhttps://fatedreel.com/tt0292242\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0292542\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0293416\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0293508\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0294870\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0296166\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0297721\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0297884\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0298228\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0298845\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0299117\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0299658\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0300140\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0300214\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://f"
+  }
+}
+GOOGLE VISIBLE DOM TEXT 2026-06-23T03:32:21.574Z:
+<div node_id=1 aria-label="Ana menü" role="button" />
+<a node_id=2 aria-label="Google Search Console" href="./search-console?resource_id=sc-domain%3Afatedreel.com" />
+<input node_id=3 aria-label="fatedreel.com adresindeki tüm URL'leri inceleyin" role="combobox" type="text" />
+<button node_id=4 aria-label="Arama" role="button" />
+<div node_id=5 aria-disabled="false" aria-label="Yardım" role="button"></div>
+<div node_id=6 aria-disabled="false" aria-label="Kullanıcı ayarları" role="button" />
+<div node_id=7 aria-disabled="false" aria-label="Okunmamış mesaj sayısı: 6" role="button"> 6</div>
+<a node_id=8 aria-label="Google uygulamaları" href="https://www.google.com.tr/intl/tr/about/products" role="button" />
+<a node_id=9 aria-label="Google Hesabı: onur yılmaz   (onurmx2@gmail.com)" href="https://accounts.google.com/SignOutOptions?hl=tr&amp;continue=https://search.google.com/search-console/inspect%3Fresource_id%3Dsc-domain:fatedreel.com%26id%3DwThP7_RzBaWSXrMYTXENzQ%26alt_id%3D5tef2cU_HoPckB99YGYRHg&amp;ec=GBRA1AI" role="button" />
+<div node_id=10 aria-label="Arama özelliği" role="button">Arama özelliği </div>
+<input node_id=11 aria-disabled="false" aria-label="fatedreel.com" role="combobox" type="text" value="fatedreel.com" readonly="true" />
+<a node_id=12 href="./search-console?resource_id=sc-domain%3Afatedreel.com" role="link">home Genel Bakış</a>
+<a node_id=13 href="./search-console/performance/insights?resource_id=sc-domain%3Afatedreel.com" role="link">lightbulb_2 Analizler</a>
+<a node_id=14 href="./search-console/performance/search-analytics?resource_id=sc-domain%3Afatedreel.com" role="link">trending_up Performans</a>
+<a node_id=15 role="button">search URL denetimi</a>
+<div node_id=16 aria-label="Dizin oluşturma rapor bölümü" role="button">keyboard_arrow_down keyboard_arrow_up</div>
+<a node_id=17 href="./search-console/index?resource_id=sc-domain%3Afatedreel.com" role="link">file_copy Sayfa sayısı</a>
+<a node_id=18 href="./search-console/video-index?resource_id=sc-domain%3Afatedreel.com" role="link">video_library Videolar</a>
+<a node_id=19 href="./search-console/sitemaps?resource_id=sc-domain%3Afatedreel.com" role="link">account_tree Site Haritaları</a>
+<a node_id=20 href="./search-console/removals?resource_id=sc-domain%3Afatedreel.com" role="link">visibility_off URL Kaldırma</a>
+<a node_id=21 href="./search-console/inspect?resource_id=sc-domain%3Afatedreel.com&amp;id=5tef2cU_HoPckB99YGYRHg&amp;alt_id=wThP7_RzBaWSXrMYTXENzQ">Google dizini</a>
+<div node_id=22 aria-disabled="true" role="button">Canlı test</div>
+<div node_id=23 aria-disabled="false" aria-label="URL'yi yeniden test edin" role="button"></div>
+<a node_id=24 href="https://support.google.com/webmasters/answer/9012289#url_can_be_on_google">Daha fazla bilgi</a>
+<div node_id=25 aria-disabled="false" aria-label="Test edilen sayfayı göster" role="button">Test edilen sayfayı göster</div>
+<div node_id=26 aria-disabled="false" aria-label="Dizine eklenmesini isteTekrar istek gönder" role="button">Dizine eklenmesini iste Tekrar istek gönder</div>
+<div node_id=27 role="button">check_circle Sayfa kullanılabilirliği Sayfa dizine eklenebilir  </div>
+GOOGLE AFTER REQUEST CLICK 2026-06-23T03:32:56.554Z:
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0240419
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 22 Haz 2026, 17:33
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+GOOGLE CLOSE CANDIDATES 2026-06-23T03:33:24.960Z:
+<button node_id=29>Kapat</button>
+GOOGLE CONFIRM MODAL CLOSED 2026-06-23T03:33:53.309Z
+GOOGLE TOP DOM BEFORE NEXT URL 2026-06-23T03:34:53.586Z:
+<div node_id=1 aria-label="Ana menü" role="button" />
+<a node_id=2 aria-label="Google Search Console" href="./search-console?resource_id=sc-domain%3Afatedreel.com" />
+<input node_id=3 aria-label="fatedreel.com adresindeki tüm URL'leri inceleyin" role="combobox" type="text" />
+<button node_id=4 aria-label="Arama" role="button" />
+<div node_id=5 aria-disabled="false" aria-label="Yardım" role="button"></div>
+<div node_id=6 aria-disabled="false" aria-label="Kullanıcı ayarları" role="button" />
+<div node_id=7 aria-disabled="false" aria-label="Okunmamış mesaj sayısı: 6" role="button"> 6</div>
+<a node_id=8 aria-label="Google uygulamaları" href="https://www.google.com.tr/intl/tr/about/products" role="button" />
+<a node_id=9 aria-label="Google Hesabı: onur yılmaz   (onurmx2@gmail.com)" href="https://accounts.google.com/SignOutOptions?hl=tr&amp;continue=https://search.google.com/search-console/inspect%3Fresource_id%3Dsc-domain:fatedreel.com%26id%3DwThP7_RzBaWSXrMYTXENzQ%26alt_id%3D5tef2cU_HoPckB99YGYRHg&amp;ec=GBRA1AI" role="button" />
+<div node_id=10 aria-label="Arama özelliği" role="button">Arama özelliği </div>
+<input node_id=11 aria-disabled="false" aria-label="fatedreel.com" role="combobox" type="text" value="fatedreel.com" readonly="true" />
+<a node_id=12 href="./search-console?resource_id=sc-domain%3Afatedreel.com" role="link">home Genel Bakış</a>
+<a node_id=13 href="./search-console/performance/insights?resource_id=sc-domain%3Afatedreel.com" role="link">lightbulb_2 Analizler</a>
+<a node_id=14 href="./search-console/performance/search-analytics?resource_id=sc-domain%3Afatedreel.com" role="link">trending_up Performans</a>
+<a node_id=15 role="button">search URL denetimi</a>
+<div node_id=16 aria-label="Dizin oluşturma rapor bölümü" role="button">keyboard_arrow_down keyboard_arrow_up</div>
+<a node_id=17 href="./search-console/index?resource_id=sc-domain%3Afatedreel.com" role="link">file_copy Sayfa sayısı</a>
+<a node_id=18 href="./search-console/video-index?resource_id=sc-domain%3Afatedreel.com" role="link">video_library Videolar</a>
+<a node_id=19 href="./search-console/sitemaps?resource_id=sc-domain%3Afatedreel.com" role="link">account_tree Site Haritaları</a>
+<a node_id=20 href="./search-console/removals?resource_id=sc-domain%3Afatedreel.com" role="link">visibility_off URL Kaldırma</a>
+<a node_id=21 href="./search-console/inspect?resource_id=sc-domain%3Afatedreel.com&amp;id=5tef2cU_HoPckB99YGYRHg&amp;alt_id=wThP7_RzBaWSXrMYTXENzQ">Google dizini</a>
+<div node_id=22 aria-disabled="true" role="button">Canlı test</div>
+<div node_id=23 aria-disabled="false" aria-label="URL'yi yeniden test edin" role="button"></div>
+<a node_id=24 href="https://support.google.com/webmasters/answer/9012289#url_can_be_on_google">Daha fazla bilgi</a>
+<div node_id=25 aria-disabled="false" aria-label="Test edilen sayfayı göster" role="button">Test edilen sayfayı göster</div>
+<div node_id=26 aria-disabled="false" aria-label="Dizine eklenmesini isteTekrar istek gönder" role="button">Dizine eklenmesini iste Tekrar istek gönder</div>
+<div node_id=27 role="button">check_circle Sayfa kullanılabilirliği Sayfa dizine eklenebilir  </div>
+GOOGLE ENTERED NEXT URL 2026-06-23T03:35:53.946Z: https://fatedreel.com/tt0240913
+GOOGLE AFTER NEXT URL LOAD 2026-06-23T03:36:01.991Z:
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0240913
+URL Denetimi
+CANLI URL'Yİ TEST ET
+info
+URL Google'da yok
+Bu sayfa dizine eklenmedi. Dizine eklenmeyen sayfalar Google'da sunulamaz. Sayfanın neden dizine eklenmediğini öğrenmek için aşağıdaki ayrıntılara bakın. Daha fazla bilgi
+TARANAN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+info
+Sayfayı dizine ekleme
+Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+
+Bulunma
+Site Haritaları
+Yönlendiren site haritası algılanmadı
+Yönlendiren sayfa
+Hiç yönlendiren sayfa algılanmadı
+URL şu anda raporlanmamış olan diğer kaynaklardan bilinebilir
+Tarama
+Son tarama
+Yok
+Tarama aracısı:
+Yok
+Taramaya izin verildi mi?
+Yok
+Sayfa getirme
+Yok
+Dizine eklenmesine izin verildi mi?
+info
+Yok
+Dizin oluşturma
+Kullanıcı tarafından beyan edilen standart URL
+Yok
+Google tarafından seçilen standart URL
+
+Yok
+DAHA FAZLA BİLGİ EDİNİN
+Geliştirmeler ve Deneyim
+Yalnızca dizine eklenmiş URL'lerde geliştirmeler olabilir
+URL Denetimi
+GOOGLE LIVE TEST CANDIDATES 2026-06-23T03:36:30.194Z:
+<div node_id=30 aria-disabled="false" role="button">Canlı URL'yi test et</div>
+GOOGLE LIVE TEST START 2026-06-23T03:37:05.129Z: https://fatedreel.com/tt0240913
+GOOGLE LIVE TEST RESULT waited=20000 2026-06-23T03:37:25.337Z:
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0240913
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:37
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+URL Denetimi
+GOOGLE REQUEST CANDIDATES 2 2026-06-23T03:37:56.129Z:
+<div node_id=40 aria-disabled="false" aria-label="Dizine eklenmesini isteTekrar istek gönder" role="button">Dizine eklenmesini iste Tekrar istek gönder</div>
+<div node_id=41 role="button">check_circle Sayfa kullanılabilirliği Sayfa dizine eklenebilir  </div>
+GOOGLE REQUEST RESULT 2026-06-23T03:38:30.404Z: https://fatedreel.com/tt0240913
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0240913
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:37
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+GOOGLE CLOSE MODAL 2026-06-23T03:39:05.167Z: <button node_id=43>Kapat</button>
+GOOGLE URL ENTERED 2026-06-23T03:39:59.954Z: https://fatedreel.com/tt0243794
+GOOGLE LIVE TEST START 2026-06-23T03:40:03.768Z: https://fatedreel.com/tt0243794
+GOOGLE REQUEST RESULT 2026-06-23T03:40:35.742Z: https://fatedreel.com/tt0243794
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0243794
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:40
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+URL Denetimi
+GOOGLE CLOSE MODAL AFTER https://fatedreel.com/tt0243794 2026-06-23T03:40:35.799Z: <button node_id=57>Kapat</button>
+GOOGLE URL ENTERED 2026-06-23T03:40:38.182Z: https://fatedreel.com/tt0243862
+GOOGLE LIVE TEST START 2026-06-23T03:40:41.974Z: https://fatedreel.com/tt0243862
+GOOGLE REQUEST RESULT 2026-06-23T03:41:13.958Z: https://fatedreel.com/tt0243862
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0243862
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:40
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+URL Denetimi
+GOOGLE CLOSE MODAL AFTER https://fatedreel.com/tt0243862 2026-06-23T03:41:14.014Z: <button node_id=71>Kapat</button>
+GOOGLE URL ENTERED 2026-06-23T03:41:16.331Z: https://fatedreel.com/tt0244316
+GOOGLE LIVE TEST START 2026-06-23T03:41:20.123Z: https://fatedreel.com/tt0244316
+GOOGLE REQUEST RESULT 2026-06-23T03:41:57.181Z: https://fatedreel.com/tt0244316
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0244316
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:41
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+URL Denetimi
+GOOGLE CLOSE MODAL AFTER https://fatedreel.com/tt0244316 2026-06-23T03:41:57.233Z: <button node_id=85>Kapat</button>
+GOOGLE URL ENTERED 2026-06-23T03:41:59.714Z: https://fatedreel.com/tt0244479
+GOOGLE LIVE TEST START 2026-06-23T03:42:06.640Z: https://fatedreel.com/tt0244479
+GOOGLE REQUEST RESULT 2026-06-23T03:42:53.799Z: https://fatedreel.com/tt0244479
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0244479
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:42
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+URL Denetimi
+GOOGLE CLOSE MODAL AFTER https://fatedreel.com/tt0244479 2026-06-23T03:42:53.847Z: <button node_id=99>Kapat</button>
+GOOGLE URL ENTERED 2026-06-23T03:42:56.215Z: https://fatedreel.com/tt0245929
+GOOGLE LIVE TEST START 2026-06-23T03:43:03.104Z: https://fatedreel.com/tt0245929
+GOOGLE REQUEST RESULT 2026-06-23T03:43:24.950Z: https://fatedreel.com/tt0245929
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0245929
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:43
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+URL Denetimi
+GOOGLE CLOSE MODAL AFTER https://fatedreel.com/tt0245929 2026-06-23T03:43:25.000Z: <button node_id=113>Kapat</button>
+GOOGLE ROUND RESULTS 2026-06-23T03:43:26.377Z: [
+  {
+    "url": "https://fatedreel.com/tt0243794",
+    "entered": true,
+    "live": true,
+    "requested": true,
+    "status": "requested",
+    "detail": ""
+  },
+  {
+    "url": "https://fatedreel.com/tt0243862",
+    "entered": true,
+    "live": true,
+    "requested": true,
+    "status": "requested",
+    "detail": ""
+  },
+  {
+    "url": "https://fatedreel.com/tt0244316",
+    "entered": true,
+    "live": true,
+    "requested": true,
+    "status": "requested",
+    "detail": ""
+  },
+  {
+    "url": "https://fatedreel.com/tt0244479",
+    "entered": true,
+    "live": true,
+    "requested": true,
+    "status": "requested",
+    "detail": ""
+  },
+  {
+    "url": "https://fatedreel.com/tt0245929",
+    "entered": true,
+    "live": true,
+    "requested": true,
+    "status": "requested",
+    "detail": ""
+  }
+]
+GOOGLE URL ENTERED 2026-06-23T03:44:01.821Z: https://fatedreel.com/tt0246772
+GOOGLE LIVE TEST START 2026-06-23T03:44:05.647Z: https://fatedreel.com/tt0246772
+GOOGLE REQUEST RESULT 2026-06-23T03:44:37.605Z: https://fatedreel.com/tt0246772
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0246772
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:44
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+URL Denetimi
+GOOGLE CLOSE MODAL AFTER https://fatedreel.com/tt0246772 2026-06-23T03:44:37.663Z: <button node_id=128>Kapat</button>
+GOOGLE URL ENTERED 2026-06-23T03:44:39.989Z: https://fatedreel.com/tt0247196
+GOOGLE LIVE TEST START 2026-06-23T03:44:43.793Z: https://fatedreel.com/tt0247196
+GOOGLE REQUEST RESULT 2026-06-23T03:45:20.779Z: https://fatedreel.com/tt0247196
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0247196
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:44
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+URL Denetimi
+GOOGLE CLOSE MODAL AFTER https://fatedreel.com/tt0247196 2026-06-23T03:45:20.833Z: <button node_id=142>Kapat</button>
+GOOGLE URL ENTERED 2026-06-23T03:45:23.233Z: https://fatedreel.com/tt0247199
+GOOGLE LIVE TEST START 2026-06-23T03:45:27.040Z: https://fatedreel.com/tt0247199
+GOOGLE REQUEST RESULT 2026-06-23T03:45:53.948Z: https://fatedreel.com/tt0247199
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0247199
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:45
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+URL Denetimi
+GOOGLE CLOSE MODAL AFTER https://fatedreel.com/tt0247199 2026-06-23T03:45:54.002Z: <button node_id=157>Kapat</button>
+GOOGLE ROUND 2 RESULTS 2026-06-23T03:45:55.379Z: [
+  {
+    "url": "https://fatedreel.com/tt0246772",
+    "entered": true,
+    "live": true,
+    "requested": true,
+    "status": "requested",
+    "detail": ""
+  },
+  {
+    "url": "https://fatedreel.com/tt0247196",
+    "entered": true,
+    "live": true,
+    "requested": true,
+    "status": "requested",
+    "detail": ""
+  },
+  {
+    "url": "https://fatedreel.com/tt0247199",
+    "entered": true,
+    "live": true,
+    "requested": true,
+    "status": "requested",
+    "detail": ""
+  }
+]
+GOOGLE URL ENTERED 2026-06-23T03:46:28.016Z: https://fatedreel.com/tt0247586
+GOOGLE LIVE TEST START 2026-06-23T03:46:34.989Z: https://fatedreel.com/tt0247586
+GOOGLE REQUEST RESULT 2026-06-23T03:47:06.960Z: https://fatedreel.com/tt0247586
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0247586
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:46
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+check_circle
+Dizine eklenmesi istendi
+URL, öncelikli bir tarama sırasına eklendi. Aynı sayfanın birden fazla kez gönderilmesi, isteğin sıradaki konumunu veya önceliğini değiştirmez. Daha fazla bilgi.
+Kapat
+URL Denetimi
+GOOGLE CLOSE MODAL AFTER https://fatedreel.com/tt0247586 2026-06-23T03:47:07.017Z: <button node_id=171>Kapat</button>
+GOOGLE URL ENTERED 2026-06-23T03:47:09.386Z: https://fatedreel.com/tt0248845
+GOOGLE LIVE TEST START 2026-06-23T03:47:13.191Z: https://fatedreel.com/tt0248845
+GOOGLE REQUEST RESULT 2026-06-23T03:47:45.526Z: https://fatedreel.com/tt0248845
+
+	
+6
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0248845
+URL Denetimi
+GOOGLE DİZİNİ
+CANLI TEST
+Test zamanı: 23 Haz 2026, 06:47
+
+check_circle
+URL, Google tarafından kullanılabilir
+Dizine eklenip standart olarak seçilirse tüm alakalı geliştirmelerle Google Arama sonuçlarında görünebilir. Daha fazla bilgi
+TEST EDİLEN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+check_circle
+Sayfa kullanılabilirliği
+Sayfa dizine eklenebilir
+
+check_circle
+Video keşfi
+Video algılandı
+Geliştirmeler ve Deneyim
+URL'de geliştirme yok
+error_outline
+Kota Aşıldı
+Maalesef günlük kotanızı aştığınız için bu isteği işleyemedik. Lütfen bunu yarın tekrar göndermeyi deneyin.
+Kapat
+URL Denetimi
+GOOGLE ROUND 3 RESULTS 2026-06-23T03:47:45.527Z: [
+  {
+    "url": "https://fatedreel.com/tt0247586",
+    "entered": true,
+    "live": true,
+    "requested": true,
+    "status": "requested",
+    "detail": ""
+  },
+  {
+    "url": "https://fatedreel.com/tt0248845",
+    "entered": true,
+    "live": true,
+    "requested": false,
+    "status": "quota_or_block",
+    "detail": "Kota Aşıldı"
+  }
+]
+FINAL SUMMARY {
+  "at": "2026-06-23T03:48:21.242Z",
+  "google": {
+    "currentUrl": "https://fatedreel.com/tt0248845",
+    "status": "quota_exceeded",
+    "quotaText": "Kota Aşıldı"
+  },
+  "bing": {
+    "status": "quota_0_or_100_submitted",
+    "excerpt": "\nSkip to main content\n\nURL Submission\nSubmit URLs\n\nDid you know?\nYou can automate URL submission by using our IndexNow API or Submission API and stay updated on Microsoft Bing!\nSubmitted Urls list\nDownload all\n\nselect all items\nURL\nSubmitted\n\nAction\n\nhttps://fatedreel.com/tt0283900\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0286516\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0287803\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0291172\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0292242\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0291350\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0285441\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0283832\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0281718\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0282698\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0286261\n\n\n\nYesterday at 17:17\n\n\nhttps://fatedreel.com/tt0284363\n\n\n\nYesterday at 17:17\n\n\nhttps://fa"
+  },
+  "yandex": {
+    "status": "daily_limit_reached",
+    "excerpt": "Summary\nWebsite optimization\nEfficiency\nIndexing\nTools\nDisplay in the search\nLinks\nTutorials\nUseful services\n7\n11\nReindex pages\nAdd URL to your list of important pages in order to track its indexing and get notified about changes to its status in Search. Find out more\nYour daily limit is 150 URLs per site, including the main domain and all subdomains.\nYou have reached your daily limit of added URLs.\nSend\nSent pages\nUpdates aren't immediate. They appear after a few database refreshes.\nPage URL\tStatus\tSent\t\nhttps://fatedreel.com/tt0292242\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0292542\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0293416\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0293508\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0294870\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0296166\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0297721\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n"
+  }
+}
+GOOGLE SUCCESS URLS UNIQUE 2026-06-23T03:48:55.910Z: [
+  "https://fatedreel.com/tt0243794",
+  "https://fatedreel.com/tt0243862",
+  "https://fatedreel.com/tt0244316",
+  "https://fatedreel.com/tt0244479",
+  "https://fatedreel.com/tt0245929",
+  "https://fatedreel.com/tt0246772",
+  "https://fatedreel.com/tt0247196",
+  "https://fatedreel.com/tt0247199",
+  "https://fatedreel.com/tt0247586"
+]

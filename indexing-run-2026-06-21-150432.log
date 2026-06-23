@@ -1,0 +1,32 @@
+﻿FatedReel heartbeat indexing check
+Started: 2026-06-21T15:04:32.4961593+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Automation file: C:\Users\aa\.codex\automations\fatedreel-url-ekleme\automation.toml
+Schedule: FREQ=HOURLY;INTERVAL=6
+Previous latest log: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-21-124225.log
+Previous latest log time: 2026-06-21T13:24:18.1150302+03:00
+Previous latest log within last 6h: True
+
+IndexNow run:
+Command: C:\Users\aa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe submit_indexnow.py
+Exit code: 0
+Output:
+IndexNow status: 200 Submitted URLs: 3124
+
+Live HTTP checks:
+https://fatedreel.com/sitemap.xml -> ERROR Nesne başvurusu bir nesnenin örneğine ayarlanmadı.
+https://fatedreel.com/b6f09cebefa4ecfbb74842513996f3cf.txt -> ERROR Uzak sunucu hata döndürdü: (404) Bulunamadı.
+https://fatedreel.com/tt0120263 -> ERROR Nesne başvurusu bir nesnenin örneğine ayarlanmadı.
+
+Webmaster UI status:
+Google Search Console: NOT RUN in heartbeat - no authenticated UI automation attempted in background heartbeat; use visible Chrome session when user opens it.
+Bing Webmaster UI: NOT RUN in heartbeat - IndexNow submitted instead; UI requires authenticated browser/session.
+Yandex Webmaster UI: NOT RUN in heartbeat - IndexNow submitted instead; UI check page can be flaky/long-running.
+Quota/Login/Captcha/MFA blockers: no new quota/captcha/MFA observed in this shell run; UI not attempted.
+Finished: 2026-06-21T15:04:35.0666670+03:00
+Log path: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-21-150432.log
+
+Corrected live HTTP GET checks:
+https://fatedreel.com/sitemap.xml -> HTTP 200, Content-Type=application/xml, Bytes=509738
+https://fatedreel.com/b6f09cebefa4ecf4e122c262ba6097c6.txt -> HTTP 200, Content-Type=text/plain; charset=utf-8, Bytes=33
+https://fatedreel.com/tt0120263 -> HTTP 200, Content-Type=text/html; charset=utf-8, Bytes=89609

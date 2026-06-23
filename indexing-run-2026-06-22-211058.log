@@ -1,0 +1,25 @@
+RUN START: 2026-06-22T21:10:58.4031873+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+SCHEDULE NOTE: heartbeat fatedreel-6-saat-raporu
+AUTOMATION TOML: C:\Users\aa\.codex\automations\fatedreel-url-ekleme\automation.toml
+RECENT PRIOR LOG: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-22-171345.log
+PRIOR STATE: Last run within 6 hours existed; latest prior LastWriteTime 2026-06-22 17:49:41 local.
+INDEXNOW: starting submit_indexnow.py
+python.exe : Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut 
+from Settings > Apps > Advanced app settings > App execution aliases.
+At line:15 char:13
++   $output = & python .\submit_indexnow.py 2>&1
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Python was not ...cution aliases.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+INDEXNOW EXIT CODE: 9009
+WEBMASTER STATUS FROM PRIOR LIVE RUN: Google authenticated but Request Indexing button did not open confirmation for tt0240419 after live-test pass; no CAPTCHA/MFA/quota visible. Bing quota reached 0 after 24 submitted URLs. Yandex daily limit reached.
+RUN END: 2026-06-22T21:10:58.8631755+03:00
+INDEXNOW RETRY: bundled Python C:\Users\aa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe
+IndexNow status: 200
+Submitted URLs: 3124
+
+INDEXNOW RETRY EXIT CODE: 0
+FINAL SUMMARY: Son 6 saatte onceki webmaster run var. Bu heartbeat IndexNow'u bundled Python ile tekrar denedi. Webmaster UI icin onceki aktif oturum sonucu: Google button blocker, Bing quota 0, Yandex daily limit.

@@ -1,0 +1,74 @@
+﻿FatedReel 6 saat kontrolu
+Started: 2026-06-22 09:08:14 +03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Schedule note: fatedreel-url-ekleme is ACTIVE, FREQ=HOURLY;INTERVAL=6
+Last log before this run: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-22-030638.log
+Last log time: 06/22/2026 03:06:43
+Run in last 6 hours before this run: False
+
+[Automation config]
+version = 1
+id = "fatedreel-url-ekleme"
+kind = "cron"
+name = "FatedReel URL ekleme"
+prompt = "Every run must perform and log the FatedReel indexing workflow. Work in the repo and create a timestamped log file named indexing-run-YYYY-MM-DD-HHMMSS.log. First write the run start time, cwd, and schedule note to the log. Run the existing IndexNow submission flow for Bing/Yandex if the repo contains the script or key file; record submitted URL count, HTTP/status results, failures, and exact command/output summary. Then check whether Google Search Console, Bing Webmaster Tools, or Yandex Webmaster can be used from an authenticated browser/session available to the job. If available, continue submitting eligible FatedReel movie URLs from the sitemap that have not recently been requested; for each URL, live-test/inspect first when the console requires it, request indexing, close the success dialog, and continue until quota, CAPTCHA, login, MFA, security prompt, UI blocker, or allowed daily limit is reached. If a webmaster console is not authenticated or cannot be controlled, do not guess; record it as BLOCKED with the exact reason. Never edit site files during this automation unless a clear technical indexing blocker is found; if found, record the blocker and stop. At the end, write a final summary to the log and final report: counts submitted/requested per engine, last attempted URL, quota/blocker status, and log file path."
+status = "ACTIVE"
+rrule = "FREQ=HOURLY;INTERVAL=6"
+model = "gpt-5-codex"
+reasoning_effort = "medium"
+execution_environment = "local"
+cwds = ["C:\\Users\\aa\\Documents\\github\\fatedreel"]
+created_at = 1781853087549
+updated_at = 1781972607443
+
+[Previous logs]
+
+Name                               LastWriteTime       Length
+----                               -------------       ------
+indexing-run-2026-06-22-030638.log 22.06.2026 03:06:43   4426
+indexing-run-2026-06-21-210529.log 21.06.2026 21:09:52   2510
+indexing-run-2026-06-21-193706.log 21.06.2026 19:37:06   2929
+indexing-run-2026-06-21-150432.log 21.06.2026 15:05:58   1952
+indexing-run-2026-06-21-124225.log 21.06.2026 13:24:18   2900
+indexing-run-2026-06-19-174621.log 19.06.2026 17:55:30   1050
+
+
+
+
+[IndexNow]
+IndexNow status: 200
+Submitted URLs: 3124
+
+IndexNow bundled Python exit code: 0
+
+[Live HTTP checks]
+https://fatedreel.com/sitemap.xml -> 200 application/xml bytes=509738
+https://fatedreel.com/b6f09cebefa4ecf4e122c262ba6097c6.txt -> 200 text/plain; charset=utf-8 bytes=33
+https://fatedreel.com/favicon.ico -> 200 image/vnd.microsoft.icon bytes=15086
+https://fatedreel.com/favicon.svg -> 200 image/svg+xml bytes=14633
+https://fatedreel.com/favicon-96x96.png -> 200 image/png bytes=1433
+https://fatedreel.com/apple-touch-icon.png -> 200 image/png bytes=3233
+https://fatedreel.com/tt0430576 -> 200 text/html; charset=utf-8 bytes=89486
+https://fatedreel.com/tt0283509 -> 200 text/html; charset=utf-8 bytes=91745
+https://fatedreel.com/tt0278731 -> 200 text/html; charset=utf-8 bytes=92565
+
+[Local checks]
+SVG favicon link in index.html: True
+ICO favicon link in index.html: True
+aggregateRating in index.html: False
+
+[Webmaster UI status]
+Browser/webmaster UI flow was not re-run in this heartbeat shell pass. Latest browser/status log used: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-22-030638.log
+Google status from latest browser check: 21 indexed pages, 3.3K not indexed; Discovered-currently-not-indexed validation started; stale Review snippet issue still shown by GSC although aggregateRating is absent locally.
+Bing status from latest browser check: root URL indexed successfully; no SEO/GEO issues; 16 clicks / 65 impressions; recommendations still mention IndexNow, inbound links, short descriptions, and insufficient content.
+Yandex status from latest browser check: no errors; 3 recommendations; Yandex crawled 10 tt URLs on 2026-06-21 with 200 responses; favicon recommendation still shown in Yandex UI.
+Blockers: no quota/login/captcha/MFA observed in this shell run. Python launcher was missing, but bundled Python succeeded.
+Blockers this run: no quota/login/captcha/MFA observed in shell/IndexNow path; webmaster UI not attempted in this pass.
+Blockers this run: no quota/login/captcha/MFA observed in shell/IndexNow path; webmaster UI not attempted in this pass.
+
+[Final summary]
+This run log: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-22-090814.log
+Last log before this run: indexing-run-2026-06-22-030638.log at 06/22/2026 03:06:43
+Run within last 6 hours before this run: False
+IndexNow: completed with bundled Python; see output above.
+Live URL checks completed.

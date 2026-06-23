@@ -1,0 +1,23 @@
+﻿FatedReel heartbeat indexing check
+Timestamp local: 2026-06-22 15:09:11 +03:00
+Repo: C:\Users\aa\Documents\github\fatedreel
+Automation config: C:\Users\aa\.codex\automations\fatedreel-url-ekleme\automation.toml
+Automation status: ACTIVE; schedule: FREQ=HOURLY;INTERVAL=6
+Latest previous log: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-22-144843.log
+Latest previous log time: 2026-06-22 14:48:43
+Work in last 6 hours: True
+
+IndexNow command: python submit_indexnow.py
+IndexNow output:
+Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Apps > Advanced app settings > App execution aliases.
+
+Google status: latest manual run saw tt0238119 live-test OK and request appeared queued; current heartbeat did not safely automate Google UI because GSC request button was not exposed as a stable visible clickable element in prior run.
+Bing status: latest manual run confirmed requests through tt0280760; no login/captcha/MFA observed then.
+Yandex status: latest manual run submitted 80 URLs and left 70 daily quota; no login/captcha/MFA observed then.
+Current blockers: no fresh browser automation attempted in this heartbeat because previous log is within 6 hours; Google UI click reliability remains the known blocker.
+Log path: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-22-150911.log
+
+Retry IndexNow with bundled Python: C:\Users\aa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe submit_indexnow.py
+Bundled Python IndexNow output:
+IndexNow status: 200
+Submitted URLs: 3124

@@ -1,0 +1,42 @@
+﻿FatedReel 6 saat kontrolu
+Timestamp local: 2026-06-21 21:05:29 +03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Schedule: fatedreel-url-ekleme ACTIVE FREQ=HOURLY;INTERVAL=6
+
+
+[IndexNow]
+Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Apps > Advanced app settings > App execution aliases.
+IndexNow exit code: 9009
+
+[IndexNow retry with bundled Python]
+IndexNow status: 200
+Submitted URLs: 3124
+IndexNow bundled Python exit code: 0
+
+[Live HTTP checks]
+https://fatedreel.com/sitemap.xml -> 200 application/xml bytes=509738
+https://fatedreel.com/b6f09cebefa4ecf4e122c262ba6097c6.txt -> 200 text/plain; charset=utf-8 bytes=33
+https://fatedreel.com/favicon.ico -> 200 image/vnd.microsoft.icon bytes=15086
+https://fatedreel.com/favicon.svg -> 200 image/svg+xml bytes=14633
+https://fatedreel.com/favicon-96x96.png -> 200 image/png bytes=1433
+https://fatedreel.com/tt0430576 -> 200 text/html; charset=utf-8 bytes=89486
+https://fatedreel.com/tt0283509 -> 200 text/html; charset=utf-8 bytes=91745
+
+[Local checks]
+SVG favicon link in index.html: True aggregateRating in index.html: False
+
+[Webmaster UI status]
+Checked at: 2026-06-21 21:09:52 +03:00
+Browser/webmaster UI flow was not re-run in this heartbeat. Latest authenticated browser check log is: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-21-193706.log
+That prior browser check is within the last 6 hours.
+Google status from latest browser check: 21 indexed pages, 3.3K not indexed; Discovered-currently-not-indexed validation started; stale Review snippet issue still shown by GSC although aggregateRating is absent locally.
+Bing status from latest browser check: root URL indexed successfully; no SEO/GEO issues; 16 clicks / 65 impressions; recommendations still mention IndexNow, inbound links, short descriptions, and insufficient content.
+Yandex status from latest browser check: no errors; 3 recommendations; Yandex crawled 10 tt URLs on 2026-06-21 with 200 responses; favicon recommendation still shown in Yandex UI.
+Blockers: no quota/login/captcha/MFA observed in this shell run. Python launcher was missing, but bundled Python succeeded.
+
+[Final summary]
+Last log before this run: indexing-run-2026-06-21-193706.log
+This run log: indexing-run-2026-06-21-210529.log
+Run within last 6 hours: yes
+IndexNow: success, HTTP 200, submitted 3124 sitemap URLs
+Live URL checks: sitemap, key file, favicon files, and sample tt pages returned HTTP 200

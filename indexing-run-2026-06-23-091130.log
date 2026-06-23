@@ -1,0 +1,105 @@
+﻿RUN START: 2026-06-23T09:11:30.4414145+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Automation: fatedreel-6-saat-raporu heartbeat check
+Automation config: C:\Users\aa\.codex\automations\fatedreel-url-ekleme\automation.toml
+Last log before this run: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-23-032340.log
+Last log mtime: 2026-06-23T06:48:55.9115239+03:00
+Last log age minutes: 142.58
+
+--- RECENT LAST LOG TAIL ---
+trophy
+BaÅŸarÄ±lar
+settings
+Ayarlar
+feedback
+Geri bildirim gÃ¶nder
+info
+Search Console hakkÄ±nda
+GizlilikÅartlar
+https://fatedreel.com/tt0248845
+URL Denetimi
+GOOGLE DÄ°ZÄ°NÄ°
+CANLI TEST
+Test zamanÄ±: 23 Haz 2026, 06:47
+î—•
+check_circle
+URL, Google tarafÄ±ndan kullanÄ±labilir
+Dizine eklenip standart olarak seÃ§ilirse tÃ¼m alakalÄ± geliÅŸtirmelerle Google Arama sonuÃ§larÄ±nda gÃ¶rÃ¼nebilir. Daha fazla bilgi
+TEST EDÄ°LEN SAYFAYI GÃ–STER
+Sayfa deÄŸiÅŸti mi?
+DÄ°ZÄ°NE EKLENMESÄ°NÄ° Ä°STE
+check_circle
+Sayfa kullanÄ±labilirliÄŸi
+Sayfa dizine eklenebilir
+îŒ“
+check_circle
+Video keÅŸfi
+Video algÄ±landÄ±
+GeliÅŸtirmeler ve Deneyim
+URL'de geliÅŸtirme yok
+error_outline
+Kota AÅŸÄ±ldÄ±
+Maalesef gÃ¼nlÃ¼k kotanÄ±zÄ± aÅŸtÄ±ÄŸÄ±nÄ±z iÃ§in bu isteÄŸi iÅŸleyemedik. LÃ¼tfen bunu yarÄ±n tekrar gÃ¶ndermeyi deneyin.
+Kapat
+URL Denetimi
+GOOGLE ROUND 3 RESULTS 2026-06-23T03:47:45.527Z: [
+  {
+    "url": "https://fatedreel.com/tt0247586",
+    "entered": true,
+    "live": true,
+    "requested": true,
+    "status": "requested",
+    "detail": ""
+  },
+  {
+    "url": "https://fatedreel.com/tt0248845",
+    "entered": true,
+    "live": true,
+    "requested": false,
+    "status": "quota_or_block",
+    "detail": "Kota AÅŸÄ±ldÄ±"
+  }
+]
+FINAL SUMMARY {
+  "at": "2026-06-23T03:48:21.242Z",
+  "google": {
+    "currentUrl": "https://fatedreel.com/tt0248845",
+    "status": "quota_exceeded",
+    "quotaText": "Kota AÅŸÄ±ldÄ±"
+  },
+  "bing": {
+    "status": "quota_0_or_100_submitted",
+    "excerpt": "îœ€\nSkip to main content\nîœ’\nURL Submission\nSubmit URLs\nïˆ\nDid you know?\nYou can automate URL submission by using our IndexNow API or Submission API and stay updated on Microsoft Bing!\nSubmitted Urls list\nDownload allî¢–\nîœ¹\nselect all items\nURL\nSubmitted\nî¹©\nAction\nîœ¹\nhttps://fatedreel.com/tt0283900\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0286516\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0287803\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0291172\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0292242\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0291350\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0285441\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0283832\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0281718\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0282698\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0286261\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0284363\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fa"
+  },
+  "yandex": {
+    "status": "daily_limit_reached",
+    "excerpt": "Summary\nWebsite optimization\nEfficiency\nIndexing\nTools\nDisplay in the search\nLinks\nTutorials\nUseful services\n7\n11\nReindex pages\nAdd URL to your list of important pages in order to track its indexing and get notified about changes to its status in Search. Find out more\nYour daily limit is 150 URLs per site, including the main domain and all subdomains.\nYou have reached your daily limit of added URLs.\nSend\nSent pages\nUpdatesÂ aren't immediate. They appear afterÂ aÂ few database refreshes.\nPage URL\tStatus\tSent\t\nhttps://fatedreel.com/tt0292242\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0292542\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0293416\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0293508\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0294870\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0296166\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0297721\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n"
+  }
+}
+GOOGLE SUCCESS URLS UNIQUE 2026-06-23T03:48:55.910Z: [
+  "https://fatedreel.com/tt0243794",
+  "https://fatedreel.com/tt0243862",
+  "https://fatedreel.com/tt0244316",
+  "https://fatedreel.com/tt0244479",
+  "https://fatedreel.com/tt0245929",
+  "https://fatedreel.com/tt0246772",
+  "https://fatedreel.com/tt0247196",
+  "https://fatedreel.com/tt0247199",
+  "https://fatedreel.com/tt0247586"
+]
+
+--- INDEXNOW RUN ---
+Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Apps > Advanced app settings > App execution aliases.
+IndexNow exit code: 9009
+
+--- SUMMARY ---
+Son 6 saatte çalışma: VAR. Önceki son log 2026-06-23 06:48 yerel civarı güncellenmiş.
+Google: önceki canlı tarayıcı akışında kota aşıldı; son takılan URL https://fatedreel.com/tt0248845.
+Bing: Webmaster URL Submission kotası 0/100 görünüyordu; IndexNow ayrıca çalıştırıldı.
+Yandex: Reindex daily limit 150 dolu görünüyordu; IndexNow ayrıca çalıştırıldı.
+RUN END: 2026-06-23T09:11:30.6321207+03:00
+
+--- INDEXNOW RETRY WITH BUNDLED PYTHON ---
+IndexNow status: 200
+Submitted URLs: 3124
+Bundled Python IndexNow exit code: 0

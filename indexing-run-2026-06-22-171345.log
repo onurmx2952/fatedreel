@@ -1,0 +1,704 @@
+FatedReel indexing run start 2026-06-22T14:13:45.062Z
+Tabs: Google=https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com&id=80cklo13U7dz7DC4e3KDYg&alt_id=lZ2n0OpwVbnsfgExskpeQg Bing=https://www.bing.com/webmasters/submiturl?siteUrl=https://fatedreel.com/ Yandex=https://webmaster.yandex.com/site/https:fatedreel.com:443/indexing/reindex/
+Yandex initial snapshot excerpt:
+- link "Logo":
+  - /url: /sites/
+- list:
+  - combobox "https://fatedreel.com"
+  - link:
+    - /url: /sites/add/
+  - textbox "Search"
+- list:
+  - link "Summary":
+    - /url: /site/https:fatedreel.com:443/dashboard/?_from=menu
+    - generic: Summary
+  - button "Website optimization":
+    - generic: Website optimization
+  - button "Efficiency":
+    - generic: Efficiency
+  - button "Indexing":
+    - generic: Indexing
+  - button "Tools":
+    - generic: Tools
+  - button "Display in the search":
+    - generic: Display in the search
+  - button "Links":
+    - generic: Links
+  - button "Tutorials":
+    - generic: Tutorials
+  - button "Useful services":
+    - generic: Useful services
+- button
+- button "Ваш профиль":
+  - generic: "7"
+- button
+- link "11":
+  - /url: /notifications/
+  - generic: "11"
+- button:
+- button:
+- heading "Reindex pages" [level=2]
+- text: Add URL
+- link "to your list of important pages":
+  - /url: /site/https:fatedreel.com:443/indexing/url-tracker/
+- text: in order to track its indexing and get notified about changes to its status in Search.
+- link "Find out more":
+  - /url: https://yandex.com/support/webmaster/service/tracking-url.html
+- textbox "Enter URLs of the pages that are top priority for indexing"
+- generic: Your daily limit is 150 URLs per site, including the main domain and all subdomains.
+- generic: You have reached your daily limit of added URLs.
+- button "Send" [disabled]:
+  - generic: Send
+- heading "Sent pages" [level=2]
+- generic: Updates aren't immediate. They appear after a few database refreshes.
+- button:
+- button:
+- table:
+  - rowgroup:
+    - row "Page URL Status Sent":
+      - columnheader "Page URL":
+        - generic: Page URL
+      - columnheader "Status":
+        - generic: Status
+      - columnheader "Sent":
+        - generic: Sent
+      - columnheader
+  - rowgroup:
+    - row "https://fatedreel.com/tt0292242 In queue 06/22/2026 5:02 PM Track":
+      - cell "https://fatedreel.com/tt0292242":
+        - link "https://fatedreel.com/tt0292242":
+          - /url: https://fatedreel.com/tt0292242
+      - cell "In queue":
+        - generic: In queue
+      - cell "06/22/2026 5:02 PM"
+      - cell "Track":
+        - button "Track":
+          - generic: Track
+    - row "https://fatedreel.com/tt0292542 In queue 06/22/2026 5:02 PM Track":
+      - cell "https://fatedreel.com/tt0292542":
+        - link "https://fatedreel.com/tt0292542":
+          - /url: https://fatedreel.com/tt0292542
+      - cell "In queue":
+        - generic: In queue
+      - cell "06/22/2026 5:02 PM"
+      - cell "Track":
+        - button "Track":
+          - generic: Track
+    - row "https://fatedreel.com/tt0293416 In queue 06/22/2026 5:02 PM Track":
+      - cell "https://fatedreel.com/tt0293416":
+        - link "https://fatedreel.com/tt0293416":
+          - /url: https://fatedreel.com/tt0293416
+      - cell "In queue":
+        - generic: In queue
+      - cell "06/22/2026 5:02 PM"
+      - cell "Track":
+        - button "Track":
+          - generic: Tra
+Yandex: daily limit reached; queued rows visible starting tt0292242 at 2026-06-22 17:02. No more Yandex submissions possible in this run.
+Bing initial snapshot excerpt:
+- banner:
+  - button:
+    - generic: 
+  - link:
+    - /url: "#content"
+    - text: Skip to main content
+  - button:
+    - generic: 
+  - button:
+- main:
+  - heading [level=2]: URL Submission
+  - button:
+    - generic: Submit URLs
+  - complementary:
+    - generic: 
+    - generic: Did you know?
+    - text: You can automate URL submission by using our
+    - link:
+      - /url: /indexnow
+      - text: IndexNow API
+    - text: or
+    - link:
+      - /url: /webmasters/url-submission-api#APIs
+      - text: Submission API
+    - text: and stay updated on Microsoft Bing!
+  - heading [level=3]: Submitted Urls list
+  - button:
+    - generic: Download all
+    - generic: 
+  - grid:
+    - row:
+      - columnheader:
+        - checkbox:
+          - generic: 
+      - generic: select all items
+      - columnheader:
+        - button:
+          - generic: URL
+      - columnheader:
+        - button:
+          - generic: Submitted
+          - generic: 
+      - columnheader:
+        - generic: Action
+    - row:
+      - gridcell:
+        - checkbox:
+          - generic: 
+      - gridcell:
+        - generic: https://fatedreel.com/tt0280760
+        - button:
+          - generic: 
+        - button:
+          - generic: 
+        - button:
+          - generic: 
+      - gridcell:
+        - generic: Today at 14:47
+      - gridcell:
+        - button:
+          - generic: 
+    - row:
+      - gridcell:
+        - checkbox:
+          - generic: 
+      - gridcell:
+        - generic: https://fatedreel.com/tt0280653
+        - button:
+          - generic: 
+        - button:
+          - generic: 
+        - button:
+          - generic: 
+      - gridcell:
+        - generic: Today at 14:47
+      - gridcell:
+        - button:
+          - generic: 
+    - row:
+      - gridcell:
+        - checkbox:
+          - generic: 
+      - gridcell:
+        - generic: https://fatedreel.com/tt0279248
+        - button:
+          - generic: 
+        - button:
+          - generic: 
+        - button:
+          - generic: 
+      - gridcell:
+        - generic: Today at 14:46
+      - gridcell:
+        - button:
+          - generic: 
+    - row:
+      - gridcell:
+        - checkbox:
+          - generic: 
+      - gridcell:
+        - generic: https://fatedreel.com/tt0280477
+        - button:
+          - generic: 
+        - button:
+          - generic: 
+        - button:
+          - generic: 
+      - gridcell:
+        - generic: Today at 14:46
+      - gridcell:
+        - button:
+          - generic: 
+    - row:
+      - gridcell:
+        - checkbox:
+          - generic: 
+      - gridcell:
+        - generic: https://fatedreel.com/tt0280491
+        - button:
+          - generic: 
+        - button:
+          - generic: 
+        - button:
+          - generic: 
+      - gridcell:
+        - generic: Today at 14:46
+      - gridcell:
+        - button:
+          - generic: 
+    - row:
+      - gridcell:
+        - checkbox:
+          - generic: 
+      - gridcell:
+        - generic: https://fatedreel.c
+Bing button candidates: [{"aria":"Show navigation panel","disabled":false,"h":32,"i":0,"text":"","title":"Show navigation panel","w":32,"x":8,"y":11},{"aria":"Show Bing tools","disabled":false,"h":0,"i":1,"text":"","title":"Bing Tools","w":0,"x":0,"y":0},{"aria":"More","disabled":false,"h":54,"i":2,"text":"","title":"","w":44,"x":258,"y":0},{"aria":"Show Bing tools","disabled":false,"h":0,"i":3,"text":"","title":"Bing Tools","w":0,"x":0,"y":0},{"aria":"Copilot","disabled":false,"h":0,"i":4,"text":"","title":"Copilot in Bing Webmaster Tools","w":0,"x":0,"y":0},{"aria":"Notifications","disabled":false,"h":0,"i":5,"text":"","title":"Notifications","w":0,"x":0,"y":0},{"aria":"Help","disabled":false,"h":0,"i":6,"text":"","title":"Help","w":0,"x":0,"y":0},{"aria":"Feedback","disabled":false,"h":0,"i":7,"text":"","title":"Feedback","w":0,"x":0,"y":0},{"aria":"Settings","disabled":false,"h":0,"i":8,"text":"","title":"Settings","w":0,"x":0,"y":0},{"aria":"Profile","disabled":false,"h":54,"i":9,"text":"","title":"Profile","w":44,"x":302,"y":0},{"aria":"Submit URLs","disabled":false,"h":32,"i":10,"text":"Submit URLs","title":"","w":122.63021087646484,"x":208.3697967529297,"y":70},{"aria":"Close panel","disabled":false,"h":32,"i":94,"text":"","title":"Close","w":32,"x":283,"y":88},{"aria":"Submit","disabled":false,"h":32,"i":96,"text":"Submit","title":"","w":80,"x":235,"y":580.328125}]
+Bing form info: {"bodyText":"\nSkip to main content\n\nURL Submission\nSubmit URLs\n\nDid you know?\nYou can automate URL submission by using our IndexNow API or Submission API and stay updated on Microsoft Bing!\nSubmitted Urls list\nDownload all\n\nselect all items\nURL\nSubmitted\n\nAction\n\nhttps://fatedreel.com/tt0280760\n\n\n\nToday at 14:47\n\n\nhttps://fatedreel.com/tt0280653\n\n\n\nToday at 14:47\n\n\nhttps://fatedreel.com/tt0279248\n\n\n\nToday at 14:46\n\n\nhttps://fatedreel.com/tt0280477\n\n\n\nToday at 14:46\n\n\nhttps://fatedreel.com/tt0280491\n\n\n\nToday at 14:46\n\n\nhttps://fatedreel.com/tt0279064\n\n\n\nToday at 14:45\n\n\nhttps://fatedreel.com/tt0279231\n\n\n\nToday at 14:45\n\n\nhttps://fatedreel.com/tt0279065\n\n\n\nToday at 14:45\n\n\nhttps://fatedreel.com/tt0279112\n\n\n\nToday at 14:45\n\n\nhttps://fatedreel.com/tt0277327\n\n\n\nToday at 14:44\n\n\nhttps://fatedreel.com/tt0275719\n\n\n\nToday at 14:42\n\n\nhttps://fatedreel.com/tt0275491\n\n\n\nToday at 14:42\n\n\nhttps://fatedreel.com/tt0274309\n\n\n\nToday at 14:41\n\n\nhttps://fatedreel.com/tt0275277\n\n\n\nToday at 14:41\n\n\nhttps://fatedreel.com/tt0275083\n\n\n\nToday at 14:41\n\n\nhttps://fatedreel.com/tt0274117\n\n\n\nToday at 14:40\n\n\nhttps://fatedreel.com/tt0271383\n\n\n\nToday at 14:40\n\n\nhttps://fatedreel.com/tt0272207\n\n\n\nToday at 14:40\n\n\nhttps://fatedreel.com/tt0270053\n\n\n\nToday at 14:39\n\n\nhttps://fatedreel.com/tt0269746\n\n\n\nToday at 14:38\n\nRows per page\n25\n\n\n\nQuota left for today (URL Submission Only)\n24\nQuota will reset in 10 hrs. Learn more\nURLs submitted today\n76\nSubmit URLs\n\nQuota left for today : 24 URLs\nWe have updated our quota allocation policy. Learn more\nCancel\nSubmit","inputs":[{"aria":"Enter URLs to submit","h":300,"i":0,"placeholder":"Enter one URL per line","tag":"TEXTAREA","type":"textarea","value":"","visible":true,"w":297,"x":17,"y":218.19271850585935}]}
+Bing: quota left 24; submitting 24 URLs from https://fatedreel.com/tt0281718 to https://fatedreel.com/tt0293508
+Bing after submit snapshot excerpt:
+- banner:
+  - button "Show navigation panel":
+    - generic: 
+  - link "Skip to main content":
+    - /url: "#content"
+  - img "white bwt logo microsoft bing mobile"
+  - button "More":
+    - generic: 
+  - button "Profile":
+- main:
+  - heading "URL Submission" [level=2]
+  - button "Submit URLs" [active]:
+    - generic: Submit URLs
+  - complementary "Did you know? You can automate URL submission by using our IndexNow API or Submission API and stay updated on Microsoft Bing!":
+    - generic: 
+    - generic: Did you know?
+    - text: You can automate URL submission by using our
+    - link "IndexNow API":
+      - /url: /indexnow
+    - text: or
+    - link "Submission API":
+      - /url: /webmasters/url-submission-api#APIs
+    - text: and stay updated on Microsoft Bing!
+  - heading "Submitted Urls list" [level=3]
+  - button "Download all":
+    - generic: Download all
+    - generic: 
+  - grid "Submitted Urls list":
+    - row "select all items URL, sortable Submitted, sortable, sorted descending order Action":
+      - columnheader "select all items":
+        - checkbox "select all items":
+          - generic: 
+      - generic: select all items
+      - columnheader "URL, sortable":
+        - button "URL, sortable":
+          - generic: URL
+      - columnheader "Submitted, sortable, sorted descending order":
+        - button "Submitted, sortable, sorted descending order":
+          - generic: Submitted
+          - generic: 
+      - columnheader "Action":
+        - generic: Action
+    - row "select item https://fatedreel.com/tt0283900 URL actions Today at 17:17 More":
+      - gridcell "select item":
+        - checkbox "select item":
+          - generic: 
+      - gridcell "https://fatedreel.com/tt0283900 URL actions":
+        - generic: https://fatedreel.com/tt0283900
+        - group "URL actions":
+          - button "Copy":
+            - generic: 
+          - button "Open in new tab":
+            - generic: 
+          - button "Inspect URL":
+            - generic: 
+      - gridcell "Today at 17:17":
+        - generic: Today at 17:17
+      - gridcell "More":
+        - button "More":
+          - generic: 
+    - row "select item https://fatedreel.com/tt0286516 URL actions Today at 17:17 More":
+      - gridcell "select item":
+        - checkbox "select item":
+          - generic: 
+      - gridcell "https://fatedreel.com/tt0286516 URL actions":
+        - generic: https://fatedreel.com/tt0286516
+        - group "URL actions":
+          - button "Copy":
+            - generic: 
+          - button "Open in new tab":
+            - generic: 
+          - button "Inspect URL":
+            - generic: 
+      - gridcell "Today at 17:17":
+        - generic: Today at 17:17
+      - gridcell "More":
+        - button "More":
+          - generic: 
+    - row "select item https://fatedreel.com/tt0287803 URL actions Today at 17:17 More":
+      - gridcell "select item":
+        - checkbox "select item":
+          - generic: 
+      - gridcell "https://fatedreel.com/tt0287803 URL actions":
+        - generic: https://fatedreel.com/tt0287803
+        - group "URL actions":
+          - button "Copy":
+            - generic: 
+          - button "Open in new tab":
+            - generic: 
+          - button "Inspect URL":
+            - generic: 
+      - gridcell "Today at 17:17":
+        - generic: Today at 17:17
+      - gridcell "More":
+        - button "More":
+          - generic: 
+    - row "select item https://fatedreel.com/tt0291172 URL actions Today at 17:17 More":
+      - gridcell "select item":
+        - checkbox "select item":
+          - generic: 
+      - gridcell "https://fatedreel.com/tt0291172 URL actions":
+        - generic: https://fatedreel.com/tt0291172
+        - group "URL actions":
+          - button "Copy":
+            - generic: 
+          - button "Open in new tab":
+            - generic: 
+          - button "Inspect URL":
+            - generic: 
+      - gridcell "Today at 17:17":
+        - generic: Today at 17:17
+      - gridce
+Bing: submitted 24 URLs; list shows new rows at Today 17:17. Quota text: ["Quota left for today (URL Submission Only)\n0\nQuota will reset in 10 hrs. Learn more\nURLs submitted today"]
+Google initial snapshot excerpt:
+- banner:
+  - button "Ana menü":
+  - link "Google Search Console":
+    - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+  - search:
+    - textbox [disabled]: "\"fatedreel.com\" içindeki tüm URL'leri denetleyin"
+    - combobox "fatedreel.com adresindeki tüm URL'leri inceleyin"
+    - button "Arama":
+  - button "Yardım":
+    - generic: 
+  - button "Kullanıcı ayarları":
+  - 'button "Okunmamış mesaj sayısı: 5"':
+    - generic: 
+    - generic: "5"
+  - button "Google uygulamaları":
+  - 'button "Google Hesabı: onur yılmaz (onurmx2@gmail.com)"':
+- dialog "navigational drawer":
+  - navigation "Birincil":
+    - button "Arama özelliği":
+      - img "site simgesi"
+      - combobox "fatedreel.com"
+      - generic: 
+    - link "Genel Bakış":
+      - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+      - generic: home
+      - generic: Genel Bakış
+    - link "Analizler":
+      - /url: ./search-console/performance/insights?resource_id=sc-domain%3Afatedreel.com
+      - generic: lightbulb_2
+      - generic: Analizler
+    - link "Performans":
+      - /url: ./search-console/performance/search-analytics?resource_id=sc-domain%3Afatedreel.com
+      - generic: trending_up
+      - generic: Performans
+    - button "URL denetimi":
+      - generic: search
+      - generic: URL denetimi
+    - generic: Dizin oluşturma
+    - button "Dizin oluşturma rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Sayfa sayısı":
+      - /url: ./search-console/index?resource_id=sc-domain%3Afatedreel.com
+      - generic: file_copy
+      - generic: Sayfa sayısı
+    - link "Videolar":
+      - /url: ./search-console/video-index?resource_id=sc-domain%3Afatedreel.com
+      - generic: video_library
+      - generic: Videolar
+    - link "Site Haritaları":
+      - /url: ./search-console/sitemaps?resource_id=sc-domain%3Afatedreel.com
+      - generic: account_tree
+      - generic: Site Haritaları
+    - link "URL Kaldırma":
+      - /url: ./search-console/removals?resource_id=sc-domain%3Afatedreel.com
+      - generic: visibility_off
+      - generic: URL Kaldırma
+    - generic: Deneyim
+    - button "Deneyim rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Önemli Web Verileri":
+      - /url: ./search-console/core-web-vitals?resource_id=sc-domain%3Afatedreel.com
+      - generic: speed
+      - generic: Önemli Web Verileri
+    - link "HTTPS":
+      - /url: ./search-console/https?resource_id=sc-domain%3Afatedreel.com
+      - generic: lock
+      - generic: HTTPS
+    - generic: Geliştirmeler
+    - button "Geliştirmeler rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Yorum snippet'leri":
+      - /url: ./search-console/r/review-snippet?resource_id=sc-domain%3Afatedreel.com
+      - generic: layers
+      - generic: Yorum snippet'leri
+    - generic: Güvenlik ve Manuel İşlemler
+    - button "Güvenlik ve Manuel İşlemler rapor bölümü":
+      - generic: keyboard_arrow_down
+    - link "Bağlantı raporu":
+      - /url: ./search-c
+Google after request current URL snapshot excerpt:
+- banner:
+  - button "Ana menü":
+  - link "Google Search Console":
+    - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+  - search:
+    - textbox [disabled]: "\"fatedreel.com\" içindeki tüm URL'leri denetleyin"
+    - combobox "fatedreel.com adresindeki tüm URL'leri inceleyin"
+    - button "Arama":
+  - button "Yardım":
+    - generic: 
+  - button "Kullanıcı ayarları":
+  - 'button "Okunmamış mesaj sayısı: 5"':
+    - generic: 
+    - generic: "5"
+  - button "Google uygulamaları":
+  - 'button "Google Hesabı: onur yılmaz (onurmx2@gmail.com)"':
+- dialog "navigational drawer":
+  - navigation "Birincil":
+    - button "Arama özelliği":
+      - img "site simgesi"
+      - combobox "fatedreel.com"
+      - generic: 
+    - link "Genel Bakış":
+      - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+      - generic: home
+      - generic: Genel Bakış
+    - link "Analizler":
+      - /url: ./search-console/performance/insights?resource_id=sc-domain%3Afatedreel.com
+      - generic: lightbulb_2
+      - generic: Analizler
+    - link "Performans":
+      - /url: ./search-console/performance/search-analytics?resource_id=sc-domain%3Afatedreel.com
+      - generic: trending_up
+      - generic: Performans
+    - button "URL denetimi":
+      - generic: search
+      - generic: URL denetimi
+    - generic: Dizin oluşturma
+    - button "Dizin oluşturma rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Sayfa sayısı":
+      - /url: ./search-console/index?resource_id=sc-domain%3Afatedreel.com
+      - generic: file_copy
+      - generic: Sayfa sayısı
+    - link "Videolar":
+      - /url: ./search-console/video-index?resource_id=sc-domain%3Afatedreel.com
+      - generic: video_library
+      - generic: Videolar
+    - link "Site Haritaları":
+      - /url: ./search-console/sitemaps?resource_id=sc-domain%3Afatedreel.com
+      - generic: account_tree
+      - generic: Site Haritaları
+    - link "URL Kaldırma":
+      - /url: ./search-console/removals?resource_id=sc-domain%3Afatedreel.com
+      - generic: visibility_off
+      - generic: URL Kaldırma
+    - generic: Deneyim
+    - button "Deneyim rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Önemli Web Verileri":
+      - /url: ./search-console/core-web-vitals?resource_id=sc-domain%3Afatedreel.com
+      - generic: speed
+      - generic: Önemli Web Verileri
+    - link "HTTPS":
+      - /url: ./search-console/https?resource_id=sc-domain%3Afatedreel.com
+      - generic: lock
+      - gen
+Google button candidates after request click: [{"aria":"Aramayı kapat","disabled":false,"h":0,"i":0,"text":"","visible":false,"w":0,"x":0,"y":0},{"aria":"Aramayı temizle","disabled":false,"h":46,"i":1,"text":"","visible":true,"w":56,"x":700,"y":9},{"aria":"Arama","disabled":false,"h":46,"i":2,"text":"","visible":true,"w":56,"x":378,"y":9},{"aria":"Geri bildirim","disabled":false,"h":0,"i":3,"text":"","visible":false,"w":0,"x":0,"y":0}]
+Google after CUA request click snapshot excerpt:
+- banner:
+  - button "Ana menü":
+  - link "Google Search Console":
+    - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+  - search:
+    - textbox [disabled]: "\"fatedreel.com\" içindeki tüm URL'leri denetleyin"
+    - combobox "fatedreel.com adresindeki tüm URL'leri inceleyin"
+    - button "Arama":
+  - button "Yardım":
+    - generic: 
+  - button "Kullanıcı ayarları":
+  - 'button "Okunmamış mesaj sayısı: 5"':
+    - generic: 
+    - generic: "5"
+  - button "Google uygulamaları":
+  - 'button "Google Hesabı: onur yılmaz (onurmx2@gmail.com)"':
+- dialog "navigational drawer":
+  - navigation "Birincil":
+    - button "Arama özelliği":
+      - img "site simgesi"
+      - combobox "fatedreel.com"
+      - generic: 
+    - link "Genel Bakış":
+      - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+      - generic: home
+      - generic: Genel Bakış
+    - link "Analizler":
+      - /url: ./search-console/performance/insights?resource_id=sc-domain%3Afatedreel.com
+      - generic: lightbulb_2
+      - generic: Analizler
+    - link "Performans":
+      - /url: ./search-console/performance/search-analytics?resource_id=sc-domain%3Afatedreel.com
+      - generic: trending_up
+      - generic: Performans
+    - button "URL denetimi":
+      - generic: search
+      - generic: URL denetimi
+    - generic: Dizin oluşturma
+    - button "Dizin oluşturma rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Sayfa sayısı":
+      - /url: ./search-console/index?resource_id=sc-domain%3Afatedreel.com
+      - generic: file_copy
+      - generic: Sayfa sayısı
+    - link "Videolar":
+      - /url: ./search-console/video-index?resource_id=sc-domain%3Afatedreel.com
+      - generic: video_library
+      - generic: Videolar
+    - link "Site Haritaları":
+      - /url: ./search-console/sitemaps?resource_id=sc-domain%3Afatedreel.com
+      - generic: account_tree
+      - generic: Site Haritaları
+    - link "URL Kaldırma":
+      - /url: ./search-console/removals?resource_id=sc-domain%3Afatedreel.com
+      - generic: visibility_off
+      - generic: URL Kaldırma
+    - generic: Deneyim
+    - button "Deneyim rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Önemli Web Verileri":
+      - /url: ./search-console/core-web-vitals?resource_id=sc-domain%3Afatedreel.com
+      - generic: speed
+      - generic: Önemli Web Verileri
+    - link "HTTPS":
+      - /url: ./search-console/https?resource_id=sc-domain%3Afatedreel.com
+      - generic: lock
+      - generic: HTTPS
+    - generic: Geliştirmeler
+    - button "Geliştirmeler rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Yorum snippet'leri":
+      - /url: ./search-console/r/review-snippet?resource_id=sc-domain%3Afatedreel.com
+      - generic: layers
+      - generic: Yorum snippet'leri
+    - generic: Güvenlik ve Manuel İşlemler
+    - button "Güvenlik ve Manuel İşlemler rapor bölümü":
+      - generic: keyboard_arrow_down
+    - link "Bağlantı raporu":
+      - /url: ./search-console/links?resource_id=sc-domain%3Afatedreel.com
+      - generic: link_2
+      - generic: Bağlantılar
+    - link "Başarılar":
+      - /url: ./search-console/achievements?resource_id=sc-domain%3Afatedreel.com
+      - generic: trophy
+      - generic: Başarılar
+    - link "Ayarlar":
+      - /url: ./search-console/settings?resource_id=sc-domain%3Afatedreel.com
+      - generic: settings
+      - generic: Ayarlar
+    - button "Geri bildirim gönder":
+      - generic: feedback
+      - generic: Geri bil
+Google after dom_cua request click snapshot excerpt:
+- banner:
+  - button "Ana menü":
+  - link "Google Search Console":
+    - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+  - search:
+    - textbox [disabled]: "\"fatedreel.com\" içindeki tüm URL'leri denetleyin"
+    - combobox "fatedreel.com adresindeki tüm URL'leri inceleyin"
+    - button "Arama":
+  - button "Yardım":
+    - generic: 
+  - button "Kullanıcı ayarları":
+  - 'button "Okunmamış mesaj sayısı: 5"':
+    - generic: 
+    - generic: "5"
+  - button "Google uygulamaları":
+  - 'button "Google Hesabı: onur yılmaz (onurmx2@gmail.com)"':
+- dialog "navigational drawer":
+  - navigation "Birincil":
+    - button "Arama özelliği":
+      - img "site simgesi"
+      - combobox "fatedreel.com"
+      - generic: 
+    - link "Genel Bakış":
+      - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+      - generic: home
+      - generic: Genel Bakış
+    - link "Analizler":
+      - /url: ./search-console/performance/insights?resource_id=sc-domain%3Afatedreel.com
+      - generic: lightbulb_2
+      - generic: Analizler
+    - link "Performans":
+      - /url: ./search-console/performance/search-analytics?resource_id=sc-domain%3Afatedreel.com
+      - generic: trending_up
+      - generic: Performans
+    - button "URL denetimi":
+      - generic: search
+      - generic: URL denetimi
+    - generic: Dizin oluşturma
+    - button "Dizin oluşturma rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Sayfa sayısı":
+      - /url: ./search-console/index?resource_id=sc-domain%3Afatedreel.com
+      - generic: file_copy
+      - generic: Sayfa sayısı
+    - link "Videolar":
+      - /url: ./search-console/video-index?resource_id=sc-domain%3Afatedreel.com
+      - generic: video_library
+      - generic: Videolar
+    - link "Site Haritaları":
+      - /url: ./search-console/sitemaps?resource_id=sc-domain%3Afatedreel.com
+      - generic: account_tree
+      - generic: Site Haritaları
+    - link "URL Kaldırma":
+      - /url: ./search-console/removals?resource_id=sc-domain%3Afatedreel.com
+      - generic: visibility_off
+      - generic: URL Kaldırma
+    - generic: Deneyim
+    - button "Deneyim rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Önemli Web Verileri":
+      - /url: ./search-console/core-web-vitals?resource_id=sc-domain%3Afatedreel.com
+      - generic: speed
+      - generic: Önemli Web Verileri
+    - link "HTTPS":
+      - /url: ./search-console/https?resource_id=sc-domain%3Afatedreel.com
+      - generic: lock
+      - generic: HTTPS
+    - generic: Geliştirmeler
+    - button "Geliştirmeler rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Yorum snippet'leri":
+      - /url: ./search-console/r/review-snippet?resource_id=sc-domain%3Afatedreel.com
+      - generic: layers
+      - generic: Yorum snippet'leri
+    - generic: Güvenlik ve Manuel İşlemler
+    - button "Güvenlik ve Manuel İşlemler rapor bölümü":
+      - generic: keyboard_arrow_down
+    - link "Bağlantı raporu":
+      - /url: ./search-console/links?resource_id=sc-domain%3Afatedreel.com
+      - generic: link_2
+      - generic: Bağlantılar
+    - link "Başarılar":
+      - /url: ./search-console/achievements?resource_id=sc-domain%3Afatedreel.com
+      - generic: trophy
+      - generic: Başarılar
+    - link "Ayarlar":
+      - /url: ./search-console/settings?resource_id=sc-domain%3Afatedreel.com
+      - generic: settings
+      - generic: Ayarlar
+    - button "Geri bildirim gönder":
+      - generic: feedback
+      - generic: Geri bildirim gönder
+    - button "Search Console hakkında":
+      - generic: info
+      - generic: Search Console hakkında
+    - link "Gizlilik":
+      - /url: https://myaccount.google.com/privacypolicy?hl=tr
+    - link "Şartlar":
+      - /url: https://myaccount.google.com/termsofservice?hl=tr
+- generic: https://fatedreel.com/tt0238119
+- navigation "İçerik haritaları":
+  - heading "URL Denetimi" [level=1]
+- link "Google dizini":
+  - /url: ./search-console/inspect?resource_id=sc-domain%3Afatedreel.com&i
+GOOGLE current check: https://fatedreel.com/tt0238883 already indexed (Sayfa dizine eklendi), skipped duplicate request.
+GOOGLE inspect: https://fatedreel.com/tt0238891 => indexed_live_available
+GOOGLE inspect: https://fatedreel.com/tt0240419 => not_indexed_live_available
+GOOGLE live test started: https://fatedreel.com/tt0240419
+GOOGLE blocker: https://fatedreel.com/tt0240419 live test passed and page is indexable, but Request Indexing button did not open confirmation after DOM click, visible locator click, keyboard activation, coordinate click, and double click.
+BING final visible status snippet: <button node_id=1 aria-label="Show navigation panel" title="Show navigation panel" type="button"></button> <button node_id=2 aria-label="More" type="button"></button> <button node_id=3 aria-label="Profile" title="Profile" type="button" /> <button node_id=4 aria-label="Submit URLs" type="button">Submit URLs</button>
+YANDEX final visible status snippet: <a node_id=1 aria-label="Logo" href="/sites/" /> <input node_id=2 placeholder="https://fatedreel.com" role="combobox" /> <a node_id=3 aria-disabled="false" href="/sites/add/" /> <input node_id=4 placeholder="Search" /> <a node_id=5 href="/site/https:fatedreel.com:443/dashboard/?_from=menu">Summary</a> <button node_id=6>Website optimization</button> <button node_id=7>Efficiency</button> <button node_id=8>Indexing</button> <button node_id=9>Tools</button> <button node_id=10>Display in the search</button> <button node_id=11>Links</button> <button node_id=12>Tutorials</button> <button node_id=13>Useful services</button> <button node_id=14>User</button> <button node_id=15 aria-label="Ваш профиль" role="button">7</button> <button node_id=16>Notifications</button> <a node_id=17 href="/notificatio

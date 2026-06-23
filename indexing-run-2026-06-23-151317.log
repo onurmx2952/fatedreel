@@ -1,0 +1,93 @@
+﻿RUN START: 2026-06-23T15:13:17.2952103+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Automation heartbeat: fatedreel-6-saat-raporu
+Automation config: C:\Users\aa\.codex\automations\fatedreel-url-ekleme\automation.toml
+Last log before this run: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-23-091130.log
+Last log mtime: 2026-06-23T09:12:42.8500769+03:00
+Last log age minutes: 360.57
+Son 6 saatte çalışma: YOK
+
+--- LAST LOG TAIL ---
+    "entered": true,
+    "live": true,
+    "requested": false,
+    "status": "quota_or_block",
+    "detail": "Kota AÅŸÄ±ldÄ±"
+  }
+]
+FINAL SUMMARY {
+  "at": "2026-06-23T03:48:21.242Z",
+  "google": {
+    "currentUrl": "https://fatedreel.com/tt0248845",
+    "status": "quota_exceeded",
+    "quotaText": "Kota AÅŸÄ±ldÄ±"
+  },
+  "bing": {
+    "status": "quota_0_or_100_submitted",
+    "excerpt": "îœ€\nSkip to main content\nîœ’\nURL Submission\nSubmit URLs\nïˆ\nDid you know?\nYou can automate URL submission by using our IndexNow API or Submission API and stay updated on Microsoft Bing!\nSubmitted Urls list\nDownload allî¢–\nîœ¹\nselect all items\nURL\nSubmitted\nî¹©\nAction\nîœ¹\nhttps://fatedreel.com/tt0283900\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0286516\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0287803\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0291172\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0292242\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0291350\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0285441\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0283832\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0281718\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0282698\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0286261\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0284363\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fa"
+  },
+  "yandex": {
+    "status": "daily_limit_reached",
+    "excerpt": "Summary\nWebsite optimization\nEfficiency\nIndexing\nTools\nDisplay in the search\nLinks\nTutorials\nUseful services\n7\n11\nReindex pages\nAdd URL to your list of important pages in order to track its indexing and get notified about changes to its status in Search. Find out more\nYour daily limit is 150 URLs per site, including the main domain and all subdomains.\nYou have reached your daily limit of added URLs.\nSend\nSent pages\nUpdatesÂ aren't immediate. They appear afterÂ aÂ few database refreshes.\nPage URL\tStatus\tSent\t\nhttps://fatedreel.com/tt0292242\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0292542\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0293416\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0293508\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0294870\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0296166\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0297721\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n"
+  }
+}
+GOOGLE SUCCESS URLS UNIQUE 2026-06-23T03:48:55.910Z: [
+  "https://fatedreel.com/tt0243794",
+  "https://fatedreel.com/tt0243862",
+  "https://fatedreel.com/tt0244316",
+  "https://fatedreel.com/tt0244479",
+  "https://fatedreel.com/tt0245929",
+  "https://fatedreel.com/tt0246772",
+  "https://fatedreel.com/tt0247196",
+  "https://fatedreel.com/tt0247199",
+  "https://fatedreel.com/tt0247586"
+]
+
+--- INDEXNOW RUN ---
+Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Apps > Advanced app settings > App execution aliases.
+IndexNow exit code: 9009
+
+--- SUMMARY ---
+Son 6 saatte çalışma: VAR. Önceki son log 2026-06-23 06:48 yerel civarı güncellenmiş.
+Google: önceki canlı tarayıcı akışında kota aşıldı; son takılan URL https://fatedreel.com/tt0248845.
+Bing: Webmaster URL Submission kotası 0/100 görünüyordu; IndexNow ayrıca çalıştırıldı.
+Yandex: Reindex daily limit 150 dolu görünüyordu; IndexNow ayrıca çalıştırıldı.
+RUN END: 2026-06-23T09:11:30.6321207+03:00
+
+--- INDEXNOW RETRY WITH BUNDLED PYTHON ---
+IndexNow status: 200
+Submitted URLs: 3124
+Bundled Python IndexNow exit code: 0
+
+--- INDEXNOW RUN ---
+IndexNow status: 200
+Submitted URLs: 3124
+IndexNow exit code: 0
+
+--- WEBMASTER STATUS FROM LAST KNOWN LIVE RUN ---
+Google: last known blocker quota exceeded at https://fatedreel.com/tt0248845; live browser submission not attempted in this heartbeat unless authenticated Chrome is available.
+Bing: last known URL Submission quota 0/100; IndexNow executed above.
+Yandex: last known Reindex daily limit 150 reached; IndexNow executed above.
+RUN END: 2026-06-23T15:13:19.2265273+03:00
+
+--- CHROME CDP CHECK ---
+[
+    {
+        "title":  "URL Denetimi",
+        "url":  "https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com\u0026id=k57_JqrfP8CvlhlZc_Pgcw\u0026alt_id=q0FJtYMH--NDsOJ96EXcxw"
+    },
+    {
+        "title":  "URL Submission - Bing Webmaster Tools",
+        "url":  "https://www.bing.com/webmasters/submiturl?siteUrl=https://fatedreel.com/"
+    },
+    {
+        "title":  "Reindex pages — https://fatedreel.com — Yandex Webmaster",
+        "url":  "https://webmaster.yandex.com/site/https:fatedreel.com:443/indexing/reindex/"
+    }
+]
+--- LIVE WEBMASTER CHECK 2026-06-23T15:21:57.7242860+03:00 ---
+Chrome tabs detected: Google Search Console, Bing Webmaster Tools, Yandex Webmaster.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+IndexNow: already run in this heartbeat; status 200; submitted URLs 3124.
