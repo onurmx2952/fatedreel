@@ -1746,7 +1746,18 @@ function setAuthUser(user){
   const logout=document.getElementById('logout-btn');
   const saveState=document.getElementById('save-state');
   if(user){
-    label.innerHTML=`${user.picture?`<img class="auth-avatar" src="${escapeHtml(user.picture)}" alt="">`:''}<span class="auth-name">${escapeHtml(user.name||user.email||'Kullanıcı')}</span>`;
+    label.textContent='';
+    if(user.picture){
+      const img=document.createElement('img');
+      img.className='auth-avatar';
+      img.src=user.picture;
+      img.alt='';
+      label.appendChild(img);
+    }
+    const name=document.createElement('span');
+    name.className='auth-name';
+    name.textContent=user.name||user.email||'Kullanıcı';
+    label.appendChild(name);
     label.classList.add('on');
     logout.style.display='';
     document.body.classList.remove('auth-locked');
