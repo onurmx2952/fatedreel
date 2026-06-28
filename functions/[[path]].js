@@ -3,6 +3,11 @@ const SITE_DESCRIPTION = 'Roll through hand-picked movies, reviews, scenes, trai
 
 export async function onRequest(context) {
   const requestUrl = new URL(context.request.url);
+
+  if (requestUrl.pathname.startsWith('/api/program/')) {
+    return handleProgramApi(context, requestUrl);
+  }
+
   const match = requestUrl.pathname.match(MOVIE_PATH_PATTERN);
 
   if (!match) {
@@ -44,6 +49,238 @@ export async function onRequest(context) {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': 'public, max-age=0, must-revalidate'
+    }
+  });
+}
+
+async function handleProgramApi(context, requestUrl) {
+  const { request } = context;
+  const path = requestUrl.pathname.replace(/\/+$/, '');
+
+  try {
+    if (path === '/api/program/config' && request.method === 'GET') {
+      return jsonResponse({
+        googleClientId: context.env.GOOGLE_CLIENT_ID || ''
+      });
+    }
+
+    if (path === '/api/program/auth/google' && request.method === 'POST') {
+      requireProgramDb(context);
+      const body = await readJson(request);
+      const profile = await verifyGoogleCredential(context, body.credential);
+      const user = await upsertProgramUser(context, profile);
+      const token = createSessionToken();
+      const tokenHash = await hashToken(token);
+      const expiresAt = sqliteDateTime(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
+      await context.env.PROGRAM_DB.prepare(
+        'INSERT INTO program_sessions (token_hash, user_id, expires_at) VALUES (?, ?, ?)'
+      ).bind(tokenHash, user.id, expiresAt).run();
+
+      return jsonResponse({ user }, 200, {
+        'Set-Cookie': sessionCookie(token)
+      });
+    }
+
+    if (path === '/api/program/me' && request.method === 'GET') {
+      requireProgramDb(context);
+      const user = await getProgramUser(context);
+      if (!user) return jsonResponse({ user: null }, 401);
+      return jsonResponse({ user });
+    }
+
+    if (path === '/api/program/data' && request.method === 'GET') {
+      requireProgramDb(context);
+      const user = await requireProgramUser(context);
+      const row = await context.env.PROGRAM_DB.prepare(
+        'SELECT data_json FROM program_data WHERE user_id = ?'
+      ).bind(user.id).first();
+
+      return jsonResponse({
+        programData: row?.data_json ? JSON.parse(row.data_json) : null
+      });
+    }
+
+    if (path === '/api/program/data' && request.method === 'PUT') {
+      requireProgramDb(context);
+      const user = await requireProgramUser(context);
+      const body = await readJson(request);
+      const programData = body.programData;
+      if (!programData || typeof programData !== 'object') {
+        return jsonResponse({ error: 'Kaydedilecek program verisi bulunamadı.' }, 400);
+      }
+
+      await context.env.PROGRAM_DB.prepare(`
+        INSERT INTO program_data (user_id, data_json, updated_at)
+        VALUES (?, ?, CURRENT_TIMESTAMP)
+        ON CONFLICT(user_id) DO UPDATE SET
+          data_json = excluded.data_json,
+          updated_at = CURRENT_TIMESTAMP
+      `).bind(user.id, JSON.stringify(programData)).run();
+
+      return jsonResponse({ ok: true });
+    }
+
+    if (path === '/api/program/logout' && request.method === 'POST') {
+      requireProgramDb(context);
+      const token = getCookie(request, 'program_session');
+      if (token) {
+        await context.env.PROGRAM_DB.prepare(
+          'DELETE FROM program_sessions WHERE token_hash = ?'
+        ).bind(await hashToken(token)).run();
+      }
+
+      return jsonResponse({ ok: true }, 200, {
+        'Set-Cookie': expiredSessionCookie()
+      });
+    }
+
+    return jsonResponse({ error: 'Program API yolu bulunamadı.' }, 404);
+  } catch (error) {
+    const status = error.status || 500;
+    return jsonResponse({ error: error.message || 'Beklenmeyen hata oluştu.' }, status);
+  }
+}
+
+function requireProgramDb(context) {
+  if (!context.env.PROGRAM_DB) {
+    const error = new Error('PROGRAM_DB D1 bağlantısı ayarlı değil.');
+    error.status = 500;
+    throw error;
+  }
+}
+
+async function verifyGoogleCredential(context, credential) {
+  if (!context.env.GOOGLE_CLIENT_ID) {
+    const error = new Error('GOOGLE_CLIENT_ID ayarlı değil.');
+    error.status = 500;
+    throw error;
+  }
+
+  if (!credential || typeof credential !== 'string') {
+    const error = new Error('Google giriş bilgisi eksik.');
+    error.status = 400;
+    throw error;
+  }
+
+  const verifyUrl = `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(credential)}`;
+  const response = await fetch(verifyUrl, { headers: { Accept: 'application/json' } });
+  const profile = await response.json().catch(() => ({}));
+
+  if (!response.ok || profile.aud !== context.env.GOOGLE_CLIENT_ID || !profile.sub || !profile.email) {
+    const error = new Error('Google hesabı doğrulanamadı.');
+    error.status = 401;
+    throw error;
+  }
+
+  return {
+    googleSub: String(profile.sub),
+    email: String(profile.email),
+    name: String(profile.name || profile.email),
+    picture: String(profile.picture || '')
+  };
+}
+
+async function upsertProgramUser(context, profile) {
+  await context.env.PROGRAM_DB.prepare(`
+    INSERT INTO program_users (google_sub, email, name, picture, updated_at)
+    VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
+    ON CONFLICT(google_sub) DO UPDATE SET
+      email = excluded.email,
+      name = excluded.name,
+      picture = excluded.picture,
+      updated_at = CURRENT_TIMESTAMP
+  `).bind(profile.googleSub, profile.email, profile.name, profile.picture).run();
+
+  const row = await context.env.PROGRAM_DB.prepare(
+    'SELECT id, email, name, picture FROM program_users WHERE google_sub = ?'
+  ).bind(profile.googleSub).first();
+
+  return publicProgramUser(row);
+}
+
+async function getProgramUser(context) {
+  const token = getCookie(context.request, 'program_session');
+  if (!token) return null;
+
+  const tokenHash = await hashToken(token);
+  const row = await context.env.PROGRAM_DB.prepare(`
+    SELECT u.id, u.email, u.name, u.picture
+    FROM program_sessions s
+    JOIN program_users u ON u.id = s.user_id
+    WHERE s.token_hash = ? AND s.expires_at > CURRENT_TIMESTAMP
+  `).bind(tokenHash).first();
+
+  return row ? publicProgramUser(row) : null;
+}
+
+async function requireProgramUser(context) {
+  const user = await getProgramUser(context);
+  if (!user) {
+    const error = new Error('Önce Google ile giriş yapmalısınız.');
+    error.status = 401;
+    throw error;
+  }
+  return user;
+}
+
+function publicProgramUser(row) {
+  return {
+    id: row.id,
+    email: row.email,
+    name: row.name || row.email,
+    picture: row.picture || ''
+  };
+}
+
+async function readJson(request) {
+  try {
+    return await request.json();
+  } catch (_) {
+    const error = new Error('Geçersiz JSON verisi.');
+    error.status = 400;
+    throw error;
+  }
+}
+
+function getCookie(request, name) {
+  const cookie = request.headers.get('Cookie') || '';
+  const parts = cookie.split(';').map((item) => item.trim());
+  const prefix = `${name}=`;
+  const match = parts.find((item) => item.startsWith(prefix));
+  return match ? decodeURIComponent(match.slice(prefix.length)) : '';
+}
+
+function createSessionToken() {
+  const bytes = new Uint8Array(32);
+  crypto.getRandomValues(bytes);
+  return [...bytes].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+async function hashToken(token) {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(token));
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+function sessionCookie(token) {
+  return `program_session=${encodeURIComponent(token)}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=2592000`;
+}
+
+function expiredSessionCookie() {
+  return 'program_session=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0';
+}
+
+function sqliteDateTime(value) {
+  return new Date(value).toISOString().replace('T', ' ').replace(/\.\d{3}Z$/, '');
+}
+
+function jsonResponse(body, status = 200, headers = {}) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'no-store',
+      ...headers
     }
   });
 }

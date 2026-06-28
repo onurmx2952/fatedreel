@@ -1,0 +1,1761 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okul Ders Programı</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#1a1a1a;background:#f0f2f5}
+header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:flex;align-items:center;position:sticky;top:0;z-index:50}
+.logo{font-size:15px;font-weight:700;padding:14px 0;margin-right:24px}
+.tabs{display:flex}
+.tab{padding:14px 16px;cursor:pointer;border-bottom:2px solid transparent;color:#777;font-size:13px;font-weight:500;user-select:none}
+.tab.active{color:#2563eb;border-bottom-color:#2563eb}
+.tab:hover:not(.active){color:#1a1a1a}
+.main{padding:20px}
+.view{display:none}.view.active{display:block}
+.btn{padding:7px 14px;border-radius:8px;border:1px solid #d0d0d0;background:#fff;color:#1a1a1a;cursor:pointer;font-size:12px;font-weight:500}
+.btn:hover{background:#f5f5f5}
+.btn.primary{background:#2563eb;color:#fff;border-color:#2563eb}
+.btn.primary:hover{background:#1d4ed8}
+.btn.danger{background:#fef2f2;color:#dc2626;border-color:#fca5a5}
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+.toolbar h2{font-size:16px;font-weight:700;flex:1}
+.tbl-wrap{overflow:auto;border-radius:10px;border:1px solid #e0e0e0;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.prog-tbl{border-collapse:collapse;font-size:11px;min-width:900px;width:100%}
+.prog-tbl th,.prog-tbl td{border:1px solid #eee;padding:4px 5px;text-align:center}
+.prog-tbl th{background:#f8f9fa;font-weight:600;color:#555;position:sticky;top:0;z-index:2}
+.name-col{text-align:left;font-weight:600;min-width:155px;background:#f8f9fa;position:sticky;left:0;z-index:3;border-right:2px solid #ddd;cursor:pointer;color:#2563eb}
+.name-col:hover{background:#eff6ff}
+.day-hdr{background:#eff6ff;color:#2563eb;font-weight:700}
+.cell{min-width:70px;height:40px;cursor:pointer;vertical-align:middle;transition:background .1s}
+.cell:hover{background:#dbeafe!important}
+.cell-in{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;height:100%}
+.c-cls{font-weight:700;font-size:10px;color:#2563eb}
+.c-sub{font-size:10px;color:#555}
+.conflict{background:#fef2f2!important}
+.conflict .c-cls,.conflict .c-sub{color:#dc2626!important}
+.empty-cell{color:#ddd;font-size:11px}
+.cls-tbl{border-collapse:collapse;width:100%;min-width:600px}
+.cls-tbl th,.cls-tbl td{border:1px solid #eee;padding:0;text-align:center}
+.cls-tbl th{background:#f8f9fa;font-weight:600;color:#555;padding:8px 4px;position:sticky;top:0;z-index:2}
+.cls-tbl .hour-col{font-weight:700;font-size:12px;color:#555;background:#f8f9fa;width:50px;position:sticky;left:0;z-index:1}
+.cls-cell{height:52px;vertical-align:middle}
+.cls-cell.empty{color:#ccc;font-size:11px}
+.c-sub2{font-weight:700;font-size:12px;color:#2563eb}
+.c-tch{font-size:10px;color:#777;margin-top:2px}
+.cls-sel{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.cls-btn{padding:5px 13px;border-radius:20px;border:1px solid #d0d0d0;background:#fff;cursor:pointer;font-size:12px;font-weight:500;color:#555}
+.cls-btn.active{background:#2563eb;color:#fff;border-color:#2563eb}
+.cls-btn:hover:not(.active){background:#f5f5f5}
+.qa-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;align-items:flex-start;justify-content:center;padding-top:50px}
+.qa-bg.open{display:flex}
+.qa-modal{background:#fff;border-radius:14px;padding:20px;width:520px;max-width:95vw;max-height:82vh;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,.15)}
+.qa-modal h3{font-size:15px;font-weight:700;margin-bottom:3px}
+.qa-sub{font-size:12px;color:#888;margin-bottom:14px}
+.qa-form{display:flex;gap:8px;margin-bottom:14px;align-items:flex-end;flex-wrap:wrap}
+.qa-form .fg{display:flex;flex-direction:column;gap:4px;flex:1;min-width:100px}
+.qa-form label{font-size:11px;color:#666;font-weight:500}
+.qa-form input,.qa-form select{padding:7px 9px;border-radius:7px;border:1px solid #d0d0d0;font-size:12px;width:100%}
+.qa-grid{display:grid;gap:3px}
+.qa-day-lbl{font-size:10px;font-weight:700;color:#888;text-align:center;padding:4px 0}
+.qa-hr-lbl{font-size:11px;font-weight:600;color:#666;display:flex;align-items:center;padding-right:6px;white-space:nowrap}
+.qa-slot{height:38px;border-radius:7px;border:1.5px solid #e0e0e0;cursor:pointer;font-size:10px;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transition:all .1s}
+.qa-slot.free{background:#f0fdf4;border-color:#86efac;color:#16a34a}
+.qa-slot.free:hover{background:#dcfce7;border-color:#4ade80;transform:scale(1.04)}
+.qa-slot.busy{background:#f8f9fa;border-color:#e8e8e8;color:#aaa;cursor:default;font-size:9px}
+.sq-cls{font-size:9px;font-weight:700}.sq-sub{font-size:8px;opacity:.8}
+.qa-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;padding-top:12px;border-top:1px solid #eee}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:300;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:14px;padding:22px;min-width:320px;max-width:94vw;box-shadow:0 8px 32px rgba(0,0,0,.12)}
+.modal h3{font-size:15px;font-weight:700;margin-bottom:14px}
+.fg2{margin-bottom:12px}.fg2 label{display:block;font-size:12px;color:#666;margin-bottom:4px;font-weight:500}
+.fg2 input,.fg2 select,.fg2 textarea{width:100%;padding:7px 10px;border-radius:8px;border:1px solid #d0d0d0;font-size:12px}
+.m-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.t-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.t-card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:14px}
+.t-nm{font-weight:700;font-size:14px;color:#2563eb;cursor:pointer}.t-nm:hover{text-decoration:underline}
+.t-meta{font-size:11px;color:#888;margin-bottom:8px}
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:6px;margin:2px}
+.bl{background:#eff6ff;color:#2563eb}.gr{background:#f5f5f5;color:#555;border:1px solid #e0e0e0}
+.alert{padding:10px 14px;border-radius:8px;font-size:12px;margin-bottom:12px;font-weight:500}
+.alert.ok{background:#f0fdf4;color:#16a34a}
+.alert.warn{background:#fffbeb;color:#b45309}
+.stat-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.stat-c{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:10px 16px;flex:1;min-width:110px}
+.s-lbl{font-size:11px;color:#888;margin-bottom:2px}.s-val{font-size:22px;font-weight:700}
+.cls-summary{padding:8px 12px;font-size:11px;color:#555;background:#f8f9fa;border-top:1px solid #eee}
+.block-slot{height:48px;cursor:pointer;font-size:11px;font-weight:700}
+.block-slot.free{background:#f0fdf4;color:#16a34a}
+.block-slot.blocked{background:#fef2f2;color:#dc2626}
+.block-slot:hover{outline:2px solid #2563eb;outline-offset:-2px}
+.qa-modal,.modal{border:1px solid rgba(37,99,235,.12)}
+.qa-modal{box-shadow:0 24px 70px rgba(15,23,42,.24)}
+.qa-sub{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;color:#475569;padding:9px 10px}
+.qa-form select,.fg2 select{height:36px;background:#fff;border-color:#cbd5e1}
+.qa-form select:focus,.fg2 select:focus{outline:2px solid #bfdbfe;border-color:#2563eb}
+.qa-slot.free{font-size:14px}
+.qa-slot.free:after{content:"Ata";font-size:9px;font-weight:700}
+.t-card{box-shadow:0 8px 24px rgba(15,23,42,.06)}
+.subject-pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px}
+.subject-choice{display:flex;align-items:center;gap:6px;border:1px solid #e2e8f0;border-radius:9px;padding:7px 8px;background:#fff;font-size:11px;font-weight:600;color:#334155}
+.subject-choice input{width:auto}
+.pick-row{display:grid;grid-template-columns:1fr 82px auto;gap:8px;align-items:center;margin-bottom:7px}
+.pick-row select,.pick-row input{height:34px;border:1px solid #cbd5e1;border-radius:9px;padding:6px 8px;background:#fff;font-size:12px}
+.pick-row .mini{padding:6px 9px;font-size:11px}
+.assign-row{display:grid;grid-template-columns:88px 1fr 74px auto;gap:8px;align-items:center;margin-bottom:7px}
+.assign-row select,.assign-row input{height:34px;border:1px solid #cbd5e1;border-radius:9px;padding:6px 8px;background:#fff;font-size:12px}
+.auth-bar{display:flex;align-items:center;gap:8px;margin-left:auto}
+.auth-user{font-size:12px;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;padding:6px 10px;display:none}
+.auth-user.on{display:inline-flex}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">📅 Ders Programı</div>
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('program',this)">Öğretmen Programı</div>
+    <div class="tab" onclick="showTab('class',this)">Sınıf Programı</div>
+    <div class="tab" onclick="showTab('teachers',this)">Öğretmenler</div>
+    <div class="tab" onclick="showTab('classes',this)">Sınıflar</div>
+    <div class="tab" onclick="showTab('subjects',this)">Dersler</div>
+    <div class="tab" onclick="showTab('lessons',this)">Ders Saatleri</div>
+    <div class="tab" onclick="showTab('distribution',this)">Ders Dağıtımı</div>
+    <div class="tab" onclick="showTab('blocked',this)">Öğretmen Boş Saat</div>
+    <div class="tab" onclick="showTab('settings',this)">Ayarlar</div>
+  </div>
+</header>
+<div class="main">
+
+<div id="view-program" class="view active">
+  <div class="toolbar">
+    <h2>Öğretmen Ders Programı</h2>
+    <span id="cbadge" style="font-size:11px;color:#dc2626;background:#fef2f2;padding:4px 10px;border-radius:6px;display:none"></span>
+    <button class="btn" onclick="exportCSV()">⬇ CSV</button>
+    <button class="btn" onclick="loadCloudData()">☁ Yükle</button>
+    <button class="btn" onclick="saveCloudData()">☁ Kaydet</button>
+    <button class="btn primary" onclick="generateSchedule()">🔀 Programı Yeniden Oluştur</button>
+    <div class="auth-bar">
+      <span id="auth-user" class="auth-user"></span>
+      <div id="google-login"></div>
+      <button id="logout-btn" class="btn" onclick="logoutCloud()" style="display:none">Çıkış</button>
+    </div>
+  </div>
+  <div id="alert-area"></div>
+  <div class="stat-row">
+    <div class="stat-c"><div class="s-lbl">Öğretmen</div><div class="s-val" id="st1">0</div></div>
+    <div class="stat-c"><div class="s-lbl">Dolu saat</div><div class="s-val" id="st2">0</div></div>
+    <div class="stat-c"><div class="s-lbl">Çakışma</div><div class="s-val" id="st3" style="color:#dc2626">0</div></div>
+  </div>
+  <div class="tbl-wrap">
+    <table class="prog-tbl"><thead id="prog-head"></thead><tbody id="prog-body"></tbody></table>
+  </div>
+</div>
+
+<div id="view-class" class="view">
+  <div class="toolbar"><h2>Sınıf Programı</h2></div>
+  <div id="cls-sel" class="cls-sel"></div>
+  <div class="tbl-wrap">
+    <table class="cls-tbl"><thead id="cls-head"></thead><tbody id="cls-body"></tbody></table>
+  </div>
+</div>
+
+<div id="view-teachers" class="view">
+  <div class="toolbar"><h2>Öğretmenler</h2><button class="btn primary" onclick="openAddT()">+ Öğretmen Ekle</button></div>
+  <div id="t-list" class="t-list"></div>
+</div>
+
+<div id="view-classes" class="view">
+  <div class="toolbar">
+    <h2>Sınıflar</h2>
+    <button class="btn primary" onclick="addClassRow()">+ Sınıf Ekle</button>
+  </div>
+  <div class="tbl-wrap" style="max-width:620px">
+    <table class="cls-tbl">
+      <thead><tr><th>Sınıf</th><th style="width:120px">İşlem</th></tr></thead>
+      <tbody id="class-manage-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="view-subjects" class="view">
+  <div class="toolbar">
+    <h2>Dersler</h2>
+    <button class="btn primary" onclick="addSubjectRow()">+ Ders Ekle</button>
+    <button class="btn" onclick="saveSubjects()">Kaydet</button>
+  </div>
+  <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
+    Ders adlarını burada düzenleyin. Değişiklikler ders saatleri ve öğretmen branş seçeneklerine yansır.
+  </div>
+  <div id="subject-manage-list" class="t-list"></div>
+</div>
+
+<div id="view-lessons" class="view">
+  <div class="toolbar">
+    <h2>Ders Saatleri</h2>
+    <button class="btn primary" onclick="saveLessonPlans()">Kaydet</button>
+  </div>
+  <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
+    Dersleri listeden seçin, haftalık saatini yazın. Her sınıf düzeyi toplamı 35 olmalı.
+  </div>
+  <div id="lesson-plan-list" class="t-list"></div>
+</div>
+
+<div id="view-distribution" class="view">
+  <div class="toolbar">
+    <h2>Ders Dağıtımı</h2>
+    <button class="btn primary" onclick="saveDistribution()">Kaydet</button>
+    <button class="btn" onclick="addDistributionRow()">+ Dağıtım Ekle</button>
+  </div>
+  <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
+    Öğretmen, sınıf, ders ve haftalık saat seçimle girilir. Bu bölüm öğretmen ekranından ayrıdır.
+  </div>
+  <div class="tbl-wrap">
+    <table class="cls-tbl">
+      <thead><tr><th>Öğretmen</th><th>Sınıf</th><th>Ders</th><th>Saat</th><th style="width:90px">İşlem</th></tr></thead>
+      <tbody id="distribution-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="view-blocked" class="view">
+  <div class="toolbar">
+    <h2>Öğretmen Boş Saat / Ders Yazılmaz</h2>
+    <button class="btn danger" onclick="clearBlockedForSelected()">Seçili Öğretmeni Temizle</button>
+  </div>
+  <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:14px;margin-bottom:14px;max-width:520px">
+    <div class="fg2" style="margin-bottom:0">
+      <label>Öğretmen</label>
+      <select id="blocked-teacher" onchange="renderBlockedGrid()"></select>
+    </div>
+  </div>
+  <div class="tbl-wrap" style="max-width:760px">
+    <table class="cls-tbl">
+      <thead id="blocked-head"></thead>
+      <tbody id="blocked-body"></tbody>
+    </table>
+  </div>
+  <div class="cls-summary" style="max-width:760px;border:1px solid #eee;border-top:0;border-radius:0 0 10px 10px">
+    Yeşil: ders yazılabilir. Kırmızı: o öğretmene o saatte ders yazılmaz. Hücreye tıklayarak değiştir.
+  </div>
+</div>
+
+<div id="view-settings" class="view">
+  <div class="toolbar"><h2>Ayarlar</h2></div>
+  <div style="max-width:480px">
+    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:16px;margin-bottom:12px">
+      <div style="font-size:14px;font-weight:600;margin-bottom:10px">Günlük Ders Saati</div>
+      <input type="number" id="set-hours" value="7" min="5" max="10" style="width:80px;padding:6px 10px;border-radius:8px;border:1px solid #d0d0d0;font-size:13px">
+    </div>
+    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:16px;margin-bottom:12px">
+      <div style="font-size:14px;font-weight:600;margin-bottom:10px">Çalışma Günleri</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <label style="font-size:13px;display:flex;gap:6px;align-items:center"><input type="checkbox" checked data-day="0"> Pazartesi</label>
+        <label style="font-size:13px;display:flex;gap:6px;align-items:center"><input type="checkbox" checked data-day="1"> Salı</label>
+        <label style="font-size:13px;display:flex;gap:6px;align-items:center"><input type="checkbox" checked data-day="2"> Çarşamba</label>
+        <label style="font-size:13px;display:flex;gap:6px;align-items:center"><input type="checkbox" checked data-day="3"> Perşembe</label>
+        <label style="font-size:13px;display:flex;gap:6px;align-items:center"><input type="checkbox" checked data-day="4"> Cuma</label>
+      </div>
+    </div>
+    <button class="btn primary" onclick="saveSettings()">Kaydet</button>
+  </div>
+</div>
+
+</div>
+
+<div class="qa-bg" id="qa-bg">
+  <div class="qa-modal">
+    <h3 id="qa-name"></h3>
+    <div class="qa-sub" id="qa-sub"></div>
+    <div class="qa-form">
+      <div class="fg"><label>Sınıf</label><select id="qa-cls"></select></div>
+      <div class="fg"><label>Ders</label><select id="qa-subj"></select></div>
+    </div>
+    <div id="qa-grid" class="qa-grid"></div>
+    <div class="qa-actions"><button class="btn" onclick="closeQA()">Kapat</button></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="emodal">
+  <div class="modal"><h3 id="emodal-title"></h3><div id="emodal-body"></div></div>
+</div>
+<div class="modal-bg" id="tmodal">
+  <div class="modal"><h3 id="tmodal-title"></h3><div id="tmodal-body"></div></div>
+</div>
+
+<script>
+const DAYS=['Pazartesi','Salı','Çarşamba','Perşembe','Cuma'];
+const DAYS_S=['Pzt','Sal','Çar','Per','Cum'];
+let SUBJECTS=['TRK','MAT','FEN','ING','SOSYAL','BEDEN','DİN','MÖZ','GÖN','SAN','BİL.TAR','TEK.TAS','SEÇİNG','SEÇİMA','INK.TAR','BLÜM','REH'];
+
+// Sınıflar: 5A-F, 6A-F, 7A-F, 8A-F
+const GRADES = [5,6,7,8];
+const SECTIONS = ['A','B','C','D','E','F'];
+let ALL_CLASSES = GRADES.flatMap(g => SECTIONS.map(s => `${g}-${s}`));
+
+// Her sınıf seviyesinin haftalık ders planı
+// Görseldeki tabloya göre
+const GRADE_PLAN = {
+  5: [
+    {subj:'TRK',   wh:6},
+    {subj:'MAT',   wh:5},
+    {subj:'FEN',   wh:4},
+    {subj:'ING',   wh:4},
+    {subj:'SOSYAL',wh:3},
+    {subj:'BEDEN', wh:2},
+    {subj:'DİN',   wh:1},
+    {subj:'MÖZ',   wh:1},
+    {subj:'GÖN',   wh:1},  // veya SAN — şubeye göre değişiyor
+    {subj:'BİL.TAR',wh:1},
+    {subj:'TEK.TAS',wh:1},
+    {subj:'SEÇİNG',wh:2},
+    {subj:'SEÇİMA',wh:2},
+    {subj:'BLÜM',  wh:1},
+    {subj:'REH',   wh:1},
+  ],
+  6: [
+    {subj:'TRK',   wh:5},
+    {subj:'MAT',   wh:5},
+    {subj:'FEN',   wh:4},
+    {subj:'ING',   wh:4},
+    {subj:'SOSYAL',wh:3},
+    {subj:'BEDEN', wh:2},
+    {subj:'DİN',   wh:1},
+    {subj:'MÖZ',   wh:1},
+    {subj:'GÖN',   wh:1},
+    {subj:'BİL.TAR',wh:1},
+    {subj:'TEK.TAS',wh:1},
+    {subj:'SEÇİNG',wh:2},
+    {subj:'SEÇİMA',wh:2},
+    {subj:'BLÜM',  wh:2},
+    {subj:'REH',   wh:1},
+  ],
+  7: [
+    {subj:'TRK',   wh:5},
+    {subj:'MAT',   wh:5},
+    {subj:'FEN',   wh:4},
+    {subj:'ING',   wh:4},
+    {subj:'SOSYAL',wh:3},
+    {subj:'BEDEN', wh:2},
+    {subj:'DİN',   wh:1},
+    {subj:'MÖZ',   wh:1},
+    {subj:'GÖN',   wh:1},
+    {subj:'BİL.TAR',wh:1},
+    {subj:'TEK.TAS',wh:1},
+    {subj:'SEÇİNG',wh:2},
+    {subj:'SEÇİMA',wh:2},
+    {subj:'BLÜM',  wh:2},
+    {subj:'REH',   wh:1},
+  ],
+  8: [
+    {subj:'TRK',   wh:5},
+    {subj:'MAT',   wh:5},
+    {subj:'FEN',   wh:4},
+    {subj:'ING',   wh:4},
+    {subj:'INK.TAR',wh:2},
+    {subj:'BEDEN', wh:2},
+    {subj:'DİN',   wh:1},
+    {subj:'MÖZ',   wh:1},
+    {subj:'GÖN',   wh:1},
+    {subj:'BİL.TAR',wh:1},
+    {subj:'TEK.TAS',wh:1},
+    {subj:'SEÇİMA',wh:4},
+    {subj:'SEÇİNG',wh:2},
+    {subj:'BLÜM',  wh:1},
+    {subj:'REH',   wh:1},
+  ],
+};
+
+// Her sınıf için plan — GÖN/SAN şubeye göre değişiyor (A,C,E → GÖN ; B,D,F → SAN)
+function getPlanForClass(cls) {
+  const grade = parseInt(cls.split('-')[0]);
+  const section = cls.split('-')[1];
+  return GRADE_PLAN[grade].map(l => {
+    if(l.subj === 'GÖN') return {subj: ['B','D','F'].includes(section) ? 'SAN' : 'GÖN', wh: l.wh};
+    return {...l};
+  });
+}
+
+// CLASS_PLAN: tüm sınıflar için hazır plan
+const CLASS_PLAN = {};
+ALL_CLASSES.forEach(cls => { CLASS_PLAN[cls] = getPlanForClass(cls); });
+
+// ============================================================
+// ÖĞRETMENLER VE SINIF ATAMALARI
+// ============================================================
+// Görselden okunan atamalar: hangi öğretmen hangi sınıfa hangi dersi veriyor
+// assignments otomatik CLASS_PLAN'dan saat sayısını alıyor
+function makeAssignments(pairs) {
+  // pairs: [{cls, subj}]
+  return pairs.map(({cls,subj}) => {
+    const plan = CLASS_PLAN[cls];
+    const entry = plan && plan.find(l => l.subj === subj);
+    return {cls, subj, wh: entry ? entry.wh : 2};
+  }).filter(a => a.wh > 0);
+}
+
+let teachers = [
+  // TRK
+  {id:1,  name:'Elif Karaman',   subjects:['TRK'],
+   assignments: makeAssignments([{cls:'5-A',subj:'TRK'},{cls:'5-B',subj:'TRK'},{cls:'5-C',subj:'TRK'},{cls:'5-D',subj:'TRK'}])},
+  {id:2,  name:'Murat Yalçın',        subjects:['TRK'],
+   assignments: makeAssignments([{cls:'7-C',subj:'TRK'},{cls:'7-D',subj:'TRK'},{cls:'7-E',subj:'TRK'},{cls:'7-F',subj:'TRK'}])},
+  {id:3,  name:'Selin Aydın',           subjects:['TRK'],
+   assignments: makeAssignments([{cls:'7-A',subj:'TRK'},{cls:'7-B',subj:'TRK'},{cls:'8-F',subj:'TRK'}])},
+  {id:4,  name:'Kerem Özcan',   subjects:['TRK'],
+   assignments: makeAssignments([{cls:'5-E',subj:'TRK'},{cls:'5-F',subj:'TRK'},{cls:'6-A',subj:'TRK'}])},
+  {id:5,  name:'Derya Korkmaz',          subjects:['TRK'],
+   assignments: makeAssignments([{cls:'6-B',subj:'TRK'},{cls:'6-C',subj:'TRK'},{cls:'6-D',subj:'TRK'}])},
+  // MAT
+  {id:6,  name:'Emre Çelik',          subjects:['MAT'],
+   assignments: makeAssignments([{cls:'5-F',subj:'MAT'}])},
+  {id:7,  name:'Zehra Aslan',subjects:['MAT'],
+   assignments: makeAssignments([{cls:'6-A',subj:'MAT'},{cls:'6-B',subj:'MAT'},{cls:'6-C',subj:'MAT'}])},
+  {id:8,  name:'Okan Demir',   subjects:['MAT'],
+   assignments: makeAssignments([{cls:'5-A',subj:'MAT'},{cls:'5-B',subj:'MAT'},{cls:'5-C',subj:'MAT'},{cls:'5-D',subj:'MAT'}])},
+  {id:9,  name:'İrem Kaya',      subjects:['MAT'],
+   assignments: makeAssignments([{cls:'7-A',subj:'MAT'},{cls:'7-B',subj:'MAT'},{cls:'7-C',subj:'MAT'}])},
+  {id:10, name:'Berk Şahin',        subjects:['MAT'],
+   assignments: makeAssignments([{cls:'6-D',subj:'MAT'},{cls:'8-C',subj:'MAT'},{cls:'8-A',subj:'MAT'}])},
+  {id:11, name:'Seda Koç',     subjects:['MAT'],
+   assignments: makeAssignments([{cls:'8-E',subj:'MAT'},{cls:'8-B',subj:'MAT'},{cls:'7-D',subj:'MAT'}])},
+  {id:12, name:'Onur Arslan',            subjects:['MAT'],
+   assignments: makeAssignments([{cls:'5-E',subj:'MAT'},{cls:'6-E',subj:'MAT'}])},
+  {id:13, name:'Gizem Yıldız',       subjects:['MAT'],
+   assignments: makeAssignments([{cls:'6-F',subj:'MAT'},{cls:'7-E',subj:'MAT'},{cls:'7-F',subj:'MAT'}])},
+  // FEN
+  {id:14, name:'Caner Eren',        subjects:['FEN'],
+   assignments: makeAssignments([{cls:'5-A',subj:'FEN'},{cls:'5-B',subj:'FEN'},{cls:'5-C',subj:'FEN'}])},
+  {id:15, name:'Mina Aksoy',        subjects:['FEN'],
+   assignments: makeAssignments([{cls:'6-A',subj:'FEN'},{cls:'6-B',subj:'FEN'},{cls:'6-C',subj:'FEN'}])},
+  {id:16, name:'Tolga Keskin',       subjects:['FEN'],
+   assignments: makeAssignments([{cls:'8-F',subj:'FEN'},{cls:'7-A',subj:'FEN'},{cls:'7-B',subj:'FEN'}])},
+  {id:17, name:'Ece Polat',     subjects:['FEN'],
+   assignments: makeAssignments([{cls:'7-C',subj:'FEN'},{cls:'7-D',subj:'FEN'},{cls:'7-E',subj:'FEN'}])},
+  {id:18, name:'Barış Uçar',          subjects:['FEN'],
+   assignments: makeAssignments([{cls:'8-A',subj:'FEN'},{cls:'8-B',subj:'FEN'},{cls:'8-C',subj:'FEN'}])},
+  // ING
+  {id:19, name:'Ayşe Güneş',    subjects:['ING'],
+   assignments: makeAssignments([{cls:'5-A',subj:'ING'},{cls:'5-B',subj:'ING'},{cls:'5-C',subj:'ING'}])},
+  {id:20, name:'Hakan Çetin',           subjects:['ING'],
+   assignments: makeAssignments([{cls:'5-D',subj:'ING'},{cls:'5-E',subj:'ING'},{cls:'6-A',subj:'ING'}])},
+  {id:21, name:'Melis Taş',          subjects:['ING'],
+   assignments: makeAssignments([{cls:'7-A',subj:'ING'},{cls:'7-B',subj:'ING'},{cls:'7-C',subj:'ING'}])},
+  {id:22, name:'Serhat Bulut', subjects:['ING'],
+   assignments: makeAssignments([{cls:'5-F',subj:'ING'},{cls:'7-D',subj:'ING'},{cls:'8-C',subj:'ING'}])},
+  {id:23, name:'İlknur Avcı',  subjects:['ING'],
+   assignments: makeAssignments([{cls:'6-B',subj:'ING'},{cls:'6-C',subj:'ING'},{cls:'6-D',subj:'ING'}])},
+  {id:24, name:'Kaan Yılmaz',    subjects:['ING'],
+   assignments: makeAssignments([{cls:'7-E',subj:'ING'},{cls:'8-A',subj:'ING'},{cls:'8-B',subj:'ING'}])},
+  {id:25, name:'Büşra Kaplan',          subjects:['ING'],
+   assignments: makeAssignments([{cls:'8-E',subj:'ING'},{cls:'6-E',subj:'ING'},{cls:'6-F',subj:'ING'}])},
+  {id:26, name:'Cemal Kurt',           subjects:['ING'],
+   assignments: makeAssignments([{cls:'5-F',subj:'ING'},{cls:'7-F',subj:'ING'},{cls:'8-F',subj:'ING'}])},
+  // SOSYAL
+  {id:27, name:'Nehir Şimşek',            subjects:['SOSYAL','REH'],
+   assignments: makeAssignments([{cls:'5-A',subj:'SOSYAL'},{cls:'5-B',subj:'SOSYAL'},{cls:'5-C',subj:'SOSYAL'},{cls:'5-A',subj:'REH'}])},
+  {id:28, name:'Alperen Uslu',     subjects:['INK.TAR'],
+   assignments: makeAssignments([{cls:'8-A',subj:'INK.TAR'},{cls:'8-B',subj:'INK.TAR'},{cls:'8-C',subj:'INK.TAR'},{cls:'8-D',subj:'INK.TAR'},{cls:'8-E',subj:'INK.TAR'},{cls:'8-F',subj:'INK.TAR'}])},
+  {id:29, name:'Damla Ekinci',         subjects:['SOSYAL'],
+   assignments: makeAssignments([{cls:'7-A',subj:'SOSYAL'},{cls:'7-B',subj:'SOSYAL'},{cls:'7-C',subj:'SOSYAL'}])},
+  {id:30, name:'Yusuf Öztürk',        subjects:['SOSYAL'],
+   assignments: makeAssignments([{cls:'5-D',subj:'SOSYAL'},{cls:'5-E',subj:'SOSYAL'},{cls:'5-F',subj:'SOSYAL'}])},
+  // DİN
+  {id:31, name:'Merve Sarı',           subjects:['DİN'],
+   assignments: makeAssignments(ALL_CLASSES.map(cls=>({cls,subj:'DİN'})))},
+  // BEDEN
+  {id:32, name:'Fırat Bozkurt',      subjects:['BEDEN'],
+   assignments: makeAssignments([{cls:'5-A',subj:'BEDEN'},{cls:'5-B',subj:'BEDEN'},{cls:'6-A',subj:'BEDEN'},{cls:'6-B',subj:'BEDEN'}])},
+  {id:33, name:'Ceren Doğan',     subjects:['BEDEN'],
+   assignments: makeAssignments([{cls:'7-A',subj:'BEDEN'},{cls:'7-B',subj:'BEDEN'},{cls:'8-A',subj:'BEDEN'},{cls:'8-B',subj:'BEDEN'}])},
+  {id:34, name:'Erdem Tunç',subjects:['BEDEN'],
+   assignments: makeAssignments([{cls:'6-C',subj:'BEDEN'},{cls:'6-D',subj:'BEDEN'},{cls:'8-C',subj:'BEDEN'},{cls:'8-D',subj:'BEDEN'}])},
+  {id:35, name:'Sibel Yüce',             subjects:['BEDEN'],
+   assignments: makeAssignments([{cls:'5-C',subj:'BEDEN'},{cls:'5-D',subj:'BEDEN'},{cls:'5-E',subj:'BEDEN'},{cls:'5-F',subj:'BEDEN'}])},
+  // TEK.TAS
+  {id:36, name:'Tuna Ersoy',         subjects:['TEK.TAS'],
+   assignments: makeAssignments(['5-A','5-B','5-C','6-A','6-B','6-C','7-A','7-B','7-C'].map(cls=>({cls,subj:'TEK.TAS'})))},
+  {id:37, name:'Pelin Yavuz',          subjects:['TEK.TAS'],
+   assignments: makeAssignments(['5-D','5-E','5-F','6-D','6-E','6-F','7-D','7-E','7-F'].map(cls=>({cls,subj:'TEK.TAS'})))},
+  {id:38, name:'Volkan Acar',             subjects:['TEK.TAS'],
+   assignments: makeAssignments(['8-A','8-B','8-C','8-D','8-E','8-F'].map(cls=>({cls,subj:'TEK.TAS'})))},
+  // MÖZ
+  {id:40, name:'Deniz Topal',          subjects:['MÖZ'],
+   assignments: makeAssignments(ALL_CLASSES.filter(c=>parseInt(c)<8).map(cls=>({cls,subj:'MÖZ'})))},
+  {id:39, name:'Aslıhan Kılıç',   subjects:['MÖZ','BİL.TAR'],
+   assignments: makeAssignments(['8-A','8-B','8-C','8-D','8-E','8-F'].flatMap(cls=>[{cls,subj:'MÖZ'},{cls,subj:'BİL.TAR'}]))},
+  // GÖN / SAN
+  {id:41, name:'Bora Sezer',          subjects:['GÖN','SAN'],
+   assignments: makeAssignments(ALL_CLASSES.map(cls=>({cls,subj:['B','D','F'].includes(cls.split('-')[1])?'SAN':'GÖN'})))},
+  // BİL.TAR (5-6-7. sınıflar)
+  {id:42, name:'Nazlı Çoban',        subjects:['BİL.TAR'],
+   assignments: makeAssignments(ALL_CLASSES.filter(c=>parseInt(c)<8).map(cls=>({cls,subj:'BİL.TAR'})))},
+];
+
+// Saat hesapla
+teachers.forEach(t => { t.hours = t.assignments.reduce((s,a)=>s+a.wh,0); });
+
+let schedule={};
+let settings={hoursPerDay:7, days:[0,1,2,3,4]};
+let selectedClass=null;
+let blockedTeacherId=teachers[0]?.id||null;
+let teacherUnavailable={
+  1:{'1_0':true,'1_1':true,'1_2':true,'1_3':true},
+  2:{'4_5':true,'4_6':true},
+  3:{'2_0':true,'2_1':true,'2_2':true,'2_3':true,'2_4':true,'2_5':true,'2_6':true},
+  4:{'0_5':true,'0_6':true},
+  5:{'3_0':true,'3_1':true,'3_2':true,'3_3':true},
+  6:{'2_5':true,'2_6':true},
+  7:{'1_0':true,'1_1':true,'1_2':true,'1_3':true},
+  8:{},
+  9:{'4_0':true,'4_1':true,'4_2':true,'4_3':true},
+  10:{'0_0':true,'0_1':true,'0_2':true,'0_3':true,'0_4':true,'0_5':true,'0_6':true},
+  11:{'3_5':true,'3_6':true},
+  12:{},
+  13:{'2_0':true,'2_1':true,'2_2':true,'2_3':true},
+  14:{'4_5':true,'4_6':true},
+  15:{'1_0':true,'1_1':true,'1_2':true,'1_3':true,'1_4':true,'1_5':true,'1_6':true},
+  16:{'0_5':true,'0_6':true},
+  17:{},
+  18:{'3_0':true,'3_1':true,'3_2':true,'3_3':true},
+  19:{'2_5':true,'2_6':true},
+  20:{'4_0':true,'4_1':true,'4_2':true,'4_3':true},
+  21:{},
+  22:{'1_5':true,'1_6':true},
+  23:{'0_0':true,'0_1':true,'0_2':true,'0_3':true},
+  24:{'3_0':true,'3_1':true,'3_2':true,'3_3':true,'3_4':true,'3_5':true,'3_6':true},
+  25:{'4_5':true,'4_6':true},
+  26:{},
+  27:{'2_0':true,'2_1':true,'2_2':true,'2_3':true},
+  28:{'0_5':true,'0_6':true},
+  29:{},
+  30:{'1_0':true,'1_1':true,'1_2':true,'1_3':true},
+  31:{'4_0':true,'4_1':true,'4_2':true,'4_3':true,'4_4':true,'4_5':true,'4_6':true},
+  32:{'3_5':true,'3_6':true},
+  33:{'2_0':true,'2_1':true,'2_2':true,'2_3':true},
+  34:{},
+  35:{'0_5':true,'0_6':true},
+  36:{'1_0':true,'1_1':true,'1_2':true,'1_3':true,'1_4':true,'1_5':true,'1_6':true},
+  37:{'4_5':true,'4_6':true},
+  38:{},
+  39:{'2_5':true,'2_6':true},
+  40:{'3_0':true,'3_1':true,'3_2':true,'3_3':true},
+  41:{},
+  42:{'0_0':true,'0_1':true,'0_2':true,'0_3':true}
+};
+
+const SUBJECT_TEACHER_POOLS={
+  'TRK':[1,2,3,4,5],
+  'MAT':[6,7,8,9,10,11,12,13],
+  'FEN':[14,15,16,17,18],
+  'ING':[19,20,21,22,23,24,25,26],
+  'SOSYAL':[27,29,30],
+  'INK.TAR':[28],
+  'DİN':[31],
+  'BEDEN':[32,33,34,35],
+  'TEK.TAS':[36,37,38],
+  'MÖZ':[39,40],
+  'GÖN':[41],
+  'SAN':[41],
+  'BİL.TAR':[39,42],
+  'SEÇİNG':[19,20,21,22,23,24,25,26],
+  'SEÇİMA':[6,7,8,9,10,11,12,13],
+  'BLÜM':[14,15,16,17,18],
+  'REH':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42]
+};
+
+function showTab(name,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('view-'+name).classList.add('active');
+  if(name==='teachers') renderTeachers();
+  if(name==='class') renderClassView();
+  if(name==='classes') renderClassesManage();
+  if(name==='subjects') renderSubjectsManage();
+  if(name==='lessons') renderLessonPlans();
+  if(name==='distribution') renderDistribution();
+  if(name==='blocked') renderBlockedView();
+}
+
+function renderTableHeader(){
+  const H=settings.hoursPerDay;
+  let html='<tr><th class="name-col" rowspan="2">Öğretmen</th>';
+  settings.days.forEach(d=>{html+=`<th class="day-hdr" colspan="${H}">${DAYS[d]}</th>`;});
+  html+='</tr><tr>';
+  settings.days.forEach(()=>{for(let h=1;h<=H;h++) html+=`<th>${h}</th>`;});
+  html+='</tr>';
+  document.getElementById('prog-head').innerHTML=html;
+}
+
+function renderTable(){
+  renderTableHeader();
+  let html=''; let total=0;
+  teachers.forEach(t=>{
+    html+=`<tr><td class="name-col" onclick="openQA(${t.id})" title="Hızlı ata">${t.name}</td>`;
+    settings.days.forEach(d=>{
+      for(let h=0;h<settings.hoursPerDay;h++){
+        const key=`${t.id}_${d}_${h}`;
+        const cell=schedule[key];
+        const conf=checkConflict(t.id,d,h);
+        if(cell){
+          total++;
+          html+=`<td class="cell${conf?' conflict':''}" onclick="editCell(${t.id},${d},${h})">
+            <div class="cell-in"><span class="c-cls">${cell.cls}</span><span class="c-sub">${cell.subj}</span></div></td>`;
+        } else {
+          html+=`<td class="cell" onclick="editCell(${t.id},${d},${h})"><span class="empty-cell">—</span></td>`;
+        }
+      }
+    });
+    html+='</tr>';
+  });
+  document.getElementById('prog-body').innerHTML=html;
+  updateStats(total);
+}
+
+function checkConflict(tid,day,hour){
+  const cell=schedule[`${tid}_${day}_${hour}`];
+  if(!cell||!cell.cls) return false;
+  let n=0;
+  teachers.forEach(t=>{const c=schedule[`${t.id}_${day}_${hour}`]; if(c&&c.cls===cell.cls) n++;});
+  return n>1;
+}
+
+function updateStats(total){
+  let conflicts=0;
+  teachers.forEach(t=>{settings.days.forEach(d=>{for(let h=0;h<settings.hoursPerDay;h++){if(checkConflict(t.id,d,h)) conflicts++;}});});
+  conflicts=Math.floor(conflicts/2);
+  document.getElementById('st1').textContent=teachers.length;
+  document.getElementById('st2').textContent=total;
+  document.getElementById('st3').textContent=conflicts;
+  const b=document.getElementById('cbadge');
+  if(conflicts>0){b.textContent=`⚠ ${conflicts} çakışma`;b.style.display='';}
+  else b.style.display='none';
+}
+
+function generateSchedule(){
+  normalizeTeacherAssignments();
+  schedule={};
+  const H=settings.hoursPerDay;
+  const days=settings.days;
+  const expectedSlots=days.length*H;
+  if(expectedSlots!==35){
+    showAlert(`Her sınıf için 35 saat gerekir. Şu an ${days.length} gün x ${H} saat = ${expectedSlots}.`, 'warn');
+    return;
+  }
+
+  let best=null;
+  for(let attempt=0;attempt<120;attempt++){
+    const trial=buildGlobalBlockSchedule(attempt);
+    if(!best || trial.score<best.score) best=trial;
+    if(trial.issues.length===0) break;
+  }
+  schedule=best.schedule;
+  syncTeacherAssignmentsFromSchedule();
+
+  renderTable();
+  if(document.getElementById('view-class').classList.contains('active')) renderClassView();
+
+  const report=analyzeSchedule();
+  const blockIssues=analyzeBlockRulesObject(schedule);
+  const msg=report.classIssues.length===0
+    ? `Program oluşturuldu — 24/24 sınıf 35 saat dolu, sınıf boşluğu yok.`
+    : `Program oluşturuldu ama ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls}`;
+  showAlert(blockIssues.length===0&&report.classIssues.length===0?`Program olusturuldu - 24/24 sinif 35 saat dolu, dersler blok kuralina uygun.`:msg, blockIssues.length===0&&report.classIssues.length===0?'ok':'warn');
+}
+
+function normalizeTeacherAssignments(){
+  const byId=Object.fromEntries(teachers.map(t=>[t.id,t]));
+  const plannedLoad=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const manual={};
+  teachers.forEach(t=>{
+    (t.assignments||[]).filter(a=>a.manual).forEach(a=>{
+      if(!a.cls||!a.subj||!a.wh) return;
+      if(!ALL_CLASSES.includes(a.cls)) return;
+      ensureClassLesson(a.cls,a.subj,a.wh);
+      manual[`${a.cls}|${a.subj}`]=t.id;
+    });
+    t.assignments=[];
+  });
+
+  ALL_CLASSES.forEach(cls=>{
+    CLASS_PLAN[cls].forEach(({subj,wh})=>{
+      const key=`${cls}|${subj}`;
+      const manualTid=manual[key];
+      const pool=manualTid&&byId[manualTid]?[manualTid]:getTeacherPool(subj).filter(id=>byId[id]);
+      if(!pool.length) return;
+      const tid=pool.reduce((best,id)=>plannedLoad[id]<plannedLoad[best]?id:best,pool[0]);
+      plannedLoad[tid]+=wh;
+      byId[tid].assignments.push({cls,subj,wh,manual:manualTid===tid});
+    });
+  });
+  teachers.forEach(t=>{ t.hours=t.assignments.reduce((s,a)=>s+a.wh,0); });
+}
+
+function parseAssignmentText(text){
+  return (text||'').split('\n').map(line=>line.trim()).filter(Boolean).map(line=>{
+    const p=line.split(/\s+/);
+    if(p.length<3) return null;
+    const wh=parseInt(p[p.length-1]);
+    const cls=p[0];
+    const subj=p.slice(1,-1).join(' ');
+    if(!ALL_CLASSES.includes(cls)||!subj||!wh) return null;
+    return {cls,subj,wh,manual:true};
+  }).filter(Boolean);
+}
+
+function ensureClassLesson(cls,subj,wh){
+  if(!CLASS_PLAN[cls]) CLASS_PLAN[cls]=[];
+  const existing=CLASS_PLAN[cls].find(l=>l.subj===subj);
+  if(existing) existing.wh=wh;
+  else CLASS_PLAN[cls].push({subj,wh});
+  const grade=parseInt(cls.split('-')[0]);
+  if(GRADE_PLAN[grade]){
+    const gExisting=GRADE_PLAN[grade].find(l=>l.subj===subj);
+    if(!gExisting) GRADE_PLAN[grade].push({subj,wh});
+  }
+  if(!SUBJECTS.includes(subj)) SUBJECTS.push(subj);
+}
+
+function buildFullClassSchedule(attempt){
+  const H=settings.hoursPerDay;
+  const days=settings.days;
+  const trialSchedule={};
+  const teacherLoad=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const issues=[];
+
+  const classOrder=[...ALL_CLASSES];
+  rotate(classOrder,attempt%classOrder.length);
+  classOrder.forEach((cls,ci)=>{
+    const layout=buildClassBlockLayout(cls,attempt+ci*19);
+    if(!layout.length){
+      issues.push({cls,reason:'Bloklar 5x7 tabloya yerlestirilemedi'});
+      return;
+    }
+    layout.forEach(block=>{
+      const tid=findTeacherForBlock(block.subj,block.day,block.hour,block.len,trialSchedule,teacherLoad,attempt+ci*19);
+      if(!tid){
+        issues.push({cls,subj:block.subj,day:block.day,hour:block.hour+1,reason:'Uygun ogretmen yok'});
+        return;
+      }
+      for(let x=0;x<block.len;x++){
+        trialSchedule[`${tid}_${block.day}_${block.hour+x}`]={cls,subj:block.subj};
+        teacherLoad[tid]++;
+      }
+    });
+  });
+
+  const report=analyzeScheduleObject(trialSchedule);
+  const blockIssues=analyzeBlockRulesObject(trialSchedule);
+  const score=issues.length*1000+report.classIssues.length*100+report.totalMissing*10+report.totalGaps+blockIssues.length*200;
+  return {schedule:trialSchedule,issues:[...issues,...report.classIssues],score};
+}
+
+function buildGlobalBlockSchedule(attempt){
+  const H=settings.hoursPerDay;
+  const days=settings.days;
+  const trialSchedule={};
+  const classBusy={};
+  const teacherLoad=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  ALL_CLASSES.forEach(cls=>{
+    classBusy[cls]={};
+    days.forEach(d=>classBusy[cls][d]=Array(H).fill(false));
+  });
+
+  const blocks=[];
+  ALL_CLASSES.forEach((cls,ci)=>{
+    CLASS_PLAN[cls].forEach(({subj,wh})=>{
+      splitLessonBlocks(wh).forEach((len,bi)=>blocks.push({cls,subj,len,ci,bi}));
+    });
+  });
+  blocks.sort((a,b)=>{
+    const pa=getTeacherPool(a.subj).length;
+    const pb=getTeacherPool(b.subj).length;
+    return b.len-a.len || pa-pb || (((a.ci*13+a.bi*7+attempt)%17)-((b.ci*13+b.bi*7+attempt)%17));
+  });
+
+  const issues=[];
+  blocks.forEach(block=>{
+    const placed=placeGlobalBlock(block,trialSchedule,classBusy,teacherLoad,attempt);
+    if(!placed) issues.push({cls:block.cls,subj:block.subj,len:block.len,reason:'Blok yerlestirilemedi'});
+  });
+
+  const report=analyzeScheduleObject(trialSchedule);
+  const blockIssues=analyzeBlockRulesObject(trialSchedule);
+  const branchIssues=analyzeBranchRulesObject(trialSchedule);
+  const score=issues.length*2000+report.classIssues.length*200+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000;
+  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues],score};
+}
+
+function placeGlobalBlock(block,scheduleObj,classBusy,teacherLoad,seed=0){
+  const slots=[];
+  settings.days.forEach(d=>{
+    for(let h=0;h<=settings.hoursPerDay-block.len;h++){
+      slots.push({d,h});
+    }
+  });
+  slots.sort((a,b)=>scoreBlockSlot(block,a.d,a.h,classBusy,seed)-scoreBlockSlot(block,b.d,b.h,classBusy,seed));
+  for(const slot of slots){
+    if(!canUseClassSlot(block,slot.d,slot.h,classBusy,scheduleObj)) continue;
+    const tid=findTeacherForBlock(block.cls,block.subj,slot.d,slot.h,block.len,scheduleObj,teacherLoad,seed);
+    if(!tid) continue;
+    for(let x=0;x<block.len;x++){
+      scheduleObj[`${tid}_${slot.d}_${slot.h+x}`]={cls:block.cls,subj:block.subj};
+      classBusy[block.cls][slot.d][slot.h+x]=true;
+      teacherLoad[tid]++;
+    }
+    return true;
+  }
+  return false;
+}
+
+function scoreBlockSlot(block,d,h,classBusy,seed=0){
+  const used=classBusy[block.cls][d].filter(Boolean).length;
+  const sameDay=classBusy[block.cls][d].some((busy,idx)=>{
+    if(!busy) return false;
+    return false;
+  });
+  return used*10 + ((d*7+h+seed+block.ci)%11) + (sameDay?25:0);
+}
+
+function canUseClassSlot(block,d,h,classBusy,scheduleObj){
+  for(let x=0;x<block.len;x++){
+    if(classBusy[block.cls][d][h+x]) return false;
+  }
+  const before=h>0?getClassLessonAt(scheduleObj,block.cls,d,h-1):null;
+  const after=h+block.len<settings.hoursPerDay?getClassLessonAt(scheduleObj,block.cls,d,h+block.len):null;
+  if(before&&before.subj===block.subj) return false;
+  if(after&&after.subj===block.subj) return false;
+  return true;
+}
+
+function splitLessonBlocks(hours){
+  const blocks=[];
+  while(hours>=2){blocks.push(2);hours-=2;}
+  if(hours===1) blocks.push(1);
+  return blocks;
+}
+
+function getClassBlocks(cls,seed=0){
+  const blocks=[];
+  CLASS_PLAN[cls].forEach(({subj,wh})=>{
+    splitLessonBlocks(wh).forEach((len,idx)=>blocks.push({subj,len,idx}));
+  });
+  blocks.sort((a,b)=>{
+    if(b.len!==a.len) return b.len-a.len;
+    return ((a.subj.charCodeAt(0)+a.idx+seed)%17)-((b.subj.charCodeAt(0)+b.idx+seed)%17);
+  });
+  return blocks;
+}
+
+function buildClassBlockLayout(cls,seed=0){
+  const H=settings.hoursPerDay;
+  const days=settings.days;
+  const blocks=getClassBlocks(cls,seed);
+  const orderedDays=[...days];
+  rotate(orderedDays,seed%orderedDays.length);
+  const dayBlocks=orderedDays.map(d=>({day:d,used:0,items:[]}));
+
+  blocks.forEach(block=>{
+    const ordered=[...dayBlocks].sort((a,b)=>{
+      const aSame=a.items.some(x=>x.subj===block.subj)?1:0;
+      const bSame=b.items.some(x=>x.subj===block.subj)?1:0;
+      if(aSame!==bSame) return aSame-bSame;
+      return (b.used-a.used) || (((a.day+seed)%7)-((b.day+seed)%7));
+    });
+    let target=ordered.find(day=>day.used+block.len<=H);
+    if(!target && block.len===2){
+      const oneDay=ordered.find(day=>day.used+1<=H);
+      if(oneDay){
+        target=oneDay;
+        block={...block,len:1,forcedSingle:true};
+      }
+    }
+    if(target){
+      target.items.push(block);
+      target.used+=block.len;
+    }
+  });
+
+  if(dayBlocks.some(day=>day.used!==H)) return [];
+  const layout=[];
+  dayBlocks.sort((a,b)=>a.day-b.day).forEach(day=>{
+    let hour=0;
+    day.items.forEach(block=>{
+      layout.push({day:day.day,hour,len:block.len,subj:block.subj});
+      hour+=block.len;
+    });
+  });
+  return layout;
+}
+
+function findTeacherForBlock(cls,subj,day,hour,len,scheduleObj,teacherLoad,seed=0){
+  const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.manual&&a.cls===cls&&a.subj===subj)).map(t=>t.id);
+  const preferred=(assigned.length?assigned:getTeacherPool(subj)).filter(tid=>teachers.some(t=>t.id===tid));
+  const candidates=preferred.filter(tid=>{
+    for(let x=0;x<len;x++){
+      if(scheduleObj[`${tid}_${day}_${hour+x}`]) return false;
+      if(isTeacherUnavailable(tid,day,hour+x)) return false;
+    }
+    return true;
+  });
+  if(candidates.length){
+    candidates.sort((a,b)=>(teacherLoad[a]-teacherLoad[b]) || (((a+seed)%7)-((b+seed)%7)));
+    return candidates[0];
+  }
+  return null;
+}
+
+function solveOneSlotFast(d,h,remaining,subjectDayCount,teacherLoad,trialSchedule,seed){
+  const assignments=[];
+  const usedTeachers={};
+  const classes=[...ALL_CLASSES];
+  rotate(classes,seed%classes.length);
+  const waiting=new Set(classes);
+
+  for(let pass=0;pass<classes.length;pass++){
+    const ordered=[...waiting].sort((a,b)=>{
+      const ca=getSlotCandidatesFast(a,d,h,remaining,subjectDayCount,usedTeachers,teacherLoad,trialSchedule,seed).length;
+      const cb=getSlotCandidatesFast(b,d,h,remaining,subjectDayCount,usedTeachers,teacherLoad,trialSchedule,seed).length;
+      return ca-cb;
+    });
+    if(!ordered.length) break;
+    let changed=false;
+    ordered.forEach(cls=>{
+      if(!waiting.has(cls)) return;
+      const candidates=getSlotCandidatesFast(cls,d,h,remaining,subjectDayCount,usedTeachers,teacherLoad,trialSchedule,seed);
+      if(!candidates.length) return;
+      const cand=candidates[0];
+      assignments.push(cand);
+      usedTeachers[cand.tid]=true;
+      waiting.delete(cls);
+      changed=true;
+    });
+    if(!changed) break;
+  }
+
+  return {ok:waiting.size===0,assignments,unassigned:[...waiting]};
+}
+
+function getSlotCandidatesFast(cls,d,h,remaining,subjectDayCount,usedTeachers,teacherLoad,trialSchedule,seed=0){
+  const prev=getClassLessonAt(trialSchedule,cls,d,h-1);
+  const candidates=[];
+  Object.keys(remaining[cls]).forEach(subj=>{
+    if(remaining[cls][subj]<=0) return;
+    let added=0;
+    getTeacherPool(subj).forEach(tid=>{
+      if(usedTeachers[tid]) return;
+      if(!teachers.some(t=>t.id===tid)) return;
+      if(isTeacherUnavailable(tid,d,h)) return;
+      candidates.push({cls,subj,tid});
+      added++;
+    });
+  });
+  candidates.sort((a,b)=>{
+    const saltA=((a.tid*17+a.subj.length*13+seed)%11)/100;
+    const saltB=((b.tid*17+b.subj.length*13+seed)%11)/100;
+    const sa=remaining[cls][a.subj]*30-(subjectDayCount[cls][d][a.subj]||0)*6-(prev&&prev.subj===a.subj?8:0)-teacherLoad[a.tid]+saltA;
+    const sb=remaining[cls][b.subj]*30-(subjectDayCount[cls][d][b.subj]||0)*6-(prev&&prev.subj===b.subj?8:0)-teacherLoad[b.tid]+saltB;
+    return sb-sa;
+  });
+  return candidates;
+}
+
+function solveOneSlot(d,h,remaining,subjectDayCount,teacherLoad,trialSchedule,seed){
+  const assignments=[];
+  const usedTeachers={};
+  const classes=[...ALL_CLASSES];
+  rotate(classes,seed%classes.length);
+
+  function optionCount(cls){
+    return getSlotCandidates(cls,d,h,remaining,subjectDayCount,usedTeachers,teacherLoad,trialSchedule).length;
+  }
+
+  function dfs(pending){
+    if(!pending.length) return true;
+    pending.sort((a,b)=>optionCount(a)-optionCount(b));
+    const cls=pending[0];
+    const rest=pending.slice(1);
+    const candidates=getSlotCandidates(cls,d,h,remaining,subjectDayCount,usedTeachers,teacherLoad,trialSchedule);
+    for(const cand of candidates){
+      assignments.push(cand);
+      usedTeachers[cand.tid]=true;
+      remaining[cls][cand.subj]--;
+      subjectDayCount[cls][d][cand.subj]=(subjectDayCount[cls][d][cand.subj]||0)+1;
+      if(dfs(rest)) return true;
+      subjectDayCount[cls][d][cand.subj]--;
+      remaining[cls][cand.subj]++;
+      delete usedTeachers[cand.tid];
+      assignments.pop();
+    }
+    return false;
+  }
+
+  const ok=dfs(classes);
+  if(ok) {
+    assignments.forEach(cand=>{
+      remaining[cand.cls][cand.subj]++;
+      subjectDayCount[cand.cls][d][cand.subj]--;
+    });
+    return {ok:true,assignments:[...assignments],unassigned:[]};
+  }
+
+  // Tam eşleşme bulunamazsa mümkün olanları yerleştir; analiz bunu açıkça raporlar.
+  assignments.forEach(cand=>{
+    remaining[cand.cls][cand.subj]++;
+    subjectDayCount[cand.cls][d][cand.subj]--;
+  });
+  const greedy=[];
+  const used={};
+  classes.forEach(cls=>{
+    const candidates=getSlotCandidates(cls,d,h,remaining,subjectDayCount,used,teacherLoad,trialSchedule);
+    if(candidates.length){
+      const cand=candidates[0];
+      greedy.push(cand);
+      used[cand.tid]=true;
+    }
+  });
+  return {ok:false,assignments:greedy,unassigned:classes.filter(cls=>!greedy.some(g=>g.cls===cls))};
+}
+
+function getSlotCandidates(cls,d,h,remaining,subjectDayCount,usedTeachers,teacherLoad,trialSchedule){
+  const prev=getClassLessonAt(trialSchedule,cls,d,h-1);
+  const candidates=[];
+  Object.keys(remaining[cls]).forEach(subj=>{
+    if(remaining[cls][subj]<=0) return;
+    getTeacherPool(subj).forEach(tid=>{
+      if(usedTeachers[tid]) return;
+      if(!teachers.some(t=>t.id===tid)) return;
+      if(isTeacherUnavailable(tid,d,h)) return;
+      candidates.push({cls,subj,tid});
+    });
+  });
+  candidates.sort((a,b)=>{
+    const sa=remaining[cls][a.subj]*20-(subjectDayCount[cls][d][a.subj]||0)*4-(prev&&prev.subj===a.subj?6:0)-teacherLoad[a.tid];
+    const sb=remaining[cls][b.subj]*20-(subjectDayCount[cls][d][b.subj]||0)*4-(prev&&prev.subj===b.subj?6:0)-teacherLoad[b.tid];
+    return sb-sa;
+  });
+  return candidates;
+}
+
+function pickLessonForClassSlot(cls,d,h,remaining,subjectDayCount,teacherBusy,teacherLoad,trialSchedule,attempt){
+  let subjects=Object.keys(remaining[cls]).filter(subj=>remaining[cls][subj]>0);
+  const prev=getClassLessonAt(trialSchedule,cls,d,h-1);
+  subjects.sort((a,b)=>{
+    const scoreA=remaining[cls][a]*10-(subjectDayCount[cls][d][a]||0)*3-(prev&&prev.subj===a?5:0)+(attempt%3===0?Math.random():0);
+    const scoreB=remaining[cls][b]*10-(subjectDayCount[cls][d][b]||0)*3-(prev&&prev.subj===b?5:0)+(attempt%3===0?Math.random():0);
+    return scoreB-scoreA;
+  });
+
+  for(const subj of subjects){
+    const tid=pickTeacherForSubject(subj,d,h,teacherBusy,teacherLoad);
+    if(tid) return {subj,tid};
+  }
+  return null;
+}
+
+function pickTeacherForSubject(subj,d,h,teacherBusy,teacherLoad){
+  const pool=getTeacherPool(subj);
+  const candidates=pool.filter(tid=>{
+    if(!teachers.some(t=>t.id===tid)) return false;
+    if(teacherBusy[`${tid}_${d}_${h}`]) return false;
+    if(isTeacherUnavailable(tid,d,h)) return false;
+    return true;
+  });
+  if(!candidates.length) return null;
+  return candidates.reduce((best,id)=>teacherLoad[id]<teacherLoad[best]?id:best,candidates[0]);
+}
+
+function getTeacherPool(subj){
+  const ids=new Set(SUBJECT_TEACHER_POOLS[subj]||[]);
+  teachers.filter(t=>(t.subjects||[]).includes(subj)).forEach(t=>ids.add(t.id));
+  return [...ids];
+}
+
+function getClassLessonAt(scheduleObj,cls,d,h){
+  if(h<0) return null;
+  for(const t of teachers){
+    const c=scheduleObj[`${t.id}_${d}_${h}`];
+    if(c&&c.cls===cls) return c;
+  }
+  return null;
+}
+
+function rotate(arr,n){
+  n=n%arr.length;
+  arr.push(...arr.splice(0,n));
+}
+
+function analyzeSchedule(){
+  return analyzeScheduleObject(schedule);
+}
+
+function analyzeBlockRulesObject(scheduleObj){
+  const issues=[];
+  ALL_CLASSES.forEach(cls=>{
+    const plan=CLASS_PLAN[cls]||[];
+    const actual={};
+    settings.days.forEach(d=>{
+      let h=0;
+      while(h<settings.hoursPerDay){
+        const lesson=getClassLessonAt(scheduleObj,cls,d,h);
+        if(!lesson){h++;continue;}
+        let len=1;
+        while(h+len<settings.hoursPerDay){
+          const next=getClassLessonAt(scheduleObj,cls,d,h+len);
+          if(!next||next.subj!==lesson.subj) break;
+          len++;
+        }
+        if(!actual[lesson.subj]) actual[lesson.subj]=[];
+        actual[lesson.subj].push(len);
+        h+=len;
+      }
+    });
+    plan.forEach(({subj,wh})=>{
+      const expected=splitLessonBlocks(wh).sort((a,b)=>b-a).join('+');
+      const found=(actual[subj]||[]).sort((a,b)=>b-a).join('+');
+      if(expected!==found) issues.push({cls,subj,expected,found});
+    });
+  });
+  return issues;
+}
+
+function analyzeBranchRulesObject(scheduleObj){
+  return Object.entries(scheduleObj).filter(([key,cell])=>{
+    if(!cell) return false;
+    const tid=parseInt(key.split('_')[0]);
+    return !getTeacherPool(cell.subj).includes(tid);
+  }).map(([key,cell])=>({key,cls:cell.cls,subj:cell.subj}));
+}
+
+function analyzeScheduleObject(scheduleObj){
+  const H=settings.hoursPerDay;
+  const days=settings.days;
+  const classIssues=[];
+  let totalMissing=0,totalGaps=0;
+  ALL_CLASSES.forEach(cls=>{
+    let filled=0,missing=0,gaps=0;
+    days.forEach(d=>{
+      const hours=[];
+      for(let h=0;h<H;h++){
+        const found=teachers.some(t=>{const c=scheduleObj[`${t.id}_${d}_${h}`];return c&&c.cls===cls;});
+        if(found){filled++;hours.push(h+1);} else missing++;
+      }
+      if(hours.length){
+        for(let x=1;x<=Math.max(...hours);x++) if(!hours.includes(x)) gaps++;
+      }
+    });
+    if(filled!==35||missing||gaps) classIssues.push({cls,filled,missing,gaps});
+    totalMissing+=missing; totalGaps+=gaps;
+  });
+  return {classIssues,totalMissing,totalGaps};
+}
+
+function syncTeacherAssignmentsFromSchedule(){
+  const grouped={};
+  teachers.forEach(t=>grouped[t.id]={});
+  Object.entries(schedule).forEach(([key,cell])=>{
+    const tid=parseInt(key.split('_')[0]);
+    if(!grouped[tid]||!cell) return;
+    const gkey=`${cell.cls}|${cell.subj}`;
+    grouped[tid][gkey]=(grouped[tid][gkey]||0)+1;
+  });
+  teachers.forEach(t=>{
+    t.assignments=Object.entries(grouped[t.id]).map(([key,wh])=>{
+      const [cls,subj]=key.split('|');
+      return {cls,subj,wh};
+    });
+    t.hours=t.assignments.reduce((s,a)=>s+a.wh,0);
+  });
+}
+
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+}
+
+function openQA(tid){
+  const t=teachers.find(x=>x.id===tid);
+  document.getElementById('qa-name').textContent=t.name;
+  let placed=0;
+  settings.days.forEach(d=>{for(let h=0;h<settings.hoursPerDay;h++){if(schedule[`${tid}_${d}_${h}`]) placed++;}});
+  document.getElementById('qa-sub').textContent=`${placed} / ${t.hours} saat dolu · sınıf ve ders seç, boş saate tıkla`;
+  const clsSel=document.getElementById('qa-cls');
+  clsSel.innerHTML=ALL_CLASSES.map(cls=>`<option value="${cls}">${cls}</option>`).join('');
+  const sel=document.getElementById('qa-subj');
+  const allowed=SUBJECTS.filter(s=>getTeacherPool(s).includes(tid));
+  sel.innerHTML=allowed.map(s=>`<option value="${s}">${s}</option>`).join('');
+  if(t.assignments&&t.assignments.length) clsSel.value=t.assignments[0].cls;
+  renderQAGrid(tid);
+  document.getElementById('qa-bg').classList.add('open');
+}
+
+function renderQAGrid(tid){
+  const H=settings.hoursPerDay; const days=settings.days;
+  document.getElementById('qa-grid').style.gridTemplateColumns=`auto repeat(${days.length},1fr)`;
+  let html='<div></div>';
+  days.forEach(d=>{html+=`<div class="qa-day-lbl">${DAYS_S[d]}</div>`;});
+  for(let h=0;h<H;h++){
+    html+=`<div class="qa-hr-lbl">${h+1}.</div>`;
+    days.forEach(d=>{
+      const key=`${tid}_${d}_${h}`;
+      const cell=schedule[key];
+      if(cell){
+        html+=`<div class="qa-slot busy"><span class="sq-cls">${cell.cls}</span><span class="sq-sub">${cell.subj}</span></div>`;
+      } else {
+        html+=`<div class="qa-slot free" onclick="qaAssign(${tid},${d},${h})">+</div>`;
+      }
+    });
+  }
+  document.getElementById('qa-grid').innerHTML=html;
+}
+
+function qaAssign(tid,day,hour){
+  const cls=document.getElementById('qa-cls').value;
+  const subj=document.getElementById('qa-subj').value;
+  if(!cls||!subj){alert('Sınıf ve ders seçin');return;}
+  if(!getTeacherPool(subj).includes(tid)){alert('Bu öğretmen bu derse atanamaz');return;}
+  schedule[`${tid}_${day}_${hour}`]={cls,subj};
+  renderQAGrid(tid);
+  renderTable();
+  const t=teachers.find(x=>x.id===tid);
+  let placed=0;
+  settings.days.forEach(d=>{for(let h=0;h<settings.hoursPerDay;h++){if(schedule[`${tid}_${d}_${h}`]) placed++;}});
+  document.getElementById('qa-sub').textContent=`${placed} / ${t.hours} saat dolu · sınıf ve ders seç, boş saate tıkla`;
+}
+
+function closeQA(){document.getElementById('qa-bg').classList.remove('open');}
+document.getElementById('qa-bg').addEventListener('click',e=>{if(e.target===e.currentTarget) closeQA();});
+
+function editCell(tid,day,hour){
+  const curr=schedule[`${tid}_${day}_${hour}`]||{};
+  const t=teachers.find(x=>x.id===tid);
+  const allowed=SUBJECTS.filter(s=>getTeacherPool(s).includes(tid));
+  document.getElementById('emodal-title').textContent=`${t.name} — ${DAYS[day]} ${hour+1}. Saat`;
+  document.getElementById('emodal-body').innerHTML=`
+    <div class="fg2"><label>Sınıf</label><select id="e-cls">${ALL_CLASSES.map(c=>`<option value="${c}"${curr.cls===c?' selected':''}>${c}</option>`).join('')}</select></div>
+    <div class="fg2"><label>Ders</label><select id="e-sub"><option value="">—</option>
+      ${allowed.map(s=>`<option value="${s}"${curr.subj===s?' selected':''}>${s}</option>`).join('')}</select></div>
+    <div class="m-actions">
+      <button class="btn danger" onclick="clearCell(${tid},${day},${hour})">Temizle</button>
+      <button class="btn" onclick="closeM('emodal')">İptal</button>
+      <button class="btn primary" onclick="saveCell(${tid},${day},${hour})">Kaydet</button>
+    </div>`;
+  document.getElementById('emodal').classList.add('open');
+}
+function saveCell(tid,day,hour){
+  const cls=document.getElementById('e-cls').value;
+  const subj=document.getElementById('e-sub').value;
+  if(subj&&!getTeacherPool(subj).includes(tid)){alert('Bu öğretmen bu derse atanamaz');return;}
+  if(cls&&subj) schedule[`${tid}_${day}_${hour}`]={cls,subj};
+  else delete schedule[`${tid}_${day}_${hour}`];
+  closeM('emodal'); renderTable();
+}
+function clearCell(tid,day,hour){delete schedule[`${tid}_${day}_${hour}`]; closeM('emodal'); renderTable();}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+document.getElementById('emodal').addEventListener('click',e=>{if(e.target===e.currentTarget) closeM('emodal');});
+document.getElementById('tmodal').addEventListener('click',e=>{if(e.target===e.currentTarget) closeM('tmodal');});
+
+function renderClassView(){
+  if(!selectedClass) selectedClass=ALL_CLASSES[0];
+  document.getElementById('cls-sel').innerHTML=ALL_CLASSES.map(c=>`
+    <div class="cls-btn${c===selectedClass?' active':''}" onclick="selectClass('${c}')">${c}</div>`).join('');
+  renderClassTable();
+}
+function selectClass(cls){
+  selectedClass=cls;
+  document.querySelectorAll('.cls-btn').forEach(b=>b.classList.toggle('active',b.textContent===cls));
+  renderClassTable();
+}
+function renderClassTable(){
+  if(!selectedClass) return;
+  const H=settings.hoursPerDay; const days=settings.days;
+  const plan=CLASS_PLAN[selectedClass]||[];
+  const totalNeeded=plan.reduce((s,l)=>s+l.wh,0);
+
+  let head='<tr><th class="hour-col">Saat</th>';
+  days.forEach(d=>{head+=`<th class="day-hdr" style="min-width:150px">${DAYS[d]}</th>`;});
+  head+='</tr>';
+  document.getElementById('cls-head').innerHTML=head;
+
+  let filled=0;
+  let body='';
+  for(let h=0;h<H;h++){
+    body+=`<tr><td class="hour-col" style="text-align:center;padding:8px 4px">${h+1}</td>`;
+    days.forEach(d=>{
+      let found=null;
+      teachers.forEach(t=>{
+        const c=schedule[`${t.id}_${d}_${h}`];
+        if(c&&c.cls===selectedClass) found={subj:c.subj,teacher:t.name};
+      });
+      if(found){
+        filled++;
+        body+=`<td class="cls-cell"><div class="cell-in"><span class="c-sub2">${found.subj}</span><span class="c-tch">${found.teacher}</span></div></td>`;
+      } else {
+        body+=`<td class="cls-cell empty">—</td>`;
+      }
+    });
+    body+='</tr>';
+  }
+  body+=`<tr><td colspan="${days.length+1}" class="cls-summary">
+    <b>${selectedClass}</b> — ${filled}/${totalNeeded} saat dolu &nbsp;·&nbsp;
+    Haftalık plan: ${plan.map(l=>`${l.subj}(${l.wh})`).join(' · ')}
+  </td></tr>`;
+  document.getElementById('cls-body').innerHTML=body;
+}
+
+function renderBlockedView(){
+  const sel=document.getElementById('blocked-teacher');
+  if(!blockedTeacherId && teachers.length) blockedTeacherId=teachers[0].id;
+  sel.innerHTML=teachers.map(t=>`<option value="${t.id}"${t.id===blockedTeacherId?' selected':''}>${t.name}</option>`).join('');
+  renderBlockedGrid();
+}
+
+function renderBlockedGrid(){
+  const sel=document.getElementById('blocked-teacher');
+  blockedTeacherId=parseInt(sel.value)||teachers[0]?.id||null;
+  const H=settings.hoursPerDay;
+  const days=settings.days;
+  let head='<tr><th class="hour-col">Saat</th>';
+  days.forEach(d=>head+=`<th class="day-hdr">${DAYS[d]}</th>`);
+  head+='</tr>';
+  document.getElementById('blocked-head').innerHTML=head;
+
+  let body='';
+  for(let h=0;h<H;h++){
+    body+=`<tr><td class="hour-col" style="text-align:center;padding:8px 4px">${h+1}</td>`;
+    days.forEach(d=>{
+      const blocked=isTeacherUnavailable(blockedTeacherId,d,h);
+      body+=`<td class="block-slot ${blocked?'blocked':'free'}" onclick="toggleTeacherUnavailable(${blockedTeacherId},${d},${h})">${blocked?'Ders yazılmaz':'Uygun'}</td>`;
+    });
+    body+='</tr>';
+  }
+  document.getElementById('blocked-body').innerHTML=body;
+}
+
+function toggleTeacherUnavailable(tid,d,h){
+  if(!teacherUnavailable[tid]) teacherUnavailable[tid]={};
+  const key=`${d}_${h}`;
+  teacherUnavailable[tid][key]=!teacherUnavailable[tid][key];
+  if(!teacherUnavailable[tid][key]) delete teacherUnavailable[tid][key];
+  renderBlockedGrid();
+}
+
+function clearBlockedForSelected(){
+  if(blockedTeacherId) teacherUnavailable[blockedTeacherId]={};
+  renderBlockedGrid();
+}
+
+function isTeacherUnavailable(tid,d,h){
+  return !!(teacherUnavailable[tid]&&teacherUnavailable[tid][`${d}_${h}`]);
+}
+
+function renderLessonPlans(){
+  const root=document.getElementById('lesson-plan-list');
+  root.innerHTML=GRADES.map(g=>{
+    const plan=GRADE_PLAN[g]||[];
+    const total=plan.reduce((s,l)=>s+l.wh,0);
+    return `<div class="t-card">
+      <div class="t-nm">${g}. Sınıf Dersleri</div>
+      <div class="t-meta">Toplam: ${total} / 35 saat</div>
+      <div id="lesson-plan-${g}">${plan.map(l=>lessonRowHtml(g,l.subj,l.wh)).join('')}</div>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="btn" onclick="addLessonRow(${g})">+ Ders ekle</button>
+        <button class="btn" onclick="openLessonTextEdit(${g})">Toplu metin düzenle</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function lessonRowHtml(g,subj='',wh=1){
+  const opts=SUBJECTS.map(s=>`<option value="${s}"${s===subj?' selected':''}>${s}</option>`).join('');
+  return `<div class="pick-row lesson-row" data-grade="${g}">
+    <select class="lesson-subj">${opts}</select>
+    <input class="lesson-wh" type="number" min="1" max="10" value="${wh}">
+    <button class="btn danger mini" onclick="this.closest('.lesson-row').remove()">Sil</button>
+  </div>`;
+}
+
+function addLessonRow(g){
+  document.getElementById(`lesson-plan-${g}`).insertAdjacentHTML('beforeend',lessonRowHtml(g,SUBJECTS[0]||'',1));
+}
+
+function saveLessonPlans(){
+  let errors=[];
+  const nextPlans={};
+  GRADES.forEach(g=>{
+    const rows=Array.from(document.querySelectorAll(`#lesson-plan-${g} .lesson-row`));
+    const plan=rows.map(row=>({subj:row.querySelector('.lesson-subj').value,wh:parseInt(row.querySelector('.lesson-wh').value)||0})).filter(l=>l.subj&&l.wh>0);
+    const total=plan.reduce((s,l)=>s+l.wh,0);
+    if(total!==35) errors.push(`${g}. sınıf toplamı ${total}; 35 olmalı`);
+    nextPlans[g]=plan;
+  });
+  if(errors.length){showAlert(errors[0],'warn');return;}
+  GRADES.forEach(g=>{GRADE_PLAN[g]=nextPlans[g];});
+  refreshClassPlans();
+  syncSubjectsFromPlans();
+  renderLessonPlans();
+  showAlert('Ders saatleri kaydedildi. Programı yeniden oluşturabilirsiniz.','ok');
+}
+
+function openLessonTextEdit(g){
+  const plan=GRADE_PLAN[g]||[];
+  document.getElementById('emodal-title').textContent=`${g}. Sınıf Toplu Ders Düzenleme`;
+  document.getElementById('emodal-body').innerHTML=`
+    <div class="fg2"><label>Her satır: DERS SAAT</label>
+      <textarea id="lesson-text-edit" rows="12" style="font-family:ui-monospace,Consolas,monospace;font-size:12px;line-height:1.6">${plan.map(l=>`${l.subj} ${l.wh}`).join('\n')}</textarea>
+    </div>
+    <div class="m-actions">
+      <button class="btn" onclick="closeM('emodal')">İptal</button>
+      <button class="btn primary" onclick="saveLessonTextEdit(${g})">Aktar</button>
+    </div>`;
+  document.getElementById('emodal').classList.add('open');
+}
+
+function saveLessonTextEdit(g){
+  const rows=(document.getElementById('lesson-text-edit').value||'').split('\n').map(x=>x.trim()).filter(Boolean);
+  const plan=[];
+  for(const line of rows){
+    const m=line.match(/^(.+?)\s+(\d+)$/);
+    if(!m){alert(`Satır okunamadı: ${line}`);return;}
+    plan.push({subj:m[1].trim(),wh:parseInt(m[2])});
+  }
+  GRADE_PLAN[g]=plan;
+  refreshClassPlans();
+  syncSubjectsFromPlans();
+  closeM('emodal');
+  renderLessonPlans();
+}
+
+function refreshClassPlans(){
+  ALL_CLASSES.forEach(cls=>{ CLASS_PLAN[cls]=getPlanForClass(cls); });
+}
+
+function syncSubjectsFromPlans(){
+  const seen=new Set(SUBJECTS);
+  Object.values(GRADE_PLAN).flat().forEach(l=>{if(!seen.has(l.subj)){SUBJECTS.push(l.subj);seen.add(l.subj);}});
+  teachers.forEach(t=>(t.assignments||[]).forEach(a=>{if(!seen.has(a.subj)){SUBJECTS.push(a.subj);seen.add(a.subj);}}));
+}
+
+function renderClassesManage(){
+  document.getElementById('class-manage-body').innerHTML=ALL_CLASSES.map(cls=>`
+    <tr>
+      <td style="padding:8px 10px;font-weight:700">${cls}</td>
+      <td style="padding:8px 10px"><button class="btn danger mini" onclick="deleteClass('${cls}')">Sil</button></td>
+    </tr>`).join('');
+}
+
+function addClassRow(){
+  document.getElementById('emodal-title').textContent='Sınıf Ekle';
+  document.getElementById('emodal-body').innerHTML=`
+    <div class="fg2"><label>Sınıf Düzeyi</label><select id="new-class-grade">${GRADES.map(g=>`<option value="${g}">${g}</option>`).join('')}</select></div>
+    <div class="fg2"><label>Şube</label><select id="new-class-section">${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').slice(0,12).map(s=>`<option value="${s}">${s}</option>`).join('')}</select></div>
+    <div class="m-actions">
+      <button class="btn" onclick="closeM('emodal')">İptal</button>
+      <button class="btn primary" onclick="saveNewClass()">Ekle</button>
+    </div>`;
+  document.getElementById('emodal').classList.add('open');
+}
+
+function saveNewClass(){
+  const cls=`${document.getElementById('new-class-grade').value}-${document.getElementById('new-class-section').value}`;
+  if(!ALL_CLASSES.includes(cls)) ALL_CLASSES.push(cls);
+  ALL_CLASSES.sort((a,b)=>a.localeCompare(b,'tr',{numeric:true}));
+  refreshClassPlans();
+  closeM('emodal');
+  renderClassesManage();
+}
+
+function deleteClass(cls){
+  if(!confirm(`${cls} silinsin mi?`)) return;
+  ALL_CLASSES=ALL_CLASSES.filter(c=>c!==cls);
+  delete CLASS_PLAN[cls];
+  teachers.forEach(t=>{t.assignments=(t.assignments||[]).filter(a=>a.cls!==cls);});
+  Object.keys(schedule).forEach(k=>{if(schedule[k]?.cls===cls) delete schedule[k];});
+  renderClassesManage(); renderTable();
+}
+
+function renderSubjectsManage(){
+  const root=document.getElementById('subject-manage-list');
+  root.innerHTML=SUBJECTS.map(s=>`
+    <div class="t-card subject-edit-row" data-old="${s}">
+      <div class="fg2" style="margin-bottom:0"><label>Ders Adı</label><input class="subject-name" value="${s}"></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="btn danger mini" onclick="deleteSubject('${s}')">Sil</button></div>
+    </div>`).join('');
+}
+
+function addSubjectRow(){
+  document.getElementById('subject-manage-list').insertAdjacentHTML('beforeend',`
+    <div class="t-card subject-edit-row" data-old="">
+      <div class="fg2" style="margin-bottom:0"><label>Ders Adı</label><input class="subject-name" value="YENİ DERS"></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="btn danger mini" onclick="this.closest('.subject-edit-row').remove()">Sil</button></div>
+    </div>`);
+}
+
+function saveSubjects(){
+  const rows=Array.from(document.querySelectorAll('.subject-edit-row'));
+  const renameMap={};
+  const next=[];
+  rows.forEach(row=>{
+    const old=row.dataset.old;
+    const name=row.querySelector('.subject-name').value.trim();
+    if(!name) return;
+    if(old&&old!==name) renameMap[old]=name;
+    if(!next.includes(name)) next.push(name);
+  });
+  Object.entries(renameMap).forEach(([oldName,newName])=>renameSubject(oldName,newName));
+  SUBJECTS=next;
+  syncSubjectsFromPlans();
+  renderSubjectsManage();
+  showAlert('Ders adları kaydedildi.','ok');
+}
+
+function renameSubject(oldName,newName){
+  Object.values(GRADE_PLAN).forEach(plan=>plan.forEach(l=>{if(l.subj===oldName) l.subj=newName;}));
+  Object.values(CLASS_PLAN).forEach(plan=>plan.forEach(l=>{if(l.subj===oldName) l.subj=newName;}));
+  teachers.forEach(t=>{
+    t.subjects=(t.subjects||[]).map(s=>s===oldName?newName:s);
+    (t.assignments||[]).forEach(a=>{if(a.subj===oldName) a.subj=newName;});
+  });
+  Object.values(schedule).forEach(c=>{if(c&&c.subj===oldName) c.subj=newName;});
+}
+
+function deleteSubject(subj){
+  if(!confirm(`${subj} dersi silinsin mi?`)) return;
+  SUBJECTS=SUBJECTS.filter(s=>s!==subj);
+  Object.values(GRADE_PLAN).forEach(plan=>{
+    for(let i=plan.length-1;i>=0;i--) if(plan[i].subj===subj) plan.splice(i,1);
+  });
+  refreshClassPlans();
+  teachers.forEach(t=>{
+    t.subjects=(t.subjects||[]).filter(s=>s!==subj);
+    t.assignments=(t.assignments||[]).filter(a=>a.subj!==subj);
+  });
+  renderSubjectsManage();
+}
+
+function renderDistribution(){
+  const rows=[];
+  teachers.forEach(t=>(t.assignments||[]).filter(a=>a.manual).forEach(a=>rows.push({tid:t.id,...a})));
+  document.getElementById('distribution-body').innerHTML=rows.map(r=>distributionRowHtml(r.tid,r.cls,r.subj,r.wh)).join('');
+}
+
+function distributionRowHtml(tid=teachers[0]?.id,cls=ALL_CLASSES[0],subj=SUBJECTS[0],wh=1){
+  const teacherOpts=teachers.map(t=>`<option value="${t.id}"${t.id===tid?' selected':''}>${t.name}</option>`).join('');
+  const clsOpts=ALL_CLASSES.map(c=>`<option value="${c}"${c===cls?' selected':''}>${c}</option>`).join('');
+  const subjOpts=SUBJECTS.map(s=>`<option value="${s}"${s===subj?' selected':''}>${s}</option>`).join('');
+  return `<tr class="dist-row">
+    <td style="padding:7px"><select class="dist-teacher">${teacherOpts}</select></td>
+    <td style="padding:7px"><select class="dist-class">${clsOpts}</select></td>
+    <td style="padding:7px"><select class="dist-subj">${subjOpts}</select></td>
+    <td style="padding:7px"><input class="dist-wh" type="number" min="1" max="10" value="${wh}" style="width:70px"></td>
+    <td style="padding:7px"><button class="btn danger mini" onclick="this.closest('.dist-row').remove()">Sil</button></td>
+  </tr>`;
+}
+
+function addDistributionRow(){
+  document.getElementById('distribution-body').insertAdjacentHTML('beforeend',distributionRowHtml());
+}
+
+function saveDistribution(){
+  teachers.forEach(t=>{t.assignments=(t.assignments||[]).filter(a=>!a.manual);});
+  const rows=Array.from(document.querySelectorAll('#distribution-body .dist-row'));
+  rows.forEach(row=>{
+    const tid=parseInt(row.querySelector('.dist-teacher').value);
+    const t=teachers.find(x=>x.id===tid);
+    if(!t) return;
+    const a={cls:row.querySelector('.dist-class').value,subj:row.querySelector('.dist-subj').value,wh:parseInt(row.querySelector('.dist-wh').value)||1,manual:true};
+    t.assignments.push(a);
+    if(!t.subjects.includes(a.subj)) t.subjects.push(a.subj);
+  });
+  showAlert('Ders dağıtımı kaydedildi.','ok');
+  renderDistribution();
+  renderTeachers();
+}
+
+function renderTeachers(){
+  document.getElementById('t-list').innerHTML=teachers.map(t=>`
+    <div class="t-card">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:3px">
+        <div class="t-nm" onclick="openQA(${t.id})">${t.name}</div>
+        <div style="display:flex;gap:5px">
+          <button class="btn" style="font-size:10px;padding:3px 8px" onclick="openEditT(${t.id})">Düzenle</button>
+          <button class="btn danger" style="font-size:10px;padding:3px 8px" onclick="deleteT(${t.id})">Sil</button>
+        </div>
+      </div>
+      <div class="t-meta">${t.hours} saat/hafta</div>
+      <div>${(t.subjects||[]).map(s=>`<span class="badge bl">${s}</span>`).join('')}</div>
+      <div style="margin-top:4px">${(t.assignments||[]).filter(a=>a.manual).map(a=>`<span class="badge gr">${a.cls} ${a.subj}(${a.wh})</span>`).join('')}</div>
+    </div>`).join('');
+}
+function openAddT(){document.getElementById('tmodal-title').textContent='Öğretmen Ekle';document.getElementById('tmodal-body').innerHTML=tForm({});document.getElementById('tmodal').classList.add('open');}
+function openEditT(id){const t=teachers.find(x=>x.id===id);document.getElementById('tmodal-title').textContent='Düzenle';document.getElementById('tmodal-body').innerHTML=tForm(t,id);document.getElementById('tmodal').classList.add('open');}
+function tForm(t,id){
+  const selected=new Set(t.subjects||[]);
+  const subjectBoxes=SUBJECTS.map(s=>`<label class="subject-choice"><input type="checkbox" class="f-subj-cb" value="${s}"${selected.has(s)?' checked':''}> ${s}</label>`).join('');
+  return `<div class="fg2"><label>Ad Soyad</label><input id="f-name" value="${t.name||''}"></div>
+    <div class="fg2"><label>Haftalık saat</label><input id="f-hours" type="number" value="${t.hours||22}" style="width:80px"></div>
+    <div class="fg2"><label>Girebildiği Dersler</label><div class="subject-pick">${subjectBoxes}</div></div>
+    <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">Bu ekranda yalnızca öğretmen bilgisi düzenlenir. Sınıf-ders ataması için Ders Dağıtımı bölümünü kullanın.</div>
+    <div class="m-actions">
+      <button class="btn" onclick="closeM('tmodal')">İptal</button>
+      <button class="btn primary" onclick="saveT(${id||'null'})">${id?'Güncelle':'Ekle'}</button>
+    </div>`;
+}
+function saveT(id){
+  const name=document.getElementById('f-name').value.trim(); if(!name) return;
+  const subjects=Array.from(document.querySelectorAll('.f-subj-cb:checked')).map(x=>x.value);
+  const old=teachers.find(x=>x.id===id);
+  const assignments=old?(old.assignments||[]).filter(a=>a.manual):[];
+  const data={name,hours:parseInt(document.getElementById('f-hours').value)||0,
+    subjects,assignments};
+  if(id){Object.assign(teachers.find(x=>x.id===id),data);}
+  else{data.id=Math.max(0,...teachers.map(t=>t.id))+1;teachers.push(data);}
+  closeM('tmodal'); renderTeachers();
+}
+function deleteT(id){
+  if(!confirm('Silmek istiyor musunuz?')) return;
+  teachers=teachers.filter(t=>t.id!==id);
+  Object.keys(schedule).forEach(k=>{if(k.startsWith(id+'_')) delete schedule[k];});
+  renderTeachers(); renderTable();
+}
+function saveSettings(){
+  settings.hoursPerDay=parseInt(document.getElementById('set-hours').value)||7;
+  settings.days=[];
+  document.querySelectorAll('[data-day]').forEach(cb=>{if(cb.checked) settings.days.push(parseInt(cb.dataset.day));});
+  renderTable(); showAlert('Kaydedildi.','ok');
+}
+function exportCSV(){
+  const H=settings.hoursPerDay;
+  const header=['Öğretmen',...settings.days.flatMap(d=>Array.from({length:H},(_,h)=>`${DAYS[d]} ${h+1}.Saat`))];
+  const rows=[header,...teachers.map(t=>[t.name,...settings.days.flatMap(d=>Array.from({length:H},(_,h)=>{const c=schedule[`${t.id}_${d}_${h}`];return c?`${c.cls} ${c.subj}`:'';})) ])];
+  const csv='\uFEFF'+rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='ders_programi.csv';a.click();
+}
+function showAlert(msg,type){
+  const el=document.getElementById('alert-area');
+  el.innerHTML=`<div class="alert ${type}">${msg}</div>`;
+  setTimeout(()=>el.innerHTML='',4000);
+}
+
+let googleClientId='';
+let currentUser=null;
+
+function programState(){
+  return {
+    teachers,
+    subjects:SUBJECTS,
+    classes:ALL_CLASSES,
+    gradePlan:GRADE_PLAN,
+    teacherUnavailable,
+    settings
+  };
+}
+
+function applyProgramState(data){
+  if(!data||typeof data!=='object') return;
+  if(Array.isArray(data.subjects)) SUBJECTS=data.subjects;
+  if(Array.isArray(data.classes)) ALL_CLASSES=data.classes;
+  if(data.gradePlan) {
+    Object.keys(GRADE_PLAN).forEach(k=>delete GRADE_PLAN[k]);
+    Object.entries(data.gradePlan).forEach(([k,v])=>GRADE_PLAN[k]=v);
+  }
+  if(Array.isArray(data.teachers)) teachers=data.teachers;
+  if(data.teacherUnavailable) teacherUnavailable=data.teacherUnavailable;
+  if(data.settings) settings=data.settings;
+  refreshClassPlans();
+  renderTable();
+  renderTeachers();
+  if(document.getElementById('view-class').classList.contains('active')) renderClassView();
+  if(document.getElementById('view-lessons').classList.contains('active')) renderLessonPlans();
+  if(document.getElementById('view-distribution').classList.contains('active')) renderDistribution();
+}
+
+async function apiFetch(path,options={}){
+  const res=await fetch(path,{credentials:'include',headers:{'Content-Type':'application/json',...(options.headers||{})},...options});
+  if(!res.ok){
+    let msg='İşlem başarısız';
+    try{const body=await res.json(); msg=body.error||msg;}catch(_){}
+    throw new Error(msg);
+  }
+  return res.json();
+}
+
+async function initCloudAuth(){
+  try{
+    const config=await apiFetch('/api/program/config');
+    googleClientId=config.googleClientId||'';
+    const me=await apiFetch('/api/program/me');
+    setAuthUser(me.user||null);
+    if(me.user) await loadCloudData(true);
+  }catch(_){
+    setAuthUser(null);
+  }
+  if(window.google&&googleClientId){
+    google.accounts.id.initialize({client_id:googleClientId,callback:onGoogleCredential});
+    google.accounts.id.renderButton(document.getElementById('google-login'),{theme:'outline',size:'medium',text:'signin_with'});
+  } else {
+    document.getElementById('google-login').innerHTML='<span class="auth-user on">Google Client ID eksik</span>';
+  }
+}
+
+async function onGoogleCredential(response){
+  try{
+    const data=await apiFetch('/api/program/auth/google',{method:'POST',body:JSON.stringify({credential:response.credential})});
+    setAuthUser(data.user);
+    await loadCloudData(true);
+  }catch(err){
+    showAlert(err.message,'warn');
+  }
+}
+
+function setAuthUser(user){
+  currentUser=user;
+  const label=document.getElementById('auth-user');
+  const logout=document.getElementById('logout-btn');
+  if(user){
+    label.textContent=user.email||user.name||'Giriş yapıldı';
+    label.classList.add('on');
+    logout.style.display='';
+  } else {
+    label.textContent='';
+    label.classList.remove('on');
+    logout.style.display='none';
+  }
+}
+
+async function loadCloudData(silent=false){
+  if(!currentUser&&!silent){showAlert('Önce Google ile giriş yapın.','warn');return;}
+  try{
+    const data=await apiFetch('/api/program/data');
+    if(data.programData) applyProgramState(data.programData);
+    if(!silent) showAlert('Kayıtlar yüklendi.','ok');
+  }catch(err){
+    if(!silent) showAlert(err.message,'warn');
+  }
+}
+
+async function saveCloudData(){
+  if(!currentUser){showAlert('Önce Google ile giriş yapın.','warn');return;}
+  try{
+    await apiFetch('/api/program/data',{method:'PUT',body:JSON.stringify({programData:programState()})});
+    showAlert('Kayıtlar hesabınıza kaydedildi.','ok');
+  }catch(err){
+    showAlert(err.message,'warn');
+  }
+}
+
+async function logoutCloud(){
+  try{await apiFetch('/api/program/logout',{method:'POST',body:'{}'});}catch(_){}
+  setAuthUser(null);
+  showAlert('Çıkış yapıldı.','ok');
+}
+
+renderTable();
+setTimeout(initCloudAuth,600);
+</script>
+</body>
+</html>
+
