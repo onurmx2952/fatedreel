@@ -1,0 +1,80 @@
+﻿RUN START: 2026-06-25T15:23:51.0819005+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Automation: fatedreel-url-ekleme
+Schedule: FREQ=HOURLY;INTERVAL=6
+Previous log: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-24-091431.log
+Previous log mtime: 2026-06-24T09:21:47.4873073+03:00
+Previous log age minutes: 1802.1
+Son 6 saatte calisma: YOK
+--- INDEXNOW RUN ---
+IndexNow status: 200
+Submitted URLs: 3124
+IndexNow exit code: 0
+--- LOG PATH ---
+C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-25-152351.log
+--- CHROME / WEBMASTER ACCESS CHECK ---
+Chrome extension visible tabs: chrome://downloads only; Google/Bing/Yandex webmaster tabs not visible to automation in this run.
+CDP 127.0.0.1:9222: unavailable / timed out.
+Result: Google/Bing/Yandex live UI submission was not attempted in this run to avoid blind clicking.
+--- PREVIOUS WEBMASTER STATUS SNAPSHOT ---
+[Google: live URL]
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+[Bing: URL Submission]
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+[Yandex: Reindex]
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+[Kota]
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+[quota]
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+Google: not live-submitted this run; previous live blocker daily quota exceeded at https://fatedreel.com/tt0248845; no CAPTCHA/MFA/login observed then.
+Bing: not live-submitted this run; previous live blocker URL Submission quota 0/100, 100 submitted today; no CAPTCHA/MFA/login observed then.
+[daily limit]
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+[CAPTCHA]
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Google: not live-submitted this run; previous live blocker daily quota exceeded at https://fatedreel.com/tt0248845; no CAPTCHA/MFA/login observed then.
+Bing: not live-submitted this run; previous live blocker URL Submission quota 0/100, 100 submitted today; no CAPTCHA/MFA/login observed then.
+Yandex: not live-submitted this run; previous live blocker daily reindex limit 150 reached; no CAPTCHA/MFA/login observed then.
+[MFA]
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Google: not live-submitted this run; previous live blocker daily quota exceeded at https://fatedreel.com/tt0248845; no CAPTCHA/MFA/login observed then.
+Bing: not live-submitted this run; previous live blocker URL Submission quota 0/100, 100 submitted today; no CAPTCHA/MFA/login observed then.
+Yandex: not live-submitted this run; previous live blocker daily reindex limit 150 reached; no CAPTCHA/MFA/login observed then.
+[login]
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+Google: not live-submitted this run; previous live blocker daily quota exceeded at https://fatedreel.com/tt0248845; no CAPTCHA/MFA/login observed then.
+Bing: not live-submitted this run; previous live blocker URL Submission quota 0/100, 100 submitted today; no CAPTCHA/MFA/login observed then.
+Yandex: not live-submitted this run; previous live blocker daily reindex limit 150 reached; no CAPTCHA/MFA/login observed then.
+--- FINAL SUMMARY ---
+Previous log within last 6 hours: NO.
+IndexNow: status 200; submitted URLs 3124.
+Google: not live-submitted this run; last known live blocker daily quota exceeded at https://fatedreel.com/tt0248845; no CAPTCHA/MFA/login observed then.
+Bing: not live-submitted this run; last known live blocker URL Submission quota 0/100, 100 submitted today; no CAPTCHA/MFA/login observed then.
+Yandex: not live-submitted this run; last known live blocker daily reindex limit 150 reached; no CAPTCHA/MFA/login observed then.
+RUN END: 2026-06-25T15:26:39.6213055+03:00

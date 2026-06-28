@@ -1,0 +1,87 @@
+﻿RUN START: 2026-06-23T21:18:44.5261484+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Automation: fatedreel-url-ekleme
+Schedule: FREQ=HOURLY;INTERVAL=6
+Previous log: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-23-151317.log
+Previous log mtime: 2026-06-23T15:21:57.7363960+03:00
+Previous log age minutes: 356.78
+Son 6 saatte calisma: VAR
+--- INDEXNOW RUN ---
+IndexNow status: 200
+Submitted URLs: 3124
+IndexNow exit code: 0
+--- LOG PATH ---
+C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-23-211844.log
+--- CHROME EXTENSION TAB CHECK ---
+Extension visible tabs: chrome://downloads only; webmaster tabs not visible in extension session.
+--- CDP CHECK ---
+CDP unavailable on 127.0.0.1:9222: Uzak sunucuya bağlanılamıyor
+--- PREVIOUS WEBMASTER STATUS SNAPSHOT ---
+[Google]
+  "google": {
+GOOGLE SUCCESS URLS UNIQUE 2026-06-23T03:48:55.910Z: [
+Google: önceki canlı tarayıcı akışında kota aşıldı; son takılan URL https://fatedreel.com/tt0248845.
+Google: last known blocker quota exceeded at https://fatedreel.com/tt0248845; live browser submission not attempted in this heartbeat unless authenticated Chrome is available.
+        "url":  "https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com\u0026id=k57_JqrfP8CvlhlZc_Pgcw\u0026alt_id=q0FJtYMH--NDsOJ96EXcxw"
+Chrome tabs detected: Google Search Console, Bing Webmaster Tools, Yandex Webmaster.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+[Bing]
+  "bing": {
+    "excerpt": "îœ€\nSkip to main content\nîœ’\nURL Submission\nSubmit URLs\nïˆ\nDid you know?\nYou can automate URL submission by using our IndexNow API or Submission API and stay updated on Microsoft Bing!\nSubmitted Urls list\nDownload allî¢–\nîœ¹\nselect all items\nURL\nSubmitted\nî¹©\nAction\nîœ¹\nhttps://fatedreel.com/tt0283900\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0286516\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0287803\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0291172\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0292242\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0291350\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0285441\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0283832\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0281718\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0282698\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0286261\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fatedreel.com/tt0284363\nî£ˆ\nïŸ\nîœ¡\nYesterday at 17:17\nïŠ¼\nîœ¹\nhttps://fa"
+Bing: Webmaster URL Submission kotası 0/100 görünüyordu; IndexNow ayrıca çalıştırıldı.
+Bing: last known URL Submission quota 0/100; IndexNow executed above.
+        "title":  "URL Submission - Bing Webmaster Tools",
+        "url":  "https://www.bing.com/webmasters/submiturl?siteUrl=https://fatedreel.com/"
+Chrome tabs detected: Google Search Console, Bing Webmaster Tools, Yandex Webmaster.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+[Yandex]
+  "yandex": {
+Yandex: Reindex daily limit 150 dolu görünüyordu; IndexNow ayrıca çalıştırıldı.
+Yandex: last known Reindex daily limit 150 reached; IndexNow executed above.
+        "title":  "Reindex pages — https://fatedreel.com — Yandex Webmaster",
+        "url":  "https://webmaster.yandex.com/site/https:fatedreel.com:443/indexing/reindex/"
+Chrome tabs detected: Google Search Console, Bing Webmaster Tools, Yandex Webmaster.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+[quota]
+    "status": "quota_or_block",
+    "status": "quota_exceeded",
+    "quotaText": "Kota AÅŸÄ±ldÄ±"
+    "status": "quota_0_or_100_submitted",
+Google: last known blocker quota exceeded at https://fatedreel.com/tt0248845; live browser submission not attempted in this heartbeat unless authenticated Chrome is available.
+Bing: last known URL Submission quota 0/100; IndexNow executed above.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+[kota]
+    "detail": "Kota AÅŸÄ±ldÄ±"
+    "quotaText": "Kota AÅŸÄ±ldÄ±"
+Google: önceki canlı tarayıcı akışında kota aşıldı; son takılan URL https://fatedreel.com/tt0248845.
+Bing: Webmaster URL Submission kotası 0/100 görünüyordu; IndexNow ayrıca çalıştırıldı.
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+[IndexNow]
+IndexNow status: 200
+Bundled Python IndexNow exit code: 0
+--- INDEXNOW RUN ---
+IndexNow status: 200
+IndexNow exit code: 0
+Bing: last known URL Submission quota 0/100; IndexNow executed above.
+Yandex: last known Reindex daily limit 150 reached; IndexNow executed above.
+IndexNow: already run in this heartbeat; status 200; submitted URLs 3124.
+[CAPTCHA]
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+[MFA]
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+[login]
+Google: live URL https://fatedreel.com/tt0248845 was usable/indexable; indexing request attempted; blocker: Kota Aşıldı / daily quota exceeded. No CAPTCHA/MFA/login blocker observed.
+Bing: URL Submission page reachable; quota left for today: 0; URLs submitted today: 100; reset shown in ~12 hrs. No CAPTCHA/MFA/login blocker observed.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+[limit]
+    "status": "daily_limit_reached",
+    "excerpt": "Summary\nWebsite optimization\nEfficiency\nIndexing\nTools\nDisplay in the search\nLinks\nTutorials\nUseful services\n7\n11\nReindex pages\nAdd URL to your list of important pages in order to track its indexing and get notified about changes to its status in Search. Find out more\nYour daily limit is 150 URLs per site, including the main domain and all subdomains.\nYou have reached your daily limit of added URLs.\nSend\nSent pages\nUpdatesÂ aren't immediate. They appear afterÂ aÂ few database refreshes.\nPage URL\tStatus\tSent\t\nhttps://fatedreel.com/tt0292242\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0292542\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0293416\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0293508\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0294870\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0296166\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n\nhttps://fatedreel.com/tt0297721\t\nIn queue\n\t06/22/2026 5:02 PM\t\nTrack\n"
+Yandex: Reindex daily limit 150 dolu görünüyordu; IndexNow ayrıca çalıştırıldı.
+Yandex: last known Reindex daily limit 150 reached; IndexNow executed above.
+Yandex: Reindex page reachable; blocker: daily limit reached (150 URLs per site). No CAPTCHA/MFA/login blocker observed.
+RUN END: 2026-06-23T21:21:31.2701820+03:00

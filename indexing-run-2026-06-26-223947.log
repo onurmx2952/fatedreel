@@ -1,0 +1,40 @@
+﻿RUN START: 2026-06-26T22:39:47.5805637+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Automation: fatedreel-url-ekleme
+Schedule note: recurring FatedReel indexing workflow; run IndexNow and check authenticated webmaster console availability.
+Last run noted by scheduler: 2026-06-25T16:33:33.651Z (1782405213651)
+Memory file: C:\Users\aa\.codex\automations\fatedreel-url-ekleme\memory.md
+Previous automation memory: missing
+
+--- INDEXNOW DISCOVERY ---
+submit_indexnow.py present: True
+IndexNow key file present: True
+Sitemap present: True
+Command: python .\submit_indexnow.py
+--- INDEXNOW OUTPUT ---
+Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Apps > Advanced app settings > App execution aliases.
+IndexNow exit code: 9009
+--- INDEXNOW RETRY OUTPUT ---
+Command: C:\Users\aa\AppData\Local\Python\bin\python.exe .\submit_indexnow.py
+IndexNow status: 200
+Submitted URLs: 3124
+IndexNow retry exit code: 0
+--- WEBMASTER CONSOLE ACCESS CHECK ---
+Chrome extension/node_repl control tool discovery: BLOCKED; tool_search for 'node_repl js' returned 0 tools.
+CDP 127.0.0.1:9222: BLOCKED/unavailable; Uzak sunucuya bağlanılamıyor
+Eligible movie URLs in sitemap: 3123
+Next eligible candidate from local batch/sitemap: https://fatedreel.com/tt0281718
+Google Search Console: BLOCKED; no authenticated controllable browser/session available to this job. No live test or request indexing attempted.
+Bing Webmaster Tools: BLOCKED for UI submission; no authenticated controllable browser/session available to this job. IndexNow API submission already succeeded.
+Yandex Webmaster: BLOCKED for UI submission; no authenticated controllable browser/session available to this job. IndexNow API submission already succeeded.
+Last attempted webmaster URL: NONE (blocked before live inspection/request). Candidate for next available authenticated run: https://fatedreel.com/tt0281718
+--- FINAL SUMMARY ---
+IndexNow/Bing-Yandex API: submitted 3124 URLs; final HTTP/status result 200; final exit code 0. Initial command 'python .\submit_indexnow.py' failed because Windows Store alias intercepted python (exit 9009); retried with C:\Users\aa\AppData\Local\Python\bin\python.exe successfully.
+Google Search Console: 0 requested; BLOCKED because no authenticated controllable browser/session was available.
+Bing Webmaster Tools UI: 0 requested; BLOCKED because no authenticated controllable browser/session was available; IndexNow API succeeded.
+Yandex Webmaster UI: 0 requested; BLOCKED because no authenticated controllable browser/session was available; IndexNow API succeeded.
+Last attempted URL: NONE for webmaster UI; next candidate recorded as https://fatedreel.com/tt0281718.
+Quota/blocker status: no live console quotas checked this run; blocked before UI access by missing browser automation/session.
+Site files edited: NO. Technical indexing blocker found: NO.
+Log file path: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-26-223947.log
+RUN END: 2026-06-26T22:41:17.6112820+03:00
