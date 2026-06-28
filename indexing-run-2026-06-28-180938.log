@@ -1,0 +1,37 @@
+﻿Run start: 2026-06-28T18:09:38.9063848+03:00
+Cwd: C:\Users\aa\Documents\github\fatedreel
+Automation: FatedReel URL ekleme (fatedreel-url-ekleme)
+Schedule note: recurring indexing workflow; create fresh log, run IndexNow, then verify live webmaster console availability.
+Previous log: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-28-180627.log
+Previous log mtime: 2026-06-28T18:07:50.4278045+03:00
+Son 6 saatte calisma: VAR
+Site edits: none planned unless a clear technical indexing blocker is found.
+
+IndexNow submission:
+Command: C:\Users\aa\AppData\Local\Python\bin\python.exe .\submit_indexnow.py
+  IndexNow status: 200
+  Submitted URLs: 3124
+Exit code: 0
+Sitemap URL count: 3124
+Sitemap movie URL count: 3123
+Next candidate URL: https://fatedreel.com/tt0281718
+
+Browser/control availability check:
+CDP 127.0.0.1:9222: BLOCKED - Uzak sunucuya bağlanılamıyor
+Webmaster console status:
+Google Search Console: BLOCKED - Chrome open-tabs check found no existing Search Console tab; CDP 127.0.0.1:9222 was unreachable (Uzak sunucuya bağlanılamıyor); direct URL Inspection deep link returned Google 404; subsequent Search Console property probe timed out and reset browser control before authentication/session state could be verified.
+Bing Webmaster Tools: BLOCKED - no existing Bing Webmaster tab was available in Chrome; CDP 127.0.0.1:9222 was unreachable (Uzak sunucuya bağlanılamıyor); browser control became unstable/timed out during webmaster-console probing before Bing authentication/session state could be verified.
+Yandex Webmaster: BLOCKED - no existing Yandex Webmaster tab was available in Chrome; CDP 127.0.0.1:9222 was unreachable (Uzak sunucuya bağlanılamıyor); browser control became unstable/timed out during webmaster-console probing before Yandex authentication/session state could be verified.
+Chrome cleanup/finalize: BLOCKED - finalize attempt timed out and reset browser control.
+
+Final summary:
+IndexNow submitted/requested: 3124 URLs; HTTP/status result: 200; command exit code: 0.
+Google UI indexing requests: 0; status: BLOCKED as above.
+Bing UI indexing requests: 0; status: BLOCKED as above.
+Yandex UI indexing requests: 0; status: BLOCKED as above.
+Last attempted URL: https://fatedreel.com/tt0281718
+Quota/CAPTCHA/login/MFA/security prompt status: not reached; authenticated console state could not be verified this run.
+Technical indexing blocker found: none.
+Site edits: none.
+Run finish: 2026-06-28T18:15:21.6122994+03:00
+Log file: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-28-180938.log

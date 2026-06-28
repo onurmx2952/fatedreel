@@ -1,0 +1,39 @@
+﻿RUN START: 2026-06-28T12:04:04.7290622+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+SCHEDULE NOTE: Automation fatedreel-url-ekleme; every run performs IndexNow plus webmaster-console availability checks.
+AUTOMATION ID: fatedreel-url-ekleme
+LAST RUN PROVIDED: 2026-06-27T09:10:35.358Z (1782551435358)
+
+INDEXNOW: checking required files
+INDEXNOW SCRIPT PRESENT: True
+INDEXNOW KEY FILE PRESENT: True
+INDEXNOW COMMAND: python .\submit_indexnow.py
+INDEXNOW OUTPUT BEGIN
+IndexNow status: 200
+Submitted URLs: 3124
+INDEXNOW OUTPUT END
+INDEXNOW EXIT CODE: 0
+INDEXNOW STATUS SUMMARY: IndexNow status: 200
+INDEXNOW SUBMITTED URL COUNT SUMMARY: Submitted URLs: 3124
+INDEXNOW FAILURES: none observed.
+
+LOG PATH: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-28-120404.log
+--- WEBMASTER CONSOLE ACCESS CHECK ---
+Chrome extension/browser session: AVAILABLE for general Chrome control; session named FatedReel indexing.
+Eligible movie URLs in sitemap: 3123
+Next eligible candidate from local batch/sitemap: https://fatedreel.com/tt0281718
+Google Search Console: BLOCKED; Chrome security policy rejected access to https://search.google.com. Exact reason: Browser use cannot access https://search.google.com because enterprise network policy blocks it. No live test or request indexing attempted.
+Bing Webmaster Tools: BLOCKED for UI submission; Chrome security policy rejected access to https://www.bing.com. Exact reason: Browser use cannot access https://www.bing.com because enterprise network policy blocks it. IndexNow API submission already succeeded.
+Yandex Webmaster: BLOCKED for UI submission; Chrome security policy rejected access to https://webmaster.yandex.com. Exact reason: Browser use cannot access https://webmaster.yandex.com because enterprise network policy blocks it. IndexNow API submission already succeeded.
+Last attempted webmaster URL: NONE (blocked before live inspection/request). Candidate for next available authenticated run: https://fatedreel.com/tt0281718
+
+--- FINAL SUMMARY ---
+IndexNow/Bing-Yandex API: submitted 3124 URLs; final HTTP/status result 200; final exit code 0; failures none observed.
+Google Search Console: 0 requested; BLOCKED by Chrome enterprise network policy before console access.
+Bing Webmaster Tools UI: 0 requested; BLOCKED by Chrome enterprise network policy before console access; IndexNow API status 200.
+Yandex Webmaster UI: 0 requested; BLOCKED by Chrome enterprise network policy before console access; IndexNow API status 200.
+Last attempted URL: NONE for webmaster UI; next candidate recorded as https://fatedreel.com/tt0281718.
+Quota/blocker status: no live console quotas checked this run; blocked before UI access by browser security policy. No CAPTCHA, MFA, security prompt, quota, or daily-limit UI was reached.
+Site files edited: NO. Technical indexing blocker found: NO.
+Log file path: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-28-120404.log
+RUN END: 2026-06-28T12:06:19.3647808+03:00
