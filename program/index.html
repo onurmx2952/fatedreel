@@ -1697,7 +1697,7 @@ async function initCloudAuth(){
     google.accounts.id.initialize({client_id:googleClientId,callback:onGoogleCredential});
     google.accounts.id.renderButton(document.getElementById('google-login'),{theme:'outline',size:'medium',text:'signin_with'});
   } else {
-    document.getElementById('google-login').innerHTML='<span class="auth-user on">Google Client ID eksik</span>';
+    document.getElementById('google-login').innerHTML='<span class="auth-user on">Cloudflare GOOGLE_CLIENT_ID boş</span>';
   }
 }
 

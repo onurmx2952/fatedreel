@@ -66,6 +66,7 @@ async function handleProgramApi(context, requestUrl) {
 
     if (path === '/api/program/auth/google' && request.method === 'POST') {
       requireProgramDb(context);
+      await ensureProgramSchema(context);
       const body = await readJson(request);
       const profile = await verifyGoogleCredential(context, body.credential);
       const user = await upsertProgramUser(context, profile);
@@ -84,6 +85,7 @@ async function handleProgramApi(context, requestUrl) {
 
     if (path === '/api/program/me' && request.method === 'GET') {
       requireProgramDb(context);
+      await ensureProgramSchema(context);
       const user = await getProgramUser(context);
       if (!user) return jsonResponse({ user: null }, 401);
       return jsonResponse({ user });
@@ -91,6 +93,7 @@ async function handleProgramApi(context, requestUrl) {
 
     if (path === '/api/program/data' && request.method === 'GET') {
       requireProgramDb(context);
+      await ensureProgramSchema(context);
       const user = await requireProgramUser(context);
       const row = await context.env.PROGRAM_DB.prepare(
         'SELECT data_json FROM program_data WHERE user_id = ?'
@@ -103,6 +106,7 @@ async function handleProgramApi(context, requestUrl) {
 
     if (path === '/api/program/data' && request.method === 'PUT') {
       requireProgramDb(context);
+      await ensureProgramSchema(context);
       const user = await requireProgramUser(context);
       const body = await readJson(request);
       const programData = body.programData;
@@ -123,6 +127,7 @@ async function handleProgramApi(context, requestUrl) {
 
     if (path === '/api/program/logout' && request.method === 'POST') {
       requireProgramDb(context);
+      await ensureProgramSchema(context);
       const token = getCookie(request, 'program_session');
       if (token) {
         await context.env.PROGRAM_DB.prepare(
@@ -148,6 +153,39 @@ function requireProgramDb(context) {
     error.status = 500;
     throw error;
   }
+}
+
+async function ensureProgramSchema(context) {
+  await context.env.PROGRAM_DB.prepare(`
+    CREATE TABLE IF NOT EXISTS program_users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      google_sub TEXT NOT NULL UNIQUE,
+      email TEXT NOT NULL,
+      name TEXT,
+      picture TEXT,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+  `).run();
+
+  await context.env.PROGRAM_DB.prepare(`
+    CREATE TABLE IF NOT EXISTS program_sessions (
+      token_hash TEXT PRIMARY KEY,
+      user_id INTEGER NOT NULL,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      expires_at TEXT NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES program_users(id) ON DELETE CASCADE
+    )
+  `).run();
+
+  await context.env.PROGRAM_DB.prepare(`
+    CREATE TABLE IF NOT EXISTS program_data (
+      user_id INTEGER PRIMARY KEY,
+      data_json TEXT NOT NULL,
+      updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES program_users(id) ON DELETE CASCADE
+    )
+  `).run();
 }
 
 async function verifyGoogleCredential(context, credential) {
