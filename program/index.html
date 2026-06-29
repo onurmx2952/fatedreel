@@ -33,8 +33,8 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .cell{min-width:70px;height:40px;cursor:pointer;vertical-align:middle;transition:background .1s}
 .cell:hover{background:#dbeafe!important}
 .cell-in{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;height:100%}
-.c-cls{font-weight:700;font-size:10px;color:#2563eb}
-.c-sub{font-size:10px;color:#555}
+.c-cls{font-weight:800;font-size:10px;color:#1f2937}
+.c-sub{font-size:10px;color:#374151}
 .conflict{background:#fef2f2!important}
 .conflict .c-cls,.conflict .c-sub{color:#dc2626!important}
 .empty-cell{color:#ddd;font-size:11px}
@@ -44,7 +44,7 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .cls-tbl .hour-col{font-weight:700;font-size:12px;color:#555;background:#f8f9fa;width:50px;position:sticky;left:0;z-index:1}
 .cls-cell{height:52px;vertical-align:middle}
 .cls-cell.empty{color:#ccc;font-size:11px}
-.c-sub2{font-weight:700;font-size:12px;color:#2563eb}
+.c-sub2{font-weight:800;font-size:12px;color:#1f2937}
 .c-tch{font-size:10px;color:#777;margin-top:2px}
 .cls-sel{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
 .cls-btn{padding:5px 13px;border-radius:20px;border:1px solid #d0d0d0;background:#fff;cursor:pointer;font-size:12px;font-weight:500;color:#555}
@@ -657,31 +657,47 @@ function checkConflict(tid,day,hour){
   return n>1;
 }
 
-function pastelColor(key,alpha=0.26){
+function paletteIndex(key){
   let hash=0;
   String(key||'').split('').forEach(ch=>{hash=(hash*31+ch.charCodeAt(0))>>>0;});
-  const palette=[
-    [18,58,82],
-    [42,46,80],
-    [76,34,80],
-    [104,30,78],
-    [132,28,78],
-    [160,25,78],
-    [236,26,83],
-    [268,30,84],
-    [304,28,84],
-    [344,34,84]
+  return hash;
+}
+
+function lessonPalette(subj){
+  const colors=[
+    {bg:'#f4d8cf',bd:'#c98f82'},
+    {bg:'#f5e1b8',bd:'#c4a05f'},
+    {bg:'#dce8c8',bd:'#92a86d'},
+    {bg:'#cfe5d8',bd:'#77a78d'},
+    {bg:'#d7e3cf',bd:'#86a478'},
+    {bg:'#d9dfef',bd:'#8f9fc5'},
+    {bg:'#e5d9ee',bd:'#aa8bc1'},
+    {bg:'#efd8e4',bd:'#c28ba8'},
+    {bg:'#e7ded1',bd:'#aa9276'},
+    {bg:'#d4e1df',bd:'#7aa19b'},
+    {bg:'#ead7cc',bd:'#b98973'},
+    {bg:'#e1e0c6',bd:'#aaa669'},
+    {bg:'#d8d7ee',bd:'#8d8ac3'},
+    {bg:'#eed6d6',bd:'#bd8585'},
+    {bg:'#d4e7e8',bd:'#79a8ab'},
+    {bg:'#e7d8bd',bd:'#ad8f5f'},
+    {bg:'#d9ead3',bd:'#82a875'}
   ];
-  const [hue,sat,light]=palette[hash%palette.length];
-  return `hsla(${hue}, ${sat}%, ${light}%, ${alpha})`;
+  return colors[paletteIndex('ders-'+subj)%colors.length];
+}
+
+function teacherBorder(tid){
+  const colors=['#a36f63','#9a7a3f','#748c55','#5d8b75','#687aa3','#8068a0','#9e6f8d','#8b7b65','#5f8b91','#8c6f99'];
+  return colors[paletteIndex('ogretmen-'+tid)%colors.length];
 }
 
 function lessonStyle(subj,tid){
-  return `background:${pastelColor('ders-'+subj,.38)};border-left:4px solid ${pastelColor('ogretmen-'+tid,.72)}`;
+  const c=lessonPalette(subj);
+  return `background:${c.bg};border-left:5px solid ${teacherBorder(tid)};box-shadow:inset 0 0 0 1px rgba(31,41,55,.04)`;
 }
 
 function teacherStyle(tid){
-  return `background:${pastelColor('ogretmen-'+tid,.24)};box-shadow:inset 4px 0 0 ${pastelColor('ogretmen-'+tid,.68)}`;
+  return `background:#f8fafc;box-shadow:inset 4px 0 0 ${teacherBorder(tid)}`;
 }
 
 function h(text=''){
@@ -720,6 +736,7 @@ function generateSchedule(){
     if(trial.issues.length===0) break;
   }
   schedule=best.schedule;
+  const repaired=repairMissingClassSlots();
 
   renderTable();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
@@ -728,9 +745,100 @@ function generateSchedule(){
   const report=analyzeSchedule();
   const blockIssues=analyzeBlockRulesObject(schedule);
   const msg=report.classIssues.length===0
-    ? `Program oluşturuldu — 24/24 sınıf 35 saat dolu, sınıf boşluğu yok.`
+    ? `Program oluşturuldu — 24/24 sınıf 35 saat dolu, sınıf boşluğu yok.${repaired?` ${repaired} boş saat otomatik tamamlandı.`:''}`
     : `Program oluşturuldu ama ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls}`;
-  showAlert(blockIssues.length===0&&report.classIssues.length===0?`Program olusturuldu - 24/24 sinif 35 saat dolu, dersler blok kuralina uygun.`:msg, blockIssues.length===0&&report.classIssues.length===0?'ok':'warn');
+  showAlert(blockIssues.length===0&&report.classIssues.length===0?`Program olusturuldu - 24/24 sinif 35 saat dolu, dersler blok kuralina uygun.${repaired?` ${repaired} bos saat tamamlandi.`:''}`:msg, blockIssues.length===0&&report.classIssues.length===0?'ok':'warn');
+}
+
+function repairMissingClassSlots(){
+  const teacherLoad=currentTeacherLoad(schedule);
+  let repaired=0;
+  ALL_CLASSES.forEach(cls=>{
+    for(let pass=0;pass<20;pass++){
+      const empty=emptySlotsForClass(cls,schedule);
+      const missing=missingSubjectsForClass(cls,schedule);
+      const subjects=Object.keys(missing).filter(subj=>missing[subj]>0);
+      if(!empty.length||!subjects.length) break;
+      let placed=false;
+      for(const slot of empty){
+        const subj=pickRepairSubject(subjects,missing,cls,slot.d,slot.h);
+        const tid=findRepairTeacher(cls,subj,slot.d,slot.h,teacherLoad);
+        if(!tid) continue;
+        schedule[`${tid}_${slot.d}_${slot.h}`]={cls,subj};
+        teacherLoad[tid]=(teacherLoad[tid]||0)+1;
+        repaired++;
+        placed=true;
+        break;
+      }
+      if(!placed) break;
+    }
+  });
+  return repaired;
+}
+
+function currentTeacherLoad(scheduleObj){
+  const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  Object.keys(scheduleObj).forEach(key=>{
+    const tid=parseInt(key.split('_')[0]);
+    if(load[tid]!==undefined) load[tid]++;
+  });
+  return load;
+}
+
+function emptySlotsForClass(cls,scheduleObj){
+  const slots=[];
+  settings.days.forEach(d=>{
+    for(let h=0;h<settings.hoursPerDay;h++){
+      if(!getClassLessonAt(scheduleObj,cls,d,h)) slots.push({d,h});
+    }
+  });
+  return slots;
+}
+
+function missingSubjectsForClass(cls,scheduleObj){
+  const expected={};
+  (CLASS_PLAN[cls]||[]).forEach(l=>{expected[l.subj]=(expected[l.subj]||0)+(parseInt(l.wh)||0);});
+  const actual={};
+  settings.days.forEach(d=>{
+    for(let h=0;h<settings.hoursPerDay;h++){
+      const lesson=getClassLessonAt(scheduleObj,cls,d,h);
+      if(lesson) actual[lesson.subj]=(actual[lesson.subj]||0)+1;
+    }
+  });
+  Object.keys(expected).forEach(subj=>{expected[subj]-=(actual[subj]||0);});
+  return expected;
+}
+
+function pickRepairSubject(subjects,missing,cls,d,h){
+  const before=getClassLessonAt(schedule,cls,d,h-1);
+  const after=getClassLessonAt(schedule,cls,d,h+1);
+  const neighbor=subjects.find(subj=>(before&&before.subj===subj)||(after&&after.subj===subj));
+  if(neighbor) return neighbor;
+  return subjects.sort((a,b)=>missing[b]-missing[a]||a.localeCompare(b,'tr'))[0];
+}
+
+function findRepairTeacher(cls,subj,d,h,teacherLoad){
+  const manual=teachers.filter(t=>(t.assignments||[]).some(a=>a.manual&&a.cls===cls&&a.subj===subj)).map(t=>t.id);
+  const pools=[
+    [...new Set([...manual,...getTeacherPool(subj)])],
+    teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id),
+    teachers.map(t=>t.id)
+  ];
+  for(const pool of pools){
+    const candidates=pool.filter(tid=>{
+      if(schedule[`${tid}_${d}_${h}`]) return false;
+      if(isTeacherUnavailable(tid,d,h)) return false;
+      return teachers.some(t=>t.id===tid);
+    });
+    if(candidates.length){
+      candidates.sort((a,b)=>(teacherLoad[a]||0)-(teacherLoad[b]||0));
+      const tid=candidates[0];
+      const teacher=teachers.find(t=>t.id===tid);
+      if(teacher&&!teacher.subjects.includes(subj)) teacher.subjects.push(subj);
+      return tid;
+    }
+  }
+  return null;
 }
 
 function normalizeTeacherAssignments(){
