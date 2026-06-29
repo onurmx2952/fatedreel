@@ -482,8 +482,8 @@ let teachers = [
   {id:26, name:'Cemal Kurt',           subjects:['ING'],
    assignments: makeAssignments([{cls:'5-F',subj:'ING'},{cls:'7-F',subj:'ING'},{cls:'8-F',subj:'ING'}])},
   // SOSYAL
-  {id:27, name:'Nehir Şimşek',            subjects:['SOSYAL','REH'],
-   assignments: makeAssignments([{cls:'5-A',subj:'SOSYAL'},{cls:'5-B',subj:'SOSYAL'},{cls:'5-C',subj:'SOSYAL'},{cls:'5-A',subj:'REH'}])},
+  {id:27, name:'Nehir Şimşek',            subjects:['SOSYAL'],
+   assignments: makeAssignments([{cls:'5-A',subj:'SOSYAL'},{cls:'5-B',subj:'SOSYAL'},{cls:'5-C',subj:'SOSYAL'}])},
   {id:28, name:'Alperen Uslu',     subjects:['INK.TAR'],
    assignments: makeAssignments([{cls:'8-A',subj:'INK.TAR'},{cls:'8-B',subj:'INK.TAR'},{cls:'8-C',subj:'INK.TAR'},{cls:'8-D',subj:'INK.TAR'},{cls:'8-E',subj:'INK.TAR'},{cls:'8-F',subj:'INK.TAR'}])},
   {id:29, name:'Damla Ekinci',         subjects:['SOSYAL'],
@@ -591,7 +591,7 @@ const SUBJECT_TEACHER_POOLS={
   'SEÇİNG':[19,20,21,22,23,24,25,26],
   'SEÇİMA':[6,7,8,9,10,11,12,13],
   'BLÜM':[14,15,16,17,18],
-  'REH':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42]
+  'REH':[]
 };
 
 seedDefaultDistribution();
@@ -816,8 +816,8 @@ function pickRepairSubject(subjects,missing,cls,d,h){
 function findRepairTeacher(cls,subj,d,h,teacherLoad){
   const manual=teachers.filter(t=>(t.assignments||[]).some(a=>a.manual&&a.cls===cls&&a.subj===subj)).map(t=>t.id);
   const pools=[
-    [...new Set([...manual,...getTeacherPool(subj)])],
-    teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id),
+    [...new Set([...manual,...getTeacherPoolForClass(cls,subj)])],
+    subj==='REH'?getTeacherPoolForClass(cls,subj):teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id),
     teachers.map(t=>t.id)
   ];
   for(const pool of pools){
@@ -855,7 +855,8 @@ function normalizeTeacherAssignments(){
     CLASS_PLAN[cls].forEach(({subj,wh})=>{
       const key=`${cls}|${subj}`;
       const manualTid=manual[key];
-      const pool=manualTid&&byId[manualTid]?[manualTid]:getTeacherPool(subj).filter(id=>byId[id]);
+      const manualOk=manualTid&&byId[manualTid]&&(subj!=='REH'||teacherHasClassLesson(manualTid,cls));
+      const pool=manualOk?[manualTid]:getTeacherPoolForClass(cls,subj).filter(id=>byId[id]);
       if(!pool.length) return;
       const tid=pool.reduce((best,id)=>plannedLoad[id]<plannedLoad[best]?id:best,pool[0]);
       plannedLoad[tid]+=wh;
@@ -895,8 +896,8 @@ function seedDefaultDistribution(){
     normalizeClassPlanTo35(cls);
     (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
       const key=`${cls}|${subj}`;
-      const preferred=(prefs[key]||[]).filter(id=>byId[id]);
-      const pool=getTeacherPool(subj).filter(id=>byId[id]);
+      const preferred=(prefs[key]||[]).filter(id=>byId[id]&&(subj!=='REH'||teacherHasClassLesson(id,cls)));
+      const pool=getTeacherPoolForClass(cls,subj).filter(id=>byId[id]);
       let candidates=[...new Set([...preferred,...pool])];
       if(!candidates.length) candidates=teachers.map(t=>t.id);
       const under=candidates.filter(id=>(load[id]||0)+wh<=capacity[id]);
@@ -1178,7 +1179,7 @@ function buildClassBlockLayout(cls,seed=0){
 
 function findTeacherForBlock(cls,subj,day,hour,len,scheduleObj,teacherLoad,seed=0){
   const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.manual&&a.cls===cls&&a.subj===subj)).map(t=>t.id);
-  const preferred=(assigned.length?assigned:getTeacherPool(subj)).filter(tid=>teachers.some(t=>t.id===tid));
+  const preferred=(assigned.length?assigned:getTeacherPoolForClass(cls,subj)).filter(tid=>teachers.some(t=>t.id===tid));
   const candidates=preferred.filter(tid=>{
     for(let x=0;x<len;x++){
       if(scheduleObj[`${tid}_${day}_${hour+x}`]) return false;
@@ -1357,6 +1358,22 @@ function getTeacherPool(subj){
   const ids=new Set(SUBJECT_TEACHER_POOLS[subj]||[]);
   teachers.filter(t=>(t.subjects||[]).includes(subj)).forEach(t=>ids.add(t.id));
   return [...ids];
+}
+
+function getTeacherPoolForClass(cls,subj){
+  if(subj!=='REH') return getTeacherPool(subj);
+  const ids=new Set();
+  teachers.forEach(t=>{
+    (t.assignments||[]).forEach(a=>{
+      if(a.cls===cls&&a.subj!=='REH') ids.add(t.id);
+    });
+  });
+  return [...ids];
+}
+
+function teacherHasClassLesson(tid,cls){
+  const teacher=teachers.find(t=>t.id===tid);
+  return !!teacher&&(teacher.assignments||[]).some(a=>a.cls===cls&&a.subj!=='REH');
 }
 
 function getClassLessonAt(scheduleObj,cls,d,h){
@@ -1934,8 +1951,8 @@ function fillDistributionTo35(preferred={}){
     (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
       const preferredTid=preferred[`${cls}|${subj}`];
       const pool=[...new Set([
-        ...(preferredTid?[preferredTid]:[]),
-        ...getTeacherPool(subj),
+        ...(preferredTid&&(subj!=='REH'||teacherHasClassLesson(preferredTid,cls))?[preferredTid]:[]),
+        ...getTeacherPoolForClass(cls,subj),
         ...teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id)
       ])].filter(id=>byId[id]);
       const candidates=pool.length?pool:teachers.map(t=>t.id);
@@ -2092,7 +2109,7 @@ function migrateReligionTwoHours(){
     normalizeClassPlanTo35FromPlan(plan,'DİN');
   });
   teachers.forEach(t=>{
-    t.subjects=(t.subjects||[]).filter(s=>s!=='SEÇMELİ4');
+    t.subjects=(t.subjects||[]).filter(s=>s!=='SEÇMELİ4'&&s!=='REH');
     t.assignments=(t.assignments||[]).filter(a=>a.subj!=='SEÇMELİ4');
   });
   Object.keys(schedule).forEach(key=>{
