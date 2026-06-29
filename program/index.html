@@ -316,7 +316,7 @@ body.auth-locked .login-screen{display:flex}
 <script>
 const DAYS=['Pazartesi','Salı','Çarşamba','Perşembe','Cuma'];
 const DAYS_S=['Pzt','Sal','Çar','Per','Cum'];
-let SUBJECTS=['TRK','MAT','FEN','ING','SOSYAL','BEDEN','DİN','MÖZ','GÖN','SAN','BİL.TAR','TEK.TAS','SEÇİNG','SEÇİMA','INK.TAR','BLÜM','REH'];
+let SUBJECTS=['TRK','MAT','FEN','ING','SOSYAL','BEDEN','DİN','MÖZ','GÖN','SAN','BİL.TAR','TEK.TAS','SEÇİNG','SEÇİMA','INK.TAR','BLÜM','REH','SEÇMELİ4'];
 
 // Sınıflar: 5A-F, 6A-F, 7A-F, 8A-F
 const GRADES = [5,6,7,8];
@@ -417,10 +417,10 @@ ALL_CLASSES.forEach(cls => { CLASS_PLAN[cls] = getPlanForClass(cls); });
 // assignments otomatik CLASS_PLAN'dan saat sayısını alıyor
 function makeAssignments(pairs) {
   // pairs: [{cls, subj}]
-  return pairs.map(({cls,subj}) => {
+  return pairs.map(({cls,subj,wh}) => {
     const plan = CLASS_PLAN[cls];
     const entry = plan && plan.find(l => l.subj === subj);
-    return {cls, subj, wh: entry ? entry.wh : 2};
+    return {cls, subj, wh: wh || (entry ? entry.wh : 2)};
   }).filter(a => a.wh > 0);
 }
 
@@ -520,6 +520,8 @@ let teachers = [
   // BİL.TAR (5-6-7. sınıflar)
   {id:42, name:'Nazlı Çoban',        subjects:['BİL.TAR'],
    assignments: makeAssignments(ALL_CLASSES.filter(c=>parseInt(c)<8).map(cls=>({cls,subj:'BİL.TAR'})))},
+  {id:43, name:'Sevgi Acar',        subjects:['SEÇMELİ4'],
+   assignments: makeAssignments(ALL_CLASSES.map(cls=>({cls,subj:'SEÇMELİ4',wh:1})))},
 ];
 
 // Saat hesapla
@@ -571,7 +573,8 @@ let teacherUnavailable={
   39:{'2_5':true,'2_6':true},
   40:{'3_0':true,'3_1':true,'3_2':true,'3_3':true},
   41:{},
-  42:{'0_0':true,'0_1':true,'0_2':true,'0_3':true}
+  42:{'0_0':true,'0_1':true,'0_2':true,'0_3':true},
+  43:{}
 };
 
 const SUBJECT_TEACHER_POOLS={
@@ -591,7 +594,8 @@ const SUBJECT_TEACHER_POOLS={
   'SEÇİNG':[19,20,21,22,23,24,25,26],
   'SEÇİMA':[6,7,8,9,10,11,12,13],
   'BLÜM':[14,15,16,17,18],
-  'REH':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42]
+  'REH':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42],
+  'SEÇMELİ4':[43]
 };
 
 seedDefaultDistribution();
@@ -760,14 +764,21 @@ function normalizeTeacherAssignments(){
 function seedDefaultDistribution(){
   const byId=Object.fromEntries(teachers.map(t=>[t.id,t]));
   const prefs={};
+  const prefHours={};
   teachers.forEach(t=>{
     (t.assignments||[]).forEach(a=>{
       if(!a.cls||!a.subj) return;
       const key=`${a.cls}|${a.subj}`;
       if(!prefs[key]) prefs[key]=[];
       prefs[key].push(t.id);
+      prefHours[key]=parseInt(a.wh)||getClassSubjectHours(a.cls,a.subj)||1;
     });
     t.assignments=[];
+  });
+
+  Object.entries(prefHours).forEach(([key,wh])=>{
+    const [cls,subj]=key.split('|');
+    ensureClassLesson35(cls,subj,wh);
   });
 
   const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
