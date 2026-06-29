@@ -598,6 +598,8 @@ const SUBJECT_TEACHER_POOLS={
   'REH':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42]
 };
 
+seedDefaultDistribution();
+
 function showTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
@@ -745,6 +747,44 @@ function normalizeTeacherAssignments(){
     });
   });
   teachers.forEach(t=>{ t.hours=t.assignments.reduce((s,a)=>s+a.wh,0); });
+}
+
+function seedDefaultDistribution(){
+  const byId=Object.fromEntries(teachers.map(t=>[t.id,t]));
+  const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const assignedKeys=new Set();
+
+  teachers.forEach(t=>{
+    t.assignments=(t.assignments||[]).map(a=>{
+      const wh=parseInt(a.wh)||getClassSubjectHours(a.cls,a.subj)||1;
+      const item={...a,wh,manual:true};
+      if(item.cls&&item.subj){
+        assignedKeys.add(`${item.cls}|${item.subj}`);
+        load[t.id]=(load[t.id]||0)+wh;
+      }
+      return item;
+    });
+  });
+
+  ALL_CLASSES.forEach(cls=>{
+    (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
+      const key=`${cls}|${subj}`;
+      if(assignedKeys.has(key)) return;
+      const pool=getTeacherPool(subj).filter(id=>byId[id]);
+      if(!pool.length) return;
+      const tid=pool.reduce((best,id)=>(load[id]||0)<(load[best]||0)?id:best,pool[0]);
+      byId[tid].assignments.push({cls,subj,wh,manual:true});
+      load[tid]=(load[tid]||0)+wh;
+      assignedKeys.add(key);
+    });
+  });
+
+  teachers.forEach(t=>{t.hours=(t.assignments||[]).reduce((s,a)=>s+(parseInt(a.wh)||0),0);});
+}
+
+function getClassSubjectHours(cls,subj){
+  const entry=(CLASS_PLAN[cls]||[]).find(l=>l.subj===subj);
+  return entry?entry.wh:0;
 }
 
 function parseAssignmentText(text){
@@ -1827,6 +1867,7 @@ function applyProgramState(data){
   if(data.schedule&&typeof data.schedule==='object') schedule=data.schedule;
   if(data.settings) settings=data.settings;
   refreshClassPlans();
+  if(!hasManualDistribution()) seedDefaultDistribution();
   renderTable();
   renderTeachers();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
@@ -1834,6 +1875,10 @@ function applyProgramState(data){
   if(document.getElementById('view-distribution').classList.contains('active')) renderDistribution();
   lastSavedState=JSON.stringify(programState());
   isApplyingCloudData=false;
+}
+
+function hasManualDistribution(){
+  return teachers.some(t=>(t.assignments||[]).some(a=>a.manual));
 }
 
 async function apiFetch(path,options={}){
