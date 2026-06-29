@@ -1071,7 +1071,7 @@ function placeGlobalBlock(block,scheduleObj,classBusy,teacherLoad,seed=0){
       slots.push({d,h});
     }
   });
-  slots.sort((a,b)=>scoreBlockSlot(block,a.d,a.h,classBusy,seed)-scoreBlockSlot(block,b.d,b.h,classBusy,seed));
+  slots.sort((a,b)=>scoreBlockSlot(block,a.d,a.h,classBusy,scheduleObj,seed)-scoreBlockSlot(block,b.d,b.h,classBusy,scheduleObj,seed));
   for(const slot of slots){
     if(!canUseClassSlot(block,slot.d,slot.h,classBusy,scheduleObj)) continue;
     const tid=findTeacherForBlock(block.cls,block.subj,slot.d,slot.h,block.len,scheduleObj,teacherLoad,seed);
@@ -1086,24 +1086,29 @@ function placeGlobalBlock(block,scheduleObj,classBusy,teacherLoad,seed=0){
   return false;
 }
 
-function scoreBlockSlot(block,d,h,classBusy,seed=0){
+function scoreBlockSlot(block,d,h,classBusy,scheduleObj,seed=0){
   const used=classBusy[block.cls][d].filter(Boolean).length;
-  const sameDay=classBusy[block.cls][d].some((busy,idx)=>{
-    if(!busy) return false;
-    return false;
-  });
-  return used*10 + ((d*7+h+seed+block.ci)%11) + (sameDay?25:0);
+  return used*10 + ((d*7+h+seed+block.ci)%11);
 }
 
 function canUseClassSlot(block,d,h,classBusy,scheduleObj){
   for(let x=0;x<block.len;x++){
     if(classBusy[block.cls][d][h+x]) return false;
   }
+  if(classHasSubjectOnDay(scheduleObj,block.cls,d,block.subj)) return false;
   const before=h>0?getClassLessonAt(scheduleObj,block.cls,d,h-1):null;
   const after=h+block.len<settings.hoursPerDay?getClassLessonAt(scheduleObj,block.cls,d,h+block.len):null;
   if(before&&before.subj===block.subj) return false;
   if(after&&after.subj===block.subj) return false;
   return true;
+}
+
+function classHasSubjectOnDay(scheduleObj,cls,d,subj){
+  for(let h=0;h<settings.hoursPerDay;h++){
+    const lesson=getClassLessonAt(scheduleObj,cls,d,h);
+    if(lesson&&lesson.subj===subj) return true;
+  }
+  return false;
 }
 
 function splitLessonBlocks(hours){
@@ -1140,14 +1145,7 @@ function buildClassBlockLayout(cls,seed=0){
       if(aSame!==bSame) return aSame-bSame;
       return (b.used-a.used) || (((a.day+seed)%7)-((b.day+seed)%7));
     });
-    let target=ordered.find(day=>day.used+block.len<=H);
-    if(!target && block.len===2){
-      const oneDay=ordered.find(day=>day.used+1<=H);
-      if(oneDay){
-        target=oneDay;
-        block={...block,len:1,forcedSingle:true};
-      }
-    }
+    let target=ordered.find(day=>day.used+block.len<=H&&!day.items.some(x=>x.subj===block.subj));
     if(target){
       target.items.push(block);
       target.used+=block.len;
@@ -1389,6 +1387,7 @@ function analyzeBlockRulesObject(scheduleObj){
     const plan=CLASS_PLAN[cls]||[];
     const actual={};
     settings.days.forEach(d=>{
+      const daySubjects={};
       let h=0;
       while(h<settings.hoursPerDay){
         const lesson=getClassLessonAt(scheduleObj,cls,d,h);
@@ -1401,6 +1400,10 @@ function analyzeBlockRulesObject(scheduleObj){
         }
         if(!actual[lesson.subj]) actual[lesson.subj]=[];
         actual[lesson.subj].push(len);
+        if(daySubjects[lesson.subj]){
+          issues.push({cls,subj:lesson.subj,day:d,reason:'Aynı ders aynı gün ikinci kez geldi'});
+        }
+        daySubjects[lesson.subj]=true;
         h+=len;
       }
     });
