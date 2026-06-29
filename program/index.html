@@ -529,50 +529,7 @@ let schedule={};
 let settings={hoursPerDay:7, days:[0,1,2,3,4]};
 let selectedClass=null;
 let blockedTeacherId=teachers[0]?.id||null;
-let teacherUnavailable={
-  1:{'1_0':true,'1_1':true,'1_2':true,'1_3':true},
-  2:{'4_5':true,'4_6':true},
-  3:{'2_0':true,'2_1':true,'2_2':true,'2_3':true,'2_4':true,'2_5':true,'2_6':true},
-  4:{'0_5':true,'0_6':true},
-  5:{'3_0':true,'3_1':true,'3_2':true,'3_3':true},
-  6:{'2_5':true,'2_6':true},
-  7:{'1_0':true,'1_1':true,'1_2':true,'1_3':true},
-  8:{},
-  9:{'4_0':true,'4_1':true,'4_2':true,'4_3':true},
-  10:{'0_0':true,'0_1':true,'0_2':true,'0_3':true,'0_4':true,'0_5':true,'0_6':true},
-  11:{'3_5':true,'3_6':true},
-  12:{},
-  13:{'2_0':true,'2_1':true,'2_2':true,'2_3':true},
-  14:{'4_5':true,'4_6':true},
-  15:{'1_0':true,'1_1':true,'1_2':true,'1_3':true,'1_4':true,'1_5':true,'1_6':true},
-  16:{'0_5':true,'0_6':true},
-  17:{},
-  18:{'3_0':true,'3_1':true,'3_2':true,'3_3':true},
-  19:{'2_5':true,'2_6':true},
-  20:{'4_0':true,'4_1':true,'4_2':true,'4_3':true},
-  21:{},
-  22:{'1_5':true,'1_6':true},
-  23:{'0_0':true,'0_1':true,'0_2':true,'0_3':true},
-  24:{'3_0':true,'3_1':true,'3_2':true,'3_3':true,'3_4':true,'3_5':true,'3_6':true},
-  25:{'4_5':true,'4_6':true},
-  26:{},
-  27:{'2_0':true,'2_1':true,'2_2':true,'2_3':true},
-  28:{'0_5':true,'0_6':true},
-  29:{},
-  30:{'1_0':true,'1_1':true,'1_2':true,'1_3':true},
-  31:{'4_0':true,'4_1':true,'4_2':true,'4_3':true,'4_4':true,'4_5':true,'4_6':true},
-  32:{'3_5':true,'3_6':true},
-  33:{'2_0':true,'2_1':true,'2_2':true,'2_3':true},
-  34:{},
-  35:{'0_5':true,'0_6':true},
-  36:{'1_0':true,'1_1':true,'1_2':true,'1_3':true,'1_4':true,'1_5':true,'1_6':true},
-  37:{'4_5':true,'4_6':true},
-  38:{},
-  39:{'2_5':true,'2_6':true},
-  40:{'3_0':true,'3_1':true,'3_2':true,'3_3':true},
-  41:{},
-  42:{'0_0':true,'0_1':true,'0_2':true,'0_3':true}
-};
+let teacherUnavailable={};
 
 const SUBJECT_TEACHER_POOLS={
   'TRK':[1,2,3,4,5],
@@ -595,6 +552,7 @@ const SUBJECT_TEACHER_POOLS={
 };
 
 seedDefaultDistribution();
+seedDefaultTeacherUnavailable();
 
 function showTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -729,12 +687,14 @@ function generateSchedule(){
   for(let attempt=0;attempt<250;attempt++){
     const trialA=buildGlobalBlockSchedule(attempt);
     const trialB=buildFullClassSchedule(attempt);
-    [trialA,trialB].forEach(trial=>{
+    const trialC=buildConsistentTeacherSchedule(attempt);
+    [trialA,trialB,trialC].forEach(trial=>{
       if(!best || trial.score<best.score) best=trial;
     });
     if(best.issues.length===0) break;
   }
   schedule=best.schedule;
+  schedule=reassignTeachersConsistentlyFromClassLayout(schedule);
 
   renderTable();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
@@ -743,11 +703,22 @@ function generateSchedule(){
   const report=analyzeSchedule();
   const blockIssues=analyzeBlockRulesObject(schedule);
   const branchIssues=analyzeBranchRulesObject(schedule);
-  const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0;
+  const teacherConsistencyIssues=analyzeTeacherConsistencyObject(schedule);
+  const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0&&teacherConsistencyIssues.length===0;
   const fixHint=ok ? '' : buildFailureFixHint(report,blockIssues);
-  const msg=report.classIssues.length===0
-    ? `Program oluşturuldu — 24/24 sınıf 35 saat dolu, sınıf boşluğu yok.`
-    : `Program oturmadı: ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls} ${report.classIssues[0].filled}/35 saat dolu.${fixHint}`;
+  let msg=`Program oturmadı.`;
+  if(report.classIssues.length){
+    msg=`Program oturmadı: ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls} ${report.classIssues[0].filled}/35 saat dolu.${fixHint}`;
+  }else if(teacherConsistencyIssues.length){
+    const first=teacherConsistencyIssues[0];
+    msg=`Program oturmadı: ${teacherConsistencyIssues.length} sınıf-ders birden fazla öğretmene bölünmüş. İlk sorun: ${first.cls} ${first.subj} → ${first.teachers.join(', ')}.`;
+  }else if(blockIssues.length){
+    const first=blockIssues[0];
+    msg=`Program oturmadı: ${blockIssues.length} blok kuralı sorunu var. İlk sorun: ${first.cls} ${first.subj}.`;
+  }else if(branchIssues.length){
+    const first=branchIssues[0];
+    msg=`Program oturmadı: ${branchIssues.length} branş ataması sorunu var. İlk sorun: ${first.cls} ${first.subj}.`;
+  }
   showAlert(ok?'Program oluşturuldu - 24/24 sınıf 35 saat dolu, dersler blok kuralına uygun.':msg,ok?'ok':'warn');
 }
 
@@ -800,7 +771,7 @@ function collectUnavailableSuggestions(report,blockIssues=[]){
 
 function getLikelyTeacherIds(cls,subj){
   const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.cls===cls&&a.subj===subj)).map(t=>t.id);
-  return [...new Set([...assigned,...getTeacherPoolForClass(cls,subj)])].filter(tid=>teachers.some(t=>t.id===tid));
+  return [...new Set(assigned.length?assigned:getTeacherPoolForClass(cls,subj))].filter(tid=>teachers.some(t=>t.id===tid));
 }
 
 function getClassEmptySlots(cls,scheduleObj){
@@ -998,6 +969,7 @@ function buildFullClassSchedule(attempt){
   const days=settings.days;
   const trialSchedule={};
   const teacherLoad=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const teacherChoice={};
   const issues=[];
 
   const classOrder=[...ALL_CLASSES];
@@ -1009,7 +981,7 @@ function buildFullClassSchedule(attempt){
       return;
     }
     layout.forEach(block=>{
-      const tid=findTeacherForBlock(cls,block.subj,block.day,block.hour,block.len,trialSchedule,teacherLoad,attempt+ci*19);
+      const tid=findTeacherForBlock(cls,block.subj,block.day,block.hour,block.len,trialSchedule,teacherLoad,teacherChoice,attempt+ci*19);
       if(!tid){
         issues.push({cls,subj:block.subj,day:block.day,hour:block.hour+1,reason:'Uygun ogretmen yok'});
         return;
@@ -1024,8 +996,9 @@ function buildFullClassSchedule(attempt){
   const report=analyzeScheduleObject(trialSchedule);
   const blockIssues=analyzeBlockRulesObject(trialSchedule);
   const branchIssues=analyzeBranchRulesObject(trialSchedule);
-  const score=issues.length*1800+report.classIssues.length*200+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000;
-  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues],score};
+  const teacherConsistencyIssues=analyzeTeacherConsistencyObject(trialSchedule);
+  const score=issues.length*1800+report.classIssues.length*200+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000+teacherConsistencyIssues.length*1000;
+  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues,...teacherConsistencyIssues],score};
 }
 
 function buildGlobalBlockSchedule(attempt){
@@ -1034,6 +1007,7 @@ function buildGlobalBlockSchedule(attempt){
   const trialSchedule={};
   const classBusy={};
   const teacherLoad=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const teacherChoice={};
   ALL_CLASSES.forEach(cls=>{
     classBusy[cls]={};
     days.forEach(d=>classBusy[cls][d]=Array(H).fill(false));
@@ -1053,18 +1027,77 @@ function buildGlobalBlockSchedule(attempt){
 
   const issues=[];
   blocks.forEach(block=>{
-    const placed=placeGlobalBlock(block,trialSchedule,classBusy,teacherLoad,attempt);
+    const placed=placeGlobalBlock(block,trialSchedule,classBusy,teacherLoad,teacherChoice,attempt);
     if(!placed) issues.push({cls:block.cls,subj:block.subj,len:block.len,reason:'Blok yerlestirilemedi'});
   });
 
   const report=analyzeScheduleObject(trialSchedule);
   const blockIssues=analyzeBlockRulesObject(trialSchedule);
   const branchIssues=analyzeBranchRulesObject(trialSchedule);
-  const score=issues.length*2000+report.classIssues.length*200+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000;
-  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues],score};
+  const teacherConsistencyIssues=analyzeTeacherConsistencyObject(trialSchedule);
+  const score=issues.length*2000+report.classIssues.length*200+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000+teacherConsistencyIssues.length*1000;
+  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues,...teacherConsistencyIssues],score};
 }
 
-function placeGlobalBlock(block,scheduleObj,classBusy,teacherLoad,seed=0){
+function buildConsistentTeacherSchedule(attempt){
+  const trialSchedule={};
+  const teacherLoad=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const teacherBusy={};
+  teachers.forEach(t=>teacherBusy[t.id]={});
+  const issues=[];
+  const groups={};
+
+  const classOrder=[...ALL_CLASSES];
+  rotate(classOrder,attempt%classOrder.length);
+  classOrder.forEach((cls,ci)=>{
+    const layout=buildClassBlockLayout(cls,attempt+ci*23);
+    if(!layout.length){
+      issues.push({cls,reason:'Bloklar 5x7 tabloya yerlestirilemedi'});
+      return;
+    }
+    layout.forEach(block=>{
+      const key=`${cls}|${block.subj}`;
+      if(!groups[key]) groups[key]={cls,subj:block.subj,slots:[]};
+      for(let x=0;x<block.len;x++) groups[key].slots.push({d:block.day,h:block.hour+x});
+    });
+  });
+
+  const ordered=Object.values(groups).sort((a,b)=>{
+    const ca=getCandidateTeachersForClassSubject(a.cls,a.subj).length;
+    const cb=getCandidateTeachersForClassSubject(b.cls,b.subj).length;
+    return ca-cb || b.slots.length-a.slots.length || (((a.cls.charCodeAt(0)+attempt)%11)-((b.cls.charCodeAt(0)+attempt)%11));
+  });
+
+  ordered.forEach(group=>{
+    const candidates=getCandidateTeachersForClassSubject(group.cls,group.subj).filter(tid=>{
+      return group.slots.every(slot=>!teacherBusy[tid][`${slot.d}_${slot.h}`]&&!isTeacherUnavailable(tid,slot.d,slot.h));
+    });
+    if(!candidates.length){
+      issues.push({cls:group.cls,subj:group.subj,reason:'Tek ogretmenle uygun saat yok'});
+      return;
+    }
+    candidates.sort((a,b)=>{
+      const loadA=teacherLoad[a]||0;
+      const loadB=teacherLoad[b]||0;
+      return loadA-loadB || teacherUnavailableCount(a)-teacherUnavailableCount(b) || (((a+attempt)%13)-((b+attempt)%13));
+    });
+    const tid=candidates[0];
+    group.slots.forEach(slot=>{
+      trialSchedule[`${tid}_${slot.d}_${slot.h}`]={cls:group.cls,subj:group.subj};
+      teacherBusy[tid][`${slot.d}_${slot.h}`]=true;
+      teacherLoad[tid]++;
+    });
+  });
+
+  const report=analyzeScheduleObject(trialSchedule);
+  const blockIssues=analyzeBlockRulesObject(trialSchedule);
+  const branchIssues=analyzeBranchRulesObject(trialSchedule);
+  const teacherConsistencyIssues=analyzeTeacherConsistencyObject(trialSchedule);
+  const score=issues.length*2000+report.classIssues.length*200+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000+teacherConsistencyIssues.length*1500;
+  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues,...teacherConsistencyIssues],score};
+}
+
+function placeGlobalBlock(block,scheduleObj,classBusy,teacherLoad,teacherChoice,seed=0){
   const slots=[];
   settings.days.forEach(d=>{
     for(let h=0;h<=settings.hoursPerDay-block.len;h++){
@@ -1074,7 +1107,7 @@ function placeGlobalBlock(block,scheduleObj,classBusy,teacherLoad,seed=0){
   slots.sort((a,b)=>scoreBlockSlot(block,a.d,a.h,classBusy,scheduleObj,seed)-scoreBlockSlot(block,b.d,b.h,classBusy,scheduleObj,seed));
   for(const slot of slots){
     if(!canUseClassSlot(block,slot.d,slot.h,classBusy,scheduleObj)) continue;
-    const tid=findTeacherForBlock(block.cls,block.subj,slot.d,slot.h,block.len,scheduleObj,teacherLoad,seed);
+    const tid=findTeacherForBlock(block.cls,block.subj,slot.d,slot.h,block.len,scheduleObj,teacherLoad,teacherChoice,seed);
     if(!tid) continue;
     for(let x=0;x<block.len;x++){
       scheduleObj[`${tid}_${slot.d}_${slot.h+x}`]={cls:block.cls,subj:block.subj};
@@ -1164,21 +1197,118 @@ function buildClassBlockLayout(cls,seed=0){
   return layout;
 }
 
-function findTeacherForBlock(cls,subj,day,hour,len,scheduleObj,teacherLoad,seed=0){
+function findTeacherForBlock(cls,subj,day,hour,len,scheduleObj,teacherLoad,teacherChoice={},seed=0){
   const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.manual&&a.cls===cls&&a.subj===subj)).map(t=>t.id);
   const preferred=[...new Set([...assigned,...getTeacherPoolForClass(cls,subj)])].filter(tid=>teachers.some(t=>t.id===tid));
-  const candidates=preferred.filter(tid=>{
-    for(let x=0;x<len;x++){
-      if(scheduleObj[`${tid}_${day}_${hour+x}`]) return false;
-      if(isTeacherUnavailable(tid,day,hour+x)) return false;
-    }
-    return true;
-  });
+  const candidates=preferred.filter(tid=>canTeacherTakeBlock(tid,day,hour,len,scheduleObj));
   if(candidates.length){
-    candidates.sort((a,b)=>(teacherLoad[a]-teacherLoad[b]) || (((a+seed)%7)-((b+seed)%7)));
+    candidates.sort((a,b)=>{
+      const assignedA=assigned.includes(a)?0:1;
+      const assignedB=assigned.includes(b)?0:1;
+      return assignedA-assignedB
+        || teacherUnavailableCount(a)-teacherUnavailableCount(b)
+        || (teacherLoad[a]-teacherLoad[b])
+        || (((a+seed)%7)-((b+seed)%7));
+    });
     return candidates[0];
   }
   return null;
+}
+
+function canTeacherTakeBlock(tid,day,hour,len,scheduleObj){
+  for(let x=0;x<len;x++){
+    if(scheduleObj[`${tid}_${day}_${hour+x}`]) return false;
+    if(isTeacherUnavailable(tid,day,hour+x)) return false;
+  }
+  return true;
+}
+
+function teacherUnavailableCount(tid){
+  return Object.keys(teacherUnavailable[tid]||{}).length;
+}
+
+function unifyClassSubjectTeachers(scheduleObj){
+  const groups={};
+  Object.entries(scheduleObj).forEach(([key,cell])=>{
+    if(!cell) return;
+    const [tid,d,h]=key.split('_').map(Number);
+    const gkey=`${cell.cls}|${cell.subj}`;
+    if(!groups[gkey]) groups[gkey]=[];
+    groups[gkey].push({key,tid,d,h,cell});
+  });
+
+  Object.entries(groups).forEach(([gkey,items])=>{
+    const ids=[...new Set(items.map(i=>i.tid))];
+    if(ids.length<=1) return;
+    const [cls,subj]=gkey.split('|');
+    const candidates=getCandidateTeachersForClassSubject(cls,subj);
+    const chosen=candidates.find(tid=>items.every(item=>{
+      if(isTeacherUnavailable(tid,item.d,item.h)) return false;
+      const other=scheduleObj[`${tid}_${item.d}_${item.h}`];
+      return !other || (other.cls===cls&&other.subj===subj);
+    }));
+    if(!chosen) return;
+    items.forEach(item=>delete scheduleObj[item.key]);
+    items.forEach(item=>{scheduleObj[`${chosen}_${item.d}_${item.h}`]={cls,subj};});
+  });
+}
+
+function reassignTeachersConsistentlyFromClassLayout(sourceSchedule){
+  const groups={};
+  Object.entries(sourceSchedule).forEach(([,cell])=>{
+    if(!cell) return;
+    const key=`${cell.cls}|${cell.subj}`;
+    if(!groups[key]) groups[key]={cls:cell.cls,subj:cell.subj,slots:[]};
+  });
+  ALL_CLASSES.forEach(cls=>{
+    settings.days.forEach(d=>{
+      for(let h=0;h<settings.hoursPerDay;h++){
+        const lesson=getClassLessonAt(sourceSchedule,cls,d,h);
+        if(!lesson) continue;
+        const key=`${cls}|${lesson.subj}`;
+        if(!groups[key]) groups[key]={cls,subj:lesson.subj,slots:[]};
+        groups[key].slots.push({d,h});
+      }
+    });
+  });
+
+  let best={schedule:sourceSchedule,score:Number.POSITIVE_INFINITY};
+  for(let seed=0;seed<80;seed++){
+    const trial={};
+    const busy=Object.fromEntries(teachers.map(t=>[t.id,{}]));
+    const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
+    const ordered=Object.values(groups).sort((a,b)=>{
+      const ca=getCandidateTeachersForClassSubject(a.cls,a.subj).length;
+      const cb=getCandidateTeachersForClassSubject(b.cls,b.subj).length;
+      return ca-cb || b.slots.length-a.slots.length || (((a.cls.charCodeAt(0)+seed)%17)-((b.cls.charCodeAt(0)+seed)%17));
+    });
+    let failed=0;
+    ordered.forEach(group=>{
+      const candidates=getCandidateTeachersForClassSubject(group.cls,group.subj)
+        .filter(tid=>group.slots.every(slot=>!busy[tid][`${slot.d}_${slot.h}`]&&!isTeacherUnavailable(tid,slot.d,slot.h)));
+      if(!candidates.length){failed+=group.slots.length;return;}
+      candidates.sort((a,b)=>(load[a]-load[b]) || teacherUnavailableCount(a)-teacherUnavailableCount(b) || (((a+seed)%19)-((b+seed)%19)));
+      const tid=candidates[0];
+      group.slots.forEach(slot=>{
+        trial[`${tid}_${slot.d}_${slot.h}`]={cls:group.cls,subj:group.subj};
+        busy[tid][`${slot.d}_${slot.h}`]=true;
+        load[tid]++;
+      });
+    });
+    const report=analyzeScheduleObject(trial);
+    const blockIssues=analyzeBlockRulesObject(trial);
+    const branchIssues=analyzeBranchRulesObject(trial);
+    const consistency=analyzeTeacherConsistencyObject(trial);
+    const score=failed*1000+report.classIssues.length*200+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000+consistency.length*1500;
+    if(score<best.score) best={schedule:trial,score};
+    if(score===0) break;
+  }
+  return best.schedule;
+}
+
+function getCandidateTeachersForClassSubject(cls,subj){
+  const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.cls===cls&&a.subj===subj)).map(t=>t.id);
+  return [...new Set([...assigned,...getTeacherPoolForClass(cls,subj)])].filter(tid=>teachers.some(t=>t.id===tid));
 }
 
 function solveOneSlotFast(d,h,remaining,subjectDayCount,teacherLoad,trialSchedule,seed){
@@ -1422,6 +1552,21 @@ function analyzeBranchRulesObject(scheduleObj){
     const tid=parseInt(key.split('_')[0]);
     return !getTeacherPoolForClass(cell.cls,cell.subj).includes(tid);
   }).map(([key,cell])=>({key,cls:cell.cls,subj:cell.subj}));
+}
+
+function analyzeTeacherConsistencyObject(scheduleObj){
+  const byClassSubject={};
+  Object.entries(scheduleObj).forEach(([key,cell])=>{
+    if(!cell) return;
+    const tid=parseInt(key.split('_')[0]);
+    const k=`${cell.cls}|${cell.subj}`;
+    if(!byClassSubject[k]) byClassSubject[k]=new Set();
+    byClassSubject[k].add(tid);
+  });
+  return Object.entries(byClassSubject).filter(([,ids])=>ids.size>1).map(([key,ids])=>{
+    const [cls,subj]=key.split('|');
+    return {cls,subj,teachers:[...ids].map(id=>teachers.find(t=>t.id===id)?.name||id)};
+  });
 }
 
 function analyzeScheduleObject(scheduleObj){
@@ -1935,6 +2080,59 @@ function commitDistributionRows(){
   fillDistributionTo35(preferred);
 }
 
+function seedDefaultTeacherUnavailable(force=false){
+  if(!force&&Object.keys(teacherUnavailable||{}).length) return;
+  const result={};
+  const ordered=[...teachers].sort((a,b)=>stableTeacherRank(a)-stableTeacherRank(b));
+  const fullDayCount=Math.ceil(ordered.length/2);
+  const fullDayEligible=ordered.filter(t=>settings.days.length*settings.hoursPerDay-teacherAssignedHours(t.id)>=settings.hoursPerDay);
+  const fullDayTeachers=fullDayEligible.slice(0,Math.min(fullDayCount,fullDayEligible.length));
+  const fullDayIds=new Set(fullDayTeachers.map(t=>t.id));
+  const remaining=ordered.filter(t=>!fullDayIds.has(t.id)&&settings.days.length*settings.hoursPerDay-teacherAssignedHours(t.id)>0);
+  const partialTeachers=remaining.slice(0,Math.ceil(remaining.length/2));
+
+  fullDayTeachers.forEach((t,idx)=>{
+    const day=settings.days[(stableTeacherRank(t)+idx)%settings.days.length];
+    addBlockedSlotsForTeacher(result,t.id,settings.days.includes(day)?day:settings.days[0],fullDayHours(),teacherAssignedHours(t.id));
+  });
+
+  partialTeachers.forEach((t,idx)=>{
+    const day=settings.days[(stableTeacherRank(t)+idx*2)%settings.days.length];
+    const hours=idx%2===0?morningHours():lateDayHours();
+    addBlockedSlotsForTeacher(result,t.id,settings.days.includes(day)?day:settings.days[0],hours,teacherAssignedHours(t.id));
+  });
+
+  teachers.forEach(t=>{if(!result[t.id]) result[t.id]={};});
+  teacherUnavailable=result;
+  trimUnavailableToTeacherLoads();
+}
+
+function stableTeacherRank(t){
+  return String(t.name||t.id).split('').reduce((sum,ch)=>sum+ch.charCodeAt(0),t.id*17);
+}
+
+function fullDayHours(){
+  return Array.from({length:settings.hoursPerDay},(_,h)=>h);
+}
+
+function morningHours(){
+  return Array.from({length:Math.min(4,settings.hoursPerDay)},(_,h)=>h);
+}
+
+function lateDayHours(){
+  const start=Math.min(5,settings.hoursPerDay);
+  return Array.from({length:Math.max(0,settings.hoursPerDay-start)},(_,i)=>start+i);
+}
+
+function addBlockedSlotsForTeacher(target,tid,day,hours,assignedHours=0){
+  if(!target[tid]) target[tid]={};
+  const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-assignedHours);
+  for(const h of hours){
+    if(Object.keys(target[tid]).length>=maxBlocked) break;
+    if(h>=0&&h<settings.hoursPerDay) target[tid][`${day}_${h}`]=true;
+  }
+}
+
 function fillDistributionTo35(preferred={}){
   const byId=Object.fromEntries(teachers.map(t=>[t.id,t]));
   const load=Object.fromEntries(teachers.map(t=>[t.id,(t.assignments||[]).reduce((s,a)=>s+(parseInt(a.wh)||0),0)]));
@@ -2063,12 +2261,15 @@ function applyProgramState(data){
     hasSavedClassPlan=true;
   }
   if(Array.isArray(data.teachers)) teachers=data.teachers;
-  if(data.teacherUnavailable) teacherUnavailable=data.teacherUnavailable;
+  const hasSavedUnavailable=data.teacherUnavailable&&typeof data.teacherUnavailable==='object';
+  if(hasSavedUnavailable) teacherUnavailable=data.teacherUnavailable;
   if(data.schedule&&typeof data.schedule==='object') schedule=data.schedule;
   if(data.settings) settings=data.settings;
   migrateReligionTwoHours();
   if(!hasSavedClassPlan) refreshClassPlans();
   if(!hasManualDistribution()||distributionOverCapacity()||distributionClassHoursInvalid()) seedDefaultDistribution();
+  if(!hasSavedUnavailable) seedDefaultTeacherUnavailable(true);
+  else trimUnavailableToTeacherLoads();
   renderTable();
   renderTeachers();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
