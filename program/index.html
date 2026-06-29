@@ -239,10 +239,6 @@ body.auth-locked .login-screen{display:flex}
     <button class="btn" onclick="addDistributionRow()">+ Dağıtım Ekle</button>
     <button class="btn primary" onclick="generateFromDistribution()">Programı Yeniden Oluştur</button>
   </div>
-  <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
-    Bu ekranda “şu öğretmen şu sınıfa şu derse girer” bilgisi belirlenir. Örneğin bir öğretmen yalnızca 8-A, 8-B, 8-C, 7-A ve 7-B sınıflarına atanabilir; program yeniden oluşturulurken bu sınır korunur.
-  </div>
-  <div id="distribution-preview" class="dist-preview"></div>
   <div class="tbl-wrap">
     <table class="cls-tbl">
       <thead><tr><th>Atama cümlesi</th><th style="width:90px">İşlem</th></tr></thead>
@@ -585,7 +581,7 @@ const SUBJECT_TEACHER_POOLS={
   'ING':[19,20,21,22,23,24,25,26],
   'SOSYAL':[27,29,30],
   'INK.TAR':[28],
-  'DİN':[31],
+  'DİN':[31,27],
   'BEDEN':[32,33,34,35],
   'TEK.TAS':[36,37,38],
   'MÖZ':[39,40],
@@ -660,16 +656,28 @@ function checkConflict(tid,day,hour){
 function pastelColor(key,alpha=0.26){
   let hash=0;
   String(key||'').split('').forEach(ch=>{hash=(hash*31+ch.charCodeAt(0))>>>0;});
-  const hue=hash%360;
-  return `hsla(${hue}, 72%, 78%, ${alpha})`;
+  const palette=[
+    [18,58,82],
+    [42,46,80],
+    [76,34,80],
+    [104,30,78],
+    [132,28,78],
+    [160,25,78],
+    [236,26,83],
+    [268,30,84],
+    [304,28,84],
+    [344,34,84]
+  ];
+  const [hue,sat,light]=palette[hash%palette.length];
+  return `hsla(${hue}, ${sat}%, ${light}%, ${alpha})`;
 }
 
 function lessonStyle(subj,tid){
-  return `background:${pastelColor('ders-'+subj,.34)};border-left:4px solid ${pastelColor('ogretmen-'+tid,.78)}`;
+  return `background:${pastelColor('ders-'+subj,.38)};border-left:4px solid ${pastelColor('ogretmen-'+tid,.72)}`;
 }
 
 function teacherStyle(tid){
-  return `background:${pastelColor('ogretmen-'+tid,.25)};box-shadow:inset 4px 0 0 ${pastelColor('ogretmen-'+tid,.78)}`;
+  return `background:${pastelColor('ogretmen-'+tid,.24)};box-shadow:inset 4px 0 0 ${pastelColor('ogretmen-'+tid,.68)}`;
 }
 
 function h(text=''){
@@ -708,10 +716,10 @@ function generateSchedule(){
     if(trial.issues.length===0) break;
   }
   schedule=best.schedule;
-  syncTeacherAssignmentsFromSchedule();
 
   renderTable();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
+  if(document.getElementById('view-distribution').classList.contains('active')) renderDistribution();
 
   const report=analyzeSchedule();
   const blockIssues=analyzeBlockRulesObject(schedule);
@@ -751,34 +759,38 @@ function normalizeTeacherAssignments(){
 
 function seedDefaultDistribution(){
   const byId=Object.fromEntries(teachers.map(t=>[t.id,t]));
-  const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
-  const assignedKeys=new Set();
-
+  const prefs={};
   teachers.forEach(t=>{
-    t.assignments=(t.assignments||[]).map(a=>{
-      const wh=parseInt(a.wh)||getClassSubjectHours(a.cls,a.subj)||1;
-      const item={...a,wh,manual:true};
-      if(item.cls&&item.subj){
-        assignedKeys.add(`${item.cls}|${item.subj}`);
-        load[t.id]=(load[t.id]||0)+wh;
-      }
-      return item;
+    (t.assignments||[]).forEach(a=>{
+      if(!a.cls||!a.subj) return;
+      const key=`${a.cls}|${a.subj}`;
+      if(!prefs[key]) prefs[key]=[];
+      prefs[key].push(t.id);
     });
+    t.assignments=[];
   });
+
+  const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const capacity=Object.fromEntries(teachers.map(t=>[
+    t.id,
+    Math.max(0,settings.days.length*settings.hoursPerDay-countTeacherBlockedSlots(t.id))
+  ]));
 
   ALL_CLASSES.forEach(cls=>{
     (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
       const key=`${cls}|${subj}`;
-      if(assignedKeys.has(key)) return;
+      const preferred=(prefs[key]||[]).filter(id=>byId[id]);
       const pool=getTeacherPool(subj).filter(id=>byId[id]);
-      if(!pool.length) return;
-      const tid=pool.reduce((best,id)=>(load[id]||0)<(load[best]||0)?id:best,pool[0]);
+      let candidates=[...new Set([...preferred,...pool])];
+      if(!candidates.length) candidates=teachers.map(t=>t.id);
+      const under=candidates.filter(id=>(load[id]||0)+wh<=capacity[id]);
+      const list=under.length?under:candidates;
+      const tid=list.reduce((best,id)=>(load[id]||0)<(load[best]||0)?id:best,list[0]);
       byId[tid].assignments.push({cls,subj,wh,manual:true});
+      if(!byId[tid].subjects.includes(subj)) byId[tid].subjects.push(subj);
       load[tid]=(load[tid]||0)+wh;
-      assignedKeys.add(key);
     });
   });
-
   teachers.forEach(t=>{t.hours=(t.assignments||[]).reduce((s,a)=>s+(parseInt(a.wh)||0),0);});
 }
 
@@ -1680,20 +1692,17 @@ function renderDistribution(){
   const rows=[];
   teachers.forEach(t=>(t.assignments||[]).filter(a=>a.manual).forEach(a=>rows.push({tid:t.id,...a})));
   document.getElementById('distribution-body').innerHTML=rows.map(r=>distributionRowHtml(r.tid,r.cls,r.subj,r.wh)).join('');
-  updateDistributionPreview();
 }
 
 function distributionRowHtml(tid=teachers[0]?.id,cls=ALL_CLASSES[0],subj=SUBJECTS[0],wh=1){
   const teacherOpts=teachers.map(t=>`<option value="${t.id}"${t.id===tid?' selected':''}>${t.name}</option>`).join('');
   const clsOpts=ALL_CLASSES.map(c=>`<option value="${c}"${c===cls?' selected':''}>${c}</option>`).join('');
-  const teacher=teachers.find(t=>t.id===tid)||teachers[0]||{};
-  const allowed=(teacher.subjects&&teacher.subjects.length?teacher.subjects:SUBJECTS).filter(s=>SUBJECTS.includes(s));
-  const subjList=allowed.includes(subj)?allowed:[subj,...allowed].filter(Boolean);
+  const subjList=SUBJECTS.includes(subj)?SUBJECTS:[subj,...SUBJECTS].filter(Boolean);
   const subjOpts=subjList.map(s=>`<option value="${s}"${s===subj?' selected':''}>${s}</option>`).join('');
   return `<tr class="dist-row">
     <td style="padding:8px 10px">
       <div class="dist-row-sentence">
-        <select class="dist-teacher" onchange="refreshDistributionSubjectOptions(this.closest('.dist-row'))">${teacherOpts}</select>
+        <select class="dist-teacher">${teacherOpts}</select>
         <span class="dist-word">öğretmeni</span>
         <select class="dist-class">${clsOpts}</select>
         <span class="dist-word">sınıfına</span>
@@ -1709,7 +1718,6 @@ function distributionRowHtml(tid=teachers[0]?.id,cls=ALL_CLASSES[0],subj=SUBJECT
 
 function addDistributionRow(){
   document.getElementById('distribution-body').insertAdjacentHTML('beforeend',distributionRowHtml());
-  updateDistributionPreview();
 }
 
 function saveDistribution(silent=false){
@@ -1733,41 +1741,10 @@ function commitDistributionRows(){
   });
 }
 
-function refreshDistributionSubjectOptions(row){
-  const tid=parseInt(row.querySelector('.dist-teacher').value);
-  const teacher=teachers.find(t=>t.id===tid);
-  const current=row.querySelector('.dist-subj').value;
-  const subjects=(teacher?.subjects&&teacher.subjects.length?teacher.subjects:SUBJECTS).filter(s=>SUBJECTS.includes(s));
-  row.querySelector('.dist-subj').innerHTML=subjects.map(s=>`<option value="${s}"${s===current?' selected':''}>${s}</option>`).join('');
-  updateDistributionPreview();
-}
-
-function updateDistributionPreview(){
-  const el=document.getElementById('distribution-preview');
-  if(!el) return;
-  const rows=Array.from(document.querySelectorAll('#distribution-body .dist-row'));
-  if(!rows.length){
-    el.textContent='Henüz özel öğretmen-sınıf ataması yok. Atama eklenmezse sistem öğretmenin ders alanına göre otomatik dağıtır.';
-    return;
-  }
-  const grouped={};
-  rows.forEach(row=>{
-    const tid=parseInt(row.querySelector('.dist-teacher').value);
-    const teacher=teachers.find(t=>t.id===tid);
-    if(!teacher) return;
-    const subj=row.querySelector('.dist-subj').value;
-    const cls=row.querySelector('.dist-class').value;
-    const key=`${teacher.name}|${subj}`;
-    if(!grouped[key]) grouped[key]={teacher:teacher.name,subj,classes:[]};
-    grouped[key].classes.push(cls);
-  });
-  el.innerHTML=Object.values(grouped).map(g=>`<span class="color-chip" style="background:${pastelColor('ders-'+g.subj,.45)}"></span><b>${h(g.teacher)}</b> öğretmeni <b>${h(g.classes.join(', '))}</b> sınıflarında <b>${h(g.subj)}</b> dersine girer.`).join('<br>');
-}
-
 function generateFromDistribution(){
   saveDistribution(true);
   generateSchedule();
-  showTab('program',document.querySelector('.tab'));
+  renderDistribution();
 }
 
 function renderTeachers(){
@@ -1867,7 +1844,7 @@ function applyProgramState(data){
   if(data.schedule&&typeof data.schedule==='object') schedule=data.schedule;
   if(data.settings) settings=data.settings;
   refreshClassPlans();
-  if(!hasManualDistribution()) seedDefaultDistribution();
+  if(!hasManualDistribution()||distributionOverCapacity()) seedDefaultDistribution();
   renderTable();
   renderTeachers();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
@@ -1879,6 +1856,14 @@ function applyProgramState(data){
 
 function hasManualDistribution(){
   return teachers.some(t=>(t.assignments||[]).some(a=>a.manual));
+}
+
+function distributionOverCapacity(){
+  return teachers.some(t=>{
+    const load=(t.assignments||[]).reduce((sum,a)=>sum+(parseInt(a.wh)||0),0);
+    const capacity=Math.max(0,settings.days.length*settings.hoursPerDay-countTeacherBlockedSlots(t.id));
+    return load>capacity;
+  });
 }
 
 async function apiFetch(path,options={}){
@@ -2025,8 +2010,6 @@ function showLoginError(msg){
 renderTable();
 document.addEventListener('input',scheduleAutoSave);
 document.addEventListener('change',scheduleAutoSave);
-document.addEventListener('input',e=>{if(e.target.closest('#distribution-body')) updateDistributionPreview();});
-document.addEventListener('change',e=>{if(e.target.closest('#distribution-body')) updateDistributionPreview();});
 document.addEventListener('click',e=>{
   if(e.target.closest('#google-login')||e.target.closest('#logout-btn')||e.target.closest('.tab')) return;
   setTimeout(scheduleAutoSave,0);
