@@ -550,7 +550,7 @@ const SUBJECT_TEACHER_POOLS={
   'ING':[19,20,21,22,23,24,25,26],
   'SOSYAL':[27,29,30],
   'INK.TAR':[28],
-  'DİN':[31,27],
+  'DİN':[31,27,28,29,30],
   'BEDEN':[32,33,34,35],
   'TEK.TAS':[36,37,38],
   'MÖZ':[39,40],
@@ -558,8 +558,9 @@ const SUBJECT_TEACHER_POOLS={
   'SAN':[41],
   'BİL.TAR':[39,42],
   'SEÇİNG':[19,20,21,22,23,24,25,26],
-  'SEÇİMA':[6,7,8,9,10,11,12,13],
+  'SEÇİMA':[6,7,8,9,10,11,12,13,14,15,16,17,18],
   'BLÜM':[14,15,16,17,18],
+  'EK DERS':teachers.map(t=>t.id),
   'REH':[]
 };
 
@@ -711,13 +712,13 @@ async function generateSchedule(){
     const trialA=buildGlobalBlockSchedule(attempt);
     const trialB=buildFullClassSchedule(attempt);
     const trialC=buildConsistentTeacherSchedule(attempt);
-    [trialA,trialB,trialC].forEach(trial=>{
+    const trialD=buildGroupedTeacherSchedule(attempt);
+    [trialA,trialB,trialC,trialD].forEach(trial=>{
       if(!best || trial.score<best.score) best=trial;
     });
     if(best.issues.length===0) break;
   }
   schedule=best.schedule;
-  schedule=reassignTeachersConsistentlyFromClassLayout(schedule);
 
   renderTable();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
@@ -728,7 +729,7 @@ async function generateSchedule(){
   const branchIssues=analyzeBranchRulesObject(schedule);
   const teacherConsistencyIssues=analyzeTeacherConsistencyObject(schedule);
   const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0&&teacherConsistencyIssues.length===0;
-  const fixHint=ok ? '' : buildFailureFixHint(report,blockIssues);
+  const fixHint=ok ? '' : buildFailureFixHint(report,blockIssues,best?.issues||[]);
   let msg=`Program oturmadı.`;
   if(report.classIssues.length){
     msg=`Program oturmadı: ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls} ${report.classIssues[0].filled}/35 saat dolu.${fixHint}`;
@@ -761,9 +762,11 @@ function setWorkState(on,text='Program hazırlanıyor...'){
   document.querySelectorAll('button[onclick*="generateSchedule"],button[onclick*="generateFromDistribution"]').forEach(btn=>btn.disabled=!!on);
 }
 
-function buildFailureFixHint(report,blockIssues=[]){
-  const suggestions=collectUnavailableSuggestions(report,blockIssues);
+function buildFailureFixHint(report,blockIssues=[],solverIssues=[]){
+  const suggestions=collectUnavailableSuggestions(report,blockIssues,solverIssues);
   if(!suggestions.length){
+    const poolHint=buildTeacherPoolHint(blockIssues,solverIssues);
+    if(poolHint) return poolHint;
     return `<br><b>Öneri:</b> Boş saat kısıtından net bir aday bulunamadı. Ders dağıtımı, ders saatleri veya öğretmen branş havuzu kontrol edilmeli.`;
   }
   const rows=suggestions.slice(0,5).map(s=>{
@@ -773,7 +776,17 @@ function buildFailureFixHint(report,blockIssues=[]){
   return `<br><b>Rahat oturması için önce şunları açın:</b><br>${rows}`;
 }
 
-function collectUnavailableSuggestions(report,blockIssues=[]){
+function buildTeacherPoolHint(blockIssues=[],solverIssues=[]){
+  const issue=[...solverIssues,...blockIssues].find(x=>x&&x.cls&&x.subj);
+  if(!issue) return '';
+  const names=getLikelyTeacherIds(issue.cls,issue.subj)
+    .map(tid=>teachers.find(t=>t.id===tid)?.name)
+    .filter(Boolean)
+    .slice(0,6);
+  return `<br><b>Öneri:</b> ${issue.cls} ${issue.subj} dersi tek öğretmenle yerleşemiyor. Bu ders için Ders Dağıtımı ekranında öğretmen değiştirin veya havuzu genişletin.${names.length?` Şu an denenen öğretmenler: ${names.join(', ')}.`:''}`;
+}
+
+function collectUnavailableSuggestions(report,blockIssues=[],solverIssues=[]){
   const hits={};
   const addHit=(tid,label,weight=1,action='')=>{
     const teacher=teachers.find(t=>t.id===tid);
@@ -806,6 +819,16 @@ function collectUnavailableSuggestions(report,blockIssues=[]){
       Object.keys(teacherUnavailable[tid]||{}).slice(0,12).forEach(key=>{
         const [d,h]=key.split('_').map(Number);
         addHit(tid,`${DAYS[d]} ${h+1}. saat (${issue.cls} ${issue.subj} blok)`,1,describeUnavailableOpening(tid,d,h));
+      });
+    });
+  });
+
+  solverIssues.filter(issue=>issue&&issue.cls&&issue.subj&&issue.reason).slice(0,10).forEach(issue=>{
+    getLikelyTeacherIds(issue.cls,issue.subj).forEach(tid=>{
+      addGeneralUnavailableHints(tid,issue.cls,issue.subj,addHit);
+      Object.keys(teacherUnavailable[tid]||{}).slice(0,12).forEach(key=>{
+        const [d,h]=key.split('_').map(Number);
+        addHit(tid,`${DAYS[d]} ${h+1}. saat (${issue.cls} ${issue.subj})`,2,describeUnavailableOpening(tid,d,h));
       });
     });
   });
@@ -1044,7 +1067,7 @@ function buildFullClassSchedule(attempt){
   const classOrder=[...ALL_CLASSES];
   rotate(classOrder,attempt%classOrder.length);
   classOrder.forEach((cls,ci)=>{
-    const layout=buildClassBlockLayout(cls,attempt+ci*19);
+    const layout=findClassBlockLayout(cls,attempt+ci*19);
     if(!layout.length){
       issues.push({cls,reason:'Bloklar 5x7 tabloya yerlestirilemedi'});
       return;
@@ -1119,7 +1142,7 @@ function buildConsistentTeacherSchedule(attempt){
   const classOrder=[...ALL_CLASSES];
   rotate(classOrder,attempt%classOrder.length);
   classOrder.forEach((cls,ci)=>{
-    const layout=buildClassBlockLayout(cls,attempt+ci*23);
+    const layout=findClassBlockLayout(cls,attempt+ci*23);
     if(!layout.length){
       issues.push({cls,reason:'Bloklar 5x7 tabloya yerlestirilemedi'});
       return;
@@ -1164,6 +1187,103 @@ function buildConsistentTeacherSchedule(attempt){
   const teacherConsistencyIssues=analyzeTeacherConsistencyObject(trialSchedule);
   const score=issues.length*2000+report.classIssues.length*200+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000+teacherConsistencyIssues.length*1500;
   return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues,...teacherConsistencyIssues],score};
+}
+
+function buildGroupedTeacherSchedule(attempt){
+  const trialSchedule={};
+  const classBusy={};
+  const teacherLoad=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  ALL_CLASSES.forEach(cls=>{
+    classBusy[cls]={};
+    settings.days.forEach(d=>classBusy[cls][d]=Array(settings.hoursPerDay).fill(false));
+  });
+
+  const groups=[];
+  ALL_CLASSES.forEach((cls,ci)=>{
+    (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
+      groups.push({cls,subj,wh,blocks:splitLessonBlocks(wh),ci});
+    });
+  });
+  groups.sort((a,b)=>{
+    const ca=getCandidateTeachersForClassSubject(a.cls,a.subj).length;
+    const cb=getCandidateTeachersForClassSubject(b.cls,b.subj).length;
+    const ma=Math.max(...a.blocks);
+    const mb=Math.max(...b.blocks);
+    return mb-ma || b.wh-a.wh || ca-cb || (((a.ci+attempt)%17)-((b.ci+attempt)%17));
+  });
+
+  const issues=[];
+  groups.forEach(group=>{
+    const candidates=getCandidateTeachersForClassSubject(group.cls,group.subj).sort((a,b)=>
+      teacherLoad[a]-teacherLoad[b] || teacherUnavailableCount(a)-teacherUnavailableCount(b) || (((a+attempt)%11)-((b+attempt)%11))
+    );
+    let placed=false;
+    for(const tid of candidates){
+      const slots=planGroupSlots(group,tid,trialSchedule,classBusy,attempt);
+      if(!slots) continue;
+      slots.forEach(slot=>{
+        trialSchedule[`${tid}_${slot.d}_${slot.h}`]={cls:group.cls,subj:group.subj};
+        classBusy[group.cls][slot.d][slot.h]=true;
+        teacherLoad[tid]++;
+      });
+      placed=true;
+      break;
+    }
+    if(!placed) issues.push({cls:group.cls,subj:group.subj,reason:'Sınıf-ders tek öğretmenle yerleşmedi'});
+  });
+
+  const report=analyzeScheduleObject(trialSchedule);
+  const blockIssues=analyzeBlockRulesObject(trialSchedule);
+  const branchIssues=analyzeBranchRulesObject(trialSchedule);
+  const teacherConsistencyIssues=analyzeTeacherConsistencyObject(trialSchedule);
+  const score=issues.length*2500+report.classIssues.length*250+report.totalMissing*25+report.totalGaps+blockIssues.length*400+branchIssues.length*1000+teacherConsistencyIssues.length*2000;
+  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues,...teacherConsistencyIssues],score};
+}
+
+function planGroupSlots(group,tid,scheduleObj,classBusy,seed=0){
+  const slots=[];
+  const tempBusy=settings.days.reduce((acc,d)=>{acc[d]=[...classBusy[group.cls][d]];return acc;},{});
+  const usedSubjectDays=new Set();
+  const blocks=[...group.blocks].sort((a,b)=>b-a);
+  for(let bi=0;bi<blocks.length;bi++){
+    const len=blocks[bi];
+    const candidates=[];
+    settings.days.forEach(d=>{
+      if(usedSubjectDays.has(d)) return;
+      for(let h=0;h<=settings.hoursPerDay-len;h++){
+        let ok=true;
+        for(let x=0;x<len;x++){
+          if(tempBusy[d][h+x]) ok=false;
+          if(scheduleObj[`${tid}_${d}_${h+x}`]) ok=false;
+          if(isTeacherUnavailable(tid,d,h+x)) ok=false;
+        }
+        if(ok) candidates.push({d,h});
+      }
+    });
+    if(!candidates.length) return null;
+    candidates.sort((a,b)=>{
+      const usedA=tempBusy[a.d].filter(Boolean).length;
+      const usedB=tempBusy[b.d].filter(Boolean).length;
+      return usedA-usedB || (((a.d*7+a.h+seed+bi)%13)-((b.d*7+b.h+seed+bi)%13));
+    });
+    const pick=candidates[0];
+    usedSubjectDays.add(pick.d);
+    for(let x=0;x<len;x++){
+      tempBusy[pick.d][pick.h+x]=true;
+      slots.push({d:pick.d,h:pick.h+x});
+    }
+  }
+  return slots;
+}
+
+function findClassBlockLayout(cls,seed=0){
+  const seeds=[0,seed,seed+1,seed+3,seed+7,seed+11,seed+13,seed+19,seed+29,seed+37];
+  for(let i=0;i<80;i++) seeds.push(seed+i*7+i*i);
+  for(const s of seeds){
+    const layout=buildClassBlockLayout(cls,s);
+    if(layout.length) return layout;
+  }
+  return [];
 }
 
 function placeGlobalBlock(block,scheduleObj,classBusy,teacherLoad,teacherChoice,seed=0){
@@ -1267,18 +1387,22 @@ function buildClassBlockLayout(cls,seed=0){
 }
 
 function findTeacherForBlock(cls,subj,day,hour,len,scheduleObj,teacherLoad,teacherChoice={},seed=0){
+  const choiceKey=`${cls}|${subj}`;
+  if(teacherChoice[choiceKey]){
+    return canTeacherTakeBlock(teacherChoice[choiceKey],day,hour,len,scheduleObj) ? teacherChoice[choiceKey] : null;
+  }
   const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.manual&&a.cls===cls&&a.subj===subj)).map(t=>t.id);
   const preferred=[...new Set([...assigned,...getTeacherPoolForClass(cls,subj)])].filter(tid=>teachers.some(t=>t.id===tid));
   const candidates=preferred.filter(tid=>canTeacherTakeBlock(tid,day,hour,len,scheduleObj));
   if(candidates.length){
     candidates.sort((a,b)=>{
-      const assignedA=assigned.includes(a)?0:1;
-      const assignedB=assigned.includes(b)?0:1;
-      return assignedA-assignedB
+      return teacherClassSubjectPressure(a,cls,subj)-teacherClassSubjectPressure(b,cls,subj)
         || teacherUnavailableCount(a)-teacherUnavailableCount(b)
         || (teacherLoad[a]-teacherLoad[b])
+        || (assigned.includes(a)?0:1)-(assigned.includes(b)?0:1)
         || (((a+seed)%7)-((b+seed)%7));
     });
+    teacherChoice[choiceKey]=candidates[0];
     return candidates[0];
   }
   return null;
@@ -1294,6 +1418,15 @@ function canTeacherTakeBlock(tid,day,hour,len,scheduleObj){
 
 function teacherUnavailableCount(tid){
   return Object.keys(teacherUnavailable[tid]||{}).length;
+}
+
+function teacherClassSubjectPressure(tid,cls,subj){
+  const teacher=teachers.find(t=>t.id===tid);
+  if(!teacher) return 999;
+  const assigned=(teacher.assignments||[]).filter(a=>a.subj===subj);
+  const sameGrade=assigned.filter(a=>a.cls&&a.cls.split('-')[0]===cls.split('-')[0]).length;
+  const totalHours=assigned.reduce((sum,a)=>sum+(parseInt(a.wh)||0),0);
+  return sameGrade*8+totalHours;
 }
 
 function unifyClassSubjectTeachers(scheduleObj){
@@ -2350,6 +2483,7 @@ function applyProgramState(data){
 
 function migrateReligionTwoHours(){
   SUBJECTS=SUBJECTS.filter(s=>s!=='SEÇMELİ4');
+  if(!SUBJECTS.includes('EK DERS')) SUBJECTS.push('EK DERS');
   teachers=teachers.filter(t=>t.id!==43);
   delete teacherUnavailable[43];
   Object.values(GRADE_PLAN).forEach(plan=>{
@@ -2359,6 +2493,7 @@ function migrateReligionTwoHours(){
     else plan.push({subj:'DİN',wh:2});
     const secIng=plan.find(l=>l.subj==='SEÇİNG');
     if(secIng&&secIng.wh>1) secIng.wh=1;
+    moveInflatedTurkishToExtraLesson(plan);
     normalizeClassPlanTo35FromPlan(plan,'DİN');
   });
   Object.values(CLASS_PLAN).forEach(plan=>{
@@ -2368,6 +2503,7 @@ function migrateReligionTwoHours(){
     else plan.push({subj:'DİN',wh:2});
     const secIng=plan.find(l=>l.subj==='SEÇİNG');
     if(secIng&&secIng.wh>1) secIng.wh=1;
+    moveInflatedTurkishToExtraLesson(plan);
     normalizeClassPlanTo35FromPlan(plan,'DİN');
   });
   teachers.forEach(t=>{
@@ -2377,6 +2513,16 @@ function migrateReligionTwoHours(){
   Object.keys(schedule).forEach(key=>{
     if(schedule[key]?.subj==='SEÇMELİ4') delete schedule[key];
   });
+}
+
+function moveInflatedTurkishToExtraLesson(plan){
+  const trk=plan.find(l=>l.subj==='TRK');
+  if(!trk||trk.wh<=5) return;
+  const extra=trk.wh-5;
+  trk.wh=5;
+  const ek=plan.find(l=>l.subj==='EK DERS');
+  if(ek) ek.wh+=extra;
+  else plan.push({subj:'EK DERS',wh:extra});
 }
 
 function hasManualDistribution(){
