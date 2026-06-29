@@ -743,11 +743,86 @@ function generateSchedule(){
   const report=analyzeSchedule();
   const blockIssues=analyzeBlockRulesObject(schedule);
   const branchIssues=analyzeBranchRulesObject(schedule);
+  const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0;
+  const fixHint=ok ? '' : buildFailureFixHint(report,blockIssues);
   const msg=report.classIssues.length===0
     ? `Program oluşturuldu — 24/24 sınıf 35 saat dolu, sınıf boşluğu yok.`
-    : `Program oturmadı: ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls} ${report.classIssues[0].filled}/35 saat dolu.`;
-  const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0;
+    : `Program oturmadı: ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls} ${report.classIssues[0].filled}/35 saat dolu.${fixHint}`;
   showAlert(ok?'Program oluşturuldu - 24/24 sınıf 35 saat dolu, dersler blok kuralına uygun.':msg,ok?'ok':'warn');
+}
+
+function buildFailureFixHint(report,blockIssues=[]){
+  const suggestions=collectUnavailableSuggestions(report,blockIssues);
+  if(!suggestions.length){
+    return `<br><b>Öneri:</b> Boş saat kısıtından net bir aday bulunamadı. Ders dağıtımı, ders saatleri veya öğretmen branş havuzu kontrol edilmeli.`;
+  }
+  const rows=suggestions.slice(0,4).map(s=>`${s.teacher}: ${s.slots.slice(0,4).join(', ')}`).join('<br>');
+  return `<br><b>Boş saat önerisi:</b><br>${rows}`;
+}
+
+function collectUnavailableSuggestions(report,blockIssues=[]){
+  const hits={};
+  const addHit=(tid,label,weight=1)=>{
+    const teacher=teachers.find(t=>t.id===tid);
+    if(!teacher) return;
+    if(!hits[tid]) hits[tid]={tid,teacher:teacher.name,score:0,slots:[]};
+    hits[tid].score+=weight;
+    if(!hits[tid].slots.includes(label)) hits[tid].slots.push(label);
+  };
+
+  report.classIssues.slice(0,8).forEach(issue=>{
+    const cls=issue.cls;
+    const empty=getClassEmptySlots(cls,schedule);
+    const missing=getClassMissingSubjects(cls,schedule);
+    Object.keys(missing).filter(subj=>missing[subj]>0).forEach(subj=>{
+      const ids=getLikelyTeacherIds(cls,subj);
+      empty.forEach(slot=>{
+        ids.forEach(tid=>{
+          if(isTeacherUnavailable(tid,slot.d,slot.h)){
+            addHit(tid,`${DAYS[slot.d]} ${slot.h+1}. saat (${cls} ${subj})`,3);
+          }
+        });
+      });
+    });
+  });
+
+  blockIssues.slice(0,8).forEach(issue=>{
+    getLikelyTeacherIds(issue.cls,issue.subj).forEach(tid=>{
+      Object.keys(teacherUnavailable[tid]||{}).slice(0,12).forEach(key=>{
+        const [d,h]=key.split('_').map(Number);
+        addHit(tid,`${DAYS[d]} ${h+1}. saat (${issue.cls} ${issue.subj} blok)`,1);
+      });
+    });
+  });
+
+  return Object.values(hits).sort((a,b)=>b.score-a.score || a.teacher.localeCompare(b.teacher,'tr'));
+}
+
+function getLikelyTeacherIds(cls,subj){
+  const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.cls===cls&&a.subj===subj)).map(t=>t.id);
+  return [...new Set([...assigned,...getTeacherPoolForClass(cls,subj)])].filter(tid=>teachers.some(t=>t.id===tid));
+}
+
+function getClassEmptySlots(cls,scheduleObj){
+  const slots=[];
+  settings.days.forEach(d=>{
+    for(let h=0;h<settings.hoursPerDay;h++){
+      if(!getClassLessonAt(scheduleObj,cls,d,h)) slots.push({d,h});
+    }
+  });
+  return slots;
+}
+
+function getClassMissingSubjects(cls,scheduleObj){
+  const missing={};
+  (CLASS_PLAN[cls]||[]).forEach(l=>{missing[l.subj]=(missing[l.subj]||0)+(parseInt(l.wh)||0);});
+  settings.days.forEach(d=>{
+    for(let h=0;h<settings.hoursPerDay;h++){
+      const lesson=getClassLessonAt(scheduleObj,cls,d,h);
+      if(lesson) missing[lesson.subj]=(missing[lesson.subj]||0)-1;
+    }
+  });
+  return missing;
 }
 
 function normalizeTeacherAssignments(){
@@ -1947,7 +2022,7 @@ function exportCSV(){
 function showAlert(msg,type){
   const el=document.getElementById('alert-area');
   el.innerHTML=`<div class="alert ${type}">${msg}</div>`;
-  setTimeout(()=>el.innerHTML='',4000);
+  setTimeout(()=>el.innerHTML='',type==='warn'?10000:4000);
 }
 
 let googleClientId='';

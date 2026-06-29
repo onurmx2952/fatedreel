@@ -1,0 +1,64 @@
+﻿Run start: 2026-06-29T20:48:52.7598142+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Automation: FatedReel URL ekleme (fatedreel-url-ekleme)
+Schedule note: recurring indexing workflow; run IndexNow and verify webmaster console availability.
+Previous log: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-29-204624.log LastWriteTime=2026-06-29T20:47:53.1721144+03:00 AgeHours=0.02
+Son 6 saatte calisma: VAR
+
+Workflow files:
+submit_indexnow.py: present
+sitemap.xml: present
+b6f09cebefa4ecf4e122c262ba6097c6.txt: present
+indexing-next-batch.txt/indexing-google-batch.txt/indexing-yandex-batch.txt: present
+
+IndexNow command: python .\submit_indexnow.py
+IndexNow output begin:
+IndexNow status: 200
+Submitted URLs: 3124
+IndexNow output end:
+IndexNow exit code: 0
+
+CDP check: http://127.0.0.1:9222/json/version
+CDP status: BLOCKED Uzak sunucuya bağlanılamıyor
+
+Google next candidate: https://fatedreel.com/tt0243794
+Live URL test: https://fatedreel.com/tt0243794
+Live URL test result: HTTP 200; final URL https://fatedreel.com/tt0243794; bytes 90703
+
+Google Search Console: authenticated as onurmx2@gmail.com; property fatedreel.com opened.
+Google direct inspect deep link result: Error 404 (Bulunamadı)!!1 for tt0243794; treated as deep-link probe only.
+Google URL inspection: https://fatedreel.com/tt0243794 reported URL Google'da mevcut; request indexing available.
+Google indexing request confirmed: https://fatedreel.com/tt0243794; success dialog text Dizine eklenmesi istendi; dialog closed.
+
+Google next candidate: https://fatedreel.com/tt0243862
+Live URL test: https://fatedreel.com/tt0243862
+Live URL test result: HTTP 200; final URL https://fatedreel.com/tt0243862; bytes 91565
+
+Google URL inspection: https://fatedreel.com/tt0243862 reported URL Google'da mevcut; request indexing available.
+Google indexing request confirmed: https://fatedreel.com/tt0243862; success dialog text Dizine eklenmesi istendi.
+
+Google next candidate: https://fatedreel.com/tt0244316
+Live URL test: https://fatedreel.com/tt0244316
+Live URL test result: HTTP 200; final URL https://fatedreel.com/tt0244316; bytes 95023
+
+Google URL inspection: https://fatedreel.com/tt0244316 reported URL Google'da mevcut; request indexing available.
+Google indexing request confirmed: https://fatedreel.com/tt0244316; success dialog text Dizine eklenmesi istendi.
+Google next candidate for future run: https://fatedreel.com/tt0244479
+Google quota/blocker status: no quota/CAPTCHA/login/MFA/security prompt observed during 3 confirmed requests in this run.
+
+Bing Webmaster Tools: BLOCKED - loaded public/about page with Oturum aç sign-in prompt; final URL https://www.bing.com/webmasters/about?siteUrl=https%3A%2F%2Ffatedreel.com&from=submiturl; authenticated session not available.
+Bing UI requested: 0; IndexNow API submission already succeeded.
+
+Yandex Webmaster: authenticated as onurmx2@gmail.com; property https://fatedreel.com opened.
+Yandex Reindex pages: BLOCKED - daily limit reached. Exact UI text: You have reached your daily limit of added URLs. Send button disabled.
+Yandex UI requested this run: 0; existing sent pages show 06/29/2026 3:04 PM entries including https://fatedreel.com/tt0216787.
+
+Final summary:
+Son 6 saatte calisma: VAR
+IndexNow: submitted 3124 URLs; HTTP/status 200; command python .\submit_indexnow.py; exit code 0.
+Google Search Console: 3 indexing requests confirmed this run: https://fatedreel.com/tt0243794, https://fatedreel.com/tt0243862, https://fatedreel.com/tt0244316. Last attempted URL: https://fatedreel.com/tt0244316. Next candidate: https://fatedreel.com/tt0244479. Quota/CAPTCHA/login/MFA/security prompt not observed.
+Bing Webmaster Tools: 0 UI requests; BLOCKED - public/about page with Oturum aç sign-in prompt; authenticated session not available. IndexNow API already succeeded.
+Yandex Webmaster: 0 UI requests this run; BLOCKED - daily limit reached, exact UI text You have reached your daily limit of added URLs.; Send disabled. Last attempted/carry-forward URL from prior batch remains https://fatedreel.com/tt0216787.
+Site edits: none. Technical indexing blocker found: none.
+Log file path: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-29-204852.log
+Run end: 2026-06-29T20:59:42.8123347+03:00

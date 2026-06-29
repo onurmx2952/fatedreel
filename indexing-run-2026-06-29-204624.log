@@ -1,0 +1,38 @@
+﻿RUN START: 2026-06-29T20:46:24.6889566+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+AUTOMATION: FatedReel URL ekleme (fatedreel-url-ekleme)
+SCHEDULE NOTE: recurring indexing workflow; create fresh log, run IndexNow, then verify live webmaster console availability.
+PREVIOUS LOG: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-29-144852.log
+PREVIOUS LOG TIME: 2026-06-29 15:04:59
+PREVIOUS LOG AGE HOURS: 5.69
+SON 6 SAATTE CALISMA: VAR
+
+IndexNow submission:
+Command: C:\Users\aa\AppData\Local\Python\bin\python.exe .\submit_indexnow.py
+  IndexNow status: 200
+  Submitted URLs: 3124
+Exit code: 0
+Sitemap URL count: 3124
+Sitemap movie URL count: 3123
+
+Browser/control availability check:
+CDP 127.0.0.1:9222: BLOCKED - Uzak sunucuya baglanilamiyor.
+TCP 9222 listener: NOT FOUND.
+Google Search Console: 0 requested; BLOCKED because controllable Chrome/CDP session is unavailable in this run. No live quota/login/CAPTCHA/MFA state could be verified.
+Bing Webmaster Tools UI: 0 requested; BLOCKED because controllable Chrome/CDP session is unavailable in this run. IndexNow API submission succeeded.
+Yandex Webmaster UI: 0 requested; BLOCKED because controllable Chrome/CDP session is unavailable in this run. IndexNow API submission succeeded.
+
+Technical indexing checks:
+Live sitemap HTTP status: 200
+Technical indexing blocker found: none from sitemap/IndexNow checks.
+Site files edited: NO.
+
+Final summary:
+Son 6 saatte calisma: VAR.
+IndexNow submitted/requested: 3124 URLs; HTTP/status result: 200; command exit code: 0; failures: none observed.
+Google status: BLOCKED - no controllable Chrome/CDP session.
+Bing status: IndexNow OK; UI BLOCKED - no controllable Chrome/CDP session.
+Yandex status: IndexNow OK; UI BLOCKED - no controllable Chrome/CDP session.
+Quota/CAPTCHA/login/MFA/security prompt status: not reached/observed; blocker was browser control availability.
+Run finish: 2026-06-29T20:47:53.1173979+03:00
+Log file: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-29-204624.log

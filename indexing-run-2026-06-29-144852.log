@@ -1,0 +1,67 @@
+﻿Run start: 2026-06-29T14:48:52.1609352+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Automation ID: fatedreel-url-ekleme
+Schedule note: Automation: FatedReel URL ekleme; recurring indexing workflow; last run provided: 2026-06-29T05:41:39.921Z
+
+Workflow file check:
+- submit_indexnow.py: True
+- sitemap.xml: True
+- b6f09cebefa4ecf4e122c262ba6097c6.txt: True
+- indexing-next-batch.txt: True
+- indexing-google-batch.txt: True
+- indexing-yandex-batch.txt: True
+
+Previous newest log: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-29-144554.log
+Previous newest log LastWriteTime: 2026-06-29T14:47:04.5807218+03:00
+Hours since previous log: 0.035
+Son 6 saatte calisma: VAR
+
+Sitemap URL count: 3124
+Sitemap movie URL count: 3123
+First sitemap movie URL: https://fatedreel.com/tt0118852
+
+IndexNow submission:
+Command: python .\submit_indexnow.py
+Exit code: 0
+Output:
+IndexNow status: 200
+Submitted URLs: 3124
+
+Browser/CDP reachability:
+CDP http://127.0.0.1:9222/json/version BLOCKED: Uzak sunucuya bağlanılamıyor
+
+Webmaster console probe results:
+Google Search Console: LOADED authenticated property page; title Genel Bakis; URL https://search.google.com/search-console?resource_id=sc-domain%3Afatedreel.com
+Bing Webmaster Tools: BLOCKED - loaded public/about page with Oturum aç; final URL https://www.bing.com/webmasters/about?from=home; authenticated session not available
+Yandex Webmaster: LOADED authenticated site dashboard; title Summary - https://fatedreel.com - Yandex Webmaster; account text onurmx2@gmail.com
+
+Live webmaster submission results:
+Google Search Console: authenticated and controllable as onurmx2@gmail.com. Requested indexing confirmed for 3 URLs:
+- https://fatedreel.com/tt0238891 -> Dizine eklenmesi istendi
+- https://fatedreel.com/tt0240419 -> Dizine eklenmesi istendi
+- https://fatedreel.com/tt0240913 -> Dizine eklenmesi istendi
+Google last attempted URL: https://fatedreel.com/tt0240913
+Google quota/blocker status: no quota/CAPTCHA/login/MFA/security prompt observed during the 3 confirmed requests; direct inspect deep link returned 404 but UI inspection worked.
+
+Bing Webmaster Tools: BLOCKED - authenticated session not available. Probe loaded public/about page with Oturum ac / sign-in prompt; final URL https://www.bing.com/webmasters/about?from=home.
+Bing UI requested count: 0. Bing/Yandex IndexNow API submission already succeeded through IndexNow status 200.
+
+Yandex Webmaster: authenticated and controllable as onurmx2@gmail.com. Page indexing analysis confirmed https://fatedreel.com/tt0292242 is allowed to appear in Yandex search results. Reindex pages accepted 150 URLs total this run:
+- First 20 from indexing-next-batch.txt: https://fatedreel.com/tt0281718 through https://fatedreel.com/tt0291579 -> In queue at 06/29/2026 3:02 PM
+- Next 100 from indexing-next-batch.txt: https://fatedreel.com/tt0292242 through remaining file end -> In queue at 06/29/2026 3:03 PM
+- Final 30 from sitemap.xml not already submitted this run: https://fatedreel.com/tt0118852 through https://fatedreel.com/tt0216787 -> In queue at 06/29/2026 3:04 PM
+Yandex last attempted URL: https://fatedreel.com/tt0216787
+Yandex quota/blocker status: DAILY LIMIT REACHED - page displayed "You have reached your daily limit of added URLs."
+
+Technical indexing checks:
+Technical indexing blocker found: none from sitemap, IndexNow, Google URL inspection, or Yandex page indexing analysis.
+Site files edited: NO.
+
+Final summary:
+Son 6 saatte calisma: VAR.
+IndexNow submitted/requested: 3124 URLs; HTTP/status result: 200; command exit code: 0; failures: none observed.
+Google UI requested: 3 URLs confirmed; last attempted https://fatedreel.com/tt0240913; quota/CAPTCHA/login/MFA/security prompt not observed.
+Bing UI requested: 0; BLOCKED - no authenticated Bing Webmaster Tools session, public sign-in/about page shown.
+Yandex UI requested: 150 URLs confirmed In queue; last attempted https://fatedreel.com/tt0216787; quota status DAILY LIMIT REACHED.
+Run finish: 2026-06-29T15:04:59.9350962+03:00
+Log file: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-29-144852.log
