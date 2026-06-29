@@ -20,6 +20,7 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .btn:hover{background:#f5f5f5}
 .btn.primary{background:#2563eb;color:#fff;border-color:#2563eb}
 .btn.primary:hover{background:#1d4ed8}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
 .btn.danger{background:#fef2f2;color:#dc2626;border-color:#fca5a5}
 .toolbar{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
 .toolbar h2{font-size:16px;font-weight:700;flex:1}
@@ -38,6 +39,14 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .conflict{background:#fef2f2!important}
 .conflict .c-cls,.conflict .c-sub{color:#dc2626!important}
 .empty-cell{color:#ddd;font-size:11px}
+.alert{position:relative;padding-right:34px}
+.alert-close{position:absolute;right:10px;top:8px;border:0;background:transparent;font-size:18px;line-height:1;cursor:pointer;color:inherit;opacity:.65}
+.alert-close:hover{opacity:1}
+.work-overlay{position:fixed;inset:0;background:rgba(248,250,252,.72);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;z-index:500}
+.work-overlay.on{display:flex}
+.work-box{background:#fff;border:1px solid #dbe3ef;border-radius:14px;padding:18px 22px;box-shadow:0 18px 60px rgba(15,23,42,.18);display:flex;gap:12px;align-items:center;font-size:14px;font-weight:700;color:#1f2937}
+.spinner{width:18px;height:18px;border-radius:50%;border:3px solid #dbeafe;border-top-color:#2563eb;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 .cls-tbl{border-collapse:collapse;width:100%;min-width:600px}
 .cls-tbl th,.cls-tbl td{border:1px solid #eee;padding:0;text-align:center}
 .cls-tbl th{background:#f8f9fa;font-weight:600;color:#555;padding:8px 4px;position:sticky;top:0;z-index:2}
@@ -311,6 +320,9 @@ body.auth-locked .login-screen{display:flex}
 </div>
 <div class="modal-bg" id="tmodal">
   <div class="modal"><h3 id="tmodal-title"></h3><div id="tmodal-body"></div></div>
+</div>
+<div id="work-overlay" class="work-overlay">
+  <div class="work-box"><span class="spinner"></span><span id="work-text">Program hazırlanıyor...</span></div>
 </div>
 
 <script>
@@ -670,7 +682,14 @@ function updateStats(total){
   else b.style.display='none';
 }
 
-function generateSchedule(){
+let scheduleGenerating=false;
+
+async function generateSchedule(){
+  if(scheduleGenerating) return;
+  scheduleGenerating=true;
+  setWorkState(true,'Program hazırlanıyor...');
+  await yieldToBrowser();
+  try{
   if(document.querySelectorAll('#distribution-body .dist-row').length) saveDistribution(true);
   normalizeTeacherAssignments();
   trimUnavailableToTeacherLoads();
@@ -685,6 +704,10 @@ function generateSchedule(){
 
   let best=null;
   for(let attempt=0;attempt<250;attempt++){
+    if(attempt&&attempt%8===0){
+      setWorkState(true,`Program hazırlanıyor... ${attempt}/250`);
+      await yieldToBrowser();
+    }
     const trialA=buildGlobalBlockSchedule(attempt);
     const trialB=buildFullClassSchedule(attempt);
     const trialC=buildConsistentTeacherSchedule(attempt);
@@ -720,6 +743,22 @@ function generateSchedule(){
     msg=`Program oturmadı: ${branchIssues.length} branş ataması sorunu var. İlk sorun: ${first.cls} ${first.subj}.`;
   }
   showAlert(ok?'Program oluşturuldu - 24/24 sınıf 35 saat dolu, dersler blok kuralına uygun.':msg,ok?'ok':'warn');
+  }finally{
+    scheduleGenerating=false;
+    setWorkState(false);
+  }
+}
+
+function yieldToBrowser(){
+  return new Promise(resolve=>setTimeout(resolve,0));
+}
+
+function setWorkState(on,text='Program hazırlanıyor...'){
+  const overlay=document.getElementById('work-overlay');
+  const label=document.getElementById('work-text');
+  if(label) label.textContent=text;
+  if(overlay) overlay.classList.toggle('on',!!on);
+  document.querySelectorAll('button[onclick*="generateSchedule"],button[onclick*="generateFromDistribution"]').forEach(btn=>btn.disabled=!!on);
 }
 
 function buildFailureFixHint(report,blockIssues=[]){
@@ -727,18 +766,22 @@ function buildFailureFixHint(report,blockIssues=[]){
   if(!suggestions.length){
     return `<br><b>Öneri:</b> Boş saat kısıtından net bir aday bulunamadı. Ders dağıtımı, ders saatleri veya öğretmen branş havuzu kontrol edilmeli.`;
   }
-  const rows=suggestions.slice(0,4).map(s=>`${s.teacher}: ${s.slots.slice(0,4).join(', ')}`).join('<br>');
-  return `<br><b>Boş saat önerisi:</b><br>${rows}`;
+  const rows=suggestions.slice(0,5).map(s=>{
+    const actions=s.actions.length?s.actions.slice(0,3):s.slots.slice(0,3);
+    return `${s.teacher}: ${actions.join(' / ')}`;
+  }).join('<br>');
+  return `<br><b>Rahat oturması için önce şunları açın:</b><br>${rows}`;
 }
 
 function collectUnavailableSuggestions(report,blockIssues=[]){
   const hits={};
-  const addHit=(tid,label,weight=1)=>{
+  const addHit=(tid,label,weight=1,action='')=>{
     const teacher=teachers.find(t=>t.id===tid);
     if(!teacher) return;
-    if(!hits[tid]) hits[tid]={tid,teacher:teacher.name,score:0,slots:[]};
+    if(!hits[tid]) hits[tid]={tid,teacher:teacher.name,score:0,slots:[],actions:[]};
     hits[tid].score+=weight;
     if(!hits[tid].slots.includes(label)) hits[tid].slots.push(label);
+    if(action&&!hits[tid].actions.includes(action)) hits[tid].actions.push(action);
   };
 
   report.classIssues.slice(0,8).forEach(issue=>{
@@ -750,10 +793,11 @@ function collectUnavailableSuggestions(report,blockIssues=[]){
       empty.forEach(slot=>{
         ids.forEach(tid=>{
           if(isTeacherUnavailable(tid,slot.d,slot.h)){
-            addHit(tid,`${DAYS[slot.d]} ${slot.h+1}. saat (${cls} ${subj})`,3);
+            addHit(tid,`${DAYS[slot.d]} ${slot.h+1}. saat (${cls} ${subj})`,3,describeUnavailableOpening(tid,slot.d,slot.h));
           }
         });
       });
+      ids.forEach(tid=>addGeneralUnavailableHints(tid,cls,subj,addHit));
     });
   });
 
@@ -761,12 +805,37 @@ function collectUnavailableSuggestions(report,blockIssues=[]){
     getLikelyTeacherIds(issue.cls,issue.subj).forEach(tid=>{
       Object.keys(teacherUnavailable[tid]||{}).slice(0,12).forEach(key=>{
         const [d,h]=key.split('_').map(Number);
-        addHit(tid,`${DAYS[d]} ${h+1}. saat (${issue.cls} ${issue.subj} blok)`,1);
+        addHit(tid,`${DAYS[d]} ${h+1}. saat (${issue.cls} ${issue.subj} blok)`,1,describeUnavailableOpening(tid,d,h));
       });
     });
   });
 
   return Object.values(hits).sort((a,b)=>b.score-a.score || a.teacher.localeCompare(b.teacher,'tr'));
+}
+
+function addGeneralUnavailableHints(tid,cls,subj,addHit){
+  const blocked=teacherUnavailable[tid]||{};
+  settings.days.forEach(d=>{
+    const hours=Object.keys(blocked).filter(key=>key.startsWith(`${d}_`)).map(key=>parseInt(key.split('_')[1])).sort((a,b)=>a-b);
+    if(!hours.length) return;
+    const weight=hours.length>=settings.hoursPerDay?2:1;
+    addHit(tid,`${DAYS[d]} kısıtı (${cls} ${subj})`,weight,describeUnavailableOpening(tid,d,hours[0]));
+  });
+}
+
+function describeUnavailableOpening(tid,d,h){
+  const teacher=teachers.find(t=>t.id===tid);
+  const name=teacher?teacher.name:'Öğretmen';
+  const hours=Object.keys(teacherUnavailable[tid]||{})
+    .filter(key=>key.startsWith(`${d}_`))
+    .map(key=>parseInt(key.split('_')[1]))
+    .sort((a,b)=>a-b);
+  if(hours.length>=settings.hoursPerDay) return `${DAYS[d]} boş gününü açın`;
+  const morning=morningHours();
+  if(morning.length&&morning.every(x=>hours.includes(x))) return `${DAYS[d]} sabahını açın`;
+  const late=lateDayHours();
+  if(late.length&&late.every(x=>hours.includes(x))) return `${DAYS[d]} gün sonunu açın`;
+  return `${DAYS[d]} ${h+1}. saati açın`;
 }
 
 function getLikelyTeacherIds(cls,subj){
@@ -2222,8 +2291,8 @@ function exportCSV(){
 }
 function showAlert(msg,type){
   const el=document.getElementById('alert-area');
-  el.innerHTML=`<div class="alert ${type}">${msg}</div>`;
-  setTimeout(()=>el.innerHTML='',type==='warn'?10000:4000);
+  el.innerHTML=`<div class="alert ${type}"><button class="alert-close" onclick="this.closest('.alert').remove()">×</button>${msg}</div>`;
+  if(type!=='warn') setTimeout(()=>el.innerHTML='',4000);
 }
 
 let googleClientId='';
