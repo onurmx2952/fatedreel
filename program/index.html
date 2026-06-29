@@ -777,6 +777,7 @@ function seedDefaultDistribution(){
   ]));
 
   ALL_CLASSES.forEach(cls=>{
+    normalizeClassPlanTo35(cls);
     (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
       const key=`${cls}|${subj}`;
       const preferred=(prefs[key]||[]).filter(id=>byId[id]);
@@ -822,6 +823,47 @@ function ensureClassLesson(cls,subj,wh){
     if(!gExisting) GRADE_PLAN[grade].push({subj,wh});
   }
   if(!SUBJECTS.includes(subj)) SUBJECTS.push(subj);
+}
+
+function ensureClassLesson35(cls,subj,wh){
+  if(!CLASS_PLAN[cls]) CLASS_PLAN[cls]=[];
+  const existing=CLASS_PLAN[cls].find(l=>l.subj===subj);
+  if(existing) existing.wh=wh;
+  else CLASS_PLAN[cls].push({subj,wh});
+  if(!SUBJECTS.includes(subj)) SUBJECTS.push(subj);
+  normalizeClassPlanTo35(cls,subj);
+}
+
+function normalizeClassPlanTo35(cls,protectedSubj=''){
+  if(!CLASS_PLAN[cls]) CLASS_PLAN[cls]=[];
+  let plan=CLASS_PLAN[cls].filter(l=>l&&l.subj&&parseInt(l.wh)>0).map(l=>({subj:l.subj,wh:parseInt(l.wh)||0}));
+  const merged={};
+  plan.forEach(l=>{merged[l.subj]=(merged[l.subj]||0)+l.wh;});
+  plan=Object.entries(merged).map(([subj,wh])=>({subj,wh}));
+
+  let total=plan.reduce((s,l)=>s+l.wh,0);
+  if(total<35){
+    const missing=35-total;
+    const existing=plan.find(l=>l.subj==='EK DERS');
+    if(existing) existing.wh+=missing;
+    else plan.push({subj:'EK DERS',wh:missing});
+    if(!SUBJECTS.includes('EK DERS')) SUBJECTS.push('EK DERS');
+    total=35;
+  }
+
+  while(total>35&&plan.length){
+    const target=plan.find(l=>l.subj!==protectedSubj&&['REH','SEÇİNG','SEÇİMA','BLÜM','EK DERS'].includes(l.subj)&&l.wh>0)
+      || plan.find(l=>l.subj!==protectedSubj&&l.wh>1)
+      || plan.find(l=>l.subj!==protectedSubj&&l.wh>0)
+      || plan.find(l=>l.wh>1)
+      || plan[plan.length-1];
+    if(!target) break;
+    target.wh--;
+    total--;
+    plan=plan.filter(l=>l.wh>0);
+  }
+
+  CLASS_PLAN[cls]=plan;
 }
 
 function buildFullClassSchedule(attempt){
@@ -1731,14 +1773,39 @@ function saveDistribution(silent=false){
 function commitDistributionRows(){
   teachers.forEach(t=>{t.assignments=(t.assignments||[]).filter(a=>!a.manual);});
   const rows=Array.from(document.querySelectorAll('#distribution-body .dist-row'));
+  const preferred={};
   rows.forEach(row=>{
     const tid=parseInt(row.querySelector('.dist-teacher').value);
     const t=teachers.find(x=>x.id===tid);
     if(!t) return;
     const a={cls:row.querySelector('.dist-class').value,subj:row.querySelector('.dist-subj').value,wh:parseInt(row.querySelector('.dist-wh').value)||1,manual:true};
-    t.assignments.push(a);
+    ensureClassLesson35(a.cls,a.subj,a.wh);
+    preferred[`${a.cls}|${a.subj}`]=tid;
     if(!t.subjects.includes(a.subj)) t.subjects.push(a.subj);
   });
+  fillDistributionTo35(preferred);
+}
+
+function fillDistributionTo35(preferred={}){
+  const byId=Object.fromEntries(teachers.map(t=>[t.id,t]));
+  const load=Object.fromEntries(teachers.map(t=>[t.id,(t.assignments||[]).reduce((s,a)=>s+(parseInt(a.wh)||0),0)]));
+  ALL_CLASSES.forEach(cls=>{
+    normalizeClassPlanTo35(cls);
+    (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
+      const preferredTid=preferred[`${cls}|${subj}`];
+      const pool=[...new Set([
+        ...(preferredTid?[preferredTid]:[]),
+        ...getTeacherPool(subj),
+        ...teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id)
+      ])].filter(id=>byId[id]);
+      const candidates=pool.length?pool:teachers.map(t=>t.id);
+      const tid=candidates.reduce((best,id)=>(load[id]||0)<(load[best]||0)?id:best,candidates[0]);
+      byId[tid].assignments.push({cls,subj,wh,manual:true});
+      if(!byId[tid].subjects.includes(subj)) byId[tid].subjects.push(subj);
+      load[tid]=(load[tid]||0)+wh;
+    });
+  });
+  teachers.forEach(t=>{t.hours=(t.assignments||[]).reduce((s,a)=>s+(parseInt(a.wh)||0),0);});
 }
 
 function generateFromDistribution(){
@@ -1824,6 +1891,7 @@ function programState(){
     subjects:SUBJECTS,
     classes:ALL_CLASSES,
     gradePlan:GRADE_PLAN,
+    classPlan:CLASS_PLAN,
     teacherUnavailable,
     schedule,
     settings
@@ -1839,12 +1907,18 @@ function applyProgramState(data){
     Object.keys(GRADE_PLAN).forEach(k=>delete GRADE_PLAN[k]);
     Object.entries(data.gradePlan).forEach(([k,v])=>GRADE_PLAN[k]=v);
   }
+  let hasSavedClassPlan=false;
+  if(data.classPlan&&typeof data.classPlan==='object'){
+    Object.keys(CLASS_PLAN).forEach(k=>delete CLASS_PLAN[k]);
+    Object.entries(data.classPlan).forEach(([k,v])=>CLASS_PLAN[k]=v);
+    hasSavedClassPlan=true;
+  }
   if(Array.isArray(data.teachers)) teachers=data.teachers;
   if(data.teacherUnavailable) teacherUnavailable=data.teacherUnavailable;
   if(data.schedule&&typeof data.schedule==='object') schedule=data.schedule;
   if(data.settings) settings=data.settings;
-  refreshClassPlans();
-  if(!hasManualDistribution()||distributionOverCapacity()) seedDefaultDistribution();
+  if(!hasSavedClassPlan) refreshClassPlans();
+  if(!hasManualDistribution()||distributionOverCapacity()||distributionClassHoursInvalid()) seedDefaultDistribution();
   renderTable();
   renderTeachers();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
@@ -1864,6 +1938,14 @@ function distributionOverCapacity(){
     const capacity=Math.max(0,settings.days.length*settings.hoursPerDay-countTeacherBlockedSlots(t.id));
     return load>capacity;
   });
+}
+
+function distributionClassHoursInvalid(){
+  const totals=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,0]));
+  teachers.forEach(t=>(t.assignments||[]).forEach(a=>{
+    if(totals[a.cls]!==undefined) totals[a.cls]+=parseInt(a.wh)||0;
+  }));
+  return ALL_CLASSES.some(cls=>totals[cls]!==35);
 }
 
 async function apiFetch(path,options={}){
