@@ -726,13 +726,15 @@ function generateSchedule(){
   }
 
   let best=null;
-  for(let attempt=0;attempt<120;attempt++){
-    const trial=buildGlobalBlockSchedule(attempt);
-    if(!best || trial.score<best.score) best=trial;
-    if(trial.issues.length===0) break;
+  for(let attempt=0;attempt<250;attempt++){
+    const trialA=buildGlobalBlockSchedule(attempt);
+    const trialB=buildFullClassSchedule(attempt);
+    [trialA,trialB].forEach(trial=>{
+      if(!best || trial.score<best.score) best=trial;
+    });
+    if(best.issues.length===0) break;
   }
   schedule=best.schedule;
-  const repaired=repairMissingClassSlots();
 
   renderTable();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
@@ -740,101 +742,12 @@ function generateSchedule(){
 
   const report=analyzeSchedule();
   const blockIssues=analyzeBlockRulesObject(schedule);
+  const branchIssues=analyzeBranchRulesObject(schedule);
   const msg=report.classIssues.length===0
-    ? `Program oluşturuldu — 24/24 sınıf 35 saat dolu, sınıf boşluğu yok.${repaired?` ${repaired} boş saat otomatik tamamlandı.`:''}`
-    : `Program oluşturuldu ama ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls}`;
-  showAlert(blockIssues.length===0&&report.classIssues.length===0?`Program olusturuldu - 24/24 sinif 35 saat dolu, dersler blok kuralina uygun.${repaired?` ${repaired} bos saat tamamlandi.`:''}`:msg, blockIssues.length===0&&report.classIssues.length===0?'ok':'warn');
-}
-
-function repairMissingClassSlots(){
-  const teacherLoad=currentTeacherLoad(schedule);
-  let repaired=0;
-  ALL_CLASSES.forEach(cls=>{
-    for(let pass=0;pass<20;pass++){
-      const empty=emptySlotsForClass(cls,schedule);
-      const missing=missingSubjectsForClass(cls,schedule);
-      const subjects=Object.keys(missing).filter(subj=>missing[subj]>0);
-      if(!empty.length||!subjects.length) break;
-      let placed=false;
-      for(const slot of empty){
-        const subj=pickRepairSubject(subjects,missing,cls,slot.d,slot.h);
-        const tid=findRepairTeacher(cls,subj,slot.d,slot.h,teacherLoad);
-        if(!tid) continue;
-        schedule[`${tid}_${slot.d}_${slot.h}`]={cls,subj};
-        teacherLoad[tid]=(teacherLoad[tid]||0)+1;
-        repaired++;
-        placed=true;
-        break;
-      }
-      if(!placed) break;
-    }
-  });
-  return repaired;
-}
-
-function currentTeacherLoad(scheduleObj){
-  const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
-  Object.keys(scheduleObj).forEach(key=>{
-    const tid=parseInt(key.split('_')[0]);
-    if(load[tid]!==undefined) load[tid]++;
-  });
-  return load;
-}
-
-function emptySlotsForClass(cls,scheduleObj){
-  const slots=[];
-  settings.days.forEach(d=>{
-    for(let h=0;h<settings.hoursPerDay;h++){
-      if(!getClassLessonAt(scheduleObj,cls,d,h)) slots.push({d,h});
-    }
-  });
-  return slots;
-}
-
-function missingSubjectsForClass(cls,scheduleObj){
-  const expected={};
-  (CLASS_PLAN[cls]||[]).forEach(l=>{expected[l.subj]=(expected[l.subj]||0)+(parseInt(l.wh)||0);});
-  const actual={};
-  settings.days.forEach(d=>{
-    for(let h=0;h<settings.hoursPerDay;h++){
-      const lesson=getClassLessonAt(scheduleObj,cls,d,h);
-      if(lesson) actual[lesson.subj]=(actual[lesson.subj]||0)+1;
-    }
-  });
-  Object.keys(expected).forEach(subj=>{expected[subj]-=(actual[subj]||0);});
-  return expected;
-}
-
-function pickRepairSubject(subjects,missing,cls,d,h){
-  const before=getClassLessonAt(schedule,cls,d,h-1);
-  const after=getClassLessonAt(schedule,cls,d,h+1);
-  const neighbor=subjects.find(subj=>(before&&before.subj===subj)||(after&&after.subj===subj));
-  if(neighbor) return neighbor;
-  return subjects.sort((a,b)=>missing[b]-missing[a]||a.localeCompare(b,'tr'))[0];
-}
-
-function findRepairTeacher(cls,subj,d,h,teacherLoad){
-  const manual=teachers.filter(t=>(t.assignments||[]).some(a=>a.manual&&a.cls===cls&&a.subj===subj)).map(t=>t.id);
-  const pools=[
-    [...new Set([...manual,...getTeacherPoolForClass(cls,subj)])],
-    subj==='REH'?getTeacherPoolForClass(cls,subj):teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id),
-    teachers.map(t=>t.id)
-  ];
-  for(const pool of pools){
-    const candidates=pool.filter(tid=>{
-      if(schedule[`${tid}_${d}_${h}`]) return false;
-      if(isTeacherUnavailable(tid,d,h)) return false;
-      return teachers.some(t=>t.id===tid);
-    });
-    if(candidates.length){
-      candidates.sort((a,b)=>(teacherLoad[a]||0)-(teacherLoad[b]||0));
-      const tid=candidates[0];
-      const teacher=teachers.find(t=>t.id===tid);
-      if(teacher&&!teacher.subjects.includes(subj)) teacher.subjects.push(subj);
-      return tid;
-    }
-  }
-  return null;
+    ? `Program oluşturuldu — 24/24 sınıf 35 saat dolu, sınıf boşluğu yok.`
+    : `Program oturmadı: ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls} ${report.classIssues[0].filled}/35 saat dolu.`;
+  const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0;
+  showAlert(ok?'Program oluşturuldu - 24/24 sınıf 35 saat dolu, dersler blok kuralına uygun.':msg,ok?'ok':'warn');
 }
 
 function normalizeTeacherAssignments(){
@@ -1021,7 +934,7 @@ function buildFullClassSchedule(attempt){
       return;
     }
     layout.forEach(block=>{
-      const tid=findTeacherForBlock(block.subj,block.day,block.hour,block.len,trialSchedule,teacherLoad,attempt+ci*19);
+      const tid=findTeacherForBlock(cls,block.subj,block.day,block.hour,block.len,trialSchedule,teacherLoad,attempt+ci*19);
       if(!tid){
         issues.push({cls,subj:block.subj,day:block.day,hour:block.hour+1,reason:'Uygun ogretmen yok'});
         return;
@@ -1035,8 +948,9 @@ function buildFullClassSchedule(attempt){
 
   const report=analyzeScheduleObject(trialSchedule);
   const blockIssues=analyzeBlockRulesObject(trialSchedule);
-  const score=issues.length*1000+report.classIssues.length*100+report.totalMissing*10+report.totalGaps+blockIssues.length*200;
-  return {schedule:trialSchedule,issues:[...issues,...report.classIssues],score};
+  const branchIssues=analyzeBranchRulesObject(trialSchedule);
+  const score=issues.length*1800+report.classIssues.length*200+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000;
+  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues],score};
 }
 
 function buildGlobalBlockSchedule(attempt){
@@ -1057,8 +971,8 @@ function buildGlobalBlockSchedule(attempt){
     });
   });
   blocks.sort((a,b)=>{
-    const pa=getTeacherPool(a.subj).length;
-    const pb=getTeacherPool(b.subj).length;
+    const pa=Math.max(1,getTeacherPoolForClass(a.cls,a.subj).length);
+    const pb=Math.max(1,getTeacherPoolForClass(b.cls,b.subj).length);
     return b.len-a.len || pa-pb || (((a.ci*13+a.bi*7+attempt)%17)-((b.ci*13+b.bi*7+attempt)%17));
   });
 
@@ -1179,7 +1093,7 @@ function buildClassBlockLayout(cls,seed=0){
 
 function findTeacherForBlock(cls,subj,day,hour,len,scheduleObj,teacherLoad,seed=0){
   const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.manual&&a.cls===cls&&a.subj===subj)).map(t=>t.id);
-  const preferred=(assigned.length?assigned:getTeacherPoolForClass(cls,subj)).filter(tid=>teachers.some(t=>t.id===tid));
+  const preferred=[...new Set([...assigned,...getTeacherPoolForClass(cls,subj)])].filter(tid=>teachers.some(t=>t.id===tid));
   const candidates=preferred.filter(tid=>{
     for(let x=0;x<len;x++){
       if(scheduleObj[`${tid}_${day}_${hour+x}`]) return false;
@@ -1428,7 +1342,7 @@ function analyzeBranchRulesObject(scheduleObj){
   return Object.entries(scheduleObj).filter(([key,cell])=>{
     if(!cell) return false;
     const tid=parseInt(key.split('_')[0]);
-    return !getTeacherPool(cell.subj).includes(tid);
+    return !getTeacherPoolForClass(cell.cls,cell.subj).includes(tid);
   }).map(([key,cell])=>({key,cls:cell.cls,subj:cell.subj}));
 }
 
