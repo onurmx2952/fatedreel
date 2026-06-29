@@ -1,0 +1,41 @@
+﻿Run start: 2026-06-29T08:42:57.5844414+03:00
+Cwd: C:\Users\aa\Documents\github\fatedreel
+Automation: FatedReel URL ekleme (fatedreel-url-ekleme)
+Schedule note: recurring indexing workflow; create fresh log, run IndexNow, then verify live webmaster console availability.
+Last run input: 2026-06-28T15:08:46.722Z (1782659326722)
+Site edits: none planned unless a clear technical indexing blocker is found.
+
+IndexNow submission:
+Command: C:\Users\aa\AppData\Local\Python\bin\python.exe .\submit_indexnow.py
+  IndexNow status: 200
+  Submitted URLs: 3124
+Exit code: 0
+Sitemap URL count: 3124
+Sitemap movie URL count: 3123
+Next candidate URL: https://fatedreel.com/tt0118852
+
+Browser/control availability check:
+Chrome profile/session: AVAILABLE initially via Codex Chrome extension profile onur; Google Search Console fatedreel.com property loaded and authenticated as onurmx2@gmail.com.
+Chrome open webmaster tabs: none before probing.
+Google Search Console: AVAILABLE initially. Opened https://search.google.com/search-console?resource_id=sc-domain%3Afatedreel.com; title Genel Bakış; URL Inspection UI available.
+Google attempted URL: https://fatedreel.com/tt0238883 from indexing-google-batch.txt.
+Google inspection result before request: URL Google'da mevcut; page indexed; request button visible as Dizine eklenmesini iste / Tekrar istek gonder.
+Google request action: clicked Dizine eklenmesini iste; Search Console opened live test dialog: Yayinlanmis URL nin dizine eklenebilir olup olmadigini test etme; Bu islem bir iki dakika surebilir.
+Google final status: BLOCKED/UNCONFIRMED - Chrome control disconnected while waiting for live test/request result; reconnection returned No Chrome extension browser listed. No success dialog could be observed/closed, so confirmed requested count remains 0.
+Bing Webmaster Tools: BLOCKED - Chrome extension browser became unavailable before Bing authentication/session could be verified or controlled.
+Yandex Webmaster: BLOCKED - Chrome extension browser became unavailable before Yandex authentication/session could be verified or controlled.
+
+Technical indexing blocker checks:
+IndexNow key URL HTTP status: 200; body length: 33
+Last attempted movie URL HTTP check: BLOCKED - Invoke-WebRequest did not complete before command timeout during final logging.
+Technical indexing blocker found: none from repo/script, IndexNow success, Google inspection result, and key URL check.
+Site edits: none.
+
+Final summary:
+IndexNow submitted/requested: 3124 URLs; HTTP/status result: 200; command exit code: 0; failures: none observed.
+Google UI indexing requests confirmed: 0; attempted: 1; last attempted URL: https://fatedreel.com/tt0238883; status: BLOCKED/UNCONFIRMED due Chrome extension disconnect during live test/request result.
+Bing UI indexing requests: 0; status: BLOCKED because authenticated/controllable browser was unavailable after Google disconnect.
+Yandex UI indexing requests: 0; status: BLOCKED because authenticated/controllable browser was unavailable after Google disconnect.
+Quota/CAPTCHA/login/MFA/security prompt status: not reached/observed; blocker was browser control availability.
+Run finish: Pzt 29.06.2026  8:52:59,19
+Log file: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-29-084257.log
