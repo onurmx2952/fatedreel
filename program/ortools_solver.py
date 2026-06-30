@@ -18,9 +18,9 @@ from ortools.sat.python import cp_model
 
 DAYS = {
     0: "Pazartesi",
-    1: "SalÄ±",
-    2: "Ã‡arÅŸamba",
-    3: "PerÅŸembe",
+    1: "Salı",
+    2: "Çarşamba",
+    3: "Perşembe",
     4: "Cuma",
     5: "Cumartesi",
     6: "Pazar",
@@ -71,7 +71,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
             wh = int(assignment.get("wh") or 0)
             key = (str(cls), str(subj))
             if key in assignment_by_class_subject:
-                distribution_errors.append(f"{cls} {subj}: birden fazla Ã¶ÄŸretmen atanmÄ±ÅŸ.")
+                distribution_errors.append(f"{cls} {subj}: birden fazla öğretmen atanmış.")
                 continue
             assignment_by_class_subject[key] = (tid, wh)
 
@@ -82,16 +82,16 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
             wh = int(lesson.get("wh") or 0)
             total += wh
             if (cls, subj) not in assignment_by_class_subject:
-                distribution_errors.append(f"{cls} {subj}: ders daÄŸÄ±tÄ±mÄ±nda Ã¶ÄŸretmen yok.")
+                distribution_errors.append(f"{cls} {subj}: ders dağıtımında öğretmen yok.")
         expected = len(days) * hours_per_day
         if total != expected:
-            distribution_errors.append(f"{cls}: ders planÄ± {total}/{expected} saat.")
+            distribution_errors.append(f"{cls}: ders planı {total}/{expected} saat.")
 
     if distribution_errors:
         return {
             "ok": False,
             "status": "invalid_distribution",
-            "error": "Ders daÄŸÄ±tÄ±mÄ± OR-Tools'a gÃ¶nderilmeden Ã¶nce dÃ¼zeltilmeli.",
+            "error": "Ders dağıtımı OR-Tools'a gönderilmeden önce düzeltilmeli.",
             "issues": distribution_errors,
         }
 
@@ -111,7 +111,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         teacher_unavailable,
         days,
         hours_per_day,
-        with_time_limit(payload, float(payload.get("timeLimitSeconds") or 4)),
+        payload,
         relax_unavailable=False,
     )
     if strict.get("ok"):
@@ -128,11 +128,33 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
     )
     if day_opened.get("ok"):
         return day_opened
+
+    relaxed = solve_blocks_with_model(
+        blocks,
+        teachers,
+        teacher_by_id,
+        teacher_unavailable,
+        days,
+        hours_per_day,
+        payload,
+        relax_unavailable=True,
+    )
+    if relaxed.get("ok"):
+        return {
+            "ok": False,
+            "status": "needs_manual_change",
+            "error": "Tek bir öğretmenin boş gününü açmak programı oturtmadı.",
+            "issues": [
+                f"Kesin değişiklik: {item.get('text', 'Bir öğretmen boş saati açılmalı.')}"
+                for item in (relaxed.get("adjustments") or [])[:8]
+            ],
+        }
+
     return {
         "ok": False,
-        "status": day_opened.get("status") or strict.get("status"),
+        "status": day_opened.get("status") or relaxed.get("status") or strict.get("status"),
         "error": "OR-Tools bu dağıtım için uygun program bulamadı.",
-        "issues": day_opened.get("issues") or strict.get("issues") or build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
+        "issues": day_opened.get("issues") or relaxed.get("issues") or strict.get("issues") or build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
     }
 
 
@@ -146,20 +168,10 @@ def solve_by_opening_free_days_in_order(
     payload: dict[str, Any],
 ) -> dict[str, Any]:
     attempted: list[str] = []
-    max_attempts = int(payload.get("maxFreeDayAttempts") or 6)
-    attempt_seconds = float(payload.get("freeDayAttemptSeconds") or 1.2)
-    attempts = 0
     for teacher in teachers:
         tid = int(teacher.get("id"))
         blocked_days = full_or_heavy_blocked_days(teacher_unavailable, tid, days, hours_per_day)
         for day, hours in blocked_days:
-            if attempts >= max_attempts:
-                return {
-                    "ok": False,
-                    "status": "free_day_attempt_limit",
-                    "issues": attempted[:8] or build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
-                }
-            attempts += 1
             modified = copy_unavailable(teacher_unavailable)
             for hour in hours:
                 modified.setdefault(str(tid), {}).pop(f"{day}_{hour}", None)
@@ -172,18 +184,18 @@ def solve_by_opening_free_days_in_order(
                 modified,
                 days,
                 hours_per_day,
-                with_time_limit(payload, attempt_seconds),
+                payload,
                 relax_unavailable=False,
             )
-            label = f"{teacher.get('name', tid)} Ã¶ÄŸretmenin {day_name(day)} {compact_hours_label(hours)} saatleri"
-            attempted.append(f"{label} aÃ§Ä±ldÄ± ama program oturmadÄ±.")
+            label = f"{teacher.get('name', tid)} öğretmenin {day_name(day)} {compact_hours_label(hours)} saatleri"
+            attempted.append(f"{label} açıldı ama program oturmadı.")
             if result.get("ok"):
                 result["adjustments"] = [{
                     "teacherId": tid,
                     "teacher": teacher.get("name", tid),
                     "day": day,
                     "hours": hours,
-                    "text": f"{label} aÃ§Ä±ldÄ±.",
+                    "text": f"{label} açıldı.",
                 }]
                 result.setdefault("stats", {})["openedFreeDaySequentially"] = True
                 return result
@@ -236,9 +248,9 @@ def solve_blocks_with_model(
             name = teacher.get("name", block.teacher_id)
             openings = teacher_opening_hints(block.teacher_id, teacher_unavailable, days, hours_per_day, limit=1)
             if openings:
-                no_candidate.append(f"{block.cls} {block.subj} iÃ§in {name} Ã¶ÄŸretmenin {openings[0]} saatlerini aÃ§Ä±n.")
+                no_candidate.append(f"{block.cls} {block.subj} için {name} öğretmenin {openings[0]} saatlerini açın.")
             else:
-                no_candidate.append(f"{block.cls} {block.subj}: {name} Ã¶ÄŸretmen iÃ§in uygun blok yok; ders daÄŸÄ±tÄ±mÄ±nÄ± azaltÄ±n veya Ã¶ÄŸretmeni deÄŸiÅŸtirin.")
+                no_candidate.append(f"{block.cls} {block.subj}: {name} öğretmen için uygun blok yok; ders dağıtımını azaltın veya öğretmeni değiştirin.")
         else:
             model.AddExactlyOne(var for var, _, _ in candidates)
             var_by_block[block.index] = candidates
@@ -247,7 +259,7 @@ def solve_blocks_with_model(
         return {
             "ok": False,
             "status": "no_candidate",
-            "error": "BazÄ± bloklar iÃ§in hiÃ§ uygun saat yok.",
+            "error": "Bazı bloklar için hiç uygun saat yok.",
             "issues": no_candidate,
         }
 
@@ -270,7 +282,7 @@ def solve_blocks_with_model(
         return {
             "ok": False,
             "status": solver.StatusName(status),
-            "error": "OR-Tools bu daÄŸÄ±tÄ±m iÃ§in uygun program bulamadÄ±.",
+            "error": "OR-Tools bu dağıtım için uygun program bulamadı.",
             "issues": build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
         }
 
@@ -311,7 +323,7 @@ def solve_blocks_with_model(
 def copy_unavailable(unavailable: dict[str, Any]) -> dict[str, Any]:
     copied: dict[str, Any] = {}
     for tid, blocked in (unavailable or {}).items():
-      copied[tid] = dict(blocked or {})
+          copied[tid] = dict(blocked or {})
     return copied
 
 
@@ -366,7 +378,7 @@ def summarize_adjustments(slots: dict[tuple[int, int, int], dict[str, Any]]) -> 
     for item in grouped.values():
         hours = sorted(set(item["hours"]))
         item["hours"] = hours
-        item["text"] = f"{item['teacher']} Ã¶ÄŸretmenin {day_name(item['day'])} {compact_hours_label(hours)} saatleri aÃ§Ä±ldÄ±."
+        item["text"] = f"{item['teacher']} öğretmenin {day_name(item['day'])} {compact_hours_label(hours)} saatleri açıldı."
         result.append(item)
     result.sort(key=lambda item: (str(item["teacher"]), int(item["day"])))
     return result
@@ -387,7 +399,7 @@ def teacher_capacity_errors(
         capacity = total_slots - len(blocked)
         if assigned > capacity:
             needed = assigned - capacity
-            errors.append(f"{teacher.get('name', tid)} Ã¶ÄŸretmenin en az {needed} saatini aÃ§Ä±n; {assigned} saat dersi var ama uygun kapasite {capacity} saat.")
+            errors.append(f"{teacher.get('name', tid)} öğretmenin en az {needed} saatini açın; {assigned} saat dersi var ama uygun kapasite {capacity} saat.")
     return errors
 
 
@@ -410,7 +422,7 @@ def build_infeasible_hints(
         ),
         reverse=True,
     )
-    return [f"{name} Ã¶ÄŸretmenin ders yÃ¼kÃ¼ {load} saat; bu Ã¶ÄŸretmenin ders daÄŸÄ±tÄ±mÄ±nÄ± azaltmayÄ± deneyin." for load, name in heavy[:8]]
+    return [f"{name} öğretmenin ders yükü {load} saat; bu öğretmenin ders dağıtımını azaltmayı deneyin." for load, name in heavy[:8]]
 
 
 def build_block_opening_hints(
@@ -441,7 +453,7 @@ def build_block_opening_hints(
             full_day_bonus = 20 if len(hours) >= hours_per_day else 0
             edge_bonus = 8 if all(h < 3 for h in hours) or all(h >= max(0, hours_per_day - 3) for h in hours) else 0
             score = len(hours) * 10 + full_day_bonus + edge_bonus
-            candidates.append((score, f"{name} Ã¶ÄŸretmenin {day_name(day)} {compact_hours_label(hours)} saatlerini aÃ§Ä±n."))
+            candidates.append((score, f"{name} öğretmenin {day_name(day)} {compact_hours_label(hours)} saatlerini açın."))
     candidates.sort(reverse=True, key=lambda item: item[0])
     return [text for _, text in candidates[:8]]
 
@@ -485,7 +497,7 @@ def compact_hours_label(hours: list[int]) -> str:
 
 
 def day_name(day: int) -> str:
-    return DAYS.get(day, f"{day}. gÃ¼n")
+    return DAYS.get(day, f"{day}. gün")
 
 
 def class_sort_key(cls: str) -> tuple[int, str]:
@@ -499,7 +511,7 @@ def class_sort_key(cls: str) -> tuple[int, str]:
 
 
 if FastAPI is not None:
-    app = FastAPI(title="Okul Ders ProgramÄ± OR-Tools Solver")
+    app = FastAPI(title="Okul Ders Programı OR-Tools Solver")
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],

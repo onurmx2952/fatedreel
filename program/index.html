@@ -845,28 +845,15 @@ async function generateSchedule(){
 
 async function solveWithOrTools(){
   setWorkState(true,'OR-Tools çözümleyiciye gönderiliyor...');
-  const controller=new AbortController();
-  const timer=setTimeout(()=>controller.abort(),15000);
   try{
     const res=await apiFetch('/api/program/solve',{
       method:'POST',
-      signal:controller.signal,
-      body:JSON.stringify({
-        programData:programState(),
-        timeLimitSeconds:2,
-        freeDayAttemptSeconds:0.8,
-        maxFreeDayAttempts:4,
-        workers:8
-      })
+      body:JSON.stringify({programData:programState()})
     });
     if(res&&res.ok&&res.schedule) return {ok:true,schedule:res.schedule,adjustments:res.adjustments||[],stats:res.stats||{}};
     return {ok:false,error:res?.error||'OR-Tools çözümleyici geçerli sonuç döndürmedi.',issues:res?.issues||[]};
   }catch(error){
-    if(error.name==='AbortError') return {ok:false,error:'Çözümleyici çok uzun sürdü. Render ücretsiz servis uyanıyor veya yoğun olabilir; biraz sonra tekrar deneyin.'};
-    if(error.message==='İşlem başarısız') return {ok:false,error:'Çözümleyici servisi cevap veremedi. Render ücretsiz servis uykuda, yoğun ya da redeploy bekliyor olabilir.'};
     return {ok:false,error:error.message||'OR-Tools çözümleyiciye ulaşılamadı.'};
-  }finally{
-    clearTimeout(timer);
   }
 }
 
