@@ -274,6 +274,7 @@ body.auth-locked .login-screen{display:flex}
 <div id="view-blocked" class="view">
   <div class="toolbar">
     <h2>Öğretmen Boş Saat / Ders Yazılmaz</h2>
+    <button class="btn" onclick="assignRandomFreeDaysToHalfTeachers()">Öğretmenlerin Yarısına Rastgele Boş Gün Ver</button>
     <button class="btn danger" onclick="clearBlockedForSelected()">Seçili Öğretmeni Temizle</button>
     <button class="btn danger" onclick="clearAllBlockedSlots()">Tüm Boş Saatleri Temizle</button>
   </div>
@@ -2520,6 +2521,38 @@ function clearAllBlockedSlots(){
   renderBlockedView();
   showAlert('Tüm öğretmen boş saatleri temizlendi. Programı yeniden oluşturabilirsiniz.','ok');
   scheduleAutoSave();
+}
+
+function assignRandomFreeDaysToHalfTeachers(){
+  const eligible=teachers.filter(t=>{
+    const load=teacherAssignedHours(t.id);
+    const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-load);
+    return maxBlocked>=settings.hoursPerDay;
+  });
+  if(!eligible.length){
+    showAlert('Tam gün boş verilebilecek öğretmen yok. Ders yükleri çok yüksek görünüyor.','warn');
+    return;
+  }
+  const targetCount=Math.min(Math.ceil(teachers.length/2),eligible.length);
+  const shuffled=[...eligible].sort((a,b)=>randomSortKey(a)-randomSortKey(b));
+  let assigned=0;
+  shuffled.slice(0,targetCount).forEach((teacher,idx)=>{
+    if(!teacherUnavailable[teacher.id]) teacherUnavailable[teacher.id]={};
+    const day=settings.days[(randomSortKey(teacher)+idx)%settings.days.length];
+    const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-teacherAssignedHours(teacher.id));
+    const current=countTeacherBlockedSlots(teacher.id);
+    if(maxBlocked-current<settings.hoursPerDay) return;
+    for(let h=0;h<settings.hoursPerDay;h++) teacherUnavailable[teacher.id][`${day}_${h}`]=true;
+    assigned++;
+  });
+  trimUnavailableToTeacherLoads();
+  renderBlockedView();
+  showAlert(`${assigned} öğretmene rastgele tam gün boşluk verildi. Programı yeniden oluşturabilirsiniz.`,assigned?'ok':'warn');
+  scheduleAutoSave();
+}
+
+function randomSortKey(teacher){
+  return (stableTeacherRank(teacher)*9301 + 49297) % 233280;
 }
 
 function isTeacherUnavailable(tid,d,h){

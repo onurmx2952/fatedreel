@@ -1,0 +1,61 @@
+﻿Run start: 2026-06-30T20:05:10.5100393+03:00
+Cwd: C:\Users\aa\Documents\github\fatedreel
+Automation: FatedReel URL ekleme (fatedreel-url-ekleme)
+Schedule note: recurring indexing workflow; run IndexNow, then verify Google/Bing/Yandex webmaster availability from authenticated controllable browser if available.
+Previous log: indexing-run-2026-06-30-200346.log at 2026-06-30T20:03:52.8535443+03:00
+Son 6 saatte calisma: VAR
+Site edits: none planned unless a clear technical indexing blocker is found.
+
+IndexNow submission:
+Command: python .\submit_indexnow.py
+Exit code: 0
+Output:
+IndexNow status: 200
+Submitted URLs: 3124
+
+Browser/control check:
+CDP 127.0.0.1:9222: Uzak sunucuya bağlanılamıyor
+agent.browsers.list(): Chrome extension profile onur available; Codex In-app Browser also available.
+
+Google Search Console:
+Status: AUTHENTICATED/CONTROLLED via Chrome extension profile onur; property loaded at https://search.google.com/search-console?resource_id=sc-domain%3Afatedreel.com.
+Deep inspection URL probe returned Error 404 (Bulunamadı)!!1, then property UI worked; proceeded through property URL inspection box.
+Confirmed request text: Dizine eklenmesi istendi / URL, öncelikli bir tarama sırasına eklendi.
+Confirmed Google requests this run: 10
+Google requested URLs:
+https://fatedreel.com/tt0244479
+https://fatedreel.com/tt0245929
+https://fatedreel.com/tt0246772
+https://fatedreel.com/tt0247196
+https://fatedreel.com/tt0247199
+https://fatedreel.com/tt0247586
+https://fatedreel.com/tt0248845
+https://fatedreel.com/tt0249241
+https://fatedreel.com/tt0249462
+https://fatedreel.com/tt0250081
+Google quota/blocker: no quota, CAPTCHA, MFA, or security prompt observed after 10 confirmed requests; stopped Google after tt0250081 to finish bounded heartbeat.
+Google last attempted URL: https://fatedreel.com/tt0250081
+
+Bing Webmaster Tools:
+Status: BLOCKED unauthenticated/public page.
+Observed URL: https://www.bing.com/webmasters/about?siteUrl=https%3A%2F%2Ffatedreel.com&from=home
+Observed text: Oturum aç / Başla on Bing Webmaster Tools public marketing page.
+Confirmed Bing requests this run: 0
+
+Yandex Webmaster:
+Status: AUTHENTICATED/CONTROLLED at https://webmaster.yandex.com/site/https:fatedreel.com:443/indexing/reindex/.
+First submission: 70 URLs from indexing-yandex-batch.txt; first https://fatedreel.com/tt0292242; last https://fatedreel.com/tt0342492; observed In queue rows and You can send 80 more URLs today.
+Second submission: 80 URLs from sitemap after batch; first https://fatedreel.com/tt0342735; last https://fatedreel.com/tt0398883; observed In queue rows and You have reached your daily limit of added URLs.
+Confirmed Yandex requests this run: 150
+Yandex quota/blocker: daily limit reached exactly after 150 submitted URLs.
+Yandex last attempted URL: https://fatedreel.com/tt0398883
+
+Final summary:
+Run end: 2026-06-30T20:37:22.2380179+03:00
+Son 6 saatte calisma: VAR
+IndexNow: command python .\submit_indexnow.py; exit 0; IndexNow status 200; Submitted URLs 3124; failures none observed.
+Google: 10 confirmed indexing requests; last attempted https://fatedreel.com/tt0250081; no quota observed before bounded stop.
+Bing: 0 requests; BLOCKED unauthenticated public page with Oturum aç.
+Yandex: 150 confirmed reindex submissions; daily limit reached; last attempted https://fatedreel.com/tt0398883.
+Site edits: none. Technical indexing blocker found: none.
+Log path: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-30-200510.log
