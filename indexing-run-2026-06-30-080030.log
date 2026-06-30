@@ -1,0 +1,45 @@
+﻿FatedReel indexing workflow run
+Run start: 2026-06-30T08:00:31.5527950+03:00
+cwd: C:\Users\aa\Documents\github\fatedreel
+schedule note: Automation fatedreel-url-ekleme; every run must perform and log IndexNow plus webmaster-console checks.
+CODEX_HOME note: env var missing earlier; using C:\Users\aa\.codex for automation memory if needed.
+
+Workflow files:
+submit_indexnow.py: present
+sitemap.xml: present
+b6f09cebefa4ecf4e122c262ba6097c6.txt: present
+
+IndexNow command: python .\submit_indexnow.py
+IndexNow output begin:
+IndexNow status: 200
+Submitted URLs: 3124
+IndexNow output end:
+IndexNow exit code: 0
+
+CDP check: http://127.0.0.1:9222/json/version
+CDP status: BLOCKED Uzak sunucuya bağlanılamıyor
+
+Candidate source: sitemap.xml; after https://fatedreel.com/tt0244316
+Live URL test: https://fatedreel.com/tt0244479 => HTTP 200; final URL https://fatedreel.com/tt0244479; bytes 87926
+Live URL test: https://fatedreel.com/tt0245929 => HTTP 200; final URL https://fatedreel.com/tt0245929; bytes 86926
+Live URL test: https://fatedreel.com/tt0246772 => HTTP 200; final URL https://fatedreel.com/tt0246772; bytes 90595
+Live URL test: https://fatedreel.com/tt0247196 => HTTP 200; final URL https://fatedreel.com/tt0247196; bytes 95932
+Live URL test: https://fatedreel.com/tt0247199 => HTTP 200; final URL https://fatedreel.com/tt0247199; bytes 94666
+
+Webmaster console availability checks:
+Chrome extension/session: BLOCKED - agent.browsers.get("extension") returned Browser is not available: extension; available browser list contained only Codex In-app Browser (iab).
+Google Search Console: BLOCKED - in-app browser redirected to https://search.google.com/search-console/about; page showed login/start links with text Şimdi başla; authenticated Search Console session not available.
+Bing Webmaster Tools: BLOCKED - loaded public/about page at https://www.bing.com/webmasters/about?siteUrl=https%3A%2F%2Ffatedreel.com&from=home; page showed Sign In/Get started; authenticated session not available.
+Yandex Webmaster: BLOCKED - redirected to https://passport.yandex.com/auth?...; page showed Log in with Yandex ID and username/email field; authenticated session not available.
+
+Final summary:
+IndexNow: submitted 3124 URLs; HTTP/status 200; command python .\submit_indexnow.py; exit code 0; failures none observed.
+Google Search Console UI: 0 indexing requests; BLOCKED by missing authenticated browser session. Next eligible candidate remains https://fatedreel.com/tt0244479.
+Bing Webmaster Tools UI: 0 indexing requests; BLOCKED by missing authenticated browser session. IndexNow API submission already succeeded for Bing/Yandex-compatible endpoint.
+Yandex Webmaster UI: 0 indexing requests; BLOCKED by missing authenticated browser session; prior daily-limit carry-forward remains https://fatedreel.com/tt0216787 until authenticated session is available.
+Live-tested sitemap candidates this run: https://fatedreel.com/tt0244479, https://fatedreel.com/tt0245929, https://fatedreel.com/tt0246772, https://fatedreel.com/tt0247196, https://fatedreel.com/tt0247199.
+Last attempted URL: https://fatedreel.com/tt0244479 for Google UI, but not submitted because Search Console was not authenticated.
+Quota/CAPTCHA/login/MFA/security status: login/session blocker for Google, Bing, and Yandex; no quota/CAPTCHA/MFA/security prompt reached this run.
+Site edits: none. Technical indexing blocker found: none.
+Log file path: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-06-30-080030.log
+Run end: 2026-06-30T08:04:26.1045431+03:00

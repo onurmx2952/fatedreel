@@ -704,18 +704,13 @@ async function generateSchedule(){
   }
 
   let best=null;
-  for(let attempt=0;attempt<250;attempt++){
+  for(let attempt=0;attempt<180;attempt++){
     if(attempt&&attempt%8===0){
-      setWorkState(true,`Program hazırlanıyor... ${attempt}/250`);
+      setWorkState(true,`Program hazırlanıyor... ${attempt}/180`);
       await yieldToBrowser();
     }
-    const trialA=buildGlobalBlockSchedule(attempt);
-    const trialB=buildFullClassSchedule(attempt);
-    const trialC=buildConsistentTeacherSchedule(attempt);
-    const trialD=buildGroupedTeacherSchedule(attempt);
-    [trialA,trialB,trialC,trialD].forEach(trial=>{
-      if(!best || trial.score<best.score) best=trial;
-    });
+    const trial=buildGroupedTeacherSchedule(attempt);
+    if(!best || trial.score<best.score) best=trial;
     if(best.issues.length===0) break;
   }
   schedule=best.schedule;
@@ -783,7 +778,7 @@ function buildTeacherPoolHint(blockIssues=[],solverIssues=[]){
     .map(tid=>teachers.find(t=>t.id===tid)?.name)
     .filter(Boolean)
     .slice(0,6);
-  return `<br><b>Öneri:</b> ${issue.cls} ${issue.subj} dersi tek öğretmenle yerleşemiyor. Bu ders için Ders Dağıtımı ekranında öğretmen değiştirin veya havuzu genişletin.${names.length?` Şu an denenen öğretmenler: ${names.join(', ')}.`:''}`;
+  return `<br><b>Öneri:</b> ${issue.cls} ${issue.subj} dersi Ders Dağıtımı'ndaki öğretmenle yerleşemiyor. Bu sınıf-ders satırında öğretmeni değiştirin veya öğretmenin boş saatlerini açın.${names.length?` Şu an denenen öğretmen: ${names.join(', ')}.`:''}`;
 }
 
 function collectUnavailableSuggestions(report,blockIssues=[],solverIssues=[]){
@@ -862,8 +857,7 @@ function describeUnavailableOpening(tid,d,h){
 }
 
 function getLikelyTeacherIds(cls,subj){
-  const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.cls===cls&&a.subj===subj)).map(t=>t.id);
-  return [...new Set(assigned.length?assigned:getTeacherPoolForClass(cls,subj))].filter(tid=>teachers.some(t=>t.id===tid));
+  return getCandidateTeachersForClassSubject(cls,subj);
 }
 
 function getClassEmptySlots(cls,scheduleObj){
@@ -907,11 +901,10 @@ function normalizeTeacherAssignments(){
       const key=`${cls}|${subj}`;
       const manualTid=manual[key];
       const manualOk=manualTid&&byId[manualTid]&&(subj!=='REH'||teacherHasClassLesson(manualTid,cls));
-      const pool=manualOk?[manualTid]:getTeacherPoolForClass(cls,subj).filter(id=>byId[id]);
-      if(!pool.length) return;
-      const tid=pool.reduce((best,id)=>plannedLoad[id]<plannedLoad[best]?id:best,pool[0]);
+      if(!manualOk) return;
+      const tid=manualTid;
       plannedLoad[tid]+=wh;
-      byId[tid].assignments.push({cls,subj,wh,manual:manualTid===tid});
+      byId[tid].assignments.push({cls,subj,wh,manual:true});
     });
   });
   teachers.forEach(t=>{ t.hours=t.assignments.reduce((s,a)=>s+a.wh,0); });
@@ -1391,8 +1384,8 @@ function findTeacherForBlock(cls,subj,day,hour,len,scheduleObj,teacherLoad,teach
   if(teacherChoice[choiceKey]){
     return canTeacherTakeBlock(teacherChoice[choiceKey],day,hour,len,scheduleObj) ? teacherChoice[choiceKey] : null;
   }
-  const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.manual&&a.cls===cls&&a.subj===subj)).map(t=>t.id);
-  const preferred=[...new Set([...assigned,...getTeacherPoolForClass(cls,subj)])].filter(tid=>teachers.some(t=>t.id===tid));
+  const assigned=getCandidateTeachersForClassSubject(cls,subj);
+  const preferred=assigned;
   const candidates=preferred.filter(tid=>canTeacherTakeBlock(tid,day,hour,len,scheduleObj));
   if(candidates.length){
     candidates.sort((a,b)=>{
@@ -1509,8 +1502,11 @@ function reassignTeachersConsistentlyFromClassLayout(sourceSchedule){
 }
 
 function getCandidateTeachersForClassSubject(cls,subj){
-  const assigned=teachers.filter(t=>(t.assignments||[]).some(a=>a.cls===cls&&a.subj===subj)).map(t=>t.id);
-  return [...new Set([...assigned,...getTeacherPoolForClass(cls,subj)])].filter(tid=>teachers.some(t=>t.id===tid));
+  return [...new Set(
+    teachers
+      .filter(t=>(t.assignments||[]).some(a=>a.cls===cls&&a.subj===subj))
+      .map(t=>t.id)
+  )].filter(tid=>teachers.some(t=>t.id===tid));
 }
 
 function solveOneSlotFast(d,h,remaining,subjectDayCount,teacherLoad,trialSchedule,seed){
@@ -1752,7 +1748,7 @@ function analyzeBranchRulesObject(scheduleObj){
   return Object.entries(scheduleObj).filter(([key,cell])=>{
     if(!cell) return false;
     const tid=parseInt(key.split('_')[0]);
-    return !getTeacherPoolForClass(cell.cls,cell.subj).includes(tid);
+    return !getCandidateTeachersForClassSubject(cell.cls,cell.subj).includes(tid);
   }).map(([key,cell])=>({key,cls:cell.cls,subj:cell.subj}));
 }
 
