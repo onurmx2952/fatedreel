@@ -60,8 +60,32 @@ async function handleProgramApi(context, requestUrl) {
   try {
     if (path === '/api/program/config' && request.method === 'GET') {
       return jsonResponse({
-        googleClientId: context.env.GOOGLE_CLIENT_ID || ''
+        googleClientId: context.env.GOOGLE_CLIENT_ID || '',
+        solverEnabled: Boolean(context.env.ORTOOLS_SOLVER_URL)
       });
+    }
+
+    if (path === '/api/program/solve' && request.method === 'POST') {
+      const solverUrl = context.env.ORTOOLS_SOLVER_URL || '';
+      if (!solverUrl) {
+        return jsonResponse({
+          ok: false,
+          error: 'OR-Tools solver servisi bağlı değil. Cloudflare Pages ayarlarına ORTOOLS_SOLVER_URL eklenmeli.'
+        }, 501);
+      }
+
+      const body = await readJson(request);
+      const solverResponse = await fetch(solverUrl.replace(/\/+$/, '') + '/solve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const solverData = await solverResponse.json().catch(() => ({
+        ok: false,
+        error: 'OR-Tools servisi JSON cevap döndürmedi.'
+      }));
+
+      return jsonResponse(solverData, solverResponse.ok ? 200 : solverResponse.status);
     }
 
     if (path === '/api/program/auth/google' && request.method === 'POST') {

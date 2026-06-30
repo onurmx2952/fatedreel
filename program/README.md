@@ -17,6 +17,7 @@ Okul ders programı uygulaması `https://fatedreel.com/program/` altında çalı
 ## API yolları
 
 - `GET /api/program/config`
+- `POST /api/program/solve`
 - `POST /api/program/auth/google`
 - `GET /api/program/me`
 - `GET /api/program/data`
@@ -25,3 +26,18 @@ Okul ders programı uygulaması `https://fatedreel.com/program/` altında çalı
 
 Kayıtlar Google hesabına göre ayrılır. Aynı kullanıcı tekrar giriş yaptığında kendi ders programı verisi yüklenir.
 
+## OR-Tools solver
+
+Cloudflare Pages Python/OR-Tools calistirmadigi icin program uretme isi ayri bir Python servisine devredilir.
+
+Lokal calistirma:
+
+```bash
+cd program
+pip install -r requirements-solver.txt
+uvicorn ortools_solver:app --host 127.0.0.1 --port 8090
+```
+
+Canli ortamda Cloudflare Pages environment variable:
+
+- `ORTOOLS_SOLVER_URL`: Python solver servis adresi, ornek `https://solver.example.com`

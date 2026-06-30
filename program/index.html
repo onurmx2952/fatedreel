@@ -111,6 +111,12 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .t-card{box-shadow:0 8px 24px rgba(15,23,42,.06)}
 .subject-pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px}
 .subject-choice{display:flex;align-items:center;gap:6px;border:1px solid #e2e8f0;border-radius:9px;padding:7px 8px;background:#fff;font-size:11px;font-weight:600;color:#334155}
+.class-chip-grid{display:grid;grid-template-columns:repeat(6,minmax(64px,1fr));gap:6px}
+.class-chip{display:flex;align-items:center;justify-content:space-between;gap:5px;border:1px solid #d1d5db;border-radius:999px;padding:7px 9px;background:#fff;cursor:pointer;font-size:12px}
+.class-chip input{display:none}
+.class-chip small{color:#6b7280;font-size:10px}
+.class-chip.on{border-color:#2563eb;background:#eff6ff;color:#1d4ed8;font-weight:700}
+.class-chip.disabled{opacity:.38;cursor:not-allowed;background:#f8fafc}
 .subject-choice input{width:auto}
 .pick-row{display:grid;grid-template-columns:1fr 82px auto;gap:8px;align-items:center;margin-bottom:7px}
 .pick-row select,.pick-row input{height:34px;border:1px solid #cbd5e1;border-radius:9px;padding:6px 8px;background:#fff;font-size:12px}
@@ -764,6 +770,23 @@ async function generateSchedule(){
     return;
   }
 
+  const orToolsResult=await solveWithOrTools();
+  if(orToolsResult?.ok){
+    schedule=orToolsResult.schedule||{};
+    renderTable();
+    if(document.getElementById('view-class').classList.contains('active')) renderClassView();
+    if(document.getElementById('view-distribution').classList.contains('active')) renderDistribution();
+    const report=analyzeSchedule();
+    const blockIssues=analyzeBlockRulesObject(schedule);
+    const branchIssues=analyzeBranchRulesObject(schedule);
+    const teacherConsistencyIssues=analyzeTeacherConsistencyObject(schedule);
+    const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0&&teacherConsistencyIssues.length===0;
+    showAlert(ok?'Program oluşturuldu - OR-Tools ile 24/24 sınıf 35 saat dolu.':`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.`,ok?'ok':'warn');
+    return;
+  }
+  showAlert(orToolsResult?.error||'OR-Tools solver servisi bağlı değil. Cloudflare için ORTOOLS_SOLVER_URL ayarlanmalı veya lokal Python solver çalıştırılmalı.','warn');
+  return;
+
   let best=null;
   for(let attempt=0;attempt<250;attempt++){
     if(attempt&&attempt%8===0){
@@ -812,6 +835,20 @@ async function generateSchedule(){
   }finally{
     scheduleGenerating=false;
     setWorkState(false);
+  }
+}
+
+async function solveWithOrTools(){
+  setWorkState(true,'OR-Tools çözümleyiciye gönderiliyor...');
+  try{
+    const res=await apiFetch('/api/program/solve',{
+      method:'POST',
+      body:JSON.stringify({programData:programState()})
+    });
+    if(res&&res.ok&&res.schedule) return {ok:true,schedule:res.schedule};
+    return {ok:false,error:res?.error||'OR-Tools çözümleyici geçerli sonuç döndürmedi.'};
+  }catch(error){
+    return {ok:false,error:error.message||'OR-Tools çözümleyiciye ulaşılamadı.'};
   }
 }
 
@@ -2928,30 +2965,61 @@ function renderTeachers(){
       <div style="margin-top:4px">${(t.assignments||[]).filter(a=>a.manual).map(a=>`<span class="badge gr">${a.cls} ${a.subj}(${a.wh})</span>`).join('')}</div>
     </div>`).join('');
 }
-function openAddT(){document.getElementById('tmodal-title').textContent='Öğretmen Ekle';document.getElementById('tmodal-body').innerHTML=tForm({});document.getElementById('tmodal').classList.add('open');}
-function openEditT(id){const t=teachers.find(x=>x.id===id);document.getElementById('tmodal-title').textContent='Düzenle';document.getElementById('tmodal-body').innerHTML=tForm(t,id);document.getElementById('tmodal').classList.add('open');}
+function openAddT(){document.getElementById('tmodal-title').textContent='Öğretmen Ekle';document.getElementById('tmodal-body').innerHTML=tForm({});document.getElementById('tmodal').classList.add('open');setTimeout(()=>renderTeacherQuickClassPick(null),0);}
+function openEditT(id){const t=teachers.find(x=>x.id===id);document.getElementById('tmodal-title').textContent='Düzenle';document.getElementById('tmodal-body').innerHTML=tForm(t,id);document.getElementById('tmodal').classList.add('open');setTimeout(()=>renderTeacherQuickClassPick(id),0);}
 function tForm(t,id){
   const selected=new Set(t.subjects||[]);
   const subjectBoxes=SUBJECTS.map(s=>`<label class="subject-choice"><input type="checkbox" class="f-subj-cb" value="${s}"${selected.has(s)?' checked':''}> ${s}</label>`).join('');
+  const firstSubject=(t.subjects&&t.subjects[0])||SUBJECTS[0]||'';
+  const subjectOpts=SUBJECTS.map(s=>`<option value="${s}"${s===firstSubject?' selected':''}>${s}</option>`).join('');
   return `<div class="fg2"><label>Ad Soyad</label><input id="f-name" value="${t.name||''}"></div>
     <div class="fg2"><label>Haftalık saat</label><input id="f-hours" type="number" value="${t.hours||22}" style="width:80px"></div>
     <div class="fg2"><label>Girebildiği Dersler</label><div class="subject-pick">${subjectBoxes}</div></div>
-    <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">Bu ekranda yalnızca öğretmen bilgisi düzenlenir. Sınıf-ders ataması için Ders Dağıtımı bölümünü kullanın.</div>
+    <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
+      <b>Hızlı sınıf ataması</b>
+      <div class="fg2" style="margin-top:8px"><label>Ders</label><select id="f-quick-subj" onchange="renderTeacherQuickClassPick(${id||'null'})">${subjectOpts}</select></div>
+      <div id="f-quick-classes" class="class-chip-grid"></div>
+    </div>
     <div class="m-actions">
       <button class="btn" onclick="closeM('tmodal')">İptal</button>
       <button class="btn primary" onclick="saveT(${id||'null'})">${id?'Güncelle':'Ekle'}</button>
     </div>`;
 }
+function renderTeacherQuickClassPick(id){
+  const holder=document.getElementById('f-quick-classes');
+  const subj=document.getElementById('f-quick-subj')?.value;
+  if(!holder||!subj) return;
+  const t=teachers.find(x=>x.id===id);
+  const assigned=new Set((t?.assignments||[]).filter(a=>a.subj===subj).map(a=>a.cls));
+  holder.innerHTML=ALL_CLASSES.map(cls=>{
+    const wh=getClassSubjectHours(cls,subj);
+    const disabled=wh<=0;
+    return `<label class="class-chip ${assigned.has(cls)?'on':''} ${disabled?'disabled':''}">
+      <input type="checkbox" class="quick-class-cb" value="${cls}" ${assigned.has(cls)?'checked':''} ${disabled?'disabled':''} onchange="this.closest('.class-chip').classList.toggle('on',this.checked)">
+      <span>${cls}</span><small>${disabled?'yok':wh+'s'}</small>
+    </label>`;
+  }).join('');
+}
 function saveT(id){
   const name=document.getElementById('f-name').value.trim(); if(!name) return;
   const subjects=Array.from(document.querySelectorAll('.f-subj-cb:checked')).map(x=>x.value);
   const old=teachers.find(x=>x.id===id);
-  const assignments=old?(old.assignments||[]).filter(a=>a.manual):[];
+  let assignments=old?(old.assignments||[]).filter(a=>a.manual):[];
+  const quickSubj=document.getElementById('f-quick-subj')?.value;
+  if(quickSubj){
+    const picked=Array.from(document.querySelectorAll('.quick-class-cb:checked')).map(x=>x.value);
+    assignments=assignments.filter(a=>a.subj!==quickSubj);
+    picked.forEach(cls=>{
+      const wh=getClassSubjectHours(cls,quickSubj);
+      if(wh>0) assignments.push({cls,subj:quickSubj,wh,manual:true});
+    });
+    if(picked.length&&!subjects.includes(quickSubj)) subjects.push(quickSubj);
+  }
   const data={name,hours:parseInt(document.getElementById('f-hours').value)||0,
     subjects,assignments};
   if(id){Object.assign(teachers.find(x=>x.id===id),data);}
   else{data.id=Math.max(0,...teachers.map(t=>t.id))+1;teachers.push(data);}
-  closeM('tmodal'); renderTeachers();
+  closeM('tmodal'); renderTeachers(); renderDistribution(); scheduleAutoSave();
 }
 function deleteT(id){
   if(!confirm('Silmek istiyor musunuz?')) return;
