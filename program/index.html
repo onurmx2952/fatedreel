@@ -274,7 +274,7 @@ body.auth-locked .login-screen{display:flex}
 <div id="view-blocked" class="view">
   <div class="toolbar">
     <h2>Öğretmen Boş Saat / Ders Yazılmaz</h2>
-    <button class="btn" onclick="assignRandomFreeDaysToHalfTeachers()">Öğretmenlerin Yarısına Rastgele Boş Gün Ver</button>
+    <button class="btn" onclick="assignRandomFreeDaysToHalfTeachers()">Rastgele Boş Gün + Sabah/Son Saat Dağıt</button>
     <button class="btn danger" onclick="clearBlockedForSelected()">Seçili Öğretmeni Temizle</button>
     <button class="btn danger" onclick="clearAllBlockedSlots()">Tüm Boş Saatleri Temizle</button>
   </div>
@@ -2535,6 +2535,7 @@ function assignRandomFreeDaysToHalfTeachers(){
   }
   const targetCount=Math.min(Math.ceil(teachers.length/2),eligible.length);
   const shuffled=[...eligible].sort((a,b)=>randomSortKey(a)-randomSortKey(b));
+  const fullDayIds=new Set();
   let assigned=0;
   shuffled.slice(0,targetCount).forEach((teacher,idx)=>{
     if(!teacherUnavailable[teacher.id]) teacherUnavailable[teacher.id]={};
@@ -2543,12 +2544,56 @@ function assignRandomFreeDaysToHalfTeachers(){
     const current=countTeacherBlockedSlots(teacher.id);
     if(maxBlocked-current<settings.hoursPerDay) return;
     for(let h=0;h<settings.hoursPerDay;h++) teacherUnavailable[teacher.id][`${day}_${h}`]=true;
+    fullDayIds.add(teacher.id);
     assigned++;
   });
+
+  const remaining=teachers
+    .filter(t=>!fullDayIds.has(t.id))
+    .sort((a,b)=>randomSortKey(a)-randomSortKey(b));
+  const half=Math.ceil(remaining.length/2);
+  let morningAssigned=0;
+  let lastAssigned=0;
+  remaining.forEach((teacher,idx)=>{
+    const hours=idx<half ? firstThreeHours() : lastThreeHours();
+    const wrote=addPatternBlockedSlots(teacher.id,hours);
+    if(wrote>0 && idx<half) morningAssigned++;
+    if(wrote>0 && idx>=half) lastAssigned++;
+  });
+
   trimUnavailableToTeacherLoads();
   renderBlockedView();
-  showAlert(`${assigned} öğretmene rastgele tam gün boşluk verildi. Programı yeniden oluşturabilirsiniz.`,assigned?'ok':'warn');
+  showAlert(`${assigned} öğretmene tam gün boşluk verildi. Kalanlardan ${morningAssigned} öğretmenin ilk 3 saati, ${lastAssigned} öğretmenin son 3 saati kapatıldı. Programı yeniden oluşturabilirsiniz.`,assigned?'ok':'warn');
   scheduleAutoSave();
+}
+
+function addPatternBlockedSlots(tid,hours){
+  if(!teacherUnavailable[tid]) teacherUnavailable[tid]={};
+  const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-teacherAssignedHours(tid));
+  let current=countTeacherBlockedSlots(tid);
+  let wrote=0;
+  const dayOrder=[...settings.days].sort((a,b)=>((a*13+tid)%17)-((b*13+tid)%17));
+  for(const d of dayOrder){
+    for(const h of hours){
+      if(current>=maxBlocked) return wrote;
+      const key=`${d}_${h}`;
+      if(h>=0 && h<settings.hoursPerDay && !teacherUnavailable[tid][key]){
+        teacherUnavailable[tid][key]=true;
+        current++;
+        wrote++;
+      }
+    }
+  }
+  return wrote;
+}
+
+function firstThreeHours(){
+  return Array.from({length:Math.min(3,settings.hoursPerDay)},(_,h)=>h);
+}
+
+function lastThreeHours(){
+  const start=Math.max(0,settings.hoursPerDay-3);
+  return Array.from({length:settings.hoursPerDay-start},(_,i)=>start+i);
 }
 
 function randomSortKey(teacher){
