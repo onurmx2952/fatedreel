@@ -9,11 +9,31 @@ try:
     from fastapi import FastAPI
     from fastapi.middleware.cors import CORSMiddleware
     from pydantic import BaseModel
-except Exception:  # FastAPI is only needed when running the HTTP service.
+except Exception:
     FastAPI = None
     BaseModel = object
 
 from ortools.sat.python import cp_model
+
+
+DAYS = {
+    0: "Pazartesi",
+    1: "Salı",
+    2: "Çarşamba",
+    3: "Perşembe",
+    4: "Cuma",
+    5: "Cumartesi",
+    6: "Pazar",
+}
+
+
+@dataclass(frozen=True)
+class Block:
+    index: int
+    cls: str
+    subj: str
+    teacher_id: int
+    length: int
 
 
 def split_blocks(hours: int) -> list[int]:
@@ -24,15 +44,6 @@ def split_blocks(hours: int) -> list[int]:
     if hours == 1:
         blocks.append(1)
     return blocks
-
-
-@dataclass(frozen=True)
-class Block:
-    index: int
-    cls: str
-    subj: str
-    teacher_id: int
-    length: int
 
 
 def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
@@ -72,16 +83,16 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
             total += wh
             if (cls, subj) not in assignment_by_class_subject:
                 distribution_errors.append(f"{cls} {subj}: ders dağıtımında öğretmen yok.")
-        if total != len(days) * hours_per_day:
-            distribution_errors.append(f"{cls}: ders plani {total}/{len(days) * hours_per_day} saat.")
+        expected = len(days) * hours_per_day
+        if total != expected:
+            distribution_errors.append(f"{cls}: ders planı {total}/{expected} saat.")
 
-    capacity_errors = teacher_capacity_errors(teachers, teacher_unavailable, days, hours_per_day)
-    if distribution_errors or capacity_errors:
+    if distribution_errors:
         return {
             "ok": False,
             "status": "invalid_distribution",
             "error": "Ders dağıtımı OR-Tools'a gönderilmeden önce düzeltilmeli.",
-            "issues": distribution_errors + capacity_errors,
+            "issues": distribution_errors,
         }
 
     blocks: list[Block] = []
@@ -93,21 +104,72 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
             for length in split_blocks(assigned_wh or wh):
                 blocks.append(Block(len(blocks), cls, subj, tid, length))
 
+    strict = solve_blocks_with_model(
+        blocks,
+        teachers,
+        teacher_by_id,
+        teacher_unavailable,
+        days,
+        hours_per_day,
+        payload,
+        relax_unavailable=False,
+    )
+    if strict.get("ok"):
+        return strict
+
+    relaxed = solve_blocks_with_model(
+        blocks,
+        teachers,
+        teacher_by_id,
+        teacher_unavailable,
+        days,
+        hours_per_day,
+        payload,
+        relax_unavailable=True,
+    )
+    if relaxed.get("ok"):
+        return relaxed
+
+    return {
+        "ok": False,
+        "status": relaxed.get("status") or strict.get("status"),
+        "error": "OR-Tools bu dağıtım için uygun program bulamadı.",
+        "issues": relaxed.get("issues") or strict.get("issues") or build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
+    }
+
+
+def solve_blocks_with_model(
+    blocks: list[Block],
+    teachers: list[dict[str, Any]],
+    teacher_by_id: dict[int, dict[str, Any]],
+    teacher_unavailable: dict[str, Any],
+    days: list[int],
+    hours_per_day: int,
+    payload: dict[str, Any],
+    relax_unavailable: bool,
+) -> dict[str, Any]:
     model = cp_model.CpModel()
     var_by_block: dict[int, list[tuple[Any, int, int]]] = {}
     class_slot_vars: dict[tuple[str, int, int], list[Any]] = {}
     teacher_slot_vars: dict[tuple[int, int, int], list[Any]] = {}
     subject_day_vars: dict[tuple[str, str, int], list[Any]] = {}
+    penalty_terms: list[Any] = []
     no_candidate: list[str] = []
+    candidate_meta: dict[Any, tuple[Block, int, int]] = {}
 
     for block in blocks:
         candidates: list[tuple[Any, int, int]] = []
         for day in days:
             for start in range(0, hours_per_day - block.length + 1):
-                if teacher_blocked(teacher_unavailable, block.teacher_id, day, start, block.length):
+                blocked_hours = blocked_hours_for_block(teacher_unavailable, block.teacher_id, day, start, block.length)
+                if blocked_hours and not relax_unavailable:
                     continue
                 var = model.NewBoolVar(f"b{block.index}_d{day}_h{start}")
                 candidates.append((var, day, start))
+                candidate_meta[var] = (block, day, start)
+                if blocked_hours:
+                    for _ in blocked_hours:
+                        penalty_terms.append(var)
                 subject_day_vars.setdefault((block.cls, block.subj, day), []).append(var)
                 for offset in range(block.length):
                     hour = start + offset
@@ -116,7 +178,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         if not candidates:
             teacher = teacher_by_id.get(block.teacher_id, {})
             name = teacher.get("name", block.teacher_id)
-            openings = teacher_opening_hints(block.teacher_id, teacher_unavailable, days, hours_per_day, limit=2)
+            openings = teacher_opening_hints(block.teacher_id, teacher_unavailable, days, hours_per_day, limit=1)
             if openings:
                 no_candidate.append(f"{block.cls} {block.subj} için {name} öğretmenin {openings[0]} saatlerini açın.")
             else:
@@ -139,6 +201,8 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         model.AddAtMostOne(vars_)
     for vars_ in subject_day_vars.values():
         model.AddAtMostOne(vars_)
+    if relax_unavailable and penalty_terms:
+        model.Minimize(sum(penalty_terms))
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = float(payload.get("timeLimitSeconds") or 20)
@@ -155,34 +219,70 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         }
 
     schedule: dict[str, dict[str, str]] = {}
+    adjustment_slots: dict[tuple[int, int, int], dict[str, Any]] = {}
     for block in blocks:
         for var, day, start in var_by_block[block.index]:
-            if solver.BooleanValue(var):
-                for offset in range(block.length):
-                    schedule[f"{block.teacher_id}_{day}_{start + offset}"] = {
-                        "cls": block.cls,
-                        "subj": block.subj,
+            if not solver.BooleanValue(var):
+                continue
+            for offset in range(block.length):
+                hour = start + offset
+                schedule[f"{block.teacher_id}_{day}_{hour}"] = {"cls": block.cls, "subj": block.subj}
+                if is_teacher_unavailable(teacher_unavailable, block.teacher_id, day, hour):
+                    teacher = teacher_by_id.get(block.teacher_id, {})
+                    adjustment_slots[(block.teacher_id, day, hour)] = {
+                        "teacherId": block.teacher_id,
+                        "teacher": teacher.get("name", block.teacher_id),
+                        "day": day,
+                        "hour": hour,
                     }
-                break
+            break
 
+    adjustments = summarize_adjustments(adjustment_slots)
     return {
         "ok": True,
         "status": solver.StatusName(status),
         "schedule": schedule,
+        "adjustments": adjustments,
         "stats": {
             "blocks": len(blocks),
             "slots": len(schedule),
             "wallTime": solver.WallTime(),
+            "relaxedUnavailable": bool(adjustments),
         },
     }
 
 
-def teacher_blocked(unavailable: dict[str, Any], tid: int, day: int, start: int, length: int) -> bool:
+def blocked_hours_for_block(unavailable: dict[str, Any], tid: int, day: int, start: int, length: int) -> list[int]:
+    return [start + offset for offset in range(length) if is_teacher_unavailable(unavailable, tid, day, start + offset)]
+
+
+def is_teacher_unavailable(unavailable: dict[str, Any], tid: int, day: int, hour: int) -> bool:
     blocked = unavailable.get(str(tid)) or unavailable.get(tid) or {}
-    for offset in range(length):
-        if blocked.get(f"{day}_{start + offset}"):
-            return True
-    return False
+    return bool(blocked.get(f"{day}_{hour}"))
+
+
+def summarize_adjustments(slots: dict[tuple[int, int, int], dict[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[tuple[int, int], dict[str, Any]] = {}
+    for item in slots.values():
+        key = (int(item["teacherId"]), int(item["day"]))
+        grouped.setdefault(
+            key,
+            {
+                "teacherId": item["teacherId"],
+                "teacher": item["teacher"],
+                "day": item["day"],
+                "hours": [],
+            },
+        )
+        grouped[key]["hours"].append(int(item["hour"]))
+    result = []
+    for item in grouped.values():
+        hours = sorted(set(item["hours"]))
+        item["hours"] = hours
+        item["text"] = f"{item['teacher']} öğretmenin {day_name(item['day'])} {compact_hours_label(hours)} saatleri açıldı."
+        result.append(item)
+    result.sort(key=lambda item: (str(item["teacher"]), int(item["day"])))
+    return result
 
 
 def teacher_capacity_errors(
@@ -199,7 +299,8 @@ def teacher_capacity_errors(
         blocked = unavailable.get(str(tid)) or unavailable.get(tid) or {}
         capacity = total_slots - len(blocked)
         if assigned > capacity:
-            errors.append(f"{teacher.get('name', tid)}: {assigned} saat yuk var ama kapasite {capacity} saat.")
+            needed = assigned - capacity
+            errors.append(f"{teacher.get('name', tid)} öğretmenin en az {needed} saatini açın; {assigned} saat dersi var ama uygun kapasite {capacity} saat.")
     return errors
 
 
@@ -211,10 +312,10 @@ def build_infeasible_hints(
 ) -> list[str]:
     errors = teacher_capacity_errors(teachers, unavailable, days, hours_per_day)
     if errors:
-        return [format_capacity_hint(err) for err in errors]
-    open_hints = build_block_opening_hints(teachers, unavailable, days, hours_per_day)
-    if open_hints:
-        return open_hints
+        return errors
+    opening_hints = build_block_opening_hints(teachers, unavailable, days, hours_per_day)
+    if opening_hints:
+        return opening_hints
     heavy = sorted(
         (
             (sum(int(a.get("wh") or 0) for a in t.get("assignments") or []), t.get("name", t.get("id")))
@@ -231,15 +332,13 @@ def build_block_opening_hints(
     days: list[int],
     hours_per_day: int,
 ) -> list[str]:
-    candidates: list[tuple[int, int, str]] = []
+    candidates: list[tuple[int, str]] = []
     for teacher in teachers:
         tid = int(teacher.get("id"))
         name = str(teacher.get("name") or tid)
-        assigned = sum(int(a.get("wh") or 0) for a in teacher.get("assignments") or [])
         blocked = unavailable.get(str(tid)) or unavailable.get(tid) or {}
         if not blocked:
             continue
-        slack = len(days) * hours_per_day - assigned - len(blocked)
         day_counts: dict[int, list[int]] = {}
         for key in blocked:
             try:
@@ -254,11 +353,10 @@ def build_block_opening_hints(
             hours = sorted(set(hours))
             full_day_bonus = 20 if len(hours) >= hours_per_day else 0
             edge_bonus = 8 if all(h < 3 for h in hours) or all(h >= max(0, hours_per_day - 3) for h in hours) else 0
-            score = len(hours) * 10 + full_day_bonus + edge_bonus - max(0, slack)
-            label = compact_hours_label(hours)
-            candidates.append((score, tid, f"{name} öğretmenin {day_name(day)} {label} saatlerini açın."))
+            score = len(hours) * 10 + full_day_bonus + edge_bonus
+            candidates.append((score, f"{name} öğretmenin {day_name(day)} {compact_hours_label(hours)} saatlerini açın."))
     candidates.sort(reverse=True, key=lambda item: item[0])
-    return [text for _, _, text in candidates[:8]]
+    return [text for _, text in candidates[:8]]
 
 
 def teacher_opening_hints(
@@ -279,20 +377,14 @@ def teacher_opening_hints(
             continue
         if day in days and 0 <= hour < hours_per_day:
             by_day.setdefault(day, []).append(hour)
-    ranked = sorted(
-        by_day.items(),
-        key=lambda item: (len(item[1]), all(h < 3 for h in item[1]) or all(h >= max(0, hours_per_day - 3) for h in item[1])),
-        reverse=True,
-    )
+    ranked = sorted(by_day.items(), key=lambda item: len(item[1]), reverse=True)
     return [f"{day_name(day)} {compact_hours_label(sorted(set(hours)))}" for day, hours in ranked[:limit]]
 
 
 def compact_hours_label(hours: list[int]) -> str:
-    if not hours:
+    display = sorted({h + 1 for h in hours})
+    if not display:
         return ""
-    display = [h + 1 for h in hours]
-    if len(display) == 1:
-        return f"{display[0]}."
     ranges: list[str] = []
     start = prev = display[0]
     for hour in display[1:]:
@@ -306,30 +398,7 @@ def compact_hours_label(hours: list[int]) -> str:
 
 
 def day_name(day: int) -> str:
-    names = {
-        0: "Pazartesi",
-        1: "Salı",
-        2: "Çarşamba",
-        3: "Perşembe",
-        4: "Cuma",
-        5: "Cumartesi",
-        6: "Pazar",
-    }
-    return names.get(day, f"{day}. gün")
-
-
-def format_capacity_hint(text: str) -> str:
-    # Expected source format: "Name: 31 saat yuk var ama kapasite 28 saat."
-    import re
-
-    match = re.match(r"(.+):\s*(\d+)\s+saat yuk var ama kapasite\s+(\d+)\s+saat", text)
-    if not match:
-        return text
-    name, assigned_raw, capacity_raw = match.groups()
-    assigned = int(assigned_raw)
-    capacity = int(capacity_raw)
-    needed = max(1, assigned - capacity)
-    return f"{name} öğretmenin en az {needed} saatini açın; {assigned} saat dersi var ama uygun kapasite {capacity} saat."
+    return DAYS.get(day, f"{day}. gün")
 
 
 def class_sort_key(cls: str) -> tuple[int, str]:
@@ -343,7 +412,7 @@ def class_sort_key(cls: str) -> tuple[int, str]:
 
 
 if FastAPI is not None:
-    app = FastAPI(title="Okul Ders Programi OR-Tools Solver")
+    app = FastAPI(title="Okul Ders Programı OR-Tools Solver")
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
