@@ -269,6 +269,7 @@ body.auth-locked .login-screen{display:flex}
   <div class="toolbar">
     <h2>Öğretmen Boş Saat / Ders Yazılmaz</h2>
     <button class="btn danger" onclick="clearBlockedForSelected()">Seçili Öğretmeni Temizle</button>
+    <button class="btn danger" onclick="clearAllBlockedSlots()">Tüm Boş Saatleri Temizle</button>
   </div>
   <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:14px;margin-bottom:14px;max-width:520px">
     <div class="fg2" style="margin-bottom:0">
@@ -441,7 +442,7 @@ function makeAssignments(pairs) {
   return pairs.map(({cls,subj,wh}) => {
     const plan = CLASS_PLAN[cls];
     const entry = plan && plan.find(l => l.subj === subj);
-    return {cls, subj, wh: wh || (entry ? entry.wh : 2)};
+    return {cls, subj, wh: wh || (entry ? entry.wh : 2), manual:true};
   }).filter(a => a.wh > 0);
 }
 
@@ -722,7 +723,9 @@ async function generateSchedule(){
     const trialA=buildGlobalBlockSchedule(attempt);
     const trialB=buildFullClassSchedule(attempt);
     const trialC=buildGroupedTeacherSchedule(attempt);
-    [trialA,trialB,trialC].forEach(trial=>{
+    const trialD=buildLayoutTeacherMatchingSchedule(attempt);
+    const trials=[trialD,trialA,trialB,trialC];
+    trials.forEach(trial=>{
       if(!best || trial.score<best.score) best=trial;
     });
     if(best.issues.length===0) break;
@@ -792,7 +795,32 @@ function buildTeacherPoolHint(blockIssues=[],solverIssues=[]){
     .map(tid=>teachers.find(t=>t.id===tid)?.name)
     .filter(Boolean)
     .slice(0,6);
-  return `<br><b>Öneri:</b> ${issue.cls} ${issue.subj} dersi Ders Dağıtımı'ndaki öğretmenle yerleşemiyor. Bu sınıf-ders satırında öğretmeni değiştirin veya öğretmenin boş saatlerini açın.${names.length?` Şu an denenen öğretmen: ${names.join(', ')}.`:''}`;
+  const conflict=describeDistributionConflict(issue.cls,issue.subj);
+  const hasBlocked=hasAnyTeacherUnavailable();
+  if(hasBlocked){
+    return `<br><b>Öneri:</b> ${issue.cls} ${issue.subj} dersi Ders Dağıtımı'ndaki öğretmenle yerleşemiyor. Bu sınıf-ders satırında öğretmeni değiştirin veya öğretmenin boş saatlerini açın.${names.length?` Şu an denenen öğretmen: ${names.join(', ')}.`:''}${conflict}`;
+  }
+  return `<br><b>Öneri:</b> Boş saat kısıtı kalmamış; sorun öğretmen-sınıf dağıtımı ile saat çakışması. ${issue.cls} ${issue.subj} satırındaki öğretmeni değiştirin veya aynı öğretmene verilen sınıfları azaltın.${names.length?` Denenen öğretmen: ${names.join(', ')}.`:''}${conflict}`;
+}
+
+function hasAnyTeacherUnavailable(){
+  return teachers.some(t=>Object.keys(teacherUnavailable[t.id]||{}).length>0);
+}
+
+function describeDistributionConflict(cls,subj){
+  const ids=getLikelyTeacherIds(cls,subj);
+  if(!ids.length) return '';
+  const empty=getClassEmptySlots(cls,schedule);
+  for(const tid of ids){
+    const teacher=teachers.find(t=>t.id===tid);
+    for(const slot of empty){
+      const busy=schedule[`${tid}_${slot.d}_${slot.h}`];
+      if(busy){
+        return ` Çakışma örneği: ${teacher?.name||tid} ${DAYS[slot.d]} ${slot.h+1}. saatte ${busy.cls} ${busy.subj} dersinde.`;
+      }
+    }
+  }
+  return '';
 }
 
 function collectUnavailableSuggestions(report,blockIssues=[],solverIssues=[]){
@@ -1097,6 +1125,268 @@ function buildFullClassSchedule(attempt){
   const teacherConsistencyIssues=analyzeTeacherConsistencyObject(trialSchedule);
   const score=issues.length*1800+report.classIssues.length*200+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000+teacherConsistencyIssues.length*1000;
   return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues,...teacherConsistencyIssues],score};
+}
+
+function buildLayoutTeacherMatchingSchedule(attempt){
+  const trialSchedule={};
+  const teacherBusy=Object.fromEntries(teachers.map(t=>[t.id,{}]));
+  const teacherLoad=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const groups={};
+  const issues=[];
+
+  const classOrder=[...ALL_CLASSES];
+  rotate(classOrder,attempt%classOrder.length);
+  classOrder.forEach((cls,ci)=>{
+    const layout=findClassBlockLayout(cls,attempt+ci*31);
+    if(!layout.length){
+      issues.push({cls,reason:'Bloklar 5x7 tabloya yerlestirilemedi'});
+      return;
+    }
+    layout.forEach(block=>{
+      const key=`${cls}|${block.subj}`;
+      if(!groups[key]) groups[key]={cls,subj:block.subj,slots:[]};
+      for(let x=0;x<block.len;x++) groups[key].slots.push({d:block.day,h:block.hour+x});
+    });
+  });
+
+  const ordered=Object.values(groups).sort((a,b)=>{
+    const ca=getCandidateTeachersForClassSubject(a.cls,a.subj).length;
+    const cb=getCandidateTeachersForClassSubject(b.cls,b.subj).length;
+    return ca-cb || b.slots.length-a.slots.length || (((a.cls.charCodeAt(0)+a.subj.length+attempt)%19)-((b.cls.charCodeAt(0)+b.subj.length+attempt)%19));
+  });
+
+  ordered.forEach(group=>{
+    const candidates=getCandidateTeachersForClassSubject(group.cls,group.subj);
+    if(!candidates.length){
+      issues.push({cls:group.cls,subj:group.subj,reason:'Ders dagitiminda ogretmen yok'});
+      return;
+    }
+    const ranked=candidates.map(tid=>{
+      const conflicts=group.slots.reduce((sum,slot)=>{
+        return sum + (teacherBusy[tid][`${slot.d}_${slot.h}`]||isTeacherUnavailable(tid,slot.d,slot.h)?1:0);
+      },0);
+      return {tid,conflicts};
+    }).sort((a,b)=>a.conflicts-b.conflicts || teacherLoad[a.tid]-teacherLoad[b.tid] || teacherUnavailableCount(a.tid)-teacherUnavailableCount(b.tid) || (((a.tid+attempt)%17)-((b.tid+attempt)%17)));
+
+    const pick=ranked[0];
+    if(!pick || pick.conflicts>0){
+      issues.push({cls:group.cls,subj:group.subj,reason:'Ogretmen saat cakismasi',conflicts:pick?.conflicts||0});
+      return;
+    }
+
+    group.slots.forEach(slot=>{
+      trialSchedule[`${pick.tid}_${slot.d}_${slot.h}`]={cls:group.cls,subj:group.subj};
+      teacherBusy[pick.tid][`${slot.d}_${slot.h}`]=true;
+      teacherLoad[pick.tid]++;
+    });
+  });
+
+  const report=analyzeScheduleObject(trialSchedule);
+  const blockIssues=analyzeBlockRulesObject(trialSchedule);
+  const branchIssues=analyzeBranchRulesObject(trialSchedule);
+  const teacherConsistencyIssues=analyzeTeacherConsistencyObject(trialSchedule);
+  const score=issues.length*2200+report.classIssues.length*220+report.totalMissing*25+report.totalGaps+blockIssues.length*350+branchIssues.length*1000+teacherConsistencyIssues.length*2000;
+  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues,...teacherConsistencyIssues],score};
+}
+
+function buildSequentialClassLayoutSchedule(attempt){
+  const trialSchedule={};
+  const teacherBusy=Object.fromEntries(teachers.map(t=>[t.id,{}]));
+  const teacherLoad=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const issues=[];
+
+  const classOrder=[...ALL_CLASSES].sort((a,b)=>{
+    return classPlacementPressure(b)-classPlacementPressure(a) || (((a.charCodeAt(0)+attempt)%17)-((b.charCodeAt(0)+attempt)%17));
+  });
+  rotate(classOrder,attempt%classOrder.length);
+
+  classOrder.forEach((cls,ci)=>{
+    let best=null;
+    for(let i=0;i<90;i++){
+      const layout=buildClassBlockLayout(cls,attempt*997+ci*131+i*17);
+      if(!layout.length) continue;
+      const candidate=evaluateClassLayoutForTeachers(cls,layout,teacherBusy,teacherLoad,attempt+i);
+      if(!best || candidate.score<best.score) best=candidate;
+      if(candidate.score===0) break;
+    }
+    if(!best){
+      issues.push({cls,reason:'Bloklar 5x7 tabloya yerlestirilemedi'});
+      return;
+    }
+    if(best.score>0){
+      best.issues.forEach(issue=>issues.push(issue));
+    }
+    best.placements.forEach(p=>{
+      p.slots.forEach(slot=>{
+        trialSchedule[`${p.tid}_${slot.d}_${slot.h}`]={cls:p.cls,subj:p.subj};
+        teacherBusy[p.tid][`${slot.d}_${slot.h}`]=true;
+        teacherLoad[p.tid]++;
+      });
+    });
+  });
+
+  const report=analyzeScheduleObject(trialSchedule);
+  const blockIssues=analyzeBlockRulesObject(trialSchedule);
+  const branchIssues=analyzeBranchRulesObject(trialSchedule);
+  const teacherConsistencyIssues=analyzeTeacherConsistencyObject(trialSchedule);
+  const score=issues.length*1800+report.classIssues.length*180+report.totalMissing*20+report.totalGaps+blockIssues.length*300+branchIssues.length*1000+teacherConsistencyIssues.length*1800;
+  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues,...teacherConsistencyIssues],score};
+}
+
+function evaluateClassLayoutForTeachers(cls,layout,teacherBusy,teacherLoad,seed=0){
+  const groups={};
+  layout.forEach(block=>{
+    const key=`${cls}|${block.subj}`;
+    if(!groups[key]) groups[key]={cls,subj:block.subj,slots:[]};
+    for(let x=0;x<block.len;x++) groups[key].slots.push({d:block.day,h:block.hour+x});
+  });
+
+  const placements=[];
+  const localBusy={};
+  const issues=[];
+  let score=0;
+  const ordered=Object.values(groups).sort((a,b)=>{
+    const ca=getCandidateTeachersForClassSubject(a.cls,a.subj).length;
+    const cb=getCandidateTeachersForClassSubject(b.cls,b.subj).length;
+    return ca-cb || b.slots.length-a.slots.length || maxCandidateAssignedHours(b.cls,b.subj)-maxCandidateAssignedHours(a.cls,a.subj) || (((a.subj.length+seed)%13)-((b.subj.length+seed)%13));
+  });
+
+  ordered.forEach(group=>{
+    const candidates=getCandidateTeachersForClassSubject(group.cls,group.subj);
+    if(!candidates.length){
+      issues.push({cls:group.cls,subj:group.subj,reason:'Ders dagitiminda ogretmen yok'});
+      score+=200;
+      return;
+    }
+    const ranked=candidates.map(tid=>{
+      const conflicts=group.slots.reduce((sum,slot)=>{
+        const key=`${slot.d}_${slot.h}`;
+        return sum + (teacherBusy[tid][key]||localBusy[`${tid}_${key}`]||isTeacherUnavailable(tid,slot.d,slot.h)?1:0);
+      },0);
+      return {tid,conflicts};
+    }).sort((a,b)=>a.conflicts-b.conflicts || teacherLoad[a.tid]-teacherLoad[b.tid] || teacherUnavailableCount(a.tid)-teacherUnavailableCount(b.tid) || (((a.tid+seed)%11)-((b.tid+seed)%11)));
+
+    const pick=ranked[0];
+    if(!pick || pick.conflicts>0){
+      issues.push({cls:group.cls,subj:group.subj,reason:'Ogretmen saat cakismasi',conflicts:pick?.conflicts||0});
+      score+=100+(pick?.conflicts||1)*10+group.slots.length;
+      return;
+    }
+
+    placements.push({cls:group.cls,subj:group.subj,tid:pick.tid,slots:group.slots});
+    group.slots.forEach(slot=>{localBusy[`${pick.tid}_${slot.d}_${slot.h}`]=true;});
+  });
+
+  return {score,placements,issues};
+}
+
+function classPlacementPressure(cls){
+  return (CLASS_PLAN[cls]||[]).reduce((sum,l)=>{
+    return sum + (parseInt(l.wh)||0) * Math.max(1,maxCandidateAssignedHours(cls,l.subj));
+  },0);
+}
+
+function buildMinConflictLayoutSchedule(attempt){
+  const states={};
+  const counts={};
+  const issues=[];
+  const classOrder=[...ALL_CLASSES];
+  rotate(classOrder,attempt%classOrder.length);
+
+  const addEntries=(entries,delta)=>{
+    entries.forEach(e=>{
+      const key=`${e.tid}_${e.d}_${e.h}`;
+      counts[key]=(counts[key]||0)+delta;
+      if(counts[key]<=0) delete counts[key];
+    });
+  };
+  const entryPenalty=(e)=>{
+    const count=counts[`${e.tid}_${e.d}_${e.h}`]||0;
+    return Math.max(0,count-1)+(isTeacherUnavailable(e.tid,e.d,e.h)?2:0);
+  };
+  const totalPenalty=()=>Object.values(states).reduce((sum,state)=>sum+state.entries.reduce((s,e)=>s+entryPenalty(e),0),0);
+  const classPenalty=(cls)=>states[cls].entries.reduce((sum,e)=>sum+entryPenalty(e),0);
+
+  classOrder.forEach((cls,idx)=>{
+    const state=makeMinConflictClassState(cls,attempt*997+idx*37,counts);
+    if(!state){
+      issues.push({cls,reason:'Bloklar 5x7 tabloya yerlestirilemedi'});
+      return;
+    }
+    states[cls]=state;
+    addEntries(state.entries,1);
+  });
+
+  let current=totalPenalty();
+  for(let iter=0;iter<420&&current>0;iter++){
+    const conflicted=Object.keys(states).filter(cls=>classPenalty(cls)>0);
+    if(!conflicted.length) break;
+    conflicted.sort((a,b)=>classPenalty(b)-classPenalty(a) || (((a.charCodeAt(0)+iter+attempt)%13)-((b.charCodeAt(0)+iter+attempt)%13)));
+    const cls=conflicted[0];
+    const old=states[cls];
+    addEntries(old.entries,-1);
+    let best=old;
+    let bestPenalty=Number.POSITIVE_INFINITY;
+    for(let i=0;i<70;i++){
+      const state=makeMinConflictClassState(cls,attempt*2003+iter*97+i*23,counts);
+      if(!state) continue;
+      addEntries(state.entries,1);
+      const penalty=totalPenalty();
+      addEntries(state.entries,-1);
+      if(penalty<bestPenalty){
+        best=state;
+        bestPenalty=penalty;
+        if(penalty===0) break;
+      }
+    }
+    states[cls]=best;
+    addEntries(best.entries,1);
+    current=totalPenalty();
+  }
+
+  const trialSchedule={};
+  Object.values(states).forEach(state=>{
+    state.entries.forEach(e=>{
+      const key=`${e.tid}_${e.d}_${e.h}`;
+      if(trialSchedule[key]){
+        issues.push({cls:e.cls,subj:e.subj,reason:'Ogretmen saat cakismasi'});
+        return;
+      }
+      trialSchedule[key]={cls:e.cls,subj:e.subj};
+    });
+  });
+
+  const report=analyzeScheduleObject(trialSchedule);
+  const blockIssues=analyzeBlockRulesObject(trialSchedule);
+  const branchIssues=analyzeBranchRulesObject(trialSchedule);
+  const teacherConsistencyIssues=analyzeTeacherConsistencyObject(trialSchedule);
+  const score=issues.length*2200+current*500+report.classIssues.length*200+report.totalMissing*25+report.totalGaps+blockIssues.length*350+branchIssues.length*1000+teacherConsistencyIssues.length*1800;
+  return {schedule:trialSchedule,issues:[...issues,...report.classIssues,...blockIssues,...branchIssues,...teacherConsistencyIssues],score};
+}
+
+function makeMinConflictClassState(cls,seed,counts){
+  const layout=buildClassBlockLayout(cls,seed);
+  if(!layout.length) return null;
+  const groups={};
+  layout.forEach(block=>{
+    const key=`${cls}|${block.subj}`;
+    if(!groups[key]) groups[key]={cls,subj:block.subj,slots:[]};
+    for(let x=0;x<block.len;x++) groups[key].slots.push({d:block.day,h:block.hour+x});
+  });
+  const entries=[];
+  Object.values(groups).forEach(group=>{
+    const candidates=getCandidateTeachersForClassSubject(group.cls,group.subj);
+    if(!candidates.length) return;
+    const ranked=candidates.map(tid=>{
+      const conflict=group.slots.reduce((sum,slot)=>{
+        return sum+(counts[`${tid}_${slot.d}_${slot.h}`]||0)+(isTeacherUnavailable(tid,slot.d,slot.h)?2:0);
+      },0);
+      return {tid,conflict};
+    }).sort((a,b)=>a.conflict-b.conflict || teacherUnavailableCount(a.tid)-teacherUnavailableCount(b.tid) || (((a.tid+seed)%17)-((b.tid+seed)%17)));
+    const tid=ranked[0].tid;
+    group.slots.forEach(slot=>entries.push({cls:group.cls,subj:group.subj,tid,d:slot.d,h:slot.h}));
+  });
+  return {cls,entries};
 }
 
 function buildGlobalBlockSchedule(attempt){
@@ -1412,6 +1702,12 @@ function findTeacherForBlock(cls,subj,day,hour,len,scheduleObj,teacherLoad,teach
     return candidates[0];
   }
   return null;
+}
+
+function maxCandidateAssignedHours(cls,subj){
+  const ids=getCandidateTeachersForClassSubject(cls,subj);
+  if(!ids.length) return 0;
+  return Math.max(...ids.map(tid=>teacherAssignedHours(tid)));
 }
 
 function canTeacherTakeBlock(tid,day,hour,len,scheduleObj){
@@ -2013,6 +2309,16 @@ function toggleTeacherUnavailable(tid,d,h){
 function clearBlockedForSelected(){
   if(blockedTeacherId) teacherUnavailable[blockedTeacherId]={};
   renderBlockedGrid();
+  scheduleAutoSave();
+}
+
+function clearAllBlockedSlots(){
+  teachers.forEach(t=>{
+    teacherUnavailable[t.id]={};
+  });
+  renderBlockedView();
+  showAlert('Tüm öğretmen boş saatleri temizlendi. Programı yeniden oluşturabilirsiniz.','ok');
+  scheduleAutoSave();
 }
 
 function isTeacherUnavailable(tid,d,h){
