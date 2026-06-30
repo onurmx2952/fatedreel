@@ -714,13 +714,17 @@ async function generateSchedule(){
   }
 
   let best=null;
-  for(let attempt=0;attempt<180;attempt++){
+  for(let attempt=0;attempt<250;attempt++){
     if(attempt&&attempt%8===0){
-      setWorkState(true,`Program hazırlanıyor... ${attempt}/180`);
+      setWorkState(true,`Program hazırlanıyor... ${attempt}/250`);
       await yieldToBrowser();
     }
-    const trial=buildGroupedTeacherSchedule(attempt);
-    if(!best || trial.score<best.score) best=trial;
+    const trialA=buildGlobalBlockSchedule(attempt);
+    const trialB=buildFullClassSchedule(attempt);
+    const trialC=buildGroupedTeacherSchedule(attempt);
+    [trialA,trialB,trialC].forEach(trial=>{
+      if(!best || trial.score<best.score) best=trial;
+    });
     if(best.issues.length===0) break;
   }
   schedule=best.schedule;
@@ -768,10 +772,10 @@ function setWorkState(on,text='Program hazırlanıyor...'){
 }
 
 function buildFailureFixHint(report,blockIssues=[],solverIssues=[]){
+  const directDistributionHint=buildTeacherPoolHint(blockIssues,solverIssues);
+  if(directDistributionHint) return directDistributionHint;
   const suggestions=collectUnavailableSuggestions(report,blockIssues,solverIssues);
   if(!suggestions.length){
-    const poolHint=buildTeacherPoolHint(blockIssues,solverIssues);
-    if(poolHint) return poolHint;
     return `<br><b>Öneri:</b> Boş saat kısıtından net bir aday bulunamadı. Ders dağıtımı, ders saatleri veya öğretmen branş havuzu kontrol edilmeli.`;
   }
   const rows=suggestions.slice(0,5).map(s=>{
@@ -815,7 +819,6 @@ function collectUnavailableSuggestions(report,blockIssues=[],solverIssues=[]){
           }
         });
       });
-      ids.forEach(tid=>addGeneralUnavailableHints(tid,cls,subj,addHit));
     });
   });
 
@@ -830,7 +833,6 @@ function collectUnavailableSuggestions(report,blockIssues=[],solverIssues=[]){
 
   solverIssues.filter(issue=>issue&&issue.cls&&issue.subj&&issue.reason).slice(0,10).forEach(issue=>{
     getLikelyTeacherIds(issue.cls,issue.subj).forEach(tid=>{
-      addGeneralUnavailableHints(tid,issue.cls,issue.subj,addHit);
       Object.keys(teacherUnavailable[tid]||{}).slice(0,12).forEach(key=>{
         const [d,h]=key.split('_').map(Number);
         addHit(tid,`${DAYS[d]} ${h+1}. saat (${issue.cls} ${issue.subj})`,2,describeUnavailableOpening(tid,d,h));
@@ -852,6 +854,7 @@ function addGeneralUnavailableHints(tid,cls,subj,addHit){
 }
 
 function describeUnavailableOpening(tid,d,h){
+  if(!isTeacherUnavailable(tid,d,h)) return '';
   const teacher=teachers.find(t=>t.id===tid);
   const name=teacher?teacher.name:'Öğretmen';
   const hours=Object.keys(teacherUnavailable[tid]||{})
@@ -1115,8 +1118,8 @@ function buildGlobalBlockSchedule(attempt){
     });
   });
   blocks.sort((a,b)=>{
-    const pa=Math.max(1,getTeacherPoolForClass(a.cls,a.subj).length);
-    const pb=Math.max(1,getTeacherPoolForClass(b.cls,b.subj).length);
+    const pa=Math.max(1,getCandidateTeachersForClassSubject(a.cls,a.subj).length);
+    const pb=Math.max(1,getCandidateTeachersForClassSubject(b.cls,b.subj).length);
     return b.len-a.len || pa-pb || (((a.ci*13+a.bi*7+attempt)%17)-((b.ci*13+b.bi*7+attempt)%17));
   });
 
