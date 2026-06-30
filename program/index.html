@@ -703,7 +703,11 @@ async function generateSchedule(){
   await yieldToBrowser();
   try{
   if(document.querySelectorAll('#distribution-body .dist-row').length) saveDistribution(true);
-  normalizeTeacherAssignments();
+  const distributionValidation=validateFixedDistribution();
+  if(distributionValidation.length){
+    showAlert(`Ders dağıtımı sabit olduğu için program oluşturulmadı:<br>${distributionValidation.slice(0,8).join('<br>')}`,'warn');
+    return;
+  }
   trimUnavailableToTeacherLoads();
   schedule={};
   const H=settings.hoursPerDay;
@@ -2621,17 +2625,51 @@ function saveDistribution(silent=false){
 function commitDistributionRows(){
   teachers.forEach(t=>{t.assignments=(t.assignments||[]).filter(a=>!a.manual);});
   const rows=Array.from(document.querySelectorAll('#distribution-body .dist-row'));
-  const preferred={};
   rows.forEach(row=>{
     const tid=parseInt(row.querySelector('.dist-teacher').value);
     const t=teachers.find(x=>x.id===tid);
     if(!t) return;
     const a={cls:row.dataset.cls,subj:row.querySelector('.dist-subj').value,wh:parseInt(row.querySelector('.dist-wh').value)||1,manual:true};
-    ensureClassLesson35(a.cls,a.subj,a.wh);
-    preferred[`${a.cls}|${a.subj}`]=tid;
+    ensureClassLesson(a.cls,a.subj,a.wh);
+    t.assignments.push(a);
     if(!t.subjects.includes(a.subj)) t.subjects.push(a.subj);
   });
-  fillDistributionTo35(preferred);
+  teachers.forEach(t=>{t.hours=(t.assignments||[]).reduce((sum,a)=>sum+(parseInt(a.wh)||0),0);});
+}
+
+function validateFixedDistribution(){
+  const issues=[];
+  const byClass=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,[]]));
+  teachers.forEach(t=>{
+    (t.assignments||[]).filter(a=>a.manual).forEach(a=>{
+      if(!a.cls||!ALL_CLASSES.includes(a.cls)) return;
+      byClass[a.cls].push({teacher:t,...a,wh:parseInt(a.wh)||0});
+    });
+  });
+
+  ALL_CLASSES.forEach(cls=>{
+    const rows=byClass[cls]||[];
+    const total=rows.reduce((sum,r)=>sum+r.wh,0);
+    if(total!==35) issues.push(`${cls}: ders dağıtımı ${total}/35 saat. Kullanıcı düzeltmeli.`);
+    const seen={};
+    rows.forEach(r=>{
+      if(!r.subj) issues.push(`${cls}: ders adı boş satır var.`);
+      if(!r.teacher) issues.push(`${cls} ${r.subj}: öğretmen yok.`);
+      if(r.wh<=0) issues.push(`${cls} ${r.subj}: saat sayısı geçersiz.`);
+      const key=`${cls}|${r.subj}`;
+      seen[key]=(seen[key]||0)+1;
+      if(r.teacher && !(r.teacher.subjects||[]).includes(r.subj)){
+        issues.push(`${cls} ${r.subj}: ${r.teacher.name} bu derse ait öğretmen değil.`);
+      }
+    });
+    Object.entries(seen).forEach(([key,count])=>{
+      if(count>1){
+        const [,subj]=key.split('|');
+        issues.push(`${cls} ${subj}: aynı ders birden fazla satıra bölünmüş.`);
+      }
+    });
+  });
+  return issues;
 }
 
 function seedDefaultTeacherUnavailable(force=false){
