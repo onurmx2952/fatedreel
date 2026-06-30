@@ -3150,7 +3150,6 @@ function exportCSV(){
 function showAlert(msg,type){
   const el=document.getElementById('alert-area');
   el.innerHTML=`<div class="alert ${type}"><button class="alert-close" onclick="this.closest('.alert').remove()">×</button>${msg}</div>`;
-  if(type!=='warn') setTimeout(()=>el.innerHTML='',4000);
 }
 
 let googleClientId='';
