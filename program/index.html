@@ -120,7 +120,20 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .dist-row-sentence{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:#334155}
 .dist-row-sentence select,.dist-row-sentence input{height:34px;border:1px solid #cbd5e1;border-radius:9px;padding:6px 8px;background:#fff;font-size:12px}
 .dist-word{color:#64748b;font-weight:600}
-.dist-preview{font-size:12px;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px;margin-bottom:10px}
+.dist-preview{font-size:12px;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.class-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.class-tab{border:1px solid #d1d5db;background:#fff;border-radius:999px;padding:7px 10px;font-weight:700;font-size:12px;cursor:pointer;color:#475569;display:inline-flex;gap:7px;align-items:center}
+.class-tab.active{background:#2563eb;border-color:#2563eb;color:#fff}
+.hour-pill{border-radius:999px;padding:2px 7px;font-size:11px;font-weight:800;background:#fee2e2;color:#b91c1c}
+.hour-pill.ok{background:#dcfce7;color:#15803d}
+.class-tab.active .hour-pill{background:rgba(255,255,255,.22);color:#fff}
+.dist-total.ok{color:#15803d;font-weight:800}
+.dist-total.bad{color:#b91c1c;font-weight:800}
+.dist-class-panel{display:none}
+.dist-class-panel.active{display:block}
+.dist-grid{display:grid;grid-template-columns:1.1fr 1.5fr 90px 70px;gap:8px;align-items:center;padding:8px 10px;border-bottom:1px solid #eef2f7}
+.dist-grid.head{background:#f8fafc;color:#64748b;font-weight:800;font-size:12px;position:sticky;top:0;z-index:1}
+.dist-grid select,.dist-grid input{height:34px;border:1px solid #cbd5e1;border-radius:9px;padding:6px 8px;background:#fff;font-size:12px;width:100%}
 .color-chip{display:inline-flex;width:10px;height:10px;border-radius:999px;margin-right:6px;vertical-align:middle;border:1px solid rgba(15,23,42,.08)}
 .auth-bar{display:flex;align-items:center;gap:8px;margin-left:auto}
 .auth-user{font-size:12px;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;padding:6px 10px;display:none;align-items:center;gap:8px}
@@ -245,15 +258,11 @@ body.auth-locked .login-screen{display:flex}
   <div class="toolbar">
     <h2>Ders Dağıtımı</h2>
     <button class="btn primary" onclick="saveDistribution()">Kaydet</button>
-    <button class="btn" onclick="addDistributionRow()">+ Dağıtım Ekle</button>
+    <button class="btn" onclick="addDistributionRow()">+ Bu Sınıfa Satır Ekle</button>
     <button class="btn primary" onclick="generateFromDistribution()">Programı Yeniden Oluştur</button>
   </div>
-  <div class="tbl-wrap">
-    <table class="cls-tbl">
-      <thead><tr><th>Atama cümlesi</th><th style="width:90px">İşlem</th></tr></thead>
-      <tbody id="distribution-body"></tbody>
-    </table>
-  </div>
+  <div id="distribution-tabs" class="class-tabs"></div>
+  <div id="distribution-body" class="tbl-wrap"></div>
 </div>
 
 <div id="view-blocked" class="view">
@@ -540,6 +549,7 @@ teachers.forEach(t => { t.hours = t.assignments.reduce((s,a)=>s+a.wh,0); });
 let schedule={};
 let settings={hoursPerDay:7, days:[0,1,2,3,4]};
 let selectedClass=null;
+let selectedDistributionClass=ALL_CLASSES[0];
 let blockedTeacherId=teachers[0]?.id||null;
 let teacherUnavailable={};
 
@@ -2223,35 +2233,72 @@ function deleteSubject(subj){
 }
 
 function renderDistribution(){
-  const rows=[];
-  teachers.forEach(t=>(t.assignments||[]).filter(a=>a.manual).forEach(a=>rows.push({tid:t.id,...a})));
-  document.getElementById('distribution-body').innerHTML=rows.map(r=>distributionRowHtml(r.tid,r.cls,r.subj,r.wh)).join('');
+  if(!ALL_CLASSES.includes(selectedDistributionClass)) selectedDistributionClass=ALL_CLASSES[0];
+  const byClass=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,[]]));
+  teachers.forEach(t=>(t.assignments||[]).filter(a=>a.manual).forEach(a=>{
+    if(!byClass[a.cls]) byClass[a.cls]=[];
+    byClass[a.cls].push({tid:t.id,...a});
+  }));
+  const totals=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,(byClass[cls]||[]).reduce((sum,r)=>sum+(parseInt(r.wh)||0),0)]));
+
+  document.getElementById('distribution-tabs').innerHTML=ALL_CLASSES.map(cls=>{
+    const total=totals[cls]||0;
+    return `<button class="class-tab ${cls===selectedDistributionClass?'active':''}" data-cls="${cls}" onclick="selectDistributionClass('${cls}')">
+      <span>${cls}</span><span class="hour-pill ${total===35?'ok':''}" data-total-cls="${cls}">${total}/35</span>
+    </button>`;
+  }).join('');
+
+  document.getElementById('distribution-body').innerHTML=ALL_CLASSES.map(cls=>{
+    const rows=(byClass[cls]||[]).sort((a,b)=>a.subj.localeCompare(b.subj,'tr'));
+    const total=totals[cls]||0;
+    return `<div class="dist-class-panel ${cls===selectedDistributionClass?'active':''}" data-cls="${cls}">
+      <div class="dist-preview"><b>${cls} ders dağıtımı</b><span class="dist-total ${total===35?'ok':'bad'}" data-panel-total="${cls}">Toplam ${total}/35 saat</span></div>
+      <div class="dist-grid head"><div>Ders</div><div>Öğretmen</div><div>Saat</div><div></div></div>
+      <div class="dist-rows">${rows.map(r=>distributionRowHtml(r.tid,cls,r.subj,r.wh)).join('')}</div>
+    </div>`;
+  }).join('');
 }
 
 function distributionRowHtml(tid=teachers[0]?.id,cls=ALL_CLASSES[0],subj=SUBJECTS[0],wh=1){
   const teacherOpts=teachers.map(t=>`<option value="${t.id}"${t.id===tid?' selected':''}>${t.name}</option>`).join('');
-  const clsOpts=ALL_CLASSES.map(c=>`<option value="${c}"${c===cls?' selected':''}>${c}</option>`).join('');
   const subjList=SUBJECTS.includes(subj)?SUBJECTS:[subj,...SUBJECTS].filter(Boolean);
   const subjOpts=subjList.map(s=>`<option value="${s}"${s===subj?' selected':''}>${s}</option>`).join('');
-  return `<tr class="dist-row">
-    <td style="padding:8px 10px">
-      <div class="dist-row-sentence">
-        <select class="dist-teacher">${teacherOpts}</select>
-        <span class="dist-word">öğretmeni</span>
-        <select class="dist-class">${clsOpts}</select>
-        <span class="dist-word">sınıfına</span>
-        <select class="dist-subj">${subjOpts}</select>
-        <span class="dist-word">dersine girer, haftada</span>
-        <input class="dist-wh" type="number" min="1" max="10" value="${wh}" style="width:70px">
-        <span class="dist-word">saat.</span>
-      </div>
-    </td>
-    <td style="padding:7px"><button class="btn danger mini" onclick="this.closest('.dist-row').remove()">Sil</button></td>
-  </tr>`;
+  return `<div class="dist-row dist-grid" data-cls="${cls}">
+    <select class="dist-subj">${subjOpts}</select>
+    <select class="dist-teacher">${teacherOpts}</select>
+    <input class="dist-wh" type="number" min="1" max="10" value="${wh}" oninput="updateDistributionTotals()">
+    <button class="btn danger mini" onclick="this.closest('.dist-row').remove();updateDistributionTotals()">Sil</button>
+  </div>`;
+}
+
+function selectDistributionClass(cls){
+  selectedDistributionClass=cls;
+  document.querySelectorAll('.class-tab').forEach(btn=>btn.classList.toggle('active',btn.dataset.cls===cls));
+  document.querySelectorAll('.dist-class-panel').forEach(panel=>panel.classList.toggle('active',panel.dataset.cls===cls));
 }
 
 function addDistributionRow(){
-  document.getElementById('distribution-body').insertAdjacentHTML('beforeend',distributionRowHtml());
+  const panel=document.querySelector(`.dist-class-panel[data-cls="${selectedDistributionClass}"] .dist-rows`);
+  if(panel){
+    panel.insertAdjacentHTML('beforeend',distributionRowHtml(teachers[0]?.id,selectedDistributionClass,SUBJECTS[0]||'',1));
+    updateDistributionTotals();
+  }
+}
+
+function updateDistributionTotals(){
+  ALL_CLASSES.forEach(cls=>{
+    const total=Array.from(document.querySelectorAll(`.dist-row[data-cls="${cls}"] .dist-wh`))
+      .reduce((sum,input)=>sum+(parseInt(input.value)||0),0);
+    document.querySelectorAll(`[data-total-cls="${cls}"]`).forEach(el=>{
+      el.textContent=`${total}/35`;
+      el.classList.toggle('ok',total===35);
+    });
+    document.querySelectorAll(`[data-panel-total="${cls}"]`).forEach(el=>{
+      el.textContent=`Toplam ${total}/35 saat`;
+      el.classList.toggle('ok',total===35);
+      el.classList.toggle('bad',total!==35);
+    });
+  });
 }
 
 function saveDistribution(silent=false){
@@ -2270,7 +2317,7 @@ function commitDistributionRows(){
     const tid=parseInt(row.querySelector('.dist-teacher').value);
     const t=teachers.find(x=>x.id===tid);
     if(!t) return;
-    const a={cls:row.querySelector('.dist-class').value,subj:row.querySelector('.dist-subj').value,wh:parseInt(row.querySelector('.dist-wh').value)||1,manual:true};
+    const a={cls:row.dataset.cls,subj:row.querySelector('.dist-subj').value,wh:parseInt(row.querySelector('.dist-wh').value)||1,manual:true};
     ensureClassLesson35(a.cls,a.subj,a.wh);
     preferred[`${a.cls}|${a.subj}`]=tid;
     if(!t.subjects.includes(a.subj)) t.subjects.push(a.subj);
