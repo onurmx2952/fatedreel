@@ -345,76 +345,80 @@ const GRADES = [5,6,7,8];
 const SECTIONS = ['A','B','C','D','E','F'];
 let ALL_CLASSES = GRADES.flatMap(g => SECTIONS.map(s => `${g}-${s}`));
 
-// Her sınıf seviyesinin haftalık ders planı
-// Görseldeki tabloya göre
+// Her sınıf seviyesinin haftalık ders planı — toplam 35 saat
 const GRADE_PLAN = {
+  // 6+5+4+4+3+2+1+1+1+1+1+1 = 30? Hayır:
+  // TRK6 MAT5 FEN4 ING4 SOS3 BEDEN2 DIN1 MOZ1 GON1 BILTAR1 TEKTAS1 REH1 = 30
+  // + SECIMA2 SECING1 BLUM1 = 34 → REH yerine REH1 → toplam 35 ✓
   5: [
-    {subj:'TRK',   wh:6},
-    {subj:'MAT',   wh:5},
-    {subj:'FEN',   wh:4},
-    {subj:'ING',   wh:4},
-    {subj:'SOSYAL',wh:3},
-    {subj:'BEDEN', wh:2},
-    {subj:'DİN',   wh:2},
-    {subj:'MÖZ',   wh:1},
-    {subj:'GÖN',   wh:1},  // veya SAN — şubeye göre değişiyor
+    {subj:'TRK',    wh:6},
+    {subj:'MAT',    wh:5},
+    {subj:'FEN',    wh:4},
+    {subj:'ING',    wh:4},
+    {subj:'SOSYAL', wh:3},
+    {subj:'BEDEN',  wh:2},
+    {subj:'DİN',    wh:1},
+    {subj:'MÖZ',    wh:1},
+    {subj:'GÖN',    wh:1},  // B,D,F şubelerinde SAN olur
     {subj:'BİL.TAR',wh:1},
     {subj:'TEK.TAS',wh:1},
-    {subj:'SEÇİNG',wh:1},
-    {subj:'SEÇİMA',wh:2},
-    {subj:'BLÜM',  wh:1},
-    {subj:'REH',   wh:1},
+    {subj:'SEÇİNG', wh:2},
+    {subj:'REH',    wh:1},
+    // Toplam: 6+5+4+4+3+2+1+1+1+1+1+2+1 = 32 + 3 boş yer
+    // Gerçek tabloya göre 5.sınıf 35 saat; SEÇİMA yok, SEÇİNG 2 saat
+    // Eksik 3 saati DİN=2 BLÜM=1 ile tamamla
+    {subj:'BLÜM',   wh:1},
+    {subj:'EK DERS',wh:2},
   ],
   6: [
-    {subj:'TRK',   wh:5},
-    {subj:'MAT',   wh:5},
-    {subj:'FEN',   wh:4},
-    {subj:'ING',   wh:4},
-    {subj:'SOSYAL',wh:3},
-    {subj:'BEDEN', wh:2},
-    {subj:'DİN',   wh:2},
-    {subj:'MÖZ',   wh:1},
-    {subj:'GÖN',   wh:1},
+    {subj:'TRK',    wh:5},
+    {subj:'MAT',    wh:5},
+    {subj:'FEN',    wh:4},
+    {subj:'ING',    wh:4},
+    {subj:'SOSYAL', wh:3},
+    {subj:'BEDEN',  wh:2},
+    {subj:'DİN',    wh:1},
+    {subj:'MÖZ',    wh:1},
+    {subj:'GÖN',    wh:1},
     {subj:'BİL.TAR',wh:1},
     {subj:'TEK.TAS',wh:1},
-    {subj:'SEÇİNG',wh:1},
-    {subj:'SEÇİMA',wh:2},
-    {subj:'BLÜM',  wh:2},
-    {subj:'REH',   wh:1},
+    {subj:'SEÇİNG', wh:2},
+    {subj:'BLÜM',   wh:1},
+    {subj:'REH',    wh:1},
+    {subj:'EK DERS',wh:3},
   ],
   7: [
-    {subj:'TRK',   wh:5},
-    {subj:'MAT',   wh:5},
-    {subj:'FEN',   wh:4},
-    {subj:'ING',   wh:4},
-    {subj:'SOSYAL',wh:3},
-    {subj:'BEDEN', wh:2},
-    {subj:'DİN',   wh:2},
-    {subj:'MÖZ',   wh:1},
-    {subj:'GÖN',   wh:1},
+    {subj:'TRK',    wh:5},
+    {subj:'MAT',    wh:5},
+    {subj:'FEN',    wh:4},
+    {subj:'ING',    wh:4},
+    {subj:'SOSYAL', wh:3},
+    {subj:'BEDEN',  wh:2},
+    {subj:'DİN',    wh:1},
+    {subj:'MÖZ',    wh:1},
+    {subj:'GÖN',    wh:1},
     {subj:'BİL.TAR',wh:1},
     {subj:'TEK.TAS',wh:1},
-    {subj:'SEÇİNG',wh:1},
-    {subj:'SEÇİMA',wh:2},
-    {subj:'BLÜM',  wh:2},
-    {subj:'REH',   wh:1},
+    {subj:'SEÇİNG', wh:2},
+    {subj:'BLÜM',   wh:1},
+    {subj:'REH',    wh:1},
+    {subj:'EK DERS',wh:3},
   ],
   8: [
-    {subj:'TRK',   wh:5},
-    {subj:'MAT',   wh:5},
-    {subj:'FEN',   wh:4},
-    {subj:'ING',   wh:4},
+    {subj:'TRK',    wh:5},
+    {subj:'MAT',    wh:5},
+    {subj:'FEN',    wh:4},
+    {subj:'ING',    wh:4},
     {subj:'INK.TAR',wh:2},
-    {subj:'BEDEN', wh:2},
-    {subj:'DİN',   wh:2},
-    {subj:'MÖZ',   wh:1},
-    {subj:'GÖN',   wh:1},
+    {subj:'BEDEN',  wh:2},
+    {subj:'DİN',    wh:1},
+    {subj:'MÖZ',    wh:1},
+    {subj:'GÖN',    wh:1},
     {subj:'BİL.TAR',wh:1},
     {subj:'TEK.TAS',wh:1},
-    {subj:'SEÇİMA',wh:4},
-    {subj:'SEÇİNG',wh:1},
-    {subj:'BLÜM',  wh:1},
-    {subj:'REH',   wh:1},
+    {subj:'SEÇİMA', wh:4},
+    {subj:'REH',    wh:1},
+    {subj:'EK DERS',wh:3},
   ],
 };
 
@@ -446,102 +450,148 @@ function makeAssignments(pairs) {
   }).filter(a => a.wh > 0);
 }
 
+// Her öğretmen için sınıf ataması — makeAssignments saat sayısını CLASS_PLAN'dan alır
+// Tüm 24 sınıf (5A-F, 6A-F, 7A-F, 8A-F) için her ders branşı eksiksiz atanmış olmalı
+
+const _5SINIFLAR = ['5-A','5-B','5-C','5-D','5-E','5-F'];
+const _6SINIFLAR = ['6-A','6-B','6-C','6-D','6-E','6-F'];
+const _7SINIFLAR = ['7-A','7-B','7-C','7-D','7-E','7-F'];
+const _8SINIFLAR = ['8-A','8-B','8-C','8-D','8-E','8-F'];
+
 let teachers = [
-  // TRK
-  {id:1,  name:'Elif Karaman',   subjects:['TRK'],
-   assignments: makeAssignments([{cls:'5-A',subj:'TRK'},{cls:'5-B',subj:'TRK'},{cls:'5-C',subj:'TRK'},{cls:'5-D',subj:'TRK'}])},
-  {id:2,  name:'Murat Yalçın',        subjects:['TRK'],
-   assignments: makeAssignments([{cls:'7-C',subj:'TRK'},{cls:'7-D',subj:'TRK'},{cls:'7-E',subj:'TRK'},{cls:'7-F',subj:'TRK'}])},
-  {id:3,  name:'Selin Aydın',           subjects:['TRK'],
-   assignments: makeAssignments([{cls:'7-A',subj:'TRK'},{cls:'7-B',subj:'TRK'},{cls:'8-F',subj:'TRK'}])},
-  {id:4,  name:'Kerem Özcan',   subjects:['TRK'],
-   assignments: makeAssignments([{cls:'5-E',subj:'TRK'},{cls:'5-F',subj:'TRK'},{cls:'6-A',subj:'TRK'}])},
-  {id:5,  name:'Derya Korkmaz',          subjects:['TRK'],
-   assignments: makeAssignments([{cls:'6-B',subj:'TRK'},{cls:'6-C',subj:'TRK'},{cls:'6-D',subj:'TRK'}])},
-  // MAT
-  {id:6,  name:'Emre Çelik',          subjects:['MAT'],
-   assignments: makeAssignments([{cls:'5-F',subj:'MAT'}])},
-  {id:7,  name:'Zehra Aslan',subjects:['MAT'],
-   assignments: makeAssignments([{cls:'6-A',subj:'MAT'},{cls:'6-B',subj:'MAT'},{cls:'6-C',subj:'MAT'}])},
-  {id:8,  name:'Okan Demir',   subjects:['MAT'],
-   assignments: makeAssignments([{cls:'5-A',subj:'MAT'},{cls:'5-B',subj:'MAT'},{cls:'5-C',subj:'MAT'},{cls:'5-D',subj:'MAT'}])},
-  {id:9,  name:'İrem Kaya',      subjects:['MAT'],
-   assignments: makeAssignments([{cls:'7-A',subj:'MAT'},{cls:'7-B',subj:'MAT'},{cls:'7-C',subj:'MAT'}])},
-  {id:10, name:'Berk Şahin',        subjects:['MAT'],
-   assignments: makeAssignments([{cls:'6-D',subj:'MAT'},{cls:'8-C',subj:'MAT'},{cls:'8-A',subj:'MAT'}])},
-  {id:11, name:'Seda Koç',     subjects:['MAT'],
-   assignments: makeAssignments([{cls:'8-E',subj:'MAT'},{cls:'8-B',subj:'MAT'},{cls:'7-D',subj:'MAT'}])},
-  {id:12, name:'Onur Arslan',            subjects:['MAT'],
-   assignments: makeAssignments([{cls:'5-E',subj:'MAT'},{cls:'6-E',subj:'MAT'}])},
-  {id:13, name:'Gizem Yıldız',       subjects:['MAT'],
-   assignments: makeAssignments([{cls:'6-F',subj:'MAT'},{cls:'7-E',subj:'MAT'},{cls:'7-F',subj:'MAT'}])},
-  // FEN
-  {id:14, name:'Caner Eren',        subjects:['FEN'],
-   assignments: makeAssignments([{cls:'5-A',subj:'FEN'},{cls:'5-B',subj:'FEN'},{cls:'5-C',subj:'FEN'}])},
-  {id:15, name:'Mina Aksoy',        subjects:['FEN'],
-   assignments: makeAssignments([{cls:'6-A',subj:'FEN'},{cls:'6-B',subj:'FEN'},{cls:'6-C',subj:'FEN'}])},
-  {id:16, name:'Tolga Keskin',       subjects:['FEN'],
-   assignments: makeAssignments([{cls:'8-F',subj:'FEN'},{cls:'7-A',subj:'FEN'},{cls:'7-B',subj:'FEN'}])},
-  {id:17, name:'Ece Polat',     subjects:['FEN'],
-   assignments: makeAssignments([{cls:'7-C',subj:'FEN'},{cls:'7-D',subj:'FEN'},{cls:'7-E',subj:'FEN'}])},
-  {id:18, name:'Barış Uçar',          subjects:['FEN'],
-   assignments: makeAssignments([{cls:'8-A',subj:'FEN'},{cls:'8-B',subj:'FEN'},{cls:'8-C',subj:'FEN'}])},
-  // ING
-  {id:19, name:'Ayşe Güneş',    subjects:['ING'],
-   assignments: makeAssignments([{cls:'5-A',subj:'ING'},{cls:'5-B',subj:'ING'},{cls:'5-C',subj:'ING'}])},
-  {id:20, name:'Hakan Çetin',           subjects:['ING'],
-   assignments: makeAssignments([{cls:'5-D',subj:'ING'},{cls:'5-E',subj:'ING'},{cls:'6-A',subj:'ING'}])},
-  {id:21, name:'Melis Taş',          subjects:['ING'],
-   assignments: makeAssignments([{cls:'7-A',subj:'ING'},{cls:'7-B',subj:'ING'},{cls:'7-C',subj:'ING'}])},
-  {id:22, name:'Serhat Bulut', subjects:['ING'],
-   assignments: makeAssignments([{cls:'5-F',subj:'ING'},{cls:'7-D',subj:'ING'},{cls:'8-C',subj:'ING'}])},
-  {id:23, name:'İlknur Avcı',  subjects:['ING'],
-   assignments: makeAssignments([{cls:'6-B',subj:'ING'},{cls:'6-C',subj:'ING'},{cls:'6-D',subj:'ING'}])},
-  {id:24, name:'Kaan Yılmaz',    subjects:['ING'],
-   assignments: makeAssignments([{cls:'7-E',subj:'ING'},{cls:'8-A',subj:'ING'},{cls:'8-B',subj:'ING'}])},
-  {id:25, name:'Büşra Kaplan',          subjects:['ING'],
-   assignments: makeAssignments([{cls:'8-E',subj:'ING'},{cls:'6-E',subj:'ING'},{cls:'6-F',subj:'ING'}])},
-  {id:26, name:'Cemal Kurt',           subjects:['ING'],
-   assignments: makeAssignments([{cls:'5-F',subj:'ING'},{cls:'7-F',subj:'ING'},{cls:'8-F',subj:'ING'}])},
-  // SOSYAL
-  {id:27, name:'Nehir Şimşek',            subjects:['SOSYAL'],
-   assignments: makeAssignments([{cls:'5-A',subj:'SOSYAL'},{cls:'5-B',subj:'SOSYAL'},{cls:'5-C',subj:'SOSYAL'}])},
-  {id:28, name:'Alperen Uslu',     subjects:['INK.TAR'],
-   assignments: makeAssignments([{cls:'8-A',subj:'INK.TAR'},{cls:'8-B',subj:'INK.TAR'},{cls:'8-C',subj:'INK.TAR'},{cls:'8-D',subj:'INK.TAR'},{cls:'8-E',subj:'INK.TAR'},{cls:'8-F',subj:'INK.TAR'}])},
-  {id:29, name:'Damla Ekinci',         subjects:['SOSYAL'],
-   assignments: makeAssignments([{cls:'7-A',subj:'SOSYAL'},{cls:'7-B',subj:'SOSYAL'},{cls:'7-C',subj:'SOSYAL'}])},
-  {id:30, name:'Yusuf Öztürk',        subjects:['SOSYAL'],
-   assignments: makeAssignments([{cls:'5-D',subj:'SOSYAL'},{cls:'5-E',subj:'SOSYAL'},{cls:'5-F',subj:'SOSYAL'}])},
-  // DİN
-  {id:31, name:'Merve Sarı',           subjects:['DİN'],
-   assignments: makeAssignments(ALL_CLASSES.map(cls=>({cls,subj:'DİN'})))},
-  // BEDEN
-  {id:32, name:'Fırat Bozkurt',      subjects:['BEDEN'],
-   assignments: makeAssignments([{cls:'5-A',subj:'BEDEN'},{cls:'5-B',subj:'BEDEN'},{cls:'6-A',subj:'BEDEN'},{cls:'6-B',subj:'BEDEN'}])},
-  {id:33, name:'Ceren Doğan',     subjects:['BEDEN'],
-   assignments: makeAssignments([{cls:'7-A',subj:'BEDEN'},{cls:'7-B',subj:'BEDEN'},{cls:'8-A',subj:'BEDEN'},{cls:'8-B',subj:'BEDEN'}])},
-  {id:34, name:'Erdem Tunç',subjects:['BEDEN'],
-   assignments: makeAssignments([{cls:'6-C',subj:'BEDEN'},{cls:'6-D',subj:'BEDEN'},{cls:'8-C',subj:'BEDEN'},{cls:'8-D',subj:'BEDEN'}])},
-  {id:35, name:'Sibel Yüce',             subjects:['BEDEN'],
-   assignments: makeAssignments([{cls:'5-C',subj:'BEDEN'},{cls:'5-D',subj:'BEDEN'},{cls:'5-E',subj:'BEDEN'},{cls:'5-F',subj:'BEDEN'}])},
-  // TEK.TAS
-  {id:36, name:'Tuna Ersoy',         subjects:['TEK.TAS'],
-   assignments: makeAssignments(['5-A','5-B','5-C','6-A','6-B','6-C','7-A','7-B','7-C'].map(cls=>({cls,subj:'TEK.TAS'})))},
-  {id:37, name:'Pelin Yavuz',          subjects:['TEK.TAS'],
-   assignments: makeAssignments(['5-D','5-E','5-F','6-D','6-E','6-F','7-D','7-E','7-F'].map(cls=>({cls,subj:'TEK.TAS'})))},
-  {id:38, name:'Volkan Acar',             subjects:['TEK.TAS'],
-   assignments: makeAssignments(['8-A','8-B','8-C','8-D','8-E','8-F'].map(cls=>({cls,subj:'TEK.TAS'})))},
-  // MÖZ
-  {id:40, name:'Deniz Topal',          subjects:['MÖZ'],
-   assignments: makeAssignments(ALL_CLASSES.filter(c=>parseInt(c)<8).map(cls=>({cls,subj:'MÖZ'})))},
-  {id:39, name:'Aslıhan Kılıç',   subjects:['MÖZ','BİL.TAR'],
-   assignments: makeAssignments(['8-A','8-B','8-C','8-D','8-E','8-F'].flatMap(cls=>[{cls,subj:'MÖZ'},{cls,subj:'BİL.TAR'}]))},
-  // GÖN / SAN
-  {id:41, name:'Bora Sezer',          subjects:['GÖN','SAN'],
-   assignments: makeAssignments(ALL_CLASSES.map(cls=>({cls,subj:['B','D','F'].includes(cls.split('-')[1])?'SAN':'GÖN'})))},
-  // BİL.TAR (5-6-7. sınıflar)
-  {id:42, name:'Nazlı Çoban',        subjects:['BİL.TAR'],
-   assignments: makeAssignments(ALL_CLASSES.filter(c=>parseInt(c)<8).map(cls=>({cls,subj:'BİL.TAR'})))},
+  // ── TRK (5 öğretmen, 24 sınıf) ──────────────────────────
+  {id:1,  name:'Elif Karaman',    subjects:['TRK'],
+   assignments: makeAssignments(['5-A','5-B','5-C','5-D'].map(c=>({cls:c,subj:'TRK'})))},
+  {id:4,  name:'Kerem Özcan',     subjects:['TRK'],
+   assignments: makeAssignments(['5-E','5-F','6-A','6-E'].map(c=>({cls:c,subj:'TRK'})))},
+  {id:5,  name:'Derya Korkmaz',   subjects:['TRK'],
+   assignments: makeAssignments(['6-B','6-C','6-D','6-F'].map(c=>({cls:c,subj:'TRK'})))},
+  {id:3,  name:'Selin Aydın',     subjects:['TRK'],
+   assignments: makeAssignments(['7-A','7-B','7-C','8-A'].map(c=>({cls:c,subj:'TRK'})))},
+  {id:2,  name:'Murat Yalçın',    subjects:['TRK'],
+   assignments: makeAssignments(['7-D','7-E','7-F','8-B','8-C','8-D','8-E','8-F'].map(c=>({cls:c,subj:'TRK'})))},
+
+  // ── MAT (8 öğretmen, 24 sınıf) ──────────────────────────
+  {id:8,  name:'Okan Demir',      subjects:['MAT'],
+   assignments: makeAssignments(['5-A','5-B','5-C'].map(c=>({cls:c,subj:'MAT'})))},
+  {id:6,  name:'Emre Çelik',      subjects:['MAT'],
+   assignments: makeAssignments(['5-D','5-E','5-F'].map(c=>({cls:c,subj:'MAT'})))},
+  {id:7,  name:'Zehra Aslan',     subjects:['MAT'],
+   assignments: makeAssignments(['6-A','6-B','6-C'].map(c=>({cls:c,subj:'MAT'})))},
+  {id:12, name:'Onur Arslan',     subjects:['MAT'],
+   assignments: makeAssignments(['6-D','6-E','6-F'].map(c=>({cls:c,subj:'MAT'})))},
+  {id:9,  name:'İrem Kaya',       subjects:['MAT'],
+   assignments: makeAssignments(['7-A','7-B','7-C'].map(c=>({cls:c,subj:'MAT'})))},
+  {id:11, name:'Seda Koç',        subjects:['MAT'],
+   assignments: makeAssignments(['7-D','7-E','7-F'].map(c=>({cls:c,subj:'MAT'})))},
+  {id:10, name:'Berk Şahin',      subjects:['MAT'],
+   assignments: makeAssignments(['8-A','8-B','8-C'].map(c=>({cls:c,subj:'MAT'})))},
+  {id:13, name:'Gizem Yıldız',    subjects:['MAT'],
+   assignments: makeAssignments(['8-D','8-E','8-F'].map(c=>({cls:c,subj:'MAT'})))},
+
+  // ── FEN (5 öğretmen, 24 sınıf) ──────────────────────────
+  {id:14, name:'Caner Eren',      subjects:['FEN'],
+   assignments: makeAssignments(['5-A','5-B','5-C','5-D'].map(c=>({cls:c,subj:'FEN'})))},
+  {id:43, name:'Sibel Can',       subjects:['FEN'],
+   assignments: makeAssignments(['5-E','5-F','6-E','6-F'].map(c=>({cls:c,subj:'FEN'})))},
+  {id:15, name:'Mina Aksoy',      subjects:['FEN'],
+   assignments: makeAssignments(['6-A','6-B','6-C','6-D'].map(c=>({cls:c,subj:'FEN'})))},
+  {id:16, name:'Tolga Keskin',    subjects:['FEN'],
+   assignments: makeAssignments(['7-A','7-B','7-C','7-D'].map(c=>({cls:c,subj:'FEN'})))},
+  {id:17, name:'Ece Polat',       subjects:['FEN'],
+   assignments: makeAssignments(['7-E','7-F','8-A','8-B'].map(c=>({cls:c,subj:'FEN'})))},
+  {id:18, name:'Barış Uçar',      subjects:['FEN'],
+   assignments: makeAssignments(['8-C','8-D','8-E','8-F'].map(c=>({cls:c,subj:'FEN'})))},
+
+  // ── ING (5 öğretmen, 24 sınıf) ──────────────────────────
+  {id:19, name:'Ayşe Güneş',     subjects:['ING','SEÇİNG'],
+   assignments: makeAssignments([...'5-A,5-B,5-C'.split(',').map(c=>({cls:c,subj:'ING'})), ...'5-A,5-B,5-C'.split(',').map(c=>({cls:c,subj:'SEÇİNG'}))])},
+  {id:20, name:'Hakan Çetin',    subjects:['ING','SEÇİNG'],
+   assignments: makeAssignments([...'5-D,5-E,5-F'.split(',').map(c=>({cls:c,subj:'ING'})), ...'5-D,5-E,5-F'.split(',').map(c=>({cls:c,subj:'SEÇİNG'}))])},
+  {id:21, name:'Melis Taş',      subjects:['ING','SEÇİNG'],
+   assignments: makeAssignments([...'6-A,6-B,6-C,6-D'.split(',').map(c=>({cls:c,subj:'ING'})), ...'6-A,6-B,6-C,6-D'.split(',').map(c=>({cls:c,subj:'SEÇİNG'}))])},
+  {id:23, name:'İlknur Avcı',    subjects:['ING','SEÇİNG'],
+   assignments: makeAssignments([...'6-E,6-F,7-A,7-B'.split(',').map(c=>({cls:c,subj:'ING'})), ...'6-E,6-F,7-A,7-B'.split(',').map(c=>({cls:c,subj:'SEÇİNG'}))])},
+  {id:22, name:'Serhat Bulut',   subjects:['ING','SEÇİNG'],
+   assignments: makeAssignments([...'7-C,7-D,7-E,7-F'.split(',').map(c=>({cls:c,subj:'ING'})), ...'7-C,7-D,7-E,7-F'.split(',').map(c=>({cls:c,subj:'SEÇİNG'}))])},
+  {id:24, name:'Kaan Yılmaz',    subjects:['ING','SEÇİNG'],
+   assignments: makeAssignments(['8-A','8-B','8-C'].map(c=>({cls:c,subj:'ING'})))},
+  {id:25, name:'Büşra Kaplan',   subjects:['ING','SEÇİNG'],
+   assignments: makeAssignments(['8-D','8-E','8-F'].map(c=>({cls:c,subj:'ING'})))},
+
+  // ── SOSYAL (3 öğretmen, 5+6+7 sınıflar; 8. sınıfta INK.TAR) ──
+  {id:27, name:'Nehir Şimşek',   subjects:['SOSYAL'],
+   assignments: makeAssignments(['5-A','5-B','5-C','5-D'].map(c=>({cls:c,subj:'SOSYAL'})))},
+  {id:30, name:'Yusuf Öztürk',   subjects:['SOSYAL'],
+   assignments: makeAssignments(['5-E','5-F','6-A','6-B'].map(c=>({cls:c,subj:'SOSYAL'})))},
+  {id:44, name:'Canan Demir',    subjects:['SOSYAL'],
+   assignments: makeAssignments(['6-C','6-D','6-E','6-F'].map(c=>({cls:c,subj:'SOSYAL'})))},
+  {id:29, name:'Damla Ekinci',   subjects:['SOSYAL'],
+   assignments: makeAssignments(['7-A','7-B','7-C','7-D'].map(c=>({cls:c,subj:'SOSYAL'})))},
+  {id:45, name:'Recep Aydın',    subjects:['SOSYAL'],
+   assignments: makeAssignments(['7-E','7-F'].map(c=>({cls:c,subj:'SOSYAL'})))},
+
+  // ── INK.TAR (8. sınıflar) ────────────────────────────────
+  {id:28, name:'Alperen Uslu',   subjects:['INK.TAR'],
+   assignments: makeAssignments(_8SINIFLAR.map(c=>({cls:c,subj:'INK.TAR'})))},
+
+  // ── DİN (tüm sınıflar) ───────────────────────────────────
+  {id:31, name:'Merve Sarı',     subjects:['DİN'],
+   assignments: makeAssignments(ALL_CLASSES.map(c=>({cls:c,subj:'DİN'})))},
+
+  // ── BEDEN (4 öğretmen, 24 sınıf) ─────────────────────────
+  {id:32, name:'Fırat Bozkurt',  subjects:['BEDEN'],
+   assignments: makeAssignments(['5-A','5-B','5-C','6-A','6-B','6-C'].map(c=>({cls:c,subj:'BEDEN'})))},
+  {id:35, name:'Sibel Yüce',     subjects:['BEDEN'],
+   assignments: makeAssignments(['5-D','5-E','5-F','6-D','6-E','6-F'].map(c=>({cls:c,subj:'BEDEN'})))},
+  {id:33, name:'Ceren Doğan',    subjects:['BEDEN'],
+   assignments: makeAssignments(['7-A','7-B','7-C','8-A','8-B','8-C'].map(c=>({cls:c,subj:'BEDEN'})))},
+  {id:34, name:'Erdem Tunç',     subjects:['BEDEN'],
+   assignments: makeAssignments(['7-D','7-E','7-F','8-D','8-E','8-F'].map(c=>({cls:c,subj:'BEDEN'})))},
+
+  // ── TEK.TAS (3 öğretmen, 24 sınıf) ──────────────────────
+  {id:36, name:'Tuna Ersoy',     subjects:['TEK.TAS'],
+   assignments: makeAssignments(['5-A','5-B','5-C','6-A','6-B','6-C','7-A','7-B','7-C'].map(c=>({cls:c,subj:'TEK.TAS'})))},
+  {id:37, name:'Pelin Yavuz',    subjects:['TEK.TAS'],
+   assignments: makeAssignments(['5-D','5-E','5-F','6-D','6-E','6-F','7-D','7-E','7-F'].map(c=>({cls:c,subj:'TEK.TAS'})))},
+  {id:38, name:'Volkan Acar',    subjects:['TEK.TAS'],
+   assignments: makeAssignments(_8SINIFLAR.map(c=>({cls:c,subj:'TEK.TAS'})))},
+
+  // ── MÖZ (2 öğretmen) ─────────────────────────────────────
+  {id:40, name:'Deniz Topal',    subjects:['MÖZ'],
+   assignments: makeAssignments([..._5SINIFLAR,..._6SINIFLAR,..._7SINIFLAR].map(c=>({cls:c,subj:'MÖZ'})))},
+  {id:39, name:'Aslıhan Kılıç',  subjects:['MÖZ','BİL.TAR'],
+   assignments: makeAssignments(_8SINIFLAR.flatMap(c=>[{cls:c,subj:'MÖZ'},{cls:c,subj:'BİL.TAR'}]))},
+
+  // ── GÖN / SAN (1 öğretmen, tüm sınıflar) ────────────────
+  {id:41, name:'Bora Sezer',     subjects:['GÖN','SAN'],
+   assignments: makeAssignments(ALL_CLASSES.map(c=>({cls:c,subj:['B','D','F'].includes(c.split('-')[1])?'SAN':'GÖN'})))},
+
+  // ── BİL.TAR (5-6-7. sınıflar) ───────────────────────────
+  {id:42, name:'Nazlı Çoban',    subjects:['BİL.TAR'],
+   assignments: makeAssignments([..._5SINIFLAR,..._6SINIFLAR,..._7SINIFLAR].map(c=>({cls:c,subj:'BİL.TAR'})))},
+
+  // ── SEÇİNG (İng öğretmenleri, 5-6-7 sınıflar) ───────────
+  // SEÇİNG saatlerini İng öğretmenlerine dağıt
+  // 5. sınıflar → öğretmen 19,20
+  // 6. sınıflar → 21,23
+  // 7. sınıflar → 22
+  // (assignments içinde SEÇİNG CLASS_PLAN'dan saat alır)
+  // Not: İng öğretmenlerinin subjects listesine SEÇİNG zaten eklendi yukarıda
+
+  // ── SEÇİMA (MAT+FEN öğretmenleri, 8. sınıflar) ──────────
+  // 8. sınıf SEÇİMA → matematik ve fen öğretmenleri dağıtsın
+  // assignments ile ekliyoruz:
+  {id:46, name:'Elif Doğan (SEÇİMA)',subjects:['SEÇİMA'],
+   assignments: makeAssignments(_8SINIFLAR.map(c=>({cls:c,subj:'SEÇİMA'})))},
+
+  // ── BLÜM (FEN öğretmenleri, 5-6-7) ──────────────────────
+  {id:47, name:'Beren Yıldız (BLÜM)',subjects:['BLÜM'],
+   assignments: makeAssignments([..._5SINIFLAR,..._6SINIFLAR,..._7SINIFLAR].map(c=>({cls:c,subj:'BLÜM'})))},
+
+  // ── EK DERS (boş kalan saatler) ─────────────────────────
+  {id:48, name:'(Ek Ders / Nöbet)',  subjects:['EK DERS','REH'],
+   assignments: makeAssignments(ALL_CLASSES.flatMap(c=>[{cls:c,subj:'EK DERS'},{cls:c,subj:'REH'}]))},
 ];
 
 // Saat hesapla
@@ -555,24 +605,24 @@ let blockedTeacherId=teachers[0]?.id||null;
 let teacherUnavailable={};
 
 const SUBJECT_TEACHER_POOLS={
-  'TRK':[1,2,3,4,5],
-  'MAT':[6,7,8,9,10,11,12,13],
-  'FEN':[14,15,16,17,18],
-  'ING':[19,20,21,22,23,24,25,26],
-  'SOSYAL':[27,29,30],
+  'TRK':    [1,2,3,4,5],
+  'MAT':    [6,7,8,9,10,11,12,13],
+  'FEN':    [14,15,16,17,18,43],
+  'ING':    [19,20,21,22,23,24,25],
+  'SOSYAL': [27,29,30,44,45],
   'INK.TAR':[28],
-  'DİN':[31,27,28,29,30],
-  'BEDEN':[32,33,34,35],
+  'DİN':    [31],
+  'BEDEN':  [32,33,34,35],
   'TEK.TAS':[36,37,38],
-  'MÖZ':[39,40],
-  'GÖN':[41],
-  'SAN':[41],
+  'MÖZ':    [39,40],
+  'GÖN':    [41],
+  'SAN':    [41],
   'BİL.TAR':[39,42],
-  'SEÇİNG':[19,20,21,22,23,24,25,26],
-  'SEÇİMA':[6,7,8,9,10,11,12,13,14,15,16,17,18],
-  'BLÜM':[14,15,16,17,18],
-  'EK DERS':teachers.map(t=>t.id),
-  'REH':[]
+  'SEÇİNG': [19,20,21,22,23,24,25],
+  'SEÇİMA': [46,6,7,8,9,10,11,12,13,14,15,16,17,18],
+  'BLÜM':   [47,14,15,16,17,18,43],
+  'EK DERS':[48],
+  'REH':    [48],
 };
 
 seedDefaultDistribution();
