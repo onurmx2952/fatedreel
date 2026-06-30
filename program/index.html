@@ -542,34 +542,6 @@ let teachers = [
   // BİL.TAR (5-6-7. sınıflar)
   {id:42, name:'Nazlı Çoban',        subjects:['BİL.TAR'],
    assignments: makeAssignments(ALL_CLASSES.filter(c=>parseInt(c)<8).map(cls=>({cls,subj:'BİL.TAR'})))},
-  // Varsayılan dağıtımı rahatlatan destek öğretmenleri
-  {id:43, name:'Cemre Aksu', subjects:['FEN','BLÜM'], assignments:[]},
-  {id:44, name:'Uğur Demir', subjects:['FEN','BLÜM'], assignments:[]},
-  {id:45, name:'Pınar Aksoy', subjects:['MAT','SEÇİMA'], assignments:[]},
-  {id:46, name:'Levent Karaca', subjects:['MAT','SEÇİMA'], assignments:[]},
-  {id:47, name:'Esra Yılmaz', subjects:['SOSYAL','DİN'], assignments:[]},
-  {id:48, name:'Hakan Ersoy', subjects:['SOSYAL','DİN'], assignments:[]},
-  {id:49, name:'Nalan Korkmaz', subjects:['ING','SEÇİNG'], assignments:[]},
-  {id:50, name:'Burak Kaya', subjects:['MÖZ','BİL.TAR'], assignments:[]},
-  {id:51, name:'Yasemin Arı', subjects:['TEK.TAS','REH'], assignments:[]},
-  {id:52, name:'Ceyda Ural', subjects:['BEDEN','REH'], assignments:[]},
-  {id:53, name:'Arda Kılıç', subjects:['GÖN','SAN'], assignments:[]},
-  {id:54, name:'Sude Deniz', subjects:['INK.TAR','DİN'], assignments:[]},
-  {id:55, name:'Aylin Kıraç', subjects:['TRK'], assignments:[]},
-  {id:56, name:'Ferhat Aydın', subjects:['TRK'], assignments:[]},
-  {id:57, name:'Gülce Eren', subjects:['TRK'], assignments:[]},
-  {id:58, name:'Mert Soylu', subjects:['TRK'], assignments:[]},
-  {id:59, name:'Eylül Şahin', subjects:['SOSYAL','DİN'], assignments:[]},
-  {id:60, name:'Koray Bilgin', subjects:['SOSYAL','DİN'], assignments:[]},
-  {id:61, name:'Dilek Arslan', subjects:['ING','SEÇİNG'], assignments:[]},
-  {id:62, name:'Tamer Bulut', subjects:['ING','SEÇİNG'], assignments:[]},
-  {id:63, name:'Selma Koçak', subjects:['TEK.TAS','REH'], assignments:[]},
-  {id:64, name:'Orhan Efe', subjects:['TEK.TAS','REH'], assignments:[]},
-  {id:65, name:'Nil Acar', subjects:['BEDEN','REH'], assignments:[]},
-  {id:66, name:'Rıza Keleş', subjects:['BEDEN','REH'], assignments:[]},
-  {id:67, name:'İpek Uslu', subjects:['BİL.TAR','MÖZ'], assignments:[]},
-  {id:68, name:'Tarık Öz', subjects:['GÖN','SAN'], assignments:[]},
-  {id:69, name:'Defne Sönmez', subjects:['INK.TAR','DİN'], assignments:[]},
 ];
 
 // Saat hesapla
@@ -583,22 +555,22 @@ let blockedTeacherId=teachers[0]?.id||null;
 let teacherUnavailable={};
 
 const SUBJECT_TEACHER_POOLS={
-  'TRK':[1,2,3,4,5,55,56,57,58],
-  'MAT':[6,7,8,9,10,11,12,13,45,46],
-  'FEN':[14,15,16,17,18,43,44],
-  'ING':[19,20,21,22,23,24,25,26,49,61,62],
-  'SOSYAL':[27,29,30,47,48,59,60],
-  'INK.TAR':[28,54,69],
-  'DİN':[31,27,28,29,30,47,48,54,59,60,69],
-  'BEDEN':[32,33,34,35,52,65,66],
-  'TEK.TAS':[36,37,38,51,63,64],
-  'MÖZ':[39,40,50,67],
-  'GÖN':[41,53,68],
-  'SAN':[41,53,68],
-  'BİL.TAR':[39,42,50,67],
-  'SEÇİNG':[19,20,21,22,23,24,25,26,49,61,62],
-  'SEÇİMA':[6,7,8,9,10,11,12,13,45,46],
-  'BLÜM':[14,15,16,17,18,43,44],
+  'TRK':[1,2,3,4,5],
+  'MAT':[6,7,8,9,10,11,12,13],
+  'FEN':[14,15,16,17,18],
+  'ING':[19,20,21,22,23,24,25,26],
+  'SOSYAL':[27,29,30],
+  'INK.TAR':[28],
+  'DİN':[31,27,28,29,30],
+  'BEDEN':[32,33,34,35],
+  'TEK.TAS':[36,37,38],
+  'MÖZ':[39,40],
+  'GÖN':[41],
+  'SAN':[41],
+  'BİL.TAR':[39,42],
+  'SEÇİNG':[19,20,21,22,23,24,25,26],
+  'SEÇİMA':[6,7,8,9,10,11,12,13,14,15,16,17,18],
+  'BLÜM':[14,15,16,17,18],
   'EK DERS':teachers.map(t=>t.id),
   'REH':[]
 };
@@ -984,18 +956,58 @@ function normalizeTeacherAssignments(){
 }
 
 function seedDefaultDistribution(){
-  teachers.forEach(t=>{t.assignments=[];});
-  const teacherBusy=Object.fromEntries(teachers.map(t=>[t.id,{}]));
-  const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const byId=Object.fromEntries(teachers.map(t=>[t.id,t]));
+  const prefs={};
+  const prefHours={};
+  teachers.forEach(t=>{
+    (t.assignments||[]).forEach(a=>{
+      if(!a.cls||!a.subj) return;
+      const key=`${a.cls}|${a.subj}`;
+      if(!prefs[key]) prefs[key]=[];
+      prefs[key].push(t.id);
+      prefHours[key]=parseInt(a.wh)||getClassSubjectHours(a.cls,a.subj)||1;
+    });
+    t.assignments=[];
+  });
 
-  ALL_CLASSES.forEach((cls,ci)=>{
+  Object.entries(prefHours).forEach(([key,wh])=>{
+    const [cls,subj]=key.split('|');
+    ensureClassLesson35(cls,subj,wh);
+  });
+
+  const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  ALL_CLASSES.forEach(cls=>{
     normalizeClassPlanTo35(cls);
-    const layout=findClassBlockLayout(cls,ci*19);
+    (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
+      const key=`${cls}|${subj}`;
+      const preferred=(prefs[key]||[]).filter(id=>byId[id]&&(subj!=='REH'||teacherHasClassLesson(id,cls)));
+      const pool=getTeacherPoolForClass(cls,subj).filter(id=>byId[id]);
+      let candidates=[...new Set([...preferred,...pool])];
+      if(!candidates.length) candidates=teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id);
+      if(!candidates.length) return;
+      candidates.sort((a,b)=>(load[a]-load[b]) || (((a+cls.charCodeAt(0))%17)-((b+cls.charCodeAt(0))%17)));
+      const tid=candidates[0];
+      byId[tid].assignments.push({cls,subj,wh,manual:true});
+      if(!byId[tid].subjects.includes(subj)) byId[tid].subjects.push(subj);
+      load[tid]=(load[tid]||0)+wh;
+    });
+  });
+  teachers.forEach(t=>{t.hours=(t.assignments||[]).reduce((s,a)=>s+(parseInt(a.wh)||0),0);});
+}
+
+function pickDefaultClassDistribution(cls,ci,teacherBusy,load){
+  let best={score:Number.POSITIVE_INFINITY,groups:[]};
+  for(let i=0;i<90;i++){
+    const layout=findClassBlockLayout(cls,ci*97+i*23);
+    if(!layout.length) continue;
     const groups={};
-    (layout.length?layout:buildClassBlockLayout(cls,ci*19)).forEach(block=>{
+    layout.forEach(block=>{
       if(!groups[block.subj]) groups[block.subj]={subj:block.subj,slots:[]};
       for(let x=0;x<block.len;x++) groups[block.subj].slots.push({d:block.day,h:block.hour+x});
     });
+    const chosen=[];
+    let score=0;
+    const localBusy={};
     Object.values(groups).sort((a,b)=>{
       if(a.subj==='REH') return 1;
       if(b.subj==='REH') return -1;
@@ -1003,39 +1015,32 @@ function seedDefaultDistribution(){
     }).forEach(group=>{
       const wh=getClassSubjectHours(cls,group.subj)||group.slots.length;
       const pool=group.subj==='REH'
-        ? teachers.filter(t=>(t.assignments||[]).some(a=>a.cls===cls&&a.subj!=='REH')).map(t=>t.id)
+        ? chosen.filter(g=>g.subj!=='REH').map(g=>g.tid)
         : [...new Set([
             ...getTeacherPool(group.subj),
             ...teachers.filter(t=>(t.subjects||[]).includes(group.subj)).map(t=>t.id)
           ])];
-      let candidates=[...new Set(pool)].filter(tid=>{
+      const candidates=[...new Set(pool)].filter(tid=>{
         const teacher=teachers.find(t=>t.id===tid);
-        return teacher&&(group.subj==='REH'||(teacher.subjects||[]).includes(group.subj))&&group.slots.every(slot=>!teacherBusy[tid][`${slot.d}_${slot.h}`]);
-      });
+        return !!teacher;
+      }).map(tid=>{
+        const conflicts=group.slots.reduce((sum,slot)=>sum+(teacherBusy[tid][`${slot.d}_${slot.h}`]||localBusy[`${tid}_${slot.d}_${slot.h}`]?1:0),0);
+        return {tid,conflicts};
+      }).sort((a,b)=>a.conflicts-b.conflicts || (load[a.tid]-load[b.tid]) || (((a.tid+ci+i)%17)-((b.tid+ci+i)%17)));
       if(!candidates.length){
-        const support=createDefaultSupportTeacher(group.subj);
-        teacherBusy[support.id]={};
-        load[support.id]=0;
-        candidates=[support.id];
+        score+=1000+wh*25;
+        return;
       }
-      candidates.sort((a,b)=>(load[a]-load[b]) || (((a+ci)%17)-((b+ci)%17)));
-      const tid=candidates[0];
-      const teacher=teachers.find(t=>t.id===tid);
-      if(!teacher.subjects.includes(group.subj)) teacher.subjects.push(group.subj);
-      teacher.assignments.push({cls,subj:group.subj,wh,manual:true});
-      group.slots.forEach(slot=>{teacherBusy[tid][`${slot.d}_${slot.h}`]=true;});
-      load[tid]=(load[tid]||0)+wh;
+      const pick=candidates[0];
+      score+=pick.conflicts*120+Math.max(0,(load[pick.tid]||0)+wh-30)*6;
+      chosen.push({subj:group.subj,wh,tid:pick.tid,slots:group.slots});
+      group.slots.forEach(slot=>{localBusy[`${pick.tid}_${slot.d}_${slot.h}`]=true;});
     });
-  });
-  teachers.forEach(t=>{t.hours=(t.assignments||[]).reduce((s,a)=>s+(parseInt(a.wh)||0),0);});
-}
-
-function createDefaultSupportTeacher(subj){
-  const nextId=Math.max(...teachers.map(t=>t.id))+1;
-  const count=teachers.filter(t=>String(t.name||'').startsWith('Destek ')).length+1;
-  const teacher={id:nextId,name:`Destek ${subj} ${count}`,subjects:[subj],assignments:[]};
-  teachers.push(teacher);
-  return teacher;
+    score+=(Object.keys(groups).length-chosen.length)*1000;
+    if(score<best.score) best={score,groups:chosen};
+    if(best.score===0) break;
+  }
+  return best.groups;
 }
 
 function getClassSubjectHours(cls,subj){
