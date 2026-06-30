@@ -773,7 +773,6 @@ async function generateSchedule(){
 
   const orToolsResult=await solveWithOrTools();
   if(orToolsResult?.ok){
-    applySolverAdjustments(orToolsResult.adjustments||[]);
     schedule=orToolsResult.schedule||{};
     renderTable();
     if(document.getElementById('view-class').classList.contains('active')) renderClassView();
@@ -784,8 +783,7 @@ async function generateSchedule(){
     const branchIssues=analyzeBranchRulesObject(schedule);
     const teacherConsistencyIssues=analyzeTeacherConsistencyObject(schedule);
     const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0&&teacherConsistencyIssues.length===0;
-    const adjustmentReport=formatSolverAdjustmentReport(orToolsResult.adjustments||[]);
-    showAlert(ok?`Program oluşturuldu - OR-Tools ile 24/24 sınıf 35 saat dolu.${adjustmentReport}`:`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.${adjustmentReport}`,ok?'ok':'warn');
+    showAlert(ok?`Program oluşturuldu - OR-Tools ile 24/24 sınıf 35 saat dolu.`:`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.`,ok?'ok':'warn');
     scheduleAutoSave();
     return;
   }
@@ -862,24 +860,6 @@ function formatOrToolsFailure(result){
   const issues=Array.isArray(result?.issues)?result.issues:[];
   if(!issues.length) return base;
   return `${h(base)}<br><b>Öneri:</b><br>${issues.slice(0,6).map(x=>`• ${h(x)}`).join('<br>')}`;
-}
-
-function applySolverAdjustments(adjustments=[]){
-  adjustments.forEach(item=>{
-    const tid=parseInt(item.teacherId);
-    if(!tid||!teacherUnavailable[tid]) return;
-    const day=parseInt(item.day);
-    (item.hours||[]).forEach(hour=>{
-      delete teacherUnavailable[tid][`${day}_${parseInt(hour)}`];
-    });
-  });
-}
-
-function formatSolverAdjustmentReport(adjustments=[]){
-  if(!adjustments.length) return '';
-  const lines=adjustments.slice(0,8).map(item=>`• ${h(item.text||'Bir öğretmen boş saati otomatik açıldı.')}`).join('<br>');
-  const more=adjustments.length>8?`<br>• ${adjustments.length-8} değişiklik daha yapıldı.`:'';
-  return `<br><b>Boş saatler otomatik esnetildi:</b><br>${lines}${more}`;
 }
 
 function yieldToBrowser(){

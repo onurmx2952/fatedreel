@@ -117,92 +117,11 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
     if strict.get("ok"):
         return strict
 
-    day_opened = solve_by_opening_free_days_in_order(
-        blocks,
-        teachers,
-        teacher_by_id,
-        teacher_unavailable,
-        days,
-        hours_per_day,
-        payload,
-    )
-    if day_opened.get("ok"):
-        return day_opened
-
-    relaxed = solve_blocks_with_model(
-        blocks,
-        teachers,
-        teacher_by_id,
-        teacher_unavailable,
-        days,
-        hours_per_day,
-        payload,
-        relax_unavailable=True,
-    )
-    if relaxed.get("ok"):
-        return {
-            "ok": False,
-            "status": "needs_manual_change",
-            "error": "Tek bir öğretmenin boş gününü açmak programı oturtmadı.",
-            "issues": [
-                f"Kesin değişiklik: {item.get('text', 'Bir öğretmen boş saati açılmalı.')}"
-                for item in (relaxed.get("adjustments") or [])[:8]
-            ],
-        }
-
     return {
         "ok": False,
-        "status": day_opened.get("status") or relaxed.get("status") or strict.get("status"),
+        "status": strict.get("status"),
         "error": "OR-Tools bu dağıtım için uygun program bulamadı.",
-        "issues": day_opened.get("issues") or relaxed.get("issues") or strict.get("issues") or build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
-    }
-
-
-def solve_by_opening_free_days_in_order(
-    blocks: list[Block],
-    teachers: list[dict[str, Any]],
-    teacher_by_id: dict[int, dict[str, Any]],
-    teacher_unavailable: dict[str, Any],
-    days: list[int],
-    hours_per_day: int,
-    payload: dict[str, Any],
-) -> dict[str, Any]:
-    attempted: list[str] = []
-    for teacher in teachers:
-        tid = int(teacher.get("id"))
-        blocked_days = full_or_heavy_blocked_days(teacher_unavailable, tid, days, hours_per_day)
-        for day, hours in blocked_days:
-            modified = copy_unavailable(teacher_unavailable)
-            for hour in hours:
-                modified.setdefault(str(tid), {}).pop(f"{day}_{hour}", None)
-                if tid in modified:
-                    modified[tid].pop(f"{day}_{hour}", None)
-            result = solve_blocks_with_model(
-                blocks,
-                teachers,
-                teacher_by_id,
-                modified,
-                days,
-                hours_per_day,
-                payload,
-                relax_unavailable=False,
-            )
-            label = f"{teacher.get('name', tid)} öğretmenin {day_name(day)} {compact_hours_label(hours)} saatleri"
-            attempted.append(f"{label} açıldı ama program oturmadı.")
-            if result.get("ok"):
-                result["adjustments"] = [{
-                    "teacherId": tid,
-                    "teacher": teacher.get("name", tid),
-                    "day": day,
-                    "hours": hours,
-                    "text": f"{label} açıldı.",
-                }]
-                result.setdefault("stats", {})["openedFreeDaySequentially"] = True
-                return result
-    return {
-        "ok": False,
-        "status": "free_day_opening_failed",
-        "issues": attempted[:8] or build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
+        "issues": strict.get("issues") or build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
     }
 
 
