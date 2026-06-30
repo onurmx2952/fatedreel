@@ -785,7 +785,7 @@ async function generateSchedule(){
     showAlert(ok?'Program oluşturuldu - OR-Tools ile 24/24 sınıf 35 saat dolu.':`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.`,ok?'ok':'warn');
     return;
   }
-  showAlert(orToolsResult?.error||'OR-Tools solver servisi bağlı değil. Cloudflare için ORTOOLS_SOLVER_URL ayarlanmalı veya lokal Python solver çalıştırılmalı.','warn');
+  showAlert(formatOrToolsFailure(orToolsResult),'warn');
   return;
 
   let best=null;
@@ -847,10 +847,17 @@ async function solveWithOrTools(){
       body:JSON.stringify({programData:programState()})
     });
     if(res&&res.ok&&res.schedule) return {ok:true,schedule:res.schedule};
-    return {ok:false,error:res?.error||'OR-Tools çözümleyici geçerli sonuç döndürmedi.'};
+    return {ok:false,error:res?.error||'OR-Tools çözümleyici geçerli sonuç döndürmedi.',issues:res?.issues||[]};
   }catch(error){
     return {ok:false,error:error.message||'OR-Tools çözümleyiciye ulaşılamadı.'};
   }
+}
+
+function formatOrToolsFailure(result){
+  const base=result?.error||'OR-Tools solver servisi bağlı değil. Cloudflare için ORTOOLS_SOLVER_URL ayarlanmalı veya lokal Python solver çalıştırılmalı.';
+  const issues=Array.isArray(result?.issues)?result.issues:[];
+  if(!issues.length) return base;
+  return `${h(base)}<br><b>Öneri:</b><br>${issues.slice(0,6).map(x=>`• ${h(x)}`).join('<br>')}`;
 }
 
 function yieldToBrowser(){
