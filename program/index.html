@@ -298,7 +298,7 @@ body.auth-locked .login-screen{display:flex}
 
 <div id="view-settings" class="view">
   <div class="toolbar"><h2>Ayarlar</h2></div>
-  <div style="max-width:480px">
+  <div style="max-width:720px">
     <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:16px;margin-bottom:12px">
       <div style="font-size:14px;font-weight:600;margin-bottom:10px">Günlük Ders Saati</div>
       <input type="number" id="set-hours" value="7" min="5" max="10" style="width:80px;padding:6px 10px;border-radius:8px;border:1px solid #d0d0d0;font-size:13px">
@@ -314,6 +314,15 @@ body.auth-locked .login-screen{display:flex}
       </div>
     </div>
     <button class="btn primary" onclick="saveSettings()">Kaydet</button>
+    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:16px;margin-top:18px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:6px">Hesap ve kayıtlar</div>
+      <div id="account-data-box" style="font-size:13px;color:#64748b;line-height:1.55;margin-bottom:12px">Yükleniyor...</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" onclick="refreshAccountDataInfo()">Kayıtları göster</button>
+        <button class="btn" onclick="resetToDefaultProgram()">Default ayarlara döndür</button>
+        <button class="btn danger" onclick="deleteCloudProgramData()">Kayıtlarımı sil</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -630,6 +639,7 @@ const SUBJECT_TEACHER_POOLS={
 
 seedDefaultDistribution();
 teachers.forEach(t=>{teacherUnavailable[t.id]={};});
+const DEFAULT_PROGRAM_STATE=JSON.parse(JSON.stringify(programState()));
 
 function showTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -643,6 +653,7 @@ function showTab(name,el){
   if(name==='lessons') renderLessonPlans();
   if(name==='distribution') renderDistribution();
   if(name==='blocked') renderBlockedView();
+  if(name==='settings') renderAccountDataInfo();
 }
 
 function renderTableHeader(){
@@ -3359,7 +3370,7 @@ function saveSettings(){
   settings.hoursPerDay=parseInt(document.getElementById('set-hours').value)||7;
   settings.days=[];
   document.querySelectorAll('[data-day]').forEach(cb=>{if(cb.checked) settings.days.push(parseInt(cb.dataset.day));});
-  renderTable(); showAlert('Kaydedildi.','ok');
+  renderTable(); renderAccountDataInfo(); showAlert('Kaydedildi.','ok'); scheduleAutoSave();
 }
 function exportCSV(){
   const H=settings.hoursPerDay;
@@ -3378,6 +3389,7 @@ let currentUser=null;
 let autoSaveTimer=null;
 let lastSavedState='';
 let isApplyingCloudData=false;
+let cloudDataMeta={hasData:false,updatedAt:null,bytes:0};
 
 function programState(){
   return {
@@ -3480,6 +3492,91 @@ async function apiFetch(path,options={}){
   return res.json();
 }
 
+function localProgramSummary(){
+  const assignmentCount=teachers.reduce((sum,t)=>sum+(t.assignments||[]).length,0);
+  const blockedCount=teachers.reduce((sum,t)=>sum+countTeacherBlockedSlots(t.id),0);
+  const filledCount=Object.keys(schedule||{}).length;
+  return `${teachers.length} öğretmen, ${ALL_CLASSES.length} sınıf, ${SUBJECTS.length} ders, ${assignmentCount} ders dağıtımı, ${blockedCount} boş saat kısıtı, ${filledCount} program hücresi`;
+}
+
+function formatDataBytes(bytes){
+  const n=Number(bytes)||0;
+  if(n<1024) return `${n} B`;
+  if(n<1024*1024) return `${(n/1024).toFixed(1)} KB`;
+  return `${(n/1024/1024).toFixed(2)} MB`;
+}
+
+function formatCloudDate(value){
+  if(!value) return 'Yok';
+  const date=new Date(String(value).replace(' ','T')+'Z');
+  if(Number.isNaN(date.getTime())) return value;
+  return date.toLocaleString('tr-TR');
+}
+
+function renderAccountDataInfo(){
+  const box=document.getElementById('account-data-box');
+  if(!box) return;
+  if(!currentUser){
+    box.innerHTML='Google ile giriş yapılmadı.';
+    return;
+  }
+  if(currentUser.guest){
+    box.innerHTML=`<b>Misafir mod</b><br>Kayıt yapılmaz. Mevcut oturum: ${h(localProgramSummary())}`;
+    return;
+  }
+  box.innerHTML=`<b>${h(currentUser.name||currentUser.email||'Kullanıcı')}</b><br>
+    ${h(currentUser.email||'')}<br>
+    Bulut kaydı: <b>${cloudDataMeta.hasData?'Var':'Yok'}</b><br>
+    Son kayıt: ${h(formatCloudDate(cloudDataMeta.updatedAt))}<br>
+    Boyut: ${h(formatDataBytes(cloudDataMeta.bytes))}<br>
+    Bu ekrandaki veri: ${h(localProgramSummary())}`;
+}
+
+async function refreshAccountDataInfo(){
+  if(currentUser?.guest){renderAccountDataInfo();showAlert('Misafir modda bulut kaydı yok.','warn');return;}
+  if(!currentUser){showAlert('Önce Google ile giriş yapın.','warn');return;}
+  try{
+    const data=await apiFetch('/api/program/data');
+    cloudDataMeta=data.meta||{hasData:Boolean(data.programData),updatedAt:null,bytes:0};
+    renderAccountDataInfo();
+    showAlert(cloudDataMeta.hasData?'Kayıt bilgileri güncellendi.':'Bu hesapta kayıtlı program yok.','ok');
+  }catch(err){
+    showAlert(err.message,'warn');
+  }
+}
+
+async function deleteCloudProgramData(){
+  if(currentUser?.guest){showAlert('Misafir modda silinecek bulut kaydı yok.','warn');return;}
+  if(!currentUser){showAlert('Önce Google ile giriş yapın.','warn');return;}
+  if(!confirm('Bu hesabın buluttaki ders programı kaydı silinsin mi? Ekran default ayarlara dönecek.')) return;
+  try{
+    await apiFetch('/api/program/data',{method:'DELETE'});
+    cloudDataMeta={hasData:false,updatedAt:null,bytes:0};
+    applyProgramState(JSON.parse(JSON.stringify(DEFAULT_PROGRAM_STATE)));
+    lastSavedState=JSON.stringify(programState());
+    setSaveState('Kayıt yok');
+    renderAccountDataInfo();
+    showAlert('Bulut kaydınız silindi ve ekran default ayarlara döndü.','ok');
+  }catch(err){
+    showAlert(err.message,'warn');
+  }
+}
+
+async function resetToDefaultProgram(){
+  if(!confirm('Program default ayarlara dönsün mü? Mevcut ekrandaki değişiklikler sıfırlanır.')) return;
+  applyProgramState(JSON.parse(JSON.stringify(DEFAULT_PROGRAM_STATE)));
+  lastSavedState='';
+  renderAccountDataInfo();
+  if(currentUser&&!currentUser.guest){
+    await saveCloudData(true);
+    showAlert('Default ayarlar hesabınıza kaydedildi.','ok');
+  }else{
+    lastSavedState=JSON.stringify(programState());
+    setSaveState('Misafir mod');
+    showAlert('Default ayarlara dönüldü. Misafir modda kayıt yapılmaz.','ok');
+  }
+}
+
 async function initCloudAuth(){
   try{
     const config=await apiFetch('/api/program/config');
@@ -3539,12 +3636,15 @@ function setAuthUser(user){
     logout.style.display='';
     document.body.classList.remove('auth-locked');
     if(saveState) saveState.textContent=user.guest?'Misafir mod':'Hazır';
+    renderAccountDataInfo();
   } else {
     label.innerHTML='';
     label.classList.remove('on');
     logout.style.display='none';
     document.body.classList.add('auth-locked');
     if(saveState) saveState.textContent='';
+    cloudDataMeta={hasData:false,updatedAt:null,bytes:0};
+    renderAccountDataInfo();
   }
 }
 
@@ -3553,8 +3653,10 @@ async function loadCloudData(silent=false){
   if(!currentUser&&!silent){showAlert('Önce Google ile giriş yapın.','warn');return;}
   try{
     const data=await apiFetch('/api/program/data');
+    cloudDataMeta=data.meta||{hasData:Boolean(data.programData),updatedAt:null,bytes:0};
     if(data.programData) applyProgramState(data.programData);
     else lastSavedState=JSON.stringify(programState());
+    renderAccountDataInfo();
     if(!silent) showAlert('Kayıtlar yüklendi.','ok');
   }catch(err){
     if(!silent) showAlert(err.message,'warn');
@@ -3576,9 +3678,11 @@ async function saveCloudData(silent=false){
   }
   try{
     setSaveState('Kaydediliyor...');
-    await apiFetch('/api/program/data',{method:'PUT',body:JSON.stringify({programData:programState()})});
+    const saved=await apiFetch('/api/program/data',{method:'PUT',body:JSON.stringify({programData:programState()})});
     lastSavedState=stateText;
+    cloudDataMeta={hasData:true,updatedAt:saved.updatedAt||new Date().toISOString(),bytes:new TextEncoder().encode(stateText).length};
     setSaveState('Kaydedildi');
+    renderAccountDataInfo();
     if(!silent) showAlert('Kayıtlar hesabınıza kaydedildi.','ok');
   }catch(err){
     setSaveState('Kayıt hatası');
@@ -3590,6 +3694,7 @@ async function logoutCloud(){
   try{await apiFetch('/api/program/logout',{method:'POST',body:'{}'});}catch(_){}
   setAuthUser(null);
   lastSavedState='';
+  cloudDataMeta={hasData:false,updatedAt:null,bytes:0};
 }
 
 function scheduleAutoSave(){
@@ -3615,7 +3720,7 @@ renderTable();
 document.addEventListener('input',scheduleAutoSave);
 document.addEventListener('change',scheduleAutoSave);
 document.addEventListener('click',e=>{
-  if(e.target.closest('#google-login')||e.target.closest('#logout-btn')||e.target.closest('.tab')) return;
+  if(e.target.closest('#google-login')||e.target.closest('#logout-btn')||e.target.closest('.tab')||e.target.closest('#view-settings .btn')) return;
   setTimeout(scheduleAutoSave,0);
 });
 setTimeout(initCloudAuth,600);

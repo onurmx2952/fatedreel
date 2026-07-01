@@ -113,11 +113,16 @@ async function handleProgramApi(context, requestUrl) {
       await ensureProgramSchema(context);
       const user = await requireProgramUser(context);
       const row = await context.env.PROGRAM_DB.prepare(
-        'SELECT data_json FROM program_data WHERE user_id = ?'
+        'SELECT data_json, updated_at FROM program_data WHERE user_id = ?'
       ).bind(user.id).first();
 
       return jsonResponse({
-        programData: row?.data_json ? JSON.parse(row.data_json) : null
+        programData: row?.data_json ? JSON.parse(row.data_json) : null,
+        meta: {
+          hasData: Boolean(row?.data_json),
+          updatedAt: row?.updated_at || null,
+          bytes: row?.data_json ? new TextEncoder().encode(row.data_json).length : 0
+        }
       });
     }
 
@@ -138,6 +143,21 @@ async function handleProgramApi(context, requestUrl) {
           data_json = excluded.data_json,
           updated_at = CURRENT_TIMESTAMP
       `).bind(user.id, JSON.stringify(programData)).run();
+
+      const row = await context.env.PROGRAM_DB.prepare(
+        'SELECT updated_at FROM program_data WHERE user_id = ?'
+      ).bind(user.id).first();
+
+      return jsonResponse({ ok: true, updatedAt: row?.updated_at || null });
+    }
+
+    if (path === '/api/program/data' && request.method === 'DELETE') {
+      requireProgramDb(context);
+      await ensureProgramSchema(context);
+      const user = await requireProgramUser(context);
+      await context.env.PROGRAM_DB.prepare(
+        'DELETE FROM program_data WHERE user_id = ?'
+      ).bind(user.id).run();
 
       return jsonResponse({ ok: true });
     }
