@@ -842,17 +842,47 @@ async function generateSchedule(){
 }
 
 async function solveWithOrTools(){
-  setWorkState(true,'OR-Tools çözümleyiciye gönderiliyor...');
-  try{
-    const res=await apiFetch('/api/program/solve',{
-      method:'POST',
-      body:JSON.stringify({programData:programState()})
-    });
-    if(res&&res.ok&&res.schedule) return {ok:true,schedule:res.schedule,adjustments:res.adjustments||[],stats:res.stats||{}};
-    return {ok:false,error:res?.error||'OR-Tools çözümleyici geçerli sonuç döndürmedi.',issues:res?.issues||[]};
-  }catch(error){
-    return {ok:false,error:error.message||'OR-Tools çözümleyiciye ulaşılamadı.'};
+  const baseState=programState();
+  const attempts=[
+    {label:'OR-Tools çözümleyici hazırlanıyor...',timeLimitSeconds:45,seed:1},
+    {label:'Çözüm biraz zorlandı, ikinci deneme yapılıyor...',timeLimitSeconds:75,seed:7},
+    {label:'Son kontrol: daha geniş arama ile deneniyor...',timeLimitSeconds:110,seed:19},
+  ];
+  let lastResult=null;
+  for(let i=0;i<attempts.length;i++){
+    const attempt=attempts[i];
+    setWorkState(true,attempt.label);
+    await yieldToBrowser();
+    try{
+      const res=await apiFetch('/api/program/solve',{
+        method:'POST',
+        body:JSON.stringify({
+          programData:baseState,
+          timeLimitSeconds:attempt.timeLimitSeconds,
+          seed:attempt.seed,
+          workers:8
+        })
+      });
+      if(res&&res.ok&&res.schedule){
+        return {ok:true,schedule:res.schedule,adjustments:res.adjustments||[],stats:res.stats||{},attempt:i+1};
+      }
+      lastResult={ok:false,error:res?.error||'OR-Tools çözümleyici geçerli sonuç döndürmedi.',issues:res?.issues||[],status:res?.status,attempt:i+1};
+      if(isFinalSolverFailure(lastResult)) break;
+    }catch(error){
+      lastResult={ok:false,error:error.message||'OR-Tools çözümleyiciye ulaşılamadı.',issues:[],network:true,attempt:i+1};
+    }
+    if(i<attempts.length-1){
+      await waitForSolverRetry(i);
+    }
   }
+  if(lastResult?.network){
+    lastResult.error='Solver servisi uyanamadı veya bağlantı kesildi. Birazdan tekrar deneyin; veri değiştirmenize gerek yok.';
+  }
+  if(String(lastResult?.status||'').toUpperCase()==='UNKNOWN'){
+    lastResult.error='Solver ayrılan sürede kesin sonuca ulaşamadı. Veri değişmediği halde farklı sonuçlar görmemeniz için öneri üretilmedi; ders dağıtımı çok sıkışık olabilir veya free solver süresi yetmemiş olabilir.';
+    lastResult.issues=[];
+  }
+  return lastResult||{ok:false,error:'OR-Tools çözümleyiciye ulaşılamadı.'};
 }
 
 function formatOrToolsFailure(result){
@@ -860,6 +890,19 @@ function formatOrToolsFailure(result){
   const issues=Array.isArray(result?.issues)?result.issues:[];
   if(!issues.length) return base;
   return `${h(base)}<br><b>Öneri:</b><br>${issues.slice(0,6).map(x=>`• ${h(x)}`).join('<br>')}`;
+}
+
+function isFinalSolverFailure(result){
+  const status=String(result?.status||'').toUpperCase();
+  if(status==='INVALID_DISTRIBUTION'||status==='NO_CANDIDATE') return true;
+  const msg=String(result?.error||'').toLowerCase();
+  if(msg.includes('ders dağıtımı')&&msg.includes('düzeltilmeli')) return true;
+  return false;
+}
+
+function waitForSolverRetry(i){
+  const ms=[1800,2600,3500][i]||1800;
+  return new Promise(resolve=>setTimeout(resolve,ms));
 }
 
 function yieldToBrowser(){

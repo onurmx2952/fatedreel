@@ -75,17 +75,10 @@ async function handleProgramApi(context, requestUrl) {
       }
 
       const body = await readJson(request);
-      const solverResponse = await fetch(solverUrl.replace(/\/+$/, '') + '/solve', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(body)
-      });
-      const solverData = await solverResponse.json().catch(() => ({
-        ok: false,
-        error: 'OR-Tools servisi JSON cevap döndürmedi.'
-      }));
-
-      return jsonResponse(solverData, solverResponse.ok ? 200 : solverResponse.status);
+      const solverData = await callSolverWithRetry(solverUrl, body);
+      const status = solverData.httpStatus || 200;
+      delete solverData.httpStatus;
+      return jsonResponse(solverData, status);
     }
 
     if (path === '/api/program/auth/google' && request.method === 'POST') {
@@ -169,6 +162,54 @@ async function handleProgramApi(context, requestUrl) {
     const status = error.status || 500;
     return jsonResponse({ error: error.message || 'Beklenmeyen hata oluştu.' }, status);
   }
+}
+
+async function callSolverWithRetry(solverUrl, body) {
+  const endpoint = solverUrl.replace(/\/+$/, '') + '/solve';
+  const attempts = [
+    { timeoutMs: 70000, delayMs: 0 },
+    { timeoutMs: 95000, delayMs: 2500 }
+  ];
+  let lastError = null;
+
+  for (const attempt of attempts) {
+    if (attempt.delayMs) await sleep(attempt.delayMs);
+    let timer = null;
+    try {
+      const controller = new AbortController();
+      timer = setTimeout(() => controller.abort('solver-timeout'), attempt.timeoutMs);
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(body),
+        signal: controller.signal
+      });
+
+      const data = await response.json().catch(() => ({
+        ok: false,
+        error: 'OR-Tools servisi JSON cevap dondurmedi.'
+      }));
+      data.httpStatus = response.ok ? 200 : response.status;
+
+      if (response.ok || response.status < 500) return data;
+      lastError = new Error(data.error || `Solver HTTP ${response.status}`);
+    } catch (error) {
+      lastError = error;
+    } finally {
+      if (timer) clearTimeout(timer);
+    }
+  }
+
+  return {
+    ok: false,
+    httpStatus: 200,
+    error: 'OR-Tools servisine ulasilamadi. Render free plan soguk aciliyor veya istek zaman asimina dustu; veri degistirmeden tekrar denenebilir.',
+    transient: true
+  };
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function requireProgramDb(context) {

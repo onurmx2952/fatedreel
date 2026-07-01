@@ -1,0 +1,38 @@
+﻿Run start: 2026-07-01T14:04:00.5699233+03:00
+Cwd: C:\Users\aa\Documents\github\fatedreel
+Automation: FatedReel URL ekleme (fatedreel-url-ekleme)
+Schedule note: heartbeat/manual verification for recurring 6-hour automation.
+Previous log: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-07-01-080754.log LastWriteTime=2026-07-01T08:17:58.5145883+03:00
+Son 6 saatte calisma: VAR
+Recent log count in last 6h before this run: 1
+
+Repo workflow file check:
+- submit_indexnow.py: True
+- sitemap.xml: True
+- b6f09cebefa4ecf4e122c262ba6097c6.txt: True
+- indexing-next-batch.txt: True
+- indexing-google-batch.txt: True
+- indexing-bing-batch.txt: True
+- indexing-yandex-batch.txt: True
+
+IndexNow run:
+Command: python submit_indexnow.py
+Exit code: 0
+Output:
+IndexNow status: 200
+Submitted URLs: 3124
+
+Browser/CDP check:
+CDP http://127.0.0.1:9222/json/version BLOCKED: Uzak sunucuya bağlanılamıyor
+
+Live sitemap check:
+HTTP 200; loc count: 3124
+
+Final summary:
+Son 6 saatte calisma: VAR
+IndexNow status summary: status=200 submitted=3124
+Google Search Console status: BLOCKED/NOT CONFIRMED - no controllable authenticated webmaster UI used in this run; CDP check logged above.
+Bing Webmaster status: BLOCKED/NOT CONFIRMED - no controllable authenticated webmaster UI used in this run; IndexNow submitted if status=200.
+Yandex Webmaster status: BLOCKED/NOT CONFIRMED - no controllable authenticated webmaster UI used in this run; IndexNow submitted if status=200.
+Quota/login/captcha/MFA/blockers: no quota/CAPTCHA/MFA observed in this run; browser/CDP status controls UI verification.
+Log file path: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-07-01-140400.log

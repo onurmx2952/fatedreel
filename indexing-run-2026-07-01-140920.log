@@ -1,0 +1,72 @@
+﻿Run start: 2026-07-01T14:09:20.3775673+03:00
+Cwd: C:\Users\aa\Documents\github\fatedreel
+Schedule note: recurring fatedreel-url-ekleme automation; run every scheduled heartbeat and log all indexing checks.
+Previous log: indexing-run-2026-07-01-140400.log LastWriteTime=2026-07-01T14:04:05.7327025+03:00
+Son 6 saatte calisma: VAR
+
+IndexNow flow: found submit_indexnow.py; running command: python .\submit_indexnow.py
+Exit code: 0
+Command output:
+IndexNow status: 200
+Submitted URLs: 3124
+
+Browser/control checks:
+CDP 127.0.0.1:9222: BLOCKED Uzak sunucuya bağlanılamıyor
+Browser surfaces: extension profile onur available; iab also available.
+Open webmaster tabs observed: Google URL Denetimi / 404 inspect tabs, Bing Webmaster Tools public/about tab, Yandex Reindex pages tab.
+Google Search Console: authenticated URL Inspection usable.
+Google confirmed request: https://fatedreel.com/tt0250258; visible text: Dizine eklenmesi istendi.
+Google attempt URL: https://fatedreel.com/tt0250638
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: confirmed; URL Google'da yok | URL Google tarafından bilinmiyor | Dizine eklenmesi istendi
+Google attempt URL: https://fatedreel.com/tt0252444
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: confirmed; URL Google'da yok | URL Google tarafından bilinmiyor | Dizine eklenmesi istendi
+Google attempt URL: https://fatedreel.com/tt0252480
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: confirmed; URL Google'da yok | URL Google tarafından bilinmiyor | Dizine eklenmesi istendi
+Google attempt URL: https://fatedreel.com/tt0252684
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: confirmed; URL Google'da yok | URL Google tarafından bilinmiyor | Dizine eklenmesi istendi
+Google attempt URL: https://fatedreel.com/tt0253200
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: confirmed; URL Google'da yok | URL Google tarafından bilinmiyor | Dizine eklenmesi istendi
+Google attempt URL: https://fatedreel.com/tt0255067
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: confirmed; URL Google'da yok | URL Google tarafından bilinmiyor | Dizine eklenmesi istendi
+Google attempt URL: https://fatedreel.com/tt0255094
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: confirmed; URL Google'da yok | URL Google tarafından bilinmiyor | Dizine eklenmesi istendi
+Google attempt URL: https://fatedreel.com/tt0257360
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: confirmed; URL Google'da yok | URL Google tarafından bilinmiyor | Dizine eklenmesi istendi
+Google attempt URL: https://fatedreel.com/tt0258068
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: confirmed; URL Google'da yok | URL Google tarafından bilinmiyor | Dizine eklenmesi istendi
+Google attempt URL: https://fatedreel.com/tt0258760
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: confirmed; URL Google'da yok | URL Google tarafından bilinmiyor | Dizine eklenmesi istendi
+Google attempt URL: https://fatedreel.com/tt0259072
+Google inspection result: URL Google'da yok | Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+Google request result: quota; URL Google'da yok | URL Google tarafından bilinmiyor | Kota Aşıldı | Maalesef günlük kotanızı aştığınız için bu isteği işleyemedik. Lütfen bunu yarın tekrar göndermeyi deneyin.
+Google confirmed requests this run: 11
+Google last attempted URL: https://fatedreel.com/tt0259072
+Google blocker/quota: Kota Aşıldı / günlük kotanızı
+
+Bing Webmaster Tools: BLOCKED unauthenticated/public page.
+Bing URL: https://www.bing.com/webmasters/about?siteUrl=https%3A%2F%2Ffatedreel.com&from=home
+Bing visible text: Oturum aç / Başla. Confirmed Bing UI requests: 0.
+
+Yandex Webmaster: authenticated Reindex pages UI loaded, but daily limit already reached in this run.
+Yandex URL: https://webmaster.yandex.com/site/https:fatedreel.com:443/indexing/reindex/
+Yandex visible text: You have reached your daily limit of added URLs. Confirmed new Yandex UI submissions this run: 0.
+Yandex listed queued rows from 07/01/2026 8:16 AM starting at https://fatedreel.com/tt0401085 from earlier same-day submission.
+
+Final summary:
+Son 6 saatte calisma: VAR
+IndexNow: status 200; Submitted URLs: 3124; failures observed: none; command: python .\submit_indexnow.py; exit code 0.
+Google Search Console: authenticated; confirmed indexing requests this run: 11; first confirmed https://fatedreel.com/tt0250258; last confirmed https://fatedreel.com/tt0258760; last attempted https://fatedreel.com/tt0259072; quota/blocker: Kota Aşıldı / Maalesef günlük kotanızı aştığınız için bu isteği işleyemedik. Lütfen bunu yarın tekrar göndermeyi deneyin.
+Bing Webmaster Tools: BLOCKED unauthenticated public/about page; confirmed UI requests: 0.
+Yandex Webmaster: daily limit already reached; confirmed new UI submissions this run: 0.
+Site edits: none. Technical indexing blocker found: none.
+Log file: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-07-01-140920.log

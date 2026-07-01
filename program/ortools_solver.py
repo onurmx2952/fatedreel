@@ -192,12 +192,20 @@ def solve_blocks_with_model(
         model.Minimize(sum(penalty_terms))
 
     solver = cp_model.CpSolver()
-    solver.parameters.max_time_in_seconds = float(payload.get("timeLimitSeconds") or 20)
+    solver.parameters.max_time_in_seconds = float(payload.get("timeLimitSeconds") or 75)
     solver.parameters.num_search_workers = int(payload.get("workers") or 8)
     solver.parameters.random_seed = int(payload.get("seed") or 1)
 
     status = solver.Solve(model)
     if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        if status == cp_model.UNKNOWN:
+            return {
+                "ok": False,
+                "status": solver.StatusName(status),
+                "error": "OR-Tools ayrılan sürede kesin sonuca ulaşamadı. Sistem daha geniş aramayla tekrar deneyecek.",
+                "issues": [],
+                "transient": True,
+            }
         return {
             "ok": False,
             "status": solver.StatusName(status),
@@ -242,7 +250,7 @@ def solve_blocks_with_model(
 def copy_unavailable(unavailable: dict[str, Any]) -> dict[str, Any]:
     copied: dict[str, Any] = {}
     for tid, blocked in (unavailable or {}).items():
-          copied[tid] = dict(blocked or {})
+        copied[tid] = dict(blocked or {})
     return copied
 
 
