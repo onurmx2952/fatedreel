@@ -1,0 +1,14 @@
+﻿Run start: 2026-07-01T08:07:54.4585651+03:00
+CWD: C:\Users\aa\Documents\github\fatedreel
+Automation: FatedReel URL ekleme (fatedreel-url-ekleme)
+Schedule note: recurring indexing workflow; last run input 2026-06-30T23:05:36.982Z; current timezone Europe/Istanbul.
+Son 6 saatte calisma: VAR
+Previous log considered: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-07-01-080355.log
+
+IndexNow step:
+Command: python .\submit_indexnow.py
+Exit code: 0
+Output:
+IndexNow status: 200
+Submitted URLs: 3124
+

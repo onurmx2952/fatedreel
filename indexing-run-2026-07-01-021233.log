@@ -1,0 +1,579 @@
+﻿Run start: 2026-07-01T02:12:33.3156709+03:00
+Cwd: C:\Users\aa\Documents\github\fatedreel
+Automation: FatedReel URL ekleme (fatedreel-url-ekleme)
+Schedule note: recurring indexing workflow; run IndexNow and verify Google/Bing/Yandex webmaster availability.
+Previous log: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-07-01-020336.log
+Previous log LastWriteTime: 2026-07-01T02:03:42.2151570+03:00
+Son 6 saatte calisma: VAR
+
+Workflow files:
+submit_indexnow.py: True
+sitemap.xml: True
+IndexNow key file: True
+
+IndexNow command start: 2026-07-01T02:13:02.7664673+03:00
+Command: python .\submit_indexnow.py
+Exit code: 0
+Output:
+IndexNow status: 200
+Submitted URLs: 3124
+IndexNow command end: 2026-07-01T02:13:04.2650290+03:00
+
+Browser access check start: 2026-07-01T02:23:14.8254338+03:00
+CDP 127.0.0.1:9222: BLOCKED Uzak sunucuya bağlanılamıyor
+Browser surfaces: [{"capabilities":{"browser":[],"tab":[{"description":"List assets already observed in the current page state and bundle selected assets into a temporary local artifact.","id":"pageAssets"}]},"id":"-396f-4d26-8995-c145d561155a","name":"Chrome","type":"extension","metadata":{"extensionId":"hehggadaopoacecdllhhajmbjkdcmajg","extensionInstanceId":"32085e8a-0f3d-4764-8f37-af8aecc18aa1","profileName":"onur","profileIsLastUsed":"true","profileOrdering":"0"}},{"capabilities":{"browser":[{"id":"visibility","description":"Use to show or hide the browser to the user, and to determine the browser's current visibility. Keep browser work in the background unless the user asks to see it or live viewing is useful. When the browser should be visible, call set(true)."},{"id":"viewport","description":"Controls an explicit browser viewport override for responsive or device-size testing. Use it when a task calls for specific dimensions or breakpoint validation; otherwise leave it unset so the browser uses its normal 1280x720 viewport. Reset temporary overrides before finishing unless the user asked to keep them."}],"tab":[{"id":"pageAssets","description":"List assets already observed in the current page state and bundle selected assets into a temporary local artifact."}]},"id":"-5133-4d54-a71b-c8994702a8f4","name":"Codex In-app Browser","type":"iab","metadata":{"codexAppBuildFlavor":"prod","codexAppSessionId":"fbe8b360-374e-4133-9c84-69d3dc3482f5","codexSessionId":"019f1ac7-f359-7392-a7b1-9f53e4ce91cd"}}]
+Open tabs observed: [{"title":"ders-programi-solver ・ Web Service ・ Render Dashboard","url":"https://dashboard.render.com/web/srv-d91sejq8qa3s73b5k20g/deploys/dep-d922n8nlk1mc7392rmhg?r=2026-06-30%4020%3A47%3A34%7E2026-06-30%4020%3A51%3A51","lastOpened":"2026-06-30T20:48:29.139Z"},{"title":"Cloudflare Dashboard | Manage Your Account","url":"https://dash.cloudflare.com/1faa06dbbaffc1c0ef978f84f3571235/pages/view/fatedreel","lastOpened":"2026-06-30T20:46:19.058Z"},{"title":"(2) WhatsApp","url":"https://web.whatsapp.com/","lastOpened":"2026-06-30T18:54:51.229Z"},{"title":"OAuth application authorized","url":"https://github.com/login/oauth/authorize?client_id=de0e3c7e9973e1c4dd77&scope=repo+user+workflow&skip_account_picker=true&state=65ad40df-4f3f-41fd-9142-9c8fa2460e69","lastOpened":"2026-06-30T18:43:49.651Z"},{"title":"Okul Ders Programı","url":"https://fatedreel.com/program/","lastOpened":"2026-06-30T13:53:40.907Z"},{"title":"onurmx2952/fatedreel: fatedreel","url":"https://github.com/onurmx2952/fatedreel","lastOpened":"2026-06-30T13:38:31.990Z"},{"title":"KARABÜK ÜNİVERSİTESİ UZAKTAN EĞİTİM MERKEZİ","url":"https://semlms.karabuk.edu.tr/student/exams/582","lastOpened":"2026-06-30T13:15:10.512Z"},{"title":"Aile Danışmanlığı Soru Cevapları - Google Gemini","url":"https://gemini.google.com/app/0ece625fe6aad014?hl=tr","lastOpened":"2026-06-30T13:08:19.290Z"},{"title":"(anonymous)","url":"file:///C:/Users/aa/Downloads/Sorular.pdf","lastOpened":"2026-06-30T13:01:23.934Z"},{"title":"Gelen Kutusu (973) - onurmx2@gmail.com - Gmail","url":"https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox","lastOpened":"2026-06-30T12:40:17.566Z"}]
+Google Search Console attempt URL: https://fatedreel.com/tt0250258
+Google loaded URL: https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com&id=https%3A%2F%2Ffatedreel.com%2Ftt0250258
+Google title: Error 404 (Bulunamadı)!!1
+Google visible text excerpt:
+404. Bu bir hata.
+
+İstenen URL bu sunucuda bulunamadı. Tüm bildiğimiz bu.
+Relevant existing webmaster tabs: [{"title":"Error 404 (Bulunamadı)!!1","url":"https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com&id=https%3A%2F%2Ffatedreel.com%2Ftt0250258","lastOpened":"2026-06-30T23:28:23.541Z","tabGroup":"🔎 FatedReel indexing"},{"title":"URL Denetimi","url":"https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com&id=R2XBp8ARIcD-k2Uc8cc4EQ","lastOpened":"2026-06-30T12:26:00.713Z","tabGroup":"🔎 FatedReel final browser check"},{"title":"Reindex pages — https://fatedreel.com — Yandex Webmaster","url":"https://webmaster.yandex.com/site/https:fatedreel.com:443/indexing/reindex/","lastOpened":"2026-06-30T12:25:59.398Z","tabGroup":"🔎 FatedReel final browser check"},{"title":"Bing Webmaster Tools","url":"https://www.bing.com/webmasters/about?siteUrl=https%3A%2F%2Ffatedreel.com&from=home","lastOpened":"2026-06-30T12:25:57.188Z","tabGroup":"🔎 FatedReel final browser check"},{"title":"Error 404 (Bulunamadı)!!1","url":"https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Ffatedreel.com%2F&id=https%3A%2F%2Ffatedreel.com%2Ftt0244479","lastOpened":"2026-06-30T12:25:56.235Z","tabGroup":"🔎 FatedReel final browser check"},{"title":"Reindex pages — https://fatedreel.com — Yandex Webmaster","url":"https://webmaster.yandex.com/site/https:fatedreel.com:443/indexing/reindex/","lastOpened":"2026-06-30T11:03:29.592Z","tabGroup":"🔎 FatedReel final browser check"}]
+Claimed existing Google tab URL: https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com&id=R2XBp8ARIcD-k2Uc8cc4EQ
+Claimed Google title: URL Denetimi
+Claimed Google text excerpt:
+
+	
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0244479
+URL Denetimi
+CANLI URL'Yİ TEST ET
+check_circle
+URL Google'da mevcut
+Google Arama sonuçlarında ilgili tüm geliştirmelerle görünebilir (manuel bir işleme tabi değilse veya kaldırma isteği yoksa). Daha fazla bilgi
+TARANAN SAYFAYI GÖSTER
+
+Dizine eklenmesi istendi
+TEKRAR İSTEK GÖNDER
+check_circle
+Sayfayı dizine ekleme
+Sayfa dizine eklendi
+
+info
+Videoları dizine ekleme
+Dizine eklenmiş video yok
+
+Geliştirmeler ve Deneyim
+check_circle
+HTTPS
+Sayfa HTTPS üzerinden sunuldu
+
+Google DOM snapshot excerpt before new inspect:
+- banner:
+  - button "Ana menü":
+  - link "Google Search Console":
+    - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+  - search:
+    - textbox [disabled]: "\"fatedreel.com\" içindeki tüm URL'leri denetleyin"
+    - combobox "fatedreel.com adresindeki tüm URL'leri inceleyin"
+    - button "Arama":
+  - button "Yardım":
+    - generic: 
+  - button "Kullanıcı ayarları":
+  - button "İletiler":
+    - generic: 
+  - button "Google uygulamaları":
+  - 'button "Google Hesabı: onur yılmaz (onurmx2@gmail.com)"':
+- dialog "navigational drawer":
+  - navigation "Birincil":
+    - button "Arama özelliği":
+      - img "site simgesi"
+      - combobox "fatedreel.com"
+      - generic: 
+    - link "Genel Bakış":
+      - /url: ./search-console?resource_id=sc-domain%3Afatedreel.com
+      - generic: home
+      - generic: Genel Bakış
+    - link "Analizler":
+      - /url: ./search-console/performance/insights?resource_id=sc-domain%3Afatedreel.com
+      - generic: lightbulb_2
+      - generic: Analizler
+    - link "Performans":
+      - /url: ./search-console/performance/search-analytics?resource_id=sc-domain%3Afatedreel.com
+      - generic: trending_up
+      - generic: Performans
+    - button "URL denetimi":
+      - generic: search
+      - generic: URL denetimi
+    - generic: Dizin oluşturma
+    - button "Dizin oluşturma rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Sayfa sayısı":
+      - /url: ./search-console/index?resource_id=sc-domain%3Afatedreel.com
+      - generic: file_copy
+      - generic: Sayfa sayısı
+    - link "Videolar":
+      - /url: ./search-console/video-index?resource_id=sc-domain%3Afatedreel.com
+      - generic: video_library
+      - generic: Videolar
+    - link "Site Haritaları":
+      - /url: ./search-console/sitemaps?resource_id=sc-domain%3Afatedreel.com
+      - generic: account_tree
+      - generic: Site Haritaları
+    - link "URL Kaldırma":
+      - /url: ./search-console/removals?resource_id=sc-domain%3Afatedreel.com
+      - generic: visibility_off
+      - generic: URL Kaldırma
+    - generic: Deneyim
+    - button "Deneyim rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Önemli Web Verileri":
+      - /url: ./search-console/core-web-vitals?resource_id=sc-domain%3Afatedreel.com
+      - generic: speed
+      - generic: Önemli Web Verileri
+    - link "HTTPS":
+      - /url: ./search-console/https?resource_id=sc-domain%3Afatedreel.com
+      - generic: lock
+      - generic: HTTPS
+    - generic: Geliştirmeler
+    - button "Geliştirmeler rapor bölümü" [expanded]:
+      - generic: keyboard_arrow_up
+    - link "Yorum snippet'leri":
+      - /url: ./search-console/r/review-snippet?resource_id=sc-domain%3Afatedreel.com
+      - generic: layers
+      - generic: Yorum snippet'leri
+    - generic: Güvenlik ve Manuel İşlemler
+    - button "Güvenlik ve Manuel İşlemler rapor bölümü":
+      - generic: keyboard_arrow_down
+    - link "Bağlantı raporu":
+      - /url: ./search-console/links?resource_id=sc-domain%3Afatedreel.com
+      - generic: link_2
+      - generic: Bağlantılar
+    - link "Başarılar":
+      - /url: ./search-console/achievements?resource_id=sc-domain%3Afatedreel.com
+      - generic: trophy
+      - generic: Başarılar
+    - link "Ayarlar":
+      - /url: ./search-console/settings?resource_id=sc-domain%3Afatedreel.com
+      - generic: settings
+      - generic: Ayarlar
+    - button "Geri bildirim gönder":
+      - generic: feedback
+      - generic: Geri bildirim gönder
+    - button "Search Console hakkında":
+      - generic: info
+      - generic: Search Console hakkında
+    - link "Gizlilik":
+      - /url: https://myaccount.google.com/privacypolicy?hl=tr
+    - link "Şartlar":
+      - /url: https://myaccount.google.com/termsofservice?hl=tr
+- generic: https://fatedreel.com/tt0244479
+- navigation "İçerik haritaları":
+  - heading "URL Denetimi" [level=1]
+- button "Canlı URL'yi test et":
+  - generic: Canlı URL'yi test et
+- main:
+  - generic: check_circle
+  - generic: URL Google'da mevcut
+  - text: Google Arama sonuçlarında ilgili tüm geliştirmelerle görünebilir (manuel bir işleme tabi değilse veya kaldırma isteği yoksa).
+  - link "Daha fazla bilgi":
+    - /url: https://support.google.com/webmasters/answer/9012289#url_on_google
+  - button "Taranan sayfayı göster":
+    - generic: Taranan sayfayı göster
+  - generic: 
+  - generic: Dizine eklenmesi istendi
+  - button "Dizine eklenmesini isteTekrar istek gönder" [active]:
+    - generic: Tekrar istek gönder
+  - button "Sayfayı dizine ekleme Sayfa dizine eklendi":
+    - generic: check_circle
+    - generic: Sayfayı dizine ekleme
+    - generic: Sayfa dizine eklendi
+    - generic: 
+  - link "Videoları dizine ekleme Dizine eklenmiş video yok" [disabled]:
+    - /url: ./search-console/inspect/video-index?resource_id=sc-domain%3Afatedreel.com&id=R2XBp8ARIcD-k2Uc8cc4EQ
+    - generic: info
+    - generic: Videoları dizine ekleme
+    - generic: Dizine eklenmiş video yok
+    - generic: 
+  - generic: Geliştirmeler ve Deneyim
+  - link "HT
+Google inspect combobox count: 1
+Google after entering candidate URL: https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com&id=Ro7NtqUWXupr61OsjNNyWg
+Text excerpt:
+
+	
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0250258
+URL Denetimi
+CANLI URL'Yİ TEST ET
+info
+URL Google'da yok
+Bu sayfa dizine eklenmedi. Dizine eklenmeyen sayfalar Google'da sunulamaz. Sayfanın neden dizine eklenmediğini öğrenmek için aşağıdaki ayrıntılara bakın. Daha fazla bilgi
+TARANAN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+info
+Sayfayı dizine ekleme
+Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+
+Bulunma
+Site Haritaları
+Yönlendiren site haritası algılanmadı
+Yönlendiren sayfa
+Hiç yönlendiren sayfa algılanmadı
+URL şu anda raporlanmamış olan diğer kaynaklardan bilinebilir
+Tarama
+Son tarama
+Yok
+Tarama aracısı:
+Yok
+Taramaya izin verildi mi?
+Yok
+Sayfa getirme
+Yok
+Dizine eklenmesine izin verildi mi?
+info
+Yok
+Dizin oluşturma
+Kullanıcı tarafından beyan edilen standart URL
+Yok
+Google tarafından seçilen standart URL
+
+Yok
+DAHA FAZLA BİLGİ EDİNİN
+Geliştirmeler ve Deneyim
+Yalnızca dizine eklenmiş URL'lerde geliştirmeler olabilir
+URL Denetimi
+Google request indexing button count for tt0250258: 1
+Google after request click URL: https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com&id=Ro7NtqUWXupr61OsjNNyWg
+Text excerpt:
+
+	
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0250258
+URL Denetimi
+CANLI URL'Yİ TEST ET
+info
+URL Google'da yok
+Bu sayfa dizine eklenmedi. Dizine eklenmeyen sayfalar Google'da sunulamaz. Sayfanın neden dizine eklenmediğini öğrenmek için aşağıdaki ayrıntılara bakın. Daha fazla bilgi
+TARANAN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+info
+Sayfayı dizine ekleme
+Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+
+Bulunma
+Site Haritaları
+Yönlendiren site haritası algılanmadı
+Yönlendiren sayfa
+Hiç yönlendiren sayfa algılanmadı
+URL şu anda raporlanmamış olan diğer kaynaklardan bilinebilir
+Tarama
+Son tarama
+Yok
+Tarama aracısı:
+Yok
+Taramaya izin verildi mi?
+Yok
+Sayfa getirme
+Yok
+Dizine eklenmesine izin verildi mi?
+info
+Yok
+Dizin oluşturma
+Kullanıcı tarafından beyan edilen standart URL
+Yok
+Google tarafından seçilen standart URL
+
+Yok
+DAHA FAZLA BİLGİ EDİNİN
+Geliştirmeler ve Deneyim
+Yalnızca dizine eklenmiş URL'lerde geliştirmeler olabilir
+Yayınlanmış URL’nin dizine eklenebilir olup olmadığını test etme
+Bu işlem bir iki dakika sürebilir
+İptal
+Google after live-test wait URL: https://search.google.com/search-console/inspect?resource_id=sc-domain%3Afatedreel.com&id=Ro7NtqUWXupr61OsjNNyWg
+Text excerpt:
+
+	
+
+home
+Genel Bakış
+lightbulb_2
+Analizler
+trending_up
+Performans
+search
+URL denetimi
+Dizin oluşturma
+keyboard_arrow_up
+file_copy
+Sayfa sayısı
+video_library
+Videolar
+account_tree
+Site Haritaları
+visibility_off
+URL Kaldırma
+Deneyim
+keyboard_arrow_up
+speed
+Önemli Web Verileri
+lock
+HTTPS
+Geliştirmeler
+keyboard_arrow_up
+layers
+Yorum snippet'leri
+Güvenlik ve Manuel İşlemler
+keyboard_arrow_down
+link_2
+Bağlantılar
+trophy
+Başarılar
+settings
+Ayarlar
+feedback
+Geri bildirim gönder
+info
+Search Console hakkında
+GizlilikŞartlar
+https://fatedreel.com/tt0250258
+URL Denetimi
+CANLI URL'Yİ TEST ET
+info
+URL Google'da yok
+Bu sayfa dizine eklenmedi. Dizine eklenmeyen sayfalar Google'da sunulamaz. Sayfanın neden dizine eklenmediğini öğrenmek için aşağıdaki ayrıntılara bakın. Daha fazla bilgi
+TARANAN SAYFAYI GÖSTER
+Sayfa değişti mi?
+DİZİNE EKLENMESİNİ İSTE
+info
+Sayfayı dizine ekleme
+Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor
+
+Bulunma
+Site Haritaları
+Yönlendiren site haritası algılanmadı
+Yönlendiren sayfa
+Hiç yönlendiren sayfa algılanmadı
+URL şu anda raporlanmamış olan diğer kaynaklardan bilinebilir
+Tarama
+Son tarama
+Yok
+Tarama aracısı:
+Yok
+Taramaya izin verildi mi?
+Yok
+Sayfa getirme
+Yok
+Dizine eklenmesine izin verildi mi?
+info
+Yok
+Dizin oluşturma
+Kullanıcı tarafından beyan edilen standart URL
+Yok
+Google tarafından seçilen standart URL
+
+Yok
+DAHA FAZLA BİLGİ EDİNİN
+Geliştirmeler ve Deneyim
+Yalnızca dizine eklenmiş URL'lerde geliştirmeler olabilir
+error_outline
+Kota Aşıldı
+Maalesef günlük kotanızı aştığınız için bu isteği işleyemedik. Lütfen bunu yarın tekrar göndermeyi deneyin.
+Kapat
+Google quota close button count: 1
+Bing Webmaster loaded URL: https://www.bing.com/webmasters/about?siteUrl=https%3A%2F%2Ffatedreel.com&from=home
+Bing title: Bing Webmaster Tools
+Bing visible text excerpt:
+Yardım
+TR
+
+Oturum aç
+Siteniz için daha fazla kullanıcı mı istiyorsunuz?
+Sitenizin performans verilerini alın, ücretsiz SEO/GEO araçlarından yararlanın ve Bing arama sonuçlarında sayfa sıralamanızı iyileştirmek için istatistikleri analiz edin.
+Başla
+Siteniz hakkında bilgi edinin
+Raporlarımız ve araçlarımızla insanları sitenize neyin yönlendirdiğini, insanların ne aradığını anlayın ve sitenize gelen trafiği artırmaya odaklanın ve siteleriniz için kişiselleştirilmiş mesajlar ve uyarılar alın.
+Pano
+SEO/GEO araçları
+Raporlama araçları
+Tanılama araçları
+İletişim
+Kaydol 
+daha fazla bilgi görmek için
+SEO/GEO özellikleri
+Benzersiz SEO/GEO araçlarımız, web sitenizin hedeflenen web sitenize hızlı ve ilk olarak ulaşmasına yardımcı olmak için sitenizi keşfetmenize, geri bağlantıları analiz etmenize, anahtar kelimeleri yönetmenize ve daha fazlasını yapmanıza olanak tanır.
+
+Geri bağlantılar
+Site geri bağlantı profiliniz, yönlendiren sayfaları, etki alanlarını ve bağlantı metinlerini analiz etmenize yardımcı olur
+
+Anahtar kelime araştırma
+Anahtar Kelime Araştırması, arama yapanların sorguladığının tümcelerini ve anahtar kelimelerini ve karşılık gelen arama birimlerini kontrol etmenizi sağlar.
+
+SEO/GEO Raporu
+SEO/GEO raporları, tüm web sitesinde bulunan tüm hataların ve hataları içeren toplam sayfaların toplu sayımlarını içerir
+
+Site Tarama
+Site Taraması, sitenizi tarayan ve genel teknik SEO/GEO sorunlarını kontrol eden isteğe bağlı bir site denetim aracıdır.
+Ücretsiz başlayın
+
+Sitenizle daha fazlasını yapın
+Sitenizi yönetmenize yardımcı olan genişletilmiş özelliklerimize ve genel araçlarımıza bir göz atın
+URL Gönderimi için Wordpress Eklentisi
+WordPress için Bing URL Gönderimi Eklentisi, WordPress sitelerinden Bing dizinine URL'lerin otomatik olarak gönderilmesini sağlar.
+Daha fazla bilgi
+
+Mobil uyumlu
+Sitenizin Bing Mobile Friendliness aracıyla mobil dostu olup olmadığını kontrol edin
+Daha fazla bilgi
+
+Web yöneticisi hakkında daha fazla bilgi edinin
+Destek ekosistemimiz ve kapsamlı dokümantasyonumuzla tüm sorularınızı ele aldık.
+
+Yönergeler
+Bing Web yöneticisi yönergeleri çok çeşitli konuları kapsar ve sitenizin Bing'de dizine eklenmenize ve keşfedilmenize yardımcı olur
+Daha fazla bilgi
+
+
+API erişimi
+Bing Web Yöneticisi Uygulama Programlama Arayüzü (API), web yöneticilerinin web sitesi bilgilerine programlı olarak erişmesine olanak tanır
+Daha fazla bilgi
+
+
+Yardım Merkezi
+Web Yöneticisi Nasıl Yapılır Merkezi, araçlarımızın belirli konuları ve bölümleri hakkında size yardım ve yardım sağlar
+Daha fazla bilgi
+
+
+Destek
+Web yöneticisi araçlarında karşılaştığınız sorunlar veya sorularla destek alın
+Daha fazla bilgi
+
+
+Blog
+Blogumuzdaki en son güncellemeler ve duyurular ile iletişimde kalın
+Daha fazla bilgi
+
+
+URL Gönderimi API
+Web sitelerinin güncellenen içerik konusunda Bing'i bilgilendirmek için arayabileceği, site içeriğinizin anında taranmasına, dizine eklenmesine ve keşfedilmesine olanak tanıyan eklenti kolay API çözümü.
+Daha fazla bilgi
+
+Bizi 

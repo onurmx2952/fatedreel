@@ -1111,6 +1111,65 @@ function normalizeTeacherAssignments(){
   teachers.forEach(t=>{ t.hours=t.assignments.reduce((s,a)=>s+a.wh,0); });
 }
 
+function reconcileDistributionWithClassPlans(){
+  const byId=Object.fromEntries(teachers.map(t=>[t.id,t]));
+  const existing={};
+  const gradeSubjectTeacher={};
+  teachers.forEach(t=>{
+    (t.assignments||[]).filter(a=>a.manual).forEach(a=>{
+      if(!a.cls||!a.subj||!ALL_CLASSES.includes(a.cls)) return;
+      existing[`${a.cls}|${a.subj}`]={tid:t.id,wh:parseInt(a.wh)||0};
+      const grade=parseInt(a.cls.split('-')[0]);
+      const gkey=`${grade}|${a.subj}`;
+      if(!gradeSubjectTeacher[gkey]) gradeSubjectTeacher[gkey]=t.id;
+    });
+    t.assignments=[];
+  });
+
+  const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  let added=0;
+  let updated=0;
+
+  ALL_CLASSES.forEach(cls=>{
+    const grade=parseInt(cls.split('-')[0]);
+    (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
+      const key=`${cls}|${subj}`;
+      const old=existing[key];
+      let tid=old?.tid;
+      if(!isUsableTeacherForSubject(tid,cls,subj)) tid=gradeSubjectTeacher[`${grade}|${subj}`];
+      if(!isUsableTeacherForSubject(tid,cls,subj)) tid=pickDistributionTeacher(cls,subj,load);
+      if(!tid||!byId[tid]) return;
+      if(!old) added++;
+      if(old && (parseInt(old.wh)||0)!==(parseInt(wh)||0)) updated++;
+      byId[tid].assignments.push({cls,subj,wh:parseInt(wh)||0,manual:true});
+      if(!byId[tid].subjects.includes(subj)) byId[tid].subjects.push(subj);
+      load[tid]=(load[tid]||0)+(parseInt(wh)||0);
+    });
+  });
+
+  teachers.forEach(t=>{t.hours=(t.assignments||[]).reduce((sum,a)=>sum+(parseInt(a.wh)||0),0);});
+  trimUnavailableToTeacherLoads();
+  return {added,updated};
+}
+
+function isUsableTeacherForSubject(tid,cls,subj){
+  const teacher=teachers.find(t=>t.id===parseInt(tid));
+  if(!teacher) return false;
+  if(subj==='REH') return teacherHasClassLesson(teacher.id,cls);
+  return (teacher.subjects||[]).includes(subj) || getTeacherPool(subj).includes(teacher.id);
+}
+
+function pickDistributionTeacher(cls,subj,load={}){
+  const pool=[...new Set([
+    ...getTeacherPoolForClass(cls,subj),
+    ...teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id),
+    ...getFallbackTeacherPool(subj),
+  ])].filter(id=>teachers.some(t=>t.id===id));
+  const candidates=pool.length?pool:teachers.map(t=>t.id);
+  candidates.sort((a,b)=>(load[a]||0)-(load[b]||0) || stableTeacherRank(teachers.find(t=>t.id===a))-stableTeacherRank(teachers.find(t=>t.id===b)));
+  return candidates[0]||null;
+}
+
 function seedDefaultDistribution(){
   const byId=Object.fromEntries(teachers.map(t=>[t.id,t]));
   const prefs={};
@@ -2190,9 +2249,40 @@ function pickTeacherForSubject(subj,d,h,teacherBusy,teacherLoad){
 }
 
 function getTeacherPool(subj){
-  const ids=new Set(SUBJECT_TEACHER_POOLS[subj]||[]);
+  const ids=new Set([...(SUBJECT_TEACHER_POOLS[subj]||[]),...getFallbackTeacherPool(subj)]);
   teachers.filter(t=>(t.subjects||[]).includes(subj)).forEach(t=>ids.add(t.id));
   return [...ids];
+}
+
+function getFallbackTeacherPool(subj){
+  const key=normalizeSubjectKey(subj);
+  const pools=[];
+  if(key.includes('VATANDAS')||key.includes('YURTTAS')||key.includes('HUKUK')||key.includes('DEMOKRASI')) pools.push('SOSYAL','INK.TAR');
+  if(key.includes('TARIH')||key.includes('INKILAP')) pools.push('SOSYAL','INK.TAR');
+  if(key.includes('COGRAF')||key.includes('SOSYAL')) pools.push('SOSYAL');
+  if(key.includes('TURK')||key.includes('DIL')) pools.push('TRK');
+  if(key.includes('MAT')) pools.push('MAT');
+  if(key.includes('FEN')||key.includes('BILIM')) pools.push('FEN');
+  if(key.includes('ING')||key.includes('ENGLISH')) pools.push('ING');
+  if(key.includes('DIN')||key.includes('KURAN')||key.includes('PEYGAMBER')) pools.push('DİN');
+  if(key.includes('BEDEN')||key.includes('SPOR')) pools.push('BEDEN');
+  if(key.includes('MUZ')||key.includes('MÜZ')) pools.push('MÖZ');
+  if(key.includes('SANAT')||key.includes('GORSEL')) pools.push('SAN','GÖN');
+  if(key.includes('BILISIM')||key.includes('BİLİŞİM')||key.includes('TEKNOLOJI')) pools.push('BİL.TAR','BLÜM');
+  return [...new Set(pools.flatMap(name=>SUBJECT_TEACHER_POOLS[name]||[]))];
+}
+
+function normalizeSubjectKey(subj){
+  return String(subj||'')
+    .toLocaleUpperCase('tr')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .replace(/İ/g,'I')
+    .replace(/Ğ/g,'G')
+    .replace(/Ü/g,'U')
+    .replace(/Ş/g,'S')
+    .replace(/Ö/g,'O')
+    .replace(/Ç/g,'C');
 }
 
 function getTeacherPoolForClass(cls,subj){
@@ -2533,6 +2623,7 @@ function clearAllBlockedSlots(){
 }
 
 function assignRandomFreeDaysToHalfTeachers(){
+  teachers.forEach(t=>{teacherUnavailable[t.id]={};});
   const eligible=teachers.filter(t=>{
     const load=teacherAssignedHours(t.id);
     const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-load);
@@ -2565,24 +2656,27 @@ function assignRandomFreeDaysToHalfTeachers(){
   let lastAssigned=0;
   remaining.forEach((teacher,idx)=>{
     const hours=idx<half ? firstThreeHours() : lastThreeHours();
-    const wrote=addPatternBlockedSlots(teacher.id,hours);
+    const protectedDay=settings.days[(randomSortKey(teacher)+idx*3+1)%settings.days.length];
+    clearTeacherDayUnavailable(teacher.id,protectedDay);
+    const wrote=addPatternBlockedSlots(teacher.id,hours,protectedDay);
     if(wrote>0 && idx<half) morningAssigned++;
     if(wrote>0 && idx>=half) lastAssigned++;
   });
 
   trimUnavailableToTeacherLoads();
   renderBlockedView();
-  showAlert(`${assigned} öğretmene tam gün boşluk verildi. Kalanlardan ${morningAssigned} öğretmenin ilk 3 saati, ${lastAssigned} öğretmenin son 3 saati kapatıldı. Programı yeniden oluşturabilirsiniz.`,assigned?'ok':'warn');
+  showAlert(`${assigned} öğretmene tam gün boşluk verildi. Kalanlardan ${morningAssigned} öğretmenin ilk 3 saati, ${lastAssigned} öğretmenin son 3 saati kapatıldı. Sabah/çıkış boşluğu verilen her öğretmende haftada en az bir gün tamamen açık bırakıldı. Programı yeniden oluşturabilirsiniz.`,assigned?'ok':'warn');
   scheduleAutoSave();
 }
 
-function addPatternBlockedSlots(tid,hours){
+function addPatternBlockedSlots(tid,hours,protectedDay=null){
   if(!teacherUnavailable[tid]) teacherUnavailable[tid]={};
   const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-teacherAssignedHours(tid));
   let current=countTeacherBlockedSlots(tid);
   let wrote=0;
   const dayOrder=[...settings.days].sort((a,b)=>((a*13+tid)%17)-((b*13+tid)%17));
   for(const d of dayOrder){
+    if(d===protectedDay) continue;
     for(const h of hours){
       if(current>=maxBlocked) return wrote;
       const key=`${d}_${h}`;
@@ -2594,6 +2688,11 @@ function addPatternBlockedSlots(tid,hours){
     }
   }
   return wrote;
+}
+
+function clearTeacherDayUnavailable(tid,day){
+  if(!teacherUnavailable[tid]) teacherUnavailable[tid]={};
+  for(let h=0;h<settings.hoursPerDay;h++) delete teacherUnavailable[tid][`${day}_${h}`];
 }
 
 function firstThreeHours(){
@@ -2687,8 +2786,10 @@ function saveLessonPlans(){
   GRADES.forEach(g=>{GRADE_PLAN[g]=nextPlans[g];});
   refreshClassPlans();
   syncSubjectsFromPlans();
+  const syncResult=reconcileDistributionWithClassPlans();
   renderLessonPlans();
-  showAlert('Ders saatleri kaydedildi. Programı yeniden oluşturabilirsiniz.','ok');
+  if(document.getElementById('view-distribution').classList.contains('active')) renderDistribution();
+  showAlert(`Ders saatleri kaydedildi. ${syncResult.added} dağıtım satırı otomatik eşitlendi. Programı yeniden oluşturabilirsiniz.`,'ok');
   scheduleAutoSave();
 }
 
@@ -2717,8 +2818,10 @@ function saveLessonTextEdit(g){
   GRADE_PLAN[g]=plan;
   refreshClassPlans();
   syncSubjectsFromPlans();
+  reconcileDistributionWithClassPlans();
   closeM('emodal');
   renderLessonPlans();
+  if(document.getElementById('view-distribution').classList.contains('active')) renderDistribution();
   scheduleAutoSave();
 }
 
