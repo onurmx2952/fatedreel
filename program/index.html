@@ -26,13 +26,13 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .toolbar h2{font-size:16px;font-weight:700;flex:1}
 .tbl-wrap{overflow:auto;border-radius:10px;border:1px solid #e0e0e0;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .prog-tbl{border-collapse:collapse;font-size:11px;min-width:900px;width:100%}
-.prog-tbl th,.prog-tbl td{border:1px solid #eee;padding:4px 5px;text-align:center}
+.prog-tbl th,.prog-tbl td{border:1px solid rgba(255,255,255,.55);padding:4px 5px;text-align:center}
 .prog-tbl th{background:#f8f9fa;font-weight:600;color:#555;position:sticky;top:0;z-index:2}
 .name-col{text-align:left;font-weight:600;min-width:155px;background:#f8f9fa;position:sticky;left:0;z-index:3;border-right:2px solid #ddd;cursor:pointer;color:#2563eb}
 .name-col:hover{background:#eff6ff}
 .day-hdr{background:#eff6ff;color:#2563eb;font-weight:700}
 .cell{min-width:70px;height:40px;cursor:pointer;vertical-align:middle;transition:background .1s}
-.cell:hover{background:#dbeafe!important}
+.cell:hover{filter:brightness(1.035);box-shadow:inset 0 0 0 2px rgba(255,255,255,.45)}
 .cell-in{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;height:100%}
 .c-cls{font-weight:800;font-size:10px;color:#1f2937}
 .c-sub{font-size:10px;color:#374151}
@@ -48,13 +48,13 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .spinner{width:18px;height:18px;border-radius:50%;border:3px solid #dbeafe;border-top-color:#2563eb;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .cls-tbl{border-collapse:collapse;width:100%;min-width:600px}
-.cls-tbl th,.cls-tbl td{border:1px solid #eee;padding:0;text-align:center}
+.cls-tbl th,.cls-tbl td{border:1px solid rgba(255,255,255,.55);padding:0;text-align:center}
 .cls-tbl th{background:#f8f9fa;font-weight:600;color:#555;padding:8px 4px;position:sticky;top:0;z-index:2}
 .cls-tbl .hour-col{font-weight:700;font-size:12px;color:#555;background:#f8f9fa;width:50px;position:sticky;left:0;z-index:1}
 .cls-cell{height:52px;vertical-align:middle}
 .cls-cell.empty{color:#ccc;font-size:11px}
 .c-sub2{font-weight:800;font-size:12px;color:#1f2937}
-.c-tch{font-size:10px;color:#777;margin-top:2px}
+.c-tch{font-size:10px;color:#64748b;margin-top:2px}
 .cls-sel{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
 .cls-btn{padding:5px 13px;border-radius:20px;border:1px solid #d0d0d0;background:#fff;cursor:pointer;font-size:12px;font-weight:500;color:#555}
 .cls-btn.active{background:#2563eb;color:#fff;border-color:#2563eb}
@@ -711,36 +711,49 @@ function paletteIndex(key){
 }
 
 function lessonPalette(subj){
+  const fixed={
+    'TRK':{bg:'#d9eff8',bd:'#7db9d8'},
+    'MAT':{bg:'#ffedb8',bd:'#e2b94f'},
+    'FEN':{bg:'#ffd5d6',bd:'#e99a9d'},
+    'ING':{bg:'#dff0bd',bd:'#a9c96f'},
+    'SOSYAL':{bg:'#ead7f0',bd:'#c097cf'},
+    'BEDEN':{bg:'#cdeff0',bd:'#7cc4c8'},
+    'DİN':{bg:'#f6d7e7',bd:'#d69abd'},
+    'MÖZ':{bg:'#e8e0fb',bd:'#b7a2e8'},
+    'GÖN':{bg:'#d9f0dc',bd:'#8dc892'},
+    'BİL.TAR':{bg:'#d8eff4',bd:'#83c0cf'},
+    'TEK.TAS':{bg:'#ffe3c6',bd:'#e2aa76'},
+    'SEÇİNG':{bg:'#f7d7df',bd:'#dc9aad'},
+    'SEÇİMA':{bg:'#e0e8bd',bd:'#b5c679'},
+    'BLÜM':{bg:'#d6e5ff',bd:'#94b5e8'},
+    'REH':{bg:'#f7e5be',bd:'#d4b66e'},
+    'INK.TAR':{bg:'#eadccc',bd:'#c7a987'},
+    'SAN':{bg:'#fbd4f0',bd:'#d494c7'}
+  };
+  if(fixed[subj]) return fixed[subj];
   const colors=[
-    {bg:'#f4d8cf',bd:'#c98f82'},
-    {bg:'#f5e1b8',bd:'#c4a05f'},
-    {bg:'#dce8c8',bd:'#92a86d'},
-    {bg:'#cfe5d8',bd:'#77a78d'},
-    {bg:'#d7e3cf',bd:'#86a478'},
-    {bg:'#d9dfef',bd:'#8f9fc5'},
-    {bg:'#e5d9ee',bd:'#aa8bc1'},
-    {bg:'#efd8e4',bd:'#c28ba8'},
-    {bg:'#e7ded1',bd:'#aa9276'},
-    {bg:'#d4e1df',bd:'#7aa19b'},
-    {bg:'#ead7cc',bd:'#b98973'},
-    {bg:'#e1e0c6',bd:'#aaa669'},
-    {bg:'#d8d7ee',bd:'#8d8ac3'},
-    {bg:'#eed6d6',bd:'#bd8585'},
-    {bg:'#d4e7e8',bd:'#79a8ab'},
-    {bg:'#e7d8bd',bd:'#ad8f5f'},
-    {bg:'#d9ead3',bd:'#82a875'}
+    {bg:'#d9eff8',bd:'#7db9d8'},
+    {bg:'#ffedb8',bd:'#e2b94f'},
+    {bg:'#ffd5d6',bd:'#e99a9d'},
+    {bg:'#dff0bd',bd:'#a9c96f'},
+    {bg:'#ead7f0',bd:'#c097cf'},
+    {bg:'#cdeff0',bd:'#7cc4c8'},
+    {bg:'#f6d7e7',bd:'#d69abd'},
+    {bg:'#e8e0fb',bd:'#b7a2e8'},
+    {bg:'#d9f0dc',bd:'#8dc892'},
+    {bg:'#ffe3c6',bd:'#e2aa76'}
   ];
   return colors[paletteIndex('ders-'+subj)%colors.length];
 }
 
 function teacherBorder(tid){
-  const colors=['#a36f63','#9a7a3f','#748c55','#5d8b75','#687aa3','#8068a0','#9e6f8d','#8b7b65','#5f8b91','#8c6f99'];
+  const colors=['#76afd0','#d8b34a','#df9296','#9abd68','#bd91ca','#73bec2','#cf93b6','#aa98dd','#83c58a','#d69d69'];
   return colors[paletteIndex('ogretmen-'+tid)%colors.length];
 }
 
 function lessonStyle(subj,tid){
   const c=lessonPalette(subj);
-  return `background:${c.bg};border-left:5px solid ${teacherBorder(tid)};box-shadow:inset 0 0 0 1px rgba(31,41,55,.04)`;
+  return `background:${c.bg};border-left:5px solid ${teacherBorder(tid)};box-shadow:inset 0 0 0 1px rgba(255,255,255,.38)`;
 }
 
 function teacherStyle(tid){
