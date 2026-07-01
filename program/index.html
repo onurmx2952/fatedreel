@@ -784,7 +784,7 @@ async function generateSchedule(){
   setWorkState(true,'Program hazırlanıyor...');
   await yieldToBrowser();
   try{
-  if(document.querySelectorAll('#distribution-body .dist-row').length) saveDistribution(true,{trimUnavailable:false});
+  if(document.querySelectorAll('#distribution-body .dist-row').length&&!saveDistribution(false,{trimUnavailable:false})) return;
   const distributionValidation=validateFixedDistribution();
   if(distributionValidation.length){
     showAlert(`Ders dağıtımı sabit olduğu için program oluşturulmadı:<br>${distributionValidation.slice(0,8).join('<br>')}`,'warn');
@@ -1234,15 +1234,17 @@ function normalizeTeacherAssignments(){
     t.assignments=[];
   });
 
+  const rehOwner=new Set();
   ALL_CLASSES.forEach(cls=>{
     CLASS_PLAN[cls].forEach(({subj,wh})=>{
       const key=`${cls}|${subj}`;
       const manualTid=manual[key];
-      const manualOk=manualTid&&byId[manualTid]&&(subj!=='REH'||teacherHasClassLesson(manualTid,cls));
+      const manualOk=manualTid&&byId[manualTid]&&(subj!=='REH'||(teacherHasClassLesson(manualTid,cls)&&!rehOwner.has(manualTid)));
       if(!manualOk) return;
       const tid=manualTid;
       plannedLoad[tid]+=wh;
       byId[tid].assignments.push({cls,subj,wh,manual:true});
+      if(subj==='REH') rehOwner.add(tid);
     });
   });
   teachers.forEach(t=>{ t.hours=t.assignments.reduce((s,a)=>s+a.wh,0); });
@@ -1282,8 +1284,27 @@ function reconcileDistributionWithClassPlans(){
 function isUsableTeacherForSubject(tid,cls,subj){
   const teacher=teachers.find(t=>t.id===parseInt(tid));
   if(!teacher) return false;
-  if(subj==='REH') return teacherHasClassLesson(teacher.id,cls);
+  if(subj==='REH') return teacherHasClassLesson(teacher.id,cls)&&teacherCanTakeRehClass(teacher.id,cls);
   return (teacher.subjects||[]).includes(subj) || getTeacherPool(subj).includes(teacher.id);
+}
+
+function teacherCanTakeRehClass(tid,cls){
+  const teacher=teachers.find(t=>t.id===parseInt(tid));
+  if(!teacher) return false;
+  const rehClasses=[...new Set((teacher.assignments||[])
+    .filter(a=>a.manual&&a.subj==='REH'&&a.cls)
+    .map(a=>a.cls))];
+  return !rehClasses.length||rehClasses.includes(cls);
+}
+
+function rehAssignmentIssues(assignmentsByTeacher=null){
+  const issues=[];
+  const source=assignmentsByTeacher||teachers.map(t=>({id:t.id,name:t.name,assignments:t.assignments||[]}));
+  source.forEach(t=>{
+    const classes=[...new Set((t.assignments||[]).filter(a=>a.subj==='REH').map(a=>a.cls).filter(Boolean))];
+    if(classes.length>1) issues.push(`${t.name}: ${classes.join(', ')} rehberlik verilmiş. Bir öğretmen sadece bir sınıfın rehberliğine girebilir.`);
+  });
+  return issues;
 }
 
 function pickDistributionTeacher(cls,subj,load={}){
@@ -1291,8 +1312,9 @@ function pickDistributionTeacher(cls,subj,load={}){
     ...getTeacherPoolForClass(cls,subj),
     ...teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id),
     ...getFallbackTeacherPool(subj),
-  ])].filter(id=>teachers.some(t=>t.id===id));
-  const candidates=pool.length?pool:teachers.map(t=>t.id);
+  ])].filter(id=>teachers.some(t=>t.id===id)&&(subj!=='REH'||teacherCanTakeRehClass(id,cls)));
+  const candidates=pool.length?pool:(subj==='REH'?[]:teachers.map(t=>t.id));
+  if(!candidates.length) return null;
   candidates.sort((a,b)=>(load[a]||0)-(load[b]||0) || stableTeacherRank(teachers.find(t=>t.id===a))-stableTeacherRank(teachers.find(t=>t.id===b)));
   return candidates[0]||null;
 }
@@ -1319,18 +1341,20 @@ function seedDefaultDistribution(){
   });
 
   const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
+  const rehOwner=new Set();
   ALL_CLASSES.forEach(cls=>{
     normalizeClassPlanTo35(cls);
     (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
       const key=`${cls}|${subj}`;
-      const preferred=(prefs[key]||[]).filter(id=>byId[id]&&(subj!=='REH'||teacherHasClassLesson(id,cls)));
-      const pool=getTeacherPoolForClass(cls,subj).filter(id=>byId[id]);
+      const preferred=(prefs[key]||[]).filter(id=>byId[id]&&(subj!=='REH'||(teacherHasClassLesson(id,cls)&&!rehOwner.has(id))));
+      const pool=getTeacherPoolForClass(cls,subj).filter(id=>byId[id]&&(subj!=='REH'||!rehOwner.has(id)));
       let candidates=[...new Set([...preferred,...pool])];
-      if(!candidates.length) candidates=teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id);
+      if(!candidates.length&&subj!=='REH') candidates=teachers.filter(t=>(t.subjects||[]).includes(subj)).map(t=>t.id);
       if(!candidates.length) return;
       candidates.sort((a,b)=>(load[a]-load[b]) || (((a+cls.charCodeAt(0))%17)-((b+cls.charCodeAt(0))%17)));
       const tid=candidates[0];
       byId[tid].assignments.push({cls,subj,wh,manual:true});
+      if(subj==='REH') rehOwner.add(tid);
       if(!byId[tid].subjects.includes(subj)) byId[tid].subjects.push(subj);
       load[tid]=(load[tid]||0)+wh;
     });
@@ -3213,30 +3237,44 @@ function updateDistributionTotals(){
 }
 
 function saveDistribution(silent=false,options={}){
-  commitDistributionRows();
+  if(!commitDistributionRows(silent)) return false;
   if(options.trimUnavailable) trimUnavailableToTeacherLoads();
   if(!silent) showAlert('Ders dağıtımı kaydedildi.','ok');
   renderDistribution();
   renderTeachers();
+  return true;
 }
 
-function commitDistributionRows(){
-  teachers.forEach(t=>{t.assignments=(t.assignments||[]).filter(a=>!a.manual);});
+function commitDistributionRows(silent=false){
   const rows=Array.from(document.querySelectorAll('#distribution-body .dist-row'));
+  const draft=teachers.map(t=>({id:t.id,name:t.name,assignments:[]}));
+  const newAssignments=[];
   rows.forEach(row=>{
     const tid=parseInt(row.querySelector('.dist-teacher').value);
     const t=teachers.find(x=>x.id===tid);
     const a={cls:row.dataset.cls,subj:row.querySelector('.dist-subj').value,wh:parseInt(row.querySelector('.dist-wh').value)||1,manual:true};
-    ensureClassLesson(a.cls,a.subj,a.wh);
     if(!t) return;
+    newAssignments.push({tid,a});
+    draft.find(x=>x.id===tid).assignments.push(a);
+  });
+  const rehIssues=rehAssignmentIssues(draft);
+  if(rehIssues.length){
+    if(!silent) showAlert(`Ders dağıtımı kaydedilmedi:<br>${rehIssues.slice(0,6).join('<br>')}`,'warn');
+    return false;
+  }
+  teachers.forEach(t=>{t.assignments=(t.assignments||[]).filter(a=>!a.manual);});
+  newAssignments.forEach(({tid,a})=>{
+    const t=teachers.find(x=>x.id===tid);
+    ensureClassLesson(a.cls,a.subj,a.wh);
     t.assignments.push(a);
     if(!t.subjects.includes(a.subj)) t.subjects.push(a.subj);
   });
   teachers.forEach(t=>{t.hours=(t.assignments||[]).reduce((sum,a)=>sum+(parseInt(a.wh)||0),0);});
+  return true;
 }
 
 function validateFixedDistribution(){
-  const issues=[];
+  const issues=[...rehAssignmentIssues()];
   const byClass=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,[]]));
   ALL_CLASSES.forEach(cls=>{
     (CLASS_PLAN[cls]||[]).forEach(l=>{
@@ -3359,7 +3397,7 @@ function fillDistributionTo35(preferred={}){
 }
 
 function generateFromDistribution(){
-  saveDistribution(true,{trimUnavailable:false});
+  if(!saveDistribution(false,{trimUnavailable:false})) return;
   generateSchedule();
   renderDistribution();
 }
@@ -3407,13 +3445,27 @@ function renderTeacherQuickClassPick(id){
   const assigned=new Set((t?.assignments||[]).filter(a=>a.subj===subj).map(a=>a.cls));
   holder.innerHTML=ALL_CLASSES.map(cls=>{
     const wh=getClassSubjectHours(cls,subj);
-    const disabled=wh<=0;
+    const rehNeedsClassLesson=subj==='REH'&&(!id||!teacherHasClassLesson(id,cls));
+    const disabled=wh<=0||rehNeedsClassLesson;
     return `<label class="class-chip ${assigned.has(cls)?'on':''} ${disabled?'disabled':''}">
-      <input type="checkbox" class="quick-class-cb" value="${cls}" ${assigned.has(cls)?'checked':''} ${disabled?'disabled':''} onchange="this.closest('.class-chip').classList.toggle('on',this.checked)">
-      <span>${cls}</span><small>${disabled?'yok':wh+'s'}</small>
+      <input type="checkbox" class="quick-class-cb" value="${cls}" ${assigned.has(cls)?'checked':''} ${disabled?'disabled':''} onchange="toggleQuickClassPick(this,'${subj}')">
+      <span>${cls}</span><small>${disabled?(rehNeedsClassLesson?'dersi yok':'yok'):wh+'s'}</small>
     </label>`;
   }).join('');
 }
+
+function toggleQuickClassPick(input,subj){
+  if(subj==='REH'&&input.checked){
+    document.querySelectorAll('.quick-class-cb').forEach(cb=>{
+      if(cb!==input){
+        cb.checked=false;
+        cb.closest('.class-chip')?.classList.remove('on');
+      }
+    });
+  }
+  input.closest('.class-chip')?.classList.toggle('on',input.checked);
+}
+
 function saveT(id){
   const name=document.getElementById('f-name').value.trim(); if(!name) return;
   const subjects=Array.from(document.querySelectorAll('.f-subj-cb:checked')).map(x=>x.value);
@@ -3424,12 +3476,19 @@ function saveT(id){
   const quickSubj=document.getElementById('f-quick-subj')?.value;
   if(quickSubj&&subjects.includes(quickSubj)){
     const picked=Array.from(document.querySelectorAll('.quick-class-cb:checked')).map(x=>x.value);
+    if(quickSubj==='REH'&&picked.length>1){
+      showAlert('Bir öğretmen sadece bir sınıfın rehberlik dersine girebilir.','warn');
+      return;
+    }
     assignments=assignments.filter(a=>a.subj!==quickSubj);
     picked.forEach(cls=>{
       const wh=getClassSubjectHours(cls,quickSubj);
-      if(wh>0) assignments.push({cls,subj:quickSubj,wh,manual:true});
+      const hasClassLesson=quickSubj!=='REH'||assignments.some(a=>a.cls===cls&&a.subj!=='REH');
+      if(wh>0&&hasClassLesson) assignments.push({cls,subj:quickSubj,wh,manual:true});
     });
   }
+  const draftIssues=rehAssignmentIssues([{id:id||0,name:name,assignments}]);
+  if(draftIssues.length){showAlert(draftIssues[0],'warn');return;}
   const data={name,hours:parseInt(document.getElementById('f-hours').value)||0,
     subjects,assignments};
   if(id){Object.assign(teachers.find(x=>x.id===id),data);}
@@ -3874,7 +3933,7 @@ async function saveCloudData(silent=false,label=''){
     return;
   }
   if(!currentUser){showAlert('Önce Google ile giriş yapın.','warn');return;}
-  if(document.querySelectorAll('#distribution-body .dist-row').length) commitDistributionRows();
+  if(document.querySelectorAll('#distribution-body .dist-row').length&&!commitDistributionRows(false)) return;
   const stateText=JSON.stringify(programState());
   if(stateText===lastSavedState){
     if(!silent) showAlert('Değişiklik yok.','ok');
