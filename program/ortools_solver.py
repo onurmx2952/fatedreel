@@ -211,9 +211,8 @@ def solve_blocks_with_model(
             return {
                 "ok": False,
                 "status": solver.StatusName(status),
-                "error": "OR-Tools ayrılan sürede kesin sonuca ulaşamadı. Sistem daha geniş aramayla tekrar deneyecek.",
-                "issues": [],
-                "transient": True,
+                "error": "OR-Tools 20 saniye içinde programı oturtamadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.",
+                "issues": build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
             }
         return {
             "ok": False,

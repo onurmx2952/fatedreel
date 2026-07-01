@@ -167,8 +167,7 @@ async function handleProgramApi(context, requestUrl) {
 async function callSolverWithRetry(solverUrl, body) {
   const endpoint = solverUrl.replace(/\/+$/, '') + '/solve';
   const attempts = [
-    { timeoutMs: 70000, delayMs: 0 },
-    { timeoutMs: 95000, delayMs: 2500 }
+    { timeoutMs: 70000, delayMs: 0 }
   ];
   let lastError = null;
 

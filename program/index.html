@@ -848,9 +848,7 @@ async function generateSchedule(){
 async function solveWithOrTools(){
   const baseState=programState();
   const attempts=[
-    {label:'OR-Tools çözümleyici hazırlanıyor...',timeLimitSeconds:45,seed:1},
-    {label:'Çözüm biraz zorlandı, ikinci deneme yapılıyor...',timeLimitSeconds:75,seed:7},
-    {label:'Son kontrol: daha geniş arama ile deneniyor...',timeLimitSeconds:110,seed:19},
+    {label:'OR-Tools çözümleyici hazırlanıyor... En fazla 20 saniye denenecek.',timeLimitSeconds:20,seed:1},
   ];
   let lastResult=null;
   for(let i=0;i<attempts.length;i++){
@@ -885,8 +883,7 @@ async function solveWithOrTools(){
     lastResult.error='Solver servisi uyanamadı veya bağlantı kesildi. Birazdan tekrar deneyin; veri değiştirmenize gerek yok.';
   }
   if(String(lastResult?.status||'').toUpperCase()==='UNKNOWN'){
-    lastResult.error='Solver ayrılan sürede kesin sonuca ulaşamadı. Veri değişmediği halde farklı sonuçlar görmemeniz için öneri üretilmedi; ders dağıtımı çok sıkışık olabilir veya free solver süresi yetmemiş olabilir.';
-    lastResult.issues=[];
+    lastResult.error='OR-Tools 20 saniye içinde programı oturtamadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.';
   }
   return lastResult||{ok:false,error:'OR-Tools çözümleyiciye ulaşılamadı.'};
 }
@@ -894,10 +891,11 @@ async function solveWithOrTools(){
 function formatOrToolsFailure(result){
   const status=String(result?.status||'').toUpperCase();
   const impossible=status==='INFEASIBLE'||status==='HARD_IMPOSSIBLE';
+  const timedOut=status==='UNKNOWN';
   const base=result?.error||(impossible?'Bu veriyle program matematiksel olarak imkansız görünüyor.':'OR-Tools solver servisi bağlı değil. Cloudflare için ORTOOLS_SOLVER_URL ayarlanmalı veya lokal Python solver çalıştırılmalı.');
   const issues=Array.isArray(result?.issues)?result.issues:[];
   if(!issues.length) return h(base);
-  return `${h(base)}<br><b>${impossible?'İmkansızlık nedeni':'Öneri'}:</b><br>${issues.slice(0,8).map(x=>`• ${h(x)}`).join('<br>')}`;
+  return `${h(base)}<br><b>${impossible?'İmkansızlık nedeni':timedOut?'Boş saat önerisi':'Öneri'}:</b><br>${issues.slice(0,8).map(x=>`• ${h(x)}`).join('<br>')}`;
 }
 
 function isFinalSolverFailure(result){
