@@ -121,7 +121,7 @@ async function handleProgramApi(context, requestUrl) {
         meta: {
           hasData: Boolean(row?.data_json),
           updatedAt: row?.updated_at || null,
-          bytes: row?.data_json ? new TextEncoder().encode(row.data_json).length : 0
+          bytes: row?.data_json ? row.data_json.length : 0
         }
       });
     }

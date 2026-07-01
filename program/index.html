@@ -644,7 +644,7 @@ const DEFAULT_PROGRAM_STATE=JSON.parse(JSON.stringify(programState()));
 function showTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  el.classList.add('active');
+  if(el) el.classList.add('active');
   document.getElementById('view-'+name).classList.add('active');
   if(name==='teachers') renderTeachers();
   if(name==='class') renderClassView();
@@ -654,6 +654,11 @@ function showTab(name,el){
   if(name==='distribution') renderDistribution();
   if(name==='blocked') renderBlockedView();
   if(name==='settings') renderAccountDataInfo();
+}
+
+function activateTab(name){
+  const tab=[...document.querySelectorAll('.tab')].find(item=>(item.getAttribute('onclick')||'').includes(`'${name}'`));
+  showTab(name,tab);
 }
 
 function renderTableHeader(){
@@ -670,7 +675,7 @@ function renderTable(){
   renderTableHeader();
   let html=''; let total=0;
   teachers.forEach(t=>{
-    html+=`<tr><td class="name-col" onclick="openQA(${t.id})" title="Hızlı ata" style="${teacherStyle(t.id)}">${t.name}</td>`;
+    html+=`<tr><td class="name-col" onclick="openTeacherBlocked(${t.id})" title="Boş saat tablosunu aç" style="${teacherStyle(t.id)}">${t.name}</td>`;
     settings.days.forEach(d=>{
       for(let h=0;h<settings.hoursPerDay;h++){
         const key=`${t.id}_${d}_${h}`;
@@ -2668,6 +2673,19 @@ function renderBlockedView(){
   renderBlockedGrid();
 }
 
+function openTeacherBlocked(tid){
+  blockedTeacherId=parseInt(tid)||teachers[0]?.id||null;
+  activateTab('blocked');
+  setTimeout(()=>{
+    const sel=document.getElementById('blocked-teacher');
+    if(sel&&blockedTeacherId){
+      sel.value=String(blockedTeacherId);
+      renderBlockedGrid();
+    }
+    document.getElementById('view-blocked')?.scrollIntoView({block:'start'});
+  },0);
+}
+
 function renderBlockedGrid(){
   const sel=document.getElementById('blocked-teacher');
   blockedTeacherId=parseInt(sel.value)||teachers[0]?.id||null;
@@ -3287,7 +3305,7 @@ function renderTeachers(){
   document.getElementById('t-list').innerHTML=teachers.map(t=>`
     <div class="t-card" style="${teacherStyle(t.id)}">
       <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:3px">
-        <div class="t-nm" onclick="openQA(${t.id})">${t.name}</div>
+        <div class="t-nm" onclick="openTeacherBlocked(${t.id})">${t.name}</div>
         <div style="display:flex;gap:5px">
           <button class="btn" style="font-size:10px;padding:3px 8px" onclick="openEditT(${t.id})">Düzenle</button>
           <button class="btn danger" style="font-size:10px;padding:3px 8px" onclick="deleteT(${t.id})">Sil</button>
@@ -3499,6 +3517,18 @@ function localProgramSummary(){
   return `${teachers.length} öğretmen, ${ALL_CLASSES.length} sınıf, ${SUBJECTS.length} ders, ${assignmentCount} ders dağıtımı, ${blockedCount} boş saat kısıtı, ${filledCount} program hücresi`;
 }
 
+function programDataSummary(data){
+  if(!data||typeof data!=='object') return 'Kayıt verisi yok.';
+  const t=Array.isArray(data.teachers)?data.teachers:[];
+  const classes=Array.isArray(data.classes)?data.classes:Object.keys(data.classPlan||{});
+  const subjects=Array.isArray(data.subjects)?data.subjects:[];
+  const assignments=t.reduce((sum,item)=>sum+((item.assignments||[]).length),0);
+  const unavailable=data.teacherUnavailable||{};
+  const blocked=Object.values(unavailable).reduce((sum,map)=>sum+Object.keys(map||{}).length,0);
+  const filled=Object.keys(data.schedule||{}).length;
+  return `${t.length} öğretmen, ${classes.length} sınıf, ${subjects.length} ders, ${assignments} ders dağıtımı, ${blocked} boş saat kısıtı, ${filled} program hücresi`;
+}
+
 function formatDataBytes(bytes){
   const n=Number(bytes)||0;
   if(n<1024) return `${n} B`;
@@ -3533,16 +3563,48 @@ function renderAccountDataInfo(){
 }
 
 async function refreshAccountDataInfo(){
-  if(currentUser?.guest){renderAccountDataInfo();showAlert('Misafir modda bulut kaydı yok.','warn');return;}
-  if(!currentUser){showAlert('Önce Google ile giriş yapın.','warn');return;}
+  if(currentUser?.guest){renderAccountDataInfo();showAccountRecordsModal();return;}
+  if(!currentUser){renderAccountDataInfo();showAccountRecordsModal();return;}
+  showAccountRecordsModal(null,'Bulut kaydı kontrol ediliyor...');
   try{
     const data=await apiFetch('/api/program/data');
     cloudDataMeta=data.meta||{hasData:Boolean(data.programData),updatedAt:null,bytes:0};
     renderAccountDataInfo();
-    showAlert(cloudDataMeta.hasData?'Kayıt bilgileri güncellendi.':'Bu hesapta kayıtlı program yok.','ok');
+    showAccountRecordsModal(data);
   }catch(err){
+    showAccountRecordsModal(null,err.message);
     showAlert(err.message,'warn');
   }
+}
+
+function showAccountRecordsModal(cloudData=null,error=''){
+  document.getElementById('emodal-title').textContent='Kayıtlarım';
+  const userLine=currentUser
+    ? `${h(currentUser.guest?'Misafir kullanıcı':(currentUser.name||currentUser.email||'Kullanıcı'))}${currentUser.email&&!currentUser.guest?`<br><span style="color:#64748b">${h(currentUser.email)}</span>`:''}`
+    : 'Google ile giriş yapılmadı.';
+  const hasCloud=cloudData?.meta?.hasData ?? cloudDataMeta.hasData;
+  const updatedAt=cloudData?.meta?.updatedAt ?? cloudDataMeta.updatedAt;
+  const bytes=cloudData?.meta?.bytes ?? cloudDataMeta.bytes;
+  const cloudSummary=cloudData?.programData
+    ? programDataSummary(cloudData.programData)
+    : (currentUser?.guest?'Misafir modda bulut kaydı tutulmaz.':hasCloud?'Bulut kaydı var.':'Bulut kaydı bulunamadı.');
+  document.getElementById('emodal-body').innerHTML=`
+    <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
+      <b>Hesap</b><br>${userLine}
+    </div>
+    <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
+      <b>Bu ekrandaki kayıt</b><br>${h(localProgramSummary())}
+    </div>
+    <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
+      <b>Bulut kaydı</b><br>
+      Durum: <b>${hasCloud?'Var':'Yok'}</b><br>
+      Son kayıt: ${h(formatCloudDate(updatedAt))}<br>
+      Boyut: ${h(formatDataBytes(bytes))}<br>
+      Özet: ${h(cloudSummary)}
+    </div>
+    ${error?`<div class="alert warn">${h(error)}</div>`:''}
+    <div class="m-actions"><button class="btn" onclick="closeM('emodal')">Kapat</button></div>`;
+  document.getElementById('emodal').classList.add('open');
 }
 
 async function deleteCloudProgramData(){
