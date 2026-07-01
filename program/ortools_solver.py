@@ -95,6 +95,15 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
             "issues": distribution_errors,
         }
 
+    hard_errors = build_hard_impossibility_errors(teachers, class_plan, teacher_unavailable, days, hours_per_day)
+    if hard_errors:
+        return {
+            "ok": False,
+            "status": "hard_impossible",
+            "error": "Bu veriyle programın oturması imkansız görünüyor.",
+            "issues": hard_errors,
+        }
+
     blocks: list[Block] = []
     for cls in classes:
         for lesson in class_plan.get(cls) or []:
@@ -120,7 +129,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
     return {
         "ok": False,
         "status": strict.get("status"),
-        "error": "OR-Tools bu dağıtım için uygun program bulamadı.",
+        "error": "OR-Tools bu dağıtım için uygun program bulamadı." if strict.get("status") != "INFEASIBLE" else "Bu veriyle program matematiksel olarak imkansız görünüyor.",
         "issues": strict.get("issues") or build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
     }
 
@@ -328,6 +337,55 @@ def teacher_capacity_errors(
             needed = assigned - capacity
             errors.append(f"{teacher.get('name', tid)} öğretmenin en az {needed} saatini açın; {assigned} saat dersi var ama uygun kapasite {capacity} saat.")
     return errors
+
+
+def build_hard_impossibility_errors(
+    teachers: list[dict[str, Any]],
+    class_plan: dict[str, Any],
+    unavailable: dict[str, Any],
+    days: list[int],
+    hours_per_day: int,
+) -> list[str]:
+    errors: list[str] = []
+    expected = len(days) * hours_per_day
+    for cls, plan in class_plan.items():
+        total = sum(int(lesson.get("wh") or 0) for lesson in (plan or []))
+        if total != expected:
+            errors.append(f"{cls}: ders planı {total}/{expected} saat.")
+        for lesson in plan or []:
+            subj = str(lesson.get("subj") or "")
+            wh = int(lesson.get("wh") or 0)
+            blocks = split_blocks(wh)
+            if len(blocks) > len(days):
+                errors.append(f"{cls} {subj}: {wh} saat {len(blocks)} parçaya bölünüyor ama haftada {len(days)} gün var; aynı ders aynı gün ikinci kez gelemeyeceği için imkansız.")
+            if any(length > hours_per_day for length in blocks):
+                errors.append(f"{cls} {subj}: blok uzunluğu günlük ders saatini aşıyor.")
+
+    errors.extend(teacher_capacity_errors(teachers, unavailable, days, hours_per_day))
+    for teacher in teachers:
+        tid = int(teacher.get("id"))
+        name = teacher.get("name", tid)
+        for assignment in teacher.get("assignments") or []:
+            cls = assignment.get("cls")
+            subj = assignment.get("subj")
+            for length in split_blocks(int(assignment.get("wh") or 0)):
+                if not has_any_candidate_slot_for_block(unavailable, tid, days, hours_per_day, length):
+                    errors.append(f"{name}: {cls} {subj} için {length} saatlik blok yerleşemiyor; uygun saatlerinde ardışık {length} saat yok.")
+    return list(dict.fromkeys(errors))[:20]
+
+
+def has_any_candidate_slot_for_block(
+    unavailable: dict[str, Any],
+    tid: int,
+    days: list[int],
+    hours_per_day: int,
+    length: int,
+) -> bool:
+    for day in days:
+        for start in range(0, hours_per_day - length + 1):
+            if not blocked_hours_for_block(unavailable, tid, day, start, length):
+                return True
+    return False
 
 
 def build_infeasible_hints(

@@ -761,6 +761,11 @@ async function generateSchedule(){
     showAlert(`Ders dağıtımı sabit olduğu için program oluşturulmadı:<br>${distributionValidation.slice(0,8).join('<br>')}`,'warn');
     return;
   }
+  const hardIssues=validateHardImpossibilities();
+  if(hardIssues.length){
+    showAlert(formatHardImpossibility(hardIssues),'warn');
+    return;
+  }
   trimUnavailableToTeacherLoads();
   schedule={};
   const H=settings.hoursPerDay;
@@ -886,10 +891,12 @@ async function solveWithOrTools(){
 }
 
 function formatOrToolsFailure(result){
-  const base=result?.error||'OR-Tools solver servisi bağlı değil. Cloudflare için ORTOOLS_SOLVER_URL ayarlanmalı veya lokal Python solver çalıştırılmalı.';
+  const status=String(result?.status||'').toUpperCase();
+  const impossible=status==='INFEASIBLE'||status==='HARD_IMPOSSIBLE';
+  const base=result?.error||(impossible?'Bu veriyle program matematiksel olarak imkansız görünüyor.':'OR-Tools solver servisi bağlı değil. Cloudflare için ORTOOLS_SOLVER_URL ayarlanmalı veya lokal Python solver çalıştırılmalı.');
   const issues=Array.isArray(result?.issues)?result.issues:[];
-  if(!issues.length) return base;
-  return `${h(base)}<br><b>Öneri:</b><br>${issues.slice(0,6).map(x=>`• ${h(x)}`).join('<br>')}`;
+  if(!issues.length) return h(base);
+  return `${h(base)}<br><b>${impossible?'İmkansızlık nedeni':'Öneri'}:</b><br>${issues.slice(0,8).map(x=>`• ${h(x)}`).join('<br>')}`;
 }
 
 function isFinalSolverFailure(result){
@@ -903,6 +910,65 @@ function isFinalSolverFailure(result){
 function waitForSolverRetry(i){
   const ms=[1800,2600,3500][i]||1800;
   return new Promise(resolve=>setTimeout(resolve,ms));
+}
+
+function validateHardImpossibilities(){
+  const issues=[];
+  const totalSlots=settings.days.length*settings.hoursPerDay;
+  if(totalSlots!==35){
+    issues.push(`Haftalık tablo ${totalSlots} saat; her sınıf için 35 saat olmalı.`);
+  }
+
+  ALL_CLASSES.forEach(cls=>{
+    const plan=CLASS_PLAN[cls]||[];
+    const total=plan.reduce((sum,l)=>sum+(parseInt(l.wh)||0),0);
+    if(total!==totalSlots) issues.push(`${cls}: ders planı ${total}/${totalSlots} saat.`);
+    plan.forEach(({subj,wh})=>{
+      const blocks=splitLessonBlocks(parseInt(wh)||0);
+      if(blocks.length>settings.days.length){
+        issues.push(`${cls} ${subj}: ${wh} saat, ${blocks.length} parçaya bölünüyor ama haftada ${settings.days.length} gün var. Aynı ders aynı gün ikinci kez gelemeyeceği için imkansız.`);
+      }
+      if(blocks.some(len=>len>settings.hoursPerDay)){
+        issues.push(`${cls} ${subj}: blok uzunluğu günlük ders saatini aşıyor.`);
+      }
+    });
+  });
+
+  teachers.forEach(t=>{
+    const load=teacherAssignedHours(t.id);
+    const blocked=countTeacherBlockedSlots(t.id);
+    const capacity=totalSlots-blocked;
+    if(load>capacity){
+      issues.push(`${t.name}: ${load} saat dersi var ama boş saat kısıtlarından sonra en fazla ${capacity} saat derse girebilir. En az ${load-capacity} kırmızı saati açın veya ders yükünü azaltın.`);
+    }
+    (t.assignments||[]).forEach(a=>{
+      const blocks=splitLessonBlocks(parseInt(a.wh)||0);
+      blocks.forEach(len=>{
+        if(!hasAnyCandidateSlotForBlock(t.id,len)){
+          issues.push(`${t.name}: ${a.cls} ${a.subj} için ${len} saatlik blok yerleşemiyor. Bu öğretmenin uygun saatlerinde ardışık ${len} saat yok.`);
+        }
+      });
+    });
+  });
+
+  return [...new Set(issues)].slice(0,20);
+}
+
+function hasAnyCandidateSlotForBlock(tid,len){
+  for(const d of settings.days){
+    for(let start=0;start<=settings.hoursPerDay-len;start++){
+      let ok=true;
+      for(let x=0;x<len;x++){
+        if(isTeacherUnavailable(tid,d,start+x)){ok=false;break;}
+      }
+      if(ok) return true;
+    }
+  }
+  return false;
+}
+
+function formatHardImpossibility(issues){
+  return `Program oluşturulmadı: Bu veriyle programın oturması imkansız görünüyor.<br><b>İmkansızlık nedeni:</b><br>${issues.slice(0,10).map(x=>`• ${h(x)}`).join('<br>')}`;
 }
 
 function yieldToBrowser(){
