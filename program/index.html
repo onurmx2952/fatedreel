@@ -35,7 +35,7 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .cell:hover{filter:brightness(1.035);box-shadow:inset 0 0 0 2px rgba(255,255,255,.45)}
 .cell-in{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;height:100%}
 .c-cls{font-weight:800;font-size:10px;color:#1f2937}
-.c-sub{font-size:10px;color:#374151}
+.c-sub{font-size:10px;color:var(--lesson-fg,#374151);font-weight:800}
 .conflict{background:#fef2f2!important}
 .conflict .c-cls,.conflict .c-sub{color:#dc2626!important}
 .empty-cell{color:#ddd;font-size:11px}
@@ -53,7 +53,7 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .cls-tbl .hour-col{font-weight:700;font-size:12px;color:#555;background:#f8f9fa;width:50px;position:sticky;left:0;z-index:1}
 .cls-cell{height:52px;vertical-align:middle}
 .cls-cell.empty{color:#ccc;font-size:11px}
-.c-sub2{font-weight:800;font-size:12px;color:#1f2937}
+.c-sub2{font-weight:800;font-size:12px;color:var(--lesson-fg,#1f2937)}
 .c-tch{font-size:10px;color:#64748b;margin-top:2px}
 .cls-sel{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
 .cls-btn{padding:5px 13px;border-radius:20px;border:1px solid #d0d0d0;background:#fff;cursor:pointer;font-size:12px;font-weight:500;color:#555}
@@ -712,36 +712,36 @@ function paletteIndex(key){
 
 function lessonPalette(subj){
   const fixed={
-    'TRK':{bg:'#d9eff8',bd:'#7db9d8'},
-    'MAT':{bg:'#ffedb8',bd:'#e2b94f'},
-    'FEN':{bg:'#ffd5d6',bd:'#e99a9d'},
-    'ING':{bg:'#dff0bd',bd:'#a9c96f'},
-    'SOSYAL':{bg:'#ead7f0',bd:'#c097cf'},
-    'BEDEN':{bg:'#cdeff0',bd:'#7cc4c8'},
-    'DİN':{bg:'#f6d7e7',bd:'#d69abd'},
-    'MÖZ':{bg:'#e8e0fb',bd:'#b7a2e8'},
-    'GÖN':{bg:'#d9f0dc',bd:'#8dc892'},
-    'BİL.TAR':{bg:'#d8eff4',bd:'#83c0cf'},
-    'TEK.TAS':{bg:'#ffe3c6',bd:'#e2aa76'},
-    'SEÇİNG':{bg:'#f7d7df',bd:'#dc9aad'},
-    'SEÇİMA':{bg:'#e0e8bd',bd:'#b5c679'},
-    'BLÜM':{bg:'#d6e5ff',bd:'#94b5e8'},
-    'REH':{bg:'#f7e5be',bd:'#d4b66e'},
-    'INK.TAR':{bg:'#eadccc',bd:'#c7a987'},
-    'SAN':{bg:'#fbd4f0',bd:'#d494c7'}
+    'TRK':{bg:'#cfeeff',bd:'#2f95c8',fg:'#0b5f86'},
+    'MAT':{bg:'#ffe89a',bd:'#d39b00',fg:'#815d00'},
+    'FEN':{bg:'#ffc9c5',bd:'#df615a',fg:'#9f302b'},
+    'ING':{bg:'#d8f2a6',bd:'#78ad26',fg:'#47720e'},
+    'SOSYAL':{bg:'#e7d2ff',bd:'#9b63d3',fg:'#67309d'},
+    'BEDEN':{bg:'#bdeeee',bd:'#2ea5a5',fg:'#117071'},
+    'DİN':{bg:'#ffd8ad',bd:'#df8330',fg:'#955017'},
+    'MÖZ':{bg:'#d8d1ff',bd:'#7865d8',fg:'#4332a0'},
+    'GÖN':{bg:'#c9efcf',bd:'#42a653',fg:'#237032'},
+    'BİL.TAR':{bg:'#c8dcff',bd:'#4f7ed8',fg:'#274f9f'},
+    'TEK.TAS':{bg:'#ffd0a3',bd:'#d06f1d',fg:'#8a3f08'},
+    'SEÇİNG':{bg:'#c8f3df',bd:'#38a974',fg:'#157046'},
+    'SEÇİMA':{bg:'#eef0a8',bd:'#a1a832',fg:'#666b12'},
+    'BLÜM':{bg:'#c9d8ff',bd:'#5579dc',fg:'#294ba3'},
+    'REH':{bg:'#f6dfb2',bd:'#c58d2b',fg:'#7e5712'},
+    'INK.TAR':{bg:'#e5d0bd',bd:'#a87346',fg:'#70451f'},
+    'SAN':{bg:'#ffc7e8',bd:'#d5509f',fg:'#96336d'}
   };
   if(fixed[subj]) return fixed[subj];
   const colors=[
-    {bg:'#d9eff8',bd:'#7db9d8'},
-    {bg:'#ffedb8',bd:'#e2b94f'},
-    {bg:'#ffd5d6',bd:'#e99a9d'},
-    {bg:'#dff0bd',bd:'#a9c96f'},
-    {bg:'#ead7f0',bd:'#c097cf'},
-    {bg:'#cdeff0',bd:'#7cc4c8'},
-    {bg:'#f6d7e7',bd:'#d69abd'},
-    {bg:'#e8e0fb',bd:'#b7a2e8'},
-    {bg:'#d9f0dc',bd:'#8dc892'},
-    {bg:'#ffe3c6',bd:'#e2aa76'}
+    {bg:'#cfeeff',bd:'#2f95c8',fg:'#0b5f86'},
+    {bg:'#ffe89a',bd:'#d39b00',fg:'#815d00'},
+    {bg:'#ffc9c5',bd:'#df615a',fg:'#9f302b'},
+    {bg:'#d8f2a6',bd:'#78ad26',fg:'#47720e'},
+    {bg:'#e7d2ff',bd:'#9b63d3',fg:'#67309d'},
+    {bg:'#bdeeee',bd:'#2ea5a5',fg:'#117071'},
+    {bg:'#ffd8ad',bd:'#df8330',fg:'#955017'},
+    {bg:'#d8d1ff',bd:'#7865d8',fg:'#4332a0'},
+    {bg:'#c8f3df',bd:'#38a974',fg:'#157046'},
+    {bg:'#ffc7e8',bd:'#d5509f',fg:'#96336d'}
   ];
   return colors[paletteIndex('ders-'+subj)%colors.length];
 }
@@ -753,7 +753,7 @@ function teacherBorder(tid){
 
 function lessonStyle(subj,tid){
   const c=lessonPalette(subj);
-  return `background:${c.bg};border-left:5px solid ${teacherBorder(tid)};box-shadow:inset 0 0 0 1px rgba(255,255,255,.38)`;
+  return `background:${c.bg};border-left:7px solid ${c.bd};--lesson-fg:${c.fg||'#1f2937'};box-shadow:inset 0 0 0 1px rgba(255,255,255,.42)`;
 }
 
 function teacherStyle(tid){
