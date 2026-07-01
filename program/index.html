@@ -1112,38 +1112,29 @@ function normalizeTeacherAssignments(){
 }
 
 function reconcileDistributionWithClassPlans(){
-  const byId=Object.fromEntries(teachers.map(t=>[t.id,t]));
-  const existing={};
-  const gradeSubjectTeacher={};
-  teachers.forEach(t=>{
-    (t.assignments||[]).filter(a=>a.manual).forEach(a=>{
-      if(!a.cls||!a.subj||!ALL_CLASSES.includes(a.cls)) return;
-      existing[`${a.cls}|${a.subj}`]={tid:t.id,wh:parseInt(a.wh)||0};
-      const grade=parseInt(a.cls.split('-')[0]);
-      const gkey=`${grade}|${a.subj}`;
-      if(!gradeSubjectTeacher[gkey]) gradeSubjectTeacher[gkey]=t.id;
-    });
-    t.assignments=[];
+  const validLessonKeys=new Set();
+  ALL_CLASSES.forEach(cls=>{
+    (CLASS_PLAN[cls]||[]).forEach(({subj})=>validLessonKeys.add(`${cls}|${subj}`));
   });
-
-  const load=Object.fromEntries(teachers.map(t=>[t.id,0]));
   let added=0;
   let updated=0;
-
+  teachers.forEach(t=>{
+    t.assignments=(t.assignments||[]).filter(a=>{
+      if(!a.manual) return true;
+      if(!a.cls||!a.subj||!ALL_CLASSES.includes(a.cls)) return false;
+      if(!validLessonKeys.has(`${a.cls}|${a.subj}`)) return false;
+      const wh=getClassSubjectHours(a.cls,a.subj);
+      if(wh>0 && (parseInt(a.wh)||0)!==wh){
+        a.wh=wh;
+        updated++;
+      }
+      return true;
+    });
+  });
   ALL_CLASSES.forEach(cls=>{
-    const grade=parseInt(cls.split('-')[0]);
     (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
-      const key=`${cls}|${subj}`;
-      const old=existing[key];
-      let tid=old?.tid;
-      if(!isUsableTeacherForSubject(tid,cls,subj)) tid=gradeSubjectTeacher[`${grade}|${subj}`];
-      if(!isUsableTeacherForSubject(tid,cls,subj)) tid=pickDistributionTeacher(cls,subj,load);
-      if(!tid||!byId[tid]) return;
-      if(!old) added++;
-      if(old && (parseInt(old.wh)||0)!==(parseInt(wh)||0)) updated++;
-      byId[tid].assignments.push({cls,subj,wh:parseInt(wh)||0,manual:true});
-      if(!byId[tid].subjects.includes(subj)) byId[tid].subjects.push(subj);
-      load[tid]=(load[tid]||0)+(parseInt(wh)||0);
+      const exists=teachers.some(t=>(t.assignments||[]).some(a=>a.manual&&a.cls===cls&&a.subj===subj));
+      if(!exists && parseInt(wh)>0) added++;
     });
   });
 
@@ -2789,7 +2780,7 @@ function saveLessonPlans(){
   const syncResult=reconcileDistributionWithClassPlans();
   renderLessonPlans();
   if(document.getElementById('view-distribution').classList.contains('active')) renderDistribution();
-  showAlert(`Ders saatleri kaydedildi. ${syncResult.added} dağıtım satırı otomatik eşitlendi. Programı yeniden oluşturabilirsiniz.`,'ok');
+  showAlert(`Ders saatleri kaydedildi. ${syncResult.added} ders dağıtım satırı öğretmen seçimi bekliyor. Programı yeniden oluşturmadan önce Ders Dağıtımı ekranından öğretmenleri seçin.`,'ok');
   scheduleAutoSave();
 }
 
@@ -2935,10 +2926,17 @@ function deleteSubject(subj){
 function renderDistribution(){
   if(!ALL_CLASSES.includes(selectedDistributionClass)) selectedDistributionClass=ALL_CLASSES[0];
   const byClass=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,[]]));
+  const seen=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,new Set()]));
   teachers.forEach(t=>(t.assignments||[]).filter(a=>a.manual).forEach(a=>{
     if(!byClass[a.cls]) byClass[a.cls]=[];
     byClass[a.cls].push({tid:t.id,...a});
+    if(seen[a.cls]) seen[a.cls].add(a.subj);
   }));
+  ALL_CLASSES.forEach(cls=>{
+    (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
+      if(!seen[cls].has(subj)) byClass[cls].push({tid:'',cls,subj,wh,unassigned:true});
+    });
+  });
   const totals=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,(byClass[cls]||[]).reduce((sum,r)=>sum+(parseInt(r.wh)||0),0)]));
 
   document.getElementById('distribution-tabs').innerHTML=ALL_CLASSES.map(cls=>{
@@ -2960,7 +2958,8 @@ function renderDistribution(){
 }
 
 function distributionRowHtml(tid=teachers[0]?.id,cls=ALL_CLASSES[0],subj=SUBJECTS[0],wh=1){
-  const teacherOpts=teachers.map(t=>`<option value="${t.id}"${t.id===tid?' selected':''}>${t.name}</option>`).join('');
+  tid=tid===''?'':parseInt(tid);
+  const teacherOpts=`<option value=""${tid===''?' selected':''}>Öğretmen seçin</option>`+teachers.map(t=>`<option value="${t.id}"${t.id===tid?' selected':''}>${t.name}</option>`).join('');
   const subjList=SUBJECTS.includes(subj)?SUBJECTS:[subj,...SUBJECTS].filter(Boolean);
   const subjOpts=subjList.map(s=>`<option value="${s}"${s===subj?' selected':''}>${s}</option>`).join('');
   return `<div class="dist-row dist-grid" data-cls="${cls}">
@@ -2980,7 +2979,7 @@ function selectDistributionClass(cls){
 function addDistributionRow(){
   const panel=document.querySelector(`.dist-class-panel[data-cls="${selectedDistributionClass}"] .dist-rows`);
   if(panel){
-    panel.insertAdjacentHTML('beforeend',distributionRowHtml(teachers[0]?.id,selectedDistributionClass,SUBJECTS[0]||'',1));
+    panel.insertAdjacentHTML('beforeend',distributionRowHtml('',selectedDistributionClass,SUBJECTS[0]||'',1));
     updateDistributionTotals();
   }
 }
@@ -3015,9 +3014,9 @@ function commitDistributionRows(){
   rows.forEach(row=>{
     const tid=parseInt(row.querySelector('.dist-teacher').value);
     const t=teachers.find(x=>x.id===tid);
-    if(!t) return;
     const a={cls:row.dataset.cls,subj:row.querySelector('.dist-subj').value,wh:parseInt(row.querySelector('.dist-wh').value)||1,manual:true};
     ensureClassLesson(a.cls,a.subj,a.wh);
+    if(!t) return;
     t.assignments.push(a);
     if(!t.subjects.includes(a.subj)) t.subjects.push(a.subj);
   });
@@ -3027,10 +3026,23 @@ function commitDistributionRows(){
 function validateFixedDistribution(){
   const issues=[];
   const byClass=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,[]]));
+  ALL_CLASSES.forEach(cls=>{
+    (CLASS_PLAN[cls]||[]).forEach(l=>{
+      byClass[cls].push({teacher:null,cls,subj:l.subj,wh:parseInt(l.wh)||0,expected:true});
+    });
+  });
   teachers.forEach(t=>{
     (t.assignments||[]).filter(a=>a.manual).forEach(a=>{
       if(!a.cls||!ALL_CLASSES.includes(a.cls)) return;
-      byClass[a.cls].push({teacher:t,...a,wh:parseInt(a.wh)||0});
+      const rows=byClass[a.cls]||[];
+      const existing=rows.find(r=>r.expected&&r.subj===a.subj);
+      if(existing){
+        existing.teacher=t;
+        existing.wh=parseInt(a.wh)||0;
+        existing.expected=false;
+      } else {
+        rows.push({teacher:t,...a,wh:parseInt(a.wh)||0});
+      }
     });
   });
 
@@ -3041,7 +3053,7 @@ function validateFixedDistribution(){
     const seen={};
     rows.forEach(r=>{
       if(!r.subj) issues.push(`${cls}: ders adı boş satır var.`);
-      if(!r.teacher) issues.push(`${cls} ${r.subj}: öğretmen yok.`);
+      if(!r.teacher) issues.push(`${cls} ${r.subj}: öğretmen seçilmemiş.`);
       if(r.wh<=0) issues.push(`${cls} ${r.subj}: saat sayısı geçersiz.`);
       const key=`${cls}|${r.subj}`;
       seen[key]=(seen[key]||0)+1;
@@ -3194,21 +3206,27 @@ function saveT(id){
   const name=document.getElementById('f-name').value.trim(); if(!name) return;
   const subjects=Array.from(document.querySelectorAll('.f-subj-cb:checked')).map(x=>x.value);
   const old=teachers.find(x=>x.id===id);
-  let assignments=old?(old.assignments||[]).filter(a=>a.manual):[];
+  const oldSubjects=new Set(old?.subjects||[]);
+  const removedSubjects=[...oldSubjects].filter(subj=>!subjects.includes(subj));
+  let assignments=old?(old.assignments||[]).filter(a=>a.manual&&subjects.includes(a.subj)):[];
   const quickSubj=document.getElementById('f-quick-subj')?.value;
-  if(quickSubj){
+  if(quickSubj&&subjects.includes(quickSubj)){
     const picked=Array.from(document.querySelectorAll('.quick-class-cb:checked')).map(x=>x.value);
     assignments=assignments.filter(a=>a.subj!==quickSubj);
     picked.forEach(cls=>{
       const wh=getClassSubjectHours(cls,quickSubj);
       if(wh>0) assignments.push({cls,subj:quickSubj,wh,manual:true});
     });
-    if(picked.length&&!subjects.includes(quickSubj)) subjects.push(quickSubj);
   }
   const data={name,hours:parseInt(document.getElementById('f-hours').value)||0,
     subjects,assignments};
   if(id){Object.assign(teachers.find(x=>x.id===id),data);}
   else{data.id=Math.max(0,...teachers.map(t=>t.id))+1;teachers.push(data);}
+  if(id&&removedSubjects.length){
+    Object.keys(schedule).forEach(key=>{
+      if(key.startsWith(id+'_')&&removedSubjects.includes(schedule[key]?.subj)) delete schedule[key];
+    });
+  }
   closeM('tmodal'); renderTeachers(); renderDistribution(); scheduleAutoSave();
 }
 function deleteT(id){
@@ -3276,7 +3294,7 @@ function applyProgramState(data){
   if(data.settings) settings=data.settings;
   migrateReligionTwoHours();
   if(!hasSavedClassPlan) refreshClassPlans();
-  if(!hasManualDistribution()||distributionOverCapacity()||distributionClassHoursInvalid()) seedDefaultDistribution();
+  if(!hasManualDistribution()||distributionOverCapacity()) seedDefaultDistribution();
   if(!hasSavedUnavailable) seedDefaultTeacherUnavailable(true);
   else trimUnavailableToTeacherLoads();
   renderTable();

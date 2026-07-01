@@ -12,3 +12,45 @@ Output:
 IndexNow status: 200
 Submitted URLs: 3124
 
+
+Browser/CDP check:
+CDP http://127.0.0.1:9222/json/version BLOCKED: Uzak sunucuya bağlanılamıyor
+Chrome extension browser: AVAILABLE; profileName=onur; browser surfaces included extension and iab.
+
+Google Search Console:
+Candidate/attempt URL: https://fatedreel.com/tt0250258
+Existing direct inspection URL with id=https%3A%2F%2Ffatedreel.com%2Ftt0250258 loaded Google 404: "İstenen URL bu sunucuda bulunamadı."
+Authenticated property UI was available in Chrome on URL Denetimi page for https://fatedreel.com/tt0250258.
+Inspection state before request: URL Google'da yok; Sayfa dizine eklenmedi: URL Google tarafından bilinmiyor; request indexing control visible.
+Clicked visible request control; Search Console started live eligibility test: "Yayınlanmış URL'nin dizine eklenebilir olup olmadığını test etme".
+Google result: BLOCKED by quota. Exact UI text: "Kota Aşıldı" / "Maalesef günlük kotanızı aştığınız için bu isteği işleyemedik. Lütfen bunu yarın tekrar göndermeyi deneyin."
+Google quota dialog close button count: 1; closed successfully.
+Google confirmed indexing requests this run: 0 (quota blocker after attempt).
+Google last attempted URL: https://fatedreel.com/tt0250258
+
+Bing Webmaster Tools:
+Loaded URL: https://www.bing.com/webmasters/about?siteUrl=https%3A%2F%2Ffatedreel.com&from=home
+Title: Bing Webmaster Tools
+Status: BLOCKED unauthenticated/public page; observed text: "Oturum aç" and "Başla".
+Bing UI requests this run: 0. IndexNow API submission already succeeded.
+
+Yandex Webmaster:
+Loaded URL: https://webmaster.yandex.com/site/https:fatedreel.com:443/indexing/reindex/
+Status before submit: authenticated reindex UI available; textarea visible; Send disabled until URLs filled; no daily-limit text before fill.
+Candidate source: sitemap.xml after previous Yandex last attempted https://fatedreel.com/tt0398883.
+Yandex submitted this run: 150 URLs.
+Yandex first submitted URL: https://fatedreel.com/tt0401085
+Yandex last submitted URL: https://fatedreel.com/tt0809951
+Yandex result: rows showed In queue at 07/01/2026 8:16 AM and exact quota text "You have reached your daily limit of added URLs."
+
+Site edits: none.
+Technical indexing blocker found: none.
+
+Final summary:
+Son 6 saatte calisma: VAR
+IndexNow: command "python .\submit_indexnow.py" exit 0; IndexNow status 200; Submitted URLs 3124; failures none observed.
+Google: 0 confirmed indexing requests; last attempted https://fatedreel.com/tt0250258; quota BLOCKED with "Kota Aşıldı".
+Bing: 0 UI requests; BLOCKED unauthenticated/public page with "Oturum aç" / "Başla"; IndexNow submitted.
+Yandex: 150 confirmed reindex submissions queued; first https://fatedreel.com/tt0401085; last https://fatedreel.com/tt0809951; daily limit reached.
+Run finished: 2026-07-01T08:17:58.4604312+03:00
+Log file path: C:\Users\aa\Documents\github\fatedreel\indexing-run-2026-07-01-080754.log
