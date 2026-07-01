@@ -2708,11 +2708,14 @@ function renderTeacherBlockedModal(tid){
   days.forEach(d=>head+=`<th class="day-hdr">${DAYS[d]}</th>`);
   head+='</tr>';
   let body='';
-  for(let h=0;h<H;h++){
-    body+=`<tr><td class="hour-col" style="text-align:center;padding:8px 4px">${h+1}</td>`;
+  for(let hour=0;hour<H;hour++){
+    body+=`<tr><td class="hour-col" style="text-align:center;padding:8px 4px">${hour+1}</td>`;
     days.forEach(d=>{
-      const blocked=isTeacherUnavailable(teacher.id,d,h);
-      body+=`<td class="block-slot ${blocked?'blocked':'free'}" onclick="toggleTeacherUnavailableFromModal(${teacher.id},${d},${h})">${blocked?'Ders yazılmaz':'Uygun'}</td>`;
+      const blocked=isTeacherUnavailable(teacher.id,d,hour);
+      const cell=schedule[`${teacher.id}_${d}_${hour}`];
+      const label=blocked?'Ders yazılmaz':'Uygun';
+      const assignment=cell?`<div style="font-size:10px;margin-top:3px;color:#334155;font-weight:800">${h(cell.cls)} ${h(cell.subj||'')}</div>`:'';
+      body+=`<td class="block-slot ${blocked?'blocked':'free'}" onclick="toggleTeacherUnavailableFromModal(${teacher.id},${d},${hour})"><div>${label}</div>${assignment}</td>`;
     });
     body+='</tr>';
   }
@@ -2725,7 +2728,7 @@ function renderTeacherBlockedModal(tid){
       <table class="cls-tbl"><thead>${head}</thead><tbody>${body}</tbody></table>
     </div>
     <div class="cls-summary" style="border:1px solid #eee;border-top:0;border-radius:0 0 10px 10px;margin-bottom:12px">
-      Yeşil: ders yazılabilir. Kırmızı: o öğretmene o saatte ders yazılmaz.
+      Yeşil: ders yazılabilir. Kırmızı: o öğretmene o saatte ders yazılmaz. Program oluşturulduysa kutunun içinde atanan sınıf ve ders de görünür.
     </div>
     <div class="m-actions">
       <button class="btn danger" onclick="clearBlockedForTeacherFromModal(${teacher.id})">Bu öğretmeni temizle</button>
