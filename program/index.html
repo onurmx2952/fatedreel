@@ -755,7 +755,7 @@ async function generateSchedule(){
   setWorkState(true,'Program hazırlanıyor...');
   await yieldToBrowser();
   try{
-  if(document.querySelectorAll('#distribution-body .dist-row').length) saveDistribution(true);
+  if(document.querySelectorAll('#distribution-body .dist-row').length) saveDistribution(true,{trimUnavailable:false});
   const distributionValidation=validateFixedDistribution();
   if(distributionValidation.length){
     showAlert(`Ders dağıtımı sabit olduğu için program oluşturulmadı:<br>${distributionValidation.slice(0,8).join('<br>')}`,'warn');
@@ -766,7 +766,6 @@ async function generateSchedule(){
     showAlert(formatHardImpossibility(hardIssues),'warn');
     return;
   }
-  trimUnavailableToTeacherLoads();
   schedule={};
   const H=settings.hoursPerDay;
   const days=settings.days;
@@ -872,9 +871,11 @@ async function solveWithOrTools(){
         return {ok:true,schedule:res.schedule,adjustments:res.adjustments||[],stats:res.stats||{},attempt:i+1};
       }
       lastResult={ok:false,error:res?.error||'OR-Tools çözümleyici geçerli sonuç döndürmedi.',issues:res?.issues||[],status:res?.status,attempt:i+1};
+      if(res?.transient) break;
       if(isFinalSolverFailure(lastResult)) break;
     }catch(error){
       lastResult={ok:false,error:error.message||'OR-Tools çözümleyiciye ulaşılamadı.',issues:[],network:true,attempt:i+1};
+      break;
     }
     if(i<attempts.length-1){
       await waitForSolverRetry(i);
@@ -901,7 +902,7 @@ function formatOrToolsFailure(result){
 
 function isFinalSolverFailure(result){
   const status=String(result?.status||'').toUpperCase();
-  if(status==='INVALID_DISTRIBUTION'||status==='NO_CANDIDATE') return true;
+  if(['INVALID_DISTRIBUTION','NO_CANDIDATE','HARD_IMPOSSIBLE','INFEASIBLE'].includes(status)) return true;
   const msg=String(result?.error||'').toLowerCase();
   if(msg.includes('ders dağıtımı')&&msg.includes('düzeltilmeli')) return true;
   return false;
@@ -1248,7 +1249,6 @@ function reconcileDistributionWithClassPlans(){
   });
 
   teachers.forEach(t=>{t.hours=(t.assignments||[]).reduce((sum,a)=>sum+(parseInt(a.wh)||0),0);});
-  trimUnavailableToTeacherLoads();
   return {added,updated};
 }
 
@@ -2809,7 +2809,7 @@ function randomSortKey(teacher){
 }
 
 function isTeacherUnavailable(tid,d,h){
-  return !!(teacherUnavailable[tid]&&teacherUnavailable[tid][`${d}_${h}`]);
+  return !!getTeacherUnavailableMap(tid)[`${d}_${h}`];
 }
 
 function teacherAssignedHours(tid){
@@ -2819,7 +2819,7 @@ function teacherAssignedHours(tid){
 }
 
 function countTeacherBlockedSlots(tid){
-  const blocked=teacherUnavailable[tid]||{};
+  const blocked=getTeacherUnavailableMap(tid);
   return settings.days.reduce((sum,d)=>{
     let n=0;
     for(let h=0;h<settings.hoursPerDay;h++) if(blocked[`${d}_${h}`]) n++;
@@ -2827,17 +2827,30 @@ function countTeacherBlockedSlots(tid){
   },0);
 }
 
+function getTeacherUnavailableMap(tid){
+  return teacherUnavailable[tid]||teacherUnavailable[String(tid)]||{};
+}
+
+function ensureTeacherUnavailableMap(tid){
+  if(!teacherUnavailable[tid]&&teacherUnavailable[String(tid)]){
+    teacherUnavailable[tid]=teacherUnavailable[String(tid)];
+  }
+  if(!teacherUnavailable[tid]) teacherUnavailable[tid]={};
+  return teacherUnavailable[tid];
+}
+
 function trimUnavailableToTeacherLoads(){
   teachers.forEach(t=>{
     const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-teacherAssignedHours(t.id));
-    const validKeys=Object.keys(teacherUnavailable[t.id]||{}).filter(key=>{
+    const blocked=ensureTeacherUnavailableMap(t.id);
+    const validKeys=Object.keys(blocked).filter(key=>{
       const [d,h]=key.split('_').map(Number);
       return settings.days.includes(d)&&h>=0&&h<settings.hoursPerDay;
     });
     if(validKeys.length<=maxBlocked) return;
     const keep=new Set(validKeys.slice(0,maxBlocked));
-    Object.keys(teacherUnavailable[t.id]||{}).forEach(key=>{
-      if(!keep.has(key)) delete teacherUnavailable[t.id][key];
+    Object.keys(blocked).forEach(key=>{
+      if(!keep.has(key)) delete blocked[key];
     });
   });
 }
@@ -3109,9 +3122,9 @@ function updateDistributionTotals(){
   });
 }
 
-function saveDistribution(silent=false){
+function saveDistribution(silent=false,options={}){
   commitDistributionRows();
-  trimUnavailableToTeacherLoads();
+  if(options.trimUnavailable) trimUnavailableToTeacherLoads();
   if(!silent) showAlert('Ders dağıtımı kaydedildi.','ok');
   renderDistribution();
   renderTeachers();
@@ -3256,7 +3269,7 @@ function fillDistributionTo35(preferred={}){
 }
 
 function generateFromDistribution(){
-  saveDistribution(true);
+  saveDistribution(true,{trimUnavailable:false});
   generateSchedule();
   renderDistribution();
 }
@@ -3405,7 +3418,6 @@ function applyProgramState(data){
   if(!hasSavedClassPlan) refreshClassPlans();
   if(!hasManualDistribution()||distributionOverCapacity()) seedDefaultDistribution();
   if(!hasSavedUnavailable) seedDefaultTeacherUnavailable(true);
-  else trimUnavailableToTeacherLoads();
   renderTable();
   renderTeachers();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
