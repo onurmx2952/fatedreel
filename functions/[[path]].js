@@ -132,6 +132,7 @@ async function handleProgramApi(context, requestUrl) {
       const user = await requireProgramUser(context);
       const body = await readJson(request);
       const programData = body.programData;
+      const dataJson = JSON.stringify(programData);
       if (!programData || typeof programData !== 'object') {
         return jsonResponse({ error: 'Kaydedilecek program verisi bulunamadı.' }, 400);
       }
@@ -142,7 +143,22 @@ async function handleProgramApi(context, requestUrl) {
         ON CONFLICT(user_id) DO UPDATE SET
           data_json = excluded.data_json,
           updated_at = CURRENT_TIMESTAMP
-      `).bind(user.id, JSON.stringify(programData)).run();
+      `).bind(user.id, dataJson).run();
+
+      const lastVersion = await context.env.PROGRAM_DB.prepare(
+        'SELECT data_json FROM program_data_versions WHERE user_id = ? ORDER BY id DESC LIMIT 1'
+      ).bind(user.id).first();
+      if (lastVersion?.data_json !== dataJson) {
+        await context.env.PROGRAM_DB.prepare(
+          'INSERT INTO program_data_versions (user_id, data_json, label, created_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)'
+        ).bind(user.id, dataJson, body.label || null).run();
+        await context.env.PROGRAM_DB.prepare(`
+          DELETE FROM program_data_versions
+          WHERE user_id = ? AND id NOT IN (
+            SELECT id FROM program_data_versions WHERE user_id = ? ORDER BY id DESC LIMIT 25
+          )
+        `).bind(user.id, user.id).run();
+      }
 
       const row = await context.env.PROGRAM_DB.prepare(
         'SELECT updated_at FROM program_data WHERE user_id = ?'
@@ -151,12 +167,52 @@ async function handleProgramApi(context, requestUrl) {
       return jsonResponse({ ok: true, updatedAt: row?.updated_at || null });
     }
 
+    if (path === '/api/program/data/versions' && request.method === 'GET') {
+      requireProgramDb(context);
+      await ensureProgramSchema(context);
+      const user = await requireProgramUser(context);
+      const rows = await context.env.PROGRAM_DB.prepare(`
+        SELECT id, label, created_at, length(data_json) AS bytes
+        FROM program_data_versions
+        WHERE user_id = ?
+        ORDER BY id DESC
+        LIMIT 25
+      `).bind(user.id).all();
+
+      return jsonResponse({ versions: rows.results || [] });
+    }
+
+    const versionMatch = path.match(/^\/api\/program\/data\/versions\/(\d+)$/);
+    if (versionMatch && request.method === 'GET') {
+      requireProgramDb(context);
+      await ensureProgramSchema(context);
+      const user = await requireProgramUser(context);
+      const row = await context.env.PROGRAM_DB.prepare(`
+        SELECT id, label, created_at, data_json
+        FROM program_data_versions
+        WHERE user_id = ? AND id = ?
+      `).bind(user.id, Number(versionMatch[1])).first();
+      if (!row) return jsonResponse({ error: 'Kayıt bulunamadı.' }, 404);
+
+      return jsonResponse({
+        version: {
+          id: row.id,
+          label: row.label || '',
+          createdAt: row.created_at,
+          programData: JSON.parse(row.data_json)
+        }
+      });
+    }
+
     if (path === '/api/program/data' && request.method === 'DELETE') {
       requireProgramDb(context);
       await ensureProgramSchema(context);
       const user = await requireProgramUser(context);
       await context.env.PROGRAM_DB.prepare(
         'DELETE FROM program_data WHERE user_id = ?'
+      ).bind(user.id).run();
+      await context.env.PROGRAM_DB.prepare(
+        'DELETE FROM program_data_versions WHERE user_id = ?'
       ).bind(user.id).run();
 
       return jsonResponse({ ok: true });
@@ -267,6 +323,17 @@ async function ensureProgramSchema(context) {
       user_id INTEGER PRIMARY KEY,
       data_json TEXT NOT NULL,
       updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES program_users(id) ON DELETE CASCADE
+    )
+  `).run();
+
+  await context.env.PROGRAM_DB.prepare(`
+    CREATE TABLE IF NOT EXISTS program_data_versions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      data_json TEXT NOT NULL,
+      label TEXT,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (user_id) REFERENCES program_users(id) ON DELETE CASCADE
     )
   `).run();

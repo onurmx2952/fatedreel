@@ -2675,15 +2675,61 @@ function renderBlockedView(){
 
 function openTeacherBlocked(tid){
   blockedTeacherId=parseInt(tid)||teachers[0]?.id||null;
-  activateTab('blocked');
-  setTimeout(()=>{
-    const sel=document.getElementById('blocked-teacher');
-    if(sel&&blockedTeacherId){
-      sel.value=String(blockedTeacherId);
-      renderBlockedGrid();
-    }
-    document.getElementById('view-blocked')?.scrollIntoView({block:'start'});
-  },0);
+  renderTeacherBlockedModal(blockedTeacherId);
+  document.getElementById('emodal').classList.add('open');
+}
+
+function renderTeacherBlockedModal(tid){
+  const teacher=teachers.find(t=>t.id===parseInt(tid));
+  if(!teacher) return;
+  blockedTeacherId=teacher.id;
+  const H=settings.hoursPerDay;
+  const days=settings.days;
+  const load=teacherAssignedHours(teacher.id);
+  const totalSlots=days.length*H;
+  const maxBlocked=Math.max(0,totalSlots-load);
+  const blockedCount=countTeacherBlockedSlots(teacher.id);
+  const over=blockedCount>maxBlocked;
+  document.getElementById('emodal-title').textContent=`${teacher.name} - Boş Saat`;
+  let head='<tr><th class="hour-col">Saat</th>';
+  days.forEach(d=>head+=`<th class="day-hdr">${DAYS[d]}</th>`);
+  head+='</tr>';
+  let body='';
+  for(let h=0;h<H;h++){
+    body+=`<tr><td class="hour-col" style="text-align:center;padding:8px 4px">${h+1}</td>`;
+    days.forEach(d=>{
+      const blocked=isTeacherUnavailable(teacher.id,d,h);
+      body+=`<td class="block-slot ${blocked?'blocked':'free'}" onclick="toggleTeacherUnavailableFromModal(${teacher.id},${d},${h})">${blocked?'Ders yazılmaz':'Uygun'}</td>`;
+    });
+    body+='</tr>';
+  }
+  document.getElementById('emodal-body').innerHTML=`
+    <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
+      Atanan ders: <b>${load}</b> saat · En fazla boş/kırmızı: <b>${maxBlocked}</b> · Seçili kırmızı:
+      <b style="color:${over?'#dc2626':'#16a34a'}">${blockedCount}</b>${over?' · Fazla kırmızı var, bazılarını yeşile çevirin.':''}
+    </div>
+    <div class="tbl-wrap" style="max-width:760px">
+      <table class="cls-tbl"><thead>${head}</thead><tbody>${body}</tbody></table>
+    </div>
+    <div class="cls-summary" style="border:1px solid #eee;border-top:0;border-radius:0 0 10px 10px;margin-bottom:12px">
+      Yeşil: ders yazılabilir. Kırmızı: o öğretmene o saatte ders yazılmaz.
+    </div>
+    <div class="m-actions">
+      <button class="btn danger" onclick="clearBlockedForTeacherFromModal(${teacher.id})">Bu öğretmeni temizle</button>
+      <button class="btn" onclick="closeM('emodal')">Kapat</button>
+    </div>`;
+}
+
+function toggleTeacherUnavailableFromModal(tid,d,h){
+  toggleTeacherUnavailable(tid,d,h);
+  renderTeacherBlockedModal(tid);
+}
+
+function clearBlockedForTeacherFromModal(tid){
+  teacherUnavailable[tid]={};
+  if(document.getElementById('view-blocked').classList.contains('active')) renderBlockedView();
+  renderTeacherBlockedModal(tid);
+  scheduleAutoSave();
 }
 
 function renderBlockedGrid(){
@@ -2731,7 +2777,8 @@ function toggleTeacherUnavailable(tid,d,h){
   }
   teacherUnavailable[tid][key]=!teacherUnavailable[tid][key];
   if(!teacherUnavailable[tid][key]) delete teacherUnavailable[tid][key];
-  renderBlockedGrid();
+  if(document.getElementById('view-blocked').classList.contains('active')) renderBlockedGrid();
+  scheduleAutoSave();
 }
 
 function clearBlockedForSelected(){
@@ -3568,16 +3615,17 @@ async function refreshAccountDataInfo(){
   showAccountRecordsModal(null,'Bulut kaydı kontrol ediliyor...');
   try{
     const data=await apiFetch('/api/program/data');
+    const history=await apiFetch('/api/program/data/versions');
     cloudDataMeta=data.meta||{hasData:Boolean(data.programData),updatedAt:null,bytes:0};
     renderAccountDataInfo();
-    showAccountRecordsModal(data);
+    showAccountRecordsModal(data,'',history.versions||[]);
   }catch(err){
     showAccountRecordsModal(null,err.message);
     showAlert(err.message,'warn');
   }
 }
 
-function showAccountRecordsModal(cloudData=null,error=''){
+function showAccountRecordsModal(cloudData=null,error='',versions=[]){
   document.getElementById('emodal-title').textContent='Kayıtlarım';
   const userLine=currentUser
     ? `${h(currentUser.guest?'Misafir kullanıcı':(currentUser.name||currentUser.email||'Kullanıcı'))}${currentUser.email&&!currentUser.guest?`<br><span style="color:#64748b">${h(currentUser.email)}</span>`:''}`
@@ -3588,6 +3636,14 @@ function showAccountRecordsModal(cloudData=null,error=''){
   const cloudSummary=cloudData?.programData
     ? programDataSummary(cloudData.programData)
     : (currentUser?.guest?'Misafir modda bulut kaydı tutulmaz.':hasCloud?'Bulut kaydı var.':'Bulut kaydı bulunamadı.');
+  const versionRows=(versions||[]).map(v=>`
+    <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:8px;display:flex;gap:10px;justify-content:space-between;align-items:center">
+      <div>
+        <b>${h(formatCloudDate(v.created_at))}</b><br>
+        <span style="color:#64748b">${h(formatDataBytes(v.bytes))}${v.label?` · ${h(v.label)}`:''}</span>
+      </div>
+      <button class="btn" onclick="restoreProgramVersion(${v.id})">Bu kayda dön</button>
+    </div>`).join('');
   document.getElementById('emodal-body').innerHTML=`
     <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
       <b>Hesap</b><br>${userLine}
@@ -3602,9 +3658,26 @@ function showAccountRecordsModal(cloudData=null,error=''){
       Boyut: ${h(formatDataBytes(bytes))}<br>
       Özet: ${h(cloudSummary)}
     </div>
+    <div style="font-size:14px;font-weight:700;margin:14px 0 8px">Önceki kayıtlar</div>
+    ${versionRows||`<div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">Henüz geçmiş kayıt yok. Bundan sonraki otomatik kayıtlar burada listelenecek.</div>`}
     ${error?`<div class="alert warn">${h(error)}</div>`:''}
     <div class="m-actions"><button class="btn" onclick="closeM('emodal')">Kapat</button></div>`;
   document.getElementById('emodal').classList.add('open');
+}
+
+async function restoreProgramVersion(id){
+  if(!currentUser||currentUser.guest){showAlert('Kayıt geri yüklemek için Google ile giriş yapın.','warn');return;}
+  if(!confirm('Bu eski kayıt açılsın ve mevcut kaydınızın yerine geçsin mi?')) return;
+  try{
+    const data=await apiFetch(`/api/program/data/versions/${id}`);
+    if(!data.version?.programData) throw new Error('Kayıt verisi boş.');
+    applyProgramState(data.version.programData);
+    await saveCloudData(true);
+    closeM('emodal');
+    showAlert('Seçilen eski kayıt açıldı ve hesabınıza tekrar kaydedildi.','ok');
+  }catch(err){
+    showAlert(err.message,'warn');
+  }
 }
 
 async function deleteCloudProgramData(){
