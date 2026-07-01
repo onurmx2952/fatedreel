@@ -510,6 +510,10 @@ if FastAPI is not None:
         workers: int | None = None
         seed: int | None = None
 
+    @app.get("/")
+    def home() -> dict[str, Any]:
+        return {"status": "API çalışıyor", "service": "ders-programi-solver"}
+
     @app.get("/health")
     def health() -> dict[str, Any]:
         return {"ok": True}
