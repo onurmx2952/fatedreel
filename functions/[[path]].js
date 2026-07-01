@@ -204,6 +204,17 @@ async function handleProgramApi(context, requestUrl) {
       });
     }
 
+    if (versionMatch && request.method === 'DELETE') {
+      requireProgramDb(context);
+      await ensureProgramSchema(context);
+      const user = await requireProgramUser(context);
+      const result = await context.env.PROGRAM_DB.prepare(
+        'DELETE FROM program_data_versions WHERE user_id = ? AND id = ?'
+      ).bind(user.id, Number(versionMatch[1])).run();
+
+      return jsonResponse({ ok: true, deleted: result.meta?.changes || 0 });
+    }
+
     if (path === '/api/program/data' && request.method === 'DELETE') {
       requireProgramDb(context);
       await ensureProgramSchema(context);

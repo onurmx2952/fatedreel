@@ -197,7 +197,6 @@ body.auth-locked .login-screen{display:flex}
   <div class="toolbar">
     <h2>Öğretmen Ders Programı</h2>
     <span id="cbadge" style="font-size:11px;color:#dc2626;background:#fef2f2;padding:4px 10px;border-radius:6px;display:none"></span>
-    <button class="btn" onclick="exportCSV()">⬇ CSV</button>
     <button class="btn primary" onclick="generateSchedule()">🔀 Programı Yeniden Oluştur</button>
   </div>
   <div id="alert-area"></div>
@@ -318,9 +317,10 @@ body.auth-locked .login-screen{display:flex}
       <div style="font-size:14px;font-weight:700;margin-bottom:6px">Hesap ve kayıtlar</div>
       <div id="account-data-box" style="font-size:13px;color:#64748b;line-height:1.55;margin-bottom:12px">Yükleniyor...</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn" onclick="refreshAccountDataInfo()">Kayıtları göster</button>
+        <button class="btn" onclick="openCloudProgramData()">Aç</button>
+        <button class="btn primary" onclick="manualSaveCloudData()">Kaydet</button>
         <button class="btn" onclick="resetToDefaultProgram()">Default ayarlara döndür</button>
-        <button class="btn danger" onclick="deleteCloudProgramData()">Kayıtlarımı sil</button>
+        <button class="btn danger" onclick="deleteCloudProgramData()">Sil</button>
       </div>
     </div>
   </div>
@@ -3625,10 +3625,10 @@ function renderAccountDataInfo(){
     Bu ekrandaki veri: ${h(localProgramSummary())}`;
 }
 
-async function refreshAccountDataInfo(){
+async function openCloudProgramData(){
   if(currentUser?.guest){renderAccountDataInfo();showAccountRecordsModal();return;}
   if(!currentUser){renderAccountDataInfo();showAccountRecordsModal();return;}
-  showAccountRecordsModal(null,'Bulut kaydı kontrol ediliyor...');
+  showAccountRecordsModal(null,'Kayıtlar açılıyor...');
   try{
     const data=await apiFetch('/api/program/data');
     const history=await apiFetch('/api/program/data/versions');
@@ -3641,8 +3641,20 @@ async function refreshAccountDataInfo(){
   }
 }
 
+async function manualSaveCloudData(){
+  if(currentUser?.guest){showAlert('Misafir modda kayıt yapılmaz. Google ile giriş yapınca kaydedilir.','warn');return;}
+  if(!currentUser){showAlert('Kaydetmek için önce Google ile giriş yapın.','warn');return;}
+  try{
+    await saveCloudData(true,'Elle kayıt');
+    await openCloudProgramData();
+    showAlert('Kayıt hesabınıza kaydedildi.','ok');
+  }catch(err){
+    showAlert(err.message,'warn');
+  }
+}
+
 function showAccountRecordsModal(cloudData=null,error='',versions=[]){
-  document.getElementById('emodal-title').textContent='Kayıtlarım';
+  document.getElementById('emodal-title').textContent='Aç / Kaydet / Sil';
   const userLine=currentUser
     ? `${h(currentUser.guest?'Misafir kullanıcı':(currentUser.name||currentUser.email||'Kullanıcı'))}${currentUser.email&&!currentUser.guest?`<br><span style="color:#64748b">${h(currentUser.email)}</span>`:''}`
     : 'Google ile giriş yapılmadı.';
@@ -3652,13 +3664,17 @@ function showAccountRecordsModal(cloudData=null,error='',versions=[]){
   const cloudSummary=cloudData?.programData
     ? programDataSummary(cloudData.programData)
     : (currentUser?.guest?'Misafir modda bulut kaydı tutulmaz.':hasCloud?'Bulut kaydı var.':'Bulut kaydı bulunamadı.');
+  const canUseCloud=currentUser&&!currentUser.guest;
   const versionRows=(versions||[]).map(v=>`
-    <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:8px;display:flex;gap:10px;justify-content:space-between;align-items:center">
+    <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:8px;display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap">
       <div>
         <b>${h(formatCloudDate(v.created_at))}</b><br>
         <span style="color:#64748b">${h(formatDataBytes(v.bytes))}${v.label?` · ${h(v.label)}`:''}</span>
       </div>
-      <button class="btn" onclick="restoreProgramVersion(${v.id})">Bu kayda dön</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" onclick="restoreProgramVersion(${v.id})">Aç</button>
+        <button class="btn danger" onclick="deleteProgramVersion(${v.id})">Sil</button>
+      </div>
     </div>`).join('');
   document.getElementById('emodal-body').innerHTML=`
     <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
@@ -3668,29 +3684,66 @@ function showAccountRecordsModal(cloudData=null,error='',versions=[]){
       <b>Bu ekrandaki kayıt</b><br>${h(localProgramSummary())}
     </div>
     <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
-      <b>Bulut kaydı</b><br>
-      Durum: <b>${hasCloud?'Var':'Yok'}</b><br>
+      <div style="display:flex;gap:10px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap">
+        <div>
+          <b>Son kaydedilen kayıt</b><br>
+          Durum: <b>${hasCloud?'Var':'Yok'}</b><br>
       Son kayıt: ${h(formatCloudDate(updatedAt))}<br>
       Boyut: ${h(formatDataBytes(bytes))}<br>
       Özet: ${h(cloudSummary)}
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn" ${canUseCloud&&cloudData?.programData?'':'disabled'} onclick="openCurrentCloudData()">Aç</button>
+          <button class="btn primary" ${canUseCloud?'':'disabled'} onclick="manualSaveCloudData()">Kaydet</button>
+          <button class="btn danger" ${canUseCloud&&hasCloud?'':'disabled'} onclick="deleteCloudProgramData()">Sil</button>
+        </div>
+      </div>
     </div>
-    <div style="font-size:14px;font-weight:700;margin:14px 0 8px">Önceki kayıtlar</div>
-    ${versionRows||`<div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">Henüz geçmiş kayıt yok. Bundan sonraki otomatik kayıtlar burada listelenecek.</div>`}
+    <div style="font-size:14px;font-weight:700;margin:14px 0 8px">Eski kayıtlar</div>
+    ${versionRows||`<div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">Henüz eski kayıt yok.</div>`}
     ${error?`<div class="alert warn">${h(error)}</div>`:''}
     <div class="m-actions"><button class="btn" onclick="closeM('emodal')">Kapat</button></div>`;
   document.getElementById('emodal').classList.add('open');
 }
 
+async function openCurrentCloudData(){
+  if(!currentUser||currentUser.guest){showAlert('Kayıt açmak için Google ile giriş yapın.','warn');return;}
+  try{
+    const data=await apiFetch('/api/program/data');
+    if(!data.programData) throw new Error('Açılacak kayıt bulunamadı.');
+    if(!confirm('Hesaptaki son kayıt açılsın mı? Bu ekrandaki kaydedilmemiş değişiklikler gider.')) return;
+    cloudDataMeta=data.meta||cloudDataMeta;
+    applyProgramState(data.programData);
+    lastSavedState=JSON.stringify(programState());
+    renderAccountDataInfo();
+    closeM('emodal');
+    showAlert('Kayıt açıldı.','ok');
+  }catch(err){
+    showAlert(err.message,'warn');
+  }
+}
+
 async function restoreProgramVersion(id){
   if(!currentUser||currentUser.guest){showAlert('Kayıt geri yüklemek için Google ile giriş yapın.','warn');return;}
-  if(!confirm('Bu eski kayıt açılsın ve mevcut kaydınızın yerine geçsin mi?')) return;
+  if(!confirm('Bu eski kayıt açılsın mı? Açtıktan sonra isterseniz Kaydet ile son kayıt yapabilirsiniz.')) return;
   try{
     const data=await apiFetch(`/api/program/data/versions/${id}`);
     if(!data.version?.programData) throw new Error('Kayıt verisi boş.');
     applyProgramState(data.version.programData);
-    await saveCloudData(true);
     closeM('emodal');
-    showAlert('Seçilen eski kayıt açıldı ve hesabınıza tekrar kaydedildi.','ok');
+    showAlert('Seçilen eski kayıt açıldı. Kalıcı yapmak için Ayarlar > Kaydet kullanın.','ok');
+  }catch(err){
+    showAlert(err.message,'warn');
+  }
+}
+
+async function deleteProgramVersion(id){
+  if(!currentUser||currentUser.guest){showAlert('Kayıt silmek için Google ile giriş yapın.','warn');return;}
+  if(!confirm('Bu eski kayıt silinsin mi?')) return;
+  try{
+    await apiFetch(`/api/program/data/versions/${id}`,{method:'DELETE'});
+    showAlert('Eski kayıt silindi.','ok');
+    await openCloudProgramData();
   }catch(err){
     showAlert(err.message,'warn');
   }
@@ -3814,7 +3867,7 @@ async function loadCloudData(silent=false){
   }
 }
 
-async function saveCloudData(silent=false){
+async function saveCloudData(silent=false,label=''){
   if(currentUser?.guest){
     lastSavedState=JSON.stringify(programState());
     setSaveState('Misafir mod');
@@ -3829,7 +3882,7 @@ async function saveCloudData(silent=false){
   }
   try{
     setSaveState('Kaydediliyor...');
-    const saved=await apiFetch('/api/program/data',{method:'PUT',body:JSON.stringify({programData:programState()})});
+    const saved=await apiFetch('/api/program/data',{method:'PUT',body:JSON.stringify({programData:programState(),label})});
     lastSavedState=stateText;
     cloudDataMeta={hasData:true,updatedAt:saved.updatedAt||new Date().toISOString(),bytes:new TextEncoder().encode(stateText).length};
     setSaveState('Kaydedildi');
