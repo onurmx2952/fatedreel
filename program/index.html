@@ -161,6 +161,19 @@ body.auth-locked .login-screen{display:flex}
 .guest-btn:hover{text-decoration:underline}
 .login-error{display:none;margin-top:14px;font-size:12px;color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:9px}
 .login-error.on{display:block}
+.setup-screen{position:fixed;inset:0;z-index:450;background:linear-gradient(135deg,#f8fafc,#eef2ff);display:none;align-items:center;justify-content:center;padding:24px}
+.setup-screen.on{display:flex}
+.setup-card{width:min(620px,94vw);background:#fff;border:1px solid #e2e8f0;border-radius:18px;box-shadow:0 24px 80px rgba(15,23,42,.16);padding:26px}
+.setup-card h1{font-size:24px;margin-bottom:8px;color:#0f172a}
+.setup-card p{font-size:13px;color:#64748b;line-height:1.55;margin-bottom:18px}
+.setup-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:14px}
+.setup-choice{border:1px solid #dbe3ef;border-radius:14px;padding:14px;background:#f8fafc;cursor:pointer;font-weight:800;color:#334155;display:flex;gap:10px;align-items:center}
+.setup-choice:has(input:checked){border-color:#2563eb;background:#eff6ff;color:#1d4ed8}
+.setup-choice input{width:18px;height:18px}
+.setup-field{display:grid;gap:7px;margin:12px 0 18px}
+.setup-field label{font-size:13px;font-weight:800;color:#475569}
+.setup-field input{height:44px;border:1px solid #cbd5e1;border-radius:12px;padding:8px 12px;font-size:16px}
+.setup-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
 .settings-grid{max-width:980px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:start}
 .settings-card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:14px}
 .settings-card h3{font-size:14px;font-weight:800;margin-bottom:10px}
@@ -176,6 +189,24 @@ body.auth-locked .login-screen{display:flex}
     <div id="google-login"></div>
     <button class="guest-btn" onclick="guestLogin()">Misafir olarak dene</button>
     <div id="login-error" class="login-error"></div>
+  </div>
+</div>
+<div class="setup-screen" id="setup-screen">
+  <div class="setup-card">
+    <h1>Okul Kurulumu</h1>
+    <p>Okul türünü ve derslik sayısını seçin. Sistem sınıfları, resmi haftalık ders saatlerini ve başlangıç öğretmen dağıtımını otomatik hazırlasın.</p>
+    <div class="setup-options">
+      <label class="setup-choice"><input type="radio" name="setup-school-type" value="middle" checked> Ortaokul</label>
+      <label class="setup-choice"><input type="radio" name="setup-school-type" value="high"> Lise</label>
+    </div>
+    <div class="setup-field">
+      <label for="setup-classroom-count">Okuldaki derslik sayısı</label>
+      <input id="setup-classroom-count" type="number" min="4" max="80" value="24">
+    </div>
+    <div class="setup-actions">
+      <button class="btn" onclick="skipInitialSetup()">Mevcut ayarlarla devam et</button>
+      <button class="btn primary" onclick="applyInitialSchoolSetup()">Kurulumu oluştur</button>
+    </div>
   </div>
 </div>
 <header>
@@ -260,7 +291,7 @@ body.auth-locked .login-screen{display:flex}
     <button class="btn primary" onclick="saveLessonPlans()">Kaydet</button>
   </div>
   <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
-    Dersleri listeden seçin, haftalık saatini yazın. Her sınıf düzeyi toplamı 35 olmalı.
+    Dersleri listeden seçin, haftalık saatini yazın. Her sınıf düzeyi toplamı haftalık ders saatiyle uyumlu olmalı.
   </div>
   <div id="lesson-plan-list" class="t-list"></div>
 </div>
@@ -373,8 +404,8 @@ const DAYS_S=['Pzt','Sal','Çar','Per','Cum'];
 let SUBJECTS=['TRK','MAT','FEN','ING','SOSYAL','BEDEN','DİN','MÖZ','GÖN','SAN','BİL.TAR','TEK.TAS','SEÇİNG','SEÇİMA','INK.TAR','BLÜM','REH'];
 
 // Sınıflar: 5A-F, 6A-F, 7A-F, 8A-F
-const GRADES = [5,6,7,8];
-const SECTIONS = ['A','B','C','D','E','F'];
+let GRADES = [5,6,7,8];
+let SECTIONS = ['A','B','C','D','E','F'];
 let ALL_CLASSES = GRADES.flatMap(g => SECTIONS.map(s => `${g}-${s}`));
 
 // MEB haftalık ders çizelgesine göre ortaokul planı.
@@ -657,6 +688,184 @@ seedDefaultDistribution();
 teachers.forEach(t=>{teacherUnavailable[t.id]={};});
 const DEFAULT_PROGRAM_STATE=JSON.parse(JSON.stringify(programState()));
 
+const SETUP_SECTION_LETTERS='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const SCHOOL_SETUP_PLANS={
+  middle:{
+    grades:[5,6,7,8],
+    hoursPerDay:7,
+    plans:{
+      5:[['TRK',6],['MAT',5],['FEN',4],['SOSYAL',3],['DİN',2],['ING',3],['GÖN',1],['MÖZ',1],['BEDEN',2],['BİL.TAR',2],['REH',1],['SEÇMELİ A',2],['SEÇMELİ B',2],['SEÇMELİ C',1]],
+      6:[['TRK',6],['MAT',5],['FEN',4],['SOSYAL',3],['DİN',2],['ING',3],['GÖN',1],['MÖZ',1],['BEDEN',2],['BİL.TAR',2],['REH',1],['SEÇMELİ A',2],['SEÇMELİ B',2],['SEÇMELİ C',1]],
+      7:[['TRK',5],['MAT',5],['FEN',4],['SOSYAL',3],['DİN',2],['ING',4],['GÖN',1],['MÖZ',1],['BEDEN',2],['TEK.TAS',2],['REH',1],['SEÇMELİ A',2],['SEÇMELİ B',2],['SEÇMELİ C',1]],
+      8:[['TRK',5],['MAT',5],['FEN',4],['INK.TAR',2],['DİN',2],['ING',4],['GÖN',1],['MÖZ',1],['BEDEN',2],['TEK.TAS',2],['REH',1],['SEÇMELİ A',2],['SEÇMELİ B',2],['SEÇMELİ C',2]]
+    }
+  },
+  high:{
+    grades:[9,10,11,12],
+    hoursPerDay:8,
+    plans:{
+      9:[['TDE',5],['DİN',2],['TAR',2],['COG',2],['MAT',6],['FİZ',2],['KİM',2],['BİY',2],['ING',4],['BEDEN',2],['GÖN/MÖZ',2],['SAĞLIK',1],['REH',1],['SEÇMELİ A',2],['SEÇMELİ B',2],['SEÇMELİ C',2],['SEÇMELİ D',1]],
+      10:[['TDE',5],['DİN',2],['TAR',2],['COG',2],['MAT',6],['FİZ',2],['KİM',2],['BİY',2],['FEL',2],['ING',4],['BEDEN',2],['GÖN/MÖZ',2],['REH',1],['SEÇMELİ A',2],['SEÇMELİ B',2],['SEÇMELİ C',2]],
+      11:[['TDE',5],['DİN',2],['FEL',2],['ING',4],['BEDEN',2],['GÖN/MÖZ',2],['REH',1],['SEÇMELİ A',4],['SEÇMELİ B',4],['SEÇMELİ C',4],['SEÇMELİ D',4],['SEÇMELİ E',6]],
+      12:[['TDE',5],['DİN',2],['INK.TAR',2],['ING',4],['BEDEN/GÖN/MÖZ',2],['REH',1],['SEÇMELİ A',6],['SEÇMELİ B',6],['SEÇMELİ C',6],['SEÇMELİ D',6]]
+    }
+  }
+};
+
+const SUBJECT_LONG_NAMES={
+  TRK:'Türkçe', MAT:'Matematik', FEN:'Fen', SOSYAL:'Sosyal', DİN:'Din', ING:'İngilizce',
+  BEDEN:'Beden', GÖN:'Görsel Sanatlar', SAN:'Görsel Sanatlar', MÖZ:'Müzik', 'BİL.TAR':'Bilişim',
+  'TEK.TAS':'Teknoloji Tasarım', 'INK.TAR':'İnkılap Tarihi', REH:'Rehberlik',
+  TDE:'Türk Dili ve Edebiyatı', TAR:'Tarih', COG:'Coğrafya', 'FİZ':'Fizik', 'KİM':'Kimya',
+  'BİY':'Biyoloji', FEL:'Felsefe', 'SAĞLIK':'Sağlık Bilgisi', 'GÖN/MÖZ':'Sanat',
+  'BEDEN/GÖN/MÖZ':'Spor Sanat'
+};
+
+function weeklyTargetHours(){
+  return (settings.days?.length||5)*(parseInt(settings.hoursPerDay)||7);
+}
+
+function showSetupWizard(){
+  const screen=document.getElementById('setup-screen');
+  if(screen) screen.classList.add('on');
+}
+
+function hideSetupWizard(){
+  const screen=document.getElementById('setup-screen');
+  if(screen) screen.classList.remove('on');
+}
+
+function skipInitialSetup(){
+  hideSetupWizard();
+  lastSavedState=JSON.stringify(programState());
+}
+
+function planTuplesToObjects(plan){
+  return plan.map(([subj,wh])=>({subj,wh}));
+}
+
+function distributeClassCounts(total,gradeCount){
+  const base=Math.floor(total/gradeCount);
+  let extra=total%gradeCount;
+  return Array.from({length:gradeCount},()=>base+(extra-->0?1:0));
+}
+
+function classListForSetup(grades,classroomCount){
+  const counts=distributeClassCounts(Math.max(grades.length,parseInt(classroomCount)||grades.length),grades.length);
+  const classes=[];
+  grades.forEach((grade,gi)=>{
+    for(let i=0;i<counts[gi];i++) classes.push(`${grade}-${SETUP_SECTION_LETTERS[i]||String(i+1)}`);
+  });
+  return {classes,counts};
+}
+
+function subjectTeacherBaseName(subj){
+  if(/^SEÇMELİ/.test(subj)) return 'Seçmeli';
+  return SUBJECT_LONG_NAMES[subj]||subj;
+}
+
+function isElectiveSubject(subj){
+  return /^SEÇMELİ/.test(subj);
+}
+
+function resetGeneratedSchoolState(type,classroomCount){
+  const config=SCHOOL_SETUP_PLANS[type]||SCHOOL_SETUP_PLANS.middle;
+  GRADES=[...config.grades];
+  SECTIONS=[...SETUP_SECTION_LETTERS];
+  const classSetup=classListForSetup(GRADES,classroomCount);
+  ALL_CLASSES=classSetup.classes;
+  settings={hoursPerDay:config.hoursPerDay,days:[0,1,2,3,4]};
+
+  Object.keys(GRADE_PLAN).forEach(k=>delete GRADE_PLAN[k]);
+  Object.entries(config.plans).forEach(([grade,plan])=>{GRADE_PLAN[grade]=planTuplesToObjects(plan);});
+
+  Object.keys(CLASS_PLAN).forEach(k=>delete CLASS_PLAN[k]);
+  ALL_CLASSES.forEach(cls=>{
+    const grade=parseInt(cls.split('-')[0]);
+    const section=cls.split('-')[1];
+    CLASS_PLAN[cls]=(GRADE_PLAN[grade]||[]).map(l=>{
+      if(l.subj==='GÖN'&&['B','D','F'].includes(section)) return {subj:'SAN',wh:l.wh};
+      return {...l};
+    });
+  });
+
+  const subjectTotals={};
+  ALL_CLASSES.forEach(cls=>{
+    (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
+      if(subj==='REH') return;
+      subjectTotals[subj]=(subjectTotals[subj]||0)+(parseInt(wh)||0);
+    });
+  });
+  SUBJECTS=[...new Set(Object.values(CLASS_PLAN).flat().map(l=>l.subj))];
+
+  const nextTeachers=[];
+  let nextId=1;
+  const subjectTeachers={};
+  Object.entries(subjectTotals).forEach(([subj,total])=>{
+    const divisor=isElectiveSubject(subj)?24:21;
+    const count=Math.max(1,Math.ceil(total/divisor));
+    subjectTeachers[subj]=[];
+    for(let i=1;i<=count;i++){
+      const teacher={id:nextId++,name:`${i}. ${subjectTeacherBaseName(subj)} Öğretmeni`,subjects:[subj],assignments:[],hours:0};
+      nextTeachers.push(teacher);
+      subjectTeachers[subj].push(teacher);
+    }
+  });
+
+  const classTeachers={};
+  Object.entries(CLASS_PLAN).forEach(([cls,plan])=>{
+    classTeachers[cls]=[];
+    plan.filter(l=>l.subj!=='REH').forEach(({subj,wh})=>{
+      const pool=subjectTeachers[subj]||[];
+      if(!pool.length) return;
+      pool.sort((a,b)=>(a.hours||0)-(b.hours||0)||a.id-b.id);
+      const chosen=pool[0];
+      chosen.assignments.push({cls,subj,wh,manual:true});
+      chosen.hours=(chosen.hours||0)+wh;
+      classTeachers[cls].push(chosen);
+    });
+  });
+
+  const rehOwners=new Set();
+  ALL_CLASSES.forEach(cls=>{
+    const reh=(CLASS_PLAN[cls]||[]).find(l=>l.subj==='REH');
+    if(!reh) return;
+    const pool=(classTeachers[cls]||[]).filter(t=>!rehOwners.has(t.id));
+    if(!pool.length) return;
+    pool.sort((a,b)=>(a.hours||0)-(b.hours||0)||a.id-b.id);
+    const chosen=pool[0];
+    chosen.assignments.push({cls,subj:'REH',wh:reh.wh,manual:true});
+    if(!chosen.subjects.includes('REH')) chosen.subjects.push('REH');
+    chosen.hours=(chosen.hours||0)+reh.wh;
+    rehOwners.add(chosen.id);
+  });
+
+  teachers=nextTeachers.map(t=>({...t,hours:(t.assignments||[]).reduce((sum,a)=>sum+(parseInt(a.wh)||0),0)}));
+  teacherUnavailable={};
+  teachers.forEach(t=>{teacherUnavailable[t.id]={};});
+  schedule={};
+  selectedClass=ALL_CLASSES[0]||'';
+  selectedDistributionClass=ALL_CLASSES[0]||'';
+  blockedTeacherId=teachers[0]?.id||null;
+}
+
+function applyInitialSchoolSetup(){
+  const type=document.querySelector('input[name="setup-school-type"]:checked')?.value||'middle';
+  const count=parseInt(document.getElementById('setup-classroom-count')?.value)||24;
+  resetGeneratedSchoolState(type,count);
+  hideSetupWizard();
+  renderTable();
+  renderTeachers();
+  renderClassView();
+  renderLessonPlans();
+  renderDistribution();
+  renderBlockedView();
+  showTab('distribution',document.querySelector('.tab[onclick*="distribution"]'));
+  scheduleAutoSave();
+  const schoolName=type==='high'?'lise':'ortaokul';
+  showAlert(`${count} derslikli ${schoolName} için başlangıç dersleri, öğretmenleri ve sınıf dağıtımı hazırlandı.`,'ok');
+}
+
 function showTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
@@ -815,8 +1024,9 @@ async function generateSchedule(){
   const H=settings.hoursPerDay;
   const days=settings.days;
   const expectedSlots=days.length*H;
-  if(expectedSlots!==35){
-    showAlert(`Her sınıf için 35 saat gerekir. Şu an ${days.length} gün x ${H} saat = ${expectedSlots}.`, 'warn');
+  const target=weeklyTargetHours();
+  if(expectedSlots!==target){
+    showAlert(`Her sınıf için ${target} saat gerekir. Şu an ${days.length} gün x ${H} saat = ${expectedSlots}.`, 'warn');
     return;
   }
 
@@ -832,7 +1042,7 @@ async function generateSchedule(){
     const branchIssues=analyzeBranchRulesObject(schedule);
     const teacherConsistencyIssues=analyzeTeacherConsistencyObject(schedule);
     const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0&&teacherConsistencyIssues.length===0;
-    showAlert(ok?`Program oluşturuldu - OR-Tools ile 24/24 sınıf 35 saat dolu.`:`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.`,ok?'ok':'warn');
+    showAlert(ok?`Program oluşturuldu - OR-Tools ile ${ALL_CLASSES.length}/${ALL_CLASSES.length} sınıf ${target} saat dolu.`:`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.`,ok?'ok':'warn');
     scheduleAutoSave();
     return;
   }
@@ -872,7 +1082,7 @@ async function generateSchedule(){
   const fixHint=ok ? '' : buildFailureFixHint(report,blockIssues,best?.issues||[]);
   let msg=`Program oturmadı.`;
   if(report.classIssues.length){
-    msg=`Program oturmadı: ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls} ${report.classIssues[0].filled}/35 saat dolu.${fixHint}`;
+    msg=`Program oturmadı: ${report.classIssues.length} sınıfta eksik/boşluk var. İlk sorun: ${report.classIssues[0].cls} ${report.classIssues[0].filled}/${target} saat dolu.${fixHint}`;
   }else if(teacherConsistencyIssues.length){
     const first=teacherConsistencyIssues[0];
     msg=`Program oturmadı: ${teacherConsistencyIssues.length} sınıf-ders birden fazla öğretmene bölünmüş. İlk sorun: ${first.cls} ${first.subj} → ${first.teachers.join(', ')}.`;
@@ -883,7 +1093,7 @@ async function generateSchedule(){
     const first=branchIssues[0];
     msg=`Program oturmadı: ${branchIssues.length} branş ataması sorunu var. İlk sorun: ${first.cls} ${first.subj}.`;
   }
-  showAlert(ok?'Program oluşturuldu - 24/24 sınıf 35 saat dolu, dersler blok kuralına uygun.':msg,ok?'ok':'warn');
+  showAlert(ok?`Program oluşturuldu - ${ALL_CLASSES.length}/${ALL_CLASSES.length} sınıf ${target} saat dolu, dersler blok kuralına uygun.`:msg,ok?'ok':'warn');
   }finally{
     scheduleGenerating=false;
     setWorkState(false);
@@ -959,8 +1169,9 @@ function waitForSolverRetry(i){
 function validateHardImpossibilities(){
   const issues=[];
   const totalSlots=settings.days.length*settings.hoursPerDay;
-  if(totalSlots!==35){
-    issues.push(`Haftalık tablo ${totalSlots} saat; her sınıf için 35 saat olmalı.`);
+  const target=weeklyTargetHours();
+  if(totalSlots!==target){
+    issues.push(`Haftalık tablo ${totalSlots} saat; her sınıf için ${target} saat olmalı.`);
   }
 
   ALL_CLASSES.forEach(cls=>{
@@ -1466,6 +1677,7 @@ function ensureClassLesson35(cls,subj,wh){
 }
 
 function normalizeClassPlanTo35(cls,protectedSubj=''){
+  const targetHours=weeklyTargetHours();
   if(!CLASS_PLAN[cls]) CLASS_PLAN[cls]=[];
   let plan=CLASS_PLAN[cls].filter(l=>l&&l.subj&&parseInt(l.wh)>0).map(l=>({subj:l.subj,wh:parseInt(l.wh)||0}));
   const merged={};
@@ -1473,17 +1685,17 @@ function normalizeClassPlanTo35(cls,protectedSubj=''){
   plan=Object.entries(merged).map(([subj,wh])=>({subj,wh}));
 
   let total=plan.reduce((s,l)=>s+l.wh,0);
-  if(total<35){
-    const missing=35-total;
+  if(total<targetHours){
+    const missing=targetHours-total;
     const fallbackSubj=getDefaultFillerSubject(cls);
     const existing=plan.find(l=>l.subj===fallbackSubj);
     if(existing) existing.wh+=missing;
     else plan.push({subj:fallbackSubj,wh:missing});
     if(!SUBJECTS.includes(fallbackSubj)) SUBJECTS.push(fallbackSubj);
-    total=35;
+    total=targetHours;
   }
 
-  while(total>35&&plan.length){
+  while(total>targetHours&&plan.length){
     const target=plan.find(l=>l.subj!==protectedSubj&&['REH','SEÇİNG','SEÇİMA','BLÜM'].includes(l.subj)&&l.wh>0)
       || plan.find(l=>l.subj!==protectedSubj&&l.wh>1)
       || plan.find(l=>l.subj!==protectedSubj&&l.wh>0)
@@ -1499,17 +1711,18 @@ function normalizeClassPlanTo35(cls,protectedSubj=''){
 }
 
 function normalizeClassPlanTo35FromPlan(plan,protectedSubj=''){
+  const targetHours=weeklyTargetHours();
   let total=plan.reduce((s,l)=>s+(parseInt(l.wh)||0),0);
-  if(total<35){
-    const missing=35-total;
+  if(total<targetHours){
+    const missing=targetHours-total;
     const fallbackSubj='SEÇİMA';
     const existing=plan.find(l=>l.subj===fallbackSubj);
     if(existing) existing.wh+=missing;
     else plan.push({subj:fallbackSubj,wh:missing});
     if(!SUBJECTS.includes(fallbackSubj)) SUBJECTS.push(fallbackSubj);
-    total=35;
+    total=targetHours;
   }
-  while(total>35&&plan.length){
+  while(total>targetHours&&plan.length){
     const target=plan.find(l=>l.subj!==protectedSubj&&['REH','SEÇİNG','SEÇİMA','BLÜM'].includes(l.subj)&&l.wh>0)
       || plan.find(l=>l.subj!==protectedSubj&&l.wh>1)
       || plan.find(l=>l.subj!==protectedSubj&&l.wh>0)
@@ -2547,6 +2760,7 @@ function analyzeTeacherConsistencyObject(scheduleObj){
 function analyzeScheduleObject(scheduleObj){
   const H=settings.hoursPerDay;
   const days=settings.days;
+  const target=weeklyTargetHours();
   const classIssues=[];
   let totalMissing=0,totalGaps=0;
   ALL_CLASSES.forEach(cls=>{
@@ -2561,7 +2775,7 @@ function analyzeScheduleObject(scheduleObj){
         for(let x=1;x<=Math.max(...hours);x++) if(!hours.includes(x)) gaps++;
       }
     });
-    if(filled!==35||missing||gaps) classIssues.push({cls,filled,missing,gaps});
+    if(filled!==target||missing||gaps) classIssues.push({cls,filled,missing,gaps});
     totalMissing+=missing; totalGaps+=gaps;
   });
   return {classIssues,totalMissing,totalGaps};
@@ -2987,13 +3201,14 @@ function trimUnavailableToTeacherLoads(){
 
 function renderLessonPlans(){
   const root=document.getElementById('lesson-plan-list');
+  const target=weeklyTargetHours();
   root.innerHTML=GRADES.map(g=>{
     const plan=GRADE_PLAN[g]||[];
     const total=plan.reduce((s,l)=>s+l.wh,0);
-    const totalOk=total===35;
+    const totalOk=total===target;
     return `<div class="t-card">
       <div class="t-nm">${g}. Sınıf Dersleri</div>
-      <div class="t-meta lesson-total" data-grade="${g}" style="color:${totalOk?'#15803d':'#b91c1c'};font-weight:${totalOk?'700':'800'}">Toplam: ${total} / 35 saat</div>
+      <div class="t-meta lesson-total" data-grade="${g}" style="color:${totalOk?'#15803d':'#b91c1c'};font-weight:${totalOk?'700':'800'}">Toplam: ${total} / ${target} saat</div>
       <div id="lesson-plan-${g}">${plan.map(l=>lessonRowHtml(g,l.subj,l.wh)).join('')}</div>
       <div style="display:flex;gap:8px;margin-top:10px">
         <button class="btn" onclick="addLessonRow(${g})">+ Ders ekle</button>
@@ -3022,20 +3237,22 @@ function updateLessonTotal(g){
     .reduce((sum,input)=>sum+(parseInt(input.value)||0),0);
   const el=document.querySelector(`.lesson-total[data-grade="${g}"]`);
   if(!el) return;
-  el.textContent=`Toplam: ${total} / 35 saat`;
-  const ok=total===35;
+  const target=weeklyTargetHours();
+  el.textContent=`Toplam: ${total} / ${target} saat`;
+  const ok=total===target;
   el.style.color=ok?'#15803d':'#b91c1c';
   el.style.fontWeight=ok?'700':'800';
 }
 
 function saveLessonPlans(){
   let warnings=[];
+  const target=weeklyTargetHours();
   const nextPlans={};
   GRADES.forEach(g=>{
     const rows=Array.from(document.querySelectorAll(`#lesson-plan-${g} .lesson-row`));
     const plan=rows.map(row=>({subj:row.querySelector('.lesson-subj').value,wh:parseInt(row.querySelector('.lesson-wh').value)||0})).filter(l=>l.subj&&l.wh>0);
     const total=plan.reduce((s,l)=>s+l.wh,0);
-    if(total!==35) warnings.push(`${g}. sınıf toplamı ${total}/35`);
+    if(total!==target) warnings.push(`${g}. sınıf toplamı ${total}/${target}`);
     nextPlans[g]=plan;
   });
   GRADES.forEach(g=>{GRADE_PLAN[g]=nextPlans[g];});
@@ -3045,7 +3262,7 @@ function saveLessonPlans(){
   renderLessonPlans();
   if(document.getElementById('view-distribution').classList.contains('active')) renderDistribution();
   const msg=warnings.length
-    ? `Ders saatleri kaydedildi ama toplam 35 olmayan düzey var: ${warnings.join(', ')}. Program oluşturmadan önce 35'e tamamlayın.`
+    ? `Ders saatleri kaydedildi ama toplam ${target} olmayan düzey var: ${warnings.join(', ')}. Program oluşturmadan önce ${target}'e tamamlayın.`
     : `Ders saatleri kaydedildi. ${syncResult.added} ders dağıtım satırı öğretmen seçimi bekliyor. Programı yeniden oluşturmadan önce Ders Dağıtımı ekranından öğretmenleri seçin.`;
   showAlert(msg,warnings.length?'warn':'ok');
   scheduleAutoSave();
@@ -3206,11 +3423,12 @@ function renderDistribution(){
   });
   const totals=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,(byClass[cls]||[])
     .reduce((sum,r)=>sum+(r.tid===''?0:(parseInt(r.wh)||0)),0)]));
+  const target=weeklyTargetHours();
 
   document.getElementById('distribution-tabs').innerHTML=ALL_CLASSES.map(cls=>{
     const total=totals[cls]||0;
     return `<button class="class-tab ${cls===selectedDistributionClass?'active':''}" data-cls="${cls}" onclick="selectDistributionClass('${cls}')">
-      <span>${cls}</span><span class="hour-pill ${total===35?'ok':''}" data-total-cls="${cls}">${total}/35</span>
+      <span>${cls}</span><span class="hour-pill ${total===target?'ok':''}" data-total-cls="${cls}">${total}/${target}</span>
     </button>`;
   }).join('');
 
@@ -3218,7 +3436,7 @@ function renderDistribution(){
     const rows=(byClass[cls]||[]).sort((a,b)=>a.subj.localeCompare(b.subj,'tr'));
     const total=totals[cls]||0;
     return `<div class="dist-class-panel ${cls===selectedDistributionClass?'active':''}" data-cls="${cls}">
-      <div class="dist-preview"><b>${cls} ders dağıtımı</b><span class="dist-total ${total===35?'ok':'bad'}" data-panel-total="${cls}">Toplam ${total}/35 saat</span></div>
+      <div class="dist-preview"><b>${cls} ders dağıtımı</b><span class="dist-total ${total===target?'ok':'bad'}" data-panel-total="${cls}">Toplam ${total}/${target} saat</span></div>
       <div class="dist-grid head"><div>Ders</div><div>Öğretmen</div><div>Saat</div><div></div></div>
       <div class="dist-rows">${rows.map(r=>distributionRowHtml(r.tid,cls,r.subj,r.wh)).join('')}</div>
     </div>`;
@@ -3283,6 +3501,7 @@ function addDistributionRow(){
 }
 
 function updateDistributionTotals(){
+  const target=weeklyTargetHours();
   ALL_CLASSES.forEach(cls=>{
     const total=Array.from(document.querySelectorAll(`.dist-row[data-cls="${cls}"]`))
       .reduce((sum,row)=>{
@@ -3291,13 +3510,13 @@ function updateDistributionTotals(){
         return sum+(hasTeacher?wh:0);
       },0);
     document.querySelectorAll(`[data-total-cls="${cls}"]`).forEach(el=>{
-      el.textContent=`${total}/35`;
-      el.classList.toggle('ok',total===35);
+      el.textContent=`${total}/${target}`;
+      el.classList.toggle('ok',total===target);
     });
     document.querySelectorAll(`[data-panel-total="${cls}"]`).forEach(el=>{
-      el.textContent=`Toplam ${total}/35 saat`;
-      el.classList.toggle('ok',total===35);
-      el.classList.toggle('bad',total!==35);
+      el.textContent=`Toplam ${total}/${target} saat`;
+      el.classList.toggle('ok',total===target);
+      el.classList.toggle('bad',total!==target);
     });
   });
 }
@@ -3365,7 +3584,8 @@ function validateFixedDistribution(){
   ALL_CLASSES.forEach(cls=>{
     const rows=byClass[cls]||[];
     const total=rows.reduce((sum,r)=>sum+r.wh,0);
-    if(total!==35) issues.push(`${cls}: ders dağıtımı ${total}/35 saat. Kullanıcı düzeltmeli.`);
+    const target=weeklyTargetHours();
+    if(total!==target) issues.push(`${cls}: ders dağıtımı ${total}/${target} saat. Kullanıcı düzeltmeli.`);
     const seen={};
     rows.forEach(r=>{
       if(!r.subj) issues.push(`${cls}: ders adı boş satır var.`);
@@ -3712,6 +3932,8 @@ function programState(){
   return {
     teachers,
     subjects:SUBJECTS,
+    grades:GRADES,
+    sections:SECTIONS,
     classes:ALL_CLASSES,
     gradePlan:GRADE_PLAN,
     classPlan:CLASS_PLAN,
@@ -3725,6 +3947,8 @@ function applyProgramState(data){
   if(!data||typeof data!=='object') return;
   isApplyingCloudData=true;
   if(Array.isArray(data.subjects)) SUBJECTS=data.subjects;
+  if(Array.isArray(data.grades)) GRADES=data.grades;
+  if(Array.isArray(data.sections)) SECTIONS=data.sections;
   if(Array.isArray(data.classes)) ALL_CLASSES=data.classes;
   if(data.gradePlan) {
     Object.keys(GRADE_PLAN).forEach(k=>delete GRADE_PLAN[k]);
@@ -4023,7 +4247,10 @@ async function initCloudAuth(){
     googleClientId=config.googleClientId||'';
     const me=await apiFetch('/api/program/me');
     setAuthUser(me.user||null);
-    if(me.user) await loadCloudData(true);
+    if(me.user){
+      const hasData=await loadCloudData(true);
+      if(!hasData) showSetupWizard();
+    }
   }catch(_){
     setAuthUser(null);
   }
@@ -4039,7 +4266,8 @@ async function onGoogleCredential(response){
   try{
     const data=await apiFetch('/api/program/auth/google',{method:'POST',body:JSON.stringify({credential:response.credential})});
     setAuthUser(data.user);
-    await loadCloudData(true);
+    const hasData=await loadCloudData(true);
+    if(!hasData) showSetupWizard();
     scheduleAutoSave();
   }catch(err){
     showLoginError(err.message);
@@ -4050,6 +4278,7 @@ function guestLogin(){
   setAuthUser({name:'Misafir kullanıcı',email:'Kayıt yapılmaz',guest:true});
   lastSavedState=JSON.stringify(programState());
   setSaveState('Misafir mod');
+  showSetupWizard();
 }
 
 function setAuthUser(user){
@@ -4089,8 +4318,8 @@ function setAuthUser(user){
 }
 
 async function loadCloudData(silent=false){
-  if(currentUser?.guest){if(!silent) showAlert('Misafir modda kayıt yüklenmez.','warn');return;}
-  if(!currentUser&&!silent){showAlert('Önce Google ile giriş yapın.','warn');return;}
+  if(currentUser?.guest){if(!silent) showAlert('Misafir modda kayıt yüklenmez.','warn');return false;}
+  if(!currentUser&&!silent){showAlert('Önce Google ile giriş yapın.','warn');return false;}
   try{
     const data=await apiFetch('/api/program/data');
     cloudDataMeta=data.meta||{hasData:Boolean(data.programData),updatedAt:null,bytes:0};
@@ -4098,8 +4327,10 @@ async function loadCloudData(silent=false){
     else lastSavedState=JSON.stringify(programState());
     renderAccountDataInfo();
     if(!silent) showAlert('Kayıtlar yüklendi.','ok');
+    return Boolean(data.programData);
   }catch(err){
     if(!silent) showAlert(err.message,'warn');
+    return false;
   }
 }
 
