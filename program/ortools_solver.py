@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 import json
+import random
 import sys
 from dataclasses import dataclass
 from typing import Any
@@ -439,7 +440,9 @@ def build_block_opening_hints(
             score = len(hours) * 10 + full_day_bonus + edge_bonus
             candidates.append((score, f"{name} öğretmenin {day_name(day)} {compact_hours_label(hours)} saatlerini açın."))
     candidates.sort(reverse=True, key=lambda item: item[0])
-    return [text for _, text in candidates[:8]]
+    top_pool = candidates[: max(8, min(len(candidates), 18))]
+    random.shuffle(top_pool)
+    return [text for _, text in top_pool[:8]]
 
 
 def teacher_opening_hints(
@@ -461,7 +464,9 @@ def teacher_opening_hints(
         if day in days and 0 <= hour < hours_per_day:
             by_day.setdefault(day, []).append(hour)
     ranked = sorted(by_day.items(), key=lambda item: len(item[1]), reverse=True)
-    return [f"{day_name(day)} {compact_hours_label(sorted(set(hours)))}" for day, hours in ranked[:limit]]
+    top_pool = ranked[: max(limit, min(len(ranked), limit * 3))]
+    random.shuffle(top_pool)
+    return [f"{day_name(day)} {compact_hours_label(sorted(set(hours)))}" for day, hours in top_pool[:limit]]
 
 
 def compact_hours_label(hours: list[int]) -> str:
