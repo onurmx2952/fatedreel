@@ -356,6 +356,7 @@ body.auth-locked .login-screen{display:flex}
       <div class="settings-actions">
         <button class="btn" onclick="openCloudProgramData()">Aç</button>
         <button class="btn primary" onclick="manualSaveCloudData()">Kaydet</button>
+        <button class="btn" onclick="reopenSchoolSetup()">Okul kurulumunu yeniden aç</button>
         <button class="btn" onclick="resetToDefaultProgram()">Default ayarlara döndür</button>
         <button class="btn danger" onclick="deleteCloudProgramData()">Sil</button>
       </div>
@@ -738,6 +739,10 @@ function hideSetupWizard(){
 function skipInitialSetup(){
   hideSetupWizard();
   lastSavedState=JSON.stringify(programState());
+}
+
+function reopenSchoolSetup(){
+  showSetupWizard();
 }
 
 function planTuplesToObjects(plan){
