@@ -768,6 +768,46 @@ function isElectiveSubject(subj){
   return /^SEÇMELİ/.test(subj);
 }
 
+function pickSetupSubjects(subjects,names){
+  const targets=names.map(normalizeSubjectKey);
+  return subjects.filter(subj=>targets.includes(normalizeSubjectKey(subj)));
+}
+
+function setupTeacherGroups(type,subjects){
+  const groupDefs=type==='high'
+    ? [
+        {name:'Sosyal Bilimler',subjects:pickSetupSubjects(subjects,['TAR','INK.TAR','COG','FEL'])},
+        {name:'Biyoloji Sağlık',subjects:pickSetupSubjects(subjects,['BİY','SAĞLIK'])},
+        {name:'Seçmeli',subjects:subjects.filter(isElectiveSubject)},
+        {name:'Sanat',subjects:pickSetupSubjects(subjects,['GÖN/MÖZ','BEDEN/GÖN/MÖZ'])},
+      ]
+    : [
+        {name:'Sosyal',subjects:pickSetupSubjects(subjects,['SOSYAL','INK.TAR'])},
+        {name:'Sanat',subjects:pickSetupSubjects(subjects,['GÖN','SAN'])},
+        {name:'Bilişim Teknoloji',subjects:pickSetupSubjects(subjects,['BİL.TAR','TEK.TAS'])},
+        {name:'Seçmeli',subjects:subjects.filter(isElectiveSubject)},
+      ];
+  const used=new Set();
+  const groups=[];
+  groupDefs.forEach(group=>{
+    const list=[...new Set(group.subjects.filter(s=>subjects.includes(s)&&!used.has(s)))];
+    if(!list.length) return;
+    list.forEach(s=>used.add(s));
+    groups.push({name:group.name,subjects:list});
+  });
+  subjects.forEach(subj=>{
+    if(used.has(subj)||subj==='REH') return;
+    used.add(subj);
+    groups.push({name:subjectTeacherBaseName(subj),subjects:[subj]});
+  });
+  return groups;
+}
+
+function setupTeacherCount(total){
+  const minLoad=21;
+  return Math.max(1,Math.floor(total/minLoad));
+}
+
 function resetGeneratedSchoolState(type,classroomCount){
   const config=SCHOOL_SETUP_PLANS[type]||SCHOOL_SETUP_PLANS.middle;
   GRADES=[...config.grades];
@@ -801,14 +841,15 @@ function resetGeneratedSchoolState(type,classroomCount){
   const nextTeachers=[];
   let nextId=1;
   const subjectTeachers={};
-  Object.entries(subjectTotals).forEach(([subj,total])=>{
-    const divisor=isElectiveSubject(subj)?24:21;
-    const count=Math.max(1,Math.ceil(total/divisor));
-    subjectTeachers[subj]=[];
+  setupTeacherGroups(type,SUBJECTS).forEach(group=>{
+    const total=group.subjects.reduce((sum,subj)=>sum+(subjectTotals[subj]||0),0);
+    if(total<=0) return;
+    const count=setupTeacherCount(total);
+    group.subjects.forEach(subj=>{subjectTeachers[subj]=[];});
     for(let i=1;i<=count;i++){
-      const teacher={id:nextId++,name:`${i}. ${subjectTeacherBaseName(subj)} Öğretmeni`,subjects:[subj],assignments:[],hours:0};
+      const teacher={id:nextId++,name:`${i}. ${group.name} Öğretmeni`,subjects:[...group.subjects],assignments:[],hours:0};
       nextTeachers.push(teacher);
-      subjectTeachers[subj].push(teacher);
+      group.subjects.forEach(subj=>subjectTeachers[subj].push(teacher));
     }
   });
 
