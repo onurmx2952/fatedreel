@@ -804,8 +804,13 @@ function setupTeacherGroups(type,subjects){
 }
 
 function setupTeacherCount(total){
-  const minLoad=21;
-  return Math.max(1,Math.floor(total/minLoad));
+  const preferredMin=21;
+  const softMin=17;
+  const maxLoad=30;
+  let count=Math.max(1,Math.ceil(total/maxLoad));
+  while(total/(count+1)>=preferredMin) count++;
+  if(total/count<softMin) count=Math.max(1,Math.floor(total/softMin));
+  return count;
 }
 
 function resetGeneratedSchoolState(type,classroomCount){
