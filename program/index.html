@@ -714,7 +714,7 @@ const SCHOOL_SETUP_PLANS={
 
 const SUBJECT_LONG_NAMES={
   TRK:'Türkçe', MAT:'Matematik', FEN:'Fen', SOSYAL:'Sosyal', DİN:'Din', ING:'İngilizce',
-  BEDEN:'Beden', GÖN:'Görsel Sanatlar', SAN:'Görsel Sanatlar', MÖZ:'Müzik', 'BİL.TAR':'Bilişim',
+  BEDEN:'Beden', GÖN:'Görsel Sanatlar', SAN:'Sanat', MÖZ:'Müzik', 'BİL.TAR':'Bilişim',
   'TEK.TAS':'Teknoloji Tasarım', 'INK.TAR':'İnkılap Tarihi', REH:'Rehberlik',
   TDE:'Türk Dili ve Edebiyatı', TAR:'Tarih', COG:'Coğrafya', 'FİZ':'Fizik', 'KİM':'Kimya',
   'BİY':'Biyoloji', FEL:'Felsefe', 'SAĞLIK':'Sağlık Bilgisi', 'GÖN/MÖZ':'Sanat',
@@ -785,7 +785,6 @@ function setupTeacherGroups(type,subjects){
       ]
     : [
         {name:'Sosyal',subjects:pickSetupSubjects(subjects,['SOSYAL','INK.TAR'])},
-        {name:'Sanat',subjects:pickSetupSubjects(subjects,['GÖN','SAN'])},
         {name:'Bilişim Teknoloji',subjects:pickSetupSubjects(subjects,['BİL.TAR','TEK.TAS'])},
         {name:'Seçmeli',subjects:subjects.filter(isElectiveSubject)},
       ];
