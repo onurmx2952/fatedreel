@@ -806,7 +806,8 @@ function setupTeacherGroups(type,subjects){
 
 function setupBaseTeacherCount(total){
   const preferredMin=21;
-  return Math.max(1,Math.floor(total/preferredMin));
+  const hardMax=30;
+  return Math.max(1,Math.max(Math.ceil(total/hardMax),Math.floor(total/preferredMin)));
 }
 
 function setupTeacherGroupPlans(type,subjects,subjectTotals){
