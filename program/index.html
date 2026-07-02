@@ -356,7 +356,6 @@ body.auth-locked .login-screen{display:flex}
       <div class="settings-actions">
         <button class="btn" onclick="openCloudProgramData()">Aç</button>
         <button class="btn primary" onclick="manualSaveCloudData()">Kaydet</button>
-        <button class="btn" onclick="reopenSchoolSetup()">Okul kurulumunu yeniden aç</button>
         <button class="btn" onclick="resetToDefaultProgram()">Default ayarlara döndür</button>
         <button class="btn danger" onclick="deleteCloudProgramData()">Sil</button>
       </div>
@@ -741,10 +740,6 @@ function skipInitialSetup(){
   lastSavedState=JSON.stringify(programState());
 }
 
-function reopenSchoolSetup(){
-  showSetupWizard();
-}
-
 function planTuplesToObjects(plan){
   return plan.map(([subj,wh])=>({subj,wh}));
 }
@@ -808,14 +803,29 @@ function setupTeacherGroups(type,subjects){
   return groups;
 }
 
-function setupTeacherCount(total){
+function setupBaseTeacherCount(total){
   const preferredMin=21;
-  const softMin=17;
-  const maxLoad=30;
-  let count=Math.max(1,Math.ceil(total/maxLoad));
-  while(total/(count+1)>=preferredMin) count++;
-  if(total/count<softMin) count=Math.max(1,Math.floor(total/softMin));
-  return count;
+  return Math.max(1,Math.floor(total/preferredMin));
+}
+
+function setupTeacherGroupPlans(type,subjects,subjectTotals){
+  const groups=setupTeacherGroups(type,subjects).map(group=>{
+    const total=group.subjects.reduce((sum,subj)=>sum+(subjectTotals[subj]||0),0);
+    const baseCount=setupBaseTeacherCount(total);
+    return {
+      ...group,
+      total,
+      count:baseCount,
+      canAddExtra:total>0 && total/(baseCount+1)>=17,
+    };
+  }).filter(group=>group.total>0);
+  const extraLimit=Math.ceil(groups.length*0.3);
+  groups
+    .filter(group=>group.canAddExtra)
+    .sort((a,b)=>(b.total/b.count)-(a.total/a.count) || b.total-a.total)
+    .slice(0,extraLimit)
+    .forEach(group=>{group.count++;});
+  return groups;
 }
 
 function resetGeneratedSchoolState(type,classroomCount){
@@ -851,10 +861,8 @@ function resetGeneratedSchoolState(type,classroomCount){
   const nextTeachers=[];
   let nextId=1;
   const subjectTeachers={};
-  setupTeacherGroups(type,SUBJECTS).forEach(group=>{
-    const total=group.subjects.reduce((sum,subj)=>sum+(subjectTotals[subj]||0),0);
-    if(total<=0) return;
-    const count=setupTeacherCount(total);
+  setupTeacherGroupPlans(type,SUBJECTS,subjectTotals).forEach(group=>{
+    const count=group.count;
     group.subjects.forEach(subj=>{subjectTeachers[subj]=[];});
     for(let i=1;i<=count;i++){
       const teacher={id:nextId++,name:`${i}. ${group.name} Öğretmeni`,subjects:[...group.subjects],assignments:[],hours:0};
