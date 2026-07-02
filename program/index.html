@@ -3256,6 +3256,7 @@ function saveLessonPlans(){
     nextPlans[g]=plan;
   });
   GRADES.forEach(g=>{GRADE_PLAN[g]=nextPlans[g];});
+  migrateVisualArtsRows();
   refreshClassPlans();
   syncSubjectsFromPlans();
   const syncResult=reconcileDistributionWithClassPlans();
@@ -3965,7 +3966,9 @@ function applyProgramState(data){
   if(hasSavedUnavailable) teacherUnavailable=data.teacherUnavailable;
   if(data.schedule&&typeof data.schedule==='object') schedule=data.schedule;
   if(data.settings) settings=data.settings;
+  migrateVisualArtsRows();
   migrateReligionTwoHours();
+  migrateVisualArtsRows();
   if(!hasSavedClassPlan) refreshClassPlans();
   if(!hasManualDistribution()||distributionOverCapacity()) seedDefaultDistribution();
   if(!hasSavedUnavailable) seedDefaultTeacherUnavailable(true);
@@ -4003,6 +4006,26 @@ function migrateReligionTwoHours(){
   });
 }
 
+function migrateVisualArtsRows(){
+  Object.values(GRADE_PLAN).forEach(plan=>{
+    const hasGon=plan.some(l=>l.subj==='GÖN');
+    const hasSan=plan.some(l=>l.subj==='SAN');
+    if(hasGon&&hasSan){
+      for(let i=plan.length-1;i>=0;i--) if(plan[i].subj==='SAN') plan.splice(i,1);
+    }
+  });
+  Object.entries(CLASS_PLAN).forEach(([cls,plan])=>{
+    const section=String(cls).split('-')[1]||'';
+    const keepSubj=['B','D','F'].includes(section)?'SAN':'GÖN';
+    const dropSubj=keepSubj==='SAN'?'GÖN':'SAN';
+    const hasKeep=plan.some(l=>l.subj===keepSubj);
+    const hasDrop=plan.some(l=>l.subj===dropSubj);
+    if(hasKeep&&hasDrop){
+      for(let i=plan.length-1;i>=0;i--) if(plan[i].subj===dropSubj) plan.splice(i,1);
+    }
+  });
+}
+
 function hasManualDistribution(){
   return teachers.some(t=>(t.assignments||[]).some(a=>a.manual));
 }
@@ -4016,11 +4039,12 @@ function distributionOverCapacity(){
 }
 
 function distributionClassHoursInvalid(){
+  const target=weeklyTargetHours();
   const totals=Object.fromEntries(ALL_CLASSES.map(cls=>[cls,0]));
   teachers.forEach(t=>(t.assignments||[]).forEach(a=>{
     if(totals[a.cls]!==undefined) totals[a.cls]+=parseInt(a.wh)||0;
   }));
-  return ALL_CLASSES.some(cls=>totals[cls]!==35);
+  return ALL_CLASSES.some(cls=>totals[cls]!==target);
 }
 
 async function apiFetch(path,options={}){
