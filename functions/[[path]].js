@@ -307,7 +307,7 @@ async function callSolverWithRetry(solverUrl, body) {
   return {
     ok: false,
     httpStatus: 200,
-    error: 'OR-Tools servisine ulasilamadi. Render free plan soguk aciliyor veya istek zaman asimina dustu; veri degistirmeden tekrar denenebilir.',
+    error: 'OR-Tools servisine ulasilamadi veya istek zaman asimina dustu. Lokal solver ve Cloudflare Tunnel calisiyorsa veri degistirmeden tekrar denenebilir.',
     transient: true
   };
 }

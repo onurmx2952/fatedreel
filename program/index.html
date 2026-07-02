@@ -1210,7 +1210,7 @@ async function solveWithOrTools(){
     }
   }
   if(lastResult?.network){
-    lastResult.error='Solver servisi uyanamadı veya bağlantı kesildi. Birazdan tekrar deneyin; veri değiştirmenize gerek yok.';
+    lastResult.error='Solver isteği zaman aşımına düştü veya bağlantı anlık kesildi. Veri değiştirmenize gerek yok; tekrar deneyebilirsiniz.';
   }
   if(String(lastResult?.status||'').toUpperCase()==='UNKNOWN'){
     lastResult.error='OR-Tools 20 saniye içinde programı oturtamadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.';
