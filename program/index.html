@@ -2669,7 +2669,7 @@ function saveCell(tid,day,hour){
 function clearCell(tid,day,hour){delete schedule[`${tid}_${day}_${hour}`]; closeM('emodal'); renderTable();}
 function closeM(id){document.getElementById(id).classList.remove('open');}
 document.getElementById('emodal').addEventListener('click',e=>{if(e.target===e.currentTarget) closeM('emodal');});
-document.getElementById('tmodal').addEventListener('click',e=>{if(e.target===e.currentTarget) closeM('tmodal');});
+document.getElementById('tmodal').addEventListener('click',e=>{e.stopPropagation();});
 
 function renderClassView(){
   if(!selectedClass) selectedClass=ALL_CLASSES[0];
@@ -3470,6 +3470,7 @@ function renderTeachers(){
 }
 function openAddT(){document.getElementById('tmodal-title').textContent='Öğretmen Ekle';document.getElementById('tmodal-body').innerHTML=tForm({});document.getElementById('tmodal').classList.add('open');setTimeout(()=>renderTeacherQuickClassPick(null),0);}
 function openEditT(id){const t=teachers.find(x=>x.id===id);document.getElementById('tmodal-title').textContent='Düzenle';document.getElementById('tmodal-body').innerHTML=tForm(t,id);document.getElementById('tmodal').classList.add('open');setTimeout(()=>renderTeacherQuickClassPick(id),0);}
+document.getElementById('tmodal-body').addEventListener('click',e=>e.stopPropagation());
 function tForm(t,id){
   const selected=new Set(t.subjects||[]);
   const subjectBoxes=SUBJECTS.map(s=>`<label class="subject-choice"><input type="checkbox" class="f-subj-cb" value="${s}"${selected.has(s)?' checked':''}> ${s}</label>`).join('');
