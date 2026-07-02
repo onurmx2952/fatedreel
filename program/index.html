@@ -3210,15 +3210,40 @@ function renderDistribution(){
 
 function distributionRowHtml(tid=teachers[0]?.id,cls=ALL_CLASSES[0],subj=SUBJECTS[0],wh=1){
   tid=tid===''?'':parseInt(tid);
-  const teacherOpts=`<option value=""${tid===''?' selected':''}>Öğretmen seçin</option>`+teachers.map(t=>`<option value="${t.id}"${t.id===tid?' selected':''}>${t.name}</option>`).join('');
+  const teacherOpts=distributionTeacherOptions(tid,cls,subj);
   const subjList=SUBJECTS.includes(subj)?SUBJECTS:[subj,...SUBJECTS].filter(Boolean);
   const subjOpts=subjList.map(s=>`<option value="${s}"${s===subj?' selected':''}>${s}</option>`).join('');
   return `<div class="dist-row dist-grid" data-cls="${cls}">
-    <select class="dist-subj" onchange="updateDistributionTotals()">${subjOpts}</select>
+    <select class="dist-subj" onchange="refreshDistributionTeacherOptions(this.closest('.dist-row'));updateDistributionTotals()">${subjOpts}</select>
     <select class="dist-teacher" onchange="updateDistributionTotals()">${teacherOpts}</select>
     <input class="dist-wh" type="number" min="1" max="10" value="${wh}" oninput="updateDistributionTotals()">
     <button class="btn danger mini" onclick="this.closest('.dist-row').remove();updateDistributionTotals()">Sil</button>
   </div>`;
+}
+
+function distributionTeacherOptions(tid='',cls='',subj=''){
+  tid=tid===''?'':parseInt(tid);
+  let list=teachers;
+  if(subj==='REH'){
+    list=teachers.filter(t=>teacherHasClassLesson(t.id,cls)&&teacherCanTakeRehClass(t.id,cls));
+    if(tid!==''&&!list.some(t=>t.id===tid)){
+      const selected=teachers.find(t=>t.id===tid);
+      if(selected) list=[selected,...list];
+    }
+  }
+  const emptyText=subj==='REH'?'Rehberlik için uygun öğretmen seçin':'Öğretmen seçin';
+  return `<option value=""${tid===''?' selected':''}>${emptyText}</option>`+
+    list.map(t=>`<option value="${t.id}"${t.id===tid?' selected':''}>${t.name}</option>`).join('');
+}
+
+function refreshDistributionTeacherOptions(row){
+  if(!row) return;
+  const subj=row.querySelector('.dist-subj')?.value||'';
+  const teacherSelect=row.querySelector('.dist-teacher');
+  if(!teacherSelect) return;
+  const current=teacherSelect.value;
+  teacherSelect.innerHTML=distributionTeacherOptions(current,row.dataset.cls,subj);
+  if(current&&Array.from(teacherSelect.options).some(opt=>opt.value===current)) teacherSelect.value=current;
 }
 
 function selectDistributionClass(cls){
