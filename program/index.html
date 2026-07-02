@@ -820,13 +820,21 @@ function setupTeacherGroupPlans(type,subjects,subjectTotals){
     };
   }).filter(group=>group.total>0);
   const extraLimit=Math.ceil(groups.length*0.3);
+  const belowSoftLimit=Math.floor(groups.length*0.1);
+  let belowSoftCount=0;
   const candidates=groups
-    .filter(group=>group.canAddExtra)
+    .filter(group=>group.canAddExtra || belowSoftCount<belowSoftLimit)
     .sort(()=>Math.random()-0.5)
     .slice(0,extraLimit);
   candidates.forEach(group=>{
+    let extra=1;
     const canAddTwo=group.total/(group.count+2)>=17;
-    const extra=canAddTwo && Math.random()<0.45 ? 2 : 1;
+    if(canAddTwo && Math.random()<0.45) extra=2;
+    const wouldBelow=group.total/(group.count+extra)<17;
+    if(wouldBelow){
+      if(belowSoftCount>=belowSoftLimit) return;
+      belowSoftCount++;
+    }
     group.count+=extra;
   });
   return groups;
