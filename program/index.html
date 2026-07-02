@@ -3169,18 +3169,21 @@ function assignRandomFreeDaysToHalfTeachers(){
   const half=Math.ceil(remaining.length/2);
   let morningAssigned=0;
   let lastAssigned=0;
+  let twoHourAssigned=0;
   remaining.forEach((teacher,idx)=>{
-    const hours=idx<half ? firstThreeHours() : lastThreeHours();
+    const useTwoHour=idx%2===1;
+    const hours=idx<half ? firstEdgeHours(useTwoHour?2:3) : lastEdgeHours(useTwoHour?2:3);
     const protectedDay=settings.days[(randomSortKey(teacher)+idx*3+1)%settings.days.length];
     clearTeacherDayUnavailable(teacher.id,protectedDay);
     const wrote=addPatternBlockedSlots(teacher.id,hours,protectedDay);
     if(wrote>0 && idx<half) morningAssigned++;
     if(wrote>0 && idx>=half) lastAssigned++;
+    if(wrote>0 && useTwoHour) twoHourAssigned++;
   });
 
   trimUnavailableToTeacherLoads();
   renderBlockedView();
-  showAlert(`${assigned} öğretmene tam gün boşluk verildi. Kalanlardan ${morningAssigned} öğretmenin ilk 3 saati, ${lastAssigned} öğretmenin son 3 saati kapatıldı. Sabah/çıkış boşluğu verilen her öğretmende haftada en az bir gün tamamen açık bırakıldı. Programı yeniden oluşturabilirsiniz.`,assigned?'ok':'warn');
+  showAlert(`${assigned} öğretmene tam gün boşluk verildi. Kalanlardan ${morningAssigned} öğretmene sabah, ${lastAssigned} öğretmene çıkış boşluğu verildi; ${twoHourAssigned} öğretmende blok 2 saate esnetildi. Her öğretmende haftada en az bir gün tamamen açık bırakıldı. Programı yeniden oluşturabilirsiniz.`,assigned?'ok':'warn');
   scheduleAutoSave();
 }
 
@@ -3210,12 +3213,12 @@ function clearTeacherDayUnavailable(tid,day){
   for(let h=0;h<settings.hoursPerDay;h++) delete teacherUnavailable[tid][`${day}_${h}`];
 }
 
-function firstThreeHours(){
-  return Array.from({length:Math.min(3,settings.hoursPerDay)},(_,h)=>h);
+function firstEdgeHours(count=3){
+  return Array.from({length:Math.min(count,settings.hoursPerDay)},(_,h)=>h);
 }
 
-function lastThreeHours(){
-  const start=Math.max(0,settings.hoursPerDay-3);
+function lastEdgeHours(count=3){
+  const start=Math.max(0,settings.hoursPerDay-count);
   return Array.from({length:settings.hoursPerDay-start},(_,i)=>start+i);
 }
 
@@ -3697,7 +3700,8 @@ function seedDefaultTeacherUnavailable(force=false){
 
   partialTeachers.forEach((t,idx)=>{
     const day=settings.days[(stableTeacherRank(t)+idx*2)%settings.days.length];
-    const hours=idx%2===0?morningHours():lateDayHours();
+    const useTwoHour=idx%4>=2;
+    const hours=idx%2===0?morningHours(useTwoHour?2:3):lateDayHours(useTwoHour?2:3);
     addBlockedSlotsForTeacher(result,t.id,settings.days.includes(day)?day:settings.days[0],hours,teacherAssignedHours(t.id));
   });
 
@@ -3714,12 +3718,12 @@ function fullDayHours(){
   return Array.from({length:settings.hoursPerDay},(_,h)=>h);
 }
 
-function morningHours(){
-  return Array.from({length:Math.min(4,settings.hoursPerDay)},(_,h)=>h);
+function morningHours(count=3){
+  return Array.from({length:Math.min(count,settings.hoursPerDay)},(_,h)=>h);
 }
 
-function lateDayHours(){
-  const start=Math.min(5,settings.hoursPerDay);
+function lateDayHours(count=3){
+  const start=Math.max(0,settings.hoursPerDay-count);
   return Array.from({length:Math.max(0,settings.hoursPerDay-start)},(_,i)=>start+i);
 }
 
