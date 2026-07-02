@@ -810,10 +810,12 @@ function setupBaseTeacherCount(total){
   return Math.max(1,Math.max(Math.ceil(total/hardMax),Math.floor(total/preferredMin)));
 }
 
-function setupTeacherGroupPlans(type,subjects,subjectTotals){
+function setupTeacherGroupPlans(type,subjects,subjectTotals,options={}){
+  const oddClassroomCount=!!options.oddClassroomCount;
   const groups=setupTeacherGroups(type,subjects).map(group=>{
     const total=group.subjects.reduce((sum,subj)=>sum+(subjectTotals[subj]||0),0);
-    const baseCount=setupBaseTeacherCount(total);
+    let baseCount=setupBaseTeacherCount(total);
+    if(oddClassroomCount && total/baseCount>24 && total/(baseCount+1)>=14) baseCount++;
     return {
       ...group,
       total,
@@ -875,7 +877,7 @@ function resetGeneratedSchoolState(type,classroomCount){
   const nextTeachers=[];
   let nextId=1;
   const subjectTeachers={};
-  setupTeacherGroupPlans(type,SUBJECTS,subjectTotals).forEach(group=>{
+  setupTeacherGroupPlans(type,SUBJECTS,subjectTotals,{oddClassroomCount:ALL_CLASSES.length%2===1}).forEach(group=>{
     const count=group.count;
     group.subjects.forEach(subj=>{subjectTeachers[subj]=[];});
     for(let i=1;i<=count;i++){
