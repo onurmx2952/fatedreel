@@ -776,7 +776,9 @@ function pickSetupSubjects(subjects,names){
 function setupTeacherGroups(type,subjects){
   const groupDefs=type==='high'
     ? [
-        {name:'Sosyal Bilimler',subjects:pickSetupSubjects(subjects,['TAR','INK.TAR','COG','FEL'])},
+        {name:'Tarih',subjects:pickSetupSubjects(subjects,['TAR','INK.TAR'])},
+        {name:'Coğrafya',subjects:pickSetupSubjects(subjects,['COG'])},
+        {name:'Felsefe',subjects:pickSetupSubjects(subjects,['FEL'])},
         {name:'Biyoloji Sağlık',subjects:pickSetupSubjects(subjects,['BİY','SAĞLIK'])},
         {name:'Seçmeli',subjects:subjects.filter(isElectiveSubject)},
         {name:'Sanat',subjects:pickSetupSubjects(subjects,['GÖN/MÖZ','BEDEN/GÖN/MÖZ'])},
