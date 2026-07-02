@@ -3615,8 +3615,12 @@ function importCSVText(text){
   const classPattern=new RegExp(`^(${ALL_CLASSES.map(c=>c.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')})\\s+(.+)$`);
   rows.slice(1).forEach(row=>{
     const teacherName=(row[0]||'').trim();
-    const teacher=teachers.find(t=>t.name===teacherName);
-    if(!teacher) return;
+    if(!teacherName) return;
+    let teacher=teachers.find(t=>t.name===teacherName);
+    if(!teacher){
+      teacher={id:Math.max(0,...teachers.map(t=>t.id))+1,name:teacherName,hours:0,subjects:[],assignments:[]};
+      teachers.push(teacher);
+    }
     let index=1;
     settings.days.forEach(d=>{
       for(let h=0;h<settings.hoursPerDay;h++,index++){
@@ -3627,6 +3631,7 @@ function importCSVText(text){
         const cls=match[1];
         const subj=match[2].trim();
         if(subj&&!SUBJECTS.includes(subj)) SUBJECTS.push(subj);
+        if(subj&&!teacher.subjects.includes(subj)) teacher.subjects.push(subj);
         nextSchedule[`${teacher.id}_${d}_${h}`]={cls,subj};
         imported++;
       }
@@ -3634,7 +3639,9 @@ function importCSVText(text){
   });
   if(!imported) throw new Error('CSV okundu ama eşleşen öğretmen/program hücresi bulunamadı.');
   schedule=nextSchedule;
+  teachers.forEach(t=>{t.hours=settings.days.reduce((sum,d)=>sum+Array.from({length:settings.hoursPerDay},(_,h)=>schedule[`${t.id}_${d}_${h}`]?1:0).reduce((a,b)=>a+b,0),0);});
   renderTable();
+  renderTeachers();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
   scheduleAutoSave();
 }
