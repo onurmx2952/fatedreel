@@ -140,6 +140,8 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .dist-grid{display:grid;grid-template-columns:1.1fr 1.5fr 90px 70px;gap:8px;align-items:center;padding:8px 10px;border-bottom:1px solid #eef2f7}
 .dist-grid.head{background:#f8fafc;color:#64748b;font-weight:800;font-size:12px;position:sticky;top:0;z-index:1}
 .dist-grid select,.dist-grid input{height:34px;border:1px solid #cbd5e1;border-radius:9px;padding:6px 8px;background:#fff;font-size:12px;width:100%}
+.dist-row.missing-teacher{background:#fff7ed}
+.dist-row.missing-teacher .dist-teacher{border-color:#f97316;background:#fff7ed;color:#9a3412;font-weight:800}
 .color-chip{display:inline-flex;width:10px;height:10px;border-radius:999px;margin-right:6px;vertical-align:middle;border:1px solid rgba(15,23,42,.08)}
 .auth-bar{display:flex;align-items:center;gap:8px;margin-left:auto}
 .auth-user{font-size:12px;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;padding:6px 10px;display:none;align-items:center;gap:8px}
@@ -3213,9 +3215,9 @@ function distributionRowHtml(tid=teachers[0]?.id,cls=ALL_CLASSES[0],subj=SUBJECT
   const teacherOpts=distributionTeacherOptions(tid,cls,subj);
   const subjList=SUBJECTS.includes(subj)?SUBJECTS:[subj,...SUBJECTS].filter(Boolean);
   const subjOpts=subjList.map(s=>`<option value="${s}"${s===subj?' selected':''}>${s}</option>`).join('');
-  return `<div class="dist-row dist-grid" data-cls="${cls}">
+  return `<div class="dist-row dist-grid ${tid===''?'missing-teacher':''}" data-cls="${cls}">
     <select class="dist-subj" onchange="refreshDistributionTeacherOptions(this.closest('.dist-row'));updateDistributionTotals()">${subjOpts}</select>
-    <select class="dist-teacher" onchange="updateDistributionTotals()">${teacherOpts}</select>
+    <select class="dist-teacher" onchange="markDistributionRowState(this.closest('.dist-row'));updateDistributionTotals()">${teacherOpts}</select>
     <input class="dist-wh" type="number" min="1" max="10" value="${wh}" oninput="updateDistributionTotals()">
     <button class="btn danger mini" onclick="this.closest('.dist-row').remove();updateDistributionTotals()">Sil</button>
   </div>`;
@@ -3244,6 +3246,11 @@ function refreshDistributionTeacherOptions(row){
   const current=teacherSelect.value;
   teacherSelect.innerHTML=distributionTeacherOptions(current,row.dataset.cls,subj);
   if(current&&Array.from(teacherSelect.options).some(opt=>opt.value===current)) teacherSelect.value=current;
+  markDistributionRowState(row);
+}
+
+function markDistributionRowState(row){
+  row?.classList.toggle('missing-teacher',!row.querySelector('.dist-teacher')?.value);
 }
 
 function selectDistributionClass(cls){
@@ -3871,8 +3878,8 @@ function showAccountRecordsModal(cloudData=null,error='',versions=[]){
         </div>
       </div>
     </div>
-    <div style="font-size:14px;font-weight:700;margin:14px 0 8px">Eski kayıtlar</div>
-    ${versionRows||`<div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">Henüz eski kayıt yok.</div>`}
+    <div style="font-size:14px;font-weight:700;margin:14px 0 8px">Son 20 dakikadaki kayıtlar</div>
+    ${versionRows||`<div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">Son 20 dakika içinde kayıt yok.</div>`}
     ${error?`<div class="alert warn">${h(error)}</div>`:''}
     <div class="m-actions"><button class="btn" onclick="closeM('emodal')">Kapat</button></div>`;
   document.getElementById('emodal').classList.add('open');

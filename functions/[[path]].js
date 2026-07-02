@@ -146,12 +146,29 @@ async function handleProgramApi(context, requestUrl) {
       `).bind(user.id, dataJson).run();
 
       const lastVersion = await context.env.PROGRAM_DB.prepare(
-        'SELECT data_json FROM program_data_versions WHERE user_id = ? ORDER BY id DESC LIMIT 1'
+        'SELECT id, data_json FROM program_data_versions WHERE user_id = ? ORDER BY id DESC LIMIT 1'
       ).bind(user.id).first();
       if (lastVersion?.data_json !== dataJson) {
+        const minuteVersion = await context.env.PROGRAM_DB.prepare(`
+          SELECT id
+          FROM program_data_versions
+          WHERE user_id = ?
+            AND strftime('%Y-%m-%d %H:%M', created_at) = strftime('%Y-%m-%d %H:%M', CURRENT_TIMESTAMP)
+          ORDER BY id DESC
+          LIMIT 1
+        `).bind(user.id).first();
+        if (minuteVersion?.id) {
+          await context.env.PROGRAM_DB.prepare(`
+            UPDATE program_data_versions
+            SET data_json = ?,
+                label = COALESCE(?, label)
+            WHERE user_id = ? AND id = ?
+          `).bind(dataJson, body.label || null, user.id, minuteVersion.id).run();
+        } else {
         await context.env.PROGRAM_DB.prepare(
           'INSERT INTO program_data_versions (user_id, data_json, label, created_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)'
         ).bind(user.id, dataJson, body.label || null).run();
+        }
         await context.env.PROGRAM_DB.prepare(`
           DELETE FROM program_data_versions
           WHERE user_id = ? AND id NOT IN (
@@ -175,8 +192,9 @@ async function handleProgramApi(context, requestUrl) {
         SELECT id, label, created_at, length(data_json) AS bytes
         FROM program_data_versions
         WHERE user_id = ?
+          AND datetime(created_at) >= datetime(CURRENT_TIMESTAMP, '-20 minutes')
         ORDER BY id DESC
-        LIMIT 25
+        LIMIT 20
       `).bind(user.id).all();
 
       return jsonResponse({ versions: rows.results || [] });
