@@ -2990,9 +2990,10 @@ function renderLessonPlans(){
   root.innerHTML=GRADES.map(g=>{
     const plan=GRADE_PLAN[g]||[];
     const total=plan.reduce((s,l)=>s+l.wh,0);
+    const totalOk=total===35;
     return `<div class="t-card">
       <div class="t-nm">${g}. Sınıf Dersleri</div>
-      <div class="t-meta">Toplam: ${total} / 35 saat</div>
+      <div class="t-meta lesson-total" data-grade="${g}" style="color:${totalOk?'#15803d':'#b91c1c'};font-weight:${totalOk?'700':'800'}">Toplam: ${total} / 35 saat</div>
       <div id="lesson-plan-${g}">${plan.map(l=>lessonRowHtml(g,l.subj,l.wh)).join('')}</div>
       <div style="display:flex;gap:8px;margin-top:10px">
         <button class="btn" onclick="addLessonRow(${g})">+ Ders ekle</button>
@@ -3005,34 +3006,48 @@ function renderLessonPlans(){
 function lessonRowHtml(g,subj='',wh=1){
   const opts=SUBJECTS.map(s=>`<option value="${s}"${s===subj?' selected':''}>${s}</option>`).join('');
   return `<div class="pick-row lesson-row" data-grade="${g}">
-    <select class="lesson-subj">${opts}</select>
-    <input class="lesson-wh" type="number" min="1" max="10" value="${wh}">
-    <button class="btn danger mini" onclick="this.closest('.lesson-row').remove()">Sil</button>
+    <select class="lesson-subj" onchange="updateLessonTotal(${g})">${opts}</select>
+    <input class="lesson-wh" type="number" min="1" max="10" value="${wh}" oninput="updateLessonTotal(${g})">
+    <button class="btn danger mini" onclick="this.closest('.lesson-row').remove();updateLessonTotal(${g})">Sil</button>
   </div>`;
 }
 
 function addLessonRow(g){
   document.getElementById(`lesson-plan-${g}`).insertAdjacentHTML('beforeend',lessonRowHtml(g,SUBJECTS[0]||'',1));
+  updateLessonTotal(g);
+}
+
+function updateLessonTotal(g){
+  const total=Array.from(document.querySelectorAll(`#lesson-plan-${g} .lesson-wh`))
+    .reduce((sum,input)=>sum+(parseInt(input.value)||0),0);
+  const el=document.querySelector(`.lesson-total[data-grade="${g}"]`);
+  if(!el) return;
+  el.textContent=`Toplam: ${total} / 35 saat`;
+  const ok=total===35;
+  el.style.color=ok?'#15803d':'#b91c1c';
+  el.style.fontWeight=ok?'700':'800';
 }
 
 function saveLessonPlans(){
-  let errors=[];
+  let warnings=[];
   const nextPlans={};
   GRADES.forEach(g=>{
     const rows=Array.from(document.querySelectorAll(`#lesson-plan-${g} .lesson-row`));
     const plan=rows.map(row=>({subj:row.querySelector('.lesson-subj').value,wh:parseInt(row.querySelector('.lesson-wh').value)||0})).filter(l=>l.subj&&l.wh>0);
     const total=plan.reduce((s,l)=>s+l.wh,0);
-    if(total!==35) errors.push(`${g}. sınıf toplamı ${total}; 35 olmalı`);
+    if(total!==35) warnings.push(`${g}. sınıf toplamı ${total}/35`);
     nextPlans[g]=plan;
   });
-  if(errors.length){showAlert(errors[0],'warn');return;}
   GRADES.forEach(g=>{GRADE_PLAN[g]=nextPlans[g];});
   refreshClassPlans();
   syncSubjectsFromPlans();
   const syncResult=reconcileDistributionWithClassPlans();
   renderLessonPlans();
   if(document.getElementById('view-distribution').classList.contains('active')) renderDistribution();
-  showAlert(`Ders saatleri kaydedildi. ${syncResult.added} ders dağıtım satırı öğretmen seçimi bekliyor. Programı yeniden oluşturmadan önce Ders Dağıtımı ekranından öğretmenleri seçin.`,'ok');
+  const msg=warnings.length
+    ? `Ders saatleri kaydedildi ama toplam 35 olmayan düzey var: ${warnings.join(', ')}. Program oluşturmadan önce 35'e tamamlayın.`
+    : `Ders saatleri kaydedildi. ${syncResult.added} ders dağıtım satırı öğretmen seçimi bekliyor. Programı yeniden oluşturmadan önce Ders Dağıtımı ekranından öğretmenleri seçin.`;
+  showAlert(msg,warnings.length?'warn':'ok');
   scheduleAutoSave();
 }
 
