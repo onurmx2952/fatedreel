@@ -1222,8 +1222,66 @@ function formatOrToolsFailure(result){
   const timedOut=status==='UNKNOWN';
   const base=result?.error||(impossible?'Bu veriyle program matematiksel olarak imkansız görünüyor.':'OR-Tools solver servisi bağlı değil. Cloudflare için ORTOOLS_SOLVER_URL ayarlanmalı veya lokal Python solver çalıştırılmalı.');
   const issues=Array.isArray(result?.issues)?result.issues:[];
+  if(timedOut) lastSolverOpeningHints=issues.slice(0,8);
   if(!issues.length) return h(base);
-  return `${h(base)}<br><b>${impossible?'İmkansızlık nedeni':timedOut?'Boş saat önerisi':'Öneri'}:</b><br>${issues.slice(0,8).map(x=>`• ${h(x)}`).join('<br>')}`;
+  const applyBtn=timedOut?`<div style="margin-top:12px"><button class="btn primary" onclick="applySolverOpeningHints()">Önerileri uygula</button></div>`:'';
+  return `${h(base)}<br><b>${impossible?'İmkansızlık nedeni':timedOut?'Boş saat önerisi':'Öneri'}:</b><br>${issues.slice(0,8).map(x=>`• ${h(x)}`).join('<br>')}${applyBtn}`;
+}
+
+function parseSolverOpeningHint(text){
+  const raw=String(text||'').trim();
+  const teacherMatch=raw.match(/^(.+?) öğretmenin (.+)$/);
+  if(!teacherMatch) return null;
+  const teacherName=teacherMatch[1].trim();
+  const rest=teacherMatch[2].trim();
+  const dayName=DAYS.find(day=>rest.startsWith(day+' '));
+  if(!dayName) return null;
+  const day=DAYS.indexOf(dayName);
+  const afterDay=rest.slice(dayName.length).trim();
+  const teacher=teachers.find(t=>String(t.name||'').trim()===teacherName);
+  if(!teacher) return null;
+  if(afterDay.startsWith('boş gününü açın')){
+    return {tid:teacher.id,day,hours:Array.from({length:settings.hoursPerDay},(_,h)=>h)};
+  }
+  const hoursMatch=afterDay.match(/^(.+?) saatlerini açın\.?$/);
+  if(!hoursMatch) return null;
+  const hours=parseHourLabel(hoursMatch[1]);
+  return hours.length?{tid:teacher.id,day,hours}:null;
+}
+
+function parseHourLabel(label){
+  const cleaned=String(label||'').replace(/\./g,'').trim();
+  const hours=[];
+  cleaned.split(',').map(x=>x.trim()).filter(Boolean).forEach(part=>{
+    const range=part.match(/^(\d+)\s*-\s*(\d+)$/);
+    if(range){
+      const a=parseInt(range[1],10);
+      const b=parseInt(range[2],10);
+      for(let h=Math.min(a,b);h<=Math.max(a,b);h++) hours.push(h-1);
+      return;
+    }
+    const single=parseInt(part,10);
+    if(single) hours.push(single-1);
+  });
+  return [...new Set(hours)].filter(h=>h>=0&&h<settings.hoursPerDay);
+}
+
+function applySolverOpeningHints(){
+  const hints=(lastSolverOpeningHints||[]).map(parseSolverOpeningHint).filter(Boolean);
+  let opened=0;
+  hints.forEach(hint=>{
+    if(!teacherUnavailable[hint.tid]) teacherUnavailable[hint.tid]={};
+    hint.hours.forEach(hour=>{
+      const key=`${hint.day}_${hour}`;
+      if(teacherUnavailable[hint.tid][key]){
+        delete teacherUnavailable[hint.tid][key];
+        opened++;
+      }
+    });
+  });
+  renderBlockedView();
+  scheduleAutoSave();
+  showAlert(opened?`${opened} kırmızı saat önerilere göre açıldı. Programı yeniden oluşturabilirsiniz.`:'Uygulanacak kırmızı saat bulunamadı; öneriler zaten açık olabilir.','ok');
 }
 
 function isFinalSolverFailure(result){
@@ -4005,6 +4063,7 @@ let autoSaveTimer=null;
 let lastSavedState='';
 let isApplyingCloudData=false;
 let cloudDataMeta={hasData:false,updatedAt:null,bytes:0};
+let lastSolverOpeningHints=[];
 
 function programState(){
   return {
