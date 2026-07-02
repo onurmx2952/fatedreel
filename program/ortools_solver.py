@@ -416,7 +416,7 @@ def build_block_opening_hints(
     days: list[int],
     hours_per_day: int,
 ) -> list[str]:
-    candidates: list[tuple[int, str]] = []
+    candidates: list[tuple[int, str, str]] = []
     for teacher in teachers:
         tid = int(teacher.get("id"))
         name = str(teacher.get("name") or tid)
@@ -435,14 +435,75 @@ def build_block_opening_hints(
                 day_counts.setdefault(day, []).append(hour)
         for day, hours in day_counts.items():
             hours = sorted(set(hours))
-            full_day_bonus = 20 if len(hours) >= hours_per_day else 0
-            edge_bonus = 8 if all(h < 3 for h in hours) or all(h >= max(0, hours_per_day - 3) for h in hours) else 0
-            score = len(hours) * 10 + full_day_bonus + edge_bonus
-            candidates.append((score, f"{name} öğretmenin {day_name(day)} {compact_hours_label(hours)} saatlerini açın."))
-    candidates.sort(reverse=True, key=lambda item: item[0])
-    top_pool = candidates[: max(8, min(len(candidates), 18))]
-    random.shuffle(top_pool)
-    return [text for _, text in top_pool[:8]]
+            candidates.extend(opening_hint_candidates_for_day(name, day, hours, hours_per_day))
+    random.shuffle(candidates)
+    candidates.sort(reverse=True, key=lambda item: item[0] + random.randint(0, 9))
+    picked: list[str] = []
+    seen_teacher_types: dict[str, int] = {}
+    for _, text, teacher_type in candidates:
+        if seen_teacher_types.get(teacher_type, 0) >= 2:
+            continue
+        picked.append(text)
+        seen_teacher_types[teacher_type] = seen_teacher_types.get(teacher_type, 0) + 1
+        if len(picked) >= 8:
+            return picked
+    for _, text, _ in candidates:
+        if text not in picked:
+            picked.append(text)
+        if len(picked) >= 8:
+            break
+    return picked
+
+
+def opening_hint_candidates_for_day(
+    name: str,
+    day: int,
+    hours: list[int],
+    hours_per_day: int,
+) -> list[tuple[int, str, str]]:
+    teacher_type = teacher_hint_type(name)
+    candidates: list[tuple[int, str, str]] = []
+    chunks = blocked_hour_chunks(hours)
+    for chunk in chunks:
+        if len(chunk) <= 3:
+            score = len(chunk) * 12
+            candidates.append((score, f"{name} öğretmenin {day_name(day)} {compact_hours_label(chunk)} saatlerini açın.", teacher_type))
+            continue
+        for size in (2, 3):
+            possible = [chunk[i : i + size] for i in range(0, len(chunk) - size + 1)]
+            random.shuffle(possible)
+            for part in possible[:2]:
+                candidates.append((24 + size, f"{name} öğretmenin {day_name(day)} {compact_hours_label(part)} saatlerini açın.", teacher_type))
+    if len(hours) >= hours_per_day:
+        candidates.append((12, f"{name} öğretmenin {day_name(day)} boş gününü açın.", teacher_type))
+    if len(hours) > 3:
+        sample_size = 2 if random.random() < 0.55 else 3
+        possible = [hours[i : i + sample_size] for i in range(0, len(hours) - sample_size + 1)]
+        random.shuffle(possible)
+        for chunk in possible[:2]:
+            candidates.append((24, f"{name} öğretmenin {day_name(day)} {compact_hours_label(chunk)} saatlerini açın.", teacher_type))
+    return candidates
+
+
+def blocked_hour_chunks(hours: list[int]) -> list[list[int]]:
+    chunks: list[list[int]] = []
+    current: list[int] = []
+    for hour in sorted(set(hours)):
+        if current and hour != current[-1] + 1:
+            chunks.append(current)
+            current = []
+        current.append(hour)
+    if current:
+        chunks.append(current)
+    return chunks
+
+
+def teacher_hint_type(name: str) -> str:
+    cleaned = str(name)
+    parts = cleaned.split(".", 1)
+    if parts[0].strip().isdigit() and len(parts) > 1:
+        cleaned = parts[1].strip()
+    return cleaned.replace(" öğretmeni", "").replace("Öğretmeni", "").strip().lower()
 
 
 def teacher_opening_hints(
