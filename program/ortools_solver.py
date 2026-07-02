@@ -127,6 +127,28 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
     if strict.get("ok"):
         return strict
 
+    relaxed = solve_blocks_with_model(
+        blocks,
+        teachers,
+        teacher_by_id,
+        teacher_unavailable,
+        days,
+        hours_per_day,
+        with_time_limit(payload, 12),
+        relax_unavailable=True,
+    )
+    if relaxed.get("ok"):
+        adjustments = relaxed.get("adjustments") or []
+        if adjustments:
+            return {
+                "ok": False,
+                "status": "needs_openings",
+                "error": "Program, aşağıdaki kırmızı saatler açılırsa oturabiliyor.",
+                "issues": [adjustment_to_hint_text(item) for item in adjustments],
+                "adjustments": adjustments,
+            }
+        return relaxed
+
     return {
         "ok": False,
         "status": strict.get("status"),
@@ -318,6 +340,10 @@ def summarize_adjustments(slots: dict[tuple[int, int, int], dict[str, Any]]) -> 
         result.append(item)
     result.sort(key=lambda item: (str(item["teacher"]), int(item["day"])))
     return result
+
+
+def adjustment_to_hint_text(item: dict[str, Any]) -> str:
+    return f"{item['teacher']} öğretmenin {day_name(item['day'])} {compact_hours_label(item['hours'])} saatlerini açın."
 
 
 def teacher_capacity_errors(

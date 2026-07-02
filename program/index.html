@@ -1220,12 +1220,14 @@ function formatOrToolsFailure(result){
   const status=String(result?.status||'').toUpperCase();
   const impossible=status==='INFEASIBLE'||status==='HARD_IMPOSSIBLE';
   const timedOut=status==='UNKNOWN';
+  const needsOpenings=status==='NEEDS_OPENINGS';
   const base=result?.error||(impossible?'Bu veriyle program matematiksel olarak imkansız görünüyor.':'OR-Tools solver servisi bağlı değil. Cloudflare için ORTOOLS_SOLVER_URL ayarlanmalı veya lokal Python solver çalıştırılmalı.');
   const issues=Array.isArray(result?.issues)?result.issues:[];
-  if(timedOut) lastSolverOpeningHints=issues.slice(0,8);
+  if(timedOut||needsOpenings) lastSolverOpeningHints=issues.slice(0,12);
   if(!issues.length) return h(base);
-  const applyBtn=timedOut?`<div style="margin-top:12px"><button class="btn primary" onclick="applySolverOpeningHints()">Önerileri uygula</button></div>`:'';
-  return `${h(base)}<br><b>${impossible?'İmkansızlık nedeni':timedOut?'Boş saat önerisi':'Öneri'}:</b><br>${issues.slice(0,8).map(x=>`• ${h(x)}`).join('<br>')}${applyBtn}`;
+  const applyBtn=(timedOut||needsOpenings)?`<div style="margin-top:12px"><button class="btn primary" onclick="applySolverOpeningHints()">Önerileri uygula</button></div>`:'';
+  const title=impossible?'İmkansızlık nedeni':(timedOut||needsOpenings)?'Boş saat önerisi':'Öneri';
+  return `${h(base)}<br><b>${title}:</b><br>${issues.slice(0,12).map(x=>`• ${h(x)}`).join('<br>')}${applyBtn}`;
 }
 
 function parseSolverOpeningHint(text){
