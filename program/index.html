@@ -3579,7 +3579,6 @@ function importCSVFile(event){
   reader.onload=()=>{
     try{
       importCSVText(String(reader.result||''));
-      showAlert('CSV yüklendi.','ok');
     }catch(err){
       showAlert(err.message||'CSV yüklenemedi.','warn');
     }
@@ -3611,15 +3610,20 @@ function importCSVText(text){
   if(lines.length<2) throw new Error('CSV içinde program satırı bulunamadı.');
   const rows=lines.map(parseCSVLine);
   const nextSchedule={};
+  const importedTeachers=[];
+  const importedClasses=new Set();
+  const importedSubjects=new Set();
+  const classSubjectCounts={};
+  const teacherAssignmentCounts={};
   let imported=0;
-  const classPattern=new RegExp(`^(${ALL_CLASSES.map(c=>c.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')})\\s+(.+)$`);
+  const classPattern=/^([5-8]\s*[-–]\s*[A-ZÇĞİÖŞÜ])\s+(.+)$/i;
   rows.slice(1).forEach(row=>{
     const teacherName=(row[0]||'').trim();
     if(!teacherName) return;
-    let teacher=teachers.find(t=>t.name===teacherName);
+    let teacher=importedTeachers.find(t=>t.name===teacherName);
     if(!teacher){
-      teacher={id:Math.max(0,...teachers.map(t=>t.id))+1,name:teacherName,hours:0,subjects:[],assignments:[]};
-      teachers.push(teacher);
+      teacher={id:importedTeachers.length+1,name:teacherName,hours:0,subjects:[],assignments:[]};
+      importedTeachers.push(teacher);
     }
     let index=1;
     settings.days.forEach(d=>{
@@ -3628,22 +3632,52 @@ function importCSVText(text){
         if(!value) return;
         const match=value.match(classPattern);
         if(!match) return;
-        const cls=match[1];
+        const cls=match[1].toLocaleUpperCase('tr').replace(/\s+/g,'').replace('–','-');
         const subj=match[2].trim();
+        importedClasses.add(cls);
+        importedSubjects.add(subj);
         if(subj&&!SUBJECTS.includes(subj)) SUBJECTS.push(subj);
         if(subj&&!teacher.subjects.includes(subj)) teacher.subjects.push(subj);
         nextSchedule[`${teacher.id}_${d}_${h}`]={cls,subj};
+        classSubjectCounts[cls]??={};
+        classSubjectCounts[cls][subj]=(classSubjectCounts[cls][subj]||0)+1;
+        const akey=`${teacher.id}|${cls}|${subj}`;
+        teacherAssignmentCounts[akey]=(teacherAssignmentCounts[akey]||0)+1;
         imported++;
       }
     });
   });
   if(!imported) throw new Error('CSV okundu ama eşleşen öğretmen/program hücresi bulunamadı.');
+  teachers=importedTeachers;
+  ALL_CLASSES=[...importedClasses].sort((a,b)=>a.localeCompare(b,'tr',{numeric:true}));
+  SUBJECTS=[...new Set([...SUBJECTS,...importedSubjects])];
+  Object.keys(CLASS_PLAN).forEach(k=>delete CLASS_PLAN[k]);
+  ALL_CLASSES.forEach(cls=>{
+    CLASS_PLAN[cls]=Object.entries(classSubjectCounts[cls]||{})
+      .map(([subj,wh])=>({subj,wh}))
+      .sort((a,b)=>a.subj.localeCompare(b.subj,'tr'));
+  });
+  teachers.forEach(t=>{t.assignments=[];});
+  Object.entries(teacherAssignmentCounts).forEach(([key,wh])=>{
+    const [tid,cls,subj]=key.split('|');
+    const teacher=teachers.find(t=>t.id===parseInt(tid));
+    if(teacher) teacher.assignments.push({cls,subj,wh,manual:true});
+  });
+  teacherUnavailable={};
+  teachers.forEach(t=>{teacherUnavailable[t.id]={};});
   schedule=nextSchedule;
   teachers.forEach(t=>{t.hours=settings.days.reduce((sum,d)=>sum+Array.from({length:settings.hoursPerDay},(_,h)=>schedule[`${t.id}_${d}_${h}`]?1:0).reduce((a,b)=>a+b,0),0);});
+  selectedClass=ALL_CLASSES[0]||'';
+  selectedDistributionClass=ALL_CLASSES[0]||'';
+  blockedTeacherId=teachers[0]?.id||null;
   renderTable();
   renderTeachers();
+  renderBlockedView();
+  if(document.getElementById('view-distribution').classList.contains('active')) renderDistribution();
   if(document.getElementById('view-class').classList.contains('active')) renderClassView();
   scheduleAutoSave();
+  showTab('program',document.querySelector('.tab[onclick*="program"]'));
+  showAlert(`CSV yüklendi: ${teachers.length} öğretmen, ${ALL_CLASSES.length} sınıf, ${imported} program hücresi. Eski öğretmen/program/boş saat kayıtları temizlendi.`,'ok');
 }
 
 function showAlert(msg,type){
