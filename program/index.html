@@ -821,13 +821,26 @@ function setupTeacherGroupPlans(type,subjects,subjectTotals,options={}){
       total,
       count:baseCount,
       canAddExtra:total>0 && total/(baseCount+1)>=17,
+      denseHighSchool:false,
     };
   }).filter(group=>group.total>0);
+  if(type==='high'){
+    const denseLimit=Math.max(1,Math.floor(groups.length*0.2));
+    const denseCandidates=groups
+      .filter(group=>group.count>1&&group.total/(group.count-1)>=25&&group.total/(group.count-1)<=27.5)
+      .sort(()=>Math.random()-0.5)
+      .slice(0,denseLimit);
+    denseCandidates.forEach(group=>{
+      group.count--;
+      group.denseHighSchool=true;
+      group.canAddExtra=false;
+    });
+  }
   const extraLimit=Math.ceil(groups.length*0.3);
   const belowSoftLimit=Math.floor(groups.length*0.1);
   let belowSoftCount=0;
   const candidates=groups
-    .filter(group=>group.canAddExtra || belowSoftCount<belowSoftLimit)
+    .filter(group=>!group.denseHighSchool&&(group.canAddExtra || belowSoftCount<belowSoftLimit))
     .sort(()=>Math.random()-0.5)
     .slice(0,extraLimit);
   candidates.forEach(group=>{
