@@ -3323,8 +3323,7 @@ function assignRandomFreeDaysToHalfTeachers(){
     .filter(t=>!fullDayIds.has(t.id))
     .filter(t=>canTeacherReceiveRandomPartialHours(teacherAssignedHours(t.id)))
     .sort((a,b)=>randomSortKey(a)-randomSortKey(b));
-  const partialTarget=Math.ceil(remaining.length/3);
-  const partialTeachers=remaining.slice(0,partialTarget);
+  const partialTeachers=remaining;
   const half=Math.ceil(partialTeachers.length/2);
   let morningAssigned=0;
   let lastAssigned=0;
@@ -3343,7 +3342,7 @@ function assignRandomFreeDaysToHalfTeachers(){
   trimUnavailableToTeacherLoads();
   renderBlockedView();
   const totalAssigned=assigned+morningAssigned+lastAssigned;
-  showAlert(totalAssigned?`${assigned} öğretmene tam gün boşluk verildi. Kalanlardan ${morningAssigned} öğretmene sabah, ${lastAssigned} öğretmene çıkış boşluğu verildi; ${twoHourAssigned} öğretmende blok 2 saate esnetildi. Programı yeniden oluşturabilirsiniz.`:'Rastgele boş saat verilebilecek uygun öğretmen bulunamadı. Ders yükleri yüksek görünüyor.','ok');
+  showAlert(totalAssigned?`${assigned} öğretmene tam gün boşluk verildi. Uygun kalanlardan ${morningAssigned} öğretmene sabah, ${lastAssigned} öğretmene çıkış boşluğu verildi; ${twoHourAssigned} öğretmende blok 2 saate esnetildi. Programı yeniden oluşturabilirsiniz.`:'Rastgele boş saat verilebilecek uygun öğretmen bulunamadı. Ders yükleri yüksek görünüyor.','ok');
   scheduleAutoSave();
 }
 
@@ -3873,7 +3872,7 @@ function seedDefaultTeacherUnavailable(force=false){
     const load=teacherAssignedHours(t.id);
     return !fullDayIds.has(t.id)&&canTeacherReceiveRandomPartialHours(load)&&settings.days.length*settings.hoursPerDay-load>0;
   });
-  const partialTeachers=remaining.slice(0,Math.ceil(remaining.length/3));
+  const partialTeachers=remaining;
 
   fullDayTeachers.forEach((t,idx)=>{
     const day=settings.days[(stableTeacherRank(t)+idx)%settings.days.length];
