@@ -820,7 +820,7 @@ function setupTeacherGroupPlans(type,subjects,subjectTotals,options={}){
       ...group,
       total,
       count:baseCount,
-      canAddExtra:total>0 && total/(baseCount+1)>=17,
+      canAddExtra:total>0 && total/(baseCount+1)>=(type==='high'?17:21),
       denseHighSchool:false,
     };
   }).filter(group=>group.total>0);
@@ -837,12 +837,14 @@ function setupTeacherGroupPlans(type,subjects,subjectTotals,options={}){
     });
   }
   const extraLimit=Math.ceil(groups.length*0.3);
-  const belowSoftLimit=Math.floor(groups.length*0.1);
+  const belowSoftLimit=type==='high'?Math.floor(groups.length*0.1):0;
   let belowSoftCount=0;
-  const candidates=groups
-    .filter(group=>!group.denseHighSchool&&(group.canAddExtra || belowSoftCount<belowSoftLimit))
-    .sort(()=>Math.random()-0.5)
-    .slice(0,extraLimit);
+  const regularCandidates=groups.filter(group=>!group.denseHighSchool&&group.canAddExtra);
+  const belowSoftCandidates=groups.filter(group=>!group.denseHighSchool&&!group.canAddExtra);
+  const candidates=[
+    ...regularCandidates.sort(()=>Math.random()-0.5),
+    ...belowSoftCandidates.sort(()=>Math.random()-0.5).slice(0,belowSoftLimit),
+  ].slice(0,extraLimit);
   candidates.forEach(group=>{
     let extra=1;
     const canAddTwo=group.total/(group.count+2)>=17;
