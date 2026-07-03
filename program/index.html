@@ -196,13 +196,16 @@ body.auth-locked .login-screen{display:flex}
     <h1>Okul Kurulumu</h1>
     <p>Okul türünü ve derslik sayısını seçin. Sistem sınıfları, resmi haftalık ders saatlerini ve başlangıç öğretmen dağıtımını otomatik hazırlasın.</p>
     <div class="setup-options">
-      <label class="setup-choice"><input type="radio" name="setup-school-type" value="middle" checked> Ortaokul</label>
-      <label class="setup-choice"><input type="radio" name="setup-school-type" value="high"> Lise</label>
+      <label class="setup-choice"><input type="radio" name="setup-school-type" value="middle" checked onchange="updateSetupOptions()"> Ortaokul</label>
+      <label class="setup-choice"><input type="radio" name="setup-school-type" value="high" onchange="updateSetupOptions()"> Lise</label>
     </div>
     <div class="setup-field">
       <label for="setup-classroom-count">Okuldaki derslik sayısı</label>
       <input id="setup-classroom-count" type="number" min="4" max="80" value="24">
     </div>
+    <label class="setup-choice" id="setup-prep-wrap" style="display:none;margin-bottom:14px">
+      <input id="setup-has-prep" type="checkbox"> Hazırlık sınıfı var
+    </label>
     <div class="setup-actions">
       <button class="btn" onclick="skipInitialSetup()">Mevcut ayarlarla devam et</button>
       <button class="btn primary" onclick="applyInitialSchoolSetup()">Kurulumu oluştur</button>
@@ -478,10 +481,16 @@ const GRADE_PLAN = {
 };
 
 // Her sınıf için plan — GÖN/SAN şubeye göre değişiyor (A,C,E → GÖN ; B,D,F → SAN)
+function classGradeKey(cls){
+  const raw=String(cls||'').split('-')[0];
+  const numeric=parseInt(raw,10);
+  return Number.isNaN(numeric)?raw:numeric;
+}
+
 function getPlanForClass(cls) {
-  const grade = parseInt(cls.split('-')[0]);
+  const grade = classGradeKey(cls);
   const section = cls.split('-')[1];
-  return GRADE_PLAN[grade].map(l => {
+  return (GRADE_PLAN[grade]||[]).map(l => {
     if(l.subj === 'GÖN') return {subj: ['B','D','F'].includes(section) ? 'SAN' : 'GÖN', wh: l.wh};
     return {...l};
   });
@@ -702,7 +711,9 @@ const SCHOOL_SETUP_PLANS={
   },
   high:{
     grades:[9,10,11,12],
+    prepGrade:'Hazırlık',
     hoursPerDay:8,
+    prepPlan:[['TDE',4],['MAT',3],['ING',20],['IKYD',4],['BİL.YAZ',4],['BEDEN',2],['GÖN/MÖZ',2],['REH',1]],
     plans:{
       9:[['TDE',5],['DİN',2],['TAR',2],['COG',2],['MAT',6],['FİZ',2],['KİM',2],['BİY',2],['ING',4],['BEDEN',2],['GÖN/MÖZ',2],['SAĞLIK',1],['REH',1],['SEÇMELİ A',2],['SEÇMELİ B',2],['SEÇMELİ C',2],['SEÇMELİ D',1]],
       10:[['TDE',5],['DİN',2],['TAR',2],['COG',2],['MAT',6],['FİZ',2],['KİM',2],['BİY',2],['FEL',2],['ING',4],['BEDEN',2],['GÖN/MÖZ',2],['REH',1],['SEÇMELİ A',2],['SEÇMELİ B',2],['SEÇMELİ C',2]],
@@ -718,7 +729,7 @@ const SUBJECT_LONG_NAMES={
   'TEK.TAS':'Teknoloji Tasarım', 'INK.TAR':'İnkılap Tarihi', REH:'Rehberlik',
   TDE:'Türk Dili ve Edebiyatı', TAR:'Tarih', COG:'Coğrafya', 'FİZ':'Fizik', 'KİM':'Kimya',
   'BİY':'Biyoloji', FEL:'Felsefe', 'SAĞLIK':'Sağlık Bilgisi', 'GÖN/MÖZ':'Sanat',
-  'BEDEN/GÖN/MÖZ':'Spor Sanat'
+  'BEDEN/GÖN/MÖZ':'Spor Sanat', IKYD:'İkinci Yabancı Dil', 'BİL.YAZ':'Bilişim Teknolojileri'
 };
 
 function weeklyTargetHours(){
@@ -727,12 +738,26 @@ function weeklyTargetHours(){
 
 function showSetupWizard(){
   const screen=document.getElementById('setup-screen');
-  if(screen) screen.classList.add('on');
+  if(screen){
+    updateSetupOptions();
+    screen.classList.add('on');
+  }
 }
 
 function hideSetupWizard(){
   const screen=document.getElementById('setup-screen');
   if(screen) screen.classList.remove('on');
+}
+
+function updateSetupOptions(){
+  const type=document.querySelector('input[name="setup-school-type"]:checked')?.value||'middle';
+  const wrap=document.getElementById('setup-prep-wrap');
+  if(!wrap) return;
+  wrap.style.display=type==='high'?'flex':'none';
+  if(type!=='high'){
+    const prep=document.getElementById('setup-has-prep');
+    if(prep) prep.checked=false;
+  }
 }
 
 function skipInitialSetup(){
@@ -841,15 +866,20 @@ function setupTeacherGroupPlans(type,subjects,subjectTotals,options={}){
   return groups;
 }
 
-function resetGeneratedSchoolState(type,classroomCount){
+function resetGeneratedSchoolState(type,classroomCount,options={}){
   const config=SCHOOL_SETUP_PLANS[type]||SCHOOL_SETUP_PLANS.middle;
-  GRADES=[...config.grades];
+  const includePrep=type==='high'&&!!options.includePrep&&config.prepGrade&&Array.isArray(config.prepPlan);
+  GRADES=includePrep?[config.prepGrade,...config.grades]:[...config.grades];
   SECTIONS=[...SETUP_SECTION_LETTERS];
   const classSetup=classListForSetup(GRADES,classroomCount);
   ALL_CLASSES=classSetup.classes;
   settings={hoursPerDay:config.hoursPerDay,days:[0,1,2,3,4]};
 
   Object.keys(GRADE_PLAN).forEach(k=>delete GRADE_PLAN[k]);
+  if(includePrep){
+    GRADE_PLAN[config.prepGrade]=planTuplesToObjects(config.prepPlan);
+    normalizeClassPlanTo35FromPlan(GRADE_PLAN[config.prepGrade]);
+  }
   Object.entries(config.plans).forEach(([grade,plan])=>{
     GRADE_PLAN[grade]=planTuplesToObjects(plan);
     normalizeClassPlanTo35FromPlan(GRADE_PLAN[grade]);
@@ -857,7 +887,7 @@ function resetGeneratedSchoolState(type,classroomCount){
 
   Object.keys(CLASS_PLAN).forEach(k=>delete CLASS_PLAN[k]);
   ALL_CLASSES.forEach(cls=>{
-    const grade=parseInt(cls.split('-')[0]);
+    const grade=classGradeKey(cls);
     const section=cls.split('-')[1];
     CLASS_PLAN[cls]=(GRADE_PLAN[grade]||[]).map(l=>{
       if(l.subj==='GÖN'&&['B','D','F'].includes(section)) return {subj:'SAN',wh:l.wh};
@@ -927,7 +957,8 @@ function resetGeneratedSchoolState(type,classroomCount){
 function applyInitialSchoolSetup(){
   const type=document.querySelector('input[name="setup-school-type"]:checked')?.value||'middle';
   const count=parseInt(document.getElementById('setup-classroom-count')?.value)||24;
-  resetGeneratedSchoolState(type,count);
+  const includePrep=type==='high'&&!!document.getElementById('setup-has-prep')?.checked;
+  resetGeneratedSchoolState(type,count,{includePrep});
   hideSetupWizard();
   renderTable();
   renderTeachers();
@@ -1839,7 +1870,7 @@ function ensureClassLesson(cls,subj,wh){
   const existing=CLASS_PLAN[cls].find(l=>l.subj===subj);
   if(existing) existing.wh=wh;
   else CLASS_PLAN[cls].push({subj,wh});
-  const grade=parseInt(cls.split('-')[0]);
+  const grade=classGradeKey(cls);
   if(GRADE_PLAN[grade]){
     const gExisting=GRADE_PLAN[grade].find(l=>l.subj===subj);
     if(!gExisting) GRADE_PLAN[grade].push({subj,wh});
@@ -1920,7 +1951,7 @@ function isFlexibleLessonSubject(subj){
 }
 
 function getDefaultFillerSubject(cls){
-  const grade=parseInt(String(cls).split('-')[0],10);
+  const grade=classGradeKey(cls);
   return grade===8?'SEÇİMA':'BLÜM';
 }
 
@@ -3409,8 +3440,9 @@ function renderLessonPlans(){
     const plan=GRADE_PLAN[g]||[];
     const total=plan.reduce((s,l)=>s+l.wh,0);
     const totalOk=total===target;
+    const gradeTitle=String(g)==='Hazırlık'?'Hazırlık Sınıfı':`${g}. Sınıf`;
     return `<div class="t-card">
-      <div class="t-nm">${g}. Sınıf Dersleri</div>
+      <div class="t-nm">${gradeTitle} Dersleri</div>
       <div class="t-meta lesson-total" data-grade="${g}" style="color:${totalOk?'#15803d':'#b91c1c'};font-weight:${totalOk?'700':'800'}">Toplam: ${total} / ${target} saat</div>
       <div id="lesson-plan-${g}">${plan.map(l=>lessonRowHtml(g,l.subj,l.wh)).join('')}</div>
       <div style="display:flex;gap:8px;margin-top:10px">
@@ -3474,7 +3506,7 @@ function saveLessonPlans(){
 
 function openLessonTextEdit(g){
   const plan=GRADE_PLAN[g]||[];
-  document.getElementById('emodal-title').textContent=`${g}. Sınıf Toplu Ders Düzenleme`;
+  document.getElementById('emodal-title').textContent=`${String(g)==='Hazırlık'?'Hazırlık Sınıfı':`${g}. Sınıf`} Toplu Ders Düzenleme`;
   document.getElementById('emodal-body').innerHTML=`
     <div class="fg2"><label>Her satır: DERS SAAT</label>
       <textarea id="lesson-text-edit" rows="12" style="font-family:ui-monospace,Consolas,monospace;font-size:12px;line-height:1.6">${plan.map(l=>`${l.subj} ${l.wh}`).join('\n')}</textarea>
@@ -4194,14 +4226,16 @@ function applyProgramState(data){
 
 function migrateReligionTwoHours(){
   SUBJECTS=SUBJECTS.filter(s=>s!=='SEÇMELİ4'&&s!=='EK DERS');
-  Object.values(GRADE_PLAN).forEach(plan=>{
+  Object.entries(GRADE_PLAN).forEach(([grade,plan])=>{
+    if(grade==='Hazırlık') return;
     for(let i=plan.length-1;i>=0;i--) if(plan[i].subj==='SEÇMELİ4'||plan[i].subj==='EK DERS') plan.splice(i,1);
     const din=plan.find(l=>l.subj==='DİN');
     if(din) din.wh=2;
     else plan.push({subj:'DİN',wh:2});
     normalizeClassPlanTo35FromPlan(plan,'DİN');
   });
-  Object.values(CLASS_PLAN).forEach(plan=>{
+  Object.entries(CLASS_PLAN).forEach(([cls,plan])=>{
+    if(classGradeKey(cls)==='Hazırlık') return;
     for(let i=plan.length-1;i>=0;i--) if(plan[i].subj==='SEÇMELİ4'||plan[i].subj==='EK DERS') plan.splice(i,1);
     const din=plan.find(l=>l.subj==='DİN');
     if(din) din.wh=2;
