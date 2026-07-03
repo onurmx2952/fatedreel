@@ -863,7 +863,31 @@ function setupTeacherGroupPlans(type,subjects,subjectTotals,options={}){
       group.count--;
       group.overloadCandidate=true;
   });
+  addRandomLowLoadTeachers(groups,type);
   return groups;
+}
+
+function addRandomLowLoadTeachers(groups,type){
+  const baseTotal=groups.reduce((sum,group)=>sum+group.count,0);
+  const lowLimit=20;
+  const targetRatio=type==='middle'?0.30:0.18;
+  const maxLow=Math.max(1,Math.floor(baseTotal*targetRatio));
+  let lowCount=groups.reduce((sum,group)=>sum+(group.total/group.count<=lowLimit?group.count:0),0);
+  const candidates=groups
+    .filter(group=>group.count>0)
+    .filter(group=>group.total/group.count>=22)
+    .filter(group=>group.total/(group.count+1)>=15)
+    .sort(()=>Math.random()-0.5);
+  for(const group of candidates){
+    const currentLow=group.total/group.count<=lowLimit?group.count:0;
+    const nextLow=group.total/(group.count+1)<=lowLimit?group.count+1:0;
+    const delta=nextLow-currentLow;
+    if(delta<=0) continue;
+    if(lowCount+delta>maxLow) continue;
+    group.count++;
+    group.lowLoadCandidate=true;
+    lowCount+=delta;
+  }
 }
 
 function resetGeneratedSchoolState(type,classroomCount,options={}){
@@ -3350,7 +3374,7 @@ function randomUnavailableThresholds(){
   const isHighSchool=(parseInt(settings.hoursPerDay)||7)>=8;
   return isHighSchool
     ? {noFullDayAbove:30,noPartialAbove:33}
-    : {noFullDayAbove:21,noPartialAbove:27};
+    : {noFullDayAbove:23,noPartialAbove:29};
 }
 
 function canTeacherReceiveRandomFullDay(load){

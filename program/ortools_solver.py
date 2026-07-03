@@ -147,8 +147,32 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         teacher_unavailable,
         days,
         hours_per_day,
-        with_time_limit(payload, 12),
+        with_time_limit(payload, 10),
         relax_unavailable=True,
+        relax_scope="edge",
+    )
+    if relaxed.get("ok"):
+        adjustments = relaxed.get("adjustments") or []
+        if adjustments:
+            return {
+                "ok": False,
+                "status": "needs_openings",
+                "error": "Program, önce sabah veya çıkıştaki kırmızı saatler açılırsa oturabiliyor.",
+                "issues": [adjustment_to_hint_text(item) for item in adjustments],
+                "adjustments": adjustments,
+            }
+        return relaxed
+
+    relaxed = solve_blocks_with_model(
+        blocks,
+        teachers,
+        teacher_by_id,
+        teacher_unavailable,
+        days,
+        hours_per_day,
+        with_time_limit(payload, 10),
+        relax_unavailable=True,
+        relax_scope="all",
     )
     if relaxed.get("ok"):
         adjustments = relaxed.get("adjustments") or []
@@ -179,6 +203,7 @@ def solve_blocks_with_model(
     hours_per_day: int,
     payload: dict[str, Any],
     relax_unavailable: bool,
+    relax_scope: str = "all",
 ) -> dict[str, Any]:
     model = cp_model.CpModel()
     var_by_block: dict[int, list[tuple[Any, int, int]]] = {}
@@ -196,6 +221,11 @@ def solve_blocks_with_model(
                 blocked_hours = blocked_hours_for_block(teacher_unavailable, block.teacher_id, day, start, block.length)
                 if blocked_hours and not relax_unavailable:
                     continue
+                if blocked_hours and relax_scope == "edge":
+                    if is_full_day_blocked(teacher_unavailable, block.teacher_id, day, hours_per_day):
+                        continue
+                    if not all(is_edge_hour(hour, hours_per_day) for hour in blocked_hours):
+                        continue
                 var = model.NewBoolVar(f"b{block.index}_d{day}_h{start}")
                 candidates.append((var, day, start))
                 candidate_meta[var] = (block, day, start)
@@ -329,6 +359,15 @@ def blocked_hours_for_block(unavailable: dict[str, Any], tid: int, day: int, sta
 def is_teacher_unavailable(unavailable: dict[str, Any], tid: int, day: int, hour: int) -> bool:
     blocked = unavailable.get(str(tid)) or unavailable.get(tid) or {}
     return bool(blocked.get(f"{day}_{hour}"))
+
+
+def is_full_day_blocked(unavailable: dict[str, Any], tid: int, day: int, hours_per_day: int) -> bool:
+    return all(is_teacher_unavailable(unavailable, tid, day, hour) for hour in range(hours_per_day))
+
+
+def is_edge_hour(hour: int, hours_per_day: int) -> bool:
+    edge_size = min(3, max(1, hours_per_day // 2))
+    return hour < edge_size or hour >= hours_per_day - edge_size
 
 
 def summarize_adjustments(slots: dict[tuple[int, int, int], dict[str, Any]]) -> list[dict[str, Any]]:
@@ -502,19 +541,27 @@ def opening_hint_candidates_for_day(
 ) -> list[tuple[int, str, str]]:
     teacher_type = teacher_hint_type(name)
     candidates: list[tuple[int, str, str]] = []
+    first_edge = [h for h in range(min(3, hours_per_day)) if h in hours]
+    last_edge_start = max(0, hours_per_day - 3)
+    last_edge = [h for h in range(last_edge_start, hours_per_day) if h in hours]
+    if 2 <= len(first_edge) <= 3:
+        candidates.append((72 + len(first_edge), f"{name} öğretmenin {day_name(day)} {compact_hours_label(first_edge)} saatlerini açın.", teacher_type))
+    if 2 <= len(last_edge) <= 3:
+        candidates.append((70 + len(last_edge), f"{name} öğretmenin {day_name(day)} {compact_hours_label(last_edge)} saatlerini açın.", teacher_type))
     chunks = blocked_hour_chunks(hours)
     for chunk in chunks:
         if len(chunk) <= 3:
-            score = len(chunk) * 12
+            score = 48 + len(chunk) * 4 if all(is_edge_hour(hour, hours_per_day) for hour in chunk) else len(chunk) * 12
             candidates.append((score, f"{name} öğretmenin {day_name(day)} {compact_hours_label(chunk)} saatlerini açın.", teacher_type))
             continue
         for size in (2, 3):
             possible = [chunk[i : i + size] for i in range(0, len(chunk) - size + 1)]
             random.shuffle(possible)
             for part in possible[:2]:
-                candidates.append((24 + size, f"{name} öğretmenin {day_name(day)} {compact_hours_label(part)} saatlerini açın.", teacher_type))
+                score = 42 + size if all(is_edge_hour(hour, hours_per_day) for hour in part) else 24 + size
+                candidates.append((score, f"{name} öğretmenin {day_name(day)} {compact_hours_label(part)} saatlerini açın.", teacher_type))
     if len(hours) >= hours_per_day:
-        candidates.append((12, f"{name} öğretmenin {day_name(day)} boş gününü açın.", teacher_type))
+        candidates.append((8, f"{name} öğretmenin {day_name(day)} boş gününü açın.", teacher_type))
     if len(hours) > 3:
         sample_size = 2 if random.random() < 0.55 else 3
         possible = [hours[i : i + sample_size] for i in range(0, len(hours) - sample_size + 1)]
