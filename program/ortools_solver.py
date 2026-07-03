@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 import json
+import math
 import random
 import sys
 from dataclasses import dataclass
@@ -37,7 +38,19 @@ class Block:
     length: int
 
 
-def split_blocks(hours: int) -> list[int]:
+def split_blocks(hours: int, days: list[int] | None = None, hours_per_day: int | None = None) -> list[int]:
+    if days and hours_per_day and hours > len(days) * 2:
+        blocks: list[int] = []
+        remaining = hours
+        slots = len(days)
+        while slots > 0 and remaining > 0:
+            length = min(hours_per_day, math.ceil(remaining / slots))
+            blocks.append(length)
+            remaining -= length
+            slots -= 1
+        if remaining > 0:
+            blocks.extend(split_blocks(remaining))
+        return blocks
     blocks: list[int] = []
     while hours >= 2:
         blocks.append(2)
@@ -111,7 +124,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
             subj = str(lesson.get("subj"))
             wh = int(lesson.get("wh") or 0)
             tid, assigned_wh = assignment_by_class_subject[(cls, subj)]
-            for length in split_blocks(assigned_wh or wh):
+            for length in split_blocks(assigned_wh or wh, days, hours_per_day):
                 blocks.append(Block(len(blocks), cls, subj, tid, length))
 
     strict = solve_blocks_with_model(
@@ -381,7 +394,7 @@ def build_hard_impossibility_errors(
         for lesson in plan or []:
             subj = str(lesson.get("subj") or "")
             wh = int(lesson.get("wh") or 0)
-            blocks = split_blocks(wh)
+            blocks = split_blocks(wh, days, hours_per_day)
             if len(blocks) > len(days):
                 errors.append(f"{cls} {subj}: {wh} saat {len(blocks)} parçaya bölünüyor ama haftada {len(days)} gün var; aynı ders aynı gün ikinci kez gelemeyeceği için imkansız.")
             if any(length > hours_per_day for length in blocks):
@@ -394,7 +407,7 @@ def build_hard_impossibility_errors(
         for assignment in teacher.get("assignments") or []:
             cls = assignment.get("cls")
             subj = assignment.get("subj")
-            for length in split_blocks(int(assignment.get("wh") or 0)):
+            for length in split_blocks(int(assignment.get("wh") or 0), days, hours_per_day):
                 if not has_any_candidate_slot_for_block(unavailable, tid, days, hours_per_day, length):
                     errors.append(f"{name}: {cls} {subj} için {length} saatlik blok yerleşemiyor; uygun saatlerinde ardışık {length} saat yok.")
     return list(dict.fromkeys(errors))[:20]

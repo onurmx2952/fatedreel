@@ -2495,6 +2495,21 @@ function classHasSubjectOnDay(scheduleObj,cls,d,subj){
 }
 
 function splitLessonBlocks(hours){
+  const dayCount=settings.days?.length||5;
+  const hoursPerDay=parseInt(settings.hoursPerDay)||7;
+  if(hours>dayCount*2){
+    const blocks=[];
+    let remaining=hours;
+    let slots=dayCount;
+    while(slots>0&&remaining>0){
+      const len=Math.min(hoursPerDay,Math.ceil(remaining/slots));
+      blocks.push(len);
+      remaining-=len;
+      slots--;
+    }
+    if(remaining>0) splitLessonBlocks(remaining).forEach(len=>blocks.push(len));
+    return blocks;
+  }
   const blocks=[];
   while(hours>=2){blocks.push(2);hours-=2;}
   if(hours===1) blocks.push(1);
