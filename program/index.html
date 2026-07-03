@@ -806,55 +806,37 @@ function setupTeacherGroups(type,subjects){
 
 function setupBaseTeacherCount(total){
   const preferredMin=21;
-  const hardMax=30;
+  const hardMax=35;
   return Math.max(1,Math.max(Math.ceil(total/hardMax),Math.floor(total/preferredMin)));
 }
 
 function setupTeacherGroupPlans(type,subjects,subjectTotals,options={}){
   const oddClassroomCount=!!options.oddClassroomCount;
+  const overloadLimit=type==='high'?35:29;
   const groups=setupTeacherGroups(type,subjects).map(group=>{
     const total=group.subjects.reduce((sum,subj)=>sum+(subjectTotals[subj]||0),0);
     let baseCount=setupBaseTeacherCount(total);
-    if(oddClassroomCount && total/baseCount>24 && total/(baseCount+1)>=14) baseCount++;
+    let oddRaised=false;
+    if(oddClassroomCount && total/baseCount>27 && total/(baseCount+1)>=18){
+      baseCount++;
+      oddRaised=true;
+    }
     return {
       ...group,
       total,
       count:baseCount,
-      canAddExtra:total>0 && total/(baseCount+1)>=21,
-      denseHighSchool:false,
+      oddRaised,
+      overloadCandidate:false,
     };
   }).filter(group=>group.total>0);
-  if(type==='high'){
-    const denseLimit=Math.max(1,Math.floor(groups.length*0.2));
-    const denseCandidates=groups
-      .filter(group=>group.count>1&&group.total/(group.count-1)>=25&&group.total/(group.count-1)<=27.5)
-      .sort(()=>Math.random()-0.5)
-      .slice(0,denseLimit);
-    denseCandidates.forEach(group=>{
+  const overloadLimitCount=Math.max(1,Math.round(groups.length*(type==='high'?0.2:0.1)));
+  const overloadCandidates=groups
+    .filter(group=>!group.oddRaised&&group.count>1&&group.total/(group.count-1)>=25&&group.total/(group.count-1)<=overloadLimit)
+    .sort(()=>Math.random()-0.5)
+    .slice(0,overloadLimitCount);
+  overloadCandidates.forEach(group=>{
       group.count--;
-      group.denseHighSchool=true;
-      group.canAddExtra=false;
-    });
-  }
-  const extraLimit=Math.ceil(groups.length*0.3);
-  const belowSoftLimit=0;
-  let belowSoftCount=0;
-  const regularCandidates=groups.filter(group=>!group.denseHighSchool&&group.canAddExtra);
-  const belowSoftCandidates=groups.filter(group=>!group.denseHighSchool&&!group.canAddExtra);
-  const candidates=[
-    ...regularCandidates.sort(()=>Math.random()-0.5),
-    ...belowSoftCandidates.sort(()=>Math.random()-0.5).slice(0,belowSoftLimit),
-  ].slice(0,extraLimit);
-  candidates.forEach(group=>{
-    let extra=1;
-    const canAddTwo=group.total/(group.count+2)>=21;
-    if(canAddTwo && Math.random()<0.45) extra=2;
-    const wouldBelow=group.total/(group.count+extra)<17;
-    if(wouldBelow){
-      if(belowSoftCount>=belowSoftLimit) return;
-      belowSoftCount++;
-    }
-    group.count+=extra;
+      group.overloadCandidate=true;
   });
   return groups;
 }
@@ -3280,7 +3262,7 @@ function assignRandomFreeDaysToHalfTeachers(){
     showAlert('Tam gün boş verilebilecek öğretmen yok. Ders yükleri çok yüksek görünüyor.','warn');
     return;
   }
-  const targetCount=Math.min(Math.ceil(teachers.length/2),eligible.length);
+  const targetCount=Math.min(Math.ceil(teachers.length/3),eligible.length);
   const shuffled=[...eligible].sort((a,b)=>randomSortKey(a)-randomSortKey(b));
   const fullDayIds=new Set();
   let assigned=0;
@@ -3297,14 +3279,16 @@ function assignRandomFreeDaysToHalfTeachers(){
 
   const remaining=teachers
     .filter(t=>!fullDayIds.has(t.id))
+    .filter(t=>canTeacherReceiveRandomPartialHours(teacherAssignedHours(t.id)))
     .sort((a,b)=>randomSortKey(a)-randomSortKey(b));
-  const half=Math.ceil(remaining.length/2);
+  const partialTarget=Math.ceil(remaining.length/3);
+  const partialTeachers=remaining.slice(0,partialTarget);
+  const half=Math.ceil(partialTeachers.length/2);
   let morningAssigned=0;
   let lastAssigned=0;
   let twoHourAssigned=0;
-  remaining.forEach((teacher,idx)=>{
-    if(!canTeacherReceiveRandomPartialHours(teacherAssignedHours(teacher.id))) return;
-    const useTwoHour=idx%2===1;
+  partialTeachers.forEach((teacher,idx)=>{
+    const useTwoHour=idx%3!==0;
     const hours=idx<half ? firstEdgeHours(useTwoHour?2:3) : lastEdgeHours(useTwoHour?2:3);
     const protectedDay=settings.days[(randomSortKey(teacher)+idx*3+1)%settings.days.length];
     clearTeacherDayUnavailable(teacher.id,protectedDay);
@@ -3323,8 +3307,8 @@ function assignRandomFreeDaysToHalfTeachers(){
 function randomUnavailableThresholds(){
   const isHighSchool=(parseInt(settings.hoursPerDay)||7)>=8;
   return isHighSchool
-    ? {noFullDayAbove:30,noPartialAbove:33}
-    : {noFullDayAbove:23,noPartialAbove:27};
+    ? {noFullDayAbove:27,noPartialAbove:31}
+    : {noFullDayAbove:21,noPartialAbove:25};
 }
 
 function canTeacherReceiveRandomFullDay(load){
@@ -3834,7 +3818,7 @@ function seedDefaultTeacherUnavailable(force=false){
   if(!force&&Object.keys(teacherUnavailable||{}).length) return;
   const result={};
   const ordered=[...teachers].sort((a,b)=>stableTeacherRank(a)-stableTeacherRank(b));
-  const fullDayCount=Math.ceil(ordered.length/2);
+  const fullDayCount=Math.ceil(ordered.length/3);
   const fullDayEligible=ordered.filter(t=>{
     const load=teacherAssignedHours(t.id);
     return canTeacherReceiveRandomFullDay(load)&&settings.days.length*settings.hoursPerDay-load>=settings.hoursPerDay;
@@ -3845,7 +3829,7 @@ function seedDefaultTeacherUnavailable(force=false){
     const load=teacherAssignedHours(t.id);
     return !fullDayIds.has(t.id)&&canTeacherReceiveRandomPartialHours(load)&&settings.days.length*settings.hoursPerDay-load>0;
   });
-  const partialTeachers=remaining.slice(0,Math.ceil(remaining.length/2));
+  const partialTeachers=remaining.slice(0,Math.ceil(remaining.length/3));
 
   fullDayTeachers.forEach((t,idx)=>{
     const day=settings.days[(stableTeacherRank(t)+idx)%settings.days.length];
@@ -3854,7 +3838,7 @@ function seedDefaultTeacherUnavailable(force=false){
 
   partialTeachers.forEach((t,idx)=>{
     const day=settings.days[(stableTeacherRank(t)+idx*2)%settings.days.length];
-    const useTwoHour=idx%4>=2;
+    const useTwoHour=idx%3!==0;
     const hours=idx%2===0?morningHours(useTwoHour?2:3):lateDayHours(useTwoHour?2:3);
     addBlockedSlotsForTeacher(result,t.id,settings.days.includes(day)?day:settings.days[0],hours,teacherAssignedHours(t.id));
   });
