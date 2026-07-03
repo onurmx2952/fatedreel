@@ -853,7 +853,10 @@ function resetGeneratedSchoolState(type,classroomCount){
   settings={hoursPerDay:config.hoursPerDay,days:[0,1,2,3,4]};
 
   Object.keys(GRADE_PLAN).forEach(k=>delete GRADE_PLAN[k]);
-  Object.entries(config.plans).forEach(([grade,plan])=>{GRADE_PLAN[grade]=planTuplesToObjects(plan);});
+  Object.entries(config.plans).forEach(([grade,plan])=>{
+    GRADE_PLAN[grade]=planTuplesToObjects(plan);
+    normalizeClassPlanTo35FromPlan(GRADE_PLAN[grade]);
+  });
 
   Object.keys(CLASS_PLAN).forEach(k=>delete CLASS_PLAN[k]);
   ALL_CLASSES.forEach(cls=>{
@@ -1831,7 +1834,7 @@ function normalizeClassPlanTo35(cls,protectedSubj=''){
   }
 
   while(total>targetHours&&plan.length){
-    const target=plan.find(l=>l.subj!==protectedSubj&&['REH','SEÇİNG','SEÇİMA','BLÜM'].includes(l.subj)&&l.wh>0)
+    const target=plan.find(l=>l.subj!==protectedSubj&&isFlexibleLessonSubject(l.subj)&&l.wh>0)
       || plan.find(l=>l.subj!==protectedSubj&&l.wh>1)
       || plan.find(l=>l.subj!==protectedSubj&&l.wh>0)
       || plan.find(l=>l.wh>1)
@@ -1858,7 +1861,7 @@ function normalizeClassPlanTo35FromPlan(plan,protectedSubj=''){
     total=targetHours;
   }
   while(total>targetHours&&plan.length){
-    const target=plan.find(l=>l.subj!==protectedSubj&&['REH','SEÇİNG','SEÇİMA','BLÜM'].includes(l.subj)&&l.wh>0)
+    const target=plan.find(l=>l.subj!==protectedSubj&&isFlexibleLessonSubject(l.subj)&&l.wh>0)
       || plan.find(l=>l.subj!==protectedSubj&&l.wh>1)
       || plan.find(l=>l.subj!==protectedSubj&&l.wh>0)
       || plan.find(l=>l.wh>1)
@@ -1868,6 +1871,10 @@ function normalizeClassPlanTo35FromPlan(plan,protectedSubj=''){
     total--;
     for(let i=plan.length-1;i>=0;i--) if(plan[i].wh<=0) plan.splice(i,1);
   }
+}
+
+function isFlexibleLessonSubject(subj){
+  return /^SEÇMELİ/.test(String(subj||''))||['SEÇİNG','SEÇİMA','BLÜM','REH'].includes(subj);
 }
 
 function getDefaultFillerSubject(cls){
