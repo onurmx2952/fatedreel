@@ -3205,6 +3205,7 @@ function assignRandomFreeDaysToHalfTeachers(){
   teachers.forEach(t=>{teacherUnavailable[t.id]={};});
   const eligible=teachers.filter(t=>{
     const load=teacherAssignedHours(t.id);
+    if(!canTeacherReceiveRandomFullDay(load)) return false;
     const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-load);
     return maxBlocked>=settings.hoursPerDay;
   });
@@ -3235,6 +3236,7 @@ function assignRandomFreeDaysToHalfTeachers(){
   let lastAssigned=0;
   let twoHourAssigned=0;
   remaining.forEach((teacher,idx)=>{
+    if(!canTeacherReceiveRandomPartialHours(teacherAssignedHours(teacher.id))) return;
     const useTwoHour=idx%2===1;
     const hours=idx<half ? firstEdgeHours(useTwoHour?2:3) : lastEdgeHours(useTwoHour?2:3);
     const protectedDay=settings.days[(randomSortKey(teacher)+idx*3+1)%settings.days.length];
@@ -3249,6 +3251,21 @@ function assignRandomFreeDaysToHalfTeachers(){
   renderBlockedView();
   showAlert(`${assigned} öğretmene tam gün boşluk verildi. Kalanlardan ${morningAssigned} öğretmene sabah, ${lastAssigned} öğretmene çıkış boşluğu verildi; ${twoHourAssigned} öğretmende blok 2 saate esnetildi. Her öğretmende haftada en az bir gün tamamen açık bırakıldı. Programı yeniden oluşturabilirsiniz.`,assigned?'ok':'warn');
   scheduleAutoSave();
+}
+
+function randomUnavailableThresholds(){
+  const isHighSchool=(parseInt(settings.hoursPerDay)||7)>=8;
+  return isHighSchool
+    ? {noFullDayAbove:30,noPartialAbove:33}
+    : {noFullDayAbove:23,noPartialAbove:27};
+}
+
+function canTeacherReceiveRandomFullDay(load){
+  return (parseInt(load)||0)<=randomUnavailableThresholds().noFullDayAbove;
+}
+
+function canTeacherReceiveRandomPartialHours(load){
+  return (parseInt(load)||0)<=randomUnavailableThresholds().noPartialAbove;
 }
 
 function addPatternBlockedSlots(tid,hours,protectedDay=null){
@@ -3751,10 +3768,16 @@ function seedDefaultTeacherUnavailable(force=false){
   const result={};
   const ordered=[...teachers].sort((a,b)=>stableTeacherRank(a)-stableTeacherRank(b));
   const fullDayCount=Math.ceil(ordered.length/2);
-  const fullDayEligible=ordered.filter(t=>settings.days.length*settings.hoursPerDay-teacherAssignedHours(t.id)>=settings.hoursPerDay);
+  const fullDayEligible=ordered.filter(t=>{
+    const load=teacherAssignedHours(t.id);
+    return canTeacherReceiveRandomFullDay(load)&&settings.days.length*settings.hoursPerDay-load>=settings.hoursPerDay;
+  });
   const fullDayTeachers=fullDayEligible.slice(0,Math.min(fullDayCount,fullDayEligible.length));
   const fullDayIds=new Set(fullDayTeachers.map(t=>t.id));
-  const remaining=ordered.filter(t=>!fullDayIds.has(t.id)&&settings.days.length*settings.hoursPerDay-teacherAssignedHours(t.id)>0);
+  const remaining=ordered.filter(t=>{
+    const load=teacherAssignedHours(t.id);
+    return !fullDayIds.has(t.id)&&canTeacherReceiveRandomPartialHours(load)&&settings.days.length*settings.hoursPerDay-load>0;
+  });
   const partialTeachers=remaining.slice(0,Math.ceil(remaining.length/2));
 
   fullDayTeachers.forEach((t,idx)=>{
