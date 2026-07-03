@@ -1120,7 +1120,10 @@ async function generateSchedule(){
     const branchIssues=analyzeBranchRulesObject(schedule);
     const teacherConsistencyIssues=analyzeTeacherConsistencyObject(schedule);
     const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0&&teacherConsistencyIssues.length===0;
-    showAlert(ok?`Program oluşturuldu - OR-Tools ile ${ALL_CLASSES.length}/${ALL_CLASSES.length} sınıf ${target} saat dolu.`:`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.`,ok?'ok':'warn');
+    const openingNote=(orToolsResult.autoOpenings||[]).length
+      ? `<br>Programı oturtmak için açılan saatler:<br>${orToolsResult.autoOpenings.slice(0,5).map(x=>`• ${h(x)} açıldı`).join('<br>')}${orToolsResult.autoOpenings.length>5?'<br>• ...':''}`
+      : '';
+    showAlert(ok?`Program oluşturuldu - OR-Tools ile ${ALL_CLASSES.length}/${ALL_CLASSES.length} sınıf ${target} saat dolu.${openingNote}`:`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.`,ok?'ok':'warn');
     scheduleAutoSave();
     return;
   }
@@ -1179,27 +1182,25 @@ async function generateSchedule(){
 }
 
 async function solveWithOrTools(){
-  const baseState=programState();
-  const attempts=[
-    {label:'OR-Tools çözümleyici hazırlanıyor... En fazla 20 saniye denenecek.',timeLimitSeconds:20,seed:1},
-  ];
   let lastResult=null;
-  for(let i=0;i<attempts.length;i++){
-    const attempt=attempts[i];
-    setWorkState(true,attempt.label);
+  const autoOpeningsLog=[];
+  const seenOpenings=new Set();
+  const maxRounds=12;
+  for(let i=0;i<maxRounds;i++){
+    setWorkState(true,i===0?'Program oturtulmaya çalışılıyor... 10 saniye deneniyor.':`Program oturtulmaya çalışılıyor... ${i+1}. deneme, 10 saniye deneniyor.`);
     await yieldToBrowser();
     try{
       const res=await apiFetch('/api/program/solve',{
         method:'POST',
         body:JSON.stringify({
-          programData:baseState,
-          timeLimitSeconds:attempt.timeLimitSeconds,
-          seed:attempt.seed,
+          programData:programState(),
+          timeLimitSeconds:10,
+          seed:i+1,
           workers:8
         })
       });
       if(res&&res.ok&&res.schedule){
-        return {ok:true,schedule:res.schedule,adjustments:res.adjustments||[],stats:res.stats||{},attempt:i+1};
+        return {ok:true,schedule:res.schedule,adjustments:res.adjustments||[],stats:res.stats||{},attempt:i+1,autoOpenings:autoOpeningsLog};
       }
       lastResult={ok:false,error:res?.error||'OR-Tools çözümleyici geçerli sonuç döndürmedi.',issues:res?.issues||[],status:res?.status,attempt:i+1};
       if(res?.transient) break;
@@ -1208,15 +1209,33 @@ async function solveWithOrTools(){
       lastResult={ok:false,error:error.message||'OR-Tools çözümleyiciye ulaşılamadı.',issues:[],network:true,attempt:i+1};
       break;
     }
-    if(i<attempts.length-1){
-      await waitForSolverRetry(i);
+    const status=String(lastResult?.status||'').toUpperCase();
+    if(['UNKNOWN','NEEDS_OPENINGS','INFEASIBLE','NO_CANDIDATE'].includes(status)){
+      const openingResult=openSolverOpeningHints(lastResult.issues||[]);
+      if(openingResult.opened>0){
+        const signature=openingResult.actions.join('|');
+        if(seenOpenings.has(signature)){
+          lastResult.error='Aynı boş saat önerileri tekrarlandı; otomatik açma artık ilerletmiyor. Ders dağıtımı veya öğretmen yükleri kontrol edilmeli.';
+          break;
+        }
+        seenOpenings.add(signature);
+        autoOpeningsLog.push(...openingResult.actions);
+        const shown=openingResult.actions.slice(0,5).join(' · ');
+        setWorkState(true,`Program mümkün olmadığı için ${shown} açıldı. Yeniden deneniyor...`);
+        if(document.getElementById('view-blocked').classList.contains('active')) renderBlockedView();
+        await waitForSolverRetry(i);
+        continue;
+      }
+      lastResult.error='Program 10 saniyede oturmadı ve otomatik açılabilecek yeni boş saat bulunamadı.';
+      break;
     }
+    break;
   }
   if(lastResult?.network){
     lastResult.error='Solver isteği zaman aşımına düştü veya bağlantı anlık kesildi. Veri değiştirmenize gerek yok; tekrar deneyebilirsiniz.';
   }
   if(String(lastResult?.status||'').toUpperCase()==='UNKNOWN'){
-    lastResult.error='OR-Tools 20 saniye içinde programı oturtamadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.';
+    lastResult.error=lastResult.error||'Program 10 saniyede oturmadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.';
   }
   return lastResult||{ok:false,error:'OR-Tools çözümleyiciye ulaşılamadı.'};
 }
@@ -1237,7 +1256,7 @@ function formatOrToolsFailure(result){
 
 function parseSolverOpeningHint(text){
   const raw=String(text||'').trim();
-  const teacherMatch=raw.match(/^(.+?) öğretmenin (.+)$/);
+  const teacherMatch=raw.match(/(?:^| için )(.+?) öğretmenin (.+)$/);
   if(!teacherMatch) return null;
   const teacherName=teacherMatch[1].trim();
   const rest=teacherMatch[2].trim();
@@ -1274,26 +1293,52 @@ function parseHourLabel(label){
 }
 
 function applySolverOpeningHints(){
-  const hints=(lastSolverOpeningHints||[]).map(parseSolverOpeningHint).filter(Boolean);
+  const result=openSolverOpeningHints(lastSolverOpeningHints||[]);
+  renderBlockedView();
+  scheduleAutoSave();
+  showAlert(result.opened?`${result.opened} kırmızı saat önerilere göre açıldı. Programı yeniden oluşturabilirsiniz.`:'Uygulanacak kırmızı saat bulunamadı; öneriler zaten açık olabilir.','ok');
+}
+
+function openSolverOpeningHints(issueTexts=[]){
+  const hints=(issueTexts||[]).map(parseSolverOpeningHint).filter(Boolean);
   let opened=0;
+  const actions=[];
   hints.forEach(hint=>{
     if(!teacherUnavailable[hint.tid]) teacherUnavailable[hint.tid]={};
+    const teacher=teachers.find(t=>t.id===hint.tid);
+    let openedForHint=0;
     hint.hours.forEach(hour=>{
       const key=`${hint.day}_${hour}`;
       if(teacherUnavailable[hint.tid][key]){
         delete teacherUnavailable[hint.tid][key];
         opened++;
+        openedForHint++;
       }
     });
+    if(openedForHint>0){
+      actions.push(`${teacher?.name||hint.tid} ${DAYS[hint.day]} ${formatHourListForMessage(hint.hours)}`);
+    }
   });
-  renderBlockedView();
-  scheduleAutoSave();
-  showAlert(opened?`${opened} kırmızı saat önerilere göre açıldı. Programı yeniden oluşturabilirsiniz.`:'Uygulanacak kırmızı saat bulunamadı; öneriler zaten açık olabilir.','ok');
+  return {opened,actions};
+}
+
+function formatHourListForMessage(hours){
+  const sorted=[...new Set(hours)].sort((a,b)=>a-b).map(h=>h+1);
+  if(!sorted.length) return '';
+  const ranges=[];
+  let start=sorted[0],prev=sorted[0];
+  for(let i=1;i<=sorted.length;i++){
+    const current=sorted[i];
+    if(current===prev+1){prev=current;continue;}
+    ranges.push(start===prev?`${start}. saat`:`${start}-${prev}. saat`);
+    start=current;prev=current;
+  }
+  return ranges.join(', ');
 }
 
 function isFinalSolverFailure(result){
   const status=String(result?.status||'').toUpperCase();
-  if(['INVALID_DISTRIBUTION','NO_CANDIDATE','HARD_IMPOSSIBLE','INFEASIBLE'].includes(status)) return true;
+  if(['INVALID_DISTRIBUTION','HARD_IMPOSSIBLE'].includes(status)) return true;
   const msg=String(result?.error||'').toLowerCase();
   if(msg.includes('ders dağıtımı')&&msg.includes('düzeltilmeli')) return true;
   return false;
