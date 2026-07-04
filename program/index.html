@@ -829,18 +829,25 @@ function setupTeacherGroups(type,subjects){
   return groups;
 }
 
-function setupBaseTeacherCount(total){
-  const preferredMin=21;
+function setupRealismProfile(type){
+  return type==='high'
+    ? {lowLoadRatio:0.20,lowLimit:20,extraIfAverageAtLeast:27,extraMinAverage:17,overloadRatio:0.18,overloadMin:25,overloadMax:35}
+    : {lowLoadRatio:0.30,lowLimit:20,extraIfAverageAtLeast:24,extraMinAverage:17,overloadRatio:0.10,overloadMin:25,overloadMax:31};
+}
+
+function setupBaseTeacherCount(total,type){
   const hardMax=35;
+  const preferredMin=21;
   return Math.max(1,Math.max(Math.ceil(total/hardMax),Math.floor(total/preferredMin)));
 }
 
 function setupTeacherGroupPlans(type,subjects,subjectTotals,options={}){
   const oddClassroomCount=!!options.oddClassroomCount;
-  const overloadLimit=type==='high'?35:29;
+  const profile=setupRealismProfile(type);
+  const overloadLimit=profile.overloadMax;
   const groups=setupTeacherGroups(type,subjects).map(group=>{
     const total=group.subjects.reduce((sum,subj)=>sum+(subjectTotals[subj]||0),0);
-    let baseCount=setupBaseTeacherCount(total);
+    let baseCount=setupBaseTeacherCount(total,type);
     let oddRaised=false;
     if(oddClassroomCount && total/baseCount>27 && total/(baseCount+1)>=18){
       baseCount++;
@@ -854,9 +861,9 @@ function setupTeacherGroupPlans(type,subjects,subjectTotals,options={}){
       overloadCandidate:false,
     };
   }).filter(group=>group.total>0);
-  const overloadLimitCount=Math.max(1,Math.round(groups.length*(type==='high'?0.2:0.1)));
+  const overloadLimitCount=Math.max(1,Math.round(groups.length*profile.overloadRatio));
   const overloadCandidates=groups
-    .filter(group=>!group.oddRaised&&group.count>1&&group.total/(group.count-1)>=25&&group.total/(group.count-1)<=overloadLimit)
+    .filter(group=>!group.oddRaised&&group.count>1&&group.total/(group.count-1)>=profile.overloadMin&&group.total/(group.count-1)<=overloadLimit)
     .sort(()=>Math.random()-0.5)
     .slice(0,overloadLimitCount);
   overloadCandidates.forEach(group=>{
@@ -868,19 +875,18 @@ function setupTeacherGroupPlans(type,subjects,subjectTotals,options={}){
 }
 
 function addRandomLowLoadTeachers(groups,type){
+  const profile=setupRealismProfile(type);
   const baseTotal=groups.reduce((sum,group)=>sum+group.count,0);
-  const lowLimit=20;
-  const targetRatio=type==='middle'?0.30:0.18;
-  const maxLow=Math.max(1,Math.floor(baseTotal*targetRatio));
-  let lowCount=groups.reduce((sum,group)=>sum+(group.total/group.count<=lowLimit?group.count:0),0);
+  const maxLow=Math.max(1,Math.floor(baseTotal*profile.lowLoadRatio));
+  let lowCount=groups.reduce((sum,group)=>sum+(group.total/group.count<=profile.lowLimit?group.count:0),0);
   const candidates=groups
     .filter(group=>group.count>0)
-    .filter(group=>group.total/group.count>=22)
-    .filter(group=>group.total/(group.count+1)>=15)
+    .filter(group=>group.total/group.count>=profile.extraIfAverageAtLeast)
+    .filter(group=>group.total/(group.count+1)>=profile.extraMinAverage)
     .sort(()=>Math.random()-0.5);
   for(const group of candidates){
-    const currentLow=group.total/group.count<=lowLimit?group.count:0;
-    const nextLow=group.total/(group.count+1)<=lowLimit?group.count+1:0;
+    const currentLow=group.total/group.count<=profile.lowLimit?group.count:0;
+    const nextLow=group.total/(group.count+1)<=profile.lowLimit?group.count+1:0;
     const delta=nextLow-currentLow;
     if(delta<=0) continue;
     if(lowCount+delta>maxLow) continue;
@@ -3328,8 +3334,8 @@ function assignRandomFreeDaysToHalfTeachers(){
     const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-load);
     return maxBlocked>=settings.hoursPerDay;
   });
-  const targetCount=Math.min(Math.ceil(teachers.length/3),eligible.length);
-  const shuffled=[...eligible].sort((a,b)=>randomSortKey(a)-randomSortKey(b));
+  const targetCount=Math.min(Math.ceil(teachers.length*randomUnavailableThresholds().fullDayRatio),eligible.length);
+  const shuffled=[...eligible].sort((a,b)=>teacherAssignedHours(a.id)-teacherAssignedHours(b.id) || randomSortKey(a)-randomSortKey(b));
   const fullDayIds=new Set();
   let assigned=0;
   shuffled.slice(0,targetCount).forEach((teacher,idx)=>{
@@ -3373,8 +3379,8 @@ function assignRandomFreeDaysToHalfTeachers(){
 function randomUnavailableThresholds(){
   const isHighSchool=(parseInt(settings.hoursPerDay)||7)>=8;
   return isHighSchool
-    ? {noFullDayAbove:30,noPartialAbove:33}
-    : {noFullDayAbove:23,noPartialAbove:29};
+    ? {noFullDayAbove:30,noPartialAbove:33,fullDayRatio:0.18}
+    : {noFullDayAbove:23,noPartialAbove:29,fullDayRatio:0.22};
 }
 
 function canTeacherReceiveRandomFullDay(load){
@@ -3885,7 +3891,7 @@ function seedDefaultTeacherUnavailable(force=false){
   if(!force&&Object.keys(teacherUnavailable||{}).length) return;
   const result={};
   const ordered=[...teachers].sort((a,b)=>stableTeacherRank(a)-stableTeacherRank(b));
-  const fullDayCount=Math.ceil(ordered.length/3);
+  const fullDayCount=Math.ceil(ordered.length*randomUnavailableThresholds().fullDayRatio);
   const fullDayEligible=ordered.filter(t=>{
     const load=teacherAssignedHours(t.id);
     return canTeacherReceiveRandomFullDay(load)&&settings.days.length*settings.hoursPerDay-load>=settings.hoursPerDay;
