@@ -825,18 +825,24 @@ function pickSetupSubjects(subjects,names){
 function setupTeacherGroups(type,subjects){
   const groupDefs=type==='high'
     ? [
+        {name:'Türk Dili ve Edebiyatı',subjects:pickSetupSubjects(subjects,['TDE','SEÇ.TDE'])},
+        {name:'Matematik',subjects:pickSetupSubjects(subjects,['MAT','SEÇ.MAT'])},
+        {name:'Fizik',subjects:pickSetupSubjects(subjects,['FİZ','SEÇ.FİZ'])},
+        {name:'Kimya',subjects:pickSetupSubjects(subjects,['KİM','SEÇ.KİM'])},
+        {name:'Biyoloji Sağlık',subjects:pickSetupSubjects(subjects,['BİY','SAĞLIK','SEÇ.BİY'])},
         {name:'Tarih',subjects:pickSetupSubjects(subjects,['TAR','INK.TAR'])},
         {name:'Coğrafya',subjects:pickSetupSubjects(subjects,['COG'])},
         {name:'Felsefe',subjects:pickSetupSubjects(subjects,['FEL'])},
-        {name:'Biyoloji Sağlık',subjects:pickSetupSubjects(subjects,['BİY','SAĞLIK'])},
         {name:'Sosyal Etkinlik',subjects:pickSetupSubjects(subjects,['SOS.ETK','DRAMA'])},
         {name:'Sanat',subjects:pickSetupSubjects(subjects,['GÖN/MÖZ','BEDEN/GÖN/MÖZ'])},
       ]
     : [
-        {name:'Sosyal',subjects:pickSetupSubjects(subjects,['SOSYAL','INK.TAR'])},
+        {name:'Türkçe',subjects:pickSetupSubjects(subjects,['TRK','YYB'])},
+        {name:'Matematik',subjects:pickSetupSubjects(subjects,['MAT','MBU'])},
+        {name:'Sosyal',subjects:pickSetupSubjects(subjects,['SOSYAL','INK.TAR','GORG'])},
+        {name:'Din',subjects:pickSetupSubjects(subjects,['DİN','KURAN','AHLAK'])},
+        {name:'Beden',subjects:pickSetupSubjects(subjects,['BEDEN','SPOR'])},
         {name:'Bilişim Teknoloji',subjects:pickSetupSubjects(subjects,['BİL.TAR','TEK.TAS'])},
-        {name:'Din',subjects:pickSetupSubjects(subjects,['KURAN','AHLAK'])},
-        {name:'Beden',subjects:pickSetupSubjects(subjects,['SPOR'])},
       ];
   const used=new Set();
   const groups=[];
@@ -2916,6 +2922,11 @@ function pickTeacherForSubject(subj,d,h,teacherBusy,teacherLoad){
 function getTeacherPool(subj){
   const ids=new Set([...(SUBJECT_TEACHER_POOLS[subj]||[]),...getFallbackTeacherPool(subj)]);
   teachers.filter(t=>(t.subjects||[]).includes(subj)).forEach(t=>ids.add(t.id));
+  teachers.forEach(t=>{
+    (t.assignments||[]).forEach(a=>{
+      if(a.subj===subj) ids.add(t.id);
+    });
+  });
   return [...ids];
 }
 
@@ -2927,6 +2938,9 @@ function getFallbackTeacherPool(subj){
   if(key.includes('COGRAF')||key.includes('SOSYAL')) pools.push('SOSYAL');
   if(key.includes('TURK')||key.includes('DIL')) pools.push('TRK');
   if(key.includes('MAT')) pools.push('MAT');
+  if(key.includes('FIZ')) pools.push('FİZ','FEN');
+  if(key.includes('KIM')) pools.push('KİM','FEN');
+  if(key.includes('BIY')||key.includes('SAGLIK')) pools.push('BİY','FEN');
   if(key.includes('FEN')||key.includes('BILIM')) pools.push('FEN');
   if(key.includes('ING')||key.includes('ENGLISH')) pools.push('ING');
   if(key.includes('DIN')||key.includes('KURAN')||key.includes('PEYGAMBER')) pools.push('DİN');
