@@ -3379,8 +3379,8 @@ function assignRandomFreeDaysToHalfTeachers(){
 function randomUnavailableThresholds(){
   const isHighSchool=(parseInt(settings.hoursPerDay)||7)>=8;
   return isHighSchool
-    ? {noFullDayAbove:30,noPartialAbove:33,fullDayRatio:0.18}
-    : {noFullDayAbove:23,noPartialAbove:29,fullDayRatio:0.22};
+    ? {noFullDayAbove:31,noPartialAbove:33,fullDayRatio:0.28}
+    : {noFullDayAbove:24,noPartialAbove:29,fullDayRatio:0.34};
 }
 
 function canTeacherReceiveRandomFullDay(load){
