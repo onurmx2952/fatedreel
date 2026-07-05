@@ -4171,6 +4171,10 @@ function importCSVText(text){
   const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).filter(line=>line.trim());
   if(lines.length<2) throw new Error('CSV içinde program satırı bulunamadı.');
   const rows=lines.map(parseCSVLine);
+  const inferredHours=Math.round((rows[0].length-1)/(settings.days?.length||5));
+  if(inferredHours>=1&&inferredHours<=12&&inferredHours!==settings.hoursPerDay){
+    settings.hoursPerDay=inferredHours;
+  }
   const nextSchedule={};
   const importedTeachers=[];
   const importedClasses=new Set();
@@ -4178,7 +4182,7 @@ function importCSVText(text){
   const classSubjectCounts={};
   const teacherAssignmentCounts={};
   let imported=0;
-  const classPattern=/^([5-8]\s*[-–]\s*[A-ZÇĞİÖŞÜ])\s+(.+)$/i;
+  const classPattern=/^((?:[5-9]|1[0-2])\s*[-/–]\s*[A-ZÇĞİÖŞÜ]|Hazırlık\s*[-/–]\s*[A-ZÇĞİÖŞÜ])\s+(.+)$/i;
   rows.slice(1).forEach(row=>{
     const teacherName=(row[0]||'').trim();
     if(!teacherName) return;
@@ -4191,10 +4195,10 @@ function importCSVText(text){
     settings.days.forEach(d=>{
       for(let h=0;h<settings.hoursPerDay;h++,index++){
         const value=(row[index]||'').trim();
-        if(!value) return;
+        if(!value) continue;
         const match=value.match(classPattern);
-        if(!match) return;
-        const cls=match[1].toLocaleUpperCase('tr').replace(/\s+/g,'').replace('–','-');
+        if(!match) continue;
+        const cls=match[1].toLocaleUpperCase('tr').replace(/\s+/g,'').replace('–','-').replace('/','-');
         const subj=match[2].trim();
         importedClasses.add(cls);
         importedSubjects.add(subj);
