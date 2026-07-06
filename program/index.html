@@ -366,9 +366,14 @@ body.auth-locked .login-screen{display:flex}
 
     <div class="settings-card">
       <h3>CSV</h3>
-      <div style="font-size:13px;color:#64748b;line-height:1.55;margin-bottom:12px">Öğretmen programını CSV olarak indirir veya aynı formatta geri yükler.</div>
+      <div style="font-size:13px;color:#64748b;line-height:1.55;margin-bottom:12px">
+        İki format desteklenir:<br>
+        <b>Program CSV</b> — öğretmen programını indirir/yükler.<br>
+        <b>Dağıtım CSV</b> — <code>Tip,Ogretmen,Sinif,Ders,Saat,Gun</code> sütunlu dosyada <code>DAGITIM</code> ve <code>BOS_GUN</code> satırlarını okur; ders dağıtımı ve öğretmen boş günlerini gösterir, program oluşturmaz.
+      </div>
       <div class="settings-actions">
-        <button class="btn" onclick="exportCSV()">CSV indir</button>
+        <button class="btn" onclick="exportCSV()">Program CSV indir</button>
+        <button class="btn" onclick="exportDistributionCSV()">Dağıtım CSV indir</button>
         <button class="btn" onclick="document.getElementById('csv-upload').click()">CSV yükle</button>
         <input id="csv-upload" type="file" accept=".csv,text/csv" style="display:none" onchange="importCSVFile(event)">
       </div>
@@ -4167,10 +4172,48 @@ function parseCSVLine(line){
   return cells;
 }
 
+function isDistributionCSVFormat(rows){
+  const header=(rows[0]||[]).map(normalizeCSVHeader);
+  if(header.includes('TIP')&&header.includes('DERS')&&(header.includes('OGRETMEN')||header.includes('OGRT'))){
+    return true;
+  }
+  return rows.slice(1,12).some(row=>{
+    const type=String(row[0]||'').trim().toLocaleUpperCase('tr');
+    return type==='DAGITIM'||type==='DAĞITIM'||type==='BOS_GUN'||type==='BOŞ_GÜN'||type==='AYAR';
+  });
+}
+
+function syncSettingsFormFromState(){
+  const hoursInput=document.getElementById('set-hours');
+  if(hoursInput) hoursInput.value=settings.hoursPerDay;
+  document.querySelectorAll('[data-day]').forEach(cb=>{
+    cb.checked=(settings.days||[]).includes(parseInt(cb.dataset.day));
+  });
+}
+
+function deriveGradesAndSectionsFromClasses(classes){
+  const gradeSet=new Set();
+  const sectionSet=new Set();
+  classes.forEach(cls=>{
+    const parts=String(cls).split('-');
+    if(parts.length<2) return;
+    gradeSet.add(parts.slice(0,-1).join('-'));
+    sectionSet.add(parts[parts.length-1]);
+  });
+  return {
+    grades:[...gradeSet].sort((a,b)=>String(a).localeCompare(String(b),'tr',{numeric:true})),
+    sections:[...sectionSet].sort((a,b)=>a.localeCompare(b,'tr'))
+  };
+}
+
 function importCSVText(text){
   const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).filter(line=>line.trim());
   if(lines.length<2) throw new Error('CSV içinde program satırı bulunamadı.');
   const rows=lines.map(parseCSVLine);
+  if(isDistributionCSVFormat(rows)){
+    importDistributionCSVRows(rows);
+    return;
+  }
   const inferredHours=Math.round((rows[0].length-1)/(settings.days?.length||5));
   if(inferredHours>=1&&inferredHours<=12&&inferredHours!==settings.hoursPerDay){
     settings.hoursPerDay=inferredHours;
@@ -4244,6 +4287,156 @@ function importCSVText(text){
   scheduleAutoSave();
   showTab('program',document.querySelector('.tab[onclick*="program"]'));
   showAlert(`CSV yüklendi: ${teachers.length} öğretmen, ${ALL_CLASSES.length} sınıf, ${imported} program hücresi. Eski öğretmen/program/boş saat kayıtları temizlendi.`,'ok');
+}
+
+function importDistributionCSVRows(rows){
+  const header=rows[0].map(normalizeCSVHeader);
+  const col=name=>header.indexOf(name);
+  const typeCol=col('TIP');
+  const teacherCol=header.includes('OGRETMEN')?col('OGRETMEN'):col('OGRT');
+  const classCol=col('SINIF');
+  const subjectCol=col('DERS');
+  const hoursCol=col('SAAT');
+  const dayCol=col('GUN');
+  const importedTeachers=[];
+  const byName={};
+  const importedClasses=new Set();
+  const importedSubjects=new Set();
+  const classSubjectCounts={};
+  const assignmentTotals={};
+  const nextUnavailable={};
+  let assignmentCount=0;
+  let blockedDayCount=0;
+  function getTeacher(name){
+    const key=String(name||'').trim();
+    if(!key) return null;
+    if(!byName[key]){
+      byName[key]={id:importedTeachers.length+1,name:key,hours:0,subjects:[],assignments:[]};
+      importedTeachers.push(byName[key]);
+    }
+    return byName[key];
+  }
+  rows.slice(1).forEach(row=>{
+    const type=String(row[typeCol]||'').trim().toLocaleUpperCase('tr');
+    if(type==='AYAR'){
+      const key=normalizeCSVHeader(row[subjectCol]);
+      const value=parseInt(row[hoursCol])||0;
+      if(key==='GUNLUK_SAAT'&&value>=1&&value<=12) settings.hoursPerDay=value;
+      return;
+    }
+    const teacher=getTeacher(row[teacherCol]);
+    if(!teacher) return;
+    if(type==='DAGITIM'||type==='DAĞITIM'){
+      const cls=String(row[classCol]||'').trim().toLocaleUpperCase('tr').replace(/\s+/g,'').replace('–','-').replace('/','-');
+      const subj=String(row[subjectCol]||'').trim();
+      const wh=parseInt(row[hoursCol])||0;
+      if(!cls||!subj||wh<=0) return;
+      importedClasses.add(cls);
+      importedSubjects.add(subj);
+      if(!teacher.subjects.includes(subj)) teacher.subjects.push(subj);
+      const akey=`${teacher.id}|${cls}|${subj}`;
+      assignmentTotals[akey]=(assignmentTotals[akey]||0)+wh;
+      classSubjectCounts[cls]??={};
+      classSubjectCounts[cls][subj]=(classSubjectCounts[cls][subj]||0)+wh;
+      assignmentCount++;
+    }else if(type==='BOS_GUN'||type==='BOŞ_GÜN'){
+      const day=parseDayName(row[dayCol]);
+      if(day===null) return;
+      nextUnavailable[teacher.id]??={};
+      for(let h=0;h<settings.hoursPerDay;h++) nextUnavailable[teacher.id][`${day}_${h}`]=true;
+      blockedDayCount++;
+    }
+  });
+  if(!assignmentCount) throw new Error('CSV okundu ama ders dağıtımı satırı bulunamadı.');
+  Object.entries(assignmentTotals).forEach(([key,wh])=>{
+    const [tid,cls,subj]=key.split('|');
+    const teacher=importedTeachers.find(t=>t.id===parseInt(tid));
+    if(!teacher) return;
+    teacher.assignments.push({cls,subj,wh,manual:true});
+    teacher.hours+=wh;
+  });
+  teachers=importedTeachers;
+  ALL_CLASSES=[...importedClasses].sort((a,b)=>a.localeCompare(b,'tr',{numeric:true}));
+  const derived=deriveGradesAndSectionsFromClasses(ALL_CLASSES);
+  GRADES=derived.grades;
+  SECTIONS=derived.sections;
+  SUBJECTS=[...importedSubjects].sort((a,b)=>a.localeCompare(b,'tr'));
+  Object.keys(CLASS_PLAN).forEach(k=>delete CLASS_PLAN[k]);
+  Object.keys(GRADE_PLAN).forEach(k=>delete GRADE_PLAN[k]);
+  ALL_CLASSES.forEach(cls=>{
+    CLASS_PLAN[cls]=Object.entries(classSubjectCounts[cls]||{})
+      .map(([subj,wh])=>({subj,wh}))
+      .sort((a,b)=>a.subj.localeCompare(b.subj,'tr'));
+    const grade=classGradeKey(cls);
+    GRADE_PLAN[grade]??=[];
+    (CLASS_PLAN[cls]||[]).forEach(({subj,wh})=>{
+      const existing=GRADE_PLAN[grade].find(l=>l.subj===subj);
+      if(existing) existing.wh=Math.max(existing.wh,wh);
+      else GRADE_PLAN[grade].push({subj,wh});
+    });
+  });
+  teacherUnavailable={};
+  teachers.forEach(t=>{teacherUnavailable[t.id]=nextUnavailable[t.id]||{};});
+  schedule={};
+  selectedClass=ALL_CLASSES[0]||'';
+  selectedDistributionClass=ALL_CLASSES[0]||'';
+  blockedTeacherId=teachers[0]?.id||null;
+  syncSettingsFormFromState();
+  renderTableHeader();
+  renderTable();
+  renderTeachers();
+  renderBlockedView();
+  renderDistribution();
+  if(document.getElementById('view-class').classList.contains('active')) renderClassView();
+  lastSavedState=JSON.stringify(programState());
+  scheduleAutoSave();
+  showTab('distribution',document.querySelector('.tab[onclick*="distribution"]'));
+  showAlert(`Dağıtım CSV yüklendi: ${teachers.length} öğretmen, ${ALL_CLASSES.length} sınıf, ${assignmentCount} atama, ${blockedDayCount} boş gün kaydı. Program oluşturulmadı; <b>Ders Dağıtımı</b> ve <b>Öğretmen Boş Saat</b> sekmelerinden kontrol edebilirsiniz.`,'ok');
+}
+
+function exportDistributionCSV(){
+  const esc=value=>`"${String(value??'').replace(/"/g,'""')}"`;
+  const rows=[['Tip','Ogretmen','Sinif','Ders','Saat','Gun']];
+  rows.push(['AYAR','','','GUNLUK_SAAT',settings.hoursPerDay,'']);
+  const dayName=d=>DAYS[d]||'';
+  teachers.forEach(t=>{
+    (t.assignments||[]).forEach(a=>{
+      rows.push(['DAGITIM',t.name,a.cls,a.subj,a.wh,'']);
+    });
+    const blockedDays=new Set();
+    Object.keys(teacherUnavailable[t.id]||{}).forEach(key=>{
+      const day=parseInt(key.split('_')[0]);
+      if(!Number.isNaN(day)) blockedDays.add(day);
+    });
+    [...blockedDays].sort((a,b)=>a-b).forEach(day=>{
+      rows.push(['BOS_GUN',t.name,'','','',dayName(day)]);
+    });
+  });
+  const csv='\uFEFF'+rows.map(r=>r.map(esc).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download='ders_dagitim_bos_gun.csv';
+  a.click();
+}
+
+function normalizeCSVHeader(value){
+  return String(value||'')
+    .trim()
+    .toLocaleUpperCase('tr')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .replace(/İ/g,'I')
+    .replace(/Ğ/g,'G')
+    .replace(/Ü/g,'U')
+    .replace(/Ş/g,'S')
+    .replace(/Ö/g,'O')
+    .replace(/Ç/g,'C');
+}
+
+function parseDayName(value){
+  const normalized=normalizeCSVHeader(value);
+  const map={PAZARTESI:0,SALI:1,CARSAMBA:2,PERSEMBE:3,CUMA:4,CUMARTESI:5,PAZAR:6};
+  return Object.prototype.hasOwnProperty.call(map,normalized)?map[normalized]:null;
 }
 
 function showAlert(msg,type){
