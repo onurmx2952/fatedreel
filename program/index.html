@@ -3425,18 +3425,17 @@ function assignRandomFreeDaysToHalfTeachers(){
 }
 
 function randomUnavailableThresholds(){
-  const isHighSchool=(parseInt(settings.hoursPerDay)||7)>=8;
-  return isHighSchool
-    ? {noFullDayAbove:31,noPartialAbove:33,fullDayRatio:0.28}
-    : {noFullDayAbove:24,noPartialAbove:29,fullDayRatio:0.34};
+  return {fullDayRatio:1};
 }
 
 function canTeacherReceiveRandomFullDay(load){
-  return (parseInt(load)||0)<=randomUnavailableThresholds().noFullDayAbove;
+  const totalSlots=settings.days.length*settings.hoursPerDay;
+  return totalSlots-(parseInt(load)||0)>=settings.hoursPerDay;
 }
 
 function canTeacherReceiveRandomPartialHours(load){
-  return (parseInt(load)||0)<=randomUnavailableThresholds().noPartialAbove;
+  const totalSlots=settings.days.length*settings.hoursPerDay;
+  return totalSlots-(parseInt(load)||0)>0;
 }
 
 function addPatternBlockedSlots(tid,hours,protectedDay=null){
