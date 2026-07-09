@@ -136,6 +136,21 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         hours_per_day,
         payload,
         relax_unavailable=False,
+        free_day_mode="require",
+    )
+    if strict.get("ok"):
+        return strict
+
+    strict = solve_blocks_with_model(
+        blocks,
+        teachers,
+        teacher_by_id,
+        teacher_unavailable,
+        days,
+        hours_per_day,
+        payload,
+        relax_unavailable=False,
+        free_day_mode="maximize",
     )
     if strict.get("ok"):
         return strict
@@ -150,6 +165,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         with_time_limit(payload, 10),
         relax_unavailable=True,
         relax_scope="edge",
+        free_day_mode="none",
     )
     if relaxed.get("ok"):
         adjustments = relaxed.get("adjustments") or []
@@ -173,6 +189,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         with_time_limit(payload, 10),
         relax_unavailable=True,
         relax_scope="all",
+        free_day_mode="none",
     )
     if relaxed.get("ok"):
         adjustments = relaxed.get("adjustments") or []
@@ -204,6 +221,7 @@ def solve_blocks_with_model(
     payload: dict[str, Any],
     relax_unavailable: bool,
     relax_scope: str = "all",
+    free_day_mode: str = "none",
 ) -> dict[str, Any]:
     model = cp_model.CpModel()
     var_by_block: dict[int, list[tuple[Any, int, int]]] = {}
@@ -263,8 +281,42 @@ def solve_blocks_with_model(
         model.AddAtMostOne(vars_)
     for vars_ in subject_day_vars.values():
         model.AddAtMostOne(vars_)
+
+    free_day_vars: list[Any] = []
+    free_day_teacher_vars: list[Any] = []
+    if free_day_mode in {"require", "maximize"}:
+        load_by_teacher = teacher_assignment_loads(teachers)
+        for teacher in teachers:
+            tid = int(teacher.get("id"))
+            load = load_by_teacher.get(tid, 0)
+            if load <= 0:
+                continue
+            day_free_vars: list[Any] = []
+            for day in days:
+                day_slot_vars: list[Any] = []
+                for hour in range(hours_per_day):
+                    day_slot_vars.extend(teacher_slot_vars.get((tid, day, hour), []))
+                busy = model.NewBoolVar(f"t{tid}_d{day}_busy")
+                if day_slot_vars:
+                    model.AddMaxEquality(busy, day_slot_vars)
+                else:
+                    model.Add(busy == 0)
+                free = model.NewBoolVar(f"t{tid}_d{day}_free")
+                model.Add(busy + free == 1)
+                day_free_vars.append(free)
+                free_day_vars.append(free)
+            if not day_free_vars:
+                continue
+            has_free_day = model.NewBoolVar(f"t{tid}_has_free_day")
+            model.AddMaxEquality(has_free_day, day_free_vars)
+            free_day_teacher_vars.append(has_free_day)
+            if free_day_mode == "require" and load <= (len(days) - 1) * hours_per_day:
+                model.Add(has_free_day == 1)
+
     if relax_unavailable and penalty_terms:
         model.Minimize(sum(penalty_terms))
+    elif free_day_mode == "maximize" and free_day_teacher_vars:
+        model.Maximize(sum(free_day_teacher_vars) * 1000 + sum(free_day_vars))
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = float(payload.get("timeLimitSeconds") or 75)
@@ -307,6 +359,7 @@ def solve_blocks_with_model(
             break
 
     adjustments = summarize_adjustments(adjustment_slots)
+    free_day_stats = count_free_day_teachers(schedule, teachers, days, hours_per_day)
     return {
         "ok": True,
         "status": solver.StatusName(status),
@@ -317,8 +370,50 @@ def solve_blocks_with_model(
             "slots": len(schedule),
             "wallTime": solver.WallTime(),
             "relaxedUnavailable": bool(adjustments),
+            "freeDayMode": free_day_mode,
+            "freeDayTeachers": free_day_stats["freeDayTeachers"],
+            "targetFreeDayTeachers": free_day_stats["targetFreeDayTeachers"],
         },
     }
+
+
+def teacher_assignment_loads(teachers: list[dict[str, Any]]) -> dict[int, int]:
+    loads: dict[int, int] = {}
+    for teacher in teachers:
+        tid = int(teacher.get("id"))
+        loads[tid] = sum(int(a.get("wh") or 0) for a in teacher.get("assignments") or [])
+    return loads
+
+
+def count_free_day_teachers(
+    schedule: dict[str, dict[str, str]],
+    teachers: list[dict[str, Any]],
+    days: list[int],
+    hours_per_day: int,
+) -> dict[str, int]:
+    loads = teacher_assignment_loads(teachers)
+    busy_by_teacher_day: set[tuple[int, int]] = set()
+    for key in schedule:
+        parts = str(key).split("_")
+        if len(parts) < 3:
+            continue
+        try:
+            tid = int(parts[0])
+            day = int(parts[1])
+        except ValueError:
+            continue
+        busy_by_teacher_day.add((tid, day))
+
+    target = 0
+    with_free_day = 0
+    for teacher in teachers:
+        tid = int(teacher.get("id"))
+        if loads.get(tid, 0) <= 0:
+            continue
+        target += 1
+        if any((tid, day) not in busy_by_teacher_day for day in days):
+            with_free_day += 1
+    return {"freeDayTeachers": with_free_day, "targetFreeDayTeachers": target}
 
 
 def copy_unavailable(unavailable: dict[str, Any]) -> dict[str, Any]:
