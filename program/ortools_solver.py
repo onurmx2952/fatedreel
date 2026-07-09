@@ -211,6 +211,8 @@ def solve_blocks_with_model(
     teacher_slot_vars: dict[tuple[int, int, int], list[Any]] = {}
     subject_day_vars: dict[tuple[str, str, int], list[Any]] = {}
     penalty_terms: list[Any] = []
+    full_day_break_terms: list[Any] = []
+    full_day_relaxed_vars: dict[tuple[int, int], list[Any]] = {}
     no_candidate: list[str] = []
     candidate_meta: dict[Any, tuple[Block, int, int]] = {}
 
@@ -230,7 +232,11 @@ def solve_blocks_with_model(
                 candidates.append((var, day, start))
                 candidate_meta[var] = (block, day, start)
                 if blocked_hours:
-                    for _ in blocked_hours:
+                    full_day_blocked = is_full_day_blocked(teacher_unavailable, block.teacher_id, day, hours_per_day)
+                    if full_day_blocked:
+                        full_day_relaxed_vars.setdefault((block.teacher_id, day), []).append(var)
+                    weight = 150 if full_day_blocked else 1
+                    for _ in range(len(blocked_hours) * weight):
                         penalty_terms.append(var)
                 subject_day_vars.setdefault((block.cls, block.subj, day), []).append(var)
                 for offset in range(block.length):
@@ -295,11 +301,21 @@ def solve_blocks_with_model(
             if free_day_mode == "require" and load <= (len(days) - 1) * hours_per_day:
                 model.Add(has_free_day == 1)
 
+    for (tid, day), vars_ in full_day_relaxed_vars.items():
+        opened = model.NewBoolVar(f"t{tid}_d{day}_full_day_opened")
+        model.AddMaxEquality(opened, vars_)
+        full_day_break_terms.append(opened)
+
     if relax_unavailable and penalty_terms:
         if free_day_mode == "maximize" and free_day_teacher_vars:
-            model.Minimize(sum(penalty_terms) * 10000 - sum(free_day_teacher_vars) * 100 - sum(free_day_vars))
+            model.Minimize(
+                sum(full_day_break_terms) * 1000000
+                + sum(penalty_terms) * 10000
+                - sum(free_day_teacher_vars) * 100
+                - sum(free_day_vars)
+            )
         else:
-            model.Minimize(sum(penalty_terms))
+            model.Minimize(sum(full_day_break_terms) * 1000000 + sum(penalty_terms))
     elif free_day_mode == "maximize" and free_day_teacher_vars:
         model.Maximize(sum(free_day_teacher_vars) * 1000 + sum(free_day_vars))
 
@@ -340,6 +356,8 @@ def solve_blocks_with_model(
                         "teacher": teacher.get("name", block.teacher_id),
                         "day": day,
                         "hour": hour,
+                        "fullDay": is_full_day_blocked(teacher_unavailable, block.teacher_id, day, hours_per_day),
+                        "hoursPerDay": hours_per_day,
                     }
             break
 
@@ -461,14 +479,26 @@ def summarize_adjustments(slots: dict[tuple[int, int, int], dict[str, Any]]) -> 
                 "teacher": item["teacher"],
                 "day": item["day"],
                 "hours": [],
+                "fullDay": False,
+                "hoursPerDay": item.get("hoursPerDay"),
             },
         )
         grouped[key]["hours"].append(int(item["hour"]))
+        if item.get("fullDay"):
+            grouped[key]["fullDay"] = True
+        if item.get("hoursPerDay"):
+            grouped[key]["hoursPerDay"] = item.get("hoursPerDay")
     result = []
     for item in grouped.values():
         hours = sorted(set(item["hours"]))
+        if item.get("fullDay"):
+            hours = list(range(int(item.get("hoursPerDay") or (max(hours) + 1 if hours else 0))))
         item["hours"] = hours
-        item["text"] = f"{item['teacher']} öğretmenin {day_name(item['day'])} {compact_hours_label(hours)} saatleri açıldı."
+        item["text"] = (
+            f"{item['teacher']} öğretmenin {day_name(item['day'])} boş günü açıldı."
+            if item.get("fullDay")
+            else f"{item['teacher']} öğretmenin {day_name(item['day'])} {compact_hours_label(hours)} saatleri açıldı."
+        )
         result.append(item)
     result.sort(key=lambda item: (str(item["teacher"]), int(item["day"])))
     return result

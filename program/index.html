@@ -1403,7 +1403,10 @@ function applySolverAdjustments(adjustments=[]){
     const day=parseInt(item.day);
     if(!Number.isFinite(tid)||!Number.isFinite(day)) return;
     if(!teacherUnavailable[tid]) teacherUnavailable[tid]={};
-    (item.hours||[]).forEach(rawHour=>{
+    const hours=item.fullDay
+      ? Array.from({length:settings.hoursPerDay},(_,h)=>h)
+      : (item.hours||[]);
+    hours.forEach(rawHour=>{
       const hour=parseInt(rawHour);
       if(!Number.isFinite(hour)) return;
       const key=`${day}_${hour}`;
