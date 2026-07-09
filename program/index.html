@@ -3105,6 +3105,7 @@ function syncTeacherAssignmentsFromSchedule(){
 
 function shuffle(arr){
   for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  return arr;
 }
 
 function openQA(tid){
@@ -3379,12 +3380,12 @@ function assignRandomFreeDaysToHalfTeachers(){
     return maxBlocked>=settings.hoursPerDay;
   });
   const targetCount=Math.min(Math.ceil(teachers.length*randomUnavailableThresholds().fullDayRatio),eligible.length);
-  const shuffled=[...eligible].sort((a,b)=>teacherAssignedHours(a.id)-teacherAssignedHours(b.id) || randomSortKey(a)-randomSortKey(b));
+  const shuffled=shuffle([...eligible]).sort((a,b)=>teacherAssignedHours(a.id)-teacherAssignedHours(b.id));
   const fullDayIds=new Set();
   let assigned=0;
   shuffled.slice(0,targetCount).forEach((teacher,idx)=>{
     if(!teacherUnavailable[teacher.id]) teacherUnavailable[teacher.id]={};
-    const day=settings.days[(randomSortKey(teacher)+idx)%settings.days.length];
+    const day=randomFrom(settings.days);
     const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-teacherAssignedHours(teacher.id));
     const current=countTeacherBlockedSlots(teacher.id);
     if(maxBlocked-current<settings.hoursPerDay) return;
@@ -3396,20 +3397,21 @@ function assignRandomFreeDaysToHalfTeachers(){
   const remaining=teachers
     .filter(t=>!fullDayIds.has(t.id))
     .filter(t=>canTeacherReceiveRandomPartialHours(teacherAssignedHours(t.id)))
-    .sort((a,b)=>randomSortKey(a)-randomSortKey(b));
+    .sort(()=>Math.random()-0.5);
   const partialTeachers=remaining;
   const half=Math.ceil(partialTeachers.length/2);
   let morningAssigned=0;
   let lastAssigned=0;
   let twoHourAssigned=0;
   partialTeachers.forEach((teacher,idx)=>{
-    const useTwoHour=idx%3!==0;
-    const hours=idx<half ? firstEdgeHours(useTwoHour?2:3) : lastEdgeHours(useTwoHour?2:3);
-    const protectedDay=settings.days[(randomSortKey(teacher)+idx*3+1)%settings.days.length];
+    const useTwoHour=Math.random()<0.65;
+    const useMorning=idx<half;
+    const hours=useMorning ? firstEdgeHours(useTwoHour?2:3) : lastEdgeHours(useTwoHour?2:3);
+    const protectedDay=randomFrom(settings.days);
     clearTeacherDayUnavailable(teacher.id,protectedDay);
     const wrote=addPatternBlockedSlots(teacher.id,hours,protectedDay);
-    if(wrote>0 && idx<half) morningAssigned++;
-    if(wrote>0 && idx>=half) lastAssigned++;
+    if(wrote>0 && useMorning) morningAssigned++;
+    if(wrote>0 && !useMorning) lastAssigned++;
     if(wrote>0 && useTwoHour) twoHourAssigned++;
   });
 
@@ -3440,7 +3442,7 @@ function addPatternBlockedSlots(tid,hours,protectedDay=null){
   const maxBlocked=Math.max(0,settings.days.length*settings.hoursPerDay-teacherAssignedHours(tid));
   let current=countTeacherBlockedSlots(tid);
   let wrote=0;
-  const dayOrder=[...settings.days].sort((a,b)=>((a*13+tid)%17)-((b*13+tid)%17));
+  const dayOrder=shuffle([...settings.days]);
   for(const d of dayOrder){
     if(d===protectedDay) continue;
     for(const h of hours){
@@ -3472,6 +3474,11 @@ function lastEdgeHours(count=3){
 
 function randomSortKey(teacher){
   return (stableTeacherRank(teacher)*9301 + 49297) % 233280;
+}
+
+function randomFrom(arr){
+  if(!arr||!arr.length) return null;
+  return arr[Math.floor(Math.random()*arr.length)];
 }
 
 function isTeacherUnavailable(tid,d,h){
@@ -3934,29 +3941,29 @@ function validateFixedDistribution(){
 function seedDefaultTeacherUnavailable(force=false){
   if(!force&&Object.keys(teacherUnavailable||{}).length) return;
   const result={};
-  const ordered=[...teachers].sort((a,b)=>stableTeacherRank(a)-stableTeacherRank(b));
+  const ordered=shuffle([...teachers]);
   const fullDayCount=Math.ceil(ordered.length*randomUnavailableThresholds().fullDayRatio);
   const fullDayEligible=ordered.filter(t=>{
     const load=teacherAssignedHours(t.id);
     return canTeacherReceiveRandomFullDay(load)&&settings.days.length*settings.hoursPerDay-load>=settings.hoursPerDay;
   });
-  const fullDayTeachers=fullDayEligible.slice(0,Math.min(fullDayCount,fullDayEligible.length));
+  const fullDayTeachers=shuffle([...fullDayEligible]).slice(0,Math.min(fullDayCount,fullDayEligible.length));
   const fullDayIds=new Set(fullDayTeachers.map(t=>t.id));
-  const remaining=ordered.filter(t=>{
+  const remaining=shuffle(ordered.filter(t=>{
     const load=teacherAssignedHours(t.id);
     return !fullDayIds.has(t.id)&&canTeacherReceiveRandomPartialHours(load)&&settings.days.length*settings.hoursPerDay-load>0;
-  });
+  }));
   const partialTeachers=remaining;
 
   fullDayTeachers.forEach((t,idx)=>{
-    const day=settings.days[(stableTeacherRank(t)+idx)%settings.days.length];
+    const day=randomFrom(settings.days);
     addBlockedSlotsForTeacher(result,t.id,settings.days.includes(day)?day:settings.days[0],fullDayHours(),teacherAssignedHours(t.id));
   });
 
   partialTeachers.forEach((t,idx)=>{
-    const day=settings.days[(stableTeacherRank(t)+idx*2)%settings.days.length];
-    const useTwoHour=idx%3!==0;
-    const hours=idx%2===0?morningHours(useTwoHour?2:3):lateDayHours(useTwoHour?2:3);
+    const day=randomFrom(settings.days);
+    const useTwoHour=Math.random()<0.65;
+    const hours=Math.random()<0.5?morningHours(useTwoHour?2:3):lateDayHours(useTwoHour?2:3);
     addBlockedSlotsForTeacher(result,t.id,settings.days.includes(day)?day:settings.days[0],hours,teacherAssignedHours(t.id));
   });
 
@@ -4947,4 +4954,3 @@ setTimeout(initCloudAuth,600);
 </script>
 </body>
 </html>
-
