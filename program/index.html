@@ -1204,6 +1204,7 @@ async function generateSchedule(){
 
   const orToolsResult=await solveWithOrTools();
   if(orToolsResult?.ok){
+    const appliedRelaxedOpenings=applySolverAdjustments(orToolsResult.adjustments||[]);
     schedule=orToolsResult.schedule||{};
     renderTable();
     if(document.getElementById('view-class').classList.contains('active')) renderClassView();
@@ -1217,7 +1218,7 @@ async function generateSchedule(){
     const relaxedOpenings=(orToolsResult.adjustments||[]).map(item=>item.text||`${item.teacher||'Öğretmen'} ${DAYS[item.day]||''} ${(item.hours||[]).map(x=>x+1).join(', ')}. saat`);
     const openingActions=[...(orToolsResult.autoOpenings||[]).map(x=>`${h(x)} açıldı`), ...relaxedOpenings];
     const openingNote=openingActions.length
-      ? `<br>Programı oturtmak için esnetilen/açılan saatler:<br>${openingActions.slice(0,5).map(x=>`• ${h(x)}`).join('<br>')}${openingActions.length>5?'<br>• ...':''}`
+      ? `<br>Programı oturtmak için açılan saatler:<br>${openingActions.slice(0,5).map(x=>`• ${h(x)}`).join('<br>')}${openingActions.length>5?'<br>• ...':''}${appliedRelaxedOpenings?`<br>${appliedRelaxedOpenings} kırmızı saat otomatik yeşile çevrildi.`:''}`
       : '';
     showAlert(ok?`Program oluşturuldu - OR-Tools ile ${ALL_CLASSES.length}/${ALL_CLASSES.length} sınıf ${target} saat dolu.${openingNote}`:`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.`,ok?'ok':'warn');
     scheduleAutoSave();
@@ -1393,6 +1394,26 @@ function applySolverOpeningHints(){
   renderBlockedView();
   scheduleAutoSave();
   showAlert(result.opened?`${result.opened} kırmızı saat önerilere göre açıldı. Programı yeniden oluşturabilirsiniz.`:'Uygulanacak kırmızı saat bulunamadı; öneriler zaten açık olabilir.','ok');
+}
+
+function applySolverAdjustments(adjustments=[]){
+  let opened=0;
+  (adjustments||[]).forEach(item=>{
+    const tid=parseInt(item.teacherId);
+    const day=parseInt(item.day);
+    if(!Number.isFinite(tid)||!Number.isFinite(day)) return;
+    if(!teacherUnavailable[tid]) teacherUnavailable[tid]={};
+    (item.hours||[]).forEach(rawHour=>{
+      const hour=parseInt(rawHour);
+      if(!Number.isFinite(hour)) return;
+      const key=`${day}_${hour}`;
+      if(teacherUnavailable[tid][key]){
+        delete teacherUnavailable[tid][key];
+        opened++;
+      }
+    });
+  });
+  return opened;
 }
 
 function openSolverOpeningHints(issueTexts=[]){
