@@ -165,18 +165,9 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         with_time_limit(payload, 10),
         relax_unavailable=True,
         relax_scope="edge",
-        free_day_mode="none",
+        free_day_mode="maximize",
     )
     if relaxed.get("ok"):
-        adjustments = relaxed.get("adjustments") or []
-        if adjustments:
-            return {
-                "ok": False,
-                "status": "needs_openings",
-                "error": "Program, önce sabah veya çıkıştaki kırmızı saatler açılırsa oturabiliyor.",
-                "issues": [adjustment_to_hint_text(item) for item in adjustments],
-                "adjustments": adjustments,
-            }
         return relaxed
 
     relaxed = solve_blocks_with_model(
@@ -189,18 +180,9 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         with_time_limit(payload, 10),
         relax_unavailable=True,
         relax_scope="all",
-        free_day_mode="none",
+        free_day_mode="maximize",
     )
     if relaxed.get("ok"):
-        adjustments = relaxed.get("adjustments") or []
-        if adjustments:
-            return {
-                "ok": False,
-                "status": "needs_openings",
-                "error": "Program, aşağıdaki kırmızı saatler açılırsa oturabiliyor.",
-                "issues": [adjustment_to_hint_text(item) for item in adjustments],
-                "adjustments": adjustments,
-            }
         return relaxed
 
     return {
@@ -314,7 +296,10 @@ def solve_blocks_with_model(
                 model.Add(has_free_day == 1)
 
     if relax_unavailable and penalty_terms:
-        model.Minimize(sum(penalty_terms))
+        if free_day_mode == "maximize" and free_day_teacher_vars:
+            model.Minimize(sum(penalty_terms) * 10000 - sum(free_day_teacher_vars) * 100 - sum(free_day_vars))
+        else:
+            model.Minimize(sum(penalty_terms))
     elif free_day_mode == "maximize" and free_day_teacher_vars:
         model.Maximize(sum(free_day_teacher_vars) * 1000 + sum(free_day_vars))
 
@@ -534,16 +519,16 @@ def build_hard_impossibility_errors(
             if any(length > hours_per_day for length in blocks):
                 errors.append(f"{cls} {subj}: blok uzunluğu günlük ders saatini aşıyor.")
 
-    errors.extend(teacher_capacity_errors(teachers, unavailable, days, hours_per_day))
     for teacher in teachers:
         tid = int(teacher.get("id"))
         name = teacher.get("name", tid)
+        assigned = sum(int(a.get("wh") or 0) for a in teacher.get("assignments") or [])
+        if assigned > expected:
+            errors.append(f"{name}: {assigned} saat dersi var ama haftada en fazla {expected} saat derse girebilir.")
         for assignment in teacher.get("assignments") or []:
-            cls = assignment.get("cls")
-            subj = assignment.get("subj")
             for length in split_blocks(int(assignment.get("wh") or 0), days, hours_per_day):
-                if not has_any_candidate_slot_for_block(unavailable, tid, days, hours_per_day, length):
-                    errors.append(f"{name}: {cls} {subj} için {length} saatlik blok yerleşemiyor; uygun saatlerinde ardışık {length} saat yok.")
+                if length > hours_per_day:
+                    errors.append(f"{name}: {length} saatlik ders bloğu günlük ders saatini aşıyor.")
     return list(dict.fromkeys(errors))[:20]
 
 

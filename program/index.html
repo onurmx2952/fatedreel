@@ -1214,8 +1214,10 @@ async function generateSchedule(){
     const branchIssues=analyzeBranchRulesObject(schedule);
     const teacherConsistencyIssues=analyzeTeacherConsistencyObject(schedule);
     const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0&&teacherConsistencyIssues.length===0;
-    const openingNote=(orToolsResult.autoOpenings||[]).length
-      ? `<br>Programı oturtmak için açılan saatler:<br>${orToolsResult.autoOpenings.slice(0,5).map(x=>`• ${h(x)} açıldı`).join('<br>')}${orToolsResult.autoOpenings.length>5?'<br>• ...':''}`
+    const relaxedOpenings=(orToolsResult.adjustments||[]).map(item=>item.text||`${item.teacher||'Öğretmen'} ${DAYS[item.day]||''} ${(item.hours||[]).map(x=>x+1).join(', ')}. saat`);
+    const openingActions=[...(orToolsResult.autoOpenings||[]).map(x=>`${h(x)} açıldı`), ...relaxedOpenings];
+    const openingNote=openingActions.length
+      ? `<br>Programı oturtmak için esnetilen/açılan saatler:<br>${openingActions.slice(0,5).map(x=>`• ${h(x)}`).join('<br>')}${openingActions.length>5?'<br>• ...':''}`
       : '';
     showAlert(ok?`Program oluşturuldu - OR-Tools ile ${ALL_CLASSES.length}/${ALL_CLASSES.length} sınıf ${target} saat dolu.${openingNote}`:`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.`,ok?'ok':'warn');
     scheduleAutoSave();
