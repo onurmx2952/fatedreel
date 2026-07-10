@@ -314,7 +314,8 @@ body.auth-locked .login-screen{display:flex}
   <div class="toolbar">
     <h2>Öğretmen Boş Saat / Ders Yazılmaz</h2>
     <button class="btn" onclick="assignRandomFreeDaysToHalfTeachers()">Rastgele Boş Gün + Sabah/Son Saat Dağıt</button>
-    <button class="btn primary" onclick="smartAssignFreeTimeAndSolve(3)" title="3 farklı boş gün/saat kombinasyonu dener, her birini gerçekten oturtmaya çalışır, en az sayıda boş saat kapatan kombinasyonu uygular">🎯 En İyi Kombinasyonu Bul ve Oturt (3 Deneme)</button>
+    <button class="btn primary" onclick="smartAssignFreeTimeAndSolve(3)" title="3 farklı boş gün/saat kombinasyonu dener, her birini gerçekten oturtmaya çalışır, en çok öğretmene boş saat kalan kombinasyonu uygular">🎯 En İyi Kombinasyonu Bul ve Oturt (3 Deneme)</button>
+    <button class="btn primary" onclick="smartAssignFreeTimeAndSolve(8)" title="Aynı yöntem, 8 kombinasyon dener; daha uzun sürer ama daha çok öğretmene boş saat verme ihtimali daha yüksektir">🎯 Daha Kapsamlı Dene (8 Deneme)</button>
     <button class="btn danger" onclick="clearBlockedForSelected()">Seçili Öğretmeni Temizle</button>
     <button class="btn danger" onclick="clearAllBlockedSlots()">Tüm Boş Saatleri Temizle</button>
   </div>
@@ -3497,6 +3498,7 @@ async function smartAssignFreeTimeAndSolve(maxTrials=3){
     if(!pre.ok) return;
 
     const countUnavailableSlots=(map)=>teachers.reduce((sum,t)=>sum+Object.keys(map[t.id]||{}).length,0);
+    const countTeachersWithFreeTime=(map)=>teachers.reduce((sum,t)=>sum+(Object.keys(map[t.id]||{}).length>0?1:0),0);
 
     let best=null;
     const trialSummaries=[];
@@ -3505,21 +3507,28 @@ async function smartAssignFreeTimeAndSolve(maxTrials=3){
       await yieldToBrowser();
       buildRandomFreeTimeAssignment();
       const initialFreeSlots=countUnavailableSlots(teacherUnavailable);
+      const initialTeachersWithFreeTime=countTeachersWithFreeTime(teacherUnavailable);
       schedule={};
       const orToolsResult=await solveWithOrTools();
       if(orToolsResult?.ok){
         applySolverAdjustments(orToolsResult.adjustments||[]);
         const finalFreeSlots=countUnavailableSlots(teacherUnavailable);
+        const finalTeachersWithFreeTime=countTeachersWithFreeTime(teacherUnavailable);
         const openingsCount=Math.max(0,initialFreeSlots-finalFreeSlots);
-        trialSummaries.push(`Deneme ${trial}: oturdu, ${initialFreeSlots} boş saat verildi, ${openingsCount} kapatıldı, ${finalFreeSlots} korundu`);
-        // En iyi kombinasyon: sonunda elinde en çok boş saat kalan (sadece en az kapatan değil,
-        // çünkü baştan az/hiç boş saat verilen bir deneme de "0 kapatma" ile kazanabilir ama
-        // öğretmenlere hiçbir boşluk sağlamaz - bunu önlemek için finalFreeSlots'u maksimize ediyoruz).
-        if(!best||finalFreeSlots>best.finalFreeSlots){
+        trialSummaries.push(`Deneme ${trial}: oturdu, ${initialTeachersWithFreeTime} öğretmene boş saat verildi (${initialFreeSlots} saat), sonunda ${finalTeachersWithFreeTime} öğretmende (${finalFreeSlots} saat) kaldı`);
+        // En iyi kombinasyon: önce en çok öğretmenin boş saatini koruyabilen, eşitlikte
+        // toplam boş saati en çok koruyan seçilir. Sadece toplam saat sayısına bakmak
+        // az sayıda öğretmene çok saat veren ama çoğu öğretmene hiç vermeyen bir
+        // kombinasyonu "en iyi" seçebiliyordu; bunu düzelttik.
+        const better=!best
+          || finalTeachersWithFreeTime>best.finalTeachersWithFreeTime
+          || (finalTeachersWithFreeTime===best.finalTeachersWithFreeTime && finalFreeSlots>best.finalFreeSlots);
+        if(better){
           best={
             trial,
             initialFreeSlots,
             finalFreeSlots,
+            finalTeachersWithFreeTime,
             openingsCount,
             schedule:JSON.parse(JSON.stringify(orToolsResult.schedule||{})),
             teacherUnavailable:JSON.parse(JSON.stringify(teacherUnavailable))
@@ -3551,7 +3560,7 @@ async function smartAssignFreeTimeAndSolve(maxTrials=3){
     if(best.finalFreeSlots===0){
       showAlert(`Uyarı: denenen ${maxTrials} kombinasyonun hiçbirinde boş saat korunamadı, program tamamen dolu saatlerle oturtuldu.<br>${trialSummaries.join('<br>')}<br>Ders yükleri/dağıtımı çok sıkışık olabilir; boş saatleri elle, daha az sayıda ve az kısıtlayıcı şekilde vermeyi deneyin.`,'warn');
     }else{
-      showAlert(`${maxTrials} kombinasyon denendi, en çok boş saat koruyan seçildi (deneme ${best.trial}/${maxTrials}): ${best.finalFreeSlots} boş saat korundu, ${best.openingsCount} kapatıldı.<br>${trialSummaries.join('<br>')}`,ok?'ok':'warn');
+      showAlert(`${maxTrials} kombinasyon denendi, en çok öğretmene boş saat kalan seçildi (deneme ${best.trial}/${maxTrials}): ${best.finalTeachersWithFreeTime} öğretmende toplam ${best.finalFreeSlots} boş saat korundu.<br>${trialSummaries.join('<br>')}`,ok?'ok':'warn');
     }
     scheduleAutoSave();
   } finally {
