@@ -3496,21 +3496,30 @@ async function smartAssignFreeTimeAndSolve(maxTrials=3){
     const pre=checkScheduleGenerationPreconditions();
     if(!pre.ok) return;
 
+    const countUnavailableSlots=(map)=>teachers.reduce((sum,t)=>sum+Object.keys(map[t.id]||{}).length,0);
+
     let best=null;
     const trialSummaries=[];
     for(let trial=1;trial<=maxTrials;trial++){
       setWorkState(true,`Kombinasyon ${trial}/${maxTrials} deneniyor (boş gün/saat dağıtılıp oturtulmaya çalışılıyor)...`);
       await yieldToBrowser();
       buildRandomFreeTimeAssignment();
+      const initialFreeSlots=countUnavailableSlots(teacherUnavailable);
       schedule={};
       const orToolsResult=await solveWithOrTools();
       if(orToolsResult?.ok){
         applySolverAdjustments(orToolsResult.adjustments||[]);
-        const openingsCount=(orToolsResult.autoOpenings||[]).length+(orToolsResult.adjustments||[]).length;
-        trialSummaries.push(`Deneme ${trial}: oturdu, ${openingsCount} boş saat kapatıldı`);
-        if(!best||openingsCount<best.openingsCount){
+        const finalFreeSlots=countUnavailableSlots(teacherUnavailable);
+        const openingsCount=Math.max(0,initialFreeSlots-finalFreeSlots);
+        trialSummaries.push(`Deneme ${trial}: oturdu, ${initialFreeSlots} boş saat verildi, ${openingsCount} kapatıldı, ${finalFreeSlots} korundu`);
+        // En iyi kombinasyon: sonunda elinde en çok boş saat kalan (sadece en az kapatan değil,
+        // çünkü baştan az/hiç boş saat verilen bir deneme de "0 kapatma" ile kazanabilir ama
+        // öğretmenlere hiçbir boşluk sağlamaz - bunu önlemek için finalFreeSlots'u maksimize ediyoruz).
+        if(!best||finalFreeSlots>best.finalFreeSlots){
           best={
             trial,
+            initialFreeSlots,
+            finalFreeSlots,
             openingsCount,
             schedule:JSON.parse(JSON.stringify(orToolsResult.schedule||{})),
             teacherUnavailable:JSON.parse(JSON.stringify(teacherUnavailable))
@@ -3539,7 +3548,11 @@ async function smartAssignFreeTimeAndSolve(maxTrials=3){
     const teacherConsistencyIssues=analyzeTeacherConsistencyObject(schedule);
     const ok=blockIssues.length===0&&report.classIssues.length===0&&branchIssues.length===0&&teacherConsistencyIssues.length===0;
 
-    showAlert(`${maxTrials} kombinasyon denendi, en iyisi seçildi (deneme ${best.trial}/${maxTrials}): ${best.openingsCount} boş saat kapatılarak program oturtuldu.<br>${trialSummaries.join('<br>')}`,ok?'ok':'warn');
+    if(best.finalFreeSlots===0){
+      showAlert(`Uyarı: denenen ${maxTrials} kombinasyonun hiçbirinde boş saat korunamadı, program tamamen dolu saatlerle oturtuldu.<br>${trialSummaries.join('<br>')}<br>Ders yükleri/dağıtımı çok sıkışık olabilir; boş saatleri elle, daha az sayıda ve az kısıtlayıcı şekilde vermeyi deneyin.`,'warn');
+    }else{
+      showAlert(`${maxTrials} kombinasyon denendi, en çok boş saat koruyan seçildi (deneme ${best.trial}/${maxTrials}): ${best.finalFreeSlots} boş saat korundu, ${best.openingsCount} kapatıldı.<br>${trialSummaries.join('<br>')}`,ok?'ok':'warn');
+    }
     scheduleAutoSave();
   } finally {
     scheduleGenerating=false;
