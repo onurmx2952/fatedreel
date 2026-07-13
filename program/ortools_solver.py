@@ -326,7 +326,7 @@ def solve_blocks_with_model(
             return {
                 "ok": False,
                 "status": solver.StatusName(status),
-                "error": "OR-Tools 20 saniye içinde programı oturtamadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.",
+                "error": "OR-Tools bu denemede programı oturtamadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.",
                 "issues": build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
             }
         return {

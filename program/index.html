@@ -44,7 +44,12 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .alert-close:hover{opacity:1}
 .work-overlay{position:fixed;inset:0;background:rgba(248,250,252,.72);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;z-index:500}
 .work-overlay.on{display:flex}
-.work-box{background:#fff;border:1px solid #dbe3ef;border-radius:14px;padding:18px 22px;box-shadow:0 18px 60px rgba(15,23,42,.18);display:flex;gap:12px;align-items:center;font-size:14px;font-weight:700;color:#1f2937}
+.work-box{background:#fff;border:1px solid #dbe3ef;border-radius:14px;padding:18px 22px;box-shadow:0 18px 60px rgba(15,23,42,.18);display:flex;gap:12px;align-items:flex-start;font-size:14px;font-weight:700;color:#1f2937;min-width:min(380px,92vw)}
+.work-copy{display:grid;gap:5px;min-width:0}
+.work-title{font-size:14px;font-weight:800;color:#0f172a}
+.work-detail{font-size:12px;font-weight:600;color:#475569;line-height:1.35}
+.work-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;font-weight:700;color:#64748b}
+.work-pill{background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;padding:3px 8px}
 .spinner{width:18px;height:18px;border-radius:50%;border:3px solid #dbeafe;border-top-color:#2563eb;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .cls-tbl{border-collapse:collapse;width:100%;min-width:600px}
@@ -403,7 +408,18 @@ body.auth-locked .login-screen{display:flex}
   <div class="modal"><h3 id="tmodal-title"></h3><div id="tmodal-body"></div></div>
 </div>
 <div id="work-overlay" class="work-overlay">
-  <div class="work-box"><span class="spinner"></span><span id="work-text">Program hazırlanıyor...</span></div>
+  <div class="work-box">
+    <span class="spinner"></span>
+    <div class="work-copy">
+      <div id="work-text" class="work-title">Program hazırlanıyor...</div>
+      <div id="work-detail" class="work-detail">Veriler kontrol ediliyor.</div>
+      <div class="work-meta">
+        <span id="work-step" class="work-pill">Başlıyor</span>
+        <span id="work-elapsed" class="work-pill">Geçen: 0 sn</span>
+        <span id="work-eta" class="work-pill">Tahmini kalan: hesaplanıyor</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -1174,11 +1190,12 @@ function updateStats(total){
 }
 
 let scheduleGenerating=false;
+let workStartedAt=0;
 
 async function generateSchedule(){
   if(scheduleGenerating) return;
   scheduleGenerating=true;
-  setWorkState(true,'Program hazırlanıyor...');
+  setWorkState(true,'Program hazırlanıyor...','Ders dağıtımı ve temel kurallar kontrol ediliyor.',{step:'Ön kontrol',current:1,total:1});
   await yieldToBrowser();
   try{
   if(document.querySelectorAll('#distribution-body .dist-row').length&&!saveDistribution(false,{trimUnavailable:false})) return;
@@ -1284,7 +1301,14 @@ async function solveWithOrTools(){
   const seenOpenings=new Set();
   const maxRounds=12;
   for(let i=0;i<maxRounds;i++){
-    setWorkState(true,i===0?'Program oturtulmaya çalışılıyor... 10 saniye deneniyor.':`Program oturtulmaya çalışılıyor... ${i+1}. deneme, 10 saniye deneniyor.`);
+    setWorkState(
+      true,
+      'Program oturtulmaya çalışılıyor...',
+      i===0
+        ? 'OR-Tools ders bloklarını, öğretmen çakışmalarını ve boş günleri birlikte deniyor.'
+        : 'Önceki denemeden gelen uygun açılımlar uygulanarak yeniden deneniyor.',
+      {step:`Deneme ${i+1}/${maxRounds}`,current:i+1,total:maxRounds,etaSeconds:(maxRounds-i)*8}
+    );
     await yieldToBrowser();
     try{
       const res=await apiFetch('/api/program/solve',{
@@ -1318,12 +1342,17 @@ async function solveWithOrTools(){
         seenOpenings.add(signature);
         autoOpeningsLog.push(...openingResult.actions);
         const shown=openingResult.actions.slice(0,5).join(' · ');
-        setWorkState(true,`Program mümkün olmadığı için ${shown} açıldı. Yeniden deneniyor...`);
+        setWorkState(
+          true,
+          'Program yeniden deneniyor...',
+          `Programı rahatlatmak için açılan saatler: ${shown}`,
+          {step:`Düzeltme ${i+1}/${maxRounds}`,current:i+1,total:maxRounds,etaSeconds:(maxRounds-i)*8}
+        );
         if(document.getElementById('view-blocked').classList.contains('active')) renderBlockedView();
         await waitForSolverRetry(i);
         continue;
       }
-      lastResult.error='Program 10 saniyede oturmadı ve otomatik açılabilecek yeni boş saat bulunamadı.';
+      lastResult.error='Program bu denemede oturmadı ve otomatik açılabilecek yeni boş saat bulunamadı.';
       break;
     }
     break;
@@ -1332,7 +1361,7 @@ async function solveWithOrTools(){
     lastResult.error='Solver isteği zaman aşımına düştü veya bağlantı anlık kesildi. Veri değiştirmenize gerek yok; tekrar deneyebilirsiniz.';
   }
   if(String(lastResult?.status||'').toUpperCase()==='UNKNOWN'){
-    lastResult.error=lastResult.error||'Program 10 saniyede oturmadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.';
+    lastResult.error=lastResult.error||'Program bu denemede oturmadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.';
   }
   return lastResult||{ok:false,error:'OR-Tools çözümleyiciye ulaşılamadı.'};
 }
@@ -1534,10 +1563,26 @@ function yieldToBrowser(){
   return new Promise(resolve=>setTimeout(resolve,0));
 }
 
-function setWorkState(on,text='Program hazırlanıyor...'){
+function setWorkState(on,text='Program hazırlanıyor...',detail='Veriler kontrol ediliyor.',meta={}){
   const overlay=document.getElementById('work-overlay');
   const label=document.getElementById('work-text');
+  const detailEl=document.getElementById('work-detail');
+  const stepEl=document.getElementById('work-step');
+  const elapsedEl=document.getElementById('work-elapsed');
+  const etaEl=document.getElementById('work-eta');
+  if(on&&!workStartedAt) workStartedAt=Date.now();
+  if(!on) workStartedAt=0;
   if(label) label.textContent=text;
+  if(detailEl) detailEl.textContent=detail;
+  const elapsed=workStartedAt?Math.max(0,Math.round((Date.now()-workStartedAt)/1000)):0;
+  const current=Math.max(1,parseInt(meta.current||1,10));
+  const total=Math.max(current,parseInt(meta.total||1,10));
+  const eta=Number.isFinite(meta.etaSeconds)
+    ? Math.max(0,Math.round(meta.etaSeconds))
+    : (current>1 ? Math.max(0,Math.round((elapsed/(current-1))*(total-current))) : null);
+  if(stepEl) stepEl.textContent=meta.step||`Deneme ${current}/${total}`;
+  if(elapsedEl) elapsedEl.textContent=`Geçen: ${elapsed} sn`;
+  if(etaEl) etaEl.textContent=eta===null?'Tahmini kalan: hesaplanıyor':`Tahmini kalan: ${eta} sn`;
   if(overlay) overlay.classList.toggle('on',!!on);
   document.querySelectorAll('button[onclick*="generateSchedule"],button[onclick*="generateFromDistribution"]').forEach(btn=>btn.disabled=!!on);
 }
