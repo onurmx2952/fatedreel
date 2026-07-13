@@ -223,20 +223,16 @@ def solve_blocks_with_model(
                 blocked_hours = blocked_hours_for_block(teacher_unavailable, block.teacher_id, day, start, block.length)
                 if blocked_hours and not relax_unavailable:
                     continue
+                if blocked_hours and is_full_day_blocked(teacher_unavailable, block.teacher_id, day, hours_per_day):
+                    continue
                 if blocked_hours and relax_scope == "edge":
-                    if is_full_day_blocked(teacher_unavailable, block.teacher_id, day, hours_per_day):
-                        continue
                     if not all(is_edge_hour(hour, hours_per_day) for hour in blocked_hours):
                         continue
                 var = model.NewBoolVar(f"b{block.index}_d{day}_h{start}")
                 candidates.append((var, day, start))
                 candidate_meta[var] = (block, day, start)
                 if blocked_hours:
-                    full_day_blocked = is_full_day_blocked(teacher_unavailable, block.teacher_id, day, hours_per_day)
-                    if full_day_blocked:
-                        full_day_relaxed_vars.setdefault((block.teacher_id, day), []).append(var)
-                    weight = 150 if full_day_blocked else 1
-                    for _ in range(len(blocked_hours) * weight):
+                    for _ in range(len(blocked_hours)):
                         penalty_terms.append(var)
                 subject_day_vars.setdefault((block.cls, block.subj, day), []).append(var)
                 for offset in range(block.length):

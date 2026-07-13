@@ -1308,7 +1308,7 @@ async function solveWithOrTools(){
     }
     const status=String(lastResult?.status||'').toUpperCase();
     if(['UNKNOWN','NEEDS_OPENINGS','INFEASIBLE','NO_CANDIDATE'].includes(status)){
-      const openingResult=openSolverOpeningHints(lastResult.issues||[]);
+      const openingResult=openSolverOpeningHints(lastResult.issues||[], {allowFullDays:false});
       if(openingResult.opened>0){
         const signature=openingResult.actions.join('|');
         if(seenOpenings.has(signature)){
@@ -1364,7 +1364,7 @@ function parseSolverOpeningHint(text){
   const teacher=teachers.find(t=>String(t.name||'').trim()===teacherName);
   if(!teacher) return null;
   if(afterDay.startsWith('boş gününü açın')){
-    return {tid:teacher.id,day,hours:Array.from({length:settings.hoursPerDay},(_,h)=>h)};
+    return {tid:teacher.id,day,hours:Array.from({length:settings.hoursPerDay},(_,h)=>h),fullDay:true};
   }
   const hoursMatch=afterDay.match(/^(.+?) saatlerini açın\.?$/);
   if(!hoursMatch) return null;
@@ -1419,11 +1419,12 @@ function applySolverAdjustments(adjustments=[]){
   return opened;
 }
 
-function openSolverOpeningHints(issueTexts=[]){
+function openSolverOpeningHints(issueTexts=[], options={}){
   const hints=(issueTexts||[]).map(parseSolverOpeningHint).filter(Boolean);
   let opened=0;
   const actions=[];
   hints.forEach(hint=>{
+    if(hint.fullDay && options.allowFullDays===false) return;
     if(!teacherUnavailable[hint.tid]) teacherUnavailable[hint.tid]={};
     const teacher=teachers.find(t=>t.id===hint.tid);
     let openedForHint=0;
