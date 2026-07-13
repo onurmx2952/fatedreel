@@ -312,7 +312,7 @@ def solve_blocks_with_model(
             )
         else:
             model.Minimize(sum(full_day_break_terms) * 1000000 + sum(penalty_terms))
-    elif free_day_mode == "maximize" and free_day_teacher_vars:
+    elif free_day_mode in {"require", "maximize"} and free_day_teacher_vars:
         model.Maximize(sum(free_day_teacher_vars) * 1000 + sum(free_day_vars))
 
     solver = cp_model.CpSolver()
@@ -372,6 +372,7 @@ def solve_blocks_with_model(
             "freeDayMode": free_day_mode,
             "freeDayTeachers": free_day_stats["freeDayTeachers"],
             "targetFreeDayTeachers": free_day_stats["targetFreeDayTeachers"],
+            "totalFreeDays": free_day_stats["totalFreeDays"],
         },
     }
 
@@ -405,14 +406,17 @@ def count_free_day_teachers(
 
     target = 0
     with_free_day = 0
+    total_free_days = 0
     for teacher in teachers:
         tid = int(teacher.get("id"))
         if loads.get(tid, 0) <= 0:
             continue
         target += 1
-        if any((tid, day) not in busy_by_teacher_day for day in days):
+        teacher_free_days = sum(1 for day in days if (tid, day) not in busy_by_teacher_day)
+        total_free_days += teacher_free_days
+        if teacher_free_days > 0:
             with_free_day += 1
-    return {"freeDayTeachers": with_free_day, "targetFreeDayTeachers": target}
+    return {"freeDayTeachers": with_free_day, "targetFreeDayTeachers": target, "totalFreeDays": total_free_days}
 
 
 def copy_unavailable(unavailable: dict[str, Any]) -> dict[str, Any]:
