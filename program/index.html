@@ -1299,7 +1299,7 @@ async function solveWithOrTools(){
   let lastResult=null;
   const autoOpeningsLog=[];
   const seenOpenings=new Set();
-  const maxRounds=4;
+  const maxRounds=10;
   for(let i=0;i<maxRounds;i++){
     setWorkState(
       true,
@@ -1307,7 +1307,7 @@ async function solveWithOrTools(){
       i===0
         ? 'OR-Tools boş günleri koruyarak en iyi programı arıyor.'
         : 'Mantıklı parçalı düzeltmeler uygulandı; program yeniden deneniyor.',
-      {step:`Deneme ${i+1}/${maxRounds}`,current:i+1,total:maxRounds,etaSeconds:(maxRounds-i)*12}
+      {step:`Deneme ${i+1}/${maxRounds}`,current:i+1,total:maxRounds,etaSeconds:(maxRounds-i)*10}
     );
     await yieldToBrowser();
     try{
@@ -1329,11 +1329,12 @@ async function solveWithOrTools(){
       break;
     }
     if(lastResult?.network) break;
-    const openingResult=openSolverOpeningHints(lastResult.issues||[], {allowFullDays:false});
+    const allowFullDays=i>=7;
+    const openingResult=openSolverOpeningHints(lastResult.issues||[], {allowFullDays});
     if(openingResult.opened<=0) break;
     const signature=openingResult.actions.join('|');
     if(seenOpenings.has(signature)){
-      lastResult.error='Aynı parçalı saat düzeltmeleri tekrarlandı; otomatik düzeltme ilerletmiyor. Ders dağıtımı veya öğretmen yükleri kontrol edilmeli.';
+      lastResult.error='Aynı otomatik düzeltmeler tekrarlandı; ders dağıtımı veya öğretmen yükleri yeniden dengelenmeli.';
       break;
     }
     seenOpenings.add(signature);
@@ -1341,8 +1342,8 @@ async function solveWithOrTools(){
     setWorkState(
       true,
       'Program yeniden deneniyor...',
-      `Otomatik açılan parçalı saatler: ${openingResult.actions.slice(0,5).join(' · ')}`,
-      {step:`Düzeltme ${i+1}/${maxRounds}`,current:i+1,total:maxRounds,etaSeconds:(maxRounds-i)*12}
+      `${allowFullDays?'Son çare düzeltmesi':'Otomatik açılan saatler'}: ${openingResult.actions.slice(0,5).join(' · ')}`,
+      {step:`Düzeltme ${i+1}/${maxRounds}`,current:i+1,total:maxRounds,etaSeconds:(maxRounds-i)*10}
     );
     if(document.getElementById('view-blocked').classList.contains('active')) renderBlockedView();
     scheduleAutoSave();
@@ -1352,7 +1353,7 @@ async function solveWithOrTools(){
     lastResult.error='Solver isteği zaman aşımına düştü veya bağlantı anlık kesildi. Veri değiştirmenize gerek yok; tekrar deneyebilirsiniz.';
   }
   if(String(lastResult?.status||'').toUpperCase()==='UNKNOWN'){
-    lastResult.error=lastResult.error||'Program bu denemede oturmadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.';
+    lastResult.error=lastResult.error||'Program otomatik düzeltmelerle oturmadı. Ders dağıtımı ve öğretmen yükleri yeniden dengelenmeli.';
   }
   return lastResult||{ok:false,error:'OR-Tools çözümleyiciye ulaşılamadı.'};
 }
@@ -1367,16 +1368,15 @@ function formatOrToolsFailure(result){
   const parsedHints=issues.map(parseSolverOpeningHint).filter(Boolean);
   const partialHints=parsedHints.filter(hint=>!hint.fullDay);
   if(timedOut||needsOpenings||partialHints.length) lastSolverOpeningHints=issues.slice(0,12);
-  if(partialHints.length){
-    const tried=(result?.attempt||1)>1?' otomatik denendi ama program hâlâ oturmadı':' otomatik uygulanamadı';
-    return `${h(base)}<br><b>Otomatik düzeltme${tried}.</b><br>Parçalı saat önerilerini kullanıcıya bırakmıyorum; sistem bunları kendi deniyor. Devam ediyorsa sorun ders dağıtımı, öğretmen yükü veya tam boş gün kısıtında.`;
+  if(parsedHints.length){
+    return `${h(base)}<br><b>Program otomatik düzeltmelerle de oturmadı.</b><br>Ders dağıtımı, öğretmen yükü veya tam boş gün kısıtı yeniden dengelenmeli.`;
   }
   if(!issues.length) return h(base);
   const nonOpeningIssues=issues
     .filter(x=>!parseSolverOpeningHint(x))
     .slice(0,8);
   if(!nonOpeningIssues.length){
-    return `${h(base)}<br><b>Program oturmadı.</b><br>Tam boş günleri otomatik bozmuyorum. Sorun tam boş gün kısıtından kaynaklanıyor olabilir.`;
+    return `${h(base)}<br><b>Program oturmadı.</b><br>Ders dağıtımı veya öğretmen yükleri yeniden dengelenmeli.`;
   }
   const title=impossible?'İmkansızlık nedeni':'Öneri';
   return `${h(base)}<br><b>${title}:</b><br>${nonOpeningIssues.map(x=>`• ${h(x)}`).join('<br>')}`;
@@ -1397,10 +1397,29 @@ function parseSolverOpeningHint(text){
   if(afterDay.startsWith('boş gününü açın')){
     return {tid:teacher.id,day,hours:Array.from({length:settings.hoursPerDay},(_,h)=>h),fullDay:true};
   }
+  if(afterDay.startsWith('sabahını açın')){
+    return {tid:teacher.id,day,hours:firstPartHours(3)};
+  }
+  if(afterDay.startsWith('gün sonunu açın')){
+    return {tid:teacher.id,day,hours:lastPartHours(3)};
+  }
+  if(afterDay.startsWith('öğleden sonrasını açın')){
+    return {tid:teacher.id,day,hours:lastPartHours(Math.max(1, settings.hoursPerDay-4))};
+  }
   const hoursMatch=afterDay.match(/^(.+?) saat(?:ini|lerini|leri)? aç(?:ın|ıldı)\.?$/);
   if(!hoursMatch) return null;
   const hours=parseHourLabel(hoursMatch[1]);
   return hours.length?{tid:teacher.id,day,hours}:null;
+}
+
+function firstPartHours(count){
+  const limit=Math.min(settings.hoursPerDay, count);
+  return Array.from({length:limit},(_,h)=>h);
+}
+
+function lastPartHours(count){
+  const start=Math.max(0, settings.hoursPerDay-count);
+  return Array.from({length:settings.hoursPerDay-start},(_,i)=>start+i);
 }
 
 function findTeacherByHintName(name){
