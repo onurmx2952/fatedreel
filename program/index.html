@@ -1364,11 +1364,22 @@ function formatOrToolsFailure(result){
   const needsOpenings=status==='NEEDS_OPENINGS';
   const base=result?.error||(impossible?'Bu veriyle program matematiksel olarak imkansız görünüyor.':'OR-Tools solver servisi bağlı değil. Cloudflare için ORTOOLS_SOLVER_URL ayarlanmalı veya lokal Python solver çalıştırılmalı.');
   const issues=Array.isArray(result?.issues)?result.issues:[];
-  if(timedOut||needsOpenings) lastSolverOpeningHints=issues.slice(0,12);
+  const parsedHints=issues.map(parseSolverOpeningHint).filter(Boolean);
+  const partialHints=parsedHints.filter(hint=>!hint.fullDay);
+  if(timedOut||needsOpenings||partialHints.length) lastSolverOpeningHints=issues.slice(0,12);
+  if(partialHints.length){
+    const tried=(result?.attempt||1)>1?' otomatik denendi ama program hâlâ oturmadı':' otomatik uygulanamadı';
+    return `${h(base)}<br><b>Otomatik düzeltme${tried}.</b><br>Parçalı saat önerilerini kullanıcıya bırakmıyorum; sistem bunları kendi deniyor. Devam ediyorsa sorun ders dağıtımı, öğretmen yükü veya tam boş gün kısıtında.`;
+  }
   if(!issues.length) return h(base);
-  const applyBtn=(timedOut||needsOpenings)?`<div style="margin-top:12px"><button class="btn primary" onclick="applySolverOpeningHints()">Önerileri uygula</button></div>`:'';
-  const title=impossible?'İmkansızlık nedeni':(timedOut||needsOpenings)?'Boş saat önerisi':'Öneri';
-  return `${h(base)}<br><b>${title}:</b><br>${issues.slice(0,12).map(x=>`• ${h(x)}`).join('<br>')}${applyBtn}`;
+  const nonOpeningIssues=issues
+    .filter(x=>!parseSolverOpeningHint(x))
+    .slice(0,8);
+  if(!nonOpeningIssues.length){
+    return `${h(base)}<br><b>Program oturmadı.</b><br>Tam boş günleri otomatik bozmuyorum. Sorun tam boş gün kısıtından kaynaklanıyor olabilir.`;
+  }
+  const title=impossible?'İmkansızlık nedeni':'Öneri';
+  return `${h(base)}<br><b>${title}:</b><br>${nonOpeningIssues.map(x=>`• ${h(x)}`).join('<br>')}`;
 }
 
 function parseSolverOpeningHint(text){
@@ -1386,7 +1397,7 @@ function parseSolverOpeningHint(text){
   if(afterDay.startsWith('boş gününü açın')){
     return {tid:teacher.id,day,hours:Array.from({length:settings.hoursPerDay},(_,h)=>h),fullDay:true};
   }
-  const hoursMatch=afterDay.match(/^(.+?) saatlerini açın\.?$/);
+  const hoursMatch=afterDay.match(/^(.+?) saat(?:ini|lerini|leri)? aç(?:ın|ıldı)\.?$/);
   if(!hoursMatch) return null;
   const hours=parseHourLabel(hoursMatch[1]);
   return hours.length?{tid:teacher.id,day,hours}:null;
