@@ -58,14 +58,14 @@
         <button class="check" id="check" disabled>Kontrol et <span>→</span></button>
       </div>
       <div class="result" id="result">
-        <div class="result-head"><span class="result-icon" id="resultIcon">↗</span><div><strong id="resultTitle">Güzel deneme!</strong><small id="score"></small></div></div>
+        <div class="result-head"><span class="result-icon good" id="resultIcon">→</span><div><strong id="resultTitle">Cevabı incele</strong><small>Doğal kullanımla karşılaştır</small></div></div>
         <div class="correct"><span>DOĞAL ÇEVİRİ</span><p id="correct"></p></div>
         <div class="why"><span>NEDEN?</span><p id="explanation"></p></div>
         <button class="next" id="next" type="button">Sonraki cümle <span>→</span></button>
       </div>
     </form>
   </section>
-  <footer><span><b id="done">0</b> cümle tamamlandı</span><span class="dot">•</span><span><b id="good">0</b> başarılı deneme</span><span class="note">Her gün birkaç cümle, büyük fark yaratır.</span></footer>
+  <footer><span><b id="done">0</b> cümle tamamlandı</span><span class="note">Her gün birkaç cümle, büyük fark yaratır.</span></footer>
 </main>
 <script>
 const pick=a=>a[Math.floor(Math.random()*a.length)];
@@ -120,7 +120,7 @@ const templates=[
   {level:"A2",make(){const x=pick(places),t=pick(pastTimes);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${x[2]} gittim.`,en:`I went to ${x[3]} ${t[1]}.`,hint:"go → went",explanation:'Geçmiş zamanda go → went olur. Küçük örnek: I go today. / I went yesterday.'}}},
   {level:"A2",make(){const o=pick(objects),t=pick(pastTimes);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${o[0]} aldım.`,en:`I bought ${o[1]} ${t[1]}.`,hint:"buy → bought",explanation:"Geçmiş zamanda buy → bought olur. Küçük örnek: I buy. / I bought."}}},
   {level:"A2",make(){const a=pick(activities),t=pick(times);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${a[0]} zorundayım.`,en:`I have to ${a[1]} ${t[1]}.`,hint:"have to",explanation:"Zorunluluk için have to kullanılır. Küçük örnek: I have to work."}}},
-  {level:"A2",make(){const a=pick(activities),t=pick(times);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${a[0]} zorunda değilim.`,en:`I do not have to ${a[1]} ${t[1]}.`,hint:"do not have to",explanation:"Zorunda olmamak için do not have to kullanılır. Küçük örnek: I do not have to work."}}},
+  {level:"A2",make(){const a=pick(activities),t=pick(times);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${a[0]} zorunda değilim.`,en:`I don't have to ${a[1]} ${t[1]}.`,hint:"don't have to",explanation:"Zorunda olmamak için don't have to kullanılır. Küçük örnek: I don't have to work."}}},
   {level:"A2",make(){const a=pick(activities);return{tr:`Yarın ${a[6]}.`,en:`I am going to ${a[1]} tomorrow.`,hint:"going to",explanation:"Plan için am/is/are going to kullanılır. Küçük örnek: I am going to read."}}},
   {level:"A2",make(){const a=pick(adjectives);return{tr:`Bu, diğerinden daha ${a[0]}.`,en:`This is ${a[2]} than the other one.`,hint:`${a[2]} than`,explanation:"Kısa sıfatlarda karşılaştırma için -er + than kullanılır. Küçük örnek: taller than."}}},
   {level:"A2",make(){const a=pick(activities);return{tr:`${a[0][0].toUpperCase()+a[0].slice(1)} istiyorum çünkü bu benim için önemli.`,en:`I want to ${a[1]} because it is important to me.`,hint:"because",explanation:"Nedeni because ile bağlarız. Küçük örnek: I study because I want to learn."}}},
@@ -136,11 +136,7 @@ function makeSentence(){
   const t=pick(templates),s=t.make();s.level=t.level;return s;
 }
 const $=id=>document.getElementById(id);let current=makeSentence(),revealed=false;
-let stats={done:0,good:0};try{stats=JSON.parse(localStorage.getItem("bir-cumle-stats"))||stats}catch{}
-function norm(s){return s.toLowerCase().replace(/[’']/g,"").replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim()}
-function distance(a,b){const m=Array.from({length:b.length+1},(_,i)=>[i]);for(let j=0;j<=a.length;j++)m[0][j]=j;for(let i=1;i<=b.length;i++)for(let j=1;j<=a.length;j++)m[i][j]=b[i-1]===a[j-1]?m[i-1][j-1]:Math.min(m[i-1][j-1],m[i][j-1],m[i-1][j])+1;return m[b.length][a.length]}
-function hasGrammarError(s){s=norm(s);return /\b(am|is|are|was|were)\s+(go|play|wake|stay|move|read|find|leave|understand|listen|cook|study|walk|watch|visit|get|take)\b/.test(s)||/\bdid\s+\w+ed\b/.test(s)}
-function grade(a,b){const raw=norm(a),correct=norm(b);if(!raw)return 0;const similarity=Math.max(0,Math.round((1-distance(raw,correct)/Math.max(raw.length,correct.length))*100));return hasGrammarError(raw)?Math.min(similarity,55):similarity}
+let stats={done:0};try{const saved=JSON.parse(localStorage.getItem("bir-cumle-stats"));if(saved?.done)stats.done=saved.done}catch{}
 function explain(correct){
   if(correct.startsWith("I went"))return '"Dün" geçmiş zamanı gösterir. go → went olur. Küçük örnek: I go today. / I went yesterday.';
   if(correct.includes("wake up"))return "Her sabah bir alışkanlıktır; geniş zaman kullanılır. Küçük örnek: I wake up early.";
@@ -167,12 +163,12 @@ function explain(correct){
   if(correct.includes("may rain"))return "Olasılık için may + yalın fiil kullanılır. Küçük örnek: It may rain.";
   return "Geniş zamanda I/you/we/they ile fiil yalın kalır. Küçük örnek: I understand.";
 }
-function render(){$("turkish").textContent=current.tr;$("number").textContent="CÜMLE "+String(stats.done+1).padStart(2,"0");$("sentenceLevel").textContent=current.level;$("done").textContent=stats.done;$("good").textContent=stats.good}
+function render(){$("turkish").textContent=current.tr;$("number").textContent="CÜMLE "+String(stats.done+1).padStart(2,"0");$("sentenceLevel").textContent=current.level;$("done").textContent=stats.done}
 $("answer").addEventListener("input",e=>$("check").disabled=!e.target.value.trim());
 $("answer").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("form").requestSubmit()}});
 $("hint").onclick=()=>{$("hint").querySelector("span").textContent=current.hint};
-$("form").onsubmit=e=>{e.preventDefault();if(revealed||!$("answer").value.trim())return;revealed=true;const s=grade($("answer").value,current.en);stats.done++;if(s>=75)stats.good++;localStorage.setItem("bir-cumle-stats",JSON.stringify(stats));$("answer").disabled=true;$("actions").style.display="none";$("result").classList.add("show");$("correct").textContent=current.en;$("explanation").textContent=current.explanation;$("score").textContent="Benzerlik puanı: %"+s;$("resultTitle").textContent=s>=90?"Harika!":s>=75?"Gayet iyi!":"Bir düzeltme var";if(s>=75){$("answerWrap").classList.add("good");$("resultIcon").classList.add("good");$("resultIcon").textContent="✓"}else $("answerWrap").classList.add("work");render()};
-$("next").onclick=()=>{current=makeSentence();revealed=false;$("answer").value="";$("answer").disabled=false;$("check").disabled=true;$("actions").style.display="flex";$("result").classList.remove("show");$("answerWrap").className="answer";$("resultIcon").className="result-icon";$("resultIcon").textContent="↗";$("hint").querySelector("span").textContent="İpucu göster";render();$("answer").focus()};
+$("form").onsubmit=e=>{e.preventDefault();if(revealed||!$("answer").value.trim())return;revealed=true;stats.done++;localStorage.setItem("bir-cumle-stats",JSON.stringify(stats));$("answer").disabled=true;$("actions").style.display="none";$("result").classList.add("show");$("correct").textContent=current.en;$("explanation").textContent=current.explanation;$("answerWrap").classList.add("good");render()};
+$("next").onclick=()=>{current=makeSentence();revealed=false;$("answer").value="";$("answer").disabled=false;$("check").disabled=true;$("actions").style.display="flex";$("result").classList.remove("show");$("answerWrap").className="answer";$("hint").querySelector("span").textContent="İpucu göster";render();$("answer").focus()};
 render();
 </script>
 </body>
