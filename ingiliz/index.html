@@ -27,7 +27,7 @@
     label{display:block;margin-bottom:9px;color:#899088;font-size:9px;font-weight:800;letter-spacing:.18em}.answer{position:relative;border:1px solid #cfd7ce;border-radius:9px;background:#fff;transition:.2s}.answer:focus-within{border-color:#789584;box-shadow:0 0 0 3px rgba(120,149,132,.12)}.answer.good{border-color:#7da784;background:#f8fcf6}.answer.work{border-color:#d3aa75;background:#fffaf3}
     textarea{width:100%;min-height:76px;padding:16px 86px 13px 16px;resize:none;border:0;outline:0;color:#2e433b;background:transparent;line-height:1.5}textarea::placeholder{color:#b3bab4}.enter{position:absolute;right:13px;bottom:12px;color:#a6ada7;border:1px solid #dde1dc;border-radius:5px;padding:3px 6px;font-size:9px}
     .actions{display:flex;align-items:center;justify-content:space-between;margin-top:18px}.hint{border:0;padding:10px 2px;background:transparent;color:#78857e;font-size:12px}.hint b{color:var(--orange);margin-right:5px}.check,.next{border:0;border-radius:7px;padding:12px 17px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;box-shadow:0 5px 14px rgba(34,58,50,.16)}.check span,.next span{margin-left:18px;color:#cbd9d0}.check:disabled{cursor:not-allowed;opacity:.4}
-    .result{display:none;margin-top:18px;animation:reveal .35s ease}.result.show{display:block}@keyframes reveal{from{opacity:0;transform:translateY(6px)}}.result-head{display:flex;align-items:center;gap:10px;margin-bottom:13px}.result-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;color:#9a6737;background:#f5dfc5;font-weight:800}.result-icon.good{color:#557a5c;background:#dcebd9}.result-head strong{display:block;font:400 20px "Instrument Serif"}.result-head small{color:var(--muted);font-size:10px}.correct{padding:14px 16px;background:#edf3e9;border-radius:8px}.correct span{color:#779078;font-size:8px;font-weight:800;letter-spacing:.16em}.correct p{margin:5px 0 0;color:#315043;font-size:15px}.next{width:100%;margin-top:13px}
+    .result{display:none;margin-top:18px;animation:reveal .35s ease}.result.show{display:block}@keyframes reveal{from{opacity:0;transform:translateY(6px)}}.result-head{display:flex;align-items:center;gap:10px;margin-bottom:13px}.result-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;color:#9a6737;background:#f5dfc5;font-weight:800}.result-icon.good{color:#557a5c;background:#dcebd9}.result-head strong{display:block;font:400 20px "Instrument Serif"}.result-head small{color:var(--muted);font-size:10px}.correct{padding:14px 16px;background:#edf3e9;border-radius:8px}.correct span,.why span{color:#779078;font-size:8px;font-weight:800;letter-spacing:.16em}.correct p{margin:5px 0 0;color:#315043;font-size:15px}.why{margin-top:10px;padding:13px 16px;border:1px solid #e3ddd1;border-radius:8px;background:#fffaf2}.why p{margin:6px 0 0;color:#655f55;font-size:12px;line-height:1.55}.next{width:100%;margin-top:13px}
     footer{width:min(680px,100%);margin:22px auto 0;display:flex;align-items:center;color:#8c968f;font-size:10px}footer b{color:#4b6459}.dot{margin:0 9px;color:#bac0ba}.note{margin-left:auto;font:italic 12px "Instrument Serif"}
     @media(max-width:620px){.shell{padding:0 16px 28px}.top{height:70px}.hero{margin-top:44px}.hero h1{font-size:50px}.card{padding:27px 20px 22px}.tr{margin:25px 0 29px}footer{flex-wrap:wrap;justify-content:center}.note{width:100%;margin:10px 0 0;text-align:center}}
     @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}}
@@ -60,6 +60,7 @@
       <div class="result" id="result">
         <div class="result-head"><span class="result-icon" id="resultIcon">↗</span><div><strong id="resultTitle">Güzel deneme!</strong><small id="score"></small></div></div>
         <div class="correct"><span>DOĞAL ÇEVİRİ</span><p id="correct"></p></div>
+        <div class="why"><span>NEDEN?</span><p id="explanation"></p></div>
         <button class="next" id="next" type="button">Sonraki cümle <span>→</span></button>
       </div>
     </form>
@@ -97,12 +98,39 @@ const $=id=>document.getElementById(id);let index=Math.floor(Math.random()*sente
 let stats={done:0,good:0};try{stats=JSON.parse(localStorage.getItem("bir-cumle-stats"))||stats}catch{}
 function norm(s){return s.toLowerCase().replace(/[’']/g,"").replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim()}
 function distance(a,b){const m=Array.from({length:b.length+1},(_,i)=>[i]);for(let j=0;j<=a.length;j++)m[0][j]=j;for(let i=1;i<=b.length;i++)for(let j=1;j<=a.length;j++)m[i][j]=b[i-1]===a[j-1]?m[i-1][j-1]:Math.min(m[i-1][j-1],m[i][j-1],m[i-1][j])+1;return m[b.length][a.length]}
-function grade(a,b){a=norm(a);b=norm(b);return a?Math.max(0,Math.round((1-distance(a,b)/Math.max(a.length,b.length))*100)):0}
+function hasGrammarError(s){s=norm(s);return /\b(am|is|are|was|were)\s+(go|play|wake|stay|move|read|find|leave|understand)\b/.test(s)||/\bdid\s+\w+ed\b/.test(s)}
+function grade(a,b){const raw=norm(a),correct=norm(b);if(!raw)return 0;const similarity=Math.max(0,Math.round((1-distance(raw,correct)/Math.max(raw.length,correct.length))*100));return hasGrammarError(raw)?Math.min(similarity,55):similarity}
+function explain(correct){
+  if(correct.startsWith("I went"))return '"Dün" geçmiş zamanı gösterir. go → went olur. Küçük örnek: I go today. / I went yesterday.';
+  if(correct.includes("wake up"))return "Her sabah bir alışkanlıktır; geniş zaman kullanılır. Küçük örnek: I wake up early.";
+  if(correct.includes("plays football"))return "He / she / it ile fiile -s gelir. Küçük örnek: I play. / He plays.";
+  if(correct.includes("warmer than"))return "İki şeyi karşılaştırırken -er + than kullanılır. Küçük örnek: warm → warmer than.";
+  if(correct.startsWith("There are"))return "Çoğul isimle there are kullanılır. Küçük örnek: There are two books.";
+  if(correct.includes("going to"))return "Plan için am/is/are going to kullanılır. Küçük örnek: I am going to read.";
+  if(correct.includes("next to"))return "Yanında = next to. Küçük örnek: The café is next to the bank.";
+  if(correct.startsWith("Can I have"))return "Kibarca bir şey isterken Can I have...? denir. Küçük örnek: Can I have tea?";
+  if(correct.includes("is cooking"))return "Şu anda olan işte is/am/are + fiil-ing kullanılır. Küçük örnek: She is cooking.";
+  if(correct.includes("more expensive"))return "Uzun sıfatlarda more + sıfat + than kullanılır. Küçük örnek: more expensive than.";
+  if(correct.includes("stayed"))return "Geçen yaz geçmiş zamandır; düzenli fiil -ed alır. Küçük örnek: stay → stayed.";
+  if(correct.includes("do not have to"))return "Zorunda değilim = do not have to. Küçük örnek: I do not have to work.";
+  if(correct.includes("because"))return "Nedeni because ile bağlarız. Küçük örnek: I study because I want to learn.";
+  if(correct.startsWith("What time does"))return "He/she/it sorusunda does gelir; ana fiil yalın kalır. Küçük örnek: When does it leave?";
+  if(correct.includes("not any milk"))return "Olumsuz cümlede sayılamayan isimle any kullanılır. Küçük örnek: There is not any water.";
+  if(correct.startsWith("Can you"))return "Kibar rica için Can you...? kullanılır. Küçük örnek: Can you help me?";
+  if(correct.includes("the tallest"))return "Bir grubun en üstünü için the + sıfat-est kullanılır. Küçük örnek: the tallest.";
+  if(correct.includes("prefer to"))return "Tercih etmek = prefer to + fiil. Küçük örnek: I prefer to stay.";
+  if(correct.includes("cannot find"))return "Yapamıyorum = cannot + yalın fiil. Küçük örnek: I cannot find it.";
+  if(correct.includes("at ten o'clock"))return "Saatlerde at, günlerde on kullanılır. Küçük örnek: at ten / on Monday.";
+  if(correct.includes("moved"))return "Geçen hafta geçmiş zamandır. Küçük örnek: move → moved.";
+  if(correct.includes("likes running"))return "like fiilinden sonra -ing kullanılabilir. Küçük örnek: She likes reading.";
+  if(correct.includes("may rain"))return "Olasılık için may + yalın fiil kullanılır. Küçük örnek: It may rain.";
+  return "Geniş zamanda I/you/we/they ile fiil yalın kalır. Küçük örnek: I understand.";
+}
 function render(){$("turkish").textContent=sentences[index][0];$("number").textContent="CÜMLE "+String(Math.min(stats.done+1,99)).padStart(2,"0");$("done").textContent=stats.done;$("good").textContent=stats.good}
 $("answer").addEventListener("input",e=>$("check").disabled=!e.target.value.trim());
 $("answer").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("form").requestSubmit()}});
 $("hint").onclick=()=>{$("hint").querySelector("span").textContent=sentences[index][2]};
-$("form").onsubmit=e=>{e.preventDefault();if(revealed||!$("answer").value.trim())return;revealed=true;const s=grade($("answer").value,sentences[index][1]);stats.done++;if(s>=75)stats.good++;localStorage.setItem("bir-cumle-stats",JSON.stringify(stats));$("answer").disabled=true;$("actions").style.display="none";$("result").classList.add("show");$("correct").textContent=sentences[index][1];$("score").textContent="Benzerlik puanı: %"+s;$("resultTitle").textContent=s>=90?"Harika!":s>=75?"Gayet iyi!":"Güzel deneme!";if(s>=75){$("answerWrap").classList.add("good");$("resultIcon").classList.add("good");$("resultIcon").textContent="✓"}else $("answerWrap").classList.add("work");render()};
+$("form").onsubmit=e=>{e.preventDefault();if(revealed||!$("answer").value.trim())return;revealed=true;const s=grade($("answer").value,sentences[index][1]);stats.done++;if(s>=75)stats.good++;localStorage.setItem("bir-cumle-stats",JSON.stringify(stats));$("answer").disabled=true;$("actions").style.display="none";$("result").classList.add("show");$("correct").textContent=sentences[index][1];$("explanation").textContent=explain(sentences[index][1]);$("score").textContent="Benzerlik puanı: %"+s;$("resultTitle").textContent=s>=90?"Harika!":s>=75?"Gayet iyi!":"Bir düzeltme var";if(s>=75){$("answerWrap").classList.add("good");$("resultIcon").classList.add("good");$("resultIcon").textContent="✓"}else $("answerWrap").classList.add("work");render()};
 $("next").onclick=()=>{let n=index;while(n===index)n=Math.floor(Math.random()*sentences.length);index=n;revealed=false;$("answer").value="";$("answer").disabled=false;$("check").disabled=true;$("actions").style.display="flex";$("result").classList.remove("show");$("answerWrap").className="answer";$("resultIcon").className="result-icon";$("resultIcon").textContent="↗";$("hint").querySelector("span").textContent="İpucu göster";render();$("answer").focus()};
 render();
 </script>
