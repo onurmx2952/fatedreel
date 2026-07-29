@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bir Cümle — İngilizce Pratik</title>
+  <meta name="description" content="A2 seviyesinde Türkçe cümleleri İngilizceye çevirerek her gün pratik yap.">
+  <link rel="canonical" href="https://fatedreel.com/ingiliz/">
+  <meta property="og:title" content="Bir Cümle — İngilizce Pratik">
+  <meta property="og:description" content="Bir cümle, bir adım ileri. Ücretsiz A2 İngilizce çeviri pratiği.">
+  <meta property="og:url" content="https://fatedreel.com/ingiliz/">
+  <meta property="og:image" content="https://fatedreel.com/ingiliz/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#223a32;--muted:#738279;--paper:#f5f1e9;--cream:#fffdf8;--orange:#e96f39}
+    *{box-sizing:border-box}html{background:var(--paper)}body{margin:0;min-width:320px;color:var(--ink);font-family:"DM Sans",Arial,sans-serif}
+    button,textarea{font:inherit}button{cursor:pointer}.shell{min-height:100vh;overflow:hidden;padding:0 28px 36px;background:radial-gradient(circle at 12% 90%,rgba(244,203,163,.16),transparent 23rem),radial-gradient(circle at 95% 18%,rgba(215,230,207,.32),transparent 20rem),linear-gradient(180deg,#f8f4ec,#f3efe6)}
+    .top{width:min(1120px,100%);height:86px;margin:auto;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(34,58,50,.11)}
+    .brand{display:flex;gap:10px;align-items:center;color:var(--ink);text-decoration:none;font-weight:700;letter-spacing:-.03em}.mark{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;background:var(--orange);font:italic 23px "Instrument Serif"}
+    .level{display:flex;align-items:center;gap:9px;color:#64766d;font-size:13px;font-weight:600}.level i{width:7px;height:7px;border-radius:50%;background:#6f9a71;box-shadow:0 0 0 4px rgba(111,154,113,.12)}
+    .hero{width:min(720px,100%);margin:65px auto 32px;text-align:center}.eyebrow{color:#879088;letter-spacing:.19em;font-size:11px;font-weight:800;margin:0 0 16px}.hero h1{margin:0;font:400 clamp(48px,6vw,74px)/.94 "Instrument Serif",Georgia,serif;letter-spacing:-.025em}.hero h1 em{color:var(--orange);font-weight:400}.intro{max-width:490px;margin:22px auto 0;color:var(--muted);font-size:15px;line-height:1.65}
+    .card{width:min(680px,100%);margin:auto;padding:32px 36px 30px;background:rgba(255,253,248,.96);border:1px solid rgba(30,63,51,.12);border-radius:18px;box-shadow:0 22px 60px rgba(52,66,57,.1),0 3px 8px rgba(52,66,57,.04)}
+    .meta{display:flex;justify-content:space-between;color:#9a9f99;font-size:10px;letter-spacing:.17em;font-weight:800}.easy{display:flex;align-items:center;gap:7px}.easy i{width:6px;height:6px;border-radius:50%;background:#79a47b}.tr{margin:31px 0 34px;text-align:center;font:400 clamp(27px,4vw,36px)/1.2 "Instrument Serif",Georgia,serif}
+    label{display:block;margin-bottom:9px;color:#899088;font-size:9px;font-weight:800;letter-spacing:.18em}.answer{position:relative;border:1px solid #cfd7ce;border-radius:9px;background:#fff;transition:.2s}.answer:focus-within{border-color:#789584;box-shadow:0 0 0 3px rgba(120,149,132,.12)}.answer.good{border-color:#7da784;background:#f8fcf6}.answer.work{border-color:#d3aa75;background:#fffaf3}
+    textarea{width:100%;min-height:76px;padding:16px 86px 13px 16px;resize:none;border:0;outline:0;color:#2e433b;background:transparent;line-height:1.5}textarea::placeholder{color:#b3bab4}.enter{position:absolute;right:13px;bottom:12px;color:#a6ada7;border:1px solid #dde1dc;border-radius:5px;padding:3px 6px;font-size:9px}
+    .actions{display:flex;align-items:center;justify-content:space-between;margin-top:18px}.hint{border:0;padding:10px 2px;background:transparent;color:#78857e;font-size:12px}.hint b{color:var(--orange);margin-right:5px}.check,.next{border:0;border-radius:7px;padding:12px 17px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;box-shadow:0 5px 14px rgba(34,58,50,.16)}.check span,.next span{margin-left:18px;color:#cbd9d0}.check:disabled{cursor:not-allowed;opacity:.4}
+    .result{display:none;margin-top:18px;animation:reveal .35s ease}.result.show{display:block}@keyframes reveal{from{opacity:0;transform:translateY(6px)}}.result-head{display:flex;align-items:center;gap:10px;margin-bottom:13px}.result-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;color:#9a6737;background:#f5dfc5;font-weight:800}.result-icon.good{color:#557a5c;background:#dcebd9}.result-head strong{display:block;font:400 20px "Instrument Serif"}.result-head small{color:var(--muted);font-size:10px}.correct{padding:14px 16px;background:#edf3e9;border-radius:8px}.correct span{color:#779078;font-size:8px;font-weight:800;letter-spacing:.16em}.correct p{margin:5px 0 0;color:#315043;font-size:15px}.next{width:100%;margin-top:13px}
+    footer{width:min(680px,100%);margin:22px auto 0;display:flex;align-items:center;color:#8c968f;font-size:10px}footer b{color:#4b6459}.dot{margin:0 9px;color:#bac0ba}.note{margin-left:auto;font:italic 12px "Instrument Serif"}
+    @media(max-width:620px){.shell{padding:0 16px 28px}.top{height:70px}.hero{margin-top:44px}.hero h1{font-size:50px}.card{padding:27px 20px 22px}.tr{margin:25px 0 29px}footer{flex-wrap:wrap;justify-content:center}.note{width:100%;margin:10px 0 0;text-align:center}}
+    @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <header class="top">
+    <a class="brand" href="/" aria-label="FatedReel ana sayfa"><span class="mark">f</span><span>fatedreel</span></a>
+    <div class="level"><i></i>A2 · Temel seviye</div>
+  </header>
+  <section class="hero">
+    <p class="eyebrow">GÜNÜN İNGİLİZCE ANTRENMANI</p>
+    <h1>Bir cümle.<br><em>Bir adım ileri.</em></h1>
+    <p class="intro">Türkçe cümleyi İngilizceye çevir. Mükemmel olmak zorunda değil—önemli olan denemek.</p>
+  </section>
+  <section class="card" aria-live="polite">
+    <div class="meta"><span id="number">CÜMLE 01</span><span class="easy"><i></i>KOLAY</span></div>
+    <p class="tr" id="turkish"></p>
+    <form id="form">
+      <label for="answer">İNGİLİZCE ÇEVİRİN</label>
+      <div class="answer" id="answerWrap">
+        <textarea id="answer" rows="2" placeholder="İngilizce cümlenizi buraya yazın..." autocomplete="off" autofocus></textarea>
+        <span class="enter">↵ Enter</span>
+      </div>
+      <div class="actions" id="actions">
+        <button class="hint" id="hint" type="button"><b>✦</b><span>İpucu göster</span></button>
+        <button class="check" id="check" disabled>Kontrol et <span>→</span></button>
+      </div>
+      <div class="result" id="result">
+        <div class="result-head"><span class="result-icon" id="resultIcon">↗</span><div><strong id="resultTitle">Güzel deneme!</strong><small id="score"></small></div></div>
+        <div class="correct"><span>DOĞAL ÇEVİRİ</span><p id="correct"></p></div>
+        <button class="next" id="next" type="button">Sonraki cümle <span>→</span></button>
+      </div>
+    </form>
+  </section>
+  <footer><span><b id="done">0</b> cümle tamamlandı</span><span class="dot">•</span><span><b id="good">0</b> başarılı deneme</span><span class="note">Her gün birkaç cümle, büyük fark yaratır.</span></footer>
+</main>
+<script>
+const sentences=[
+["Her sabah saat yedide uyanırım.","I wake up at seven every morning.","wake up"],
+["Kardeşim hafta sonları futbol oynar.","My brother plays football at weekends.","at weekends"],
+["Bugün hava dünden daha sıcak.","The weather is warmer than yesterday.","warmer than"],
+["Masada iki fincan kahve var.","There are two cups of coffee on the table.","there are"],
+["Akşam yemeğinden sonra kitap okuyacağım.","I am going to read a book after dinner.","going to"],
+["Otobüs durağı bankanın yanında.","The bus stop is next to the bank.","next to"],
+["Dün arkadaşlarımla sinemaya gittim.","I went to the cinema with my friends yesterday.","went"],
+["Biraz su alabilir miyim?","Can I have some water, please?","Can I have...?" ],
+["Annem şu anda mutfakta yemek yapıyor.","My mother is cooking in the kitchen now.","is cooking"],
+["Bu çanta benimkinden daha pahalı.","This bag is more expensive than mine.","more expensive"],
+["Geçen yaz küçük bir otelde kaldık.","We stayed in a small hotel last summer.","stayed"],
+["Pazar günleri erken kalkmak zorunda değilim.","I do not have to get up early on Sundays.","do not have to"],
+["İngilizce öğreniyorum çünkü seyahat etmek istiyorum.","I am learning English because I want to travel.","because"],
+["Tren saat kaçta kalkıyor?","What time does the train leave?","What time does...?"],
+["Buzdolabında hiç süt yok.","There is not any milk in the fridge.","not any"],
+["Lütfen pencereyi açar mısın?","Can you open the window, please?","Can you...?"],
+["O, sınıfımızdaki en uzun öğrenci.","He is the tallest student in our class.","the tallest"],
+["Bu akşam evde kalmayı tercih ederim.","I prefer to stay at home this evening.","prefer to"],
+["Telefonumu bulamıyorum.","I cannot find my phone.","cannot find"],
+["Toplantı pazartesi günü saat onda.","The meeting is at ten o'clock on Monday.","at ten o'clock"],
+["Onlar geçen hafta yeni bir eve taşındılar.","They moved to a new house last week.","moved"],
+["Köpeğim bahçede koşmayı seviyor.","My dog likes running in the garden.","likes running"],
+["Yarın yağmur yağabilir.","It may rain tomorrow.","may"],
+["Bu soruyu anlamıyorum.","I do not understand this question.","do not understand"]
+];
+const $=id=>document.getElementById(id);let index=Math.floor(Math.random()*sentences.length),revealed=false;
+let stats={done:0,good:0};try{stats=JSON.parse(localStorage.getItem("bir-cumle-stats"))||stats}catch{}
+function norm(s){return s.toLowerCase().replace(/[’']/g,"").replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim()}
+function distance(a,b){const m=Array.from({length:b.length+1},(_,i)=>[i]);for(let j=0;j<=a.length;j++)m[0][j]=j;for(let i=1;i<=b.length;i++)for(let j=1;j<=a.length;j++)m[i][j]=b[i-1]===a[j-1]?m[i-1][j-1]:Math.min(m[i-1][j-1],m[i][j-1],m[i-1][j])+1;return m[b.length][a.length]}
+function grade(a,b){a=norm(a);b=norm(b);return a?Math.max(0,Math.round((1-distance(a,b)/Math.max(a.length,b.length))*100)):0}
+function render(){$("turkish").textContent=sentences[index][0];$("number").textContent="CÜMLE "+String(Math.min(stats.done+1,99)).padStart(2,"0");$("done").textContent=stats.done;$("good").textContent=stats.good}
+$("answer").addEventListener("input",e=>$("check").disabled=!e.target.value.trim());
+$("answer").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("form").requestSubmit()}});
+$("hint").onclick=()=>{$("hint").querySelector("span").textContent=sentences[index][2]};
+$("form").onsubmit=e=>{e.preventDefault();if(revealed||!$("answer").value.trim())return;revealed=true;const s=grade($("answer").value,sentences[index][1]);stats.done++;if(s>=75)stats.good++;localStorage.setItem("bir-cumle-stats",JSON.stringify(stats));$("answer").disabled=true;$("actions").style.display="none";$("result").classList.add("show");$("correct").textContent=sentences[index][1];$("score").textContent="Benzerlik puanı: %"+s;$("resultTitle").textContent=s>=90?"Harika!":s>=75?"Gayet iyi!":"Güzel deneme!";if(s>=75){$("answerWrap").classList.add("good");$("resultIcon").classList.add("good");$("resultIcon").textContent="✓"}else $("answerWrap").classList.add("work");render()};
+$("next").onclick=()=>{let n=index;while(n===index)n=Math.floor(Math.random()*sentences.length);index=n;revealed=false;$("answer").value="";$("answer").disabled=false;$("check").disabled=true;$("actions").style.display="flex";$("result").classList.remove("show");$("answerWrap").className="answer";$("resultIcon").className="result-icon";$("resultIcon").textContent="↗";$("hint").querySelector("span").textContent="İpucu göster";render();$("answer").focus()};
+render();
+</script>
+</body>
+</html>

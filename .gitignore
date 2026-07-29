@@ -10,3 +10,8 @@ program/.venv-solver/
 # Local runtime logs
 *.log
 program/*.log
+
+# İngilizce uygulamasında ana siteye yalnızca statik sürümü ekle
+ingiliz/*
+!ingiliz/index.html
+!ingiliz/og.png
