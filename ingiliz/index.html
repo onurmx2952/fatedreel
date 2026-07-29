@@ -37,7 +37,7 @@
 <main class="shell">
   <header class="top">
     <a class="brand" href="/" aria-label="FatedReel ana sayfa"><span class="mark">f</span><span>fatedreel</span></a>
-    <div class="level"><i></i>A2 · Temel seviye</div>
+    <div class="level"><i></i>A1 + A2 · Karışık</div>
   </header>
   <section class="hero">
     <p class="eyebrow">GÜNÜN İNGİLİZCE ANTRENMANI</p>
@@ -45,7 +45,7 @@
     <p class="intro">Türkçe cümleyi İngilizceye çevir. Mükemmel olmak zorunda değil—önemli olan denemek.</p>
   </section>
   <section class="card" aria-live="polite">
-    <div class="meta"><span id="number">CÜMLE 01</span><span class="easy"><i></i>KOLAY</span></div>
+    <div class="meta"><span id="number">CÜMLE 01</span><span class="easy"><i></i><b id="sentenceLevel">A1</b></span></div>
     <p class="tr" id="turkish"></p>
     <form id="form">
       <label for="answer">İNGİLİZCE ÇEVİRİN</label>
@@ -68,37 +68,78 @@
   <footer><span><b id="done">0</b> cümle tamamlandı</span><span class="dot">•</span><span><b id="good">0</b> başarılı deneme</span><span class="note">Her gün birkaç cümle, büyük fark yaratır.</span></footer>
 </main>
 <script>
-const sentences=[
-["Her sabah saat yedide uyanırım.","I wake up at seven every morning.","wake up"],
-["Kardeşim hafta sonları futbol oynar.","My brother plays football at weekends.","at weekends"],
-["Bugün hava dünden daha sıcak.","The weather is warmer than yesterday.","warmer than"],
-["Masada iki fincan kahve var.","There are two cups of coffee on the table.","there are"],
-["Akşam yemeğinden sonra kitap okuyacağım.","I am going to read a book after dinner.","going to"],
-["Otobüs durağı bankanın yanında.","The bus stop is next to the bank.","next to"],
-["Dün arkadaşlarımla sinemaya gittim.","I went to the cinema with my friends yesterday.","went"],
-["Biraz su alabilir miyim?","Can I have some water, please?","Can I have...?" ],
-["Annem şu anda mutfakta yemek yapıyor.","My mother is cooking in the kitchen now.","is cooking"],
-["Bu çanta benimkinden daha pahalı.","This bag is more expensive than mine.","more expensive"],
-["Geçen yaz küçük bir otelde kaldık.","We stayed in a small hotel last summer.","stayed"],
-["Pazar günleri erken kalkmak zorunda değilim.","I do not have to get up early on Sundays.","do not have to"],
-["İngilizce öğreniyorum çünkü seyahat etmek istiyorum.","I am learning English because I want to travel.","because"],
-["Tren saat kaçta kalkıyor?","What time does the train leave?","What time does...?"],
-["Buzdolabında hiç süt yok.","There is not any milk in the fridge.","not any"],
-["Lütfen pencereyi açar mısın?","Can you open the window, please?","Can you...?"],
-["O, sınıfımızdaki en uzun öğrenci.","He is the tallest student in our class.","the tallest"],
-["Bu akşam evde kalmayı tercih ederim.","I prefer to stay at home this evening.","prefer to"],
-["Telefonumu bulamıyorum.","I cannot find my phone.","cannot find"],
-["Toplantı pazartesi günü saat onda.","The meeting is at ten o'clock on Monday.","at ten o'clock"],
-["Onlar geçen hafta yeni bir eve taşındılar.","They moved to a new house last week.","moved"],
-["Köpeğim bahçede koşmayı seviyor.","My dog likes running in the garden.","likes running"],
-["Yarın yağmur yağabilir.","It may rain tomorrow.","may"],
-["Bu soruyu anlamıyorum.","I do not understand this question.","do not understand"]
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const places=[
+  ["okulda","at school","okula","school"],["evde","at home","eve","home"],["parkta","in the park","parka","the park"],["kütüphanede","in the library","kütüphaneye","the library"],
+  ["mutfakta","in the kitchen","mutfağa","the kitchen"],["ofiste","in the office","ofise","the office"],["bahçede","in the garden","bahçeye","the garden"],["otobüs durağında","at the bus stop","otobüs durağına","the bus stop"],
+  ["markette","at the supermarket","markete","the supermarket"],["kafede","at the café","kafeye","the café"],["hastanede","at the hospital","hastaneye","the hospital"],["tren istasyonunda","at the train station","tren istasyonuna","the train station"]
 ];
-const $=id=>document.getElementById(id);let index=Math.floor(Math.random()*sentences.length),revealed=false;
+const objects=[
+  ["bir kitap","a book"],["bir elma","an apple"],["bir fincan çay","a cup of tea"],["yeni bir çanta","a new bag"],
+  ["bir sandviç","a sandwich"],["bir bilet","a ticket"],["bir fotoğraf","a photo"],["bir şişe su","a bottle of water"],
+  ["yeni bir telefon","a new phone"],["bir harita","a map"],["bir kalem","a pen"],["bir hediye","a present"]
+];
+const activities=[
+  ["kitap okumak","read books","reading books","kitap okudum","kitap okurum","kitap okuyabilirim","kitap okuyacağım","read books","kitap okumayı"],
+  ["müzik dinlemek","listen to music","listening to music","müzik dinledim","müzik dinlerim","müzik dinleyebilirim","müzik dinleyeceğim","listened to music","müzik dinlemeyi"],
+  ["futbol oynamak","play football","playing football","futbol oynadım","futbol oynarım","futbol oynayabilirim","futbol oynayacağım","played football","futbol oynamayı"],
+  ["yemek yapmak","cook","cooking","yemek yaptım","yemek yaparım","yemek yapabilirim","yemek yapacağım","cooked","yemek yapmayı"],
+  ["İngilizce çalışmak","study English","studying English","İngilizce çalıştım","İngilizce çalışırım","İngilizce çalışabilirim","İngilizce çalışacağım","studied English","İngilizce çalışmayı"],
+  ["parkta yürümek","walk in the park","walking in the park","parkta yürüdüm","parkta yürürüm","parkta yürüyebilirim","parkta yürüyeceğim","walked in the park","parkta yürümeyi"],
+  ["film izlemek","watch a film","watching films","film izledim","film izlerim","film izleyebilirim","film izleyeceğim","watched a film","film izlemeyi"],
+  ["arkadaşlarımı ziyaret etmek","visit my friends","visiting my friends","arkadaşlarımı ziyaret ettim","arkadaşlarımı ziyaret ederim","arkadaşlarımı ziyaret edebilirim","arkadaşlarımı ziyaret edeceğim","visited my friends","arkadaşlarımı ziyaret etmeyi"],
+  ["erken kalkmak","get up early","getting up early","erken kalktım","erken kalkarım","erken kalkabilirim","erken kalkacağım","got up early","erken kalkmayı"],
+  ["otobüse binmek","take the bus","taking the bus","otobüse bindim","otobüse binerim","otobüse binebilirim","otobüse bineceğim","took the bus","otobüse binmeyi"]
+];
+const times=[
+  ["her sabah","every morning"],["her akşam","every evening"],["hafta sonları","at weekends"],
+  ["pazartesi günleri","on Mondays"],["okuldan sonra","after school"],["akşam yemeğinden sonra","after dinner"],
+  ["salı günleri","on Tuesdays"],["öğleden sonra","in the afternoon"],["sabahları","in the mornings"],["boş zamanlarımda","in my free time"]
+];
+const pastTimes=[["dün","yesterday"],["geçen hafta","last week"],["geçen cumartesi","last Saturday"],["İki gün önce","two days ago"],["geçen ay","last month"],["dün akşam","yesterday evening"],["Üç gün önce","three days ago"]];
+const people=[
+  ["Ben","I","am","have","do"],["Annem","My mother","is","has","does"],["Babam","My father","is","has","does"],
+  ["Kız kardeşim","My sister","is","has","does"],["Erkek kardeşim","My brother","is","has","does"],["Arkadaşım","My friend","is","has","does"],
+  ["Öğretmenim","My teacher","is","has","does"],["Kuzenim","My cousin","is","has","does"],["Komşum","My neighbour","is","has","does"]
+];
+const adjectives=[
+  ["uzun","tall","taller"],["hızlı","fast","faster"],["sıcak","warm","warmer"],["ucuz","cheap","cheaper"],
+  ["küçük","small","smaller"],["eski","old","older"],["genç","young","younger"],["soğuk","cold","colder"],["hafif","light","lighter"],["temiz","clean","cleaner"]
+];
+const recent=[];
+const templates=[
+  {level:"A1",make(){const p=pick(people),x=pick(places);return{tr:`${p[0]} şu anda ${x[0]}.`,en:`${p[1]} ${p[2]} ${x[1]} now.`,hint:p[2],explanation:`Şu anki yer için ${p[1]} + ${p[2]} kullanılır. Küçük örnek: I am at home.`}}},
+  {level:"A1",make(){const p=pick(people),o=pick(objects);return{tr:`${p[0]} ${o[0]} ${p[4]==="do"?"istiyorum":"istiyor"}.`,en:`${p[1]} ${p[4]==="do"?"want":"wants"} ${o[1]}.`,hint:"want / wants",explanation:"He/she/it ile fiile -s gelir. Küçük örnek: I want. / She wants."}}},
+  {level:"A1",make(){const p=pick(people),a=pick(activities);return{tr:`${p[0]} ${a[8]} ${p[4]==="do"?"seviyorum":"seviyor"}.`,en:`${p[1]} ${p[4]==="do"?"like":"likes"} ${a[2]}.`,hint:"like + -ing",explanation:"like fiilinden sonra -ing kullanılabilir. Küçük örnek: I like reading."}}},
+  {level:"A1",make(){const o=pick(objects),x=pick(places);return{tr:`${x[0][0].toUpperCase()+x[0].slice(1)} ${o[0]} var.`,en:`There is ${o[1]} ${x[1]}.`,hint:"There is",explanation:"Tek bir şey için there is kullanılır. Küçük örnek: There is a book."}}},
+  {level:"A1",make(){const a=pick(activities);return{tr:`Ben ${a[5]}.`,en:`I can ${a[1]}.`,hint:"can",explanation:"can’den sonra fiil yalın kalır. Küçük örnek: I can swim."}}},
+  {level:"A1",make(){const p=pick(people),a=pick(activities),t=pick(times);return{tr:`${p[0]} ${t[0]} ${a[8]} ${p[4]==="do"?"tercih ediyorum":"tercih ediyor"}.`,en:`${p[1]} ${p[4]==="do"?"prefer":"prefers"} to ${a[1]} ${t[1]}.`,hint:"prefer to",explanation:"Tercih için prefer to + fiil kullanılır. Küçük örnek: I prefer to read."}}},
+  {level:"A1",make(){const o=pick(objects);return{tr:`Lütfen bana ${o[0]} verir misin?`,en:`Can you give me ${o[1]}, please?`,hint:"Can you...?",explanation:"Kibar rica için Can you...? kullanılır. Küçük örnek: Can you help me?"}}},
+  {level:"A1",make(){const a=pick(activities),t=pick(times);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${a[4]}.`,en:`I ${a[1]} ${t[1]}.`,hint:t[1],explanation:"Alışkanlıklarda geniş zaman kullanılır. Küçük örnek: I read every evening."}}},
+  {level:"A2",make(){const a=pick(activities),t=pick(pastTimes);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${a[3]}.`,en:`I ${a[7]} ${t[1]}.`,hint:t[1],explanation:"Bitmiş geçmiş olayda past simple kullanılır. Küçük örnek: I play. / I played yesterday."}}},
+  {level:"A2",make(){const x=pick(places),t=pick(pastTimes);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${x[2]} gittim.`,en:`I went to ${x[3]} ${t[1]}.`,hint:"go → went",explanation:'Geçmiş zamanda go → went olur. Küçük örnek: I go today. / I went yesterday.'}}},
+  {level:"A2",make(){const o=pick(objects),t=pick(pastTimes);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${o[0]} aldım.`,en:`I bought ${o[1]} ${t[1]}.`,hint:"buy → bought",explanation:"Geçmiş zamanda buy → bought olur. Küçük örnek: I buy. / I bought."}}},
+  {level:"A2",make(){const a=pick(activities),t=pick(times);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${a[0]} zorundayım.`,en:`I have to ${a[1]} ${t[1]}.`,hint:"have to",explanation:"Zorunluluk için have to kullanılır. Küçük örnek: I have to work."}}},
+  {level:"A2",make(){const a=pick(activities),t=pick(times);return{tr:`${t[0][0].toUpperCase()+t[0].slice(1)} ${a[0]} zorunda değilim.`,en:`I do not have to ${a[1]} ${t[1]}.`,hint:"do not have to",explanation:"Zorunda olmamak için do not have to kullanılır. Küçük örnek: I do not have to work."}}},
+  {level:"A2",make(){const a=pick(activities);return{tr:`Yarın ${a[6]}.`,en:`I am going to ${a[1]} tomorrow.`,hint:"going to",explanation:"Plan için am/is/are going to kullanılır. Küçük örnek: I am going to read."}}},
+  {level:"A2",make(){const a=pick(adjectives);return{tr:`Bu, diğerinden daha ${a[0]}.`,en:`This is ${a[2]} than the other one.`,hint:`${a[2]} than`,explanation:"Kısa sıfatlarda karşılaştırma için -er + than kullanılır. Küçük örnek: taller than."}}},
+  {level:"A2",make(){const a=pick(activities);return{tr:`${a[0][0].toUpperCase()+a[0].slice(1)} istiyorum çünkü bu benim için önemli.`,en:`I want to ${a[1]} because it is important to me.`,hint:"because",explanation:"Nedeni because ile bağlarız. Küçük örnek: I study because I want to learn."}}},
+  {level:"A2",make(){const a=pick(activities);return{tr:`Yarın ${a[5]}.`,en:`I may ${a[1]} tomorrow.`,hint:"may",explanation:"Olasılık için may + yalın fiil kullanılır. Küçük örnek: It may rain."}}},
+  {level:"A2",make(){const x=pick(places);return{tr:`${x[2][0].toUpperCase()+x[2].slice(1)} nasıl gidebilirim?`,en:`How can I get to ${x[3]}?`,hint:"How can I...?",explanation:"Yol sormak için How can I get to...? kullanılır. Küçük örnek: How can I get to the station?"}}}
+];
+function makeSentence(){
+  for(let i=0;i<50;i++){
+    const t=pick(templates),s=t.make();s.level=t.level;
+    const key=s.tr+"|"+s.en;
+    if(!recent.includes(key)){recent.push(key);if(recent.length>60)recent.shift();return s}
+  }
+  const t=pick(templates),s=t.make();s.level=t.level;return s;
+}
+const $=id=>document.getElementById(id);let current=makeSentence(),revealed=false;
 let stats={done:0,good:0};try{stats=JSON.parse(localStorage.getItem("bir-cumle-stats"))||stats}catch{}
 function norm(s){return s.toLowerCase().replace(/[’']/g,"").replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim()}
 function distance(a,b){const m=Array.from({length:b.length+1},(_,i)=>[i]);for(let j=0;j<=a.length;j++)m[0][j]=j;for(let i=1;i<=b.length;i++)for(let j=1;j<=a.length;j++)m[i][j]=b[i-1]===a[j-1]?m[i-1][j-1]:Math.min(m[i-1][j-1],m[i][j-1],m[i-1][j])+1;return m[b.length][a.length]}
-function hasGrammarError(s){s=norm(s);return /\b(am|is|are|was|were)\s+(go|play|wake|stay|move|read|find|leave|understand)\b/.test(s)||/\bdid\s+\w+ed\b/.test(s)}
+function hasGrammarError(s){s=norm(s);return /\b(am|is|are|was|were)\s+(go|play|wake|stay|move|read|find|leave|understand|listen|cook|study|walk|watch|visit|get|take)\b/.test(s)||/\bdid\s+\w+ed\b/.test(s)}
 function grade(a,b){const raw=norm(a),correct=norm(b);if(!raw)return 0;const similarity=Math.max(0,Math.round((1-distance(raw,correct)/Math.max(raw.length,correct.length))*100));return hasGrammarError(raw)?Math.min(similarity,55):similarity}
 function explain(correct){
   if(correct.startsWith("I went"))return '"Dün" geçmiş zamanı gösterir. go → went olur. Küçük örnek: I go today. / I went yesterday.';
@@ -126,12 +167,12 @@ function explain(correct){
   if(correct.includes("may rain"))return "Olasılık için may + yalın fiil kullanılır. Küçük örnek: It may rain.";
   return "Geniş zamanda I/you/we/they ile fiil yalın kalır. Küçük örnek: I understand.";
 }
-function render(){$("turkish").textContent=sentences[index][0];$("number").textContent="CÜMLE "+String(Math.min(stats.done+1,99)).padStart(2,"0");$("done").textContent=stats.done;$("good").textContent=stats.good}
+function render(){$("turkish").textContent=current.tr;$("number").textContent="CÜMLE "+String(stats.done+1).padStart(2,"0");$("sentenceLevel").textContent=current.level;$("done").textContent=stats.done;$("good").textContent=stats.good}
 $("answer").addEventListener("input",e=>$("check").disabled=!e.target.value.trim());
 $("answer").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("form").requestSubmit()}});
-$("hint").onclick=()=>{$("hint").querySelector("span").textContent=sentences[index][2]};
-$("form").onsubmit=e=>{e.preventDefault();if(revealed||!$("answer").value.trim())return;revealed=true;const s=grade($("answer").value,sentences[index][1]);stats.done++;if(s>=75)stats.good++;localStorage.setItem("bir-cumle-stats",JSON.stringify(stats));$("answer").disabled=true;$("actions").style.display="none";$("result").classList.add("show");$("correct").textContent=sentences[index][1];$("explanation").textContent=explain(sentences[index][1]);$("score").textContent="Benzerlik puanı: %"+s;$("resultTitle").textContent=s>=90?"Harika!":s>=75?"Gayet iyi!":"Bir düzeltme var";if(s>=75){$("answerWrap").classList.add("good");$("resultIcon").classList.add("good");$("resultIcon").textContent="✓"}else $("answerWrap").classList.add("work");render()};
-$("next").onclick=()=>{let n=index;while(n===index)n=Math.floor(Math.random()*sentences.length);index=n;revealed=false;$("answer").value="";$("answer").disabled=false;$("check").disabled=true;$("actions").style.display="flex";$("result").classList.remove("show");$("answerWrap").className="answer";$("resultIcon").className="result-icon";$("resultIcon").textContent="↗";$("hint").querySelector("span").textContent="İpucu göster";render();$("answer").focus()};
+$("hint").onclick=()=>{$("hint").querySelector("span").textContent=current.hint};
+$("form").onsubmit=e=>{e.preventDefault();if(revealed||!$("answer").value.trim())return;revealed=true;const s=grade($("answer").value,current.en);stats.done++;if(s>=75)stats.good++;localStorage.setItem("bir-cumle-stats",JSON.stringify(stats));$("answer").disabled=true;$("actions").style.display="none";$("result").classList.add("show");$("correct").textContent=current.en;$("explanation").textContent=current.explanation;$("score").textContent="Benzerlik puanı: %"+s;$("resultTitle").textContent=s>=90?"Harika!":s>=75?"Gayet iyi!":"Bir düzeltme var";if(s>=75){$("answerWrap").classList.add("good");$("resultIcon").classList.add("good");$("resultIcon").textContent="✓"}else $("answerWrap").classList.add("work");render()};
+$("next").onclick=()=>{current=makeSentence();revealed=false;$("answer").value="";$("answer").disabled=false;$("check").disabled=true;$("actions").style.display="flex";$("result").classList.remove("show");$("answerWrap").className="answer";$("resultIcon").className="result-icon";$("resultIcon").textContent="↗";$("hint").querySelector("span").textContent="İpucu göster";render();$("answer").focus()};
 render();
 </script>
 </body>
