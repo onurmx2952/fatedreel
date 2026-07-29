@@ -27,7 +27,7 @@
     label{display:block;margin-bottom:9px;color:#899088;font-size:9px;font-weight:800;letter-spacing:.18em}.answer{position:relative;border:1px solid #cfd7ce;border-radius:9px;background:#fff;transition:.2s}.answer:focus-within{border-color:#789584;box-shadow:0 0 0 3px rgba(120,149,132,.12)}.answer.good{border-color:#7da784;background:#f8fcf6}.answer.work{border-color:#d3aa75;background:#fffaf3}
     textarea{width:100%;min-height:76px;padding:16px 86px 13px 16px;resize:none;border:0;outline:0;color:#2e433b;background:transparent;line-height:1.5}textarea::placeholder{color:#b3bab4}.enter{position:absolute;right:13px;bottom:12px;color:#a6ada7;border:1px solid #dde1dc;border-radius:5px;padding:3px 6px;font-size:9px}
     .actions{display:flex;align-items:center;justify-content:space-between;margin-top:18px}.hint{border:0;padding:10px 2px;background:transparent;color:#78857e;font-size:12px}.hint b{color:var(--orange);margin-right:5px}.check,.next{border:0;border-radius:7px;padding:12px 17px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;box-shadow:0 5px 14px rgba(34,58,50,.16)}.check span,.next span{margin-left:18px;color:#cbd9d0}.check:disabled{cursor:not-allowed;opacity:.4}
-    .result{display:none;margin-top:18px;animation:reveal .35s ease}.result.show{display:block}@keyframes reveal{from{opacity:0;transform:translateY(6px)}}.result-head{display:flex;align-items:center;gap:10px;margin-bottom:13px}.result-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;color:#9a6737;background:#f5dfc5;font-weight:800}.result-icon.good{color:#557a5c;background:#dcebd9}.result-head strong{display:block;font:400 20px "Instrument Serif"}.result-head small{color:var(--muted);font-size:10px}.correct{padding:14px 16px;background:#edf3e9;border-radius:8px}.correct span,.why span{color:#779078;font-size:8px;font-weight:800;letter-spacing:.16em}.correct p{margin:5px 0 0;color:#315043;font-size:15px}.why{margin-top:10px;padding:13px 16px;border:1px solid #e3ddd1;border-radius:8px;background:#fffaf2}.why p{margin:6px 0 0;color:#655f55;font-size:12px;line-height:1.55}.next{width:100%;margin-top:13px}
+    .result{display:none;margin-top:18px;animation:reveal .35s ease}.result.show{display:block}@keyframes reveal{from{opacity:0;transform:translateY(6px)}}.result-head{display:flex;align-items:center;gap:10px;margin-bottom:13px}.result-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;color:#9a6737;background:#f5dfc5;font-weight:800}.result-icon.good{color:#557a5c;background:#dcebd9}.result-head strong{display:block;font:400 20px "Instrument Serif"}.result-head small{color:var(--muted);font-size:10px}.correct{padding:14px 16px;background:#edf3e9;border-radius:8px}.correct span,.why span{color:#779078;font-size:8px;font-weight:800;letter-spacing:.16em}.correct p{margin:5px 0 0;color:#315043;font-size:15px}.why{margin-top:10px;padding:13px 16px;border:1px solid #e3ddd1;border-radius:8px;background:#fffaf2}.why p{margin:6px 0 0;color:#655f55;font-size:12px;line-height:1.55;white-space:pre-line}.next{width:100%;margin-top:13px}
     footer{width:min(680px,100%);margin:22px auto 0;display:flex;align-items:center;color:#8c968f;font-size:10px}footer b{color:#4b6459}.dot{margin:0 9px;color:#bac0ba}.note{margin-left:auto;font:italic 12px "Instrument Serif"}
     @media(max-width:620px){.shell{padding:0 16px 28px}.top{height:70px}.hero{margin-top:44px}.hero h1{font-size:50px}.card{padding:27px 20px 22px}.tr{margin:25px 0 29px}footer{flex-wrap:wrap;justify-content:center}.note{width:100%;margin:10px 0 0;text-align:center}}
     @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}}
@@ -137,6 +137,40 @@ function makeSentence(){
 }
 const $=id=>document.getElementById(id);let current=makeSentence(),revealed=false;
 let stats={done:0};try{const saved=JSON.parse(localStorage.getItem("bir-cumle-stats"));if(saved?.done)stats.done=saved.done}catch{}
+function clean(s){return s.toLowerCase().replace(/[’]/g,"'").replace(/[.,!?]/g," ").replace(/\s+/g," ").trim()}
+function diagnose(answer,target,base){
+  const a=clean(answer),t=clean(target),notes=[];
+  const toIng=a.match(/\bto\s+([a-z]+ing)\b/);
+  const targetTo=t.match(/\bto\s+([a-z]+)\b/);
+  if(toIng&&targetTo&&targetTo[1]!=="the"){
+    notes.push(`“to”dan sonra bu yapıda fiilin yalın hâli gelir; “to” zaten fiili bağladığı için -ing eklenmez. ❌ to ${toIng[1]}  ✓ to ${targetTo[1]}`);
+  }
+  const modalWrong=a.match(/\b(can|may|must|should)\s+([a-z]+(?:ing|ed|s))\b/);
+  if(modalWrong){
+    const right=t.match(new RegExp(`\\b${modalWrong[1]}\\s+([a-z]+)`));
+    if(right)notes.push(`“${modalWrong[1]}” bir modal fiildir; ardından fiil çekimsiz, yalın hâlde gelir. ❌ ${modalWrong[1]} ${modalWrong[2]}  ✓ ${modalWrong[1]} ${right[1]}`);
+  }
+  const didWrong=a.match(/\bdid(?:n't| not)?\s+([a-z]+ed)\b/);
+  if(didWrong)notes.push(`“did” geçmiş zamanı zaten taşıdığı için sonraki fiil geçmiş olmaz, yalın kalır. ❌ did ${didWrong[1]}  ✓ did + fiilin yalın hâli`);
+  const beBase=a.match(/\b(am|is|are|was|were)\s+(go|read|cook|play|study|walk|watch|visit|get|take|listen)\b/);
+  if(beBase)notes.push(`“${beBase[1]}” ile devam eden bir eylem anlatılıyorsa fiile -ing gelir. ❌ ${beBase[1]} ${beBase[2]}  ✓ ${beBase[1]} ${beBase[2]}ing`);
+  const irregular=[["went","go"],["bought","buy"],["got","get"],["took","take"],["read","read"]];
+  for(const [past,present] of irregular){
+    if(new RegExp(`\\b${past}\\b`).test(t)&&new RegExp(`\\b${present}\\b`).test(a)&&!new RegExp(`\\b${past}\\b`).test(a)){
+      notes.push(`Cümle geçmiş zamanda; “${present}” fiilinin burada geçmiş biçimi gerekir. ❌ ${present}  ✓ ${past}`);
+      break;
+    }
+  }
+  const third=[["wants","want"],["likes","like"],["prefers","prefer"],["has","have"],["does","do"]];
+  for(const [right,wrong] of third){
+    if(new RegExp(`\\b${right}\\b`).test(t)&&new RegExp(`\\b${wrong}\\b`).test(a)&&!new RegExp(`\\b${right}\\b`).test(a)){
+      notes.push(`Özne he/she/it grubunda olduğu için geniş zamanda fiil değişir. ❌ ${wrong}  ✓ ${right}`);
+      break;
+    }
+  }
+  if(!notes.length)return base;
+  return notes.slice(0,2).join("\n\n")+"\n\nBu cümlenin ana kuralı: "+base;
+}
 function explain(correct){
   if(correct.startsWith("I went"))return '"Dün" geçmiş zamanı gösterir. go → went olur. Küçük örnek: I go today. / I went yesterday.';
   if(correct.includes("wake up"))return "Her sabah bir alışkanlıktır; geniş zaman kullanılır. Küçük örnek: I wake up early.";
@@ -167,7 +201,7 @@ function render(){$("turkish").textContent=current.tr;$("number").textContent="C
 $("answer").addEventListener("input",e=>$("check").disabled=!e.target.value.trim());
 $("answer").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("form").requestSubmit()}});
 $("hint").onclick=()=>{$("hint").querySelector("span").textContent=current.hint};
-$("form").onsubmit=e=>{e.preventDefault();if(revealed||!$("answer").value.trim())return;revealed=true;stats.done++;localStorage.setItem("bir-cumle-stats",JSON.stringify(stats));$("answer").disabled=true;$("actions").style.display="none";$("result").classList.add("show");$("correct").textContent=current.en;$("explanation").textContent=current.explanation;$("answerWrap").classList.add("good");render()};
+$("form").onsubmit=e=>{e.preventDefault();if(revealed||!$("answer").value.trim())return;revealed=true;const userAnswer=$("answer").value;stats.done++;localStorage.setItem("bir-cumle-stats",JSON.stringify(stats));$("answer").disabled=true;$("actions").style.display="none";$("result").classList.add("show");$("correct").textContent=current.en;$("explanation").textContent=diagnose(userAnswer,current.en,current.explanation);$("answerWrap").classList.add("good");render()};
 $("next").onclick=()=>{current=makeSentence();revealed=false;$("answer").value="";$("answer").disabled=false;$("check").disabled=true;$("actions").style.display="flex";$("result").classList.remove("show");$("answerWrap").className="answer";$("hint").querySelector("span").textContent="İpucu göster";render();$("answer").focus()};
 render();
 </script>
