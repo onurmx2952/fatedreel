@@ -128,8 +128,9 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
                 blocks.append(Block(len(blocks), cls, subj, tid, length))
 
     requested_limit = float(payload.get("timeLimitSeconds") or 12)
-    strict_limit = max(2, min(4, requested_limit * 0.4))
-    relax_limit = max(2, min(4, requested_limit * 0.3))
+    strict_limit = max(2, min(3, requested_limit * 0.25))
+    edge_relax_limit = max(2, min(3, requested_limit * 0.25))
+    full_relax_limit = max(4, min(8, requested_limit * 0.5))
 
     strict = solve_blocks_with_model(
         blocks,
@@ -152,7 +153,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         teacher_unavailable,
         days,
         hours_per_day,
-        with_time_limit(payload, relax_limit),
+        with_time_limit(payload, edge_relax_limit),
         relax_unavailable=True,
         relax_scope="edge",
         free_day_mode="none",
@@ -167,7 +168,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         teacher_unavailable,
         days,
         hours_per_day,
-        with_time_limit(payload, relax_limit),
+        with_time_limit(payload, full_relax_limit),
         relax_unavailable=True,
         relax_scope="all",
         free_day_mode="none",
@@ -213,7 +214,8 @@ def solve_blocks_with_model(
                 blocked_hours = blocked_hours_for_block(teacher_unavailable, block.teacher_id, day, start, block.length)
                 if blocked_hours and not relax_unavailable:
                     continue
-                if blocked_hours and is_full_day_blocked(teacher_unavailable, block.teacher_id, day, hours_per_day):
+                full_day_blocked = bool(blocked_hours) and is_full_day_blocked(teacher_unavailable, block.teacher_id, day, hours_per_day)
+                if full_day_blocked and (not relax_unavailable or relax_scope != "all"):
                     continue
                 if blocked_hours and relax_scope == "edge":
                     if not all(is_edge_hour(hour, hours_per_day) for hour in blocked_hours):
@@ -224,6 +226,8 @@ def solve_blocks_with_model(
                 if blocked_hours:
                     for _ in range(len(blocked_hours)):
                         penalty_terms.append(var)
+                    if full_day_blocked:
+                        full_day_relaxed_vars.setdefault((block.teacher_id, day), []).append(var)
                 subject_day_vars.setdefault((block.cls, block.subj, day), []).append(var)
                 for offset in range(block.length):
                     hour = start + offset
