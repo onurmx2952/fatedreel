@@ -127,9 +127,9 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
             for length in split_blocks(assigned_wh or wh, days, hours_per_day):
                 blocks.append(Block(len(blocks), cls, subj, tid, length))
 
-    requested_limit = float(payload.get("timeLimitSeconds") or 30)
-    strict_limit = max(5, min(12, requested_limit))
-    relax_limit = max(4, min(8, requested_limit))
+    requested_limit = float(payload.get("timeLimitSeconds") or 12)
+    strict_limit = max(2, min(4, requested_limit * 0.4))
+    relax_limit = max(2, min(4, requested_limit * 0.3))
 
     strict = solve_blocks_with_model(
         blocks,
@@ -140,21 +140,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         hours_per_day,
         with_time_limit(payload, strict_limit),
         relax_unavailable=False,
-        free_day_mode="require",
-    )
-    if strict.get("ok"):
-        return strict
-
-    strict = solve_blocks_with_model(
-        blocks,
-        teachers,
-        teacher_by_id,
-        teacher_unavailable,
-        days,
-        hours_per_day,
-        with_time_limit(payload, strict_limit),
-        relax_unavailable=False,
-        free_day_mode="maximize",
+        free_day_mode="none",
     )
     if strict.get("ok"):
         return strict
@@ -169,7 +155,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         with_time_limit(payload, relax_limit),
         relax_unavailable=True,
         relax_scope="edge",
-        free_day_mode="maximize",
+        free_day_mode="none",
     )
     if relaxed.get("ok"):
         return relaxed
@@ -184,7 +170,7 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         with_time_limit(payload, relax_limit),
         relax_unavailable=True,
         relax_scope="all",
-        free_day_mode="maximize",
+        free_day_mode="none",
     )
     if relaxed.get("ok"):
         return relaxed

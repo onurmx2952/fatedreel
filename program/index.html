@@ -1296,66 +1296,30 @@ async function generateSchedule(){
 }
 
 async function solveWithOrTools(){
-  let lastResult=null;
-  const autoOpeningsLog=[];
-  const seenOpenings=new Set();
-  const maxRounds=10;
-  for(let i=0;i<maxRounds;i++){
-    setWorkState(
-      true,
-      'Program oturtulmaya çalışılıyor...',
-      i===0
-        ? 'OR-Tools boş günleri koruyarak en iyi programı arıyor.'
-        : 'Mantıklı parçalı düzeltmeler uygulandı; program yeniden deneniyor.',
-      {step:`Deneme ${i+1}/${maxRounds}`,current:i+1,total:maxRounds,etaSeconds:(maxRounds-i)*10}
-    );
-    await yieldToBrowser();
-    try{
-      const res=await apiFetch('/api/program/solve',{
-        method:'POST',
-        body:JSON.stringify({
-          programData:programState(),
-          timeLimitSeconds:30,
-          seed:(Date.now()+i)%100000,
-          workers:8
-        })
-      });
-      if(res&&res.ok&&res.schedule){
-        return {ok:true,schedule:res.schedule,adjustments:res.adjustments||[],stats:res.stats||{},attempt:i+1,autoOpenings:autoOpeningsLog};
-      }
-      lastResult={ok:false,error:res?.error||'OR-Tools çözümleyici geçerli sonuç döndürmedi.',issues:res?.issues||[],status:res?.status,attempt:i+1};
-    }catch(error){
-      lastResult={ok:false,error:error.message||'OR-Tools çözümleyiciye ulaşılamadı.',issues:[],network:true,attempt:i+1};
-      break;
+  setWorkState(
+    true,
+    'Program oturtulmaya çalışılıyor...',
+    'OR-Tools tek seferde en uygun yerleşimi arıyor.',
+    {step:'Çözüm',current:1,total:1,etaSeconds:12}
+  );
+  await yieldToBrowser();
+  try{
+    const res=await apiFetch('/api/program/solve',{
+      method:'POST',
+      body:JSON.stringify({
+        programData:programState(),
+        timeLimitSeconds:12,
+        seed:Date.now()%100000,
+        workers:8
+      })
+    });
+    if(res&&res.ok&&res.schedule){
+      return {ok:true,schedule:res.schedule,adjustments:res.adjustments||[],stats:res.stats||{},attempt:1,autoOpenings:[]};
     }
-    if(lastResult?.network) break;
-    const allowFullDays=i>=7;
-    const openingResult=openSolverOpeningHints(lastResult.issues||[], {allowFullDays});
-    if(openingResult.opened<=0) break;
-    const signature=openingResult.actions.join('|');
-    if(seenOpenings.has(signature)){
-      lastResult.error='Aynı otomatik düzeltmeler tekrarlandı; ders dağıtımı veya öğretmen yükleri yeniden dengelenmeli.';
-      break;
-    }
-    seenOpenings.add(signature);
-    autoOpeningsLog.push(...openingResult.actions);
-    setWorkState(
-      true,
-      'Program yeniden deneniyor...',
-      `${allowFullDays?'Son çare düzeltmesi':'Otomatik açılan saatler'}: ${openingResult.actions.slice(0,5).join(' · ')}`,
-      {step:`Düzeltme ${i+1}/${maxRounds}`,current:i+1,total:maxRounds,etaSeconds:(maxRounds-i)*10}
-    );
-    if(document.getElementById('view-blocked').classList.contains('active')) renderBlockedView();
-    scheduleAutoSave();
-    await waitForSolverRetry(i);
+    return {ok:false,error:res?.error||'OR-Tools çözümleyici geçerli sonuç döndürmedi.',issues:res?.issues||[],status:res?.status,attempt:1};
+  }catch(error){
+    return {ok:false,error:error.message||'OR-Tools çözümleyiciye ulaşılamadı.',issues:[],network:true,attempt:1};
   }
-  if(lastResult?.network){
-    lastResult.error='Solver isteği zaman aşımına düştü veya bağlantı anlık kesildi. Veri değiştirmenize gerek yok; tekrar deneyebilirsiniz.';
-  }
-  if(String(lastResult?.status||'').toUpperCase()==='UNKNOWN'){
-    lastResult.error=lastResult.error||'Program otomatik düzeltmelerle oturmadı. Ders dağıtımı ve öğretmen yükleri yeniden dengelenmeli.';
-  }
-  return lastResult||{ok:false,error:'OR-Tools çözümleyiciye ulaşılamadı.'};
 }
 
 function formatOrToolsFailure(result){
