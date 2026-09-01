@@ -127,10 +127,56 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
             for length in split_blocks(assigned_wh or wh, days, hours_per_day):
                 blocks.append(Block(len(blocks), cls, subj, tid, length))
 
-    requested_limit = float(payload.get("timeLimitSeconds") or 12)
-    strict_limit = max(2, min(3, requested_limit * 0.25))
-    edge_relax_limit = max(2, min(3, requested_limit * 0.25))
-    full_relax_limit = max(4, min(8, requested_limit * 0.5))
+    requested_limit = float(payload.get("timeLimitSeconds") or 18)
+    quick_limit = max(3, min(5, requested_limit * 0.3))
+    polish_limit = max(3, min(5, requested_limit * 0.3))
+    strict_limit = max(4, min(7, requested_limit * 0.4))
+    edge_relax_limit = max(2, min(3, requested_limit * 0.15))
+    full_relax_limit = max(3, min(5, requested_limit * 0.25))
+    seed = int(payload.get("seed") or 1)
+    for ratio in (0.55, 0.45, 0.35, 0.25):
+        preferred_free_days = build_preferred_free_days(
+            teachers,
+            teacher_unavailable,
+            days,
+            hours_per_day,
+            seed,
+            ratio,
+        )
+        if not preferred_free_days:
+            continue
+        strict = solve_blocks_with_model(
+            blocks,
+            teachers,
+            teacher_by_id,
+            teacher_unavailable,
+            days,
+            hours_per_day,
+            with_time_limit(payload, quick_limit),
+            relax_unavailable=False,
+            free_day_mode="none",
+            optimize_quality=False,
+            preferred_free_days=preferred_free_days,
+        )
+        if strict.get("ok"):
+            polished = solve_blocks_with_model(
+                blocks,
+                teachers,
+                teacher_by_id,
+                teacher_unavailable,
+                days,
+                hours_per_day,
+                with_time_limit(payload, polish_limit),
+                relax_unavailable=False,
+                free_day_mode="none",
+                optimize_quality=True,
+                compact_days=False,
+                solution_hint=strict.get("placements") or {},
+                preferred_free_days=preferred_free_days,
+            )
+            if polished.get("ok"):
+                return polished
+            return strict
 
     strict = solve_blocks_with_model(
         blocks,
@@ -142,8 +188,12 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         with_time_limit(payload, strict_limit),
         relax_unavailable=False,
         free_day_mode="none",
+        optimize_quality=False,
     )
     if strict.get("ok"):
+        return strict
+
+    if strict.get("status") == "UNKNOWN":
         return strict
 
     relaxed = solve_blocks_with_model(
@@ -195,6 +245,10 @@ def solve_blocks_with_model(
     relax_unavailable: bool,
     relax_scope: str = "all",
     free_day_mode: str = "none",
+    optimize_quality: bool = True,
+    compact_days: bool = False,
+    solution_hint: dict[str, Any] | None = None,
+    preferred_free_days: dict[int, set[int]] | None = None,
 ) -> dict[str, Any]:
     model = cp_model.CpModel()
     var_by_block: dict[int, list[tuple[Any, int, int]]] = {}
@@ -204,12 +258,16 @@ def solve_blocks_with_model(
     penalty_terms: list[Any] = []
     full_day_break_terms: list[Any] = []
     full_day_relaxed_vars: dict[tuple[int, int], list[Any]] = {}
+    quality_gap_terms: list[Any] = []
+    quality_busy_day_terms: list[Any] = []
     no_candidate: list[str] = []
     candidate_meta: dict[Any, tuple[Block, int, int]] = {}
 
     for block in blocks:
         candidates: list[tuple[Any, int, int]] = []
         for day in days:
+            if preferred_free_days and day in preferred_free_days.get(block.teacher_id, set()):
+                continue
             for start in range(0, hours_per_day - block.length + 1):
                 blocked_hours = blocked_hours_for_block(teacher_unavailable, block.teacher_id, day, start, block.length)
                 if blocked_hours and not relax_unavailable:
@@ -223,6 +281,10 @@ def solve_blocks_with_model(
                 var = model.NewBoolVar(f"b{block.index}_d{day}_h{start}")
                 candidates.append((var, day, start))
                 candidate_meta[var] = (block, day, start)
+                if solution_hint:
+                    hinted = solution_hint.get(str(block.index)) or solution_hint.get(block.index)
+                    if hinted and len(hinted) >= 2:
+                        model.AddHint(var, int(hinted[0]) == day and int(hinted[1]) == start)
                 if blocked_hours:
                     for _ in range(len(blocked_hours)):
                         penalty_terms.append(var)
@@ -260,6 +322,16 @@ def solve_blocks_with_model(
     for vars_ in subject_day_vars.values():
         model.AddAtMostOne(vars_)
 
+    if optimize_quality:
+        quality_gap_terms, quality_busy_day_terms = build_teacher_quality_terms(
+            model,
+            teacher_slot_vars,
+            teachers,
+            days,
+            hours_per_day,
+            compact_days,
+        )
+
     free_day_vars: list[Any] = []
     free_day_teacher_vars: list[Any] = []
     if free_day_mode in {"require", "maximize"}:
@@ -296,18 +368,17 @@ def solve_blocks_with_model(
         model.AddMaxEquality(opened, vars_)
         full_day_break_terms.append(opened)
 
+    quality_score = sum(quality_gap_terms) * 1000 + sum(quality_busy_day_terms) * 250
     if relax_unavailable and penalty_terms:
-        if free_day_mode == "maximize" and free_day_teacher_vars:
-            model.Minimize(
-                sum(full_day_break_terms) * 1000000
-                + sum(penalty_terms) * 10000
-                - sum(free_day_teacher_vars) * 100
-                - sum(free_day_vars)
-            )
-        else:
-            model.Minimize(sum(full_day_break_terms) * 1000000 + sum(penalty_terms))
+        model.Minimize(
+            sum(full_day_break_terms) * 1000000
+            + sum(penalty_terms) * 100000
+            + quality_score
+        )
     elif free_day_mode in {"require", "maximize"} and free_day_teacher_vars:
-        model.Maximize(sum(free_day_teacher_vars) * 1000 + sum(free_day_vars))
+        model.Maximize(sum(free_day_teacher_vars) * 1000 + sum(free_day_vars) - quality_score)
+    elif quality_gap_terms or quality_busy_day_terms:
+        model.Minimize(quality_score)
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = float(payload.get("timeLimitSeconds") or 75)
@@ -331,11 +402,13 @@ def solve_blocks_with_model(
         }
 
     schedule: dict[str, dict[str, str]] = {}
+    placements: dict[str, list[int]] = {}
     adjustment_slots: dict[tuple[int, int, int], dict[str, Any]] = {}
     for block in blocks:
         for var, day, start in var_by_block[block.index]:
             if not solver.BooleanValue(var):
                 continue
+            placements[str(block.index)] = [day, start]
             for offset in range(block.length):
                 hour = start + offset
                 schedule[f"{block.teacher_id}_{day}_{hour}"] = {"cls": block.cls, "subj": block.subj}
@@ -357,6 +430,7 @@ def solve_blocks_with_model(
         "ok": True,
         "status": solver.StatusName(status),
         "schedule": schedule,
+        "placements": placements,
         "adjustments": adjustments,
         "stats": {
             "blocks": len(blocks),
@@ -411,6 +485,114 @@ def count_free_day_teachers(
         if teacher_free_days > 0:
             with_free_day += 1
     return {"freeDayTeachers": with_free_day, "targetFreeDayTeachers": target, "totalFreeDays": total_free_days}
+
+
+def build_preferred_free_days(
+    teachers: list[dict[str, Any]],
+    unavailable: dict[str, Any],
+    days: list[int],
+    hours_per_day: int,
+    seed: int,
+    ratio: float = 0.55,
+) -> dict[int, set[int]]:
+    rng = random.Random(seed)
+    loads = teacher_assignment_loads(teachers)
+    day_pressure = {day: 0 for day in days}
+    result: dict[int, set[int]] = {}
+    eligible_teachers = []
+    for teacher in teachers:
+        tid = int(teacher.get("id"))
+        load = loads.get(tid, 0)
+        if load <= 0 or load > (len(days) - 1) * hours_per_day:
+            continue
+        blocked = unavailable.get(str(tid)) or unavailable.get(tid) or {}
+        has_full_blocked_day = any(
+            all(blocked.get(f"{day}_{hour}") for hour in range(hours_per_day))
+            for day in days
+        )
+        if has_full_blocked_day:
+            continue
+        eligible_teachers.append((load, rng.random(), teacher))
+
+    eligible_teachers.sort()
+    target_count = max(0, min(len(eligible_teachers), math.ceil(len(eligible_teachers) * ratio)))
+    ordered_teachers = [teacher for _, _, teacher in eligible_teachers[:target_count]]
+
+    for teacher in ordered_teachers:
+        tid = int(teacher.get("id"))
+        load = loads.get(tid, 0)
+        blocked = unavailable.get(str(tid)) or unavailable.get(tid) or {}
+
+        day_scores: list[tuple[int, int, float, int]] = []
+        for day in days:
+            blocked_count = sum(1 for hour in range(hours_per_day) if blocked.get(f"{day}_{hour}"))
+            day_scores.append((day_pressure.get(day, 0), -blocked_count, rng.random(), day))
+        day_scores.sort()
+        chosen_day = day_scores[0][3]
+        result[tid] = {chosen_day}
+        day_pressure[chosen_day] = day_pressure.get(chosen_day, 0) + 1
+
+    return result
+
+
+def build_teacher_quality_terms(
+    model: Any,
+    teacher_slot_vars: dict[tuple[int, int, int], list[Any]],
+    teachers: list[dict[str, Any]],
+    days: list[int],
+    hours_per_day: int,
+    enforce_compact_days: bool = False,
+) -> tuple[list[Any], list[Any]]:
+    gap_terms: list[Any] = []
+    busy_day_terms: list[Any] = []
+    loads = teacher_assignment_loads(teachers)
+
+    for teacher in teachers:
+        tid = int(teacher.get("id"))
+        if loads.get(tid, 0) <= 0:
+            continue
+        teacher_busy_days: list[Any] = []
+        for day in days:
+            busy_slots: list[Any] = []
+            for hour in range(hours_per_day):
+                slot_vars = teacher_slot_vars.get((tid, day, hour), [])
+                busy = model.NewBoolVar(f"t{tid}_d{day}_h{hour}_busy")
+                if slot_vars:
+                    model.AddMaxEquality(busy, slot_vars)
+                else:
+                    model.Add(busy == 0)
+                busy_slots.append(busy)
+
+            day_busy = model.NewBoolVar(f"t{tid}_d{day}_busy_quality")
+            model.AddMaxEquality(day_busy, busy_slots)
+            busy_day_terms.append(day_busy)
+            teacher_busy_days.append(day_busy)
+
+            for hour in range(1, hours_per_day - 1):
+                earlier = model.NewBoolVar(f"t{tid}_d{day}_h{hour}_earlier")
+                later = model.NewBoolVar(f"t{tid}_d{day}_h{hour}_later")
+                gap = model.NewBoolVar(f"t{tid}_d{day}_h{hour}_gap")
+                model.AddMaxEquality(earlier, busy_slots[:hour])
+                model.AddMaxEquality(later, busy_slots[hour + 1 :])
+                model.Add(gap >= earlier + later - busy_slots[hour] - 1)
+                model.Add(gap <= earlier)
+                model.Add(gap <= later)
+                model.Add(gap <= 1 - busy_slots[hour])
+                gap_terms.append(gap)
+
+        if enforce_compact_days and teacher_busy_days:
+            preferred = preferred_teacher_busy_days(loads.get(tid, 0), len(days), hours_per_day)
+            if preferred < len(days):
+                model.Add(sum(teacher_busy_days) <= preferred)
+
+    return gap_terms, busy_day_terms
+
+
+def preferred_teacher_busy_days(load: int, day_count: int, hours_per_day: int) -> int:
+    if load <= 0:
+        return 0
+    practical_daily_load = max(1, hours_per_day - 1)
+    return min(day_count, max(2, math.ceil(load / practical_daily_load)))
 
 
 def copy_unavailable(unavailable: dict[str, Any]) -> dict[str, Any]:

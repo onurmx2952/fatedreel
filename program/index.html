@@ -1221,7 +1221,7 @@ async function generateSchedule(){
 
   const orToolsResult=await solveWithOrTools();
   if(orToolsResult?.ok){
-    const appliedRelaxedOpenings=applySolverAdjustments(orToolsResult.adjustments||[]);
+    const relaxedAdjustmentCount=(orToolsResult.adjustments||[]).reduce((sum,item)=>sum+(item.hours||[]).length,0);
     schedule=orToolsResult.schedule||{};
     renderTable();
     if(document.getElementById('view-class').classList.contains('active')) renderClassView();
@@ -1235,7 +1235,7 @@ async function generateSchedule(){
     const relaxedOpenings=(orToolsResult.adjustments||[]).map(item=>item.text||`${item.teacher||'Öğretmen'} ${DAYS[item.day]||''} ${(item.hours||[]).map(x=>x+1).join(', ')}. saat`);
     const openingActions=[...(orToolsResult.autoOpenings||[]).map(x=>`${h(x)} açıldı`), ...relaxedOpenings];
     const openingNote=openingActions.length
-      ? `<br>Programı oturtmak için açılan saatler:<br>${openingActions.slice(0,5).map(x=>`• ${h(x)}`).join('<br>')}${openingActions.length>5?'<br>• ...':''}${appliedRelaxedOpenings?`<br>${appliedRelaxedOpenings} kırmızı saat otomatik yeşile çevrildi.`:''}`
+      ? `<br>Programı oturtmak için geçici esnetilen saatler:<br>${openingActions.slice(0,5).map(x=>`• ${h(x)}`).join('<br>')}${openingActions.length>5?'<br>• ...':''}${relaxedAdjustmentCount?`<br>Öğretmen boş saat kayıtları değiştirilmedi.`:''}`
       : '';
     showAlert(ok?`Program oluşturuldu - OR-Tools ile ${ALL_CLASSES.length}/${ALL_CLASSES.length} sınıf ${target} saat dolu.${openingNote}`:`OR-Tools sonuç döndürdü ama doğrulama hatası var: ${report.classIssues.length} sınıf eksiği, ${blockIssues.length} blok sorunu.`,ok?'ok':'warn');
     scheduleAutoSave();
@@ -1308,7 +1308,7 @@ async function solveWithOrTools(){
       method:'POST',
       body:JSON.stringify({
         programData:programState(),
-        timeLimitSeconds:12,
+        timeLimitSeconds:18,
         seed:Date.now()%100000,
         workers:8
       })
