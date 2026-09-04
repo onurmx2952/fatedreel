@@ -3475,8 +3475,8 @@ function randomUnavailableThresholds(){
   const hasPrep=currentHasPrepGrade();
   if(high&&hasPrep){
     return {
-      fullDayRatio: 0.08,
-      partialRatio: classroomCount>30 ? 0.22 : 0.28,
+      fullDayRatio: 0.05,
+      partialRatio: 0.16,
     };
   }
   if(high){
