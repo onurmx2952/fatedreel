@@ -1,3 +1,7 @@
+param(
+  [switch]$Restart
+)
+
 $ErrorActionPreference = "Stop"
 
 $ProgramDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -19,6 +23,11 @@ function Stop-WrongSolverProcess {
 
   $cmd = [string]$proc.CommandLine
   if ($cmd -like "*ortools_solver:app*" -and $cmd -like "*$ExpectedPython*") {
+    if ($Restart) {
+      Write-Host "Restarting solver process: PID $ProcessId" -ForegroundColor Yellow
+      Stop-Process -Id $ProcessId -Force -ErrorAction SilentlyContinue
+      return $false
+    }
     Write-Host "Solver is already running with the correct venv: http://127.0.0.1:8000" -ForegroundColor Green
     return $true
   }

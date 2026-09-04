@@ -28,6 +28,8 @@ DAYS = {
     6: "Pazar",
 }
 
+SOLVER_VERSION = "2026-09-03-free-day-balanced-v3"
+
 
 @dataclass(frozen=True)
 class Block:
@@ -128,55 +130,61 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
                 blocks.append(Block(len(blocks), cls, subj, tid, length))
 
     requested_limit = float(payload.get("timeLimitSeconds") or 18)
-    quick_limit = max(3, min(5, requested_limit * 0.3))
-    polish_limit = max(3, min(5, requested_limit * 0.3))
-    strict_limit = max(4, min(7, requested_limit * 0.4))
+    has_user_unavailable = any(bool(blocked) for blocked in (teacher_unavailable or {}).values())
+    quick_limit = max(2.5, min(4, requested_limit * 0.25))
+    polish_limit = max(2, min(3, requested_limit * 0.2))
+    strict_limit = max(8, min(14, requested_limit * 0.8))
     edge_relax_limit = max(2, min(3, requested_limit * 0.15))
     full_relax_limit = max(3, min(5, requested_limit * 0.25))
     seed = int(payload.get("seed") or 1)
-    for ratio in (0.55, 0.45, 0.35, 0.25):
-        preferred_free_days = build_preferred_free_days(
-            teachers,
-            teacher_unavailable,
-            days,
-            hours_per_day,
-            seed,
-            ratio,
-        )
-        if not preferred_free_days:
-            continue
-        strict = solve_blocks_with_model(
-            blocks,
-            teachers,
-            teacher_by_id,
-            teacher_unavailable,
-            days,
-            hours_per_day,
-            with_time_limit(payload, quick_limit),
-            relax_unavailable=False,
-            free_day_mode="none",
-            optimize_quality=False,
-            preferred_free_days=preferred_free_days,
-        )
-        if strict.get("ok"):
-            polished = solve_blocks_with_model(
+
+    # If the user already marked unavailable/free-day cells, those are the real
+    # constraints. Adding synthetic preferred free days on top of them makes the
+    # model much harder and can turn solvable data into UNKNOWN timeouts.
+    if not has_user_unavailable:
+        for ratio in (0.55, 0.45, 0.35, 0.25):
+            preferred_free_days = build_preferred_free_days(
+                teachers,
+                teacher_unavailable,
+                days,
+                hours_per_day,
+                seed,
+                ratio,
+            )
+            if not preferred_free_days:
+                continue
+            strict = solve_blocks_with_model(
                 blocks,
                 teachers,
                 teacher_by_id,
                 teacher_unavailable,
                 days,
                 hours_per_day,
-                with_time_limit(payload, polish_limit),
+                with_time_limit(payload, quick_limit),
                 relax_unavailable=False,
                 free_day_mode="none",
-                optimize_quality=True,
-                compact_days=False,
-                solution_hint=strict.get("placements") or {},
+                optimize_quality=False,
                 preferred_free_days=preferred_free_days,
             )
-            if polished.get("ok"):
-                return polished
-            return strict
+            if strict.get("ok"):
+                polished = solve_blocks_with_model(
+                    blocks,
+                    teachers,
+                    teacher_by_id,
+                    teacher_unavailable,
+                    days,
+                    hours_per_day,
+                    with_time_limit(payload, polish_limit),
+                    relax_unavailable=False,
+                    free_day_mode="none",
+                    optimize_quality=True,
+                    compact_days=False,
+                    solution_hint=strict.get("placements") or {},
+                    preferred_free_days=preferred_free_days,
+                )
+                if polished.get("ok"):
+                    return polished
+                return strict
 
     strict = solve_blocks_with_model(
         blocks,
@@ -391,7 +399,7 @@ def solve_blocks_with_model(
             return {
                 "ok": False,
                 "status": solver.StatusName(status),
-                "error": "OR-Tools bu denemede programı oturtamadı. Aşağıdaki boş saatleri açmak programı rahatlatabilir.",
+                "error": "OR-Tools bu denemede süre içinde programı oturtamadı.",
                 "issues": build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
             }
         return {
@@ -950,11 +958,11 @@ if FastAPI is not None:
 
     @app.get("/")
     def home() -> dict[str, Any]:
-        return {"status": "API çalışıyor", "service": "ders-programi-solver"}
+        return {"status": "API çalışıyor", "service": "ders-programi-solver", "version": SOLVER_VERSION}
 
     @app.get("/health")
     def health() -> dict[str, Any]:
-        return {"ok": True}
+        return {"ok": True, "version": SOLVER_VERSION}
 
     @app.post("/solve")
     def solve(request: SolveRequest) -> dict[str, Any]:
