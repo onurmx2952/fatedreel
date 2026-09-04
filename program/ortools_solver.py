@@ -28,7 +28,7 @@ DAYS = {
     6: "Pazar",
 }
 
-SOLVER_VERSION = "2026-09-03-free-day-balanced-v3"
+SOLVER_VERSION = "2026-09-04-prep-relax-unknown-v1"
 
 
 @dataclass(frozen=True)
@@ -199,9 +199,6 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
         optimize_quality=False,
     )
     if strict.get("ok"):
-        return strict
-
-    if strict.get("status") == "UNKNOWN":
         return strict
 
     relaxed = solve_blocks_with_model(
