@@ -39,6 +39,8 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .conflict{background:#fef2f2!important}
 .conflict .c-cls,.conflict .c-sub{color:#dc2626!important}
 .empty-cell{color:#ddd;font-size:11px}
+.cell.unavailable{background:#fff1f2;color:#dc2626;font-weight:800}
+.cell.unavailable .empty-cell{color:#dc2626;font-size:11px}
 .alert{position:relative;padding-right:34px}
 .alert-close{position:absolute;right:10px;top:8px;border:0;background:transparent;font-size:18px;line-height:1;cursor:pointer;color:inherit;opacity:.65}
 .alert-close:hover{opacity:1}
@@ -1098,6 +1100,8 @@ function renderTable(){
           total++;
           html+=`<td class="cell${conf?' conflict':''}" style="${lessonStyle(cell.subj,t.id)}" onclick="editCell(${t.id},${d},${h})">
             <div class="cell-in"><span class="c-cls">${cell.cls}</span><span class="c-sub">${cell.subj}</span></div></td>`;
+        } else if(isTeacherUnavailable(t.id,d,h)){
+          html+=`<td class="cell unavailable" onclick="editCell(${t.id},${d},${h})"><span class="empty-cell">Ders yazılmaz</span></td>`;
         } else {
           html+=`<td class="cell" onclick="editCell(${t.id},${d},${h})"><span class="empty-cell">—</span></td>`;
         }
@@ -3445,13 +3449,21 @@ function assignRandomFreeDaysToHalfTeachers(){
   trimUnavailableToTeacherLoads();
   renderBlockedView();
   const totalAssigned=generated.fullDayCount+generated.partialCount;
-  showAlert(totalAssigned?`${generated.fullDayCount} öğretmene tam gün boşluk verildi. ${generated.partialCount} öğretmene sabah/çıkış boşluğu eklendi; branşlar günlere dengeli dağıtıldı. Programı yeniden oluşturabilirsiniz.`:'Rastgele boş saat verilebilecek uygun öğretmen bulunamadı. Ders yükleri yüksek görünüyor.','ok');
+  const prepNote=currentHasPrepGrade()?'Hazırlık sınıflı lisede tam boş gün sıkışık olduğu için güvenli kenar saatler seçildi. ':'';
+  showAlert(totalAssigned?`${prepNote}${generated.fullDayCount} öğretmene tam gün boşluk verildi. ${generated.partialCount} öğretmene sabah/çıkış boşluğu eklendi; branşlar günlere dengeli dağıtıldı. Programı yeniden oluşturabilirsiniz.`:'Rastgele boş saat verilebilecek uygun öğretmen bulunamadı. Ders yükleri yüksek görünüyor.','ok');
   scheduleAutoSave();
 }
 
 function randomUnavailableThresholds(){
   const classroomCount=ALL_CLASSES.length;
   const high=currentSchoolSetupType()==='high';
+  const hasPrep=currentHasPrepGrade();
+  if(high&&hasPrep){
+    return {
+      fullDayRatio: 0,
+      partialRatio: classroomCount>30 ? 0.30 : 0.35,
+    };
+  }
   if(high){
     return {
       fullDayRatio: classroomCount>30 ? 0.78 : 0.90,
@@ -3466,6 +3478,10 @@ function randomUnavailableThresholds(){
 
 function currentSchoolSetupType(){
   return settings.hoursPerDay>=8 || GRADES.some(g=>String(g)==='Hazırlık'||parseInt(g,10)>=9) ? 'high' : 'middle';
+}
+
+function currentHasPrepGrade(){
+  return GRADES.some(g=>String(g)==='Hazırlık') || ALL_CLASSES.some(cls=>String(cls).startsWith('Hazırlık-'));
 }
 
 function buildBalancedRandomUnavailable(){
