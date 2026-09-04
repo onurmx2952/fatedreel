@@ -3449,7 +3449,7 @@ function assignRandomFreeDaysToHalfTeachers(){
   trimUnavailableToTeacherLoads();
   renderBlockedView();
   const totalAssigned=generated.fullDayCount+generated.partialCount;
-  const prepNote=currentHasPrepGrade()?'Hazırlık sınıflı lisede tam boş gün sıkışık olduğu için güvenli kenar saatler seçildi. ':'';
+  const prepNote=currentHasPrepGrade()?'Hazırlık sınıflı lisede tam boş gün çok sınırlı verildi. ':'';
   showAlert(totalAssigned?`${prepNote}${generated.fullDayCount} öğretmene tam gün boşluk verildi. ${generated.partialCount} öğretmene sabah/çıkış boşluğu eklendi; branşlar günlere dengeli dağıtıldı. Programı yeniden oluşturabilirsiniz.`:'Rastgele boş saat verilebilecek uygun öğretmen bulunamadı. Ders yükleri yüksek görünüyor.','ok');
   scheduleAutoSave();
 }
@@ -3460,8 +3460,8 @@ function randomUnavailableThresholds(){
   const hasPrep=currentHasPrepGrade();
   if(high&&hasPrep){
     return {
-      fullDayRatio: 0,
-      partialRatio: classroomCount>30 ? 0.30 : 0.35,
+      fullDayRatio: 0.05,
+      partialRatio: classroomCount>30 ? 0.25 : 0.30,
     };
   }
   if(high){
