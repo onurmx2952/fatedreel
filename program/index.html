@@ -109,6 +109,8 @@ header{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 20px;display:fl
 .block-slot.blocked{background:#fef2f2;color:#dc2626}
 .block-slot .slot-assignment{font-size:10px;margin-top:3px;color:#334155;font-weight:800}
 .block-slot:hover{outline:2px solid #2563eb;outline-offset:-2px}
+.assignment-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.assignment-chip{border:1px solid #dbe3ec;background:#fff;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800;color:#334155}
 .qa-modal,.modal{border:1px solid rgba(37,99,235,.12)}
 .qa-modal{box-shadow:0 24px 70px rgba(15,23,42,.24)}
 .qa-sub{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;color:#475569;padding:9px 10px}
@@ -3360,6 +3362,7 @@ function renderTeacherBlockedModal(tid){
     <div class="cls-summary" style="border-radius:10px;border:1px solid #e5e7eb;margin-bottom:12px">
       Atanan ders: <b>${load}</b> saat · En fazla boş/kırmızı: <b>${maxBlocked}</b> · Seçili kırmızı:
       <b style="color:${over?'#dc2626':'#16a34a'}">${blockedCount}</b>${over?' · Fazla kırmızı var, bazılarını yeşile çevirin.':''}
+      ${teacherAssignmentSummaryHtml(teacher.id)}
     </div>
     <div class="tbl-wrap" style="max-width:760px">
       <table class="cls-tbl"><thead>${head}</thead><tbody>${body}</tbody></table>
@@ -3397,7 +3400,7 @@ function renderBlockedGrid(){
   const info=document.getElementById('blocked-limit-info');
   if(info){
     const over=blockedCount>maxBlocked;
-    info.innerHTML=`Atanan ders: <b>${load}</b> saat · En fazla boş/kırmızı: <b>${maxBlocked}</b> · Seçili kırmızı: <b style="color:${over?'#dc2626':'#16a34a'}">${blockedCount}</b>${over?' · Fazla kırmızı var, bazılarını yeşile çevirin.':''}`;
+    info.innerHTML=`Atanan ders: <b>${load}</b> saat · En fazla boş/kırmızı: <b>${maxBlocked}</b> · Seçili kırmızı: <b style="color:${over?'#dc2626':'#16a34a'}">${blockedCount}</b>${over?' · Fazla kırmızı var, bazılarını yeşile çevirin.':''}${teacherAssignmentSummaryHtml(blockedTeacherId)}`;
   }
   let head='<tr><th class="hour-col">Saat</th>';
   days.forEach(d=>head+=`<th class="day-hdr">${DAYS[d]}</th>`);
@@ -3405,13 +3408,13 @@ function renderBlockedGrid(){
   document.getElementById('blocked-head').innerHTML=head;
 
   let body='';
-  for(let h=0;h<H;h++){
-    body+=`<tr><td class="hour-col" style="text-align:center;padding:8px 4px">${h+1}</td>`;
+  for(let hour=0;hour<H;hour++){
+    body+=`<tr><td class="hour-col" style="text-align:center;padding:8px 4px">${hour+1}</td>`;
     days.forEach(d=>{
-      const blocked=isTeacherUnavailable(blockedTeacherId,d,h);
-      const cell=schedule[`${blockedTeacherId}_${d}_${h}`];
+      const blocked=isTeacherUnavailable(blockedTeacherId,d,hour);
+      const cell=schedule[`${blockedTeacherId}_${d}_${hour}`];
       const assignment=cell?`<div class="slot-assignment">${h(cell.cls)} ${h(cell.subj||'')}</div>`:'';
-      body+=`<td class="block-slot ${blocked?'blocked':'free'}" onclick="toggleTeacherUnavailable(${blockedTeacherId},${d},${h})"><div>${blocked?'Ders yazılmaz':'Uygun'}</div>${assignment}</td>`;
+      body+=`<td class="block-slot ${blocked?'blocked':'free'}" onclick="toggleTeacherUnavailable(${blockedTeacherId},${d},${hour})"><div>${blocked?'Ders yazılmaz':'Uygun'}</div>${assignment}</td>`;
     });
     body+='</tr>';
   }
@@ -3472,8 +3475,8 @@ function randomUnavailableThresholds(){
   const hasPrep=currentHasPrepGrade();
   if(high&&hasPrep){
     return {
-      fullDayRatio: 0.05,
-      partialRatio: classroomCount>30 ? 0.25 : 0.30,
+      fullDayRatio: 0.08,
+      partialRatio: classroomCount>30 ? 0.22 : 0.28,
     };
   }
   if(high){
@@ -3583,6 +3586,15 @@ function teacherHasFullUnavailableDay(tid){
     }
     return true;
   });
+}
+
+function teacherAssignmentSummaryHtml(tid){
+  const teacher=teachers.find(t=>t.id===parseInt(tid));
+  const assignments=(teacher?.assignments||[])
+    .filter(a=>a&&a.cls&&a.subj)
+    .sort((a,b)=>String(a.cls).localeCompare(String(b.cls),'tr',{numeric:true})||String(a.subj).localeCompare(String(b.subj),'tr'));
+  if(!assignments.length) return '<div class="assignment-chips"><span class="assignment-chip">Atanan ders yok</span></div>';
+  return `<div class="assignment-chips">${assignments.map(a=>`<span class="assignment-chip">${h(a.cls)} ${h(a.subj)}(${parseInt(a.wh)||0})</span>`).join('')}</div>`;
 }
 
 function canTeacherReceiveRandomPartialHours(load){
