@@ -28,7 +28,7 @@ DAYS = {
     6: "Pazar",
 }
 
-SOLVER_VERSION = "2026-09-04-prep-relax-unknown-v1"
+SOLVER_VERSION = "2026-09-04-preserve-full-free-days-v1"
 
 
 @dataclass(frozen=True)
@@ -133,10 +133,12 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
     has_user_unavailable = any(bool(blocked) for blocked in (teacher_unavailable or {}).values())
     quick_limit = max(2.5, min(4, requested_limit * 0.25))
     polish_limit = max(2, min(3, requested_limit * 0.2))
-    strict_limit = max(8, min(14, requested_limit * 0.8))
-    edge_relax_limit = max(2, min(3, requested_limit * 0.15))
-    full_relax_limit = max(3, min(5, requested_limit * 0.25))
+    strict_limit = max(10, min(requested_limit, 20))
+    edge_relax_limit = max(4, min(7, requested_limit * 0.4))
+    partial_relax_limit = max(4, min(7, requested_limit * 0.4))
+    full_relax_limit = max(2, min(4, requested_limit * 0.2))
     seed = int(payload.get("seed") or 1)
+    has_full_day_unavailable = has_full_day_constraints(teacher_unavailable, teachers, days, hours_per_day)
 
     # If the user already marked unavailable/free-day cells, those are the real
     # constraints. Adding synthetic preferred free days on top of them makes the
@@ -215,6 +217,29 @@ def solve_program(payload: dict[str, Any]) -> dict[str, Any]:
     )
     if relaxed.get("ok"):
         return relaxed
+
+    relaxed = solve_blocks_with_model(
+        blocks,
+        teachers,
+        teacher_by_id,
+        teacher_unavailable,
+        days,
+        hours_per_day,
+        with_time_limit(payload, partial_relax_limit),
+        relax_unavailable=True,
+        relax_scope="partial",
+        free_day_mode="none",
+    )
+    if relaxed.get("ok"):
+        return relaxed
+
+    if has_full_day_unavailable:
+        return {
+            "ok": False,
+            "status": strict.get("status"),
+            "error": "OR-Tools boş günleri koruyarak uygun program bulamadı.",
+            "issues": relaxed.get("issues") or strict.get("issues") or build_infeasible_hints(teachers, teacher_unavailable, days, hours_per_day),
+        }
 
     relaxed = solve_blocks_with_model(
         blocks,
@@ -642,6 +667,19 @@ def is_teacher_unavailable(unavailable: dict[str, Any], tid: int, day: int, hour
 
 def is_full_day_blocked(unavailable: dict[str, Any], tid: int, day: int, hours_per_day: int) -> bool:
     return all(is_teacher_unavailable(unavailable, tid, day, hour) for hour in range(hours_per_day))
+
+
+def has_full_day_constraints(
+    unavailable: dict[str, Any],
+    teachers: list[dict[str, Any]],
+    days: list[int],
+    hours_per_day: int,
+) -> bool:
+    for teacher in teachers:
+        tid = int(teacher.get("id"))
+        if any(is_full_day_blocked(unavailable, tid, day, hours_per_day) for day in days):
+            return True
+    return False
 
 
 def is_edge_hour(hour: int, hours_per_day: int) -> bool:
