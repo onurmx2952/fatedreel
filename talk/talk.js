@@ -2,12 +2,13 @@ const $=id=>document.getElementById(id);
 let endpoint='',key='',stream,context,recorder,source,sink,active=false,muted=false,speaking=false;
 let samples=[],length=0,speechSamples=0,quietSamples=0,pending='',history=[],queue=Promise.resolve(),epoch=0,audio,audioUrl;
 let finishQueued=false,starting=false,frames=[],frameLength=0;
+let attemptedSpeech=0;
 const controllers=new Set();
 function state(value,title,hint){$('orb').dataset.state=value;$('status').textContent=title;if(hint!==undefined)$('hint').textContent=hint;}
 function error(message=''){$('error').textContent=message;$('error').hidden=!message;}
-function listening(){state('listening',muted?'Mikrofon kapalı':'Seni dinliyorum','İstediğin kadar düşün. Hazır olduğunda “Bitirdim”e dokun veya “bitti” de.');}
+function listening(){state('listening',muted?'Mikrofon kapalı':'Seni dinliyorum','Doğal konuş. Cümlen tamamlandığında otomatik yanıt vereceğim; düğmeye basman gerekmiyor.');}
 function message(who,text){const p=document.createElement('p'),label=document.createElement('strong');label.textContent=who;p.append(label,document.createTextNode(text));$('messages').append(p);$('transcript').querySelector('.empty').hidden=true;$('transcript').scrollTop=$('transcript').scrollHeight;}
-function clearSamples(){samples=[];length=0;speechSamples=0;quietSamples=0;}
+function clearSamples(){samples=[];length=0;speechSamples=0;quietSamples=0;attemptedSpeech=0;}
 function wav(chunks,count,rate){
  const pcm=new Float32Array(count);let offset=0;for(const chunk of chunks){pcm.set(chunk,offset);offset+=chunk.length;}
  const n=Math.floor(count*16000/rate),buffer=new ArrayBuffer(44+n*2),view=new DataView(buffer);
@@ -25,32 +26,36 @@ async function play(base64,current){
 function endAudio(){audio?.pause();if(audioUrl)URL.revokeObjectURL(audioUrl);audioUrl=undefined;speaking=false;$('audio').hidden=true;$('finish').textContent='Bitirdim';clearSamples();}
 function send(finish=false){
  if(!active||speaking||finishQueued)return;
- if(!finish&&speechSamples<context.sampleRate*0.2){clearSamples();return;}
- const encoded=length?wav(samples,length,context.sampleRate):'';clearSamples();
- if(finish){finishQueued=true;$('finish').disabled=true;state('thinking','Cevabını düşünüyorum…','Yanıt PN43’te hazırlanıyor.');}
+ if(speechSamples<context.sampleRate*0.2)return;
+ const encoded=length?wav(samples,length,context.sampleRate):'';
+ const revision=speechSamples;attemptedSpeech=revision;finishQueued=true;
+ $('finish').disabled=true;state('thinking','Seni anlıyorum…','Devam etmek istersen konuşabilirsin.');
  const current=epoch;
  queue=queue.then(async()=>{
   if(!active||current!==epoch)return;
   const controller=new AbortController();controllers.add(controller);const timer=setTimeout(()=>controller.abort(),150000);
   try{
-   const response=await fetch(endpoint+'/api/turn',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify({audio:encoded,pending,history:history.slice(-12),finish}),signal:controller.signal});
+   const response=await fetch(endpoint+'/api/turn',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify({audio:encoded,pending:'',history:history.slice(-12),finish}),signal:controller.signal});
    const result=await response.json();if(!response.ok)throw Error(result.detail||'Bağlantı kurulamadı.');
-   if(!active||current!==epoch)return;
-   if(result.waiting){pending=result.pending;if(finish){listening();if(result.empty)error('Ses algılanmadı. Mikrofona biraz daha yakın konuşmayı dene.');}return;}
+   if(!active||current!==epoch||revision!==speechSamples)return;
+   if(result.waiting){listening();if(result.empty){clearSamples();}else state('listening','Seni dinliyorum','Düşünmek için zamanın var. Cümlene devam edebilirsin.');return;}
    pending='';history.push({role:'user',content:result.text},{role:'assistant',content:result.reply});history=history.slice(-12);
    message('Sen',result.text);message('Öğretmen',result.reply);await play(result.audio,current);
-  }catch(err){if(current===epoch&&active){error(err.name==='AbortError'?'Yanıt zaman aşımına uğradı. Yeniden dene.':err.message);listening();}}
-  finally{clearTimeout(timer);controllers.delete(controller);if(current===epoch&&finish){finishQueued=false;$('finish').disabled=false;}}
+  }catch(err){if(current===epoch&&active&&revision===speechSamples){error(err.name==='AbortError'?'Yanıt zaman aşımına uğradı. Yeniden dene.':err.message);listening();}}
+  finally{clearTimeout(timer);controllers.delete(controller);if(current===epoch){finishQueued=false;$('finish').disabled=false;}}
  });
 }
 function capture(chunk){
- if(!active||muted||speaking||finishQueued)return;
+ if(!active||muted||speaking)return;
  let energy=0;for(const value of chunk)energy+=value*value;const voiced=Math.sqrt(energy/chunk.length)>0.012;
  if(!length&&!voiced){frames.push(chunk);frameLength+=chunk.length;while(frameLength>context.sampleRate*0.25&&frames.length>1)frameLength-=frames.shift().length;return;}
  if(!length){samples.push(...frames);length=frameLength;frames=[];frameLength=0;}
- samples.push(chunk);length+=chunk.length;if(voiced){speechSamples+=chunk.length;quietSamples=0;}else quietSamples+=chunk.length;
- // Silence segments transcription only; it never authorizes a teacher response.
- if(quietSamples>context.sampleRate*1.6||length>context.sampleRate*100)send(false);
+ if(voiced&&finishQueued){controllers.forEach(c=>c.abort());listening();}
+ // Keep the full utterance across pauses; cap stored trailing silence.
+ if(voiced||quietSamples<context.sampleRate*2){samples.push(chunk);length+=chunk.length;}
+ if(voiced){speechSamples+=chunk.length;quietSamples=0;}else quietSamples+=chunk.length;
+ if(length>context.sampleRate*110){error('Konuşma çok uzadı. Yanıtla düğmesiyle bu bölümü gönderebilirsin.');return;}
+ if(quietSamples>context.sampleRate*1.8&&speechSamples>attemptedSpeech)send(false);
 }
 async function start(){
  if(active||starting)return;starting=true;error();$('start').disabled=true;$('access-form').querySelector('button').disabled=true;
