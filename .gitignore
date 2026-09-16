@@ -15,3 +15,11 @@ program/*.log
 ingiliz/*
 !ingiliz/index.html
 !ingiliz/og.png
+
+# Talk secrets and agent environment
+.env
+.env.*
+!.env.example
+.dev.vars
+.talk-agent/.venv/
+.talk-agent/*.egg-info/
