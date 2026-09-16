@@ -3,12 +3,13 @@ let endpoint='',key='',stream,context,recorder,source,sink,active=false,muted=fa
 let samples=[],length=0,speechSamples=0,quietSamples=0,pending='',history=[],queue=Promise.resolve(),epoch=0,audio,audioUrl;
 let finishQueued=false,starting=false,frames=[],frameLength=0;
 let attemptedSpeech=0;
+let voiceRun=0;
 const controllers=new Set();
 function state(value,title,hint){$('orb').dataset.state=value;$('status').textContent=title;if(hint!==undefined)$('hint').textContent=hint;}
 function error(message=''){$('error').textContent=message;$('error').hidden=!message;}
 function listening(){state('listening',muted?'Mikrofon kapalı':'Seni dinliyorum','Doğal konuş. Cümlen tamamlandığında otomatik yanıt vereceğim; düğmeye basman gerekmiyor.');}
 function message(who,text){const p=document.createElement('p'),label=document.createElement('strong');label.textContent=who;p.append(label,document.createTextNode(text));$('messages').append(p);$('transcript').querySelector('.empty').hidden=true;$('transcript').scrollTop=$('transcript').scrollHeight;}
-function clearSamples(){samples=[];length=0;speechSamples=0;quietSamples=0;attemptedSpeech=0;}
+function clearSamples(){samples=[];length=0;speechSamples=0;quietSamples=0;attemptedSpeech=0;voiceRun=0;}
 function wav(chunks,count,rate){
  const pcm=new Float32Array(count);let offset=0;for(const chunk of chunks){pcm.set(chunk,offset);offset+=chunk.length;}
  const n=Math.floor(count*16000/rate),buffer=new ArrayBuffer(44+n*2),view=new DataView(buffer);
@@ -47,7 +48,12 @@ function send(finish=false){
 }
 function capture(chunk){
  if(!active||muted||speaking)return;
- let energy=0;for(const value of chunk)energy+=value*value;const voiced=Math.sqrt(energy/chunk.length)>0.012;
+ let energy=0;for(const value of chunk)energy+=value*value;
+ // Require sustained sound: a single worklet frame (about 3 ms) must not
+ // cancel an answer or restart the end-of-turn silence timer.
+ const loud=Math.sqrt(energy/chunk.length)>0.012;
+ voiceRun=loud?Math.min(context.sampleRate*0.16,voiceRun+chunk.length):Math.max(0,voiceRun-chunk.length*2);
+ const voiced=loud&&voiceRun>=context.sampleRate*0.08;
  if(!length&&!voiced){frames.push(chunk);frameLength+=chunk.length;while(frameLength>context.sampleRate*0.25&&frames.length>1)frameLength-=frames.shift().length;return;}
  if(!length){samples.push(...frames);length=frameLength;frames=[];frameLength=0;}
  if(voiced&&finishQueued){controllers.forEach(c=>c.abort());listening();}
