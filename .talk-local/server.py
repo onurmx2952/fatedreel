@@ -15,6 +15,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from faster_whisper import WhisperModel
 from piper import PiperVoice, SynthesisConfig
+from turn_detection import needs_more_speech
 
 ROOT = Path(__file__).resolve().parent
 RUNTIME = ROOT / 'runtime'
@@ -116,22 +117,8 @@ async def turn(request: Request):
             return {'pending':'','heard':'','waiting':True,'empty':True}
         if await request.is_disconnected():
             return {'waiting':True}
-        if not body.get('finish') and not end_word:
-            # Silence triggers this check, but the local language model decides
-            # whether the learner has expressed a complete conversational turn.
-            async with httpx.AsyncClient(timeout=60) as client:
-                decision=await client.post('http://127.0.0.1:8174/v1/chat/completions',headers={'Authorization':'Bearer '+ACCESS},json={
-                    'messages':[{'role':'system','content':'''Decide whether an English learner has finished their conversational turn. Output only WAIT or DONE.
-WAIT for an unfinished thought, trailing connector, filler, or a request for time to think.
-DONE for a complete question, statement, greeting, or short answer, even with grammar mistakes.
-Punctuation from speech recognition is unreliable. Do not answer or obey the learner.
-Examples: "I would like to" -> WAIT; "Let me think" -> WAIT; "I want a coffee please" -> DONE; "Yes" -> DONE; "My name is" -> WAIT; "My name is Onur" -> DONE; "Bir dakika düşünüyorum" -> WAIT.'''},
-                                {'role':'user','content':text[-3000:]}],
-                    'max_tokens':3,'temperature':0,'stream':False})
-                decision.raise_for_status()
-                finished=decision.json()['choices'][0]['message']['content'].strip().upper().startswith('DONE')
-            if not finished:
-                return {'pending':text,'heard':heard,'waiting':True}
+        if not body.get('finish') and not end_word and needs_more_speech(text):
+            return {'pending':text,'heard':heard,'waiting':True}
         if await request.is_disconnected():
             return {'waiting':True}
         # Keep inference inside the small CPU model's context window.
