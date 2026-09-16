@@ -23,3 +23,6 @@ ingiliz/*
 .dev.vars
 .talk-agent/.venv/
 .talk-agent/*.egg-info/
+.talk-local/models/
+.talk-local/bin/
+.talk-local/runtime/
