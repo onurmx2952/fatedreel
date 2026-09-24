@@ -1,2 +1,5 @@
 /*
   Referrer-Policy: strict-origin-when-cross-origin
+
+/ingsub/*.mjs
+  Content-Type: application/javascript; charset=utf-8

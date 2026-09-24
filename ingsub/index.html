@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>ING — Dinle. Tekrar et. Anla.</title>
+  <meta name="description" content="Videolarla İngilizce çalış. Çift dil altyazı, cümle tekrarı ve hassas zamanlama.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23b9f568'/%3E%3Cpath d='M26 18v28l22-14z' fill='%23141619'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header><a class="brand" href="./"><span class="mark">ıŋ</span> ING <span class="brand-note">İngilizce çalışma alanın</span></a><button id="openSource" class="primary">＋ Video aç</button></header>
+  <main>
+    <div class="heading"><div><div class="eyebrow">DİNLE · TEKRAR ET · ANLA</div><h1>Her cümlede biraz daha ileri.</h1></div><span class="session-label">Kendi hızında.</span></div>
+    <div class="workspace">
+      <section class="study" aria-label="Video çalışma alanı">
+        <div class="player-shell" id="playerShell">
+          <div class="empty-player" id="emptyPlayer"><div class="play-symbol">▷</div><h2>Bugün ne izleyelim?</h2><p>Bir YouTube bağlantısı veya kendi videonla başla.</p><button class="primary" id="emptyOpen">Video seç <span>↗</span></button><small>MP4, WebM veya doğrudan video bağlantısı</small></div>
+          <video id="video" controls playsinline hidden></video><div id="youtubeWrap" hidden><div id="youtube"></div></div>
+        </div>
+        <div class="video-info"><span id="videoTitle">Henüz video seçilmedi</span><span id="sourceType">Çalışma alanı hazır</span></div>
+        <div class="subtitle-stage" id="subtitleStage"><div class="subtitle-line english" id="enLine">İngilizce altyazını ekle.</div><div class="subtitle-line turkish" id="trLine">Türkçe çeviriyi istediğin an göster, istediğin an gizle.</div></div>
+        <div class="transport"><button id="previous" title="Önceki cümle (←)" aria-label="Önceki cümle">⏮</button><button id="replay" class="replay" title="Cümleyi baştan oynat (R)">↶ <span>Cümleyi tekrarla</span><kbd>R</kbd></button><button id="next" title="Sonraki cümle (→)" aria-label="Sonraki cümle">⏭</button><span class="divider"></span><button id="loop" aria-pressed="false" title="Cümleyi döngüye al (L)">∞ <span>Döngü</span></button><label class="rate"><span>Hız</span><select id="speed" aria-label="Oynatma hızı"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label></div>
+        <section class="settings"><div class="section-top"><h2>Altyazı kontrolü</h2><button id="focus" aria-pressed="false">Sadece video <kbd>F</kbd></button></div><div class="language-row"><button id="toggleEn" class="visibility" aria-pressed="true"><b>EN</b><span>İngilizce</span><span class="eye">Açık</span></button><label class="upload" for="enFile">Altyazı yükle ↗</label><input type="file" id="enFile" accept=".srt,.vtt" hidden><div class="offset"><button data-lang="en" data-delta="-0.1" aria-label="İngilizce altyazıyı 0,1 saniye erkene al">−</button><input id="enOffset" type="number" step="0.1" value="0" min="-3600" max="3600" aria-label="İngilizce altyazı zaman farkı, saniye"><span>sn</span><button data-lang="en" data-delta="0.1" aria-label="İngilizce altyazıyı 0,1 saniye geciktir">＋</button></div></div><div class="language-row"><button id="toggleTr" class="visibility" aria-pressed="true"><b>TR</b><span>Türkçe</span><span class="eye">Açık</span></button><label class="upload" for="trFile">Altyazı yükle ↗</label><input type="file" id="trFile" accept=".srt,.vtt" hidden><div class="offset"><button data-lang="tr" data-delta="-0.1" aria-label="Türkçe altyazıyı 0,1 saniye erkene al">−</button><input id="trOffset" type="number" step="0.1" value="0" min="-3600" max="3600" aria-label="Türkçe altyazı zaman farkı, saniye"><span>sn</span><button data-lang="tr" data-delta="0.1" aria-label="Türkçe altyazıyı 0,1 saniye geciktir">＋</button></div></div><p class="hint">SRT / VTT · Eksi değer altyazıyı erkene alır, artı değer geciktirir.</p></section>
+        <footer class="shortcuts"><span><kbd>Space</kbd> Oynat / duraklat</span><span><kbd>←</kbd><kbd>→</kbd> Cümle değiştir</span><span><kbd>E</kbd> İngilizce</span><span><kbd>T</kbd> Türkçe</span></footer>
+      </section>
+      <aside class="transcript"><div class="transcript-top"><div><div class="eyebrow">SATIR SATIR</div><h2>Cümleler <span id="cueCount">0</span></h2></div><span class="pill">EN / TR</span></div><p class="transcript-hint">Bir cümleye dokun, oradan dinle.</p><div id="cueList" class="cue-list"><div class="empty-cues"><span>≡</span><h3>Kelimeler burada hayat bulacak.</h3><p>İngilizce veya Türkçe altyazı eklediğinde cümleler burada görünür.</p><label class="upload" for="enFile">İngilizce altyazı ekle ↗</label></div></div><div class="transcript-bottom">Az az, tekrar tekrar.</div></aside>
+    </div>
+  </main>
+  <div id="notice" role="status" aria-live="polite" hidden></div>
+  <dialog id="sourceDialog"><form id="sourceForm"><div class="dialog-title"><h2>Videonu aç</h2><button type="button" id="closeDialog" aria-label="Kapat">×</button></div><p>Bağlantı yapıştır veya bilgisayarından bir video seç.</p><label for="sourceUrl">YouTube veya doğrudan video bağlantısı</label><input id="sourceUrl" type="url" placeholder="https://www.youtube.com/watch?v=…"><button class="primary" type="submit">Bağlantıyı aç ↗</button><div class="or">veya</div><label class="file-zone" for="videoFile">＋ Bilgisayardan video seç<small>Video bu tarayıcıda açılır; sunucuya yüklenmez.</small></label><input id="videoFile" type="file" accept="video/*,.mkv" hidden><p class="hint">YouTube altyazıları otomatik alınmaz. EN ve TR için ayrı SRT/VTT dosyaları ekleyebilirsin. YouTube’un kendi altyazılarını oynatıcıdaki CC düğmesinden kapatabilirsin.</p></form></dialog>
+  <script type="module" src="./app.js"></script>
+</body></html>
