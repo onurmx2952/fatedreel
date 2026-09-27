@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "lessons": [
+    {
+      "id": "sudan-elektrige",
+      "title": "Sudan elektriğe",
+      "subject": "Fen Bilimleri",
+      "description": "Bir barajdaki su, sınıfımızdaki lambayı nasıl yakar? Suyun yolunu izle; türbinin, jeneratörün ve trafonun bu yolculuktaki görevlerini keşfet.",
+      "takeaways": [
+        "Akan su türbini, türbine bağlı mil de jeneratörü döndürür.",
+        "Jeneratör, hareket enerjisini elektrik enerjisine dönüştürür.",
+        "Su kaybolmaz; türbinden çıkar ve nehre döner."
+      ],
+      "quiz": {
+        "question": "Elektriği hangi parça üretir?",
+        "options": [
+          "Türbin",
+          "Jeneratör",
+          "Transformatör"
+        ],
+        "correct": 1,
+        "explanation": "Türbin döner. Jeneratör bu hareketi elektriğe dönüştürür. Transformatör ise gerilimi değiştirir."
+      },
+      "video": "./media/sudan-elektrige/a4fcd5912b74/video.mp4",
+      "poster": "./media/sudan-elektrige/a4fcd5912b74/poster.jpg",
+      "subtitle": "./media/sudan-elektrige/a4fcd5912b74/altyazi.srt",
+      "duration": 75.0,
+      "chapters": [
+        {
+          "title": "Sudan elektriğe",
+          "start": 0
+        },
+        {
+          "title": "Yüksekteki su enerji taşır",
+          "start": 7
+        },
+        {
+          "title": "Su, türbini döndürür",
+          "start": 19.5
+        },
+        {
+          "title": "Hareketten elektrik doğar",
+          "start": 27.5
+        },
+        {
+          "title": "Elektrik yola çıkar",
+          "start": 40.5
+        },
+        {
+          "title": "Peki, suya ne olur?",
+          "start": 51.0
+        },
+        {
+          "title": "Enerji biçim değiştirir",
+          "start": 61.0
+        }
+      ],
+      "transcript": [
+        "Bir barajdaki su, sınıfımızdaki lambayı nasıl yakabilir? Gelin, suyun yolunu birlikte izleyelim.",
+        "Baraj, suyu yüksek bir yerde biriktirir. Bu suyun, yüksekliğinden dolayı potansiyel enerjisi vardır. Kapak açılınca su, cebri borudan aşağı doğru akar.",
+        "Akan su, türbinin kanatlarına kuvvet uygular ve onu döndürür. Türbine bağlı mil de birlikte döner.",
+        "Mil, jeneratörün içindeki mıknatıslı bölümü döndürür. Bobinlerin içinden geçen manyetik alan değişir. Böylece jeneratör, hareket enerjisini elektrik enerjisine dönüştürür.",
+        "Transformatör, yani trafo, iletim için gerilimi yükseltir. Elektrik, hatlarla taşınır; evlere ulaşmadan önce gerilim yeniden düşürülür.",
+        "Türbinden çıkan su, kanaldan yeniden nehre döner. Su elektriğe dönüşüp kaybolmaz. Elektriğe dönüşen, suyun enerjisidir.",
+        "Yükseklik enerjisi, akışa; akış, dönmeye; dönme de elektriğe dönüşür. Şimdi sen söyle: Elektriği türbin mi, jeneratör mü üretir?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ortaokul · Görerek öğren</title>
+  <meta name="description" content="Ortaokul için Türkçe anlatımlı animasyonlar. İzle, keşfet, öğrendiklerini sınıfta paylaş.">
+  <meta name="theme-color" content="#143f3c">
+  <link rel="icon" href="/favicon-v20260530.ico">
+  <link rel="stylesheet" href="./style.css?v=1">
+  <script src="./app.js?v=1" defer></script>
+</head>
+<body>
+<a class="skip" href="#lesson">Derse geç</a>
+<header class="topbar"><a class="brand" href="./"><span class="brand-icon" aria-hidden="true">o.</span><span>ortaokul<span class="brand-note">FATEDREEL / ÖĞRENME ARŞİVİ</span></span></a><span class="header-note">Merak et. İzle. Keşfet.</span><a class="archive-link" href="#library">Ders arşivi ↗</a></header>
+<main>
+  <section class="intro"><p class="eyebrow">KÜÇÜK SORULAR, BÜYÜK KEŞİFLER</p><h1>Birlikte anlamak<br><span>çok daha kolay.</span></h1><p>Fikirleri harekete geçiren kısa anlatımlar.<br> Sınıfta izle, durdur ve üzerine konuş.</p></section>
+  <div class="workspace">
+    <aside id="library" class="library" aria-label="Ders arşivi"><div class="section-heading"><h2>Ders arşivi</h2><span id="count">—</span></div><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Bir konu ara…" aria-label="Derslerde ara"></label><div id="filters" class="filters" aria-label="Ders filtresi"></div><div id="lesson-list" class="lesson-list" aria-live="polite"><p>İçerikler yükleniyor…</p></div><p class="library-note">Her anlatım, yeni bir keşif.<br>Yeni dersler burada birikir.</p></aside>
+    <article id="lesson" class="lesson" aria-label="Seçili ders" hidden>
+      <div class="lesson-heading"><div><p id="lesson-meta" class="eyebrow"></p><h2 id="lesson-title"></h2></div><button id="share" class="icon-button" type="button" aria-label="Ders bağlantısını kopyala">Bağlantı ↗</button></div>
+      <div class="player-shell"><video id="video" controls playsinline preload="metadata" aria-label="Ders videosu"></video><p id="video-error" hidden>Video yüklenemedi. Bağlantını kontrol et veya aşağıdaki indirme bağlantısını dene.</p></div>
+      <div class="player-bottom"><span>Türkçe anlatım · Görüntüye gömülü altyazı</span><button id="classroom" type="button">⛶ Sınıf görünümü</button></div>
+      <p id="description" class="description"></p>
+      <section class="chapters-section"><div class="section-heading"><h3>Adım adım keşfet</h3><span>Bir bölüme atla</span></div><div id="chapters" class="chapters"></div></section>
+      <div class="lesson-details"><section class="learning"><p class="eyebrow">BU DERSTEN AKLINDA KALSIN</p><ul id="takeaways"></ul></section><section class="quiz"><p class="eyebrow">BİR DE SEN DÜŞÜN</p><h3 id="question"></h3><div id="answers"></div><p id="feedback" role="status"></p></section></div>
+      <details class="transcript"><summary>Anlatım metni</summary><div id="transcript"></div></details>
+      <div class="downloads"><span>İnternet olmadan da yanında.</span><a id="download" download>Videoyu indir ↓</a><a id="subtitle" download>Altyazı (.srt) ↓</a></div>
+    </article>
+  </div>
+  <p id="status" class="status" role="status"></p>
+</main>
+<footer><span>ortaokul<span class="footer-dot">.</span></span><p>Bilgi, paylaştıkça çoğalır.</p><a href="#">Yukarı ↑</a></footer>
+<noscript>Bu ders arşivi JavaScript ile çalışır. <a href="./library.json">İçerik listesini aç</a>.</noscript>
+</body></html>

@@ -1,0 +1,67 @@
+1
+00:00:00,350 --> 00:00:03,984
+Bir barajdaki su, sınıfımızdaki lambayı nasıl yakabilir?
+
+2
+00:00:04,204 --> 00:00:06,584
+Gelin, suyun yolunu birlikte izleyelim.
+
+3
+00:00:07,350 --> 00:00:10,090
+Baraj, suyu yüksek bir yerde biriktirir.
+
+4
+00:00:10,310 --> 00:00:14,339
+Bu suyun, yüksekliğinden dolayı potansiyel enerjisi vardır.
+
+5
+00:00:14,559 --> 00:00:18,518
+Kapak açılınca su, cebri borudan aşağı doğru akar.
+
+6
+00:00:19,850 --> 00:00:23,960
+Akan su, türbinin kanatlarına kuvvet uygular ve onu döndürür.
+
+7
+00:00:24,180 --> 00:00:26,572
+Türbine bağlı mil de birlikte döner.
+
+8
+00:00:27,850 --> 00:00:31,147
+Mil, jeneratörün içindeki mıknatıslı bölümü döndürür.
+
+9
+00:00:31,367 --> 00:00:34,606
+Bobinlerin içinden geçen manyetik alan değişir.
+
+10
+00:00:34,826 --> 00:00:39,598
+Böylece jeneratör, hareket enerjisini elektrik enerjisine dönüştürür.
+
+11
+00:00:40,850 --> 00:00:44,855
+Transformatör, yani trafo, iletim için gerilimi yükseltir.
+
+12
+00:00:45,075 --> 00:00:50,230
+Elektrik, hatlarla taşınır; evlere ulaşmadan önce gerilim yeniden düşürülür.
+
+13
+00:00:51,350 --> 00:00:54,810
+Türbinden çıkan su, kanaldan yeniden nehre döner.
+
+14
+00:00:55,030 --> 00:00:57,561
+Su elektriğe dönüşüp kaybolmaz.
+
+15
+00:00:57,781 --> 00:01:00,451
+Elektriğe dönüşen, suyun enerjisidir.
+
+16
+00:01:01,350 --> 00:01:06,505
+Yükseklik enerjisi, akışa; akış, dönmeye; dönme de elektriğe dönüşür.
+
+17
+00:01:06,725 --> 00:01:10,753
+Şimdi sen söyle: Elektriği türbin mi, jeneratör mü üretir?
