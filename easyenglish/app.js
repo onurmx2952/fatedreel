@@ -7,6 +7,8 @@ let sentences = [], bag = [], current, phase = 'loading', recognition, recording
 function error(text = '') { $('error').textContent = text; $('error').hidden = !text; }
 function normalize(text) {
   return text.toLowerCase().replace(/[’‘]/g, "'")
+    .replace(/\b633\b/g,'six hundred and thirty three').replace(/\b112\b/g,'one hundred and twelve')
+    .replace(/\b100\b/g,'a hundred').replace(/\b50\b/g,'fifty').replace(/\b3\b/g,'three')
     .replace(/\b(i'm)\b/g,'i am').replace(/\b(can't)\b/g,'cannot').replace(/\b(can not)\b/g,'cannot')
     .replace(/\b(won't)\b/g,'will not').replace(/\b(let's)\b/g,'let us')
     .replace(/\b(it|he|she|that|what|who|where|there)'s\b/g,'$1 is')
