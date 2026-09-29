@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f9ff"><meta name="description" content="Dinle, İngilizce yanıtla, Türkçesini öğren."><meta name="apple-mobile-web-app-capable" content="yes"><title>Easy English</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%232c54ed'/%3E%3Cpath d='M16 11 29 20 16 29Z' fill='white'/%3E%3C/svg%3E"><link rel="stylesheet" href="./style.css?v=1"><script src="./app.js?v=1" defer></script>
+</head>
+<body>
+<header><span class="brand">easy<span>english</span><span class="brand-dot">.</span></span></header>
+<main>
+<section class="practice" aria-label="İngilizce dinleme alıştırması">
+<p id="prompt" class="prompt">Bir cümle dinle.</p>
+<div class="actions">
+<button id="listen" class="listen" disabled aria-label="Cümleyi dinle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg><span id="listenLabel">Dinle</span></button>
+<button id="answer" class="answer" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"/></svg><span id="answerLabel">Yanıtla</span></button>
+</div>
+<p id="status" class="status" role="status" aria-live="polite">Cümleler hazırlanıyor…</p>
+<button id="write" class="text-button" hidden>Yazarak yanıtla</button>
+<form id="form" hidden><label for="input">Duyduğun cümleyi İngilizce yaz.</label><div class="input-row"><input id="input" type="text" lang="en" autocomplete="off" autocapitalize="sentences" spellcheck="false" maxlength="300" placeholder="I…" required><button type="submit">Gönder</button></div></form>
+<p id="error" class="error" role="alert" hidden></p>
+<button id="retry" class="text-button" hidden>Yeniden yükle</button>
+<section id="result" class="result" aria-label="Doğru yanıt" hidden>
+<p id="feedback" class="feedback"></p>
+<p id="given" class="given"></p>
+<p id="english" class="english" lang="en"></p><p id="turkish" class="turkish"></p>
+<button id="next" class="next">Yeni cümle</button>
+</section>
+</section>
+</main>
+<footer>Dinle. Tekrar et. Öğren.</footer>
+</body></html>

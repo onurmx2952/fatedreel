@@ -1,0 +1,970 @@
+[
+  {
+    "en": "Oh please Nick, you have a spare room.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "212",
+    "id": "001",
+    "tr": "Nick, lütfen, boş bir odan var.",
+    "audio": "audio/001.mp3"
+  },
+  {
+    "en": "The girls? Yeah, Bridget and Annie.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "147",
+    "id": "002",
+    "tr": "Kızlar mı? Evet, Bridget ve Annie.",
+    "audio": "audio/002.mp3"
+  },
+  {
+    "en": "No way, not my problem.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "213",
+    "id": "003",
+    "tr": "Olmaz, benim sorunum değil.",
+    "audio": "audio/003.mp3"
+  },
+  {
+    "en": "I play with cars.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "91",
+    "id": "004",
+    "tr": "Arabalarla oynarım.",
+    "audio": "audio/004.mp3"
+  },
+  {
+    "en": "You play with cars?!",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "89",
+    "id": "006",
+    "tr": "Arabalarla mı oynuyorsun?!",
+    "audio": "audio/006.mp3"
+  },
+  {
+    "en": "Can you cycle fifty kilometres?",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "177",
+    "id": "007",
+    "tr": "Bisikletle elli kilometre gidebilir misin?",
+    "audio": "audio/007.mp3"
+  },
+  {
+    "en": "Bring it up, please.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "139",
+    "id": "008",
+    "tr": "Lütfen yukarı getir.",
+    "audio": "audio/008.mp3"
+  },
+  {
+    "en": "But what happens when Hector goes shopping for himself?",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "283",
+    "id": "009",
+    "tr": "Peki Hector kendi alışverişini yapınca ne olacak?",
+    "audio": "audio/009.mp3"
+  },
+  {
+    "en": "OK, one moment please!",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "220",
+    "id": "010",
+    "tr": "Tamam, bir dakika lütfen!",
+    "audio": "audio/010.mp3"
+  },
+  {
+    "en": "I am called Annie.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "82",
+    "id": "011",
+    "tr": "Benim adım Annie.",
+    "audio": "audio/011.mp3"
+  },
+  {
+    "en": "Hector, please come out, we want to talk to you.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "217",
+    "id": "015",
+    "tr": "Hector, lütfen dışarı çık, seninle konuşmak istiyoruz.",
+    "audio": "audio/015.mp3"
+  },
+  {
+    "en": "He plays with toy cars!",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "126",
+    "id": "018",
+    "tr": "Oyuncak arabalarla oynuyor!",
+    "audio": "audio/018.mp3"
+  },
+  {
+    "en": "You live in a museum? Full of old things?",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "100",
+    "id": "020",
+    "tr": "Bir müzede mi yaşıyorsun? Eski eşyalarla dolu bir yerde mi?",
+    "audio": "audio/020.mp3"
+  },
+  {
+    "en": "Yes, I got the cushion, as well.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "4",
+    "id": "022",
+    "tr": "Evet, minderi de aldım.",
+    "audio": "audio/022.mp3"
+  },
+  {
+    "en": "They are not toys!",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "264",
+    "id": "023",
+    "tr": "Onlar oyuncak değil!",
+    "audio": "audio/023.mp3"
+  },
+  {
+    "en": "You mean our milk you borrowed three weeks ago.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "51",
+    "id": "024",
+    "tr": "Üç hafta önce bizden ödünç aldığın sütü kastediyorsun.",
+    "audio": "audio/024.mp3"
+  },
+  {
+    "en": "Well go on then, show me.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "181",
+    "id": "026",
+    "tr": "Peki, hadi o zaman, göster bana.",
+    "audio": "audio/026.mp3"
+  },
+  {
+    "en": "Oh, Hector, from Argentina. Yes, from Argentina!",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "145",
+    "id": "027",
+    "tr": "Ah, Arjantinli Hector. Evet, Arjantinli!",
+    "audio": "audio/027.mp3"
+  },
+  {
+    "en": "Drop it, Charley. Oh, good boy!",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "15",
+    "id": "029",
+    "tr": "Bırak onu, Charley. Aferin sana!",
+    "audio": "audio/029.mp3"
+  },
+  {
+    "en": "Bridget, she gave me this.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "151",
+    "id": "030",
+    "tr": "Bridget, bunu bana o verdi.",
+    "audio": "audio/030.mp3"
+  },
+  {
+    "en": "Well, you can sleep here.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "114",
+    "id": "031",
+    "tr": "Burada uyuyabilirsin.",
+    "audio": "audio/031.mp3"
+  },
+  {
+    "en": "What a bad, bad boy.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "208",
+    "id": "032",
+    "tr": "Ne yaramaz bir çocuk.",
+    "audio": "audio/032.mp3"
+  },
+  {
+    "en": "Oh they live here.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "148",
+    "id": "033",
+    "tr": "Ah, onlar burada yaşıyor.",
+    "audio": "audio/033.mp3"
+  },
+  {
+    "en": "What are you doing?",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "140",
+    "id": "034",
+    "tr": "Ne yapıyorsun?",
+    "audio": "audio/034.mp3"
+  },
+  {
+    "en": "I am Nick, I live next door.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "143",
+    "id": "035",
+    "tr": "Ben Nick, yan dairede yaşıyorum.",
+    "audio": "audio/035.mp3"
+  },
+  {
+    "en": "Well Bridget likes strong men, especially strong legs.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "174",
+    "id": "036",
+    "tr": "Bridget güçlü erkeklerden, özellikle de güçlü bacaklardan hoşlanır.",
+    "audio": "audio/036.mp3"
+  },
+  {
+    "en": "Yeah, I need a shower.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "198",
+    "id": "037",
+    "tr": "Evet, duş almam gerekiyor.",
+    "audio": "audio/037.mp3"
+  },
+  {
+    "en": "This is the bedroom.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "105",
+    "id": "039",
+    "tr": "Burası yatak odası.",
+    "audio": "audio/039.mp3"
+  },
+  {
+    "en": "I like fish and chips!",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "221",
+    "id": "040",
+    "tr": "Balık ve patates kızartmasını severim!",
+    "audio": "audio/040.mp3"
+  },
+  {
+    "en": "Oh, Charley, there you are.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "256",
+    "id": "041",
+    "tr": "Ah, Charley, işte buradasın.",
+    "audio": "audio/041.mp3"
+  },
+  {
+    "en": "Yes, you want me.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "222",
+    "id": "043",
+    "tr": "Evet, beni istiyorsun.",
+    "audio": "audio/043.mp3"
+  },
+  {
+    "en": "Yes, a very good English teacher!",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "260",
+    "id": "044",
+    "tr": "Evet, çok iyi bir İngilizce öğretmeni!",
+    "audio": "audio/044.mp3"
+  },
+  {
+    "en": "Charley and I have the post. Haven't we, Charley?",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "13",
+    "id": "046",
+    "tr": "Posta bende ve Charley'de. Değil mi, Charley?",
+    "audio": "audio/046.mp3"
+  },
+  {
+    "en": "Oh my goodness, what are we going to do?",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "125",
+    "id": "047",
+    "tr": "Aman Tanrım, ne yapacağız?",
+    "audio": "audio/047.mp3"
+  },
+  {
+    "en": "Oh, this is Hector from Argentina. Yeah, I know.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "154",
+    "id": "048",
+    "tr": "Ah, bu Arjantinli Hector. Evet, biliyorum.",
+    "audio": "audio/048.mp3"
+  },
+  {
+    "en": "Ooh, a Latin American here, ooh, like Ricky Martin!",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "40",
+    "id": "049",
+    "tr": "Burada bir Latin Amerikalı var, Ricky Martin gibi!",
+    "audio": "audio/049.mp3"
+  },
+  {
+    "en": "But just relax, I must go to the bathroom.",
+    "source": "anglictina.extra.ep01.dvb.xvid-nsg.srt",
+    "cue": "122",
+    "id": "050",
+    "tr": "Ama rahat ol, tuvalete gitmem gerekiyor.",
+    "audio": "audio/050.mp3"
+  },
+  {
+    "en": "He's my pen friend!",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "98",
+    "id": "052",
+    "tr": "O benim mektup arkadaşım!",
+    "audio": "audio/052.mp3"
+  },
+  {
+    "en": "I am the shopkeeper, you are the customer.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "73",
+    "id": "053",
+    "tr": "Ben satıcıyım, sen müşterisin.",
+    "audio": "audio/053.mp3"
+  },
+  {
+    "en": "No. You don't look good.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "39",
+    "id": "054",
+    "tr": "Hayır. İyi görünmüyorsun.",
+    "audio": "audio/054.mp3"
+  },
+  {
+    "en": "I said, who's that?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "127",
+    "id": "056",
+    "tr": "O kim, dedim.",
+    "audio": "audio/056.mp3"
+  },
+  {
+    "en": "Oh, an easy mistake, he did try.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "176",
+    "id": "057",
+    "tr": "Ah, kolayca yapılabilecek bir hata, en azından denedi.",
+    "audio": "audio/057.mp3"
+  },
+  {
+    "en": "Now, do you like these trousers?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "242",
+    "id": "058",
+    "tr": "Peki, bu pantolonu beğendin mi?",
+    "audio": "audio/058.mp3"
+  },
+  {
+    "en": "Oh, can you get that please Nick?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "262",
+    "id": "059",
+    "tr": "Nick, şuna bakabilir misin lütfen?",
+    "audio": "audio/059.mp3"
+  },
+  {
+    "en": "You ordered melons instead of lemons and too many eggs.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "205",
+    "id": "060",
+    "tr": "Limon yerine kavun ve çok fazla yumurta sipariş ettin.",
+    "audio": "audio/060.mp3"
+  },
+  {
+    "en": "Excellent! Oh the clothes are super!",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "267",
+    "id": "061",
+    "tr": "Harika! Kıyafetler süper!",
+    "audio": "audio/061.mp3"
+  },
+  {
+    "en": "You need a designer look.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "55",
+    "id": "062",
+    "tr": "Tasarımcı elinden çıkmış bir görünüme ihtiyacın var.",
+    "audio": "audio/062.mp3"
+  },
+  {
+    "en": "Yes, he did try.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "177",
+    "id": "063",
+    "tr": "Evet, gerçekten denedi.",
+    "audio": "audio/063.mp3"
+  },
+  {
+    "en": "Well that's OK, that's one box.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "185",
+    "id": "065",
+    "tr": "Sorun yok, bu bir kutu.",
+    "audio": "audio/065.mp3"
+  },
+  {
+    "en": "Yes, that's a lot of tins.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "288",
+    "id": "066",
+    "tr": "Evet, epey çok konserve kutusu var.",
+    "audio": "audio/066.mp3"
+  },
+  {
+    "en": "Oh Hector, please, call me Gigi.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "1",
+    "id": "067",
+    "tr": "Hector, lütfen bana Gigi de.",
+    "audio": "audio/067.mp3"
+  },
+  {
+    "en": "No. I'm not cool.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "198",
+    "id": "068",
+    "tr": "Hayır. Ben havalı değilim.",
+    "audio": "audio/068.mp3"
+  },
+  {
+    "en": "Erm, where is Bridget?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "130",
+    "id": "070",
+    "tr": "Şey, Bridget nerede?",
+    "audio": "audio/070.mp3"
+  },
+  {
+    "en": "You told me this morning.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "279",
+    "id": "072",
+    "tr": "Bana bu sabah söyledin.",
+    "audio": "audio/072.mp3"
+  },
+  {
+    "en": "I like the shoes.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "195",
+    "id": "073",
+    "tr": "Ayakkabıları beğendim.",
+    "audio": "audio/073.mp3"
+  },
+  {
+    "en": "Is Hector still asleep?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "3",
+    "id": "074",
+    "tr": "Hector hâlâ uyuyor mu?",
+    "audio": "audio/074.mp3"
+  },
+  {
+    "en": "Hector's clothes are awful!",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "40",
+    "id": "075",
+    "tr": "Hector'ın kıyafetleri berbat!",
+    "audio": "audio/075.mp3"
+  },
+  {
+    "en": "I have been shopping!",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "271",
+    "id": "076",
+    "tr": "Alışveriş yaptım!",
+    "audio": "audio/076.mp3"
+  },
+  {
+    "en": "Ah, I think Hector has been shopping online.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "168",
+    "id": "077",
+    "tr": "Sanırım Hector internetten alışveriş yapmış.",
+    "audio": "audio/077.mp3"
+  },
+  {
+    "en": "Where's my lemon drink, Nick?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "256",
+    "id": "078",
+    "tr": "Limonlu içeceğim nerede, Nick?",
+    "audio": "audio/078.mp3"
+  },
+  {
+    "en": "Well, is it cool?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "264",
+    "id": "079",
+    "tr": "Peki, havalı mı?",
+    "audio": "audio/079.mp3"
+  },
+  {
+    "en": "Well I really don't know. Can you ask Annie?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "289",
+    "id": "081",
+    "tr": "Gerçekten bilmiyorum. Annie'ye sorabilir misin?",
+    "audio": "audio/081.mp3"
+  },
+  {
+    "en": "Here are your clothes, you will look so cool.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "163",
+    "id": "082",
+    "tr": "İşte kıyafetlerin, çok havalı görüneceksin.",
+    "audio": "audio/082.mp3"
+  },
+  {
+    "en": "Hector, wakey-wakey. Come on, rise and shine.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "6",
+    "id": "083",
+    "tr": "Hector, uyan bakalım. Hadi, kalk artık.",
+    "audio": "audio/083.mp3"
+  },
+  {
+    "en": "Do you like it?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "192",
+    "id": "084",
+    "tr": "Beğendin mi?",
+    "audio": "audio/084.mp3"
+  },
+  {
+    "en": "I'll buy the trousers!",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "105",
+    "id": "085",
+    "tr": "Pantolonu ben alacağım!",
+    "audio": "audio/085.mp3"
+  },
+  {
+    "en": "You need, you need a cowboy look.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "57",
+    "id": "086",
+    "tr": "Kovboy tarzı bir görünüme ihtiyacın var.",
+    "audio": "audio/086.mp3"
+  },
+  {
+    "en": "So how did Hector do the shopping?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "173",
+    "id": "087",
+    "tr": "Peki Hector alışverişi nasıl yaptı?",
+    "audio": "audio/087.mp3"
+  },
+  {
+    "en": "Oh, I'll get it.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "272",
+    "id": "089",
+    "tr": "Ah, ben bakarım.",
+    "audio": "audio/089.mp3"
+  },
+  {
+    "en": "OK, I'll just buy the shirt.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "104",
+    "id": "090",
+    "tr": "Tamam, sadece gömleği alacağım.",
+    "audio": "audio/090.mp3"
+  },
+  {
+    "en": "I would like a pair of trousers please.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "84",
+    "id": "091",
+    "tr": "Bir pantolon istiyorum lütfen.",
+    "audio": "audio/091.mp3"
+  },
+  {
+    "en": "Good luck. Yeah, good luck.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "254",
+    "id": "092",
+    "tr": "İyi şanslar. Evet, iyi şanslar.",
+    "audio": "audio/092.mp3"
+  },
+  {
+    "en": "Eh? What would you like to buy?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "221",
+    "id": "093",
+    "tr": "Efendim? Ne satın almak istersiniz?",
+    "audio": "audio/093.mp3"
+  },
+  {
+    "en": "Try it on. Eh?",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "147",
+    "id": "094",
+    "tr": "Üzerine dene. Ne?",
+    "audio": "audio/094.mp3"
+  },
+  {
+    "en": "You buy a dozen eggs, yeah.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "180",
+    "id": "096",
+    "tr": "Bir düzine yumurta alırsın, evet.",
+    "audio": "audio/096.mp3"
+  },
+  {
+    "en": "Chest, one hundred and twelve centimetres.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "234",
+    "id": "097",
+    "tr": "Göğüs ölçüsü, yüz on iki santimetre.",
+    "audio": "audio/097.mp3"
+  },
+  {
+    "en": "It's too much, it's too expensive.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "250",
+    "id": "098",
+    "tr": "Bu çok fazla, çok pahalı.",
+    "audio": "audio/098.mp3"
+  },
+  {
+    "en": "Here we go again.",
+    "source": "anglictina.extra.ep02.dvb.xvid-nsg.srt",
+    "cue": "201",
+    "id": "100",
+    "tr": "Yine başladık.",
+    "audio": "audio/100.mp3"
+  },
+  {
+    "en": "No, No, her hair, her hair!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "254",
+    "id": "101",
+    "tr": "Hayır, hayır, onun saçı, onun saçı!",
+    "audio": "audio/101.mp3"
+  },
+  {
+    "en": "Oh, my poor plant! I don't believe it!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "147",
+    "id": "102",
+    "tr": "Ah, zavallı bitkim! İnanamıyorum!",
+    "audio": "audio/102.mp3"
+  },
+  {
+    "en": "Oh dear. What's wrong?",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "47",
+    "id": "104",
+    "tr": "Ah canım. Sorun ne?",
+    "audio": "audio/104.mp3"
+  },
+  {
+    "en": "Oh, how did that get there?",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "5",
+    "id": "105",
+    "tr": "Ah, bu oraya nasıl geldi?",
+    "audio": "audio/105.mp3"
+  },
+  {
+    "en": "Let's get a drink!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "38",
+    "id": "106",
+    "tr": "Hadi bir şeyler içelim!",
+    "audio": "audio/106.mp3"
+  },
+  {
+    "en": "OK, we need a script.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "236",
+    "id": "107",
+    "tr": "Tamam, bir senaryoya ihtiyacımız var.",
+    "audio": "audio/107.mp3"
+  },
+  {
+    "en": "Oh good, the washing's done.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "150",
+    "id": "108",
+    "tr": "Güzel, çamaşırlar yıkanmış.",
+    "audio": "audio/108.mp3"
+  },
+  {
+    "en": "Or is it ears?",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "292",
+    "id": "109",
+    "tr": "Yoksa kulaklar mı?",
+    "audio": "audio/109.mp3"
+  },
+  {
+    "en": "Ha, cheats, they glued their photo on this car!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "166",
+    "id": "110",
+    "tr": "Hilebazlar, fotoğraflarını bu arabanın üstüne yapıştırmışlar!",
+    "audio": "audio/110.mp3"
+  },
+  {
+    "en": "OK, your hair is so soft.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "252",
+    "id": "112",
+    "tr": "Tamam, saçın çok yumuşak.",
+    "audio": "audio/112.mp3"
+  },
+  {
+    "en": "So you are millionaires, ay?",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "284",
+    "id": "113",
+    "tr": "Demek milyonersiniz, öyle mi?",
+    "audio": "audio/113.mp3"
+  },
+  {
+    "en": "Washing? OK. No problem.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "90",
+    "id": "114",
+    "tr": "Çamaşır mı? Tamam. Sorun değil.",
+    "audio": "audio/114.mp3"
+  },
+  {
+    "en": "Oh, excuse me, come on, let's go out and celebrate.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "142",
+    "id": "115",
+    "tr": "Pardon, hadi dışarı çıkıp kutlayalım.",
+    "audio": "audio/115.mp3"
+  },
+  {
+    "en": "This is the problem!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "152",
+    "id": "116",
+    "tr": "Sorun bu işte!",
+    "audio": "audio/116.mp3"
+  },
+  {
+    "en": "Leave it to me, my friend, I have a plan!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "122",
+    "id": "117",
+    "tr": "Bana bırak dostum, bir planım var!",
+    "audio": "audio/117.mp3"
+  },
+  {
+    "en": "And I think I know who is responsible!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "161",
+    "id": "118",
+    "tr": "Ve sanırım kimin sorumlu olduğunu biliyorum!",
+    "audio": "audio/118.mp3"
+  },
+  {
+    "en": "And guess who's coming to dinner.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "304",
+    "id": "120",
+    "tr": "Ve tahmin et, akşam yemeğine kim geliyor.",
+    "audio": "audio/120.mp3"
+  },
+  {
+    "en": "Oh and erm, Hector, would you do my washing for me?",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "89",
+    "id": "122",
+    "tr": "Ah, bir de Hector, çamaşırlarımı benim için yıkar mısın?",
+    "audio": "audio/122.mp3"
+  },
+  {
+    "en": "What is a taxidermist?",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "95",
+    "id": "123",
+    "tr": "Taksidermist, yani hayvan doldurma uzmanı nedir?",
+    "audio": "audio/123.mp3"
+  },
+  {
+    "en": "Well yes Nick you could!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "72",
+    "id": "124",
+    "tr": "Evet Nick, yapabilirsin!",
+    "audio": "audio/124.mp3"
+  },
+  {
+    "en": "No, dancing like this!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "119",
+    "id": "126",
+    "tr": "Hayır, böyle dans etmek!",
+    "audio": "audio/126.mp3"
+  },
+  {
+    "en": "That's just three hours!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "197",
+    "id": "127",
+    "tr": "Bu sadece üç saat!",
+    "audio": "audio/127.mp3"
+  },
+  {
+    "en": "I love animals. Ha!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "81",
+    "id": "128",
+    "tr": "Hayvanları severim. Ha!",
+    "audio": "audio/128.mp3"
+  },
+  {
+    "en": "I would write to you!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "83",
+    "id": "129",
+    "tr": "Sana yazardım!",
+    "audio": "audio/129.mp3"
+  },
+  {
+    "en": "Come on, keep it up!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "31",
+    "id": "130",
+    "tr": "Hadi, devam et!",
+    "audio": "audio/130.mp3"
+  },
+  {
+    "en": "Oh Charlie, here boy!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "58",
+    "id": "131",
+    "tr": "Ah Charlie, buraya gel oğlum!",
+    "audio": "audio/131.mp3"
+  },
+  {
+    "en": "So Nick, what do I say?",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "235",
+    "id": "132",
+    "tr": "Peki Nick, ne söyleyeyim?",
+    "audio": "audio/132.mp3"
+  },
+  {
+    "en": "Annie, what is a taxidermist?",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "60",
+    "id": "133",
+    "tr": "Annie, taksidermist yani hayvan doldurma uzmanı nedir?",
+    "audio": "audio/133.mp3"
+  },
+  {
+    "en": "But Nick, what about Bridget and Annie?",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "200",
+    "id": "134",
+    "tr": "Ama Nick, ya Bridget ve Annie?",
+    "audio": "audio/134.mp3"
+  },
+  {
+    "en": "Oh, I must check my emails.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "39",
+    "id": "135",
+    "tr": "Ah, e-postalarımı kontrol etmeliyim.",
+    "audio": "audio/135.mp3"
+  },
+  {
+    "en": "It smells like a perfumery.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "144",
+    "id": "137",
+    "tr": "Burası parfümeri gibi kokuyor.",
+    "audio": "audio/137.mp3"
+  },
+  {
+    "en": "Oh, you smell so sweet!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "290",
+    "id": "138",
+    "tr": "Ah, çok güzel kokuyorsun!",
+    "audio": "audio/138.mp3"
+  },
+  {
+    "en": "It's OK, I can do it!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "18",
+    "id": "140",
+    "tr": "Sorun yok, yapabilirim!",
+    "audio": "audio/140.mp3"
+  },
+  {
+    "en": "I have a plan.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "174",
+    "id": "141",
+    "tr": "Bir planım var.",
+    "audio": "audio/141.mp3"
+  },
+  {
+    "en": "Hector, we'll get lots of girlfriends now!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "136",
+    "id": "142",
+    "tr": "Hector, artık bir sürü kız arkadaşımız olacak!",
+    "audio": "audio/142.mp3"
+  },
+  {
+    "en": "Yeah, but you have had a hundred girlfriends.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "205",
+    "id": "143",
+    "tr": "Evet ama senin yüz tane kız arkadaşın oldu.",
+    "audio": "audio/143.mp3"
+  },
+  {
+    "en": "Bridget and Annie have a surprise.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "303",
+    "id": "144",
+    "tr": "Bridget ve Annie'nin bir sürprizi var.",
+    "audio": "audio/144.mp3"
+  },
+  {
+    "en": "Finding girlfriends on the Internet is so easy.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "99",
+    "id": "145",
+    "tr": "İnternette kız arkadaş bulmak çok kolay.",
+    "audio": "audio/145.mp3"
+  },
+  {
+    "en": "My perfume, I don't believe it!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "148",
+    "id": "146",
+    "tr": "Parfümüm, inanamıyorum!",
+    "audio": "audio/146.mp3"
+  },
+  {
+    "en": "Well you can pay for these then!!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "280",
+    "id": "147",
+    "tr": "O zaman bunların parasını sen ödeyebilirsin!",
+    "audio": "audio/147.mp3"
+  },
+  {
+    "en": "We have six hundred and thirty three messages!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "155",
+    "id": "148",
+    "tr": "Altı yüz otuz üç mesajımız var!",
+    "audio": "audio/148.mp3"
+  },
+  {
+    "en": "I smell a rat! Hmm!",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "160",
+    "id": "149",
+    "tr": "Bu işte bir bit yeniği var! Hım!",
+    "audio": "audio/149.mp3"
+  },
+  {
+    "en": "See you later boys.",
+    "source": "Extr.Ep03.Hector has a date_Eng.srt",
+    "cue": "88",
+    "id": "150",
+    "tr": "Sonra görüşürüz çocuklar.",
+    "audio": "audio/150.mp3"
+  }
+]
