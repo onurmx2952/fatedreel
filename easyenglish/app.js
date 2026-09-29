@@ -4,6 +4,10 @@ const audio = new Audio();
 audio.preload = 'auto';
 audio.setAttribute('playsinline', '');
 let sentences = [], bag = [], current, phase = 'loading', recognition, recording = false, timer, session = 0, heard = false;
+// iOS can retain the quieter microphone audio route after recognition ends.
+function setAudioMode(type) {
+  try { if (typeof navigator !== 'undefined' && navigator.audioSession) navigator.audioSession.type = type; } catch {}
+}
 function error(text = '') { $('error').textContent = text; $('error').hidden = !text; }
 function normalize(text) {
   return text.toLowerCase().replace(/[’‘]/g, "'")
@@ -18,7 +22,12 @@ function normalize(text) {
 }
 function stopRecognition() {
   session++; clearTimeout(timer); recording = false;
-  if (recognition) { recognition.onend = null; recognition.abort(); recognition = null; }
+  if (recognition) {
+    const previous = recognition; recognition = null;
+    previous.onend = () => { if (!recording) setAudioMode('playback'); };
+    previous.abort();
+  }
+  setAudioMode('playback');
   $('answer').classList.remove('recording'); $('answerLabel').textContent = 'Yanıtla'; $('listen').disabled = !current;
 }
 function nextSentence() {
@@ -37,6 +46,7 @@ function nextSentence() {
 function play() {
   if (!current || recording) return;
   error(); audio.pause(); audio.currentTime=0;
+  setAudioMode('playback');
   audio.play().then(() => {
     heard=true; $('listen').classList.add('playing'); $('listenLabel').textContent='Tekrar dinle';
     if (phase==='question') {
@@ -90,6 +100,7 @@ function startAnswer() {
   };
   rec.onend=finish;
   try {
+    setAudioMode('play-and-record');
     rec.start();recording=true;$('listen').disabled=true;
     timer=setTimeout(()=>{if(run!==session)return; if(transcript)finish();else{handled=true;stopRecognition();error('Ses tanıma yanıt vermedi. Tekrar dene veya yazarak yanıtla.');$('status').textContent='Yanıtını bekliyorum.';}},20000);
   } catch {stopRecognition();error('Mikrofon başlatılamadı. Yeniden dene veya yaz.');}
