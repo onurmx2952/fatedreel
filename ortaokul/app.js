@@ -17,7 +17,7 @@ function drawList() {
   for (const l of visible) {
     const b = document.createElement('button'); b.type = 'button'; b.className = 'lesson-card'; b.setAttribute('aria-current', String(l.id === selected?.id));
     const img = document.createElement('img'); img.src = mediaPath(l.poster); img.alt = ''; img.loading = 'lazy';
-    const bottom = text('span', '', 'card-bottom'); bottom.append(text('span', `${fmt(l.duration)} · Türkçe`), text('span', 'İzle ↗'));
+    const bottom = text('span', '', 'card-bottom'); bottom.append(text('span', `${fmt(l.duration)} · ${l.audioMode === 'silent' ? 'Sessiz' : 'Türkçe sesli'}`), text('span', 'İzle ↗'));
     b.append(img, text('small', `${l.subject} / Ortaokul`), text('strong', l.title), bottom);
     b.addEventListener('click', () => { location.hash = l.id; select(l); }); $('lesson-list').append(b);
   }
@@ -33,6 +33,8 @@ function drawFilters() {
 function select(l) {
   if (selected?.id === l.id) return;
   selected = l; video.pause(); $('video-error').hidden = true;
+  $('audio-description').textContent = l.audioMode === 'silent' ? 'Sessiz anlatım · Türkçe açıklama yazıları' : 'Türkçe sesli anlatım · Görüntüye gömülü altyazı';
+  $('text-heading').textContent = l.audioMode === 'silent' ? 'Ekrandaki açıklamalar' : 'Anlatım metni';
   video.src = mediaPath(l.video); video.poster = mediaPath(l.poster); video.load();
   $('lesson-title').textContent = l.title; $('lesson-meta').textContent = `${l.subject.toLocaleUpperCase('tr')} · ORTAOKUL · ${fmt(l.duration)}`;
   $('description').textContent = l.description; $('download').href = mediaPath(l.video); $('subtitle').href = mediaPath(l.subtitle);

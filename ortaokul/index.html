@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#143f3c">
   <link rel="icon" href="/favicon-v20260530.ico">
   <link rel="stylesheet" href="./style.css?v=1">
-  <script src="./app.js?v=1" defer></script>
+  <script src="./app.js?v=2" defer></script>
 </head>
 <body>
 <a class="skip" href="#lesson">Derse geç</a>
@@ -19,11 +19,11 @@
     <article id="lesson" class="lesson" aria-label="Seçili ders" hidden>
       <div class="lesson-heading"><div><p id="lesson-meta" class="eyebrow"></p><h2 id="lesson-title"></h2></div><button id="share" class="icon-button" type="button" aria-label="Ders bağlantısını kopyala">Bağlantı ↗</button></div>
       <div class="player-shell"><video id="video" controls playsinline preload="metadata" aria-label="Ders videosu"></video><p id="video-error" hidden>Video yüklenemedi. Bağlantını kontrol et veya aşağıdaki indirme bağlantısını dene.</p></div>
-      <div class="player-bottom"><span>Türkçe anlatım · Görüntüye gömülü altyazı</span><button id="classroom" type="button">⛶ Sınıf görünümü</button></div>
+      <div class="player-bottom"><span id="audio-description">Türkçe anlatım · Görüntüye gömülü altyazı</span><button id="classroom" type="button">⛶ Sınıf görünümü</button></div>
       <p id="description" class="description"></p>
       <section class="chapters-section"><div class="section-heading"><h3>Adım adım keşfet</h3><span>Bir bölüme atla</span></div><div id="chapters" class="chapters"></div></section>
       <div class="lesson-details"><section class="learning"><p class="eyebrow">BU DERSTEN AKLINDA KALSIN</p><ul id="takeaways"></ul></section><section class="quiz"><p class="eyebrow">BİR DE SEN DÜŞÜN</p><h3 id="question"></h3><div id="answers"></div><p id="feedback" role="status"></p></section></div>
-      <details class="transcript"><summary>Anlatım metni</summary><div id="transcript"></div></details>
+      <details class="transcript"><summary id="text-heading">Anlatım metni</summary><div id="transcript"></div></details>
       <div class="downloads"><span>İnternet olmadan da yanında.</span><a id="download" download>Videoyu indir ↓</a><a id="subtitle" download>Altyazı (.srt) ↓</a></div>
     </article>
   </div>

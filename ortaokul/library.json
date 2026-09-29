@@ -64,6 +64,71 @@
         "Türbinden çıkan su, kanaldan yeniden nehre döner. Su elektriğe dönüşüp kaybolmaz. Elektriğe dönüşen, suyun enerjisidir.",
         "Yükseklik enerjisi, akışa; akış, dönmeye; dönme de elektriğe dönüşür. Şimdi sen söyle: Elektriği türbin mi, jeneratör mü üretir?"
       ]
+    },
+    {
+      "id": "barajdan-sehre",
+      "title": "Barajdan şehre: elektriğin yolculuğu",
+      "subject": "Fen Bilimleri",
+      "description": "Bu kez bir el çizimi üzerinden keşfediyoruz: suyun yolu nerede biter, elektriğin yolculuğu nerede başlar? Hareketli vurgular ve Türkçe açıklamalarla adım adım takip et. Bu ders tamamen sessizdir.",
+      "takeaways": [
+        "Su cebri borudan aşağı akar ve türbini döndürür.",
+        "Jeneratör hareket enerjisini elektriğe dönüştürür; trafo gerilimi değiştirir.",
+        "Türbinden çıkan su nehre döner. Su ve elektrik farklı yollardan ilerler."
+      ],
+      "quiz": {
+        "question": "Türbinden çıkan suya ne olur?",
+        "options": [
+          "Elektriğe dönüşür",
+          "Nehre geri döner",
+          "İletim hattına girer"
+        ],
+        "correct": 1,
+        "explanation": "Su nehre döner. Jeneratörde elektriğe dönüşen, suyun aktardığı hareket enerjisidir."
+      },
+      "audioMode": "silent",
+      "video": "./media/barajdan-sehre/ee146ee0627a/video.mp4",
+      "poster": "./media/barajdan-sehre/ee146ee0627a/poster.jpg",
+      "subtitle": "./media/barajdan-sehre/ee146ee0627a/altyazi.srt",
+      "duration": 64,
+      "chapters": [
+        {
+          "title": "Barajdan şehre",
+          "start": 0
+        },
+        {
+          "title": "Su neden aşağı akar?",
+          "start": 8
+        },
+        {
+          "title": "Akış, dönmeye dönüşür",
+          "start": 17
+        },
+        {
+          "title": "Elektrik burada üretilir",
+          "start": 26
+        },
+        {
+          "title": "Elektrik şehre ulaşır",
+          "start": 37
+        },
+        {
+          "title": "Su kaybolmaz",
+          "start": 48
+        },
+        {
+          "title": "Şimdi sıra sende",
+          "start": 56
+        }
+      ],
+      "transcript": [
+        "Bu çizimde iki farklı yol var. Mavi: suyun yolu. Sarı: elektriğin iletimi.",
+        "Yüksekte biriken su, potansiyel enerji taşır. Cebri borudan aşağı akarken hız kazanır.",
+        "Akan su, türbinin kanatlarını iter. Türbin ve ona bağlı mil birlikte döner.",
+        "Mil, jeneratörün mıknatıslı bölümünü döndürür. Değişen manyetik alan, bobinlerde elektrik oluşturur.",
+        "Trafo, iletim için gerilimi yükseltir. Evlere ulaşmadan önce gerilim yeniden düşürülür.",
+        "Türbinden çıkan su nehre döner. Su elektriğe dönüşmez; enerjisi biçim değiştirir.",
+        "Elektriği hangi parça üretir? Türbin mi, jeneratör mü?"
+      ]
     }
   ]
 }

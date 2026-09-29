@@ -18,6 +18,8 @@ Aktarım için `artifacts/final_review.json` sonucu `pass`, `artifacts/beats.jso
 proje içindeki tamamlanmış MP4 ve `renders/<ders-id>.srt` gerekir. Ders tanımı
 `id`, `title`, `subject`, `description`, `takeaways`, `quiz` alanlarını içerir.
 Quiz: `question`, `options`, sıfırdan başlayan `correct`, `explanation`.
+İsteğe bağlı `audioMode`: `silent` (sessiz, Türkçe ekran açıklamaları) veya
+`narrated` (sesli). Alan yoksa önceki derslerle uyumlu şekilde sesli kabul edilir.
 
 Komut yalnızca incelemeden geçmiş video, kapak ve altyazıyı `media/` altına
 kopyalar; `library.json` listesine ekler veya aynı id'yi günceller. Git push
