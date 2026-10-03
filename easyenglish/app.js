@@ -67,7 +67,7 @@ function writeAnswer() {
 async function load() {
   $('retry').hidden=true;error();
   try {
-    const response=await fetch('./sentences.json',{signal:AbortSignal.timeout(15000)});
+    const response=await fetch('./sentences.json?v=4-full-library',{signal:AbortSignal.timeout(15000)});
     if(!response.ok)throw Error();sentences=await response.json();
     if(!Array.isArray(sentences)||!sentences.length||sentences.some(s=>!s.en||!s.tr||!s.audio))throw Error();
     nextSentence();
