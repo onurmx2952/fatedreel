@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unit 1 · To be (am / is / are)</title>
+<style>
+:root{--bg:#1f3b34;--panel:#27483f;--ink:#f3f1e7;--mute:#b9c9bf;--y:#f2d56b;--p:#f4a6b8;--g:#8fd6a8;--line:#4b6f63;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef3ec;--panel:#ffffff;--ink:#1d2f2a;--mute:#4d6259;--y:#8a6100;--p:#b02a54;--g:#1d7a45;--line:#b8cbbf}}
+:root[data-theme="light"]{--bg:#eef3ec;--panel:#fff;--ink:#1d2f2a;--mute:#4d6259;--y:#8a6100;--p:#b02a54;--g:#1d7a45;--line:#b8cbbf}
+:root[data-theme="dark"]{--bg:#1f3b34;--panel:#27483f;--ink:#f3f1e7;--mute:#b9c9bf;--y:#f2d56b;--p:#f4a6b8;--g:#8fd6a8;--line:#4b6f63}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:640px;margin:0 auto;padding:20px 18px 60px}
+h1,h2,.en{font-family:Georgia,"Times New Roman",serif}
+h1{font-size:2rem;line-height:1.15;margin:.2em 0 .1em}
+h2{font-size:1.35rem;margin:2.2em 0 .5em}
+p{margin:.5em 0}
+.mute{color:var(--mute);font-size:.92rem}
+.hero{padding:28px 0 6px;border-bottom:2px dashed var(--line)}
+.big{font-size:clamp(1.7rem,7vw,2.5rem);line-height:1.2;margin:.4em 0}
+.big .v{color:var(--y);display:inline-block;animation:pulse 1.4s .6s 2 ease-in-out}
+@keyframes pulse{50%{transform:scale(1.35);text-shadow:0 0 14px var(--y)}}
+[hidden]{display:none!important}
+input{font:inherit;color:var(--ink);background:var(--panel);border:2px solid var(--line);border-radius:10px;padding:8px 12px;min-height:44px;flex:1;min-width:0}
+button{font:inherit;color:var(--ink);background:transparent;border:2px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;min-height:44px}
+button:hover{border-color:var(--y)}
+button:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+button.on{background:var(--y);color:#1d2f2a;border-color:var(--y);font-weight:600}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.note{background:var(--panel);border-left:5px solid var(--p);padding:12px 14px;border-radius:0 10px 10px 0}
+.box{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px}
+.formula{font-size:2rem;font-family:Georgia,serif;margin:0}
+.formula .v{color:var(--y)}
+.formula small{font-size:1rem;color:var(--mute)}
+.sent{font-size:1.5rem;font-family:Georgia,serif;margin:.5em 0 .1em}
+.sent .v{color:var(--y);border-bottom:3px solid var(--y)}
+.pop{animation:pop .35s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ans{color:var(--g);min-height:1.6em}
+.q{margin:14px 0;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.q .en{font-size:1.2rem}
+.ok{background:var(--g)!important;color:#12281f!important;border-color:var(--g)!important}
+.bad{background:var(--p)!important;color:#3a0f1c!important;border-color:var(--p)!important}
+#score{font-size:1.1rem}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<meta name="description" content="Türkçe açıklamalı İngilizce gramer: cümle makinesi, sesli okuma ve cevap kontrollü alıştırmalar.">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./shared.css">
+</head>
+<body data-unit="1">
+<a class="skip" href="#lesson">Derse geç</a>
+<div class="workspace"><aside class="sidebar"><a class="brand" href="./"><span class="brand-mark">Aa</span><span>İngilizce<span class="brand-sub">Etkileşimli gramer kitabı</span></span></a>
+<div class="rail-label">DENEME ÜNİTELERİ <span>3 / 63</span></div><nav class="unit-nav" aria-label="Üniteler"><a href="./index.html" aria-current="page"><span class="unit-number">01</span><span><b>To be</b><small>am · is · are / was · were</small></span></a><a href="./unit12.html"><span class="unit-number">12</span><span><b>Present simple</b><small>Geniş zaman</small></span></a><a href="./unit19.html"><span class="unit-number">19</span><span><b>Simple past</b><small>Geçmiş zaman</small></span></a></nav>
+<div class="rail-note"><b>Oku. Değiştir. Kendini dene.</b><p>Cümleleri farklı şekillerde kur, Türkçesini aç ve alıştırmaları çöz.</p><p>Mustafa Balta<br>İngilizce Gramer Kitabı</p></div></aside><div class="lesson-shell"><header class="topbar"><span>Çalışma defteri <span class="slash">/</span> Unit 1</span><button id="theme-toggle" aria-label="Açık temaya geç">Açık tema</button></header>
+<main id="lesson">
+<section class="hero">
+  <p class="mute">Unit 1 · İlk konu</p>
+  <h1>To be<br>am · is · are</h1>
+  <p class="big en" lang="en">I <span class="v">am</span> very hungry today.</p>
+  <div class="row">
+    <button id="hear1">Cümleyi dinle</button>
+    <button id="hearT">Dersi Türkçe dinle</button>
+  </div>
+  <p class="mute" id="novoice" hidden>Bu cihazda sesli okuma bulunamadı. Cümleleri yine de okuyabilirsin.</p>
+</section>
+
+<div class="row" id="topic">
+  <button data-t="p" class="on">Şimdi: am · is · are</button>
+  <button data-t="w">Geçmiş: was · were</button>
+  <button data-t="x">Alıştırmalar</button>
+</div>
+
+<h2 class="ml" id="h-what">To be nedir?</h2>
+<div class="note ml" id="note"></div>
+
+<h2 class="ml">Cümle makinesi</h2>
+<p class="mute ml">Bir zamir seç, sonra cümlenin şeklini değiştir. Sarı kısım to be fiilidir.</p>
+<div class="row ml" id="pron"></div>
+<div class="row ml" id="mode">
+  <button data-m="a" class="on">Olumlu</button>
+  <button data-m="n">Olumsuz</button>
+  <button data-m="q">Soru</button>
+</div>
+<div class="box ml">
+  <p class="formula" id="formula"></p>
+  <p class="sent" lang="en" id="sent"></p>
+  <p class="mute" id="tr" hidden></p>
+  <p class="ans" id="ans"></p>
+  <div class="row"><button id="hear2">Dinle</button><button id="showtr">Türkçesi</button><button id="reveal" hidden>Kısa cevabı göster</button></div>
+</div>
+
+<h2 class="qz">Kendini dene</h2>
+<p class="mute qz">Boşluğa uyan fiili seç. Cümleler kitaptaki örneklerden; Türkçesi butona basınca açılır.</p>
+<div id="quiz" class="qz"></div>
+<p id="score" class="en qz" role="status"></p>
+
+<div id="ex" hidden>
+  <h2>Unit 1 alıştırmaları</h2>
+  <p class="mute">Sorular kitaptan, doğru cevaplar kitabın sonundaki cevap anahtarından.</p>
+  <div class="row" id="exsets"></div>
+  <div id="exq"></div>
+  <div class="exercise-result"><p id="exscore" class="en" role="status" aria-live="polite"></p><button id="retry-set">Bu alıştırmayı yeniden çöz</button></div>
+</div>
+
+<p class="mute" style="margin-top:2.5em">Kaynak: Mustafa Balta, İngilizce Gramer Kitabı, Unit 1 “To be”, s. 5–9 ve cevap anahtarı. İngilizce örnekler kitaptan; Kitapta bulunmayan Türkçe çeviriler bu çalışma için eklenmiştir.</p>
+<footer class="lesson-footer"><a href="./">Unit 1 · To be</a><a href="./unit12.html">Unit 12 · Present simple</a><a href="./unit19.html">Unit 19 · Simple past</a></footer>
+</main></div></div>
+
+<script>
+const P=[
+{l:"I",v:"am",s:"I'm",a:"I'm from New Zealand.",t:"Ben Yeni Zelandalıyım.",n:"I am not from Spain.",q:"Am I intelligent?",y:"Yes, you are.",no:"No, you aren't."},
+{l:"You",v:"are",s:"You're",a:"You're Chilean.",t:"Sen Şilelisin.",n:"You are not Australian.",q:"Are you a student?",y:"Yes, I am.",no:"No, I am not."},
+{l:"He",v:"is",s:"He's",a:"He's twenty years old.",t:"O yirmi yaşında.",n:"He is not thirty years old.",q:"Is he a pilot?",y:"Yes, he is.",no:"No, he isn't."},
+{l:"She",v:"is",s:"She's",a:"She's a nurse.",t:"O bir hemşire.",n:"She is not a secretary.",q:"Is she from Spain?",y:"Yes, she is.",no:"No, she isn't."},
+{l:"It",v:"is",s:"It's",a:"It's a big dog.",t:"O büyük bir köpek.",n:"It is not a small cat.",q:"Is it a big house?",y:"Yes, it is.",no:"No, it isn't."},
+{l:"We",v:"are",s:"We're",a:"We're intelligent.",t:"Biz zekiyiz.",n:"We are not stupid.",q:"Are we ready?",y:"Yes, we are.",no:"No, we aren't."},
+{l:"You (siz)",v:"are",s:"You're",a:"You're students.",t:"Siz öğrencisiniz.",n:"You are not teachers.",q:"Are you doctors?",y:"Yes, we are.",no:"No, we aren't."},
+{l:"They",v:"are",s:"They're",a:"They're married.",t:"Onlar evli.",n:"They are not single.",q:"Are they rich?",y:"Yes, they are.",no:"No, they aren't."}
+];
+const W=[
+{l:"I",v:"was",a:"I was tired this morning.",t:"Bu sabah yorgundum.",n:"I was not tired this morning.",q:"Was I late?"},
+{l:"You",v:"were",a:"You were very good.",t:"Çok iyiydin.",n:"You were not crazy.",q:"Were you sick?"},
+{l:"He",v:"was",a:"He was the best in his class.",t:"Sınıfının en iyisiydi.",n:"He was not married.",q:"Was he surprised?"},
+{l:"She",v:"was",a:"She was late for work.",t:"İşe geç kaldı.",n:"She was not famous.",q:"Was she from Italy?"},
+{l:"It",v:"was",a:"It was a sunny day.",t:"Güneşli bir gündü.",n:"It was not hot yesterday.",q:"Was it a big house?"},
+{l:"We",v:"were",a:"We were at home.",t:"Evdeydik.",n:"We were not invited.",q:"Were we ready?"},
+{l:"They",v:"were",a:"They were happy with their test results.",t:"Test sonuçlarından memnundular.",n:"They were not friends.",q:"Were they busy?"}
+];
+const QP=[["I ___ a doctor.","am","Ben bir doktorum."],["He ___ ill.","is","O hastadır."],["Shops ___ closed.","are","Mağazalar kapalı."],["Tom ___ tired.","is","Tom yorgun."],["They ___ in the kitchen.","are","Onlar mutfaktalar."],["Karen's eyes ___ green.","are","Karen'in gözleri yeşil."]];
+const QW=[["She is thirty now, so last year she ___ twenty-nine.","was","Şimdi otuz yaşında, geçen yıl yirmi dokuzdu."],["Where ___ you yesterday afternoon?","were","Dün öğleden sonra neredeydin?"],["I got married when I ___ twenty-seven.","was","Yirmi yedi yaşındayken evlendim."],["They ___ so naughty as kids.","were","Çocukken çok yaramazdılar."],["Why ___ he so angry?","was","Neden o kadar kızgındı?"],["They ___ at home yesterday.","were","Dün evdeydiler."]];
+const NOTE={p:'<p><b>To be</b>, çevremizdeki nesneleri <b>nitelemek</b>, özelliklerini, yerlerini ve konumlarını belirtmek için kullanılan temel fiildir.</p><p>Bu derste to be ile <b>kimlik, özellik ve konum</b> anlatıyoruz. Örneğin: <span lang="en">I am a doctor.</span></p>',
+w:'<p><b>was / were</b>, am · is · are fiillerinin <b>geçmiş zaman</b> halidir.</p><p><b>was</b>: I, he, she, it. <b>were</b>: you, we, they.</p>'};
+const TALK={p:"To be, çevremizdeki nesneleri nitelemek, özelliklerini, yerlerini ve konumlarını belirtmek için kullanılan temel fiildir. Bu derste to be ile kimlik, özellik ve konum anlatıyoruz. I am, ben. You are, sen. He is, she is, it is, o. We are, biz. They are, onlar.",
+w:"Was ve were, am, is, are fiillerinin geçmiş zaman halidir. I, he, she, it için was kullanılır. You, we, they için were kullanılır."};
+const TN={p:["Ben İspanya'dan değilim.","Sen Avustralyalı değilsin.","O otuz yaşında değil.","O sekreter değil.","O küçük bir kedi değil.","Biz aptal değiliz.","Siz öğretmen değilsiniz.","Onlar bekâr değil."],
+w:["Bu sabah yorgun değildim.","Deli değildin.","O evli değildi.","O ünlü değildi.","Dün sıcak değildi.","Davet edilmedik.","Onlar arkadaş değildi."]};
+const TQ={p:["Ben zeki miyim?","Sen öğrenci misin?","O pilot mu?","O İspanya'dan mı?","O büyük bir ev mi?","Hazır mıyız?","Siz doktor musunuz?","Onlar zengin mi?"],
+w:["Geç kaldım mı?","Hasta mıydın?","Şaşırmış mıydı?","O İtalya'dan mıydı?","Büyük bir ev miydi?","Hazır mıydık?","Meşgul müydüler?"]};
+TALK.x="Bu bölümde Unit 1 alıştırmalarını çözüyorsun. Boşluğa uyan to be fiilini seç.";
+const RAW={
+"1.1":"2|___ it a good film?|was\n3|I got married when I ___ twenty-seven.|was\n4|It was a great day, but we ___ so tired.|were\n5|I didn't buy those jeans because they ___ too expensive.|were\n6|When I ___ a child we lived in Rome.|was\n7|Where ___ you yesterday afternoon?|were\n8|___ the weather good while we were away?|was\n9|They ___ so naughty as kids.|were\n10|Why ___ he so angry?|was\n11|Where ___ Matt at ten o'clock?|was\n12|___ there a lot of people in the snack bar?|were\n13|What ___ the weather like at midnight?|was\n14|___ Matt in his cabin?|was\n15|___ Matt hungry in the morning?|was\n16|What ___ Matt's problem?|was\n17|___ Sean's parents at Cork?|were\n18|Why ___ they in Cork?|were\n19|He ___ at home yesterday.|was\n20|They ___ at home yesterday.|were",
+"1.2":"2|She ___ sleeping in the armchair.|is\n3|We ___ good at English.|are\n4|Mrs Denis ___ very keen on the cinema.|is\n5|You ___ a cousin by marriage.|are\n6|They ___ very tired this morning.|are\n7|Clement and John ___ in the kitchen.|are\n8|My phone number ___ two one nine six five six one.|is\n9|My credit card ___ blocked, I don't know why!|is\n10|I ___ living at Morisson's.|am\n11|This teacher ___ an English one.|is\n12|I ___ very tired today.|am\n13|We ___ so happy to see you!|are\n14|It ___ ten o'clock and I've to go.|is\n15|My friends ___ on holiday.|are\n16|My parents ___ very old now.|are\n17|My best buddy ___ always late.|is\n18|Peter ___ not at school today.|is\n19|I ___ sixteen and it is my birthday.|am\n20|We ___ better than them.|are",
+"1.3":"2|Today the weather ___ nice, but yesterday it was cold.|is\n3|I ___ hungry last night, so I had something to eat.|was\n4|Where ___ you at 11 o'clock last Friday morning?|were\n5|Don't buy those shoes. They ___ too expensive.|are\n6|I ___ hungry. Can I have something to eat?|am\n7|Why ___ you so angry yesterday?|were\n8|We must go now. It ___ very late.|is\n9|This time last year I ___ in Paris.|was\n10|We ___ tired when we arrived home, so we went to bed.|were\n11|Charlie Chaplin died in 1978. He ___ a famous film star.|was\n12|Where ___ the children? I don't know. They must be in the garden.|are",
+"1.4":"2|She is tired.|She was tired.\n3|What is she doing?|What was she doing?\n4|Why is he leaving?|Why was he leaving?\n5|John is going to Paris.|John was going to Paris.\n6|Why is Tom happy today?|Why was Tom happy yesterday?/Why was Tom happy today?\n7|Tomorrow, it will be Saturday.|Yesterday, it was Saturday.\n8|They are looking for Ashley.|They were looking for Ashley.\n9|He's not nice.|He wasn't nice.\n10|Peter and Sarah are very nice, aren't they?|Peter and Sarah were very nice, weren't they?"};
+const EO={"1.1":["was","were"],"1.2":["am","is","are"],"1.3":["am","is","are","was","were"]};
+const EL={"1.1":"1.1 was / were","1.2":"1.2 am / is / are","1.3":"1.3 karışık","1.4":"1.4 geçmişe çevir"};
+const norm=x=>x.toLowerCase().replace(/[’`]/g,"'").replace(/\bwas not\b/g,"wasn't").replace(/\bwere not\b/g,"weren't").replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim();
+function buildEx(k){
+  $("exsets").innerHTML="";
+  Object.keys(EL).forEach(x=>{const b=document.createElement("button");b.textContent=EL[x];if(x===k)b.className="on";b.onclick=()=>buildEx(x);$("exsets").appendChild(b)});
+  $("exq").innerHTML="";$("exscore").textContent=""; document.getElementById("retry-set").onclick=()=>buildEx(k);
+  const items=RAW[k].split("\n").map(l=>l.split("|"));let done=0,right=0;
+  const fin=()=>{done++;$("exscore").textContent=`${done} / ${items.length} yanıtlandı · ${right} doğru`+(done===items.length?" · Tamamlandı":"");};
+  items.forEach(([n,t,a])=>{
+    const w=document.createElement("div");w.className="q";
+    const line=document.createElement("div");line.className="en";line.textContent=`${n}. ${t}`;w.appendChild(line);
+    const r=document.createElement("div");r.className="row";w.appendChild(r);
+    if(k==="1.4"){
+      const inp=document.createElement("input");inp.placeholder="Cümleyi geçmişe çevir";inp.setAttribute("aria-label",`${n}. sorunun cevabı`);inp.autocomplete="off";inp.spellcheck=false;
+      const b=document.createElement("button");b.textContent="Kontrol et";
+      const f=document.createElement("div");f.className="mute";f.setAttribute("role","status");
+      const go=()=>{if(w.dataset.d||!inp.value.trim())return;w.dataset.d=1;const al=a.split("/");const ok=al.some(x=>norm(x)===norm(inp.value));if(ok)right++;
+        f.textContent=ok?"Doğru.":"Kitaptaki cevap: "+al[0];f.style.color=ok?"var(--g)":"var(--p)";inp.disabled=b.disabled=true;fin()};
+      b.onclick=go;inp.onkeydown=e=>{if(e.key==="Enter")go()};
+      r.append(inp,b);w.appendChild(f);
+    }else EO[k].forEach(o=>{const b=document.createElement("button");b.textContent=o;
+      b.onclick=()=>{if(w.dataset.d)return;w.dataset.d=1;const ok=o===a;if(ok)right++;
+        b.classList.add(ok?"ok":"bad");if(!ok)[...r.children].find(x=>x.textContent===a).classList.add("ok");
+        const feedback=document.createElement("p");feedback.className="answer-feedback";feedback.setAttribute("role","status");feedback.textContent=ok?"Doğru.":`Doğru cevap: ${a}`;w.appendChild(feedback);[...r.children].forEach(c=>c.disabled=true);
+        line.textContent=`${n}. ${t.replace("___",t.startsWith("___")?a[0].toUpperCase()+a.slice(1):a)}`;fin()};r.appendChild(b)});
+    $("exq").appendChild(w);
+  });
+}
+function showX(v){document.querySelectorAll(".ml,.qz").forEach(e=>e.hidden=v);$("ex").hidden=!v}
+let topic="p",D=P,cur=0,mode="a",cur_text="";
+const $=id=>document.getElementById(id);
+const hl=s=>s.replace(/(\bam\b|\bis\b|\bare\b|\bwas\b|\bwere\b|'m|'re|'s)/,'<span class="v">$1</span>');
+const re=e=>{e.classList.remove("pop");void e.offsetWidth;e.classList.add("pop")};
+
+function speak(text,lang){
+  if(!("speechSynthesis" in window)){$("novoice").hidden=false;return}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=lang==="en-US"?.85:.95;
+  speechSynthesis.speak(u);
+}
+function render(){
+  const d=D[cur],pr=d.l.split(" ")[0],notP=topic==="p";
+  let f,s;
+  if(mode==="a"){f=`${pr} + <span class="v">${d.v}</span>`+(notP?` <small>→ ${d.s}</small>`:""),s=d.a}
+  else if(mode==="n"){f=`${pr} + <span class="v">${d.v}</span> not`;s=d.n}
+  else{f=`<span class="v">${d.v[0].toUpperCase()+d.v.slice(1)}</span> + ${pr==="I"?"I":pr.toLowerCase()} ?`;s=d.q}
+  $("formula").innerHTML=f;$("sent").innerHTML=hl(s);
+  $("tr").textContent=mode==="a"?d.t:mode==="n"?TN[topic][cur]:TQ[topic][cur];$("tr").hidden=true;
+  $("showtr").hidden=false;$("showtr").textContent="Türkçesi";
+  $("ans").textContent="";
+  $("reveal").hidden=!(mode==="q"&&notP);
+  cur_text=s;re($("formula"));re($("sent"));
+}
+function buildPron(){
+  $("pron").innerHTML="";
+  D.forEach((d,i)=>{const b=document.createElement("button");b.textContent=d.l;if(i===cur)b.className="on";
+    b.onclick=()=>{cur=i;[...$("pron").children].forEach((c,j)=>c.classList.toggle("on",j===i));render()};$("pron").appendChild(b)});
+}
+function buildQuiz(){
+  const Q=topic==="p"?QP:QW;let done=0,right=0;
+  $("quiz").innerHTML="";$("score").textContent="";
+  const opts=topic==="p"?["am","is","are"]:["was","were"];
+  Q.forEach(([t,a,tr])=>{
+    const w=document.createElement("div");w.className="q";
+    w.innerHTML=`<div class="en">${t}</div>`;
+    const m=document.createElement("div");m.className="mute";m.textContent=tr;m.hidden=true;
+    const r=document.createElement("div");r.className="row";
+    opts.forEach(o=>{const b=document.createElement("button");b.textContent=o;
+      b.onclick=()=>{if(w.dataset.d)return;w.dataset.d=1;done++;
+        if(o===a){b.classList.add("ok");right++}else{b.classList.add("bad");[...r.children].find(x=>x.textContent===a).classList.add("ok")}
+        $("score").textContent=`${done} / ${Q.length} yanıtlandı · ${right} doğru`;const feedback=document.createElement("p");feedback.className="answer-feedback";feedback.setAttribute("role","status");feedback.textContent=o===a?"Doğru.":`Doğru cevap: ${a}`;w.appendChild(feedback);[...r.children].filter(c=>opts.includes(c.textContent)).forEach(c=>c.disabled=true)};
+      r.appendChild(b)});
+    const tb=document.createElement("button");tb.textContent="Türkçesi";
+    tb.onclick=()=>{m.hidden=!m.hidden;tb.textContent=m.hidden?"Türkçesi":"Gizle"};
+    r.appendChild(tb);
+    w.appendChild(r);w.appendChild(m);$("quiz").appendChild(w);
+  });
+}
+function setTopic(t){
+  if(t==="x"){topic="x";[...$("topic").children].forEach(c=>c.classList.toggle("on",c.dataset.t==="x"));showX(true);buildEx("1.1");return}
+  showX(false);
+  topic=t;D=t==="p"?P:W;cur=0;mode="a";
+  [...$("topic").children].forEach(c=>c.classList.toggle("on",c.dataset.t===t));
+  [...$("mode").children].forEach(c=>c.classList.toggle("on",c.dataset.m==="a"));
+  $("note").innerHTML=NOTE[t];$("h-what").textContent=t==="p"?"To be nedir?":"To be geçmiş zaman nedir?";
+  buildPron();buildQuiz();render();
+}
+[...$("topic").children].forEach(b=>b.onclick=()=>setTopic(b.dataset.t));
+[...$("mode").children].forEach(b=>b.onclick=()=>{mode=b.dataset.m;[...$("mode").children].forEach(c=>c.classList.toggle("on",c===b));render()});
+$("hear1").onclick=()=>speak("I am very hungry today.","en-US");
+$("hear2").onclick=()=>speak(cur_text,"en-US");
+$("hearT").onclick=()=>speak(TALK[topic],"tr-TR");
+$("showtr").onclick=()=>{const h=$("tr").hidden;$("tr").hidden=!h;$("showtr").textContent=h?"Gizle":"Türkçesi"};
+$("reveal").onclick=()=>{const d=D[cur];$("ans").textContent=`${d.y}   /   ${d.no}`;re($("ans"))};
+setTopic("p");
+</script>
+<script src="./shared.js?v=2"></script>
+</body>
+</html>
