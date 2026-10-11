@@ -98,6 +98,17 @@ export async function onRequest(context) {
     out.set('Cache-Control','no-store');out.delete('ETag');out.delete('Last-Modified');
     let html=await response.text();
     html=html.replace(/\b(href|src|action|poster|data|data-src(?:-[a-z])?|xlink:href)\s*=\s*(["'])(.*?)\2/gi,(_,attr,q,value)=>attr+'='+q+localUrl(value)+q);
+    // Older iPads cannot decode Opus. Prefer the site's AAC recording when
+    // available, retaining Opus when no equivalent recording exists.
+    const opus=html.match(/<source\b[^>]*src=["'](\/voca\/snd\/[^"']+\.opus)["'][^>]*>/i);
+    if(opus){
+      const aac=opus[1].replace(/\.opus$/,'.m4a');
+      const available=await fetch(ORIGIN+aac.slice(PREFIX.length),{method:'HEAD'}).catch(()=>null);
+      if(available&&available.ok){
+        html=html.replace(opus[0],'<source src="'+aac+'" type="audio/mp4">');
+        html=html.replace(/var opusCuts\s*=\s*true;/,'var opusCuts = false;');
+      }
+    }
     html=html.replace(/url\(\s*(["']?)(\/[^)'"\s]+)\1\s*\)/g,(_,q,url)=>'url('+q+localUrl(url)+q+')');
     html=html.replace(/<script[^>]*src=["'][^"']*\/analytics\/[^"']*["'][^>]*><\/script>/gi,'');
     html=html.replace(/(src=["']\/voca\/app\/ip[^"']+)(["'])/g,(_,src,q)=>src+(src.includes('?')?'&':'?')+'voca=20261011a'+q);
