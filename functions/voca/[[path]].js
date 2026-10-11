@@ -100,7 +100,7 @@ export async function onRequest(context) {
     html=html.replace(/\b(href|src|action|poster|data|data-src(?:-[a-z])?|xlink:href)\s*=\s*(["'])(.*?)\2/gi,(_,attr,q,value)=>attr+'='+q+localUrl(value)+q);
     html=html.replace(/url\(\s*(["']?)(\/[^)'"\s]+)\1\s*\)/g,(_,q,url)=>'url('+q+localUrl(url)+q+')');
     html=html.replace(/<script[^>]*src=["'][^"']*\/analytics\/[^"']*["'][^>]*><\/script>/gi,'');
-    html=html.replace(/(src=["']\/voca\/app\/ip[^"']+)(["'])/g,'$1&voca=20261011a$2');
+    html=html.replace(/(src=["']\/voca\/app\/ip[^"']+)(["'])/g,(_,src,q)=>src+(src.includes('?')?'&':'?')+'voca=20261011a'+q);
     if(type.includes('text/html'))html=html.replace(/<\/body>/i,supportScript+'<footer style="padding:20px;text-align:center;font:14px system-ui">İçerik: <a href="https://www.languageguide.org/english/vocabulary/">LanguageGuide.org</a> · Kişisel kullanım için iPad ses uyarlaması</footer></body>');
     return new Response(html,{status:response.status,headers:out});
   }
