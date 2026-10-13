@@ -1,7 +1,7 @@
 let saved={lesson:0,answers:{},tab:'learn'};try{saved={...saved,...JSON.parse(localStorage.getItem('kelimearasi-v1')||'{}')}}catch{}
 let tab='learn',lesson=Math.min(11,Math.max(0,saved.lesson||0)),story=0,filter='Tümü',qi=0,queue=[],revealed=false;
 const view=document.querySelector('#view');
-const persist=()=>{try{localStorage.setItem('kelimearasi-v1',JSON.stringify({...saved,lesson,tab}))}catch{}};
+const persist=()=>{saved.lesson=lesson;saved.tab=tab;try{localStorage.setItem('kelimearasi-v1',JSON.stringify(saved))}catch{}};
 function setTab(t){tab=t;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));persist();render()}
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));document.querySelector('#resume').onclick=()=>{setTab(saved.tab||'learn');view.scrollIntoView({behavior:'smooth',block:'start'})};
 function menu(items,index,fn){return `<aside class="menu" aria-label="Konu seçimi">${items.map((x,i)=>`<button class="${i===index?'current':''}" onclick="${fn}(${i})">${String(i+1).padStart(2,'0')} · ${x[0]}</button>`).join('')}</aside>`}
