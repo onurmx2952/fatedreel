@@ -1,0 +1,9 @@
+{
+  "registered_at_utc": "2026-10-19T06:07:54.416387+00:00",
+  "spec_sha256": "4759fb9daeedabaa218579c661b69b4a7c91ac2d1ead58a967f1d5342c13fe6b",
+  "target_regime_shares": null,
+  "main_seeds": [
+    2026,
+    2125
+  ]
+}

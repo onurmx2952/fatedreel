@@ -1,0 +1,185 @@
+{
+  "sha256_before_runs": "ee2376ef3f623ddc42370de98485eb5dc7f780ceca31234ee11653efeeec3ed2",
+  "specs": [
+    [
+      "scenario_0",
+      {
+        "scenario": "Devrim",
+        "resilience": 1.0,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "scenario_1",
+      {
+        "scenario": "Uzlaşma",
+        "resilience": 1.0,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "scenario_2",
+      {
+        "scenario": "Parçalanma",
+        "resilience": 1.0,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "scenario_3",
+      {
+        "scenario": "Kurumların devamı",
+        "resilience": 1.0,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "variant_0",
+      {
+        "scenario": "Devrim",
+        "resilience": 0.5,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "variant_1",
+      {
+        "scenario": "Devrim",
+        "resilience": 1.5,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "variant_2",
+      {
+        "scenario": "Devrim",
+        "resilience": 1.0,
+        "shock_scale": 0.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "variant_3",
+      {
+        "scenario": "Devrim",
+        "resilience": 1.0,
+        "shock_scale": 1.5,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "variant_4",
+      {
+        "scenario": "Devrim",
+        "resilience": 1.0,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": -0.25,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "variant_5",
+      {
+        "scenario": "Devrim",
+        "resilience": 1.0,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.25,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "variant_6",
+      {
+        "scenario": "Devrim",
+        "resilience": 1.0,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 0.5,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "variant_7",
+      {
+        "scenario": "Devrim",
+        "resilience": 1.0,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.5,
+        "conflict_resolution": 1.0
+      }
+    ],
+    [
+      "variant_8",
+      {
+        "scenario": "Devrim",
+        "resilience": 1.0,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 0.5
+      }
+    ],
+    [
+      "variant_9",
+      {
+        "scenario": "Devrim",
+        "resilience": 1.0,
+        "shock_scale": 1.0,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 1.5
+      }
+    ],
+    [
+      "stress",
+      {
+        "scenario": "Parçalanma",
+        "resilience": 1.0,
+        "shock_scale": 3,
+        "protest_scale": 1.0,
+        "leader_bias": 0.0,
+        "self_feedback": 1.0,
+        "conflict_resolution": 0.5
+      }
+    ]
+  ]
+}

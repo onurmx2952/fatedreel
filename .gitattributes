@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Preserve byte-level hashes of the preregistered model and specification.
+o4/model_v2.py -text whitespace=cr-at-eol
+o4/MODEL_V2.md -text whitespace=cr-at-eol

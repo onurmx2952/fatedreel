@@ -1,0 +1,1045 @@
+{
+  "source_sha256": "eaf32f841a5a4fe0706bcec9d9ccc9ad9cb21ed82e4994a00bab1336ffa6d33e",
+  "seeds": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030,
+    2031,
+    2032,
+    2033,
+    2034,
+    2035,
+    2036,
+    2037,
+    2038,
+    2039,
+    2040,
+    2041,
+    2042,
+    2043,
+    2044,
+    2045,
+    2046,
+    2047,
+    2048,
+    2049,
+    2050,
+    2051,
+    2052,
+    2053,
+    2054,
+    2055,
+    2056,
+    2057,
+    2058,
+    2059,
+    2060,
+    2061,
+    2062,
+    2063,
+    2064,
+    2065,
+    2066,
+    2067,
+    2068,
+    2069,
+    2070,
+    2071,
+    2072,
+    2073,
+    2074,
+    2075,
+    2076,
+    2077,
+    2078,
+    2079,
+    2080,
+    2081,
+    2082,
+    2083,
+    2084,
+    2085,
+    2086,
+    2087,
+    2088,
+    2089,
+    2090,
+    2091,
+    2092,
+    2093,
+    2094,
+    2095,
+    2096,
+    2097,
+    2098,
+    2099,
+    2100,
+    2101,
+    2102,
+    2103,
+    2104,
+    2105,
+    2106,
+    2107,
+    2108,
+    2109,
+    2110,
+    2111,
+    2112,
+    2113,
+    2114,
+    2115,
+    2116,
+    2117,
+    2118,
+    2119,
+    2120,
+    2121,
+    2122,
+    2123,
+    2124,
+    2125
+  ],
+  "runs": 100,
+  "horizon": 240,
+  "distribution": {
+    "Demokrasi": 89,
+    "Otoriter": 10,
+    "Kırılgan yönetim": 1
+  },
+  "no_shock_distribution": {
+    "Demokrasi": 89,
+    "Otoriter": 10,
+    "Kırılgan yönetim": 1
+  },
+  "boundaries": [
+    {
+      "metric": "concentration",
+      "exact_boundary_share_all": 0.6921991701244813,
+      "exact_boundary_share_after_80": 0.927888198757764,
+      "raw_below_zero_share": 0.6415416666666667,
+      "raw_above_one_share": 0.05354166666666667,
+      "late_annual_sd_mean": 0.0011693464319700896
+    },
+    {
+      "metric": "liberties",
+      "exact_boundary_share_all": 0.6771369294605809,
+      "exact_boundary_share_after_80": 0.935527950310559,
+      "raw_below_zero_share": 0.077375,
+      "raw_above_one_share": 0.6025833333333334,
+      "late_annual_sd_mean": 0.0021284623811888307
+    },
+    {
+      "metric": "violence",
+      "exact_boundary_share_all": 0.6703734439834025,
+      "exact_boundary_share_after_80": 0.856583850931677,
+      "raw_below_zero_share": 0.6731666666666667,
+      "raw_above_one_share": 0.0,
+      "late_annual_sd_mean": 0.006337273832562793
+    },
+    {
+      "metric": "prosperity",
+      "exact_boundary_share_all": 0.5441078838174274,
+      "exact_boundary_share_after_80": 0.743664596273292,
+      "raw_below_zero_share": 0.0165,
+      "raw_above_one_share": 0.529875,
+      "late_annual_sd_mean": 0.026899066507834975
+    },
+    {
+      "metric": "trust",
+      "exact_boundary_share_all": 0.6360995850622406,
+      "exact_boundary_share_after_80": 0.9013664596273292,
+      "raw_below_zero_share": 0.026916666666666665,
+      "raw_above_one_share": 0.6118333333333333,
+      "late_annual_sd_mean": 0.005114080102828192
+    },
+    {
+      "metric": "independence",
+      "exact_boundary_share_all": 0.6836929460580913,
+      "exact_boundary_share_after_80": 0.9451552795031056,
+      "raw_below_zero_share": 0.08383333333333333,
+      "raw_above_one_share": 0.6027083333333333,
+      "late_annual_sd_mean": 0.0007419024907170338
+    }
+  ],
+  "joint_saturation": [
+    {
+      "run": 0,
+      "first_joint_near_boundary_month": 87,
+      "share_after80": 0.9565217391304348
+    },
+    {
+      "run": 1,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    },
+    {
+      "run": 2,
+      "first_joint_near_boundary_month": 61,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 3,
+      "first_joint_near_boundary_month": 57,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 4,
+      "first_joint_near_boundary_month": 68,
+      "share_after80": 1.0
+    },
+    {
+      "run": 5,
+      "first_joint_near_boundary_month": 84,
+      "share_after80": 0.9751552795031055
+    },
+    {
+      "run": 6,
+      "first_joint_near_boundary_month": 65,
+      "share_after80": 1.0
+    },
+    {
+      "run": 7,
+      "first_joint_near_boundary_month": 91,
+      "share_after80": 0.9316770186335404
+    },
+    {
+      "run": 8,
+      "first_joint_near_boundary_month": 80,
+      "share_after80": 1.0
+    },
+    {
+      "run": 9,
+      "first_joint_near_boundary_month": 80,
+      "share_after80": 1.0
+    },
+    {
+      "run": 10,
+      "first_joint_near_boundary_month": 79,
+      "share_after80": 1.0
+    },
+    {
+      "run": 11,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    },
+    {
+      "run": 12,
+      "first_joint_near_boundary_month": 163,
+      "share_after80": 0.484472049689441
+    },
+    {
+      "run": 13,
+      "first_joint_near_boundary_month": 92,
+      "share_after80": 0.9254658385093167
+    },
+    {
+      "run": 14,
+      "first_joint_near_boundary_month": 60,
+      "share_after80": 1.0
+    },
+    {
+      "run": 15,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    },
+    {
+      "run": 16,
+      "first_joint_near_boundary_month": 58,
+      "share_after80": 1.0
+    },
+    {
+      "run": 17,
+      "first_joint_near_boundary_month": 93,
+      "share_after80": 0.9192546583850931
+    },
+    {
+      "run": 18,
+      "first_joint_near_boundary_month": 74,
+      "share_after80": 1.0
+    },
+    {
+      "run": 19,
+      "first_joint_near_boundary_month": 64,
+      "share_after80": 1.0
+    },
+    {
+      "run": 20,
+      "first_joint_near_boundary_month": 66,
+      "share_after80": 1.0
+    },
+    {
+      "run": 21,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    },
+    {
+      "run": 22,
+      "first_joint_near_boundary_month": 57,
+      "share_after80": 1.0
+    },
+    {
+      "run": 23,
+      "first_joint_near_boundary_month": 67,
+      "share_after80": 1.0
+    },
+    {
+      "run": 24,
+      "first_joint_near_boundary_month": 55,
+      "share_after80": 1.0
+    },
+    {
+      "run": 25,
+      "first_joint_near_boundary_month": 103,
+      "share_after80": 0.8571428571428571
+    },
+    {
+      "run": 26,
+      "first_joint_near_boundary_month": 98,
+      "share_after80": 0.8881987577639752
+    },
+    {
+      "run": 27,
+      "first_joint_near_boundary_month": 74,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 28,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    },
+    {
+      "run": 29,
+      "first_joint_near_boundary_month": 77,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 30,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    },
+    {
+      "run": 31,
+      "first_joint_near_boundary_month": 63,
+      "share_after80": 1.0
+    },
+    {
+      "run": 32,
+      "first_joint_near_boundary_month": 81,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 33,
+      "first_joint_near_boundary_month": 57,
+      "share_after80": 1.0
+    },
+    {
+      "run": 34,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    },
+    {
+      "run": 35,
+      "first_joint_near_boundary_month": 204,
+      "share_after80": 0.22981366459627328
+    },
+    {
+      "run": 36,
+      "first_joint_near_boundary_month": 118,
+      "share_after80": 0.7639751552795031
+    },
+    {
+      "run": 37,
+      "first_joint_near_boundary_month": 92,
+      "share_after80": 0.9254658385093167
+    },
+    {
+      "run": 38,
+      "first_joint_near_boundary_month": 80,
+      "share_after80": 1.0
+    },
+    {
+      "run": 39,
+      "first_joint_near_boundary_month": 60,
+      "share_after80": 1.0
+    },
+    {
+      "run": 40,
+      "first_joint_near_boundary_month": 58,
+      "share_after80": 1.0
+    },
+    {
+      "run": 41,
+      "first_joint_near_boundary_month": 65,
+      "share_after80": 1.0
+    },
+    {
+      "run": 42,
+      "first_joint_near_boundary_month": 59,
+      "share_after80": 1.0
+    },
+    {
+      "run": 43,
+      "first_joint_near_boundary_month": 135,
+      "share_after80": 0.6521739130434783
+    },
+    {
+      "run": 44,
+      "first_joint_near_boundary_month": 68,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 45,
+      "first_joint_near_boundary_month": 73,
+      "share_after80": 1.0
+    },
+    {
+      "run": 46,
+      "first_joint_near_boundary_month": 85,
+      "share_after80": 0.968944099378882
+    },
+    {
+      "run": 47,
+      "first_joint_near_boundary_month": 87,
+      "share_after80": 0.9565217391304348
+    },
+    {
+      "run": 48,
+      "first_joint_near_boundary_month": 62,
+      "share_after80": 1.0
+    },
+    {
+      "run": 49,
+      "first_joint_near_boundary_month": 116,
+      "share_after80": 0.7763975155279503
+    },
+    {
+      "run": 50,
+      "first_joint_near_boundary_month": 92,
+      "share_after80": 0.9254658385093167
+    },
+    {
+      "run": 51,
+      "first_joint_near_boundary_month": 118,
+      "share_after80": 0.7639751552795031
+    },
+    {
+      "run": 52,
+      "first_joint_near_boundary_month": 89,
+      "share_after80": 0.937888198757764
+    },
+    {
+      "run": 53,
+      "first_joint_near_boundary_month": 81,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 54,
+      "first_joint_near_boundary_month": 92,
+      "share_after80": 0.9254658385093167
+    },
+    {
+      "run": 55,
+      "first_joint_near_boundary_month": 69,
+      "share_after80": 1.0
+    },
+    {
+      "run": 56,
+      "first_joint_near_boundary_month": 64,
+      "share_after80": 1.0
+    },
+    {
+      "run": 57,
+      "first_joint_near_boundary_month": 58,
+      "share_after80": 1.0
+    },
+    {
+      "run": 58,
+      "first_joint_near_boundary_month": 62,
+      "share_after80": 1.0
+    },
+    {
+      "run": 59,
+      "first_joint_near_boundary_month": 83,
+      "share_after80": 0.9813664596273292
+    },
+    {
+      "run": 60,
+      "first_joint_near_boundary_month": 69,
+      "share_after80": 1.0
+    },
+    {
+      "run": 61,
+      "first_joint_near_boundary_month": 154,
+      "share_after80": 0.5403726708074534
+    },
+    {
+      "run": 62,
+      "first_joint_near_boundary_month": 102,
+      "share_after80": 0.8633540372670807
+    },
+    {
+      "run": 63,
+      "first_joint_near_boundary_month": 67,
+      "share_after80": 1.0
+    },
+    {
+      "run": 64,
+      "first_joint_near_boundary_month": 75,
+      "share_after80": 1.0
+    },
+    {
+      "run": 65,
+      "first_joint_near_boundary_month": 88,
+      "share_after80": 0.9503105590062112
+    },
+    {
+      "run": 66,
+      "first_joint_near_boundary_month": 84,
+      "share_after80": 0.9751552795031055
+    },
+    {
+      "run": 67,
+      "first_joint_near_boundary_month": 57,
+      "share_after80": 1.0
+    },
+    {
+      "run": 68,
+      "first_joint_near_boundary_month": 74,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 69,
+      "first_joint_near_boundary_month": 96,
+      "share_after80": 0.9006211180124224
+    },
+    {
+      "run": 70,
+      "first_joint_near_boundary_month": 70,
+      "share_after80": 1.0
+    },
+    {
+      "run": 71,
+      "first_joint_near_boundary_month": 60,
+      "share_after80": 1.0
+    },
+    {
+      "run": 72,
+      "first_joint_near_boundary_month": 140,
+      "share_after80": 0.6273291925465838
+    },
+    {
+      "run": 73,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    },
+    {
+      "run": 74,
+      "first_joint_near_boundary_month": 61,
+      "share_after80": 1.0
+    },
+    {
+      "run": 75,
+      "first_joint_near_boundary_month": 153,
+      "share_after80": 0.546583850931677
+    },
+    {
+      "run": 76,
+      "first_joint_near_boundary_month": 115,
+      "share_after80": 0.782608695652174
+    },
+    {
+      "run": 77,
+      "first_joint_near_boundary_month": 114,
+      "share_after80": 0.7888198757763976
+    },
+    {
+      "run": 78,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    },
+    {
+      "run": 79,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    },
+    {
+      "run": 80,
+      "first_joint_near_boundary_month": 103,
+      "share_after80": 0.8509316770186336
+    },
+    {
+      "run": 81,
+      "first_joint_near_boundary_month": 111,
+      "share_after80": 0.8074534161490683
+    },
+    {
+      "run": 82,
+      "first_joint_near_boundary_month": 63,
+      "share_after80": 1.0
+    },
+    {
+      "run": 83,
+      "first_joint_near_boundary_month": 63,
+      "share_after80": 1.0
+    },
+    {
+      "run": 84,
+      "first_joint_near_boundary_month": 79,
+      "share_after80": 1.0
+    },
+    {
+      "run": 85,
+      "first_joint_near_boundary_month": 96,
+      "share_after80": 0.9006211180124224
+    },
+    {
+      "run": 86,
+      "first_joint_near_boundary_month": 74,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 87,
+      "first_joint_near_boundary_month": 59,
+      "share_after80": 1.0
+    },
+    {
+      "run": 88,
+      "first_joint_near_boundary_month": 74,
+      "share_after80": 1.0
+    },
+    {
+      "run": 89,
+      "first_joint_near_boundary_month": 72,
+      "share_after80": 1.0
+    },
+    {
+      "run": 90,
+      "first_joint_near_boundary_month": 82,
+      "share_after80": 0.9875776397515528
+    },
+    {
+      "run": 91,
+      "first_joint_near_boundary_month": 65,
+      "share_after80": 1.0
+    },
+    {
+      "run": 92,
+      "first_joint_near_boundary_month": 66,
+      "share_after80": 1.0
+    },
+    {
+      "run": 93,
+      "first_joint_near_boundary_month": 76,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 94,
+      "first_joint_near_boundary_month": 65,
+      "share_after80": 1.0
+    },
+    {
+      "run": 95,
+      "first_joint_near_boundary_month": 60,
+      "share_after80": 1.0
+    },
+    {
+      "run": 96,
+      "first_joint_near_boundary_month": 166,
+      "share_after80": 0.4658385093167702
+    },
+    {
+      "run": 97,
+      "first_joint_near_boundary_month": 64,
+      "share_after80": 0.9937888198757764
+    },
+    {
+      "run": 98,
+      "first_joint_near_boundary_month": 86,
+      "share_after80": 0.9627329192546584
+    },
+    {
+      "run": 99,
+      "first_joint_near_boundary_month": null,
+      "share_after80": 0.0
+    }
+  ],
+  "fixed_points_frozen": [
+    {
+      "A": 0.35,
+      "concentration": 0.0,
+      "liberties": 1.0,
+      "violence": 0.0,
+      "prosperity": 1.0,
+      "trust": 1.0,
+      "independence": 1.0,
+      "residual": 0.0,
+      "spectral_radius": 0.0,
+      "eigenvalues": [
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        }
+      ],
+      "local_label": "çekici (donmuş kapanış)"
+    },
+    {
+      "A": 0.35,
+      "concentration": 1.0,
+      "liberties": 0.0,
+      "violence": 0.2160500000000003,
+      "prosperity": 0.0,
+      "trust": 0.0,
+      "independence": 0.0,
+      "residual": 0.0,
+      "spectral_radius": 0.9000000000111023,
+      "eigenvalues": [
+        {
+          "real": 0.9000000000111023,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        }
+      ],
+      "local_label": "çekici (donmuş kapanış)"
+    },
+    {
+      "A": 0.6,
+      "concentration": 0.0,
+      "liberties": 1.0,
+      "violence": 0.0,
+      "prosperity": 1.0,
+      "trust": 1.0,
+      "independence": 1.0,
+      "residual": 0.0,
+      "spectral_radius": 0.0,
+      "eigenvalues": [
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        }
+      ],
+      "local_label": "çekici (donmuş kapanış)"
+    },
+    {
+      "A": 0.6,
+      "concentration": 1.0,
+      "liberties": 0.0,
+      "violence": 0.21605000000000005,
+      "prosperity": 0.0,
+      "trust": 0.0,
+      "independence": 0.0,
+      "residual": 0.0,
+      "spectral_radius": 0.9000000000111023,
+      "eigenvalues": [
+        {
+          "real": 0.9000000000111023,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        }
+      ],
+      "local_label": "çekici (donmuş kapanış)"
+    },
+    {
+      "A": 0.85,
+      "concentration": 1.0,
+      "liberties": 0.0,
+      "violence": 0.21605000000000005,
+      "prosperity": 0.0,
+      "trust": 0.0,
+      "independence": 0.0,
+      "residual": 0.0,
+      "spectral_radius": 0.9000000000111023,
+      "eigenvalues": [
+        {
+          "real": 0.9000000000111023,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        }
+      ],
+      "local_label": "çekici (donmuş kapanış)"
+    },
+    {
+      "A": 0.85,
+      "concentration": 0.0,
+      "liberties": 1.0,
+      "violence": 0.0,
+      "prosperity": 1.0,
+      "trust": 1.0,
+      "independence": 1.0,
+      "residual": 0.0,
+      "spectral_radius": 0.0,
+      "eigenvalues": [
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        }
+      ],
+      "local_label": "çekici (donmuş kapanış)"
+    }
+  ],
+  "state_correlations_late": {
+    "concentration": {
+      "concentration": 1.0,
+      "liberties": -0.9674648254203544,
+      "violence": 0.8564871344022446,
+      "prosperity": -0.8552786397349427,
+      "trust": -0.8815405559352113,
+      "independence": -0.9759866855602776
+    },
+    "liberties": {
+      "concentration": -0.9674648254203544,
+      "liberties": 1.0,
+      "violence": -0.8156538889365914,
+      "prosperity": 0.805601248656322,
+      "trust": 0.8545037590253327,
+      "independence": 0.9955795598503463
+    },
+    "violence": {
+      "concentration": 0.8564871344022446,
+      "liberties": -0.8156538889365914,
+      "violence": 1.0,
+      "prosperity": -0.96682491527467,
+      "trust": -0.9647860274810964,
+      "independence": -0.8224526061966064
+    },
+    "prosperity": {
+      "concentration": -0.8552786397349427,
+      "liberties": 0.805601248656322,
+      "violence": -0.96682491527467,
+      "prosperity": 1.0,
+      "trust": 0.964592494059457,
+      "independence": 0.8140459946808177
+    },
+    "trust": {
+      "concentration": -0.8815405559352113,
+      "liberties": 0.8545037590253327,
+      "violence": -0.9647860274810964,
+      "prosperity": 0.964592494059457,
+      "trust": 1.0,
+      "independence": 0.861202685590127
+    },
+    "independence": {
+      "concentration": -0.9759866855602776,
+      "liberties": 0.9955795598503463,
+      "violence": -0.8224526061966064,
+      "prosperity": 0.8140459946808177,
+      "trust": 0.861202685590127,
+      "independence": 1.0
+    }
+  },
+  "increment_correlations": {
+    "delta_concentration": {
+      "delta_concentration": 1.0,
+      "delta_liberties": -0.3030048034952381,
+      "delta_violence": 0.10185523949374481,
+      "delta_prosperity": -0.08369108744214149,
+      "delta_trust": -0.2505751296448349,
+      "delta_independence": -0.320639252231331
+    },
+    "delta_liberties": {
+      "delta_concentration": -0.3030048034952381,
+      "delta_liberties": 1.0,
+      "delta_violence": -0.07414750378602498,
+      "delta_prosperity": 0.06865712446440851,
+      "delta_trust": 0.3503554480416457,
+      "delta_independence": 0.5577571772122614
+    },
+    "delta_violence": {
+      "delta_concentration": 0.10185523949374481,
+      "delta_liberties": -0.07414750378602498,
+      "delta_violence": 1.0,
+      "delta_prosperity": -0.2443462388141351,
+      "delta_trust": -0.10442659803841062,
+      "delta_independence": -0.0023750879565911133
+    },
+    "delta_prosperity": {
+      "delta_concentration": -0.08369108744214149,
+      "delta_liberties": 0.06865712446440851,
+      "delta_violence": -0.2443462388141351,
+      "delta_prosperity": 1.0,
+      "delta_trust": 0.09594815958492318,
+      "delta_independence": 0.0717459595460936
+    },
+    "delta_trust": {
+      "delta_concentration": -0.2505751296448349,
+      "delta_liberties": 0.3503554480416457,
+      "delta_violence": -0.10442659803841062,
+      "delta_prosperity": 0.09594815958492318,
+      "delta_trust": 1.0,
+      "delta_independence": 0.42622287698039873
+    },
+    "delta_independence": {
+      "delta_concentration": -0.320639252231331,
+      "delta_liberties": 0.5577571772122614,
+      "delta_violence": -0.0023750879565911133,
+      "delta_prosperity": 0.0717459595460936,
+      "delta_trust": 0.42622287698039873,
+      "delta_independence": 1.0
+    }
+  },
+  "aggregate_means_early": {
+    "run": 49.5,
+    "month": 6.5,
+    "A": 0.5773005139376158,
+    "D": 0.6564483374398377,
+    "S": 0.3188744970333138,
+    "F": 0.3265573941496648,
+    "B": 0.8377963416602728
+  },
+  "aggregate_means_late": {
+    "run": 49.5,
+    "month": 210.0,
+    "A": 0.5020649586064133,
+    "D": 0.716060258132834,
+    "S": 0.9065994524310933,
+    "F": 0.6781403635556313,
+    "B": 0.9515303258487726
+  },
+  "event_study": {
+    "run": {
+      "Dış müdahale ekonomik ve siyasi gerilimi artırdı.": 51.08,
+      "Ekonomik kriz üretimi ve refahı düşürdü.": 46.3201581027668,
+      "Kıtlık toplumsal baskıyı artırdı.": 48.67391304347826
+    },
+    "month": {
+      "Dış müdahale ekonomik ve siyasi gerilimi artırdı.": 112.56,
+      "Ekonomik kriz üretimi ve refahı düşürdü.": 112.6798418972332,
+      "Kıtlık toplumsal baskıyı artırdı.": 107.23188405797102
+    },
+    "prosperity_immediate": {
+      "Dış müdahale ekonomik ve siyasi gerilimi artırdı.": -0.04850397404020459,
+      "Ekonomik kriz üretimi ve refahı düşürdü.": -0.1281482075325148,
+      "Kıtlık toplumsal baskıyı artırdı.": -0.09072199640438673
+    },
+    "prosperity_after12": {
+      "Dış müdahale ekonomik ve siyasi gerilimi artırdı.": 0.0015443567137719517,
+      "Ekonomik kriz üretimi ve refahı düşürdü.": -0.03210054244383827,
+      "Kıtlık toplumsal baskıyı artırdı.": -0.014531751405976897
+    },
+    "trust_after12": {
+      "Dış müdahale ekonomik ve siyasi gerilimi artırdı.": 0.030184175143525227,
+      "Ekonomik kriz üretimi ve refahı düşürdü.": 0.013152122754876868,
+      "Kıtlık toplumsal baskıyı artırdı.": 0.021623946901043658
+    }
+  },
+  "warning": "Donmuş makro kapanışın sabit noktaları tam stokastik etmen sisteminin kararlılık kanıtı değildir."
+}
