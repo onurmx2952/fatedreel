@@ -15,3 +15,5 @@ Web arayüzünü yerelde çalıştırmak için ayrıca `python download_runtime.
 V1/V2 rejim eşikleri aynıdır. İlk grafik bütün 100 yolun 20. yıl sınıf dağılımıdır. Tekil yollar ayrı sekmededir; tek deney, deneylerin medyanı ve ortalaması açıkça ayrılır. Ortalama yol rejim olarak sınıflandırılmaz. Sıfır sayılı sınıflar gizlenmez. Monte Carlo aralıkları yalnızca tohum değişkenliğidir; model ve gerçek dünya belirsizliğini içermez.
 
 Deney öncesi tasarım MODEL_V2.md, kaynak doğrulaması research/v2/preregistration.json ve source_manifest.json içindedir. Dosyaları değiştirirseniz bu deneyin aynısını değil yeni bir model sürümünü çalıştırmış olursunuz. Sonuç sonrası açıklamalar MODEL_V2_IMPLEMENTATION.md dosyasındadır; kaynak katsayıları değiştirilmemiştir.
+
+Varsayılan görünüm denetlenmiş V1 arşivinin dağılımıdır; V2 yeni doğrulanmış model gibi varsayılanın yerine konulmaz. Model seçicisinden ayrı araştırma adayı olarak incelenebilir.
