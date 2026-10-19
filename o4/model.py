@@ -122,5 +122,3 @@ def sensitivity(params,runs=100,seed=2026,progress=None):
         rows.append({'parameter':key,'value':value,'authoritarian_rate':float(y.mean()),'paired_difference':float(delta.mean()),'paired_mc_se':float(delta.std(ddof=1)/np.sqrt(runs)) if runs>1 else None})
         if progress:progress((j+1)/len(variants))
     return pd.DataFrame(rows)
-
-

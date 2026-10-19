@@ -27,7 +27,7 @@ Yüksek sınır payları modelin clip ve geri besleme yapısının etkisidir; am
 
 ## Başlangıç koşulları
 
-scenario           regime          
+scenario           regime
 Devrim             Demokrasi            89
                    Kırılgan yönetim      1
                    Otoriter             10
