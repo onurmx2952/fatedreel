@@ -15,3 +15,21 @@
 
 /easyenglish/audio/*
   Cache-Control: public, max-age=31536000, immutable
+
+/o4/*.js
+  Content-Type: application/javascript; charset=utf-8
+
+/o4/runtime/*.mjs
+  Content-Type: application/javascript; charset=utf-8
+
+/o4/runtime/*.wasm
+  Content-Type: application/wasm
+
+/o4/runtime/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/o4/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/o4/*.json
+  Cache-Control: public, max-age=0, must-revalidate
