@@ -1,4 +1,4 @@
-import {eligiblePlaces} from './domain.js';
+import {eligiblePlaces} from './domain.js?v=3';
 const $=id=>document.getElementById(id);
 const icon=name=>`<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
 const escape=text=>String(text??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -42,7 +42,7 @@ function updateMarkers(places){
 function safeUrl(value){try{const u=new URL(value);return u.protocol==='https:'?u.href:'';}catch{return '';}}
 function photoMarkup(p,detail=false){
   const photo=safeUrl(p.photo);
-  const placeholder=`<span class="no-photo">${icon(p.group==='food'?'food':p.group==='activity'?'play':'shop')}<span>İşletme fotoğrafı bulunamadı</span></span>`;
+  const placeholder=`<span class="no-photo">${icon(({food:'food',activity:'play',shop:'shop',care:'care',other:'pin'})[p.group]||'pin')}<span>İşletme fotoğrafı bulunamadı</span></span>`;
   return photo?`<img ${detail?'class="detail-image"':''} src="${escape(photo)}" alt="${escape(p.name)} — işletme fotoğrafı" ${detail?'':'loading="lazy"'} referrerpolicy="no-referrer">`:placeholder;
 }
 function handleImageErrors(container){container.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{img.replaceWith(Object.assign(document.createElement('span'),{className:'no-photo',textContent:'İşletme fotoğrafı yüklenemedi'}));},{once:true}));}

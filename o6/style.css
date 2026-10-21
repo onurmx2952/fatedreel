@@ -17,5 +17,6 @@ dialog{border:0;background:var(--paper);color:var(--ink);border-radius:21px;padd
 .data-note{font-size:13px;max-width:65ch}.card-photo{aspect-ratio:1.5}.has-results h1{font-size:clamp(33px,3vw,44px)}
 .leaflet-overlay-pane svg{width:auto;height:auto;stroke:none}
 .walking-stamp{display:none}.rating{font-size:14px}.rating .review-count{font-size:13px}.mobile-map-toggle{display:none}
+.place-pin.care{background:#39776d}.place-pin.other{background:#535e65}
 @media(max-width:850px){.has-results h1{font-size:34px;letter-spacing:-1.3px}.has-results .walking-stamp{display:none}.has-results .main-map{height:200px}.has-results .heading-row{margin-bottom:18px}.has-results .intro{max-width:none}.card-photo{aspect-ratio:1.55}.data-note{font-size:13px}}
 @media(max-width:850px){.has-results .mobile-map-toggle{display:inline-flex;color:var(--orange);margin-left:9px;font-size:12px}.has-results .main-map,.has-results .map-bottom{display:none}.has-results .map-panel.map-expanded .main-map{display:block;height:230px}.has-results .map-panel.map-expanded .map-bottom{display:flex}.has-results .map-topline{padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:0}.has-results .map-panel.map-expanded .map-topline{margin-bottom:12px}.has-results .result-toolbar{margin-top:21px}.card-meta .rating{font-size:14px}.rating .review-count{font-size:13px}}

@@ -6,7 +6,14 @@ export function distanceMeters(a,b) {
 
 export function describePlace(p) {
   const t=(p.name+' '+p.category).toLocaleLowerCase('tr-TR');
-  if(/ofisi|genel merkez|toptancı|tedarikçi/.test(t)) return null;
+  // These labels explain a suggestion; they are not a category allowlist.
+  // An unfamiliar place type must still pass through the same quality/distance filter.
+  if(/kuaför|berber|hairdresser|hair salon|barber/.test(t)) return {group:'care',action:'Saçına bir yenilik kat.',kind:'Kuaför & berber'};
+  if(/hamam|hammam|sauna/.test(t)) return {group:'care',action:'Hamamda bir mola ver.',kind:'Hamam & sauna'};
+  if(/masaj|masöz|massage/.test(t)) return {group:'care',action:'Masaj seçeneklerine göz at.',kind:'Masaj & rahatlama'};
+  if(/\bspa\b|wellness/.test(t)) return {group:'care',action:'Kendine bir mola ayır.',kind:'Spa & rahatlama'};
+  if(/güzellik|cilt bak|manikür|pedikür|tırnak|beauty|nail salon/.test(t)) return {group:'care',action:'Bakım seçeneklerini keşfet.',kind:'Kişisel bakım'};
+  if(/fitness|spor salon|pilates|yoga|yüzme|tenis|halı saha/.test(t)) return {group:'activity',action:'Harekete biraz zaman ayır.',kind:'Spor & hareket'};
   if(/mantı|mantici/.test(t)) return {group:'food',action:'Burada mantı ye.',kind:'Mantı molası'};
   if(/bilardo/.test(t)) return {group:'activity',action:'Bir el bilardo oyna.',kind:'Oyun zamanı'};
   if(/bowling/.test(t)) return {group:'activity',action:'Bir tur bowling oyna.',kind:'Oyun zamanı'};
@@ -19,7 +26,7 @@ export function describePlace(p) {
   if(/tatlı|pastane|pastanesi|dondurma|çikolata|baklava|pasta|waffle|künefe/.test(t)) return {group:'food',action:'Kendine bir tatlı ısmarla.',kind:'Tatlı bir mola'};
   if(/restoran|lokanta|burger|pizza|kebap|döner|büfe|tost|yemek|mado|fırın|kahvaltı|meyhane|pub|bar\b/.test(t)) return {group:'food',action:'Burada bir şeyler ye.',kind:'Sofraya otur'};
   if(/mağaza|market|pazar|hediye|butik|alışveriş|giyim|çiçek|oyuncak|plak/.test(t)) return {group:'shop',action:'Şuraya bir göz at.',kind:'Yol üstü keşif'};
-  return null;
+  return {group:'other',action:'Yakınındaki bu yeri keşfet.',kind:p.category?.split(' · ')[0]||'Yeni bir keşif'};
 }
 
 export function eligiblePlaces(places,center,radius) {
@@ -30,7 +37,6 @@ export function eligiblePlaces(places,center,radius) {
     const distance=distanceMeters(center,p);
     if(distance>radius)continue;
     const suggestion=describePlace(p);
-    if(!suggestion)continue;
     const value={...p,...suggestion,distance,walkMinutes:Math.max(1,Math.ceil(distance/75))};
     unique.set(p.id||p.name+'|'+p.lat+'|'+p.lng,value);
   }

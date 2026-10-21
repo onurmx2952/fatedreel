@@ -1,6 +1,8 @@
 const JSON_HEADERS = {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
 const json = (data,status=200) => new Response(JSON.stringify(data),{status,headers:JSON_HEADERS});
-const QUERIES = ['restoran mantı','kafe kahve tatlı','bilardo bowling eğlence','telefon aksesuar mağaza','japon pazarı alışveriş','müze sanat kitapçı'];
+// General discovery is first. Extra searches improve recall across different place types;
+// they never define which categories may be recommended.
+export const QUERIES = ['işletmeler','yakındaki yerler','kuaför berber güzellik salonu','masaj spa hamam','restoran kafe','mağaza alışveriş','spor eğlence kültür','hizmet tamir atölye','eczane sağlık kliniği','otel konaklama'];
 const RADII = [50,100,250,500];
 
 import {distanceMeters,describePlace,eligiblePlaces} from '../../o6/domain.js';
@@ -60,7 +62,7 @@ export async function onRequest({request,env,waitUntil}) {
   const lat=Number(latText),lng=Number(lngText),radius=Number(url.searchParams.get('radius')||100);
   if(latText===null||lngText===null||latText.trim()===''||lngText.trim()===''||!Number.isFinite(lat)||!Number.isFinite(lng)||Math.abs(lat)>90||Math.abs(lng)>180||!RADII.includes(radius))return json({error:'Geçerli bir konum ve 50, 100, 250 veya 500 metre seç.'},400);
   const center={lat,lng};
-  const cacheUrl=new URL(url.origin+'/api/o6-cache');
+  const cacheUrl=new URL(url.origin+'/api/o6-cache-all-places-v3');
   cacheUrl.search=new URLSearchParams({lat:lat.toFixed(4),lng:lng.toFixed(4)}).toString();
   const cache=globalThis.caches?.default;
   let candidates=[],source='live',updatedAt=new Date().toISOString(),queriesOk=0;
@@ -80,5 +82,5 @@ export async function onRequest({request,env,waitUntil}) {
     }catch{return json({error:'Yer verisi şu an alınamıyor. Biraz sonra tekrar dene.'},503)}
   }
   const places=eligiblePlaces(candidates,center,radius);
-  return json({center,radius,minRating:4.5,minReviews:100,places,source,updatedAt,queriesOk,queriesTotal:QUERIES.length,examined:new Set(candidates.map(p=>p.id)).size,partial:source==='snapshot'||queriesOk<QUERIES.length});
+  return json({scope:'all_places',center,radius,minRating:4.5,minReviews:100,places,source,updatedAt,queriesOk,queriesTotal:QUERIES.length,examined:new Set(candidates.map(p=>p.id)).size,partial:source==='snapshot'||queriesOk<QUERIES.length});
 }
