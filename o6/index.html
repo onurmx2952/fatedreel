@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f8f7f3">
+  <meta name="description" content="100 metre yakınında ne var? En az 4,5 puan ve 100 değerlendirmeyle yemek, aktivite ve alışveriş keşifleri.">
+  <title>yakında — Küçük bir yürüyüş, iyi bir keşif.</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./vendor/leaflet.css">
+  <link rel="stylesheet" href="./style.css?v=1">
+  <script src="./vendor/leaflet.js" defer></script>
+  <script src="./app.js?v=1" type="module"></script>
+</head>
+<body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-location" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></symbol>
+<symbol id="i-food" viewBox="0 0 24 24"><path d="M4 3v6c0 3 6 3 6 0V3M7 3v18m11-18c-4 3-4 9 0 9h2M20 3v18"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="5"/><path d="M7 10v5m-2.5-2.5h5M16 11h.01M18 14h.01M9 6l1-3h4l1 3"/></symbol>
+<symbol id="i-shop" viewBox="0 0 24 24"><path d="M4 8h16l1 13H3L4 8Z"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+<symbol id="i-walk" viewBox="0 0 24 24"><circle cx="14" cy="4" r="2"/><path d="m7 11 4-3 4 2 3 3m-7-5-2 7-4 6m5-8 5 3 1 5"/></symbol>
+</defs></svg>
+<header class="site-header">
+  <a class="brand" href="./" aria-label="yakında ana sayfa"><span class="brand-mark"><svg><use href="#i-location"/></svg></span>yakında<span class="brand-dot">.</span></a>
+  <span class="brand-caption">Küçük bir yürüyüş, iyi bir keşif.</span>
+  <button class="icon-button" id="aboutButton" aria-label="Öneriler nasıl seçiliyor?"><svg><use href="#i-info"/></svg></button>
+</header>
+<main>
+  <section class="discovery" aria-labelledby="pageTitle">
+    <div class="heading-row"><div><h1 id="pageTitle">Yakınında güzel<br>bir şeyler var.</h1><p class="intro">Bir şey ye. Bir şey yap. Yeni bir yer keşfet.</p></div><span class="walking-stamp" aria-hidden="true"><svg><use href="#i-walk"/></svg><span>Hadi<br>çıkalım.</span></span></div>
+    <div class="location-actions"><button id="locateButton" class="button primary"><svg><use href="#i-location"/></svg><span>Konum belirle</span><svg class="button-arrow"><use href="#i-arrow"/></svg></button><button id="pickButton" class="button secondary"><svg><use href="#i-pin"/></svg>Haritadan seç</button></div>
+    <div class="criteria-row"><span><svg><use href="#i-star"/></svg>4,5 ve üzeri</span><span>100+ değerlendirme</span><label class="radius-label">Mesafe <select id="radius" aria-label="Arama yarıçapı"><option value="50">50 m</option><option value="100" selected>100 m</option><option value="250">250 m</option><option value="500">500 m</option></select></label></div>
+    <div id="feedback" class="feedback" role="status" aria-live="polite" hidden></div>
+    <div id="mobileMapAnchor"></div>
+    <div class="result-toolbar"><div><span class="tiny-label" id="locationLabel">HENÜZ KONUM SEÇİLMEDİ</span><h2 id="resultTitle">Bugün ne yapmak istersin?</h2></div><button id="refreshButton" class="text-button" hidden>Yenile <span aria-hidden="true">↻</span></button></div>
+    <nav class="categories" aria-label="Öneri kategorileri"><button data-group="all" class="active" aria-pressed="true">Hepsi</button><button data-group="food" aria-pressed="false"><svg><use href="#i-food"/></svg>Ye & iç</button><button data-group="activity" aria-pressed="false"><svg><use href="#i-play"/></svg>Bir şey yap</button><button data-group="shop" aria-pressed="false"><svg><use href="#i-shop"/></svg>Alışveriş</button></nav>
+    <div id="results" class="results" aria-live="polite">
+      <div class="welcome-state"><div class="welcome-art" aria-hidden="true"><span class="orbit"></span><span class="orbit two"></span><span class="art-center"><svg><use href="#i-pin"/></svg></span><span class="art-satellite food"><svg><use href="#i-food"/></svg></span><span class="art-satellite play"><svg><use href="#i-play"/></svg></span><span class="art-satellite shop"><svg><use href="#i-shop"/></svg></span></div><h3>İyi bir plan, hemen köşede.</h3><p>Konumunu belirle ya da haritaya bir nokta bırak.<br>Yakınındaki iyi yerleri birlikte bulalım.</p><button class="text-button" id="startAnkara">Büyükesat, Ankara’da göz at <svg><use href="#i-arrow"/></svg></button></div>
+    </div>
+    <div class="data-note" id="dataNote">Yalnızca seçtiğin mesafedeki, puan ve değerlendirme eşiğini geçen kayıtlar gösterilir.</div>
+  </section>
+  <aside class="map-panel" id="mapPanel" aria-label="Yakın çevre haritası"><div class="map-topline"><span class="map-status-dot"></span><span id="mapLabel">Bir başlangıç noktası seç.</span><span id="radiusTag">100 m yarıçap</span><button id="mapToggle" class="text-button mobile-map-toggle" aria-expanded="false" aria-controls="map">Haritayı aç ↗</button></div><div id="map" class="main-map" aria-label="Harita"></div><div class="map-bottom"><svg><use href="#i-pin"/></svg><span id="mapHint">Haritadan kendine bir keşif alanı çiz.</span><button id="mapPickButton" class="text-button">Konumu değiştir ↗</button></div><div class="map-caption"><span>Yakın olana bir şans ver.</span><span class="coordinate-label" id="coordinates">39.8952° N · 32.8785° E</span></div></aside>
+</main>
+<footer class="site-footer"><a href="/">FatedReel</a><span>Bir yere gitmek için küçük bir sebep.</span><button class="text-button" id="privacyButton">Veri ve konum</button></footer>
+<dialog id="picker" class="picker-dialog"><div class="dialog-heading"><div><p class="tiny-label">BAŞLANGIÇ NOKTAN</p><h2>Nerede keşfedelim?</h2></div><button class="icon-button" data-close="picker" aria-label="Kapat"><svg><use href="#i-close"/></svg></button></div><form id="addressForm" class="address-search"><svg><use href="#i-search"/></svg><input id="addressInput" type="search" placeholder="Mahalle, cadde ya da şehir ara" aria-label="Adres ara" minlength="3" maxlength="160" required><button class="button primary" id="addressSearchButton">Ara</button></form><div id="addressResults" class="address-results" aria-live="polite"></div><div id="pickerMap" class="picker-map" aria-label="Konum seçmek için haritaya dokun"></div><div class="picker-instruction"><svg><use href="#i-pin"/></svg><span>Haritaya dokun veya işareti sürükle.</span><output id="draftCoordinates"></output></div><div class="dialog-bottom"><span>Seçilen noktadan <strong id="pickerRadius">100 metre</strong> çevresi</span><button class="button primary" id="applyLocation">Bu konumu keşfet <svg><use href="#i-arrow"/></svg></button></div></dialog>
+<dialog id="about" class="about-dialog"><div class="dialog-heading"><h2>Sadece yakın.<br>Gerçekten iyi.</h2><button class="icon-button" data-close="about" aria-label="Kapat"><svg><use href="#i-close"/></svg></button></div><div class="rule-list"><div><strong>4,5 / 5</strong><p>Bu puanın altındaki işletmeler önerilmez.</p></div><div><strong>100 değerlendirme</strong><p>En az 100 Google Maps değerlendirmesi gerekir.</p></div><div><strong id="aboutRadius">100 metre</strong><p>Seçtiğin noktadan kuş uçuşu uzaklık. Yürüme rotası daha uzun olabilir.</p></div></div><p>Öneriler mesafeye göre sıralanır. Eşit mesafede puan ve değerlendirme sayısı dikkate alınır. Sıfır sonuç çıkarsa kriterler otomatik gevşetilmez.</p><p>İşletme görselleri Google Maps kayıtlarından gelir. Görsel ürünün veya stok durumunun garantisi değildir. Ziyaret etmeden önce açık olduğunu kontrol et.</p><p class="small-note">Harita: OpenStreetMap · Adres araması: Photon / OpenStreetMap · İşletmeler: Google Maps</p></dialog>
+<dialog id="privacy" class="about-dialog"><div class="dialog-heading"><h2>Konum sende.</h2><button class="icon-button" data-close="privacy" aria-label="Kapat"><svg><use href="#i-close"/></svg></button></div><p>Konumun yalnızca “Konum belirle” düğmesine bastığında ve izin verdiğinde alınır. Arka planda konum takibi yapılmaz.</p><p>Seçilen koordinatlar yakın yerleri aramak için sunucuya ve veri sağlayıcısına gönderilir. Harita görüntülenirken harita sağlayıcısına görüntülenen bölge iletilir.</p><p>Konum adres çubuğuna eklenir; bu bağlantıyı paylaşırsan seçtiğin nokta da paylaşılır. Konum geçmişi veya kullanıcı hesabı tutulmaz.</p><p>Veri alınamazsa tarihli Ankara tarama kayıtları kullanılabilir; bu durum sonuçların altında açıkça belirtilir. Boş sonuç, çevrende hiç işletme olmadığı anlamına gelmez.</p></dialog>
+<dialog id="placeDetail" class="detail-dialog"><button class="icon-button detail-close" data-close="placeDetail" aria-label="Kapat"><svg><use href="#i-close"/></svg></button><div id="detailContent"></div></dialog>
+<noscript><p class="feedback">Bu uygulama harita ve konum özellikleri için JavaScript gerektirir.</p></noscript>
+</body></html>
