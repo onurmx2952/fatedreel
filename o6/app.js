@@ -1,3 +1,4 @@
+import {eligiblePlaces} from './domain.js';
 const $=id=>document.getElementById(id);
 const icon=name=>`<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
 const escape=text=>String(text??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -88,6 +89,7 @@ async function discover(center,label='Seçtiğin nokta'){
   try{
     const params=new URLSearchParams({lat:state.center.lat,lng:state.center.lng,radius:state.radius});
     const response=await fetch('/api/o6?'+params,{signal:state.controller.signal});
+    if(!response.headers.get('Content-Type')?.includes('application/json'))throw new Error('Yer arama servisine ulaşılamadı.');
     const data=await response.json();
     if(!response.ok)throw new Error(data.error||'Yerler alınamadı.');
     if(token!==state.request)return;
@@ -96,9 +98,19 @@ async function discover(center,label='Seçtiğin nokta'){
     state.places=(data.places||[]).filter(p=>p.rating>=4.5&&p.reviews>=100&&p.distance<=state.radius&&p.distance>=0);
   }catch(error){
     if(token!==state.request||error.name==='AbortError')return;
-    feedback(error.message==='Failed to fetch'?'Bağlantı kurulamadı. İnternetini kontrol edip yeniden dene.':error.message,'error');
-    state.places=[];
-    $('dataNote').textContent='Arama tamamlanamadı. Boş ekran, çevrende uygun işletme olmadığı anlamına gelmez.';
+    try{
+      const backup=await fetch('./places.json',{signal:state.controller.signal});
+      if(!backup.ok)throw new Error('backup');
+      const snapshot=await backup.json();
+      if(token!==state.request)return;
+      state.data={source:'snapshot',updatedAt:snapshot.updatedAt,partial:true};
+      state.places=eligiblePlaces(snapshot.places,state.center,state.radius);
+    }catch(backupError){
+      if(token!==state.request||backupError.name==='AbortError')return;
+      feedback(error.message==='Failed to fetch'?'Bağlantı kurulamadı. İnternetini kontrol edip yeniden dene.':error.message,'error');
+      state.places=[];
+      $('dataNote').textContent='Arama tamamlanamadı. Boş ekran, çevrende uygun işletme olmadığı anlamına gelmez.';
+    }
   }finally{
     if(token===state.request){state.loading=false;$('results').setAttribute('aria-busy','false');$('refreshButton').disabled=false;render();}
   }
