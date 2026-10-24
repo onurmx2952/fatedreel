@@ -38,5 +38,11 @@
 /o4/
   Cache-Control: public, max-age=0, must-revalidate
 
+/o9/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/o9/*.js
+  Content-Type: application/javascript; charset=utf-8
+
 /o4/index.html
   Cache-Control: public, max-age=0, must-revalidate
