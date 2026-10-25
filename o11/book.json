@@ -212,7 +212,7 @@
         ],
         [
           "Kısaltmalar ve cevaplar",
-          "I am → I'm; she is → she's; they are → they're. Kısa olumlu cevabın sonunda kısaltma yapma: Yes, I am. No, she isn't mümkündür."
+          "I am → I'm; she is → she's; they are → they're. Olumsuz örneklerde günlük konuşmadaki isn't/aren't biçimlerini kullanıyoruz. Amn't kullanılmaz; I am not, I'm not olur. Kısa olumlu cevabın sonunda kısaltma yapma: Yes, I am. Olumsuz kısa cevap ise No, I'm not veya No, she isn't olabilir."
         ]
       ],
       "forms": [
@@ -222,7 +222,7 @@
         ],
         [
           "Olumsuz",
-          "Özne + am/is/are + not + durum"
+          "Özne + isn't/aren't + durum; I için I'm not"
         ],
         [
           "Soru",
@@ -272,9 +272,9 @@
           "audio": "c8afbaac0afad56d"
         },
         {
-          "en": "They are not ready.",
+          "en": "They aren't ready.",
           "tr": "Onlar hazır değil.",
-          "audio": "5d7c311153590c3f"
+          "audio": "099b3cc8a0a240b6"
         },
         {
           "en": "Are you hungry?",
@@ -287,9 +287,9 @@
           "audio": "77f17e8fd362cfb7"
         },
         {
-          "en": "No, I am not.",
+          "en": "No, I'm not.",
           "tr": "Hayır, değilim.",
-          "audio": "4ad57088f6db41de"
+          "audio": "cbcd746266165c6c"
         },
         {
           "en": "You are late.",
@@ -304,9 +304,9 @@
           "audio": "b0cea5e7aedb8a1c"
         },
         {
-          "en": "No, I am not.",
+          "en": "No, I'm not.",
           "tr": "Hayır, değilim.",
-          "audio": "4ad57088f6db41de"
+          "audio": "cbcd746266165c6c"
         },
         {
           "en": "Is Emma at home?",
@@ -340,10 +340,10 @@
           "why": "Açlık bir durum olduğu için soru Are you ile başlar; do gerekmez."
         },
         {
-          "en": "No, I am not.",
+          "en": "No, I'm not.",
           "tr": "Hayır, değilim.",
-          "audio": "4ad57088f6db41de",
-          "why": "Am ile kurulan sorunun kısa olumsuz cevabı No, I am not olur."
+          "audio": "cbcd746266165c6c",
+          "why": "Am ile kurulan sorunun kısa olumsuz cevabı No, I'm not olur."
         }
       ],
       "questions": [
@@ -1213,9 +1213,9 @@
           "audio": "8698894a966a0b3a"
         },
         {
-          "en": "There is not a problem.",
+          "en": "There isn't a problem.",
           "tr": "Bir sorun yok.",
-          "audio": "d8ff88489fe35032"
+          "audio": "dc905048cea2354c"
         },
         {
           "en": "Are there any books?",
@@ -1266,10 +1266,10 @@
           "why": "Tek kitap olduğu için there is; yüzey üzerinde olmak için on kullanılır."
         },
         {
-          "en": "There is not a problem.",
+          "en": "There isn't a problem.",
           "tr": "Bir sorun yok.",
-          "audio": "d8ff88489fe35032",
-          "why": "Problem tekil olduğu için there is not kullanılır."
+          "audio": "dc905048cea2354c",
+          "why": "Problem tekil olduğu için there isn't kullanılır."
         }
       ],
       "questions": [
@@ -1557,14 +1557,14 @@
           "audio": "472861eee9407b7b"
         },
         {
-          "en": "I do not eat breakfast.",
+          "en": "I don't eat breakfast.",
           "tr": "Kahvaltı yapmam.",
-          "audio": "88e79d1d2d9c2b3a"
+          "audio": "ec8bba7041679df4"
         },
         {
-          "en": "He does not live here.",
+          "en": "He doesn't live here.",
           "tr": "O burada yaşamıyor.",
-          "audio": "fbb0e606fff4eb90"
+          "audio": "7156e7ca330173a9"
         },
         {
           "en": "Do they have a car?",
@@ -1572,9 +1572,9 @@
           "audio": "1718bfcf99a84214"
         },
         {
-          "en": "She does not understand.",
+          "en": "She doesn't understand.",
           "tr": "O anlamıyor.",
-          "audio": "8efbbc92c3241bdc"
+          "audio": "a6ad689254019ba9"
         },
         {
           "en": "Yes, I do.",
@@ -1582,9 +1582,9 @@
           "audio": "27282b999a04ddc6"
         },
         {
-          "en": "No, he does not.",
+          "en": "No, he doesn't.",
           "tr": "Hayır.",
-          "audio": "d6bbfbec48dd2464"
+          "audio": "ef0a92b4ed4886da"
         }
       ],
       "dialogue": [
@@ -1594,9 +1594,9 @@
           "audio": "a4f1be147394b041"
         },
         {
-          "en": "No, I do not.",
+          "en": "No, I don't.",
           "tr": "Hayır, çalışmam.",
-          "audio": "facc7513d3eed76e"
+          "audio": "675d13c2dc0bf946"
         },
         {
           "en": "Does your sister work here?",
@@ -1618,10 +1618,10 @@
           "why": "You ile soru yardımcısı do olur. Ardından fiil yalın kalır."
         },
         {
-          "en": "I do not eat breakfast.",
+          "en": "I don't eat breakfast.",
           "tr": "Kahvaltı yapmam.",
-          "audio": "88e79d1d2d9c2b3a",
-          "why": "I ile olumsuz yardımcı do not olur; eat yalın kalır."
+          "audio": "ec8bba7041679df4",
+          "why": "I ile olumsuz yardımcı don't olur; eat yalın kalır."
         },
         {
           "en": "Do they have a car?",
@@ -1694,7 +1694,7 @@
         ],
         [
           "Olumsuz",
-          "Özne + am/is/are + not + fiil-ing"
+          "Özne + isn't/aren't + fiil-ing; I için I'm not"
         ],
         [
           "Soru",
@@ -1744,9 +1744,9 @@
           "audio": "efe4936036ff2512"
         },
         {
-          "en": "We are not sleeping.",
+          "en": "We aren't sleeping.",
           "tr": "Uyumuyoruz.",
-          "audio": "2896f929937d3e7e"
+          "audio": "edbab71cfddba422"
         },
         {
           "en": "Are you listening?",
@@ -2834,9 +2834,9 @@
           "audio": "e640334e6c00348d"
         },
         {
-          "en": "I did not go to work.",
+          "en": "I didn't go to work.",
           "tr": "İşe gitmedim.",
-          "audio": "fce92ac9c791c5e2"
+          "audio": "8f2d43c6483facea"
         },
         {
           "en": "Why did you call me?",
@@ -2844,9 +2844,9 @@
           "audio": "0685ab2c6b94217f"
         },
         {
-          "en": "She did not answer my message.",
+          "en": "She didn't answer my message.",
           "tr": "Mesajıma cevap vermedi.",
-          "audio": "9a83c9341b2d82c6"
+          "audio": "423f96128b5e2350"
         },
         {
           "en": "Where did they meet?",
@@ -2854,9 +2854,9 @@
           "audio": "55d6641105a4ff0d"
         },
         {
-          "en": "Why did you not tell me the truth?",
+          "en": "Why didn't you tell me the truth?",
           "tr": "Bana neden gerçeği söylemedin?",
-          "audio": "1ec8db687be67f3b"
+          "audio": "5b4812f03d570ab9"
         },
         {
           "en": "Yes, I did.",
@@ -2864,9 +2864,9 @@
           "audio": "399210252493a4d4"
         },
         {
-          "en": "No, she did not.",
+          "en": "No, she didn't.",
           "tr": "Hayır.",
-          "audio": "aa3a406c53c592b0"
+          "audio": "59cede75615e911e"
         }
       ],
       "dialogue": [
@@ -2881,9 +2881,9 @@
           "audio": "fb520dd350aff5f4"
         },
         {
-          "en": "Why did you not leave a message?",
+          "en": "Why didn't you leave a message?",
           "tr": "Neden mesaj bırakmadın?",
-          "audio": "9fd028e590de2091"
+          "audio": "401e81e752ae6723"
         },
         {
           "en": "I forgot.",
@@ -2934,7 +2934,7 @@
           "why": "Sorularda did bütün özneler için kullanılır. Ana fiil tekrar yalın hâle döner. Did you go? doğrudur; did you went? değildir."
         },
         {
-          "prompt": "I did not ____ to work.",
+          "prompt": "I didn't ____ to work.",
           "options": [
             "go",
             "went",
@@ -2942,8 +2942,8 @@
             "going"
           ],
           "answer": "go",
-          "audio": "fce92ac9c791c5e2",
-          "en": "I did not go to work.",
+          "audio": "8f2d43c6483facea",
+          "en": "I didn't go to work.",
           "tr": "İşe gitmedim.",
           "why": "Sorularda did bütün özneler için kullanılır. Ana fiil tekrar yalın hâle döner. Did you go? doğrudur; did you went? değildir."
         }
@@ -3040,9 +3040,9 @@
           "audio": "92a12ed25f8db9ff"
         },
         {
-          "en": "The door was not open.",
+          "en": "The door wasn't open.",
           "tr": "Kapı açık değildi.",
-          "audio": "b58f0f78079c012a"
+          "audio": "b16dc5f4a0a96f19"
         },
         {
           "en": "Why were you upset?",
@@ -3055,9 +3055,9 @@
           "audio": "ce3551471568492d"
         },
         {
-          "en": "It was not my fault.",
+          "en": "It wasn't my fault.",
           "tr": "Bu benim hatam değildi.",
-          "audio": "c5e7035cb9d51953"
+          "audio": "60f8f0053383b1d0"
         },
         {
           "en": "The power was out last night.",
@@ -3077,9 +3077,9 @@
       ],
       "dialogue": [
         {
-          "en": "I called you twice. Why did you not answer?",
+          "en": "I called you twice. Why didn't you answer?",
           "tr": "Seni iki kez aradım. Neden cevap vermedin?",
-          "audio": "b78cbe35fc567a3c"
+          "audio": "09df633db0698f98"
         },
         {
           "en": "Sorry, I was in a meeting.",
@@ -3124,10 +3124,10 @@
           "why": "Soru kelimesi why başta, sonra were + you gelir. Upset bir durumdur."
         },
         {
-          "en": "It was not my fault.",
+          "en": "It wasn't my fault.",
           "tr": "Bu benim hatam değildi.",
-          "audio": "c5e7035cb9d51953",
-          "why": "Geçmişte olumsuz durum: it + was not. My fault benim hatam demektir."
+          "audio": "60f8f0053383b1d0",
+          "why": "Geçmişte olumsuz durum: it + wasn't. My fault benim hatam demektir."
         },
         {
           "en": "I was at work.",
@@ -3184,7 +3184,7 @@
         ],
         [
           "Soru ve olumsuz",
-          "Olumsuzda was/were sonrasına not gelir. Soruda was/were öznenin önüne geçer. What were you doing? sorusuna süren işle cevap ver."
+          "Olumsuzda wasn't/weren't kullanılır. Soruda was/were öznenin önüne geçer. What were you doing? sorusuna süren işle cevap ver."
         ]
       ],
       "forms": [
@@ -3254,9 +3254,9 @@
           "audio": "23f91b280daac44e"
         },
         {
-          "en": "We were not watching television.",
+          "en": "We weren't watching television.",
           "tr": "Televizyon izlemiyorduk.",
-          "audio": "153f5321a2527f5e"
+          "audio": "c30eb66f54929df9"
         },
         {
           "en": "I saw him while I was walking.",
@@ -3426,9 +3426,9 @@
           "audio": "97c1689991387ce7"
         },
         {
-          "en": "I will not forget.",
+          "en": "I won't forget.",
           "tr": "Unutmayacağım.",
-          "audio": "fcfcfc5a7549585e"
+          "audio": "03868c0e32ad4b6e"
         },
         {
           "en": "Will you come tomorrow?",
@@ -3548,7 +3548,7 @@
         ],
         [
           "Will ile karşılaştır",
-          "İki yapı bazen örtüşür; temel fark konuşma anındaki karar ile önceden planı ayırmaktır. Going to go dilbilgisel olarak doğrudur."
+          "İki yapı bazen örtüşür; temel fark konuşma anındaki karar ile önceden planı ayırmaktır. Olumsuzda I'm not / isn't / aren't going to kullanılır. Going to go dilbilgisel olarak doğrudur."
         ]
       ],
       "forms": [
@@ -3558,7 +3558,7 @@
         ],
         [
           "Olumsuz",
-          "Özne + am/is/are + not + going to + fiil"
+          "Özne + isn't/aren't + going to + fiil; I için I'm not going to"
         ],
         [
           "Soru",
@@ -3613,9 +3613,9 @@
           "audio": "4480039b37928e6d"
         },
         {
-          "en": "I am not going to buy it.",
+          "en": "I'm not going to buy it.",
           "tr": "Onu almayacağım.",
-          "audio": "952254a595c06ca4"
+          "audio": "3e84c5637e078046"
         },
         {
           "en": "It is going to rain.",
@@ -3670,9 +3670,9 @@
           "why": "We ile are going to seçilir; travel yalındır."
         },
         {
-          "en": "I am not going to buy it.",
+          "en": "I'm not going to buy it.",
           "tr": "Onu almayacağım.",
-          "audio": "952254a595c06ca4",
+          "audio": "3e84c5637e078046",
           "why": "Olumsuzluk am sonrasına not eklenerek kurulur. Buy yalın kalır."
         },
         {
@@ -3986,14 +3986,14 @@
           "audio": "c4f444e9c058c8f8"
         },
         {
-          "en": "You do not have to come.",
+          "en": "You don't have to come.",
           "tr": "Gelmek zorunda değilsin.",
-          "audio": "a939a39bb130b8a5"
+          "audio": "476b0c6b5e6d7747"
         },
         {
-          "en": "You must not park here.",
+          "en": "You mustn't park here.",
           "tr": "Buraya park etmemelisin.",
-          "audio": "ba3c72263d4bae14"
+          "audio": "06b5324275955d26"
         },
         {
           "en": "Shall we go?",
@@ -4044,10 +4044,10 @@
           "why": "Have to üçüncü tekil kişide has to olur; ardından work yalın gelir."
         },
         {
-          "en": "You must not park here.",
+          "en": "You mustn't park here.",
           "tr": "Buraya park etmemelisin.",
-          "audio": "ba3c72263d4bae14",
-          "why": "Must not burada yasağı bildirir. Don't have to ile aynı anlam değildir."
+          "audio": "06b5324275955d26",
+          "why": "Mustn't burada yasağı bildirir. Don't have to ile aynı anlam değildir."
         }
       ],
       "questions": [
@@ -4541,9 +4541,9 @@
           "audio": "1dffb15f60117135"
         },
         {
-          "en": "Do not let him leave.",
+          "en": "Don't let him leave.",
           "tr": "Gitmesine izin verme.",
-          "audio": "7d80efbb53b73306"
+          "audio": "8fafcafd6a0b21d6"
         },
         {
           "en": "He told us not to worry.",
@@ -4594,9 +4594,9 @@
           "why": "Take + kişi + shopping etkinliğe götürmek demektir. Geleceği will take taşır."
         },
         {
-          "en": "Do not let him leave.",
+          "en": "Don't let him leave.",
           "tr": "Gitmesine izin verme.",
-          "audio": "7d80efbb53b73306",
+          "audio": "8fafcafd6a0b21d6",
           "why": "Don't + let olumsuz emir; him nesne zamiri, leave yalın fiildir."
         }
       ],
@@ -5477,9 +5477,9 @@
           "audio": "13443c34b8dd2427"
         },
         {
-          "en": "I have not finished yet.",
+          "en": "I haven't finished yet.",
           "tr": "Henüz bitirmedim.",
-          "audio": "f538656c1b47fb8e"
+          "audio": "663df90a9317b114"
         },
         {
           "en": "I saw her yesterday.",
@@ -5514,9 +5514,9 @@
           "audio": "6fa4743a4c568e87"
         },
         {
-          "en": "No, I have not seen her this week.",
+          "en": "No, I haven't seen her this week.",
           "tr": "Hayır, bu hafta onu görmedim.",
-          "audio": "d56d3c9b457cb785"
+          "audio": "f3cd7606fa293355"
         }
       ],
       "trap": "“I have seen her yesterday” yerine bitmiş zamanla “I saw her yesterday” kullan. “I have went” yanlış; V3 olan gone veya bağlama göre been gerekir.",
@@ -5534,10 +5534,10 @@
           "why": "She ile has; just yardımcı fiilden sonra; arrive düzenli fiildir, V3 arrived."
         },
         {
-          "en": "I have not finished yet.",
+          "en": "I haven't finished yet.",
           "tr": "Henüz bitirmedim.",
-          "audio": "f538656c1b47fb8e",
-          "why": "Yet olumsuzda genellikle sonda gelir. Have not + finished kullanılır."
+          "audio": "663df90a9317b114",
+          "why": "Yet olumsuzda genellikle sonda gelir. Haven't + finished kullanılır."
         },
         {
           "en": "He has lived here for two years.",
@@ -5668,9 +5668,9 @@
           "audio": "182e4b6f57102733"
         },
         {
-          "en": "Do not worry.",
+          "en": "Don't worry.",
           "tr": "Endişelenme.",
-          "audio": "400cd572bca181a7"
+          "audio": "86f88d3682401e3c"
         },
         {
           "en": "What about going for a walk?",
@@ -5883,9 +5883,9 @@
       ],
       "dialogue": [
         {
-          "en": "I called you, but you did not answer.",
+          "en": "I called you, but you didn't answer.",
           "tr": "Seni aradım ama cevap vermedin.",
-          "audio": "63fdda79733b0b23"
+          "audio": "8026a010624f8166"
         },
         {
           "en": "Sorry, I was driving.",
@@ -6020,8 +6020,8 @@
       "audio": "66e0443898fb6118"
     },
     {
-      "en": "No, they were not.",
-      "audio": "50ad402e52246f39"
+      "en": "No, they weren't.",
+      "audio": "76224c0b85e90c57"
     },
     {
       "en": "Do you have to?",
@@ -6098,10 +6098,6 @@
     {
       "en": "I am working now.",
       "audio": "e9e1bb4c49a91638"
-    },
-    {
-      "en": "No, they weren't.",
-      "audio": "76224c0b85e90c57"
     },
     {
       "en": "Never mind.",

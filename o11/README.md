@@ -15,7 +15,7 @@ Türkçe konuşan öğrenciler için özgün elektronik İngilizce kitabı. Kull
 
 ## Sesler
 
-404 benzersiz MP3 (~6.7 MB), Kyutai Pocket TTS ile gerçek `caro_davy` sesi kullanılarak yerelde üretilmiştir. Bu sayı 392 örneğin tekilleştirilmiş dosyalarını ve anlatım içi ek cümleleri içerir. iPad'de model indirilmez, Python sunucusu gerekmez ve başka bir sistem sesine sessizce geçilmez.
+403 etkin benzersiz MP3 (~6.7 MB), Kyutai Pocket TTS ile gerçek `caro_davy` sesi kullanılarak yerelde üretilmiştir. Bu sayı 392 örneğin tekilleştirilmiş dosyalarını ve anlatım içi ek cümleleri içerir. iPad'de model indirilmez, Python sunucusu gerekmez ve başka bir sistem sesine sessizce geçilmez.
 
 - Motor: https://github.com/kyutai-labs/pocket-tts (MIT).
 - Resmi v4.0.1 sürümünün `pocket-tts-3.3.0-x86_64-pc-windows-msvc.zip` ikilisi, varsayılan English modeli.
@@ -33,3 +33,7 @@ localStorage anahtarı: `fatedreel-o11-book-v1`. Yedekler aynı sürüm şeması
 ## Doğrulama
 
 32 ünitenin sırası, içerik alanları, soru seçenekleri/cevapları, cümle-ses SHA eşleşmeleri ve MP3 çözümlemesi kontrol edildi. Gerçek tarayıcıda iPad dikey/yatay görünüm, cümle gizleme/açma/dinleme, çeviri, işaretler, notlar, yenileme sonrası kayıt ve sınav sonucu kontrol edildi. Kayıt/yedek şeması ve kota hatası testleri üç kez; rastgele sınav bitirme akışı üç tur çalıştırıldı. Gerçek iPad Safari donanım testi yapılmadı.
+
+## Günlük olumsuzlar
+
+Örnekler ve diyaloglar do not/does not/did not yerine don't/doesn't/didn't; is not/are not/was not/were not yerine isn't/aren't/wasn't/weren't; will not için won't kullanır. I am not → I'm not; negatif sorular Why didn't you...? sırasındadır. Not to worry gibi kısaltılamayan yapılar korunur. Açıklamalardaki tam biçim → kısaltma eşleştirmeleri öğretim için kalır. Değişen metinlerin Caro Davy sesleri yeniden üretilmiştir. Eski kitap sürümünü açık tutan cihazlar için önceki ses dosyaları tutulur. Yerel ilerleme anahtarı değişmez.
