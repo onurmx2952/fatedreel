@@ -1,0 +1,6204 @@
+{
+  "version": 1,
+  "groups": [
+    "Cümle kurmanın temelleri",
+    "Günlük hayat ve şimdi",
+    "Geçmiş ve gelecek",
+    "Fiiller ve konuşma kalıpları",
+    "Cümlelerin içindeki cümleler",
+    "Doğal İngilizce ve dinleme"
+  ],
+  "units": [
+    {
+      "id": 1,
+      "title": "Kişi zamirleri",
+      "subtitle": "Cümlenin başrolü kim?",
+      "group": 1,
+      "goal": "Kişilerden ve nesnelerden doğru zamirle söz etmek.",
+      "rules": [
+        [
+          "Özne kim?",
+          "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır."
+        ],
+        [
+          "İsim yerine zamir",
+          "Bir erkek için he, bir kadın için she, bir nesne veya hayvan için it kullanılır. Evcil hayvanın cinsiyeti biliniyorsa he veya she de kullanılabilir."
+        ],
+        [
+          "Birden fazla kişi",
+          "Biz we, onlar they olur. You hem tekil hem çoğuldur. Zamirden sonra cümleyi tamamlayan bir fiil gerekir."
+        ]
+      ],
+      "forms": [
+        [
+          "Ben",
+          "I"
+        ],
+        [
+          "Sen / siz",
+          "you"
+        ],
+        [
+          "O (erkek / kadın / nesne)",
+          "he / she / it"
+        ],
+        [
+          "Biz / onlar",
+          "we / they"
+        ]
+      ],
+      "words": [
+        [
+          "friend",
+          "arkadaş"
+        ],
+        [
+          "teacher",
+          "öğretmen"
+        ],
+        [
+          "student",
+          "öğrenci"
+        ],
+        [
+          "ready",
+          "hazır"
+        ],
+        [
+          "here",
+          "burada"
+        ],
+        [
+          "happy",
+          "mutlu"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I am a student.",
+          "tr": "Ben bir öğrenciyim.",
+          "audio": "0c00f6707d412bc9"
+        },
+        {
+          "en": "You are my friend.",
+          "tr": "Sen benim arkadaşımsın.",
+          "audio": "f6c62d59d00cb483"
+        },
+        {
+          "en": "He is a teacher.",
+          "tr": "O bir öğretmen.",
+          "audio": "7690899b09835537"
+        },
+        {
+          "en": "She is here.",
+          "tr": "O burada.",
+          "audio": "8d663db951d16c21"
+        },
+        {
+          "en": "It is ready.",
+          "tr": "O hazır.",
+          "audio": "bfb60e96cd6b1a97"
+        },
+        {
+          "en": "We are happy.",
+          "tr": "Biz mutluyuz.",
+          "audio": "080244a28a9b7763"
+        },
+        {
+          "en": "They are here.",
+          "tr": "Onlar burada.",
+          "audio": "57b4a203a175a94f"
+        },
+        {
+          "en": "You are a teacher.",
+          "tr": "Siz bir öğretmensiniz.",
+          "audio": "5f5f6e2aed3812e6"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "I am Emma.",
+          "tr": "Ben Emma.",
+          "audio": "b500d1dd38508c43"
+        },
+        {
+          "en": "I am Alex.",
+          "tr": "Ben Alex.",
+          "audio": "01783f8ee50670ed"
+        },
+        {
+          "en": "We are friends.",
+          "tr": "Biz arkadaşız.",
+          "audio": "acf7e8a43cd6c9c1"
+        },
+        {
+          "en": "Yes, we are.",
+          "tr": "Evet, öyleyiz.",
+          "audio": "eaea517e9330c33c"
+        }
+      ],
+      "trap": "Türkçede özneyi söylemeden konuşabiliriz. İngilizcede bu tür cümlelerde özneyi belirt: yalnızca “am” ile başlama.",
+      "exercises": [
+        {
+          "en": "I am a student.",
+          "tr": "Ben bir öğrenciyim.",
+          "audio": "0c00f6707d412bc9",
+          "why": "Ben öznesi I olur. I ile be fiili am biçimini alır."
+        },
+        {
+          "en": "He is a teacher.",
+          "tr": "O bir öğretmen.",
+          "audio": "7690899b09835537",
+          "why": "Erkek bir kişiden söz ederken he kullanılır. He ile is gelir."
+        },
+        {
+          "en": "It is ready.",
+          "tr": "O hazır.",
+          "audio": "bfb60e96cd6b1a97",
+          "why": "Nesne için it kullanılır. It ile is gelir."
+        },
+        {
+          "en": "They are here.",
+          "tr": "Onlar burada.",
+          "audio": "57b4a203a175a94f",
+          "why": "Birden çok kişi için they kullanılır. They ile are gelir."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I ____ a student.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "be"
+          ],
+          "answer": "am",
+          "audio": "0c00f6707d412bc9",
+          "en": "I am a student.",
+          "tr": "Ben bir öğrenciyim.",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır."
+        },
+        {
+          "prompt": "You ____ my friend.",
+          "options": [
+            "are",
+            "am",
+            "is",
+            "be"
+          ],
+          "answer": "are",
+          "audio": "f6c62d59d00cb483",
+          "en": "You are my friend.",
+          "tr": "Sen benim arkadaşımsın.",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Am / Is / Are",
+      "subtitle": "Kimlik, duygu ve bulunduğun yer",
+      "group": 1,
+      "goal": "Şimdiki durumları anlatmak, olumsuz cümle ve soru kurmak.",
+      "rules": [
+        [
+          "Üç biçim, tek fiil",
+          "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir."
+        ],
+        [
+          "Olumsuz ve soru",
+          "Olumsuzluk için am/is/are sonrasına not ekle. Soruda am/is/are öznenin önüne gelir. Bu cümlelerde do/does kullanılmaz."
+        ],
+        [
+          "Kısaltmalar ve cevaplar",
+          "I am → I'm; she is → she's; they are → they're. Kısa olumlu cevabın sonunda kısaltma yapma: Yes, I am. No, she isn't mümkündür."
+        ]
+      ],
+      "forms": [
+        [
+          "Olumlu",
+          "Özne + am/is/are + durum"
+        ],
+        [
+          "Olumsuz",
+          "Özne + am/is/are + not + durum"
+        ],
+        [
+          "Soru",
+          "Am/Is/Are + özne + durum?"
+        ]
+      ],
+      "words": [
+        [
+          "tired",
+          "yorgun"
+        ],
+        [
+          "busy",
+          "meşgul"
+        ],
+        [
+          "at home",
+          "evde"
+        ],
+        [
+          "late",
+          "geç kalmış"
+        ],
+        [
+          "hungry",
+          "aç"
+        ],
+        [
+          "fine",
+          "iyi"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I am tired.",
+          "tr": "Yorgunum.",
+          "audio": "f405fc9a481225d9"
+        },
+        {
+          "en": "She is busy.",
+          "tr": "O meşgul.",
+          "audio": "3c80bc923f808865"
+        },
+        {
+          "en": "We are at home.",
+          "tr": "Evdeyiz.",
+          "audio": "c8afbaac0afad56d"
+        },
+        {
+          "en": "They are not ready.",
+          "tr": "Onlar hazır değil.",
+          "audio": "5d7c311153590c3f"
+        },
+        {
+          "en": "Are you hungry?",
+          "tr": "Aç mısın?",
+          "audio": "8d65ae4748ef4a37"
+        },
+        {
+          "en": "Is he a student?",
+          "tr": "O öğrenci mi?",
+          "audio": "77f17e8fd362cfb7"
+        },
+        {
+          "en": "No, I am not.",
+          "tr": "Hayır, değilim.",
+          "audio": "4ad57088f6db41de"
+        },
+        {
+          "en": "You are late.",
+          "tr": "Geç kaldın.",
+          "audio": "24e2061972cc2b1f"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Are you busy?",
+          "tr": "Meşgul müsün?",
+          "audio": "b0cea5e7aedb8a1c"
+        },
+        {
+          "en": "No, I am not.",
+          "tr": "Hayır, değilim.",
+          "audio": "4ad57088f6db41de"
+        },
+        {
+          "en": "Is Emma at home?",
+          "tr": "Emma evde mi?",
+          "audio": "12305f22bb391605"
+        },
+        {
+          "en": "Yes, she is.",
+          "tr": "Evet, evde.",
+          "audio": "14926dccb75025bc"
+        }
+      ],
+      "trap": "“I happy” eksiktir; “I am happy” gerekir. Ama normal bir eylemden önce gelişigüzel am ekleme. Eylemleri 8. ünitede öğreneceksin.",
+      "exercises": [
+        {
+          "en": "I am tired.",
+          "tr": "Yorgunum.",
+          "audio": "f405fc9a481225d9",
+          "why": "Yorgunluk bir durumdur. I ile am kullanılır; ayrıca bir eylem fiili gerekmez."
+        },
+        {
+          "en": "We are at home.",
+          "tr": "Evdeyiz.",
+          "audio": "c8afbaac0afad56d",
+          "why": "Evde bulunmak yer bildirir. We ile are kullanılır."
+        },
+        {
+          "en": "Are you hungry?",
+          "tr": "Aç mısın?",
+          "audio": "8d65ae4748ef4a37",
+          "why": "Açlık bir durum olduğu için soru Are you ile başlar; do gerekmez."
+        },
+        {
+          "en": "No, I am not.",
+          "tr": "Hayır, değilim.",
+          "audio": "4ad57088f6db41de",
+          "why": "Am ile kurulan sorunun kısa olumsuz cevabı No, I am not olur."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I ____ tired.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "do"
+          ],
+          "answer": "am",
+          "audio": "f405fc9a481225d9",
+          "en": "I am tired.",
+          "tr": "Yorgunum.",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir."
+        },
+        {
+          "prompt": "She ____ busy.",
+          "options": [
+            "is",
+            "am",
+            "are",
+            "does"
+          ],
+          "answer": "is",
+          "audio": "3c80bc923f808865",
+          "en": "She is busy.",
+          "tr": "O meşgul.",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Cümle yapısı",
+      "subtitle": "Kelimelerin yerini bul",
+      "group": 1,
+      "goal": "Özne, fiil ve nesneyi ayırmak; İngilizcenin temel kelime sırasını kurmak.",
+      "rules": [
+        [
+          "Özne → fiil → nesne",
+          "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma."
+        ],
+        [
+          "Yer ve zaman",
+          "Basit bir cümlede yer ve zaman bilgisi çoğunlukla temel cümleden sonra gelir. Önce cümlenin omurgasını kur, sonra ayrıntıları ekle."
+        ],
+        [
+          "Her cümlede nesne yoktur",
+          "Uyumak, gelmek gibi bazı fiiller nesne istemez. Be ile kurulan cümlelerde fiilden sonraki kelime bir durum veya kimlik de olabilir."
+        ]
+      ],
+      "forms": [
+        [
+          "Temel sıra",
+          "Özne + fiil + nesne"
+        ],
+        [
+          "Ayrıntı ekle",
+          "Özne + fiil + nesne + yer + zaman"
+        ],
+        [
+          "Durum cümlesi",
+          "Özne + be + durum / kimlik"
+        ]
+      ],
+      "words": [
+        [
+          "like",
+          "sevmek"
+        ],
+        [
+          "read",
+          "okumak"
+        ],
+        [
+          "drink",
+          "içmek"
+        ],
+        [
+          "tea",
+          "çay"
+        ],
+        [
+          "book",
+          "kitap"
+        ],
+        [
+          "every day",
+          "her gün"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I like tea.",
+          "tr": "Çayı severim.",
+          "audio": "a1826a1b123e58e8"
+        },
+        {
+          "en": "You read books.",
+          "tr": "Sen kitap okursun.",
+          "audio": "9fcdb87fc2a9d82d"
+        },
+        {
+          "en": "We drink water.",
+          "tr": "Biz su içeriz.",
+          "audio": "b6fa9cd8d19f7249"
+        },
+        {
+          "en": "They like music.",
+          "tr": "Onlar müziği sever.",
+          "audio": "c19dfb3c02a1dc92"
+        },
+        {
+          "en": "I read at home.",
+          "tr": "Evde okurum.",
+          "audio": "681378afeb089b6b"
+        },
+        {
+          "en": "We are students.",
+          "tr": "Biz öğrenciyiz.",
+          "audio": "817f1f1b1d0bf57f"
+        },
+        {
+          "en": "I drink tea every day.",
+          "tr": "Her gün çay içerim.",
+          "audio": "905328f7fe6fa06e"
+        },
+        {
+          "en": "They are happy.",
+          "tr": "Onlar mutlu.",
+          "audio": "3a7d38275737ad36"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "I like music.",
+          "tr": "Müziği severim.",
+          "audio": "22c43790596c1da3"
+        },
+        {
+          "en": "We like music.",
+          "tr": "Biz de müziği severiz.",
+          "audio": "ce4e88686cb6121e"
+        },
+        {
+          "en": "You are my friends.",
+          "tr": "Siz benim arkadaşlarımsınız.",
+          "audio": "a0b19f3993e273e9"
+        },
+        {
+          "en": "We are happy.",
+          "tr": "Mutluyuz.",
+          "audio": "080244a28a9b7763"
+        }
+      ],
+      "trap": "“I tea like” Türkçe sıraya yakındır ama İngilizcede “I like tea” gerekir. Özne, fiil ve nesneyi ayrı ayrı bul.",
+      "exercises": [
+        {
+          "en": "I like tea.",
+          "tr": "Çayı severim.",
+          "audio": "a1826a1b123e58e8",
+          "why": "Önce özne I, sonra fiil like, sonra nesne tea gelir."
+        },
+        {
+          "en": "We drink water.",
+          "tr": "Biz su içeriz.",
+          "audio": "b6fa9cd8d19f7249",
+          "why": "Özne we, fiil drink, nesne water: Türkçedeki fiili sona koyma sırasını taşıma."
+        },
+        {
+          "en": "I read at home.",
+          "tr": "Evde okurum.",
+          "audio": "681378afeb089b6b",
+          "why": "Read eylemi burada nesnesiz kullanılıyor; at home yer bilgisini ekliyor."
+        },
+        {
+          "en": "I drink tea every day.",
+          "tr": "Her gün çay içerim.",
+          "audio": "905328f7fe6fa06e",
+          "why": "Every day zaman bilgisi cümlenin sonunda. Ana sıra I + drink + tea."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I ____ tea.",
+          "options": [
+            "like",
+            "likes",
+            "am like",
+            "liking"
+          ],
+          "answer": "like",
+          "audio": "a1826a1b123e58e8",
+          "en": "I like tea.",
+          "tr": "Çayı severim.",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma."
+        },
+        {
+          "prompt": "You ____ books.",
+          "options": [
+            "read",
+            "reading",
+            "is read",
+            "reads"
+          ],
+          "answer": "read",
+          "audio": "9fcdb87fc2a9d82d",
+          "en": "You read books.",
+          "tr": "Sen kitap okursun.",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "İsimler ve tanımlıklar",
+      "subtitle": "A, an, the ve çoğullar",
+      "group": 1,
+      "goal": "Bir nesneyi ilk kez tanıtmak ve hangi nesneden söz ettiğini belirtmek.",
+      "rules": [
+        [
+          "Bir tane: a / an",
+          "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir."
+        ],
+        [
+          "Bilinen nesne: the",
+          "Dinleyen hangi şeyden söz ettiğini biliyorsa the kullanılır. Daha önce tanıtılmış nesne veya ortamda belirli olan şey buna örnektir."
+        ],
+        [
+          "Çoğul ve sayılamayan",
+          "Çoğullar genellikle -s alır; child → children gibi düzensizler de vardır. Water, music gibi sayılamayan isimlerle doğrudan a/an kullanma."
+        ]
+      ],
+      "forms": [
+        [
+          "İlk kez, tekil",
+          "a book / an apple"
+        ],
+        [
+          "Belirli",
+          "the book"
+        ],
+        [
+          "Çoğul",
+          "books / children"
+        ],
+        [
+          "Sayılamayan",
+          "water / music"
+        ]
+      ],
+      "words": [
+        [
+          "apple",
+          "elma"
+        ],
+        [
+          "door",
+          "kapı"
+        ],
+        [
+          "child",
+          "çocuk"
+        ],
+        [
+          "water",
+          "su"
+        ],
+        [
+          "orange",
+          "portakal"
+        ],
+        [
+          "room",
+          "oda"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "It is a book.",
+          "tr": "Bu bir kitap.",
+          "audio": "74def1395003c46f"
+        },
+        {
+          "en": "It is an apple.",
+          "tr": "Bu bir elma.",
+          "audio": "b0b9491febb9dd31"
+        },
+        {
+          "en": "The door is open.",
+          "tr": "Kapı açık.",
+          "audio": "7f6ceb55b490f4bb"
+        },
+        {
+          "en": "They are children.",
+          "tr": "Onlar çocuk.",
+          "audio": "102d0dc50b241525"
+        },
+        {
+          "en": "I like oranges.",
+          "tr": "Portakalı severim.",
+          "audio": "f743e54f19f2e56a"
+        },
+        {
+          "en": "We drink water.",
+          "tr": "Biz su içeriz.",
+          "audio": "b6fa9cd8d19f7249"
+        },
+        {
+          "en": "It is a small room.",
+          "tr": "Bu küçük bir oda.",
+          "audio": "268ce0c12854c081"
+        },
+        {
+          "en": "The book is here.",
+          "tr": "Kitap burada.",
+          "audio": "c592328b987f9bd3"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "It is a book.",
+          "tr": "Bu bir kitap.",
+          "audio": "74def1395003c46f"
+        },
+        {
+          "en": "The book is here.",
+          "tr": "Kitap burada.",
+          "audio": "c592328b987f9bd3"
+        },
+        {
+          "en": "It is a good book.",
+          "tr": "Bu iyi bir kitap.",
+          "audio": "1f2ca36d0fd1c97a"
+        },
+        {
+          "en": "I like books.",
+          "tr": "Kitapları severim.",
+          "audio": "57af8daabe6a5702"
+        }
+      ],
+      "trap": "“An” seçimi yazılı ilk harfe göre yapılmaz: “an hour”, “a university”. Ayrıca “a water” yerine bir bardak sudan söz edebilirsin.",
+      "exercises": [
+        {
+          "en": "It is a book.",
+          "tr": "Bu bir kitap.",
+          "audio": "74def1395003c46f",
+          "why": "Book sayılabilir tekil bir isimdir; ilk kez tanıtırken a gerekir."
+        },
+        {
+          "en": "The door is open.",
+          "tr": "Kapı açık.",
+          "audio": "7f6ceb55b490f4bb",
+          "why": "Hangi kapı olduğu bağlamda bilindiği için the kullanılır."
+        },
+        {
+          "en": "I like oranges.",
+          "tr": "Portakalı severim.",
+          "audio": "f743e54f19f2e56a",
+          "why": "Genel olarak portakalı sevmekten söz ediyoruz; çoğul oranges önüne a gelmez."
+        },
+        {
+          "en": "It is a small room.",
+          "tr": "Bu küçük bir oda.",
+          "audio": "268ce0c12854c081",
+          "why": "Small room tekil ve ilk kez tanıtılıyor; a, sıfattan önce gelir."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "It is ____ book.",
+          "options": [
+            "a",
+            "an",
+            "are",
+            "two"
+          ],
+          "answer": "a",
+          "audio": "74def1395003c46f",
+          "en": "It is a book.",
+          "tr": "Bu bir kitap.",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir."
+        },
+        {
+          "prompt": "It is ____ apple.",
+          "options": [
+            "an",
+            "a",
+            "are",
+            "two"
+          ],
+          "answer": "an",
+          "audio": "b0b9491febb9dd31",
+          "en": "It is an apple.",
+          "tr": "Bu bir elma.",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "İşaret ve sahiplik",
+      "subtitle": "Bu, şu ve kime ait?",
+      "group": 1,
+      "goal": "Yakındaki ve uzaktaki nesneleri göstermek; sahiplik belirtmek.",
+      "rules": [
+        [
+          "Yakın / uzak",
+          "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir."
+        ],
+        [
+          "Kimin?",
+          "My, your, his, her, its, our, their bir ismin önüne gelir. His erkek, her kadın için sahiplik belirtir; nesnenin cinsiyetine göre seçilmez."
+        ],
+        [
+          "İsimle sahiplik",
+          "Bir kişinin adına 's ekleyerek ona ait bir şeyi anlatabilirsin. Çoğul ve sahiplik ekini karıştırma. It's, it is kısaltmasıdır; its ise sahipliktir."
+        ]
+      ],
+      "forms": [
+        [
+          "Yakın tekil / çoğul",
+          "this / these"
+        ],
+        [
+          "Uzak tekil / çoğul",
+          "that / those"
+        ],
+        [
+          "Sahiplik",
+          "my / your / his / her / its / our / their"
+        ],
+        [
+          "İsimle sahiplik",
+          "Emma's book"
+        ]
+      ],
+      "words": [
+        [
+          "bag",
+          "çanta"
+        ],
+        [
+          "phone",
+          "telefon"
+        ],
+        [
+          "keys",
+          "anahtarlar"
+        ],
+        [
+          "car",
+          "araba"
+        ],
+        [
+          "new",
+          "yeni"
+        ],
+        [
+          "old",
+          "eski"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "This is my bag.",
+          "tr": "Bu benim çantam.",
+          "audio": "df63101fed847354"
+        },
+        {
+          "en": "That is your phone.",
+          "tr": "Şu senin telefonun.",
+          "audio": "abfe1ebccf134caf"
+        },
+        {
+          "en": "These are our books.",
+          "tr": "Bunlar bizim kitaplarımız.",
+          "audio": "6d1d81b3f1875abf"
+        },
+        {
+          "en": "Those are their keys.",
+          "tr": "Şunlar onların anahtarları.",
+          "audio": "4ea595c2e8703351"
+        },
+        {
+          "en": "Her car is new.",
+          "tr": "Onun arabası yeni.",
+          "audio": "1e1264d8d0418d55"
+        },
+        {
+          "en": "His phone is old.",
+          "tr": "Onun telefonu eski.",
+          "audio": "749e9f6f3c028fba"
+        },
+        {
+          "en": "This is Emma's room.",
+          "tr": "Bu Emma'nın odası.",
+          "audio": "ecb9f7f7a5efb114"
+        },
+        {
+          "en": "Our teacher is here.",
+          "tr": "Öğretmenimiz burada.",
+          "audio": "f0f80af361683353"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "This is your book.",
+          "tr": "Bu senin kitabın.",
+          "audio": "9a0fb7ec589d8a39"
+        },
+        {
+          "en": "That is my bag.",
+          "tr": "Şu benim çantam.",
+          "audio": "4d468c4fc843be3a"
+        },
+        {
+          "en": "These are our keys.",
+          "tr": "Bunlar bizim anahtarlarımız.",
+          "audio": "7175374a84bdcf62"
+        },
+        {
+          "en": "They are here.",
+          "tr": "Onlar burada.",
+          "audio": "57b4a203a175a94f"
+        }
+      ],
+      "trap": "“These is” yerine “these are” kullan. “My” tek başına “benimki” demek değildir; ardından isim gelir. Benimki için mine kullanılır.",
+      "exercises": [
+        {
+          "en": "This is my bag.",
+          "tr": "Bu benim çantam.",
+          "audio": "df63101fed847354",
+          "why": "Yakındaki tek nesne için this, benim çantam için my bag kullanılır."
+        },
+        {
+          "en": "These are our books.",
+          "tr": "Bunlar bizim kitaplarımız.",
+          "audio": "6d1d81b3f1875abf",
+          "why": "Yakındaki çoğul nesneler these olur; fiil are biçimini alır."
+        },
+        {
+          "en": "Her car is new.",
+          "tr": "Onun arabası yeni.",
+          "audio": "1e1264d8d0418d55",
+          "why": "Bir kadının sahip olduğu araba için her kullanılır; arabanın cinsiyeti önemli değildir."
+        },
+        {
+          "en": "This is Emma's room.",
+          "tr": "Bu Emma'nın odası.",
+          "audio": "ecb9f7f7a5efb114",
+          "why": "Emma adlı kişiye ait oda için Emma's room denir."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "____ is my bag.",
+          "options": [
+            "This",
+            "These",
+            "Those",
+            "They"
+          ],
+          "answer": "This",
+          "audio": "df63101fed847354",
+          "en": "This is my bag.",
+          "tr": "Bu benim çantam.",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir."
+        },
+        {
+          "prompt": "That is ____ phone.",
+          "options": [
+            "your",
+            "you",
+            "yours",
+            "yours are"
+          ],
+          "answer": "your",
+          "audio": "abfe1ebccf134caf",
+          "en": "That is your phone.",
+          "tr": "Şu senin telefonun.",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Nesne zamirleri",
+      "subtitle": "Beni, sana, onunla",
+      "group": 1,
+      "goal": "Eylemden etkilenen kişileri zamirle ifade etmek.",
+      "rules": [
+        [
+          "İşi yapan ve etkilenen",
+          "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır."
+        ],
+        [
+          "Fiilden sonra",
+          "Birini görmek, sevmek veya aramak gibi eylemlerde nesne zamiri fiilden sonra gelir. Nesne yerinde I, he veya they kullanma."
+        ],
+        [
+          "Edatlardan sonra",
+          "With, for, to gibi edatların ardından da nesne biçimi kullanılır. With me birlikte, for us bizim için anlamındadır."
+        ]
+      ],
+      "forms": [
+        [
+          "Özne → nesne",
+          "I → me / he → him / she → her"
+        ],
+        [
+          "Özne → nesne",
+          "we → us / they → them"
+        ],
+        [
+          "Değişmeyenler",
+          "you → you / it → it"
+        ],
+        [
+          "Edat sonrası",
+          "with me / for them"
+        ]
+      ],
+      "words": [
+        [
+          "call",
+          "aramak"
+        ],
+        [
+          "help",
+          "yardım etmek"
+        ],
+        [
+          "see",
+          "görmek"
+        ],
+        [
+          "know",
+          "tanımak / bilmek"
+        ],
+        [
+          "with",
+          "ile"
+        ],
+        [
+          "for",
+          "için"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I know him.",
+          "tr": "Onu tanıyorum.",
+          "audio": "f6c1c205498afd43"
+        },
+        {
+          "en": "They like us.",
+          "tr": "Onlar bizi sever.",
+          "audio": "5101684a37722e20"
+        },
+        {
+          "en": "We help them.",
+          "tr": "Onlara yardım ederiz.",
+          "audio": "98379bb25545f065"
+        },
+        {
+          "en": "You know me.",
+          "tr": "Beni tanıyorsun.",
+          "audio": "d84bed87830ac2c2"
+        },
+        {
+          "en": "This is for her.",
+          "tr": "Bu onun için.",
+          "audio": "836828728b1ebac5"
+        },
+        {
+          "en": "He is with me.",
+          "tr": "O benimle.",
+          "audio": "fa5b25476dda06c6"
+        },
+        {
+          "en": "I like it.",
+          "tr": "Onu seviyorum.",
+          "audio": "e76f9faa886d9b55"
+        },
+        {
+          "en": "They call us.",
+          "tr": "Onlar bizi arar.",
+          "audio": "a7002b4a71af01b0"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "You know him.",
+          "tr": "Onu tanıyorsun.",
+          "audio": "ddd30350ea6518fa"
+        },
+        {
+          "en": "Yes, I know him.",
+          "tr": "Evet, onu tanıyorum.",
+          "audio": "1f50c5b793024ae9"
+        },
+        {
+          "en": "He is with her.",
+          "tr": "O onunla.",
+          "audio": "b851c877dfc5c2ff"
+        },
+        {
+          "en": "They are our friends.",
+          "tr": "Onlar bizim arkadaşlarımız.",
+          "audio": "4e23b4d357afdbb6"
+        }
+      ],
+      "trap": "“Me am happy” yanlış; özne I olmalı. “They know I” yanlış; fiilden etkilenen kişi me olur.",
+      "exercises": [
+        {
+          "en": "I know him.",
+          "tr": "Onu tanıyorum.",
+          "audio": "f6c1c205498afd43",
+          "why": "Know eyleminden etkilenen kişi nesnedir; he yerine him gelir."
+        },
+        {
+          "en": "We help them.",
+          "tr": "Onlara yardım ederiz.",
+          "audio": "98379bb25545f065",
+          "why": "Yardım edilen kişiler them olur; özne zamiri they burada kullanılmaz."
+        },
+        {
+          "en": "This is for her.",
+          "tr": "Bu onun için.",
+          "audio": "836828728b1ebac5",
+          "why": "For edatından sonra nesne zamiri her gelir."
+        },
+        {
+          "en": "I like it.",
+          "tr": "Onu seviyorum.",
+          "audio": "e76f9faa886d9b55",
+          "why": "It hem özne hem nesne biçiminde aynıdır."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I know ____.",
+          "options": [
+            "him",
+            "he",
+            "his",
+            "himself"
+          ],
+          "answer": "him",
+          "audio": "f6c1c205498afd43",
+          "en": "I know him.",
+          "tr": "Onu tanıyorum.",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır."
+        },
+        {
+          "prompt": "They like ____.",
+          "options": [
+            "us",
+            "we",
+            "our",
+            "ours"
+          ],
+          "answer": "us",
+          "audio": "5101684a37722e20",
+          "en": "They like us.",
+          "tr": "Onlar bizi sever.",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Have / Has ve There is",
+      "subtitle": "Sahip olmak ve var olmak",
+      "group": 1,
+      "goal": "Birinin sahip olduğu şeylerle bir yerde bulunan şeyleri ayırmak.",
+      "rules": [
+        [
+          "Sahiplik",
+          "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder."
+        ],
+        [
+          "Bir yerde var",
+          "There is tekil veya sayılamayan, there are çoğul isimle kullanılır. Buradaki there, “orada” göstermekten çok varlık bildiren yapının parçasıdır."
+        ],
+        [
+          "Soru ve olumsuz",
+          "Have got sorusunda have/has öne gelir. There is/are sorusunda is/are öne gelir; olumsuzda not eklenir. Düz have ile do/does kullanımını 9. ünitede göreceğiz."
+        ]
+      ],
+      "forms": [
+        [
+          "Sahiplik",
+          "I have / she has"
+        ],
+        [
+          "Konuşmada",
+          "I have got / she has got"
+        ],
+        [
+          "Tekil varlık",
+          "There is + tekil isim"
+        ],
+        [
+          "Çoğul varlık",
+          "There are + çoğul isim"
+        ]
+      ],
+      "words": [
+        [
+          "sister",
+          "kız kardeş"
+        ],
+        [
+          "brother",
+          "erkek kardeş"
+        ],
+        [
+          "table",
+          "masa"
+        ],
+        [
+          "chair",
+          "sandalye"
+        ],
+        [
+          "garden",
+          "bahçe"
+        ],
+        [
+          "problem",
+          "sorun"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I have a sister.",
+          "tr": "Bir kız kardeşim var.",
+          "audio": "5c5dd28d914bf962"
+        },
+        {
+          "en": "She has a car.",
+          "tr": "Onun bir arabası var.",
+          "audio": "d360896124b044e2"
+        },
+        {
+          "en": "We have got a garden.",
+          "tr": "Bizim bir bahçemiz var.",
+          "audio": "900981ab098d5881"
+        },
+        {
+          "en": "Have you got a phone?",
+          "tr": "Telefonun var mı?",
+          "audio": "e5fd0dc635585d0c"
+        },
+        {
+          "en": "There is a book on the table.",
+          "tr": "Masanın üzerinde bir kitap var.",
+          "audio": "a8e8797f94e7e50a"
+        },
+        {
+          "en": "There are two chairs.",
+          "tr": "İki sandalye var.",
+          "audio": "8698894a966a0b3a"
+        },
+        {
+          "en": "There is not a problem.",
+          "tr": "Bir sorun yok.",
+          "audio": "d8ff88489fe35032"
+        },
+        {
+          "en": "Are there any books?",
+          "tr": "Hiç kitap var mı?",
+          "audio": "e8d4c507ca4a74fe"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Have you got a brother?",
+          "tr": "Erkek kardeşin var mı?",
+          "audio": "ddbb6231958bfd4c"
+        },
+        {
+          "en": "Yes, I have.",
+          "tr": "Evet, var.",
+          "audio": "a7700a56086f0544"
+        },
+        {
+          "en": "Is he here?",
+          "tr": "O burada mı?",
+          "audio": "46b26e6cd0aec268"
+        },
+        {
+          "en": "No, he is at home.",
+          "tr": "Hayır, o evde.",
+          "audio": "59a6182415ccb653"
+        }
+      ],
+      "trap": "“I am have” kullanma. “I have a car” sahipliktir; “There is a car” bir arabanın bulunduğunu söyler.",
+      "exercises": [
+        {
+          "en": "I have a sister.",
+          "tr": "Bir kız kardeşim var.",
+          "audio": "5c5dd28d914bf962",
+          "why": "Sahiplik I have ile anlatılır; am have kullanılmaz."
+        },
+        {
+          "en": "We have got a garden.",
+          "tr": "Bizim bir bahçemiz var.",
+          "audio": "900981ab098d5881",
+          "why": "We ile have got kullanılır. Bir yere varmayı değil sahipliği anlatır."
+        },
+        {
+          "en": "There is a book on the table.",
+          "tr": "Masanın üzerinde bir kitap var.",
+          "audio": "a8e8797f94e7e50a",
+          "why": "Tek kitap olduğu için there is; yüzey üzerinde olmak için on kullanılır."
+        },
+        {
+          "en": "There is not a problem.",
+          "tr": "Bir sorun yok.",
+          "audio": "d8ff88489fe35032",
+          "why": "Problem tekil olduğu için there is not kullanılır."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I ____ a sister.",
+          "options": [
+            "have",
+            "has",
+            "am have",
+            "having"
+          ],
+          "answer": "have",
+          "audio": "5c5dd28d914bf962",
+          "en": "I have a sister.",
+          "tr": "Bir kız kardeşim var.",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder."
+        },
+        {
+          "prompt": "She ____ a car.",
+          "options": [
+            "has",
+            "have",
+            "is have",
+            "having"
+          ],
+          "answer": "has",
+          "audio": "d360896124b044e2",
+          "en": "She has a car.",
+          "tr": "Onun bir arabası var.",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Present Simple",
+      "subtitle": "Her gün olan şeyler",
+      "group": 2,
+      "goal": "Alışkanlıklar, rutinler ve genel doğrular hakkında konuşmak.",
+      "rules": [
+        [
+          "Rutin ve gerçek",
+          "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir."
+        ],
+        [
+          "Üçüncü tekil kişi",
+          "He, she, it ile olumlu cümlede fiile genellikle -s eklenir. Go → goes, watch → watches, study → studies. Have → has düzensizdir."
+        ],
+        [
+          "Sıklık",
+          "Always, usually, often, sometimes ana fiilden önce gelir. Be fiili varsa genellikle ondan sonra gelir. Every day gibi ifadeler çoğunlukla sonda bulunur."
+        ]
+      ],
+      "forms": [
+        [
+          "Ben / sen / biz / onlar",
+          "Özne + fiilin yalın hâli"
+        ],
+        [
+          "O",
+          "He/She/It + fiil-s"
+        ],
+        [
+          "Sıklık",
+          "Özne + usually + fiil"
+        ]
+      ],
+      "words": [
+        [
+          "work",
+          "çalışmak"
+        ],
+        [
+          "live",
+          "yaşamak"
+        ],
+        [
+          "study",
+          "ders çalışmak"
+        ],
+        [
+          "usually",
+          "genellikle"
+        ],
+        [
+          "every morning",
+          "her sabah"
+        ],
+        [
+          "coffee",
+          "kahve"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I work at home.",
+          "tr": "Evde çalışırım.",
+          "audio": "37cd00cb8b724134"
+        },
+        {
+          "en": "She lives in London.",
+          "tr": "Londra'da yaşıyor.",
+          "audio": "e79d357dd5d165a7"
+        },
+        {
+          "en": "He drinks coffee every morning.",
+          "tr": "Her sabah kahve içer.",
+          "audio": "f0556a92db48334e"
+        },
+        {
+          "en": "They study English.",
+          "tr": "Onlar İngilizce çalışır.",
+          "audio": "6cbc54ddaf5ddb1c"
+        },
+        {
+          "en": "We usually read at night.",
+          "tr": "Genellikle gece okuruz.",
+          "audio": "7266720ef5db404e"
+        },
+        {
+          "en": "My brother watches television.",
+          "tr": "Erkek kardeşim televizyon izler.",
+          "audio": "832e140b4782109a"
+        },
+        {
+          "en": "I sometimes drink tea.",
+          "tr": "Bazen çay içerim.",
+          "audio": "0aa3e0c4af2c2fea"
+        },
+        {
+          "en": "She is always busy.",
+          "tr": "O her zaman meşguldür.",
+          "audio": "4e62aa5850258633"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "I work at home.",
+          "tr": "Evde çalışırım.",
+          "audio": "37cd00cb8b724134"
+        },
+        {
+          "en": "My sister works at home.",
+          "tr": "Kız kardeşim evde çalışır.",
+          "audio": "bfe5c021ede17347"
+        },
+        {
+          "en": "We study English every day.",
+          "tr": "Her gün İngilizce çalışırız.",
+          "audio": "20187f8bf6f714d5"
+        },
+        {
+          "en": "She studies English too.",
+          "tr": "O da İngilizce çalışır.",
+          "audio": "f9c46697b51d7705"
+        }
+      ],
+      "trap": "He/she/it ile olumlu cümlede -s unutma. “She is works” yerine “She works” kullan. Be ve normal eylem fiilini karıştırma.",
+      "exercises": [
+        {
+          "en": "I work at home.",
+          "tr": "Evde çalışırım.",
+          "audio": "37cd00cb8b724134",
+          "why": "Düzenli yapılan iş: I ile fiilin yalın biçimi work kullanılır."
+        },
+        {
+          "en": "He drinks coffee every morning.",
+          "tr": "Her sabah kahve içer.",
+          "audio": "f0556a92db48334e",
+          "why": "Every morning rutin bildirir. He ile olumlu fiile -s eklenir: drinks."
+        },
+        {
+          "en": "We usually read at night.",
+          "tr": "Genellikle gece okuruz.",
+          "audio": "7266720ef5db404e",
+          "why": "Usually ana fiilden önce gelir. We ile read yalın kalır."
+        },
+        {
+          "en": "I sometimes drink tea.",
+          "tr": "Bazen çay içerim.",
+          "audio": "0aa3e0c4af2c2fea",
+          "why": "Sometimes ana fiilden önce gelir; I ile drinks değil drink kullanılır."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I ____ at home.",
+          "options": [
+            "work",
+            "works",
+            "am work",
+            "working"
+          ],
+          "answer": "work",
+          "audio": "37cd00cb8b724134",
+          "en": "I work at home.",
+          "tr": "Evde çalışırım.",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir."
+        },
+        {
+          "prompt": "She ____ in London.",
+          "options": [
+            "lives",
+            "live",
+            "living",
+            "is live"
+          ],
+          "answer": "lives",
+          "audio": "e79d357dd5d165a7",
+          "en": "She lives in London.",
+          "tr": "Londra'da yaşıyor.",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Do / Does",
+      "subtitle": "Rutinleri sor ve olumsuz yap",
+      "group": 2,
+      "goal": "Geniş zamanda soru, olumsuzluk ve kısa cevap kurmak.",
+      "rules": [
+        [
+          "Yardımcı fiil",
+          "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir."
+        ],
+        [
+          "Olumsuz cümle",
+          "Do not → don't; does not → doesn't. Does veya doesn't zaten kişi bilgisini taşır; ana fiildeki -s kaldırılır."
+        ],
+        [
+          "Be ile ayır",
+          "Kimlik, yer ve durum sorularında am/is/are kullanılır. Normal eylemlerde do/does kullanılır. Kısa cevapta sorunun yardımcı fiilini tekrar et."
+        ]
+      ],
+      "forms": [
+        [
+          "Soru",
+          "Do/Does + özne + yalın fiil?"
+        ],
+        [
+          "Olumsuz",
+          "Özne + don't/doesn't + yalın fiil"
+        ],
+        [
+          "Kısa cevap",
+          "Yes, I do. / No, she doesn't."
+        ]
+      ],
+      "words": [
+        [
+          "want",
+          "istemek"
+        ],
+        [
+          "eat",
+          "yemek"
+        ],
+        [
+          "breakfast",
+          "kahvaltı"
+        ],
+        [
+          "early",
+          "erken"
+        ],
+        [
+          "weekend",
+          "hafta sonu"
+        ],
+        [
+          "understand",
+          "anlamak"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "Do you like coffee?",
+          "tr": "Kahveyi sever misin?",
+          "audio": "316df3f4ea292c09"
+        },
+        {
+          "en": "Does she work here?",
+          "tr": "O burada çalışıyor mu?",
+          "audio": "472861eee9407b7b"
+        },
+        {
+          "en": "I do not eat breakfast.",
+          "tr": "Kahvaltı yapmam.",
+          "audio": "88e79d1d2d9c2b3a"
+        },
+        {
+          "en": "He does not live here.",
+          "tr": "O burada yaşamıyor.",
+          "audio": "fbb0e606fff4eb90"
+        },
+        {
+          "en": "Do they have a car?",
+          "tr": "Arabaları var mı?",
+          "audio": "1718bfcf99a84214"
+        },
+        {
+          "en": "She does not understand.",
+          "tr": "O anlamıyor.",
+          "audio": "8efbbc92c3241bdc"
+        },
+        {
+          "en": "Yes, I do.",
+          "tr": "Evet.",
+          "audio": "27282b999a04ddc6"
+        },
+        {
+          "en": "No, he does not.",
+          "tr": "Hayır.",
+          "audio": "d6bbfbec48dd2464"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Do you work at the weekend?",
+          "tr": "Hafta sonu çalışır mısın?",
+          "audio": "a4f1be147394b041"
+        },
+        {
+          "en": "No, I do not.",
+          "tr": "Hayır, çalışmam.",
+          "audio": "facc7513d3eed76e"
+        },
+        {
+          "en": "Does your sister work here?",
+          "tr": "Kız kardeşin burada mı çalışıyor?",
+          "audio": "199933b2fe23fdf7"
+        },
+        {
+          "en": "Yes, she does.",
+          "tr": "Evet, burada çalışıyor.",
+          "audio": "8fa066fcf4cfc4af"
+        }
+      ],
+      "trap": "“Does she likes” yanlış; “Does she like” gerekir. “Are you like coffee?” değil “Do you like coffee?” kullan.",
+      "exercises": [
+        {
+          "en": "Do you like coffee?",
+          "tr": "Kahveyi sever misin?",
+          "audio": "316df3f4ea292c09",
+          "why": "You ile soru yardımcısı do olur. Ardından fiil yalın kalır."
+        },
+        {
+          "en": "I do not eat breakfast.",
+          "tr": "Kahvaltı yapmam.",
+          "audio": "88e79d1d2d9c2b3a",
+          "why": "I ile olumsuz yardımcı do not olur; eat yalın kalır."
+        },
+        {
+          "en": "Do they have a car?",
+          "tr": "Arabaları var mı?",
+          "audio": "1718bfcf99a84214",
+          "why": "Have burada sahiplik bildiren ana fiildir. They ile soruda do gerekir."
+        },
+        {
+          "en": "Yes, I do.",
+          "tr": "Evet.",
+          "audio": "27282b999a04ddc6",
+          "why": "Kısa cevapta sorunun yardımcısı do tekrar edilir."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "____ you like coffee?",
+          "options": [
+            "Do",
+            "Does",
+            "Are",
+            "Is"
+          ],
+          "answer": "Do",
+          "audio": "316df3f4ea292c09",
+          "en": "Do you like coffee?",
+          "tr": "Kahveyi sever misin?",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir."
+        },
+        {
+          "prompt": "____ she work here?",
+          "options": [
+            "Does",
+            "Do",
+            "Is",
+            "Are"
+          ],
+          "answer": "Does",
+          "audio": "472861eee9407b7b",
+          "en": "Does she work here?",
+          "tr": "O burada çalışıyor mu?",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Present Continuous",
+      "subtitle": "Tam şu anda",
+      "group": 2,
+      "goal": "Şu anda devam eden işleri ve geçici durumları anlatmak.",
+      "rules": [
+        [
+          "İki parça birlikte",
+          "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz."
+        ],
+        [
+          "Yazım",
+          "Work → working. Make → making: sondaki sessiz e düşer. Run → running gibi kısa örneklerde son sessiz ikiye katlanır. Lie → lying olur."
+        ],
+        [
+          "Soru ve olumsuz",
+          "Not, am/is/are sonrasına gelir. Soruda am/is/are başa geçer. Bu yapıda do/does kullanılmaz. Now ve right now yardımcı zaman ipuçlarıdır."
+        ]
+      ],
+      "forms": [
+        [
+          "Olumlu",
+          "Özne + am/is/are + fiil-ing"
+        ],
+        [
+          "Olumsuz",
+          "Özne + am/is/are + not + fiil-ing"
+        ],
+        [
+          "Soru",
+          "Am/Is/Are + özne + fiil-ing?"
+        ]
+      ],
+      "words": [
+        [
+          "now",
+          "şimdi"
+        ],
+        [
+          "wait",
+          "beklemek"
+        ],
+        [
+          "cook",
+          "yemek pişirmek"
+        ],
+        [
+          "sleep",
+          "uyumak"
+        ],
+        [
+          "listen",
+          "dinlemek"
+        ],
+        [
+          "right now",
+          "tam şu anda"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I am cooking.",
+          "tr": "Yemek yapıyorum.",
+          "audio": "251ea39f0b3d2517"
+        },
+        {
+          "en": "She is reading a book.",
+          "tr": "O bir kitap okuyor.",
+          "audio": "c91b8cd6e157ed7a"
+        },
+        {
+          "en": "They are waiting for us.",
+          "tr": "Onlar bizi bekliyor.",
+          "audio": "efe4936036ff2512"
+        },
+        {
+          "en": "We are not sleeping.",
+          "tr": "Uyumuyoruz.",
+          "audio": "2896f929937d3e7e"
+        },
+        {
+          "en": "Are you listening?",
+          "tr": "Dinliyor musun?",
+          "audio": "a76f1553b178c845"
+        },
+        {
+          "en": "He is working right now.",
+          "tr": "O şu anda çalışıyor.",
+          "audio": "fce33a94876e4450"
+        },
+        {
+          "en": "What are you doing?",
+          "tr": "Ne yapıyorsun?",
+          "audio": "5abff00c28a3f309"
+        },
+        {
+          "en": "I am drinking tea.",
+          "tr": "Çay içiyorum.",
+          "audio": "4b870a58a3393045"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "What are you doing?",
+          "tr": "Ne yapıyorsun?",
+          "audio": "5abff00c28a3f309"
+        },
+        {
+          "en": "I am cooking.",
+          "tr": "Yemek yapıyorum.",
+          "audio": "251ea39f0b3d2517"
+        },
+        {
+          "en": "Is Emma sleeping?",
+          "tr": "Emma uyuyor mu?",
+          "audio": "9960f6af787b624b"
+        },
+        {
+          "en": "No, she is reading.",
+          "tr": "Hayır, o okuyor.",
+          "audio": "57f1dd019cd4b6fe"
+        }
+      ],
+      "trap": "“I cooking” eksik; “I am cooking” gerekir. “I am cook” da doğru değildir; bu yapıda fiil -ing alır.",
+      "exercises": [
+        {
+          "en": "I am cooking.",
+          "tr": "Yemek yapıyorum.",
+          "audio": "251ea39f0b3d2517",
+          "why": "I ile am, devam eden iş için cooking gerekir. İki parçayı da yaz."
+        },
+        {
+          "en": "They are waiting for us.",
+          "tr": "Onlar bizi bekliyor.",
+          "audio": "efe4936036ff2512",
+          "why": "They ile are gelir. Wait for birini beklemek kalıbıdır."
+        },
+        {
+          "en": "Are you listening?",
+          "tr": "Dinliyor musun?",
+          "audio": "a76f1553b178c845",
+          "why": "Soruda are öznenin önüne gelir; listening -ing biçimindedir."
+        },
+        {
+          "en": "What are you doing?",
+          "tr": "Ne yapıyorsun?",
+          "audio": "5abff00c28a3f309",
+          "why": "What soru kelimesinden sonra are + you + doing sırası kurulur."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I ____ cooking.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "do"
+          ],
+          "answer": "am",
+          "audio": "251ea39f0b3d2517",
+          "en": "I am cooking.",
+          "tr": "Yemek yapıyorum.",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz."
+        },
+        {
+          "prompt": "She ____ reading a book.",
+          "options": [
+            "is",
+            "are",
+            "am",
+            "does"
+          ],
+          "answer": "is",
+          "audio": "c91b8cd6e157ed7a",
+          "en": "She is reading a book.",
+          "tr": "O bir kitap okuyor.",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "İki şimdiki zaman",
+      "subtitle": "Rutin mi, şu an mı?",
+      "group": 2,
+      "goal": "Present Simple ile Present Continuous arasında anlamına göre seçim yapmak.",
+      "rules": [
+        [
+          "Genelde olan",
+          "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir."
+        ],
+        [
+          "Şu an veya geçici",
+          "Konuşma anında devam eden veya bu dönem geçici olan iş için Continuous kullan. Zaman sözcüğüne değil, anlatmak istediğin duruma da bak."
+        ],
+        [
+          "Durum fiilleri",
+          "Know, like, want, need gibi fiiller temel anlamlarında genellikle Simple ile kullanılır. Her “şimdi” fikri otomatik olarak -ing gerektirmez."
+        ]
+      ],
+      "forms": [
+        [
+          "Rutin",
+          "I work every day."
+        ],
+        [
+          "Şimdi",
+          "I am working now."
+        ],
+        [
+          "Durum fiili",
+          "I know. / I want. / I like."
+        ]
+      ],
+      "words": [
+        [
+          "usually",
+          "genellikle"
+        ],
+        [
+          "today",
+          "bugün"
+        ],
+        [
+          "this week",
+          "bu hafta"
+        ],
+        [
+          "need",
+          "ihtiyaç duymak"
+        ],
+        [
+          "believe",
+          "inanmak"
+        ],
+        [
+          "these days",
+          "bu aralar"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I usually drink tea.",
+          "tr": "Genellikle çay içerim.",
+          "audio": "655b12fb16121f56"
+        },
+        {
+          "en": "I am drinking coffee today.",
+          "tr": "Bugün kahve içiyorum.",
+          "audio": "1fc2672bbad717d9"
+        },
+        {
+          "en": "She works in a shop.",
+          "tr": "Bir dükkânda çalışıyor.",
+          "audio": "b549c3eaace9d670"
+        },
+        {
+          "en": "She is working at home this week.",
+          "tr": "Bu hafta evde çalışıyor.",
+          "audio": "6fce9545879c07ca"
+        },
+        {
+          "en": "I know the answer.",
+          "tr": "Cevabı biliyorum.",
+          "audio": "9bae03a5d7e34a8d"
+        },
+        {
+          "en": "We need help.",
+          "tr": "Yardıma ihtiyacımız var.",
+          "audio": "55a1097ed3d038b5"
+        },
+        {
+          "en": "They play football every Sunday.",
+          "tr": "Her pazar futbol oynarlar.",
+          "audio": "b355cbc2a562370e"
+        },
+        {
+          "en": "They are playing football now.",
+          "tr": "Şu anda futbol oynuyorlar.",
+          "audio": "693945d245b15d5e"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Do you usually work here?",
+          "tr": "Genellikle burada mı çalışırsın?",
+          "audio": "bdbab19dab89aa03"
+        },
+        {
+          "en": "Yes, I do.",
+          "tr": "Evet.",
+          "audio": "27282b999a04ddc6"
+        },
+        {
+          "en": "What are you doing today?",
+          "tr": "Bugün ne yapıyorsun?",
+          "audio": "08ce30ff89dcfe9d"
+        },
+        {
+          "en": "I am helping my sister.",
+          "tr": "Kız kardeşime yardım ediyorum.",
+          "audio": "e2cf3d1a1a0e4508"
+        }
+      ],
+      "trap": "“I am knowing” yerine “I know” kullan. “Every day” rutin, “right now” devam eden iş için güçlü ipucudur; yine de anlamı kontrol et.",
+      "exercises": [
+        {
+          "en": "I usually drink tea.",
+          "tr": "Genellikle çay içerim.",
+          "audio": "655b12fb16121f56",
+          "why": "Usually alışkanlığı gösterir: Present Simple, I drink."
+        },
+        {
+          "en": "She works in a shop.",
+          "tr": "Bir dükkânda çalışıyor.",
+          "audio": "b549c3eaace9d670",
+          "why": "Kalıcı iş yerini belirtirken Present Simple kullanılır; she ile works."
+        },
+        {
+          "en": "I know the answer.",
+          "tr": "Cevabı biliyorum.",
+          "audio": "9bae03a5d7e34a8d",
+          "why": "Know temel anlamında durum fiilidir; burada knowing kullanılmaz."
+        },
+        {
+          "en": "They play football every Sunday.",
+          "tr": "Her pazar futbol oynarlar.",
+          "audio": "b355cbc2a562370e",
+          "why": "Every Sunday düzenli tekrar anlatır; they ile play yalındır."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I usually ____ tea.",
+          "options": [
+            "drink",
+            "drinks",
+            "am drink",
+            "drinking"
+          ],
+          "answer": "drink",
+          "audio": "655b12fb16121f56",
+          "en": "I usually drink tea.",
+          "tr": "Genellikle çay içerim.",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir."
+        },
+        {
+          "prompt": "I ____ coffee today.",
+          "options": [
+            "am drinking",
+            "drink",
+            "drinks",
+            "am drink"
+          ],
+          "answer": "am drinking",
+          "audio": "1fc2672bbad717d9",
+          "en": "I am drinking coffee today.",
+          "tr": "Bugün kahve içiyorum.",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Soru kelimeleri",
+      "subtitle": "Doğru soruyu sor",
+      "group": 2,
+      "goal": "Ne, nerede, ne zaman, neden ve nasıl sorularını kurmak.",
+      "rules": [
+        [
+          "Bilgi türü",
+          "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar."
+        ],
+        [
+          "Kelime sırası",
+          "Soru kelimesi başta, yardımcı fiil sonra gelir. Ardından özne ve ana fiil gelir. Be kullanılan sorularda be doğrudan soru kelimesini izler."
+        ],
+        [
+          "Özne sorusu",
+          "Who eylemi yapan kişiyi soruyorsa ayrıca do/does eklemeyiz. “Who lives here?” bu türdendir. Nesneyi soruyorsak yardımcı fiil gerekebilir."
+        ]
+      ],
+      "forms": [
+        [
+          "Durum sorusu",
+          "Soru kelimesi + be + özne?"
+        ],
+        [
+          "Eylem sorusu",
+          "Soru kelimesi + do/does + özne + fiil?"
+        ],
+        [
+          "Özneyi sor",
+          "Who + fiil?"
+        ]
+      ],
+      "words": [
+        [
+          "why",
+          "neden"
+        ],
+        [
+          "when",
+          "ne zaman"
+        ],
+        [
+          "which",
+          "hangisi"
+        ],
+        [
+          "how much",
+          "ne kadar"
+        ],
+        [
+          "answer",
+          "cevap"
+        ],
+        [
+          "because",
+          "çünkü"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "Where are you?",
+          "tr": "Neredesin?",
+          "audio": "0217318f31feb0d8"
+        },
+        {
+          "en": "Why are you tired?",
+          "tr": "Neden yorgunsun?",
+          "audio": "5628dabaeb468b28"
+        },
+        {
+          "en": "What do you want?",
+          "tr": "Ne istiyorsun?",
+          "audio": "3e17dbf90bd4ae6b"
+        },
+        {
+          "en": "Where does she live?",
+          "tr": "O nerede yaşıyor?",
+          "audio": "d28167116c987d45"
+        },
+        {
+          "en": "Who lives here?",
+          "tr": "Burada kim yaşıyor?",
+          "audio": "5e5780668ea5744c"
+        },
+        {
+          "en": "When do you work?",
+          "tr": "Ne zaman çalışıyorsun?",
+          "audio": "8aec79a7f1671c17"
+        },
+        {
+          "en": "How much is it?",
+          "tr": "Bu ne kadar?",
+          "audio": "abdfbb3951b780a1"
+        },
+        {
+          "en": "Which book do you like?",
+          "tr": "Hangi kitabı seviyorsun?",
+          "audio": "d53f86107661b3ce"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Where is your sister?",
+          "tr": "Kız kardeşin nerede?",
+          "audio": "b84f8b520a6f308c"
+        },
+        {
+          "en": "She is at home.",
+          "tr": "O evde.",
+          "audio": "26dd89da4666a28d"
+        },
+        {
+          "en": "Why is she at home?",
+          "tr": "Neden evde?",
+          "audio": "a67908d17589e30f"
+        },
+        {
+          "en": "Because she is tired.",
+          "tr": "Çünkü yorgun.",
+          "audio": "3d86bb6ef382cd66"
+        }
+      ],
+      "trap": "“Where you live?” yerine “Where do you live?” gerekir. Ama “Who lives here?” sorusundaki who zaten öznedir.",
+      "exercises": [
+        {
+          "en": "Where are you?",
+          "tr": "Neredesin?",
+          "audio": "0217318f31feb0d8",
+          "why": "Yer sorusu ve be fiili: where + are + you. Do eklenmez."
+        },
+        {
+          "en": "What do you want?",
+          "tr": "Ne istiyorsun?",
+          "audio": "3e17dbf90bd4ae6b",
+          "why": "İstenen şeyi sorarken what + do + you + want sırası gerekir."
+        },
+        {
+          "en": "Who lives here?",
+          "tr": "Burada kim yaşıyor?",
+          "audio": "5e5780668ea5744c",
+          "why": "Who eylemi yapan kişiyi soruyor; ayrıca does gerekmez. Who tekil varsayılır: lives."
+        },
+        {
+          "en": "How much is it?",
+          "tr": "Bu ne kadar?",
+          "audio": "abdfbb3951b780a1",
+          "why": "How much fiyatı sorar. Be fiili is öznenin önüne geçer."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "Where ____ you?",
+          "options": [
+            "are",
+            "do",
+            "does",
+            "is"
+          ],
+          "answer": "are",
+          "audio": "0217318f31feb0d8",
+          "en": "Where are you?",
+          "tr": "Neredesin?",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar."
+        },
+        {
+          "prompt": "Why ____ you tired?",
+          "options": [
+            "are",
+            "do",
+            "does",
+            "is"
+          ],
+          "answer": "are",
+          "audio": "5628dabaeb468b28",
+          "en": "Why are you tired?",
+          "tr": "Neden yorgunsun?",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Yer ve zaman edatları",
+      "subtitle": "In, on, at ve ötesi",
+      "group": 2,
+      "goal": "Bir şeyin nerede ve ne zaman olduğunu ifade etmek.",
+      "rules": [
+        [
+          "Yer",
+          "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır."
+        ],
+        [
+          "Zaman",
+          "In ay, yıl ve günün geniş bölümleriyle; on gün ve tarihlerle; at saatlerle kullanılır. At night ve in the morning kalıplarını birlikte öğren."
+        ],
+        [
+          "Hareket ve ilişki",
+          "To yön, from çıkış, with birliktelik, for amaç veya yararlanıcı, by ise bazı ulaşım yöntemlerini anlatır. Go home ifadesinde to yoktur."
+        ]
+      ],
+      "forms": [
+        [
+          "Yer",
+          "in the room / on the table / at home"
+        ],
+        [
+          "Zaman",
+          "in June / on Monday / at six"
+        ],
+        [
+          "Hareket",
+          "to school / from London"
+        ],
+        [
+          "Birliktelik",
+          "with me / for you / by bus"
+        ]
+      ],
+      "words": [
+        [
+          "Monday",
+          "pazartesi"
+        ],
+        [
+          "morning",
+          "sabah"
+        ],
+        [
+          "night",
+          "gece"
+        ],
+        [
+          "station",
+          "istasyon"
+        ],
+        [
+          "bus",
+          "otobüs"
+        ],
+        [
+          "at six",
+          "saat altıda"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "The keys are on the table.",
+          "tr": "Anahtarlar masanın üzerinde.",
+          "audio": "495156bf6ccd679d"
+        },
+        {
+          "en": "She is in the kitchen.",
+          "tr": "O mutfakta.",
+          "audio": "413dd9101f75aa60"
+        },
+        {
+          "en": "I work on Monday.",
+          "tr": "Pazartesi çalışırım.",
+          "audio": "9b640f105c807317"
+        },
+        {
+          "en": "We eat at six.",
+          "tr": "Saat altıda yemek yeriz.",
+          "audio": "e307e6e3fed09799"
+        },
+        {
+          "en": "He goes to work by bus.",
+          "tr": "İşe otobüsle gider.",
+          "audio": "e0b68ae6c216bca0"
+        },
+        {
+          "en": "I am from Turkey.",
+          "tr": "Türkiye'denim.",
+          "audio": "67853f22f5f70f89"
+        },
+        {
+          "en": "This book is for you.",
+          "tr": "Bu kitap senin için.",
+          "audio": "2cfc73c2cffbc9d2"
+        },
+        {
+          "en": "We are at home tonight.",
+          "tr": "Bu gece evdeyiz.",
+          "audio": "49ad595b485bb1d3"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Where are my keys?",
+          "tr": "Anahtarlarım nerede?",
+          "audio": "e77b1aa3b5e9d670"
+        },
+        {
+          "en": "They are on the table.",
+          "tr": "Masanın üzerindeler.",
+          "audio": "7bbc2fed5e3e2455"
+        },
+        {
+          "en": "Are you going to work?",
+          "tr": "İşe mi gidiyorsun?",
+          "audio": "77bd2bf5c19b7140"
+        },
+        {
+          "en": "Yes, at six.",
+          "tr": "Evet, saat altıda.",
+          "audio": "9bcb3d1c45f67010"
+        }
+      ],
+      "trap": "“In Monday” yerine “on Monday”, “at the morning” yerine “in the morning” kullan. Edatları tek bir Türkçe sözcükle eşleştirip her yere taşıma.",
+      "exercises": [
+        {
+          "en": "The keys are on the table.",
+          "tr": "Anahtarlar masanın üzerinde.",
+          "audio": "495156bf6ccd679d",
+          "why": "Yüzey üzeri için on: on the table. Keys çoğul olduğu için are gelir."
+        },
+        {
+          "en": "I work on Monday.",
+          "tr": "Pazartesi çalışırım.",
+          "audio": "9b640f105c807317",
+          "why": "Günlerle on kullanılır: on Monday."
+        },
+        {
+          "en": "He goes to work by bus.",
+          "tr": "İşe otobüsle gider.",
+          "audio": "e0b68ae6c216bca0",
+          "why": "İşe yön için to work, ulaşım için by bus kullanılır."
+        },
+        {
+          "en": "This book is for you.",
+          "tr": "Bu kitap senin için.",
+          "audio": "2cfc73c2cffbc9d2",
+          "why": "For you yararlanıcıyı anlatır. Edattan sonra you nesne biçimidir."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "The keys are ____ the table.",
+          "options": [
+            "on",
+            "in",
+            "to",
+            "from"
+          ],
+          "answer": "on",
+          "audio": "495156bf6ccd679d",
+          "en": "The keys are on the table.",
+          "tr": "Anahtarlar masanın üzerinde.",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır."
+        },
+        {
+          "prompt": "She is ____ the kitchen.",
+          "options": [
+            "in",
+            "on",
+            "to",
+            "from"
+          ],
+          "answer": "in",
+          "audio": "413dd9101f75aa60",
+          "en": "She is in the kitchen.",
+          "tr": "O mutfakta.",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Günlük eylemler",
+      "subtitle": "Go, come, take, bring, get",
+      "group": 2,
+      "goal": "Hareketin yönünü ve günlük fiillerin farklı anlamlarını anlamak.",
+      "rules": [
+        [
+          "Go ve come",
+          "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler."
+        ],
+        [
+          "Take ve bring",
+          "Take bir şeyi buradan başka yere götürmek; bring konuşmada referans alınan yere getirmektir. Give birine vermek, leave ise ayrılmak veya bir yerde bırakmaktır."
+        ],
+        [
+          "Get ve kalıplar",
+          "Get tek bir anlama sığmaz: get home eve varmak, get a message mesaj almak, get tired yorulmak. Fiili yanındaki sözcüklerle birlikte öğren."
+        ]
+      ],
+      "forms": [
+        [
+          "Yön",
+          "go to / come to"
+        ],
+        [
+          "Taşımak",
+          "take something / bring something"
+        ],
+        [
+          "Bir yerde bırakmak",
+          "leave something in/at..."
+        ],
+        [
+          "Kalıp",
+          "get home / get a message"
+        ]
+      ],
+      "words": [
+        [
+          "go",
+          "gitmek"
+        ],
+        [
+          "come",
+          "gelmek"
+        ],
+        [
+          "take",
+          "götürmek / almak"
+        ],
+        [
+          "bring",
+          "getirmek"
+        ],
+        [
+          "leave",
+          "ayrılmak / bırakmak"
+        ],
+        [
+          "get",
+          "almak / varmak / hâle gelmek"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I go to work by bus.",
+          "tr": "İşe otobüsle giderim.",
+          "audio": "95f75063a4a0b2c4"
+        },
+        {
+          "en": "She comes here every day.",
+          "tr": "O her gün buraya gelir.",
+          "audio": "0ab2ff9af1b33361"
+        },
+        {
+          "en": "We take our bags to school.",
+          "tr": "Çantalarımızı okula götürürüz.",
+          "audio": "aa2a4a095b3f738a"
+        },
+        {
+          "en": "He brings coffee to work.",
+          "tr": "İşe kahve getirir.",
+          "audio": "ada863c7351d74c7"
+        },
+        {
+          "en": "I get home at six.",
+          "tr": "Saat altıda eve varırım.",
+          "audio": "2dce79e7a2a3f987"
+        },
+        {
+          "en": "They give me a book.",
+          "tr": "Bana bir kitap verirler.",
+          "audio": "fad31edccc5e416f"
+        },
+        {
+          "en": "I leave my keys at home.",
+          "tr": "Anahtarlarımı evde bırakırım.",
+          "audio": "9deb611537848da9"
+        },
+        {
+          "en": "She gets tired at night.",
+          "tr": "Geceleri yorulur.",
+          "audio": "ff587cf7efdefdf1"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Do you take the bus?",
+          "tr": "Otobüse biner misin?",
+          "audio": "9483845fa745709c"
+        },
+        {
+          "en": "Yes, I do.",
+          "tr": "Evet.",
+          "audio": "27282b999a04ddc6"
+        },
+        {
+          "en": "When do you get home?",
+          "tr": "Eve ne zaman varırsın?",
+          "audio": "e2761a3c163d6b1a"
+        },
+        {
+          "en": "I get home at six.",
+          "tr": "Saat altıda eve varırım.",
+          "audio": "2dce79e7a2a3f987"
+        }
+      ],
+      "trap": "Bir eşyayı bir yerde unutmak için leave kullanılır. Forget daha çok bir şeyi hatırlayamamaktır. Bu ayrımı geçmiş zaman örneklerinde yeniden çalışacağız.",
+      "exercises": [
+        {
+          "en": "I go to work by bus.",
+          "tr": "İşe otobüsle giderim.",
+          "audio": "95f75063a4a0b2c4",
+          "why": "Rutin hareket için go; hedef için to work; ulaşım için by bus kullanılır."
+        },
+        {
+          "en": "We take our bags to school.",
+          "tr": "Çantalarımızı okula götürürüz.",
+          "audio": "aa2a4a095b3f738a",
+          "why": "Take burada çantayı bulunulan yerden okula götürmektir."
+        },
+        {
+          "en": "I get home at six.",
+          "tr": "Saat altıda eve varırım.",
+          "audio": "2dce79e7a2a3f987",
+          "why": "Get home bir varış kalıbıdır. Home önüne to gelmez."
+        },
+        {
+          "en": "I leave my keys at home.",
+          "tr": "Anahtarlarımı evde bırakırım.",
+          "audio": "9deb611537848da9",
+          "why": "Leave bir nesneyi bir yerde bırakmaktır; at home konumu belirtir."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I go to work ____ bus.",
+          "options": [
+            "by",
+            "with",
+            "on",
+            "from"
+          ],
+          "answer": "by",
+          "audio": "95f75063a4a0b2c4",
+          "en": "I go to work by bus.",
+          "tr": "İşe otobüsle giderim.",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler."
+        },
+        {
+          "prompt": "She ____ here every day.",
+          "options": [
+            "comes",
+            "come",
+            "coming",
+            "is come"
+          ],
+          "answer": "comes",
+          "audio": "0ab2ff9af1b33361",
+          "en": "She comes here every day.",
+          "tr": "O her gün buraya gelir.",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Past Simple",
+      "subtitle": "Dün olanları anlat",
+      "group": 3,
+      "goal": "Bitmiş geçmiş eylemleri düzenli ve düzensiz fiillerle anlatmak.",
+      "rules": [
+        [
+          "Bitmiş geçmiş",
+          "Yesterday, last week, two days ago gibi bitmiş zamanlarda olan eylemleri Past Simple ile anlat. Olumlu cümlede fiilin geçmiş biçimi kullanılır ve bütün öznelerde aynıdır."
+        ],
+        [
+          "Düzenli fiiller",
+          "-ed eklenir: work → worked. Live → lived; study → studied; stop → stopped. -ed her zaman ayrı bir hece değildir; worked, played ve wanted farklı biter."
+        ],
+        [
+          "Düzensiz fiiller",
+          "Go → went, see → saw, leave → left, get → got, take → took, say → said. Bunları kısa cümlelerle öğren. Geçmiş eyleme ayrıca was ekleme."
+        ]
+      ],
+      "forms": [
+        [
+          "Olumlu",
+          "Özne + fiilin geçmiş hâli (V2)"
+        ],
+        [
+          "Düzenli",
+          "work → worked / call → called"
+        ],
+        [
+          "Düzensiz",
+          "go → went / see → saw / leave → left"
+        ]
+      ],
+      "words": [
+        [
+          "yesterday",
+          "dün"
+        ],
+        [
+          "last week",
+          "geçen hafta"
+        ],
+        [
+          "went",
+          "gitti (go)"
+        ],
+        [
+          "saw",
+          "gördü (see)"
+        ],
+        [
+          "left",
+          "bıraktı / ayrıldı (leave)"
+        ],
+        [
+          "called",
+          "aradı (call)"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I went to work yesterday.",
+          "tr": "Dün işe gittim.",
+          "audio": "5376f7f762dfc5e6"
+        },
+        {
+          "en": "She called me last night.",
+          "tr": "Dün gece beni aradı.",
+          "audio": "2d86752cffe38635"
+        },
+        {
+          "en": "We watched a film.",
+          "tr": "Bir film izledik.",
+          "audio": "eb199baae5705f0e"
+        },
+        {
+          "en": "They arrived at six.",
+          "tr": "Saat altıda geldiler.",
+          "audio": "77dddd6c9522be0c"
+        },
+        {
+          "en": "I left my phone in the car.",
+          "tr": "Telefonumu arabada unuttum.",
+          "audio": "8ca69d548fb660d0"
+        },
+        {
+          "en": "He saw Emma at the station.",
+          "tr": "Emma'yı istasyonda gördü.",
+          "audio": "f715327d6296d405"
+        },
+        {
+          "en": "I forgot your name.",
+          "tr": "Adını unuttum.",
+          "audio": "9eb14e4cdb5dbe6c"
+        },
+        {
+          "en": "We got home late.",
+          "tr": "Eve geç vardık.",
+          "audio": "d3b2c92a9cc184ae"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "I saw Emma yesterday.",
+          "tr": "Dün Emma'yı gördüm.",
+          "audio": "e912ba35d63d4fc9"
+        },
+        {
+          "en": "She called me last week.",
+          "tr": "Geçen hafta beni aradı.",
+          "audio": "a340a3b5fd440ea7"
+        },
+        {
+          "en": "We watched a film.",
+          "tr": "Bir film izledik.",
+          "audio": "eb199baae5705f0e"
+        },
+        {
+          "en": "I went home at six.",
+          "tr": "Saat altıda eve gittim.",
+          "audio": "07f602ec5e857b76"
+        }
+      ],
+      "trap": "“I was went” yanlış; “I went” gerekir. “Telefonum unuttu” yerine eylemi yapan kişiyi özne yap: “I left my phone in the car.”",
+      "exercises": [
+        {
+          "en": "I went to work yesterday.",
+          "tr": "Dün işe gittim.",
+          "audio": "5376f7f762dfc5e6",
+          "why": "Yesterday bitmiş zamandır. Go fiilinin geçmiş hâli went; ayrıca was gerekmez."
+        },
+        {
+          "en": "We watched a film.",
+          "tr": "Bir film izledik.",
+          "audio": "eb199baae5705f0e",
+          "why": "Watch düzenli fiildir; olumlu geçmişte -ed alarak watched olur."
+        },
+        {
+          "en": "I left my phone in the car.",
+          "tr": "Telefonumu arabada unuttum.",
+          "audio": "8ca69d548fb660d0",
+          "why": "Eylemi yapan I. Bir eşyayı bir yerde unutmak için leave → left; nesne my phone olur."
+        },
+        {
+          "en": "I forgot your name.",
+          "tr": "Adını unuttum.",
+          "audio": "9eb14e4cdb5dbe6c",
+          "why": "Bir adı hatırlayamamak için forget → forgot kullanılır; left bu anlamda seçilmez."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I ____ to work yesterday.",
+          "options": [
+            "went",
+            "go",
+            "was went",
+            "going"
+          ],
+          "answer": "went",
+          "audio": "5376f7f762dfc5e6",
+          "en": "I went to work yesterday.",
+          "tr": "Dün işe gittim.",
+          "why": "Yesterday, last week, two days ago gibi bitmiş zamanlarda olan eylemleri Past Simple ile anlat. Olumlu cümlede fiilin geçmiş biçimi kullanılır ve bütün öznelerde aynıdır."
+        },
+        {
+          "prompt": "She ____ me last night.",
+          "options": [
+            "called",
+            "call",
+            "was call",
+            "calling"
+          ],
+          "answer": "called",
+          "audio": "2d86752cffe38635",
+          "en": "She called me last night.",
+          "tr": "Dün gece beni aradı.",
+          "why": "Yesterday, last week, two days ago gibi bitmiş zamanlarda olan eylemleri Past Simple ile anlat. Olumlu cümlede fiilin geçmiş biçimi kullanılır ve bütün öznelerde aynıdır."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Did / Didn't",
+      "subtitle": "Geçmişi sor, olumsuz yap",
+      "group": 3,
+      "goal": "Geçmiş zamanda soru ve olumsuz cümle kurmak.",
+      "rules": [
+        [
+          "Did geçmişi taşır",
+          "Sorularda did bütün özneler için kullanılır. Ana fiil tekrar yalın hâle döner. Did you go? doğrudur; did you went? değildir."
+        ],
+        [
+          "Didn't ile olumsuz",
+          "Did not → didn't. Burada da fiil yalındır. Fiil düzenli veya düzensiz olsa da kural değişmez."
+        ],
+        [
+          "Soru kelimeleri ve cevaplar",
+          "Why, when, where gibi kelimeler did öncesine gelir. Kısa cevap Yes, I did veya No, I didn't olur. Özne sorularında who ile ayrıca did gerekmeyebilir."
+        ]
+      ],
+      "forms": [
+        [
+          "Soru",
+          "Did + özne + yalın fiil?"
+        ],
+        [
+          "Olumsuz",
+          "Özne + didn't + yalın fiil"
+        ],
+        [
+          "Bilgi sorusu",
+          "Why/When/Where + did + özne + fiil?"
+        ]
+      ],
+      "words": [
+        [
+          "tell",
+          "anlatmak / söylemek"
+        ],
+        [
+          "truth",
+          "gerçek / doğruluk"
+        ],
+        [
+          "message",
+          "mesaj"
+        ],
+        [
+          "answer",
+          "cevap vermek"
+        ],
+        [
+          "twice",
+          "iki kez"
+        ],
+        [
+          "last night",
+          "dün gece"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "Did you see her yesterday?",
+          "tr": "Onu dün gördün mü?",
+          "audio": "e640334e6c00348d"
+        },
+        {
+          "en": "I did not go to work.",
+          "tr": "İşe gitmedim.",
+          "audio": "fce92ac9c791c5e2"
+        },
+        {
+          "en": "Why did you call me?",
+          "tr": "Beni neden aradın?",
+          "audio": "0685ab2c6b94217f"
+        },
+        {
+          "en": "She did not answer my message.",
+          "tr": "Mesajıma cevap vermedi.",
+          "audio": "9a83c9341b2d82c6"
+        },
+        {
+          "en": "Where did they meet?",
+          "tr": "Nerede buluştular?",
+          "audio": "55d6641105a4ff0d"
+        },
+        {
+          "en": "Why did you not tell me the truth?",
+          "tr": "Bana neden gerçeği söylemedin?",
+          "audio": "1ec8db687be67f3b"
+        },
+        {
+          "en": "Yes, I did.",
+          "tr": "Evet.",
+          "audio": "399210252493a4d4"
+        },
+        {
+          "en": "No, she did not.",
+          "tr": "Hayır.",
+          "audio": "aa3a406c53c592b0"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Did you call me?",
+          "tr": "Beni aradın mı?",
+          "audio": "1a84ac449041abeb"
+        },
+        {
+          "en": "Yes, I called you twice.",
+          "tr": "Evet, seni iki kez aradım.",
+          "audio": "fb520dd350aff5f4"
+        },
+        {
+          "en": "Why did you not leave a message?",
+          "tr": "Neden mesaj bırakmadın?",
+          "audio": "9fd028e590de2091"
+        },
+        {
+          "en": "I forgot.",
+          "tr": "Unuttum.",
+          "audio": "24ef4a0ef5161f56"
+        }
+      ],
+      "trap": "“Why didn’t say true to me?” cümlesinde özne eksik; kişiye söylemek için tell, gerçek için truth gerekir: “Why didn’t you tell me the truth?”",
+      "exercises": [
+        {
+          "en": "Did you see her yesterday?",
+          "tr": "Onu dün gördün mü?",
+          "audio": "e640334e6c00348d",
+          "why": "Did geçmiş zamanı taşır. See yalın kalır; saw kullanılmaz."
+        },
+        {
+          "en": "Why did you call me?",
+          "tr": "Beni neden aradın?",
+          "audio": "0685ab2c6b94217f",
+          "why": "Why + did + özne + yalın fiil sırası gerekir."
+        },
+        {
+          "en": "Where did they meet?",
+          "tr": "Nerede buluştular?",
+          "audio": "55d6641105a4ff0d",
+          "why": "Where + did + they + meet. Did sonrasında met değil meet kullanılır."
+        },
+        {
+          "en": "Yes, I did.",
+          "tr": "Evet.",
+          "audio": "399210252493a4d4",
+          "why": "Did ile sorulmuş soruya kısa olumlu cevap Yes, I did olur."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "Did you ____ her yesterday?",
+          "options": [
+            "see",
+            "saw",
+            "seen",
+            "seeing"
+          ],
+          "answer": "see",
+          "audio": "e640334e6c00348d",
+          "en": "Did you see her yesterday?",
+          "tr": "Onu dün gördün mü?",
+          "why": "Sorularda did bütün özneler için kullanılır. Ana fiil tekrar yalın hâle döner. Did you go? doğrudur; did you went? değildir."
+        },
+        {
+          "prompt": "I did not ____ to work.",
+          "options": [
+            "go",
+            "went",
+            "gone",
+            "going"
+          ],
+          "answer": "go",
+          "audio": "fce92ac9c791c5e2",
+          "en": "I did not go to work.",
+          "tr": "İşe gitmedim.",
+          "why": "Sorularda did bütün özneler için kullanılır. Ana fiil tekrar yalın hâle döner. Did you go? doğrudur; did you went? değildir."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Was / Were",
+      "subtitle": "Geçmişte nasıldı?",
+      "group": 3,
+      "goal": "Geçmişteki durumları ve yerleri, geçmişte yapılan eylemlerden ayırmak.",
+      "rules": [
+        [
+          "Am/is/are fiilinin geçmişi",
+          "I, he, she, it ile was; you, we, they ile were kullanılır. Kimlik, özellik, duygu ve bulunulan yeri geçmişte anlatır."
+        ],
+        [
+          "Olumsuz ve soru",
+          "Was not → wasn't, were not → weren't. Soruda was/were öznenin önüne gelir. Bu tür durum sorularında did kullanılmaz."
+        ],
+        [
+          "Durum mu eylem mi?",
+          "İşteydim bir durumdur; işe gittim bir eylemdir. Eylem için Past Simple kullan. Was/were + fiilin geçmiş hâlini etken cümle kurmak için birleştirme. Was/were + -ing ise ayrı ve doğru bir yapıdır; sonraki ünitede öğreneceksin."
+        ]
+      ],
+      "forms": [
+        [
+          "Özne seçimi",
+          "I/he/she/it → was; you/we/they → were"
+        ],
+        [
+          "Olumsuz",
+          "Özne + wasn't/weren't + durum"
+        ],
+        [
+          "Soru",
+          "Was/Were + özne + durum?"
+        ],
+        [
+          "Kısa cevap",
+          "Yes, I was. / No, they weren't."
+        ]
+      ],
+      "words": [
+        [
+          "upset",
+          "üzgün / canı sıkkın"
+        ],
+        [
+          "worried",
+          "endişeli"
+        ],
+        [
+          "full",
+          "dolu"
+        ],
+        [
+          "open",
+          "açık"
+        ],
+        [
+          "accident",
+          "kaza"
+        ],
+        [
+          "power",
+          "elektrik / güç"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I was tired.",
+          "tr": "Yorgundum.",
+          "audio": "86fd26e6512c4034"
+        },
+        {
+          "en": "She was angry.",
+          "tr": "O kızgındı.",
+          "audio": "3dcbd1e0e0a9c157"
+        },
+        {
+          "en": "We were at home.",
+          "tr": "Evdeydik.",
+          "audio": "8a89f12ab3f58c22"
+        },
+        {
+          "en": "The restaurant was full.",
+          "tr": "Restoran doluydu.",
+          "audio": "f6ddf02d4ab2d09d"
+        },
+        {
+          "en": "You were right.",
+          "tr": "Haklıydın.",
+          "audio": "92a12ed25f8db9ff"
+        },
+        {
+          "en": "The door was not open.",
+          "tr": "Kapı açık değildi.",
+          "audio": "b58f0f78079c012a"
+        },
+        {
+          "en": "Why were you upset?",
+          "tr": "Neden üzgündün?",
+          "audio": "07571171b02cf472"
+        },
+        {
+          "en": "Were they at the meeting?",
+          "tr": "Toplantıda mıydılar?",
+          "audio": "ce3551471568492d"
+        },
+        {
+          "en": "It was not my fault.",
+          "tr": "Bu benim hatam değildi.",
+          "audio": "c5e7035cb9d51953"
+        },
+        {
+          "en": "The power was out last night.",
+          "tr": "Dün gece elektrikler kesikti.",
+          "audio": "5d8099a0c371a130"
+        },
+        {
+          "en": "I was at work.",
+          "tr": "İşteydim.",
+          "audio": "07795bdfb15e1c15"
+        },
+        {
+          "en": "I went to work.",
+          "tr": "İşe gittim.",
+          "audio": "6488e084b50e0d5a"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "I called you twice. Why did you not answer?",
+          "tr": "Seni iki kez aradım. Neden cevap vermedin?",
+          "audio": "b78cbe35fc567a3c"
+        },
+        {
+          "en": "Sorry, I was in a meeting.",
+          "tr": "Üzgünüm, toplantıdaydım.",
+          "audio": "021b686be4951bd5"
+        },
+        {
+          "en": "Did you get my message?",
+          "tr": "Mesajımı aldın mı?",
+          "audio": "33aa31e6bd39ddf9"
+        },
+        {
+          "en": "Yes, my phone was in the car.",
+          "tr": "Evet, telefonum arabadaydı.",
+          "audio": "2064c944db919de0"
+        }
+      ],
+      "trap": "“My phone was forget in the car” yanlış. Telefon unutma işini yapmaz. “I left my phone in the car” doğru. “She was called” başka bir bağlamda edilgen olabilir; burada “beni aradı” için “She called me” kullan.",
+      "exercises": [
+        {
+          "en": "I was tired.",
+          "tr": "Yorgundum.",
+          "audio": "86fd26e6512c4034",
+          "why": "Geçmişte yorgun olma durumunu I was ile anlatırız. Bir eylemin ikinci hâli eklenmez."
+        },
+        {
+          "en": "We were at home.",
+          "tr": "Evdeydik.",
+          "audio": "8a89f12ab3f58c22",
+          "why": "We çoğuldur, bu nedenle were seçilir. At home bir yer kalıbıdır."
+        },
+        {
+          "en": "You were right.",
+          "tr": "Haklıydın.",
+          "audio": "92a12ed25f8db9ff",
+          "why": "You tek bir kişiyi anlatsa da were alır."
+        },
+        {
+          "en": "Why were you upset?",
+          "tr": "Neden üzgündün?",
+          "audio": "07571171b02cf472",
+          "why": "Soru kelimesi why başta, sonra were + you gelir. Upset bir durumdur."
+        },
+        {
+          "en": "It was not my fault.",
+          "tr": "Bu benim hatam değildi.",
+          "audio": "c5e7035cb9d51953",
+          "why": "Geçmişte olumsuz durum: it + was not. My fault benim hatam demektir."
+        },
+        {
+          "en": "I was at work.",
+          "tr": "İşteydim.",
+          "audio": "07795bdfb15e1c15",
+          "why": "İşte bulunmak bir durumdur: I was at work. İşe gitmek eylem olsaydı I went to work denirdi."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I ____ tired.",
+          "options": [
+            "was",
+            "were",
+            "am",
+            "did"
+          ],
+          "answer": "was",
+          "audio": "86fd26e6512c4034",
+          "en": "I was tired.",
+          "tr": "Yorgundum.",
+          "why": "I, he, she, it ile was; you, we, they ile were kullanılır. Kimlik, özellik, duygu ve bulunulan yeri geçmişte anlatır."
+        },
+        {
+          "prompt": "She ____ angry.",
+          "options": [
+            "was",
+            "were",
+            "are",
+            "did"
+          ],
+          "answer": "was",
+          "audio": "3dcbd1e0e0a9c157",
+          "en": "She was angry.",
+          "tr": "O kızgındı.",
+          "why": "I, he, she, it ile was; you, we, they ile were kullanılır. Kimlik, özellik, duygu ve bulunulan yeri geçmişte anlatır."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Past Continuous",
+      "subtitle": "O sırada ne oluyordu?",
+      "group": 3,
+      "goal": "Geçmişte belirli bir anda sürmekte olan işi anlatmak.",
+      "rules": [
+        [
+          "Geçmişte devam",
+          "Was/were + fiil-ing geçmişte bir anda devam eden işi anlatır. I/he/she/it ile was; you/we/they ile were seç."
+        ],
+        [
+          "Araya giren olay",
+          "Devam eden arka plan işi Continuous, onu bölen kısa olay çoğunlukla Past Simple olur. When ve while iki işi ilişkilendirir."
+        ],
+        [
+          "Soru ve olumsuz",
+          "Olumsuzda was/were sonrasına not gelir. Soruda was/were öznenin önüne geçer. What were you doing? sorusuna süren işle cevap ver."
+        ]
+      ],
+      "forms": [
+        [
+          "Devam eden iş",
+          "Özne + was/were + fiil-ing"
+        ],
+        [
+          "Araya giren olay",
+          "was/were + ing + when + Past Simple"
+        ],
+        [
+          "Eşzamanlılık",
+          "while + devam eden iş"
+        ]
+      ],
+      "words": [
+        [
+          "while",
+          "iken"
+        ],
+        [
+          "when",
+          "olduğunda"
+        ],
+        [
+          "rain",
+          "yağmur yağmak"
+        ],
+        [
+          "walk",
+          "yürümek"
+        ],
+        [
+          "shower",
+          "duş"
+        ],
+        [
+          "at that moment",
+          "o anda"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I was sleeping.",
+          "tr": "Uyuyordum.",
+          "audio": "3d565943f61653c0"
+        },
+        {
+          "en": "They were waiting for us.",
+          "tr": "Bizi bekliyorlardı.",
+          "audio": "29fd2ddb9671fb84"
+        },
+        {
+          "en": "What were you doing at six?",
+          "tr": "Saat altıda ne yapıyordun?",
+          "audio": "1683149e77975b87"
+        },
+        {
+          "en": "She was cooking when I called.",
+          "tr": "Aradığımda yemek yapıyordu.",
+          "audio": "7f6017d6289b769c"
+        },
+        {
+          "en": "It was raining.",
+          "tr": "Yağmur yağıyordu.",
+          "audio": "23f91b280daac44e"
+        },
+        {
+          "en": "We were not watching television.",
+          "tr": "Televizyon izlemiyorduk.",
+          "audio": "153f5321a2527f5e"
+        },
+        {
+          "en": "I saw him while I was walking.",
+          "tr": "Yürürken onu gördüm.",
+          "audio": "3252a37344eebb52"
+        },
+        {
+          "en": "Were you working last night?",
+          "tr": "Dün gece çalışıyor muydun?",
+          "audio": "dd9444a2f636ea86"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "What were you doing when I called?",
+          "tr": "Aradığımda ne yapıyordun?",
+          "audio": "cb4ff1cfdc36a626"
+        },
+        {
+          "en": "I was taking a shower.",
+          "tr": "Duş alıyordum.",
+          "audio": "6db8d0d1d70aa081"
+        },
+        {
+          "en": "Did you get my message?",
+          "tr": "Mesajımı aldın mı?",
+          "audio": "33aa31e6bd39ddf9"
+        },
+        {
+          "en": "Yes, I saw it later.",
+          "tr": "Evet, daha sonra gördüm.",
+          "audio": "cad12f90f203f660"
+        }
+      ],
+      "trap": "Was/were bir fiilin önünde asla kullanılmaz deme. “I was sleeping” doğrudur. “I was slept” bu anlamda yanlıştır.",
+      "exercises": [
+        {
+          "en": "I was sleeping.",
+          "tr": "Uyuyordum.",
+          "audio": "3d565943f61653c0",
+          "why": "I ile was, devam eden iş için sleeping kullanılır."
+        },
+        {
+          "en": "What were you doing at six?",
+          "tr": "Saat altıda ne yapıyordun?",
+          "audio": "1683149e77975b87",
+          "why": "Soruda were öznenin önüne geçer: what + were + you + doing."
+        },
+        {
+          "en": "It was raining.",
+          "tr": "Yağmur yağıyordu.",
+          "audio": "23f91b280daac44e",
+          "why": "Havanın geçmişte devam eden eylemi it was raining biçiminde anlatılır."
+        },
+        {
+          "en": "I saw him while I was walking.",
+          "tr": "Yürürken onu gördüm.",
+          "audio": "3252a37344eebb52",
+          "why": "Kısa olay saw; yürümekte olan arka plan işi was walking. While bu süreci bağlar."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I was ____.",
+          "options": [
+            "sleeping",
+            "slept",
+            "sleep",
+            "was sleep"
+          ],
+          "answer": "sleeping",
+          "audio": "3d565943f61653c0",
+          "en": "I was sleeping.",
+          "tr": "Uyuyordum.",
+          "why": "Was/were + fiil-ing geçmişte bir anda devam eden işi anlatır. I/he/she/it ile was; you/we/they ile were seç."
+        },
+        {
+          "prompt": "They ____ waiting for us.",
+          "options": [
+            "were",
+            "was",
+            "did",
+            "are"
+          ],
+          "answer": "were",
+          "audio": "29fd2ddb9671fb84",
+          "en": "They were waiting for us.",
+          "tr": "Bizi bekliyorlardı.",
+          "why": "Was/were + fiil-ing geçmişte bir anda devam eden işi anlatır. I/he/she/it ile was; you/we/they ile were seç."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Will / Won't",
+      "subtitle": "Kararlar, sözler ve tahminler",
+      "group": 3,
+      "goal": "Anlık kararları, gelecek tahminlerini ve sözleri ifade etmek.",
+      "rules": [
+        [
+          "Gelecek biçimi",
+          "Will bütün öznelerde aynıdır ve ardından yalın fiil gelir. Durum veya yer için will be kullanılır."
+        ],
+        [
+          "Karar ve söz",
+          "Konuşma anında verilen karar, yardım teklifi ve sözler için yaygındır. Önceden planlanan niyetler için going to yapısını sonraki ünitede karşılaştıracağız."
+        ],
+        [
+          "Soru ve olumsuz",
+          "Will not → won't. Soruda will öznenin önüne gelir. I'll, you'll, she'll konuşmada sık duyulur."
+        ]
+      ],
+      "forms": [
+        [
+          "Olumlu",
+          "Özne + will + yalın fiil"
+        ],
+        [
+          "Olumsuz",
+          "Özne + won't + yalın fiil"
+        ],
+        [
+          "Soru",
+          "Will + özne + yalın fiil?"
+        ]
+      ],
+      "words": [
+        [
+          "tomorrow",
+          "yarın"
+        ],
+        [
+          "tonight",
+          "bu gece"
+        ],
+        [
+          "promise",
+          "söz vermek"
+        ],
+        [
+          "later",
+          "sonra"
+        ],
+        [
+          "probably",
+          "muhtemelen"
+        ],
+        [
+          "soon",
+          "yakında"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I will call you tonight.",
+          "tr": "Bu gece seni arayacağım.",
+          "audio": "9fadb014d6ca78d7"
+        },
+        {
+          "en": "She will be here soon.",
+          "tr": "Yakında burada olacak.",
+          "audio": "2cdc56d5a048df83"
+        },
+        {
+          "en": "We will help you.",
+          "tr": "Sana yardım edeceğiz.",
+          "audio": "97c1689991387ce7"
+        },
+        {
+          "en": "I will not forget.",
+          "tr": "Unutmayacağım.",
+          "audio": "fcfcfc5a7549585e"
+        },
+        {
+          "en": "Will you come tomorrow?",
+          "tr": "Yarın gelecek misin?",
+          "audio": "b760b555e1281796"
+        },
+        {
+          "en": "It will probably rain.",
+          "tr": "Muhtemelen yağmur yağacak.",
+          "audio": "41fadd9802482b57"
+        },
+        {
+          "en": "I will be at home tomorrow.",
+          "tr": "Yarın evde olacağım.",
+          "audio": "b6f8bff634400d3f"
+        },
+        {
+          "en": "I will take your bag.",
+          "tr": "Çantanı ben alırım.",
+          "audio": "dd2a665b0e9e7572"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "I am tired.",
+          "tr": "Yorgunum.",
+          "audio": "f405fc9a481225d9"
+        },
+        {
+          "en": "I will make some tea.",
+          "tr": "Biraz çay yapayım.",
+          "audio": "0f63d98ae80253f1"
+        },
+        {
+          "en": "Will you help me later?",
+          "tr": "Sonra bana yardım edecek misin?",
+          "audio": "7d66258a9912d10b"
+        },
+        {
+          "en": "Of course, I will.",
+          "tr": "Elbette, edeceğim.",
+          "audio": "3843c60d7c87d068"
+        }
+      ],
+      "trap": "“Will goes” yanlış; “will go” gerekir. “I will happy” eksik; durum için “I will be happy” kullan.",
+      "exercises": [
+        {
+          "en": "I will call you tonight.",
+          "tr": "Bu gece seni arayacağım.",
+          "audio": "9fadb014d6ca78d7",
+          "why": "Will sonrasında yalın fiil call gelir. Tonight gelecek bağlamını belirler."
+        },
+        {
+          "en": "We will help you.",
+          "tr": "Sana yardım edeceğiz.",
+          "audio": "97c1689991387ce7",
+          "why": "Yardım teklifi: we will help. Will bütün öznelerde aynı kalır."
+        },
+        {
+          "en": "Will you come tomorrow?",
+          "tr": "Yarın gelecek misin?",
+          "audio": "b760b555e1281796",
+          "why": "Soruda will öznenin önüne geçer; come yalın kalır."
+        },
+        {
+          "en": "I will be at home tomorrow.",
+          "tr": "Yarın evde olacağım.",
+          "audio": "b6f8bff634400d3f",
+          "why": "Gelecekte bir yerde bulunmak durumdur; will be gerekir."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I will ____ you tonight.",
+          "options": [
+            "call",
+            "calls",
+            "called",
+            "calling"
+          ],
+          "answer": "call",
+          "audio": "9fadb014d6ca78d7",
+          "en": "I will call you tonight.",
+          "tr": "Bu gece seni arayacağım.",
+          "why": "Will bütün öznelerde aynıdır ve ardından yalın fiil gelir. Durum veya yer için will be kullanılır."
+        },
+        {
+          "prompt": "She will ____ here soon.",
+          "options": [
+            "be",
+            "is",
+            "was",
+            "being"
+          ],
+          "answer": "be",
+          "audio": "2cdc56d5a048df83",
+          "en": "She will be here soon.",
+          "tr": "Yakında burada olacak.",
+          "why": "Will bütün öznelerde aynıdır ve ardından yalın fiil gelir. Durum veya yer için will be kullanılır."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Going to",
+      "subtitle": "Niyetler ve planlar",
+      "group": 3,
+      "goal": "Önceden düşündüğün planları ve belirtiye dayalı tahminleri anlatmak.",
+      "rules": [
+        [
+          "Planın varsa",
+          "Am/is/are + going to + yalın fiil önceden alınan kararları anlatır. Going to öncesindeki be fiilini unutma."
+        ],
+        [
+          "Görünen belirti",
+          "Şu an görülen kanıta dayanarak tahmin yaparken de going to kullanılır. Yağmur bulutlarını görüp yağmur yağacağını söylemek buna örnektir."
+        ],
+        [
+          "Will ile karşılaştır",
+          "İki yapı bazen örtüşür; temel fark konuşma anındaki karar ile önceden planı ayırmaktır. Going to go dilbilgisel olarak doğrudur."
+        ]
+      ],
+      "forms": [
+        [
+          "Plan",
+          "Özne + am/is/are + going to + fiil"
+        ],
+        [
+          "Olumsuz",
+          "Özne + am/is/are + not + going to + fiil"
+        ],
+        [
+          "Soru",
+          "Am/Is/Are + özne + going to + fiil?"
+        ]
+      ],
+      "words": [
+        [
+          "plan",
+          "planlamak"
+        ],
+        [
+          "visit",
+          "ziyaret etmek"
+        ],
+        [
+          "travel",
+          "seyahat etmek"
+        ],
+        [
+          "next week",
+          "gelecek hafta"
+        ],
+        [
+          "cloud",
+          "bulut"
+        ],
+        [
+          "save",
+          "biriktirmek"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I am going to visit my sister.",
+          "tr": "Kız kardeşimi ziyaret edeceğim.",
+          "audio": "3249df915794aa51"
+        },
+        {
+          "en": "She is going to study tonight.",
+          "tr": "Bu gece ders çalışacak.",
+          "audio": "fc787c3fc95b8209"
+        },
+        {
+          "en": "We are going to travel next week.",
+          "tr": "Gelecek hafta seyahat edeceğiz.",
+          "audio": "2dfbce3b066a6b19"
+        },
+        {
+          "en": "Are you going to call him?",
+          "tr": "Onu arayacak mısın?",
+          "audio": "4480039b37928e6d"
+        },
+        {
+          "en": "I am not going to buy it.",
+          "tr": "Onu almayacağım.",
+          "audio": "952254a595c06ca4"
+        },
+        {
+          "en": "It is going to rain.",
+          "tr": "Yağmur yağacak.",
+          "audio": "6f61de4106e8171b"
+        },
+        {
+          "en": "They are going to move.",
+          "tr": "Taşınacaklar.",
+          "audio": "4aa275091712fd2d"
+        },
+        {
+          "en": "I am going to save some money.",
+          "tr": "Biraz para biriktireceğim.",
+          "audio": "1e55acacbe8d0bca"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "What are you going to do tomorrow?",
+          "tr": "Yarın ne yapacaksın?",
+          "audio": "661e42ac10847a61"
+        },
+        {
+          "en": "I am going to visit Emma.",
+          "tr": "Emma'yı ziyaret edeceğim.",
+          "audio": "5a1336dad40b5de1"
+        },
+        {
+          "en": "I will come with you.",
+          "tr": "Ben de seninle geleyim.",
+          "audio": "5868143cd8ff5d76"
+        },
+        {
+          "en": "We will take the bus.",
+          "tr": "Otobüse bineriz.",
+          "audio": "753c70b07a84c8eb"
+        }
+      ],
+      "trap": "“I going to study” eksik; “I am going to study” gerekir. “Going to” sonrasında fiilin yalın hâli kullanılır.",
+      "exercises": [
+        {
+          "en": "I am going to visit my sister.",
+          "tr": "Kız kardeşimi ziyaret edeceğim.",
+          "audio": "3249df915794aa51",
+          "why": "Plan için am going to; ardından yalın fiil visit gelir."
+        },
+        {
+          "en": "We are going to travel next week.",
+          "tr": "Gelecek hafta seyahat edeceğiz.",
+          "audio": "2dfbce3b066a6b19",
+          "why": "We ile are going to seçilir; travel yalındır."
+        },
+        {
+          "en": "I am not going to buy it.",
+          "tr": "Onu almayacağım.",
+          "audio": "952254a595c06ca4",
+          "why": "Olumsuzluk am sonrasına not eklenerek kurulur. Buy yalın kalır."
+        },
+        {
+          "en": "They are going to move.",
+          "tr": "Taşınacaklar.",
+          "audio": "4aa275091712fd2d",
+          "why": "They ile are going to ve ardından move kullanılır."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I ____ going to visit my sister.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "do"
+          ],
+          "answer": "am",
+          "audio": "3249df915794aa51",
+          "en": "I am going to visit my sister.",
+          "tr": "Kız kardeşimi ziyaret edeceğim.",
+          "why": "Am/is/are + going to + yalın fiil önceden alınan kararları anlatır. Going to öncesindeki be fiilini unutma."
+        },
+        {
+          "prompt": "She ____ going to study tonight.",
+          "options": [
+            "is",
+            "are",
+            "am",
+            "does"
+          ],
+          "answer": "is",
+          "audio": "fc787c3fc95b8209",
+          "en": "She is going to study tonight.",
+          "tr": "Bu gece ders çalışacak.",
+          "why": "Am/is/are + going to + yalın fiil önceden alınan kararları anlatır. Going to öncesindeki be fiilini unutma."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Zamanları birlikte kullanma",
+      "subtitle": "Bir konuşma, farklı zamanlar",
+      "group": 3,
+      "goal": "Anlama ve zaman bağlamına göre yapılar arasında geçiş yapmak.",
+      "rules": [
+        [
+          "Zaman çizgisini bul",
+          "Önce cümlede ne zaman olduğunu belirle: rutin, şimdi, bitmiş geçmiş veya gelecek. Ardından durum mu eylem mi diye bak. Tek bir sözcüğe bakarak karar verme."
+        ],
+        [
+          "Bağlı olaylar",
+          "Before, after ve when olayların ilişkisini anlatır. Gelecek anlamındaki zaman yan cümlelerinde genellikle Present Simple kullanılır; iki tarafa birden will koyma."
+        ],
+        [
+          "Tutarlılık",
+          "Bir konuşmadaki her cümlenin aynı zamanda olması gerekmez. Dün olanı anlattıktan sonra bu akşam için plan yapabilirsin. Her cümleyi kendi anlamıyla değerlendir."
+        ]
+      ],
+      "forms": [
+        [
+          "Rutin / şimdi",
+          "Present Simple / Present Continuous"
+        ],
+        [
+          "Bitmiş eylem / geçmiş durum",
+          "Past Simple / was-were"
+        ],
+        [
+          "Gelecek zaman yan cümlesi",
+          "when + Present Simple, will + fiil"
+        ]
+      ],
+      "words": [
+        [
+          "before",
+          "önce"
+        ],
+        [
+          "after",
+          "sonra"
+        ],
+        [
+          "as soon as",
+          "olur olmaz"
+        ],
+        [
+          "again",
+          "tekrar"
+        ],
+        [
+          "last year",
+          "geçen yıl"
+        ],
+        [
+          "next month",
+          "gelecek ay"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I usually walk, but today I am taking the bus.",
+          "tr": "Genellikle yürürüm ama bugün otobüse biniyorum.",
+          "audio": "3eb86846e63aee28"
+        },
+        {
+          "en": "She was tired, so she went home.",
+          "tr": "Yorgundu, bu yüzden eve gitti.",
+          "audio": "60ba629b381a6668"
+        },
+        {
+          "en": "I will call you when I get home.",
+          "tr": "Eve vardığımda seni arayacağım.",
+          "audio": "8c2d51f665bc961b"
+        },
+        {
+          "en": "We had dinner before we watched the film.",
+          "tr": "Filmi izlemeden önce yemek yedik.",
+          "audio": "fd55afab2c613042"
+        },
+        {
+          "en": "He is working now.",
+          "tr": "O şimdi çalışıyor.",
+          "audio": "308fda196e65997a"
+        },
+        {
+          "en": "I saw her yesterday.",
+          "tr": "Onu dün gördüm.",
+          "audio": "1d1597c8851d6651"
+        },
+        {
+          "en": "They will be here tomorrow.",
+          "tr": "Yarın burada olacaklar.",
+          "audio": "a489c16f82e70722"
+        },
+        {
+          "en": "I was reading when you called.",
+          "tr": "Aradığında okuyordum.",
+          "audio": "e036be0652c19f72"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Did you see Emma yesterday?",
+          "tr": "Dün Emma'yı gördün mü?",
+          "audio": "6fa4743a4c568e87"
+        },
+        {
+          "en": "Yes, she was at the station.",
+          "tr": "Evet, istasyondaydı.",
+          "audio": "7987be673f24f665"
+        },
+        {
+          "en": "Is she working today?",
+          "tr": "Bugün çalışıyor mu?",
+          "audio": "eb6f45ae16ec903d"
+        },
+        {
+          "en": "Yes, I will call her tonight.",
+          "tr": "Evet, bu gece onu arayacağım.",
+          "audio": "9e0f128cdb6c2abe"
+        }
+      ],
+      "trap": "“When I will get home, I will call” yerine gelecek zaman yan cümlesinde “When I get home, I will call” kullan.",
+      "exercises": [
+        {
+          "en": "I usually walk, but today I am taking the bus.",
+          "tr": "Genellikle yürürüm ama bugün otobüse biniyorum.",
+          "audio": "3eb86846e63aee28",
+          "why": "Rutin için usually + Simple; bugün yapılan geçici iş için am taking kullanılır."
+        },
+        {
+          "en": "I will call you when I get home.",
+          "tr": "Eve vardığımda seni arayacağım.",
+          "audio": "8c2d51f665bc961b",
+          "why": "Gelecek anlamındaki when yan cümlesinde get kullanılır; ana cümlede will call vardır."
+        },
+        {
+          "en": "He is working now.",
+          "tr": "O şimdi çalışıyor.",
+          "audio": "308fda196e65997a",
+          "why": "Now şu anda devam eden işi anlatır: is working."
+        },
+        {
+          "en": "They will be here tomorrow.",
+          "tr": "Yarın burada olacaklar.",
+          "audio": "a489c16f82e70722",
+          "why": "Tomorrow geleceği gösterir; durum/yer için will be kullanılır."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I usually walk, but today I ____ the bus.",
+          "options": [
+            "am taking",
+            "take",
+            "takes",
+            "am take"
+          ],
+          "answer": "am taking",
+          "audio": "3eb86846e63aee28",
+          "en": "I usually walk, but today I am taking the bus.",
+          "tr": "Genellikle yürürüm ama bugün otobüse biniyorum.",
+          "why": "Önce cümlede ne zaman olduğunu belirle: rutin, şimdi, bitmiş geçmiş veya gelecek. Ardından durum mu eylem mi diye bak. Tek bir sözcüğe bakarak karar verme."
+        },
+        {
+          "prompt": "She was tired, so she ____ home.",
+          "options": [
+            "went",
+            "was went",
+            "goes",
+            "going"
+          ],
+          "answer": "went",
+          "audio": "60ba629b381a6668",
+          "en": "She was tired, so she went home.",
+          "tr": "Yorgundu, bu yüzden eve gitti.",
+          "why": "Önce cümlede ne zaman olduğunu belirle: rutin, şimdi, bitmiş geçmiş veya gelecek. Ardından durum mu eylem mi diye bak. Tek bir sözcüğe bakarak karar verme."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Modal fiiller",
+      "subtitle": "Yapabilmek, gereklilik ve rica",
+      "group": 4,
+      "goal": "Can, could, should, must, have to ve shall ile niyetini belirtmek.",
+      "rules": [
+        [
+          "Yalın fiil",
+          "Can yetenek/izin, could kibar rica veya geçmiş yetenek, should tavsiye, must güçlü gereklilik bildirir. Bunlardan sonra to olmadan yalın fiil gelir."
+        ],
+        [
+          "Have to farklıdır",
+          "Have to gereklilik bildirir fakat normal fiil gibi çekimlenir: she has to; do you have to? Don't have to zorunlu değil, mustn't yasak anlamındadır."
+        ],
+        [
+          "Kibar soru ve öneri",
+          "Could you...? nazik bir rica; shall I...? veya shall we...? teklif/öneri için kullanılabilir. Cevap verirken bağlamı dikkate al."
+        ]
+      ],
+      "forms": [
+        [
+          "Yetenek",
+          "can + fiil"
+        ],
+        [
+          "Rica",
+          "Could you + fiil?"
+        ],
+        [
+          "Tavsiye / gereklilik",
+          "should / must + fiil"
+        ],
+        [
+          "Zorunluluk",
+          "have/has to + fiil"
+        ]
+      ],
+      "words": [
+        [
+          "can",
+          "yapabilmek"
+        ],
+        [
+          "should",
+          "yapması iyi olmak"
+        ],
+        [
+          "must",
+          "zorunda olmak"
+        ],
+        [
+          "have to",
+          "zorunda olmak"
+        ],
+        [
+          "could",
+          "yapabilir miydin / yapabilir misin"
+        ],
+        [
+          "shall",
+          "teklif ve öneri yardımcısı"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I can help you.",
+          "tr": "Sana yardım edebilirim.",
+          "audio": "aa7f792813d4397e"
+        },
+        {
+          "en": "Could you open the door?",
+          "tr": "Kapıyı açabilir misin?",
+          "audio": "bd0b6b8f70759158"
+        },
+        {
+          "en": "You should get some sleep.",
+          "tr": "Biraz uyumalısın.",
+          "audio": "465d44373640e8a4"
+        },
+        {
+          "en": "We must leave now.",
+          "tr": "Şimdi ayrılmalıyız.",
+          "audio": "87dda3f0e50135f9"
+        },
+        {
+          "en": "She has to work today.",
+          "tr": "Bugün çalışmak zorunda.",
+          "audio": "c4f444e9c058c8f8"
+        },
+        {
+          "en": "You do not have to come.",
+          "tr": "Gelmek zorunda değilsin.",
+          "audio": "a939a39bb130b8a5"
+        },
+        {
+          "en": "You must not park here.",
+          "tr": "Buraya park etmemelisin.",
+          "audio": "ba3c72263d4bae14"
+        },
+        {
+          "en": "Shall we go?",
+          "tr": "Gidelim mi?",
+          "audio": "ef59d4a0a1787cde"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Could you help me?",
+          "tr": "Bana yardım edebilir misin?",
+          "audio": "fab45d7d642d51e8"
+        },
+        {
+          "en": "Of course, I can.",
+          "tr": "Elbette, edebilirim.",
+          "audio": "510906680313caa6"
+        },
+        {
+          "en": "Do we have to leave now?",
+          "tr": "Şimdi ayrılmak zorunda mıyız?",
+          "audio": "5291bc4b4cb7e4bc"
+        },
+        {
+          "en": "No, we can wait.",
+          "tr": "Hayır, bekleyebiliriz.",
+          "audio": "ba9055984fe505c5"
+        }
+      ],
+      "trap": "“Can to go” ve “she cans” yanlış. “Mustn’t” yasaktır; “don’t have to” ise mecbur olmadığını söyler.",
+      "exercises": [
+        {
+          "en": "I can help you.",
+          "tr": "Sana yardım edebilirim.",
+          "audio": "aa7f792813d4397e",
+          "why": "Can sonrasında to olmadan yalın help gelir."
+        },
+        {
+          "en": "You should get some sleep.",
+          "tr": "Biraz uyumalısın.",
+          "audio": "465d44373640e8a4",
+          "why": "Tavsiye için should + yalın get. Get some sleep bir kalıptır."
+        },
+        {
+          "en": "She has to work today.",
+          "tr": "Bugün çalışmak zorunda.",
+          "audio": "c4f444e9c058c8f8",
+          "why": "Have to üçüncü tekil kişide has to olur; ardından work yalın gelir."
+        },
+        {
+          "en": "You must not park here.",
+          "tr": "Buraya park etmemelisin.",
+          "audio": "ba3c72263d4bae14",
+          "why": "Must not burada yasağı bildirir. Don't have to ile aynı anlam değildir."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I can ____ you.",
+          "options": [
+            "help",
+            "to help",
+            "helps",
+            "helped"
+          ],
+          "answer": "help",
+          "audio": "aa7f792813d4397e",
+          "en": "I can help you.",
+          "tr": "Sana yardım edebilirim.",
+          "why": "Can yetenek/izin, could kibar rica veya geçmiş yetenek, should tavsiye, must güçlü gereklilik bildirir. Bunlardan sonra to olmadan yalın fiil gelir."
+        },
+        {
+          "prompt": "Could you ____ the door?",
+          "options": [
+            "open",
+            "to open",
+            "opens",
+            "opened"
+          ],
+          "answer": "open",
+          "audio": "bd0b6b8f70759158",
+          "en": "Could you open the door?",
+          "tr": "Kapıyı açabilir misin?",
+          "why": "Can yetenek/izin, could kibar rica veya geçmiş yetenek, should tavsiye, must güçlü gereklilik bildirir. Bunlardan sonra to olmadan yalın fiil gelir."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "İstekler ve ihtiyaçlar",
+      "subtitle": "Want, need, would like",
+      "group": 4,
+      "goal": "İsteklerini, ihtiyaçlarını ve tercihlerini doğal biçimde söylemek.",
+      "rules": [
+        [
+          "Want ve need",
+          "Want istemek, need ihtiyaç duymaktır. Ardından bir isim veya to + fiil gelebilir. Kişiye göre wants/needs değişimi uygulanır."
+        ],
+        [
+          "Kibar istek",
+          "Would like, want ifadesinden daha kibar bir isteme yoludur. I'd like kısaltması yaygındır. Soru: Would you like...? Do you would like kullanılmaz."
+        ],
+        [
+          "Sevmek ve tercih",
+          "Like + isim veya like + -ing genel beğeniyi anlatabilir. Would like + to fiili ise belirli bir isteği ifade eder. Aynı yapılar değillerdir."
+        ]
+      ],
+      "forms": [
+        [
+          "İstek",
+          "want + isim / want to + fiil"
+        ],
+        [
+          "İhtiyaç",
+          "need + isim / need to + fiil"
+        ],
+        [
+          "Kibar istek",
+          "would like + isim / would like to + fiil"
+        ],
+        [
+          "Beğeni",
+          "like + fiil-ing"
+        ]
+      ],
+      "words": [
+        [
+          "some",
+          "biraz / birkaç"
+        ],
+        [
+          "anything",
+          "herhangi bir şey"
+        ],
+        [
+          "something",
+          "bir şey"
+        ],
+        [
+          "hungry",
+          "aç"
+        ],
+        [
+          "thirsty",
+          "susamış"
+        ],
+        [
+          "please",
+          "lütfen"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I want some water.",
+          "tr": "Biraz su istiyorum.",
+          "audio": "598ed98ceb5fd436"
+        },
+        {
+          "en": "She needs to rest.",
+          "tr": "Dinlenmesi gerekiyor.",
+          "audio": "ac6654d3ca340bcc"
+        },
+        {
+          "en": "I would like a coffee, please.",
+          "tr": "Bir kahve rica ediyorum.",
+          "audio": "e7fcc7e648aba167"
+        },
+        {
+          "en": "Would you like some tea?",
+          "tr": "Biraz çay ister misin?",
+          "audio": "bdec6d4bf5b96373"
+        },
+        {
+          "en": "We like cooking.",
+          "tr": "Yemek yapmayı severiz.",
+          "audio": "84c3914f8887a3dd"
+        },
+        {
+          "en": "I would like to go home.",
+          "tr": "Eve gitmek istiyorum.",
+          "audio": "db6790a7850277fb"
+        },
+        {
+          "en": "Do you need anything?",
+          "tr": "Bir şeye ihtiyacın var mı?",
+          "audio": "de8979445f560832"
+        },
+        {
+          "en": "He wants to see you.",
+          "tr": "Seni görmek istiyor.",
+          "audio": "936060ddbf1f0849"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Would you like some coffee?",
+          "tr": "Biraz kahve ister misin?",
+          "audio": "00718244603278dc"
+        },
+        {
+          "en": "Yes, please.",
+          "tr": "Evet, lütfen.",
+          "audio": "2fa98e4d3bdb2c5d"
+        },
+        {
+          "en": "Do you need anything else?",
+          "tr": "Başka bir şeye ihtiyacın var mı?",
+          "audio": "52b554d66c687199"
+        },
+        {
+          "en": "No, thank you.",
+          "tr": "Hayır, teşekkür ederim.",
+          "audio": "428c7f109e54dac6"
+        }
+      ],
+      "trap": "“I want go” yerine “I want to go” kullan. “I would like going” yerine bir istek belirtirken “I would like to go” gerekir.",
+      "exercises": [
+        {
+          "en": "I want some water.",
+          "tr": "Biraz su istiyorum.",
+          "audio": "598ed98ceb5fd436",
+          "why": "Want doğrudan bir isim grubu alabilir: some water."
+        },
+        {
+          "en": "I would like a coffee, please.",
+          "tr": "Bir kahve rica ediyorum.",
+          "audio": "e7fcc7e648aba167",
+          "why": "Kibar sipariş için would like + isim kullanılır."
+        },
+        {
+          "en": "We like cooking.",
+          "tr": "Yemek yapmayı severiz.",
+          "audio": "84c3914f8887a3dd",
+          "why": "Genel beğeni için like + cooking (-ing) kullanılır."
+        },
+        {
+          "en": "Do you need anything?",
+          "tr": "Bir şeye ihtiyacın var mı?",
+          "audio": "de8979445f560832",
+          "why": "Normal fiil need ile soruda do gerekir. Anything soru cümlesinde bir şey anlamındadır."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I ____ some water.",
+          "options": [
+            "want",
+            "am want",
+            "wanting",
+            "wants"
+          ],
+          "answer": "want",
+          "audio": "598ed98ceb5fd436",
+          "en": "I want some water.",
+          "tr": "Biraz su istiyorum.",
+          "why": "Want istemek, need ihtiyaç duymaktır. Ardından bir isim veya to + fiil gelebilir. Kişiye göre wants/needs değişimi uygulanır."
+        },
+        {
+          "prompt": "She needs ____.",
+          "options": [
+            "to rest",
+            "rest",
+            "resting",
+            "rests"
+          ],
+          "answer": "to rest",
+          "audio": "ac6654d3ca340bcc",
+          "en": "She needs to rest.",
+          "tr": "Dinlenmesi gerekiyor.",
+          "why": "Want istemek, need ihtiyaç duymaktır. Ardından bir isim veya to + fiil gelebilir. Kişiye göre wants/needs değişimi uygulanır."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "İki fiili birlikte kullanma",
+      "subtitle": "To mu, -ing mi?",
+      "group": 4,
+      "goal": "İlk fiilin ikinci fiilin biçimini nasıl belirlediğini öğrenmek.",
+      "rules": [
+        [
+          "To + fiil",
+          "Want, need, decide, hope ve plan gibi fiillerden sonra çoğunlukla to + yalın fiil gelir. To burada yön edatı değil, fiili bağlayan parçadır."
+        ],
+        [
+          "-ing isteyen fiiller",
+          "Enjoy, finish ve avoid gibi fiillerden sonra -ing kullanılır. Bütün fiillere uygulanabilecek tek bir kural yoktur; fiili kalıbıyla öğren."
+        ],
+        [
+          "Etkinlik kalıpları",
+          "Go shopping, go swimming gibi go + -ing kalıpları vardır. Like hem to hem -ing alabilir; bu ünitede genel beğeni için -ing biçimini çalışıyoruz."
+        ]
+      ],
+      "forms": [
+        [
+          "To kalıbı",
+          "want / need / decide / hope + to + fiil"
+        ],
+        [
+          "-ing kalıbı",
+          "enjoy / finish / avoid + fiil-ing"
+        ],
+        [
+          "Etkinlik",
+          "go shopping / go swimming"
+        ]
+      ],
+      "words": [
+        [
+          "enjoy",
+          "keyif almak"
+        ],
+        [
+          "decide",
+          "karar vermek"
+        ],
+        [
+          "hope",
+          "ummak"
+        ],
+        [
+          "finish",
+          "bitirmek"
+        ],
+        [
+          "avoid",
+          "kaçınmak"
+        ],
+        [
+          "shopping",
+          "alışveriş"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I want to learn English.",
+          "tr": "İngilizce öğrenmek istiyorum.",
+          "audio": "38277d948581f642"
+        },
+        {
+          "en": "She enjoys reading.",
+          "tr": "Okumaktan keyif alır.",
+          "audio": "eb27449af261243f"
+        },
+        {
+          "en": "We decided to leave.",
+          "tr": "Ayrılmaya karar verdik.",
+          "audio": "a7e54ed4a7219b76"
+        },
+        {
+          "en": "They finished eating.",
+          "tr": "Yemek yemeyi bitirdiler.",
+          "audio": "0b9617778c1589c2"
+        },
+        {
+          "en": "I hope to see you soon.",
+          "tr": "Seni yakında görmeyi umuyorum.",
+          "audio": "fda10aa62bc9628b"
+        },
+        {
+          "en": "We go shopping on Sunday.",
+          "tr": "Pazar günleri alışverişe gideriz.",
+          "audio": "228f1600ca794e3e"
+        },
+        {
+          "en": "He needs to work.",
+          "tr": "Çalışması gerekiyor.",
+          "audio": "f4cb6be1b1b43cea"
+        },
+        {
+          "en": "I avoid driving at night.",
+          "tr": "Gece araba kullanmaktan kaçınırım.",
+          "audio": "44090c7bd788aca9"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Do you enjoy cooking?",
+          "tr": "Yemek yapmaktan keyif alır mısın?",
+          "audio": "2b0ab208319889f6"
+        },
+        {
+          "en": "Yes, but I need to learn more.",
+          "tr": "Evet ama daha fazla öğrenmem gerekiyor.",
+          "audio": "946f7acd4c7eb232"
+        },
+        {
+          "en": "Shall we go shopping?",
+          "tr": "Alışverişe gidelim mi?",
+          "audio": "b471d9374354f199"
+        },
+        {
+          "en": "I want to finish reading first.",
+          "tr": "Önce okumayı bitirmek istiyorum.",
+          "audio": "7fefcab4d5c60188"
+        }
+      ],
+      "trap": "“Enjoy to read” yerine “enjoy reading”; “decide going” yerine “decide to go” kullan. Fiilleri tek kelime olarak değil devam kalıbıyla öğren.",
+      "exercises": [
+        {
+          "en": "I want to learn English.",
+          "tr": "İngilizce öğrenmek istiyorum.",
+          "audio": "38277d948581f642",
+          "why": "Want ikinci fiili to ile alır: want to learn."
+        },
+        {
+          "en": "We decided to leave.",
+          "tr": "Ayrılmaya karar verdik.",
+          "audio": "a7e54ed4a7219b76",
+          "why": "Decide sonrasında to + yalın leave kullanılır. Geçmişi decided taşır."
+        },
+        {
+          "en": "I hope to see you soon.",
+          "tr": "Seni yakında görmeyi umuyorum.",
+          "audio": "fda10aa62bc9628b",
+          "why": "Hope fiili burada to + see biçimini alır."
+        },
+        {
+          "en": "He needs to work.",
+          "tr": "Çalışması gerekiyor.",
+          "audio": "f4cb6be1b1b43cea",
+          "why": "Need sonrasında to work gelir; he nedeniyle needs kullanılır."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I want ____ English.",
+          "options": [
+            "to learn",
+            "learning",
+            "learn",
+            "learns"
+          ],
+          "answer": "to learn",
+          "audio": "38277d948581f642",
+          "en": "I want to learn English.",
+          "tr": "İngilizce öğrenmek istiyorum.",
+          "why": "Want, need, decide, hope ve plan gibi fiillerden sonra çoğunlukla to + yalın fiil gelir. To burada yön edatı değil, fiili bağlayan parçadır."
+        },
+        {
+          "prompt": "She enjoys ____.",
+          "options": [
+            "reading",
+            "to read",
+            "read",
+            "reads"
+          ],
+          "answer": "reading",
+          "audio": "eb27449af261243f",
+          "en": "She enjoys reading.",
+          "tr": "Okumaktan keyif alır.",
+          "why": "Want, need, decide, hope ve plan gibi fiillerden sonra çoğunlukla to + yalın fiil gelir. To burada yön edatı değil, fiili bağlayan parçadır."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Birine bir şey söylemek",
+      "subtitle": "Tell, ask, let ve take",
+      "group": 4,
+      "goal": "Birinden bir eylem istemek ve iki kişinin eylemlerini aynı cümlede bağlamak.",
+      "rules": [
+        [
+          "Tell / ask + kişi + to",
+          "Tell someone to do birine yapmasını söylemek; ask someone to do birinden yapmasını istemektir. Kişi nesne zamiri biçimindedir: him, her, us."
+        ],
+        [
+          "Let ve make",
+          "Let someone do izin vermek, make someone do yaptırmaktır. Bu etken yapılarda ikinci fiilden önce to kullanılmaz."
+        ],
+        [
+          "Take + kişi + etkinlik",
+          "Take someone shopping/swimming birini bir etkinliğe götürmektir. Ana fiil zamanı taşırken ikinci yapı kendi kalıbında kalır."
+        ]
+      ],
+      "forms": [
+        [
+          "Söyle / rica et",
+          "tell/ask + kişi + to + fiil"
+        ],
+        [
+          "İzin ver / yaptır",
+          "let/make + kişi + yalın fiil"
+        ],
+        [
+          "Etkinliğe götür",
+          "take + kişi + shopping/swimming"
+        ]
+      ],
+      "words": [
+        [
+          "ask",
+          "sormak / rica etmek"
+        ],
+        [
+          "tell",
+          "söylemek"
+        ],
+        [
+          "let",
+          "izin vermek"
+        ],
+        [
+          "make",
+          "yaptırmak / yapmak"
+        ],
+        [
+          "wait",
+          "beklemek"
+        ],
+        [
+          "stay",
+          "kalmak"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I told him to wait.",
+          "tr": "Ona beklemesini söyledim.",
+          "audio": "1a2ce3cfdac1551c"
+        },
+        {
+          "en": "She asked me to help.",
+          "tr": "Benden yardım etmemi istedi.",
+          "audio": "cf13bdcbb21840bd"
+        },
+        {
+          "en": "Let me help you.",
+          "tr": "Sana yardım edeyim.",
+          "audio": "fb72c4e6cac92374"
+        },
+        {
+          "en": "They made us wait.",
+          "tr": "Bizi beklettiler.",
+          "audio": "aa6fe5b792212f29"
+        },
+        {
+          "en": "I will take him shopping.",
+          "tr": "Onu alışverişe götüreceğim.",
+          "audio": "8389a72cc719a442"
+        },
+        {
+          "en": "Ask her to call me.",
+          "tr": "Ondan beni aramasını iste.",
+          "audio": "1dffb15f60117135"
+        },
+        {
+          "en": "Do not let him leave.",
+          "tr": "Gitmesine izin verme.",
+          "audio": "7d80efbb53b73306"
+        },
+        {
+          "en": "He told us not to worry.",
+          "tr": "Bize endişelenmememizi söyledi.",
+          "audio": "1bd2e13bfd4671d2"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "What did she ask you to do?",
+          "tr": "Senden ne yapmanı istedi?",
+          "audio": "dda6d61a768ed60e"
+        },
+        {
+          "en": "She asked me to wait.",
+          "tr": "Benden beklememi istedi.",
+          "audio": "00c278744aa97fb1"
+        },
+        {
+          "en": "Let me call her.",
+          "tr": "Onu bir arayayım.",
+          "audio": "e9bc6dc5a550cf52"
+        },
+        {
+          "en": "Tell her to come here.",
+          "tr": "Ona buraya gelmesini söyle.",
+          "audio": "36ccd20383ed8971"
+        }
+      ],
+      "trap": "“Tell he to wait” yanlış; him gerekir. “Let me to help” yanlış; “Let me help” doğrudur.",
+      "exercises": [
+        {
+          "en": "I told him to wait.",
+          "tr": "Ona beklemesini söyledim.",
+          "audio": "1a2ce3cfdac1551c",
+          "why": "Tell + kişi + to + fiil. Told geçmiş, him nesne zamiri, to wait istenen eylemdir."
+        },
+        {
+          "en": "Let me help you.",
+          "tr": "Sana yardım edeyim.",
+          "audio": "fb72c4e6cac92374",
+          "why": "Let sonrasında kişi ve yalın fiil gelir. Let me to help kullanılmaz."
+        },
+        {
+          "en": "I will take him shopping.",
+          "tr": "Onu alışverişe götüreceğim.",
+          "audio": "8389a72cc719a442",
+          "why": "Take + kişi + shopping etkinliğe götürmek demektir. Geleceği will take taşır."
+        },
+        {
+          "en": "Do not let him leave.",
+          "tr": "Gitmesine izin verme.",
+          "audio": "7d80efbb53b73306",
+          "why": "Don't + let olumsuz emir; him nesne zamiri, leave yalın fiildir."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I told ____ to wait.",
+          "options": [
+            "him",
+            "he",
+            "his",
+            "they"
+          ],
+          "answer": "him",
+          "audio": "1a2ce3cfdac1551c",
+          "en": "I told him to wait.",
+          "tr": "Ona beklemesini söyledim.",
+          "why": "Tell someone to do birine yapmasını söylemek; ask someone to do birinden yapmasını istemektir. Kişi nesne zamiri biçimindedir: him, her, us."
+        },
+        {
+          "prompt": "She asked me ____.",
+          "options": [
+            "to help",
+            "helping",
+            "helps",
+            "help"
+          ],
+          "answer": "to help",
+          "audio": "cf13bdcbb21840bd",
+          "en": "She asked me to help.",
+          "tr": "Benden yardım etmemi istedi.",
+          "why": "Tell someone to do birine yapmasını söylemek; ask someone to do birinden yapmasını istemektir. Kişi nesne zamiri biçimindedir: him, her, us."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Sık karıştırılan fiiller",
+      "subtitle": "Anlam yakın, kullanım farklı",
+      "group": 4,
+      "goal": "Say/tell, leave/forget, look/see/watch ve do/make ayrımlarını yapmak.",
+      "rules": [
+        [
+          "Say ve tell",
+          "Say söylenen söze odaklanır; kişiyi eklemek için genellikle to gerekir. Tell doğrudan kişiyi alır: tell me the truth. Speak dil veya konuşma becerisi; talk karşılıklı konuşma için sık kullanılır."
+        ],
+        [
+          "Look, see, watch",
+          "Look at isteyerek bakmak; see görmek; watch hareket eden bir şeyi bir süre izlemektir. Edatıyla birlikte öğren."
+        ],
+        [
+          "Do, make, leave, forget",
+          "Do iş/etkinlik, make üretme/oluşturma ile yaygındır; kalıplar önemlidir. Leave bir şeyi bir yerde bırakmak, forget hatırlayamamak veya yapmayı unutmak olabilir."
+        ]
+      ],
+      "forms": [
+        [
+          "Söz / kişi",
+          "say something / tell someone something"
+        ],
+        [
+          "Bak / gör / izle",
+          "look at / see / watch"
+        ],
+        [
+          "Kalıplar",
+          "do homework / make dinner"
+        ],
+        [
+          "Unutmak",
+          "forget a name / leave a bag somewhere"
+        ]
+      ],
+      "words": [
+        [
+          "say",
+          "söylemek"
+        ],
+        [
+          "tell",
+          "birine söylemek"
+        ],
+        [
+          "look at",
+          "bakmak"
+        ],
+        [
+          "watch",
+          "izlemek"
+        ],
+        [
+          "truth",
+          "gerçek / doğruluk"
+        ],
+        [
+          "true",
+          "doğru / gerçek olan"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "Tell me the truth.",
+          "tr": "Bana gerçeği söyle.",
+          "audio": "5dc856370b71fe8f"
+        },
+        {
+          "en": "She said hello to me.",
+          "tr": "Bana merhaba dedi.",
+          "audio": "85f1ad6afd1466c4"
+        },
+        {
+          "en": "I speak English.",
+          "tr": "İngilizce konuşurum.",
+          "audio": "ad560d9357c8845d"
+        },
+        {
+          "en": "We talked about the film.",
+          "tr": "Film hakkında konuştuk.",
+          "audio": "93f122296c78e692"
+        },
+        {
+          "en": "Look at this picture.",
+          "tr": "Bu resme bak.",
+          "audio": "1901f6d72fc69544"
+        },
+        {
+          "en": "I saw him yesterday.",
+          "tr": "Onu dün gördüm.",
+          "audio": "de52cf204f4253af"
+        },
+        {
+          "en": "I left my bag at school.",
+          "tr": "Çantamı okulda unuttum.",
+          "audio": "68fcc7270e712e3f"
+        },
+        {
+          "en": "I forgot her name.",
+          "tr": "Adını unuttum.",
+          "audio": "b25e16cc07c4ce47"
+        },
+        {
+          "en": "I do my homework at night.",
+          "tr": "Ödevimi gece yaparım.",
+          "audio": "e88474ebcdb916a1"
+        },
+        {
+          "en": "She is making dinner.",
+          "tr": "Akşam yemeği hazırlıyor.",
+          "audio": "b0b7e2812af08ad8"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Did you see my phone?",
+          "tr": "Telefonumu gördün mü?",
+          "audio": "b00ec8f967fc7990"
+        },
+        {
+          "en": "You left it in the kitchen.",
+          "tr": "Onu mutfakta bıraktın.",
+          "audio": "663f0eab1a37b977"
+        },
+        {
+          "en": "Tell me the truth.",
+          "tr": "Bana gerçeği söyle.",
+          "audio": "5dc856370b71fe8f"
+        },
+        {
+          "en": "I saw it on the table.",
+          "tr": "Onu masanın üzerinde gördüm.",
+          "audio": "4033b83acd6eeba1"
+        }
+      ],
+      "trap": "True sıfat, truth isimdir: “It is true” ve “Tell me the truth”. “Say me” yerine “tell me” veya “say to me” kullan.",
+      "exercises": [
+        {
+          "en": "Tell me the truth.",
+          "tr": "Bana gerçeği söyle.",
+          "audio": "5dc856370b71fe8f",
+          "why": "Kişiye bir şey söylemek tell + kişi + şey kalıbıdır. Truth isimdir; true sıfattır."
+        },
+        {
+          "en": "I speak English.",
+          "tr": "İngilizce konuşurum.",
+          "audio": "ad560d9357c8845d",
+          "why": "Bir dili konuşmak speak + dil ile anlatılır."
+        },
+        {
+          "en": "Look at this picture.",
+          "tr": "Bu resme bak.",
+          "audio": "1901f6d72fc69544",
+          "why": "See görme olayını anlatır. Geçmiş biçimi saw olur."
+        },
+        {
+          "en": "I left my bag at school.",
+          "tr": "Çantamı okulda unuttum.",
+          "audio": "68fcc7270e712e3f",
+          "why": "Bir eşyayı bir yerde bırakmak için leave → left, konum için at school kullanılır."
+        },
+        {
+          "en": "I do my homework at night.",
+          "tr": "Ödevimi gece yaparım.",
+          "audio": "e88474ebcdb916a1",
+          "why": "Do homework yerleşik bir kalıptır; make homework denmez."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "____ me the truth.",
+          "options": [
+            "Tell",
+            "Say",
+            "Speak",
+            "Talk"
+          ],
+          "answer": "Tell",
+          "audio": "5dc856370b71fe8f",
+          "en": "Tell me the truth.",
+          "tr": "Bana gerçeği söyle.",
+          "why": "Say söylenen söze odaklanır; kişiyi eklemek için genellikle to gerekir. Tell doğrudan kişiyi alır: tell me the truth. Speak dil veya konuşma becerisi; talk karşılıklı konuşma için sık kullanılır."
+        },
+        {
+          "prompt": "She ____ hello to me.",
+          "options": [
+            "said",
+            "told",
+            "tell",
+            "say"
+          ],
+          "answer": "said",
+          "audio": "85f1ad6afd1466c4",
+          "en": "She said hello to me.",
+          "tr": "Bana merhaba dedi.",
+          "why": "Say söylenen söze odaklanır; kişiyi eklemek için genellikle to gerekir. Tell doğrudan kişiyi alır: tell me the truth. Speak dil veya konuşma becerisi; talk karşılıklı konuşma için sık kullanılır."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Fiil ve edat kalıpları",
+      "subtitle": "Kelimeleri birlikte öğren",
+      "group": 4,
+      "goal": "Bir fiili doğru edatla kullanmak ve anlamlı kelime grupları tanımak.",
+      "rules": [
+        [
+          "Ayrılmaz öğrenme birimi",
+          "Look at, listen to, wait for gibi kalıplarda edat Türkçede ayrı duyulmasa da İngilizcede gerekir. Fiili yalnız başına ezberlemek eksik kalır."
+        ],
+        [
+          "Anlamı edat değiştirir",
+          "Look at bakmak, look for aramak, look after ilgilenmek demektir. Aynı fiili her bağlamda aynı Türkçeyle çevirmemelisin."
+        ],
+        [
+          "Kişi ve şey",
+          "Ask someone for something birinden bir şey istemektir. Talk to someone about something birisiyle bir şey hakkında konuşmaktır. Edattan sonra nesne zamiri gelir."
+        ]
+      ],
+      "forms": [
+        [
+          "Duyu ve bekleme",
+          "look at / listen to / wait for"
+        ],
+        [
+          "Aramak / ilgilenmek",
+          "look for / look after"
+        ],
+        [
+          "Birinden istemek",
+          "ask + kişi + for + şey"
+        ],
+        [
+          "Konu",
+          "talk about / think about / hear of"
+        ]
+      ],
+      "words": [
+        [
+          "listen to",
+          "dinlemek"
+        ],
+        [
+          "wait for",
+          "beklemek"
+        ],
+        [
+          "look for",
+          "aramak"
+        ],
+        [
+          "look after",
+          "ilgilenmek / bakmak"
+        ],
+        [
+          "ask for",
+          "istemek"
+        ],
+        [
+          "think about",
+          "hakkında düşünmek"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I am waiting for you.",
+          "tr": "Seni bekliyorum.",
+          "audio": "1a2c186ef80e92d5"
+        },
+        {
+          "en": "Listen to me.",
+          "tr": "Beni dinle.",
+          "audio": "66d49e374f9f4878"
+        },
+        {
+          "en": "She is looking for her keys.",
+          "tr": "Anahtarlarını arıyor.",
+          "audio": "88142687552b4ae7"
+        },
+        {
+          "en": "We talked about you.",
+          "tr": "Senin hakkında konuştuk.",
+          "audio": "768c53bce9e0cb4b"
+        },
+        {
+          "en": "He asked me for help.",
+          "tr": "Benden yardım istedi.",
+          "audio": "02418ad36d1a5e35"
+        },
+        {
+          "en": "I am thinking about my holiday.",
+          "tr": "Tatilimi düşünüyorum.",
+          "audio": "e98323a449c97895"
+        },
+        {
+          "en": "She looks after the children.",
+          "tr": "Çocuklara bakıyor.",
+          "audio": "bf12a5cd1ebff3ac"
+        },
+        {
+          "en": "Look at the door.",
+          "tr": "Kapıya bak.",
+          "audio": "846796e94508463d"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "What are you looking for?",
+          "tr": "Ne arıyorsun?",
+          "audio": "e3ad92be491a08c8"
+        },
+        {
+          "en": "I am looking for my keys.",
+          "tr": "Anahtarlarımı arıyorum.",
+          "audio": "0db8bc3f3a4d7e7b"
+        },
+        {
+          "en": "Did you ask Emma for help?",
+          "tr": "Emma'dan yardım istedin mi?",
+          "audio": "d7417fca31c4ea69"
+        },
+        {
+          "en": "Yes, she is looking for them too.",
+          "tr": "Evet, o da onları arıyor.",
+          "audio": "64375bc980fb9bb1"
+        }
+      ],
+      "trap": "“Listen me” ve “wait you” eksiktir. “Listen to me” ve “wait for you” kullan. Kalıpları edatlarıyla birlikte tekrar et.",
+      "exercises": [
+        {
+          "en": "I am waiting for you.",
+          "tr": "Seni bekliyorum.",
+          "audio": "1a2c186ef80e92d5",
+          "why": "Birini beklemek wait for kalıbıdır. For ardından nesne zamiri you gelir."
+        },
+        {
+          "en": "She is looking for her keys.",
+          "tr": "Anahtarlarını arıyor.",
+          "audio": "88142687552b4ae7",
+          "why": "Bir şeyi aramak look for kalıbıdır. Look at ise bakmak olurdu."
+        },
+        {
+          "en": "He asked me for help.",
+          "tr": "Benden yardım istedi.",
+          "audio": "02418ad36d1a5e35",
+          "why": "Ask + kişi + for + şey: asked me for help."
+        },
+        {
+          "en": "She looks after the children.",
+          "tr": "Çocuklara bakıyor.",
+          "audio": "bf12a5cd1ebff3ac",
+          "why": "Look after bakım/ilgi anlamındadır. Üçüncü tekil kişi nedeniyle looks olur."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I am waiting ____ you.",
+          "options": [
+            "for",
+            "to",
+            "at",
+            "of"
+          ],
+          "answer": "for",
+          "audio": "1a2c186ef80e92d5",
+          "en": "I am waiting for you.",
+          "tr": "Seni bekliyorum.",
+          "why": "Look at, listen to, wait for gibi kalıplarda edat Türkçede ayrı duyulmasa da İngilizcede gerekir. Fiili yalnız başına ezberlemek eksik kalır."
+        },
+        {
+          "prompt": "Listen ____ me.",
+          "options": [
+            "to",
+            "for",
+            "at",
+            "of"
+          ],
+          "answer": "to",
+          "audio": "66d49e374f9f4878",
+          "en": "Listen to me.",
+          "tr": "Beni dinle.",
+          "why": "Look at, listen to, wait for gibi kalıplarda edat Türkçede ayrı duyulmasa da İngilizcede gerekir. Fiili yalnız başına ezberlemek eksik kalır."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Cümleleri birleştirme",
+      "subtitle": "And, but, because, if...",
+      "group": 5,
+      "goal": "Olaylar arasında ekleme, karşıtlık, neden, koşul ve zaman ilişkisi kurmak.",
+      "rules": [
+        [
+          "Bağlantının anlamı",
+          "And ekler, but karşıtlık, because neden, so sonuç bildirir. İki cümleyi ilişkilendirirken önce hangi ilişkiyi istediğini belirle."
+        ],
+        [
+          "Koşul ve zaman",
+          "If koşul, when zaman, while sürmekte olan eşzamanlılık, until bir sınır zamana kadar devam etme anlatır. Gelecek anlamındaki if/when yan cümlesinde çoğunlukla Present Simple gelir."
+        ],
+        [
+          "That ile içerik",
+          "That bir düşüncenin veya söylenenin içeriğini bağlayabilir. Sonraki ünitede iç içe cümleleri açacağız. Her bağlaçtan sonra tam bir cümle gerekmeyebilir; buradaki örneklerde özne-fiil ilişkisini takip et."
+        ]
+      ],
+      "forms": [
+        [
+          "Neden → sonuç",
+          "because / so"
+        ],
+        [
+          "Karşıtlık / ek",
+          "but / and"
+        ],
+        [
+          "Koşul / zaman",
+          "if / when / while / until"
+        ],
+        [
+          "İçerik",
+          "that + cümle"
+        ]
+      ],
+      "words": [
+        [
+          "because",
+          "çünkü"
+        ],
+        [
+          "so",
+          "bu yüzden"
+        ],
+        [
+          "although",
+          "olmasına rağmen"
+        ],
+        [
+          "until",
+          "olana kadar"
+        ],
+        [
+          "if",
+          "eğer"
+        ],
+        [
+          "while",
+          "iken"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I was tired, so I went home.",
+          "tr": "Yorgundum, bu yüzden eve gittim.",
+          "audio": "5df97815a3531be2"
+        },
+        {
+          "en": "She stayed home because it was raining.",
+          "tr": "Yağmur yağdığı için evde kaldı.",
+          "audio": "f166874975c99c33"
+        },
+        {
+          "en": "I like tea, but he likes coffee.",
+          "tr": "Ben çayı severim ama o kahveyi sever.",
+          "audio": "ef3953575d2070d0"
+        },
+        {
+          "en": "If it rains, we will stay home.",
+          "tr": "Yağmur yağarsa evde kalacağız.",
+          "audio": "cd18f11a38c8fe5c"
+        },
+        {
+          "en": "Wait here until I come back.",
+          "tr": "Ben dönene kadar burada bekle.",
+          "audio": "dca4fd2b1d0b2680"
+        },
+        {
+          "en": "I was reading while she was cooking.",
+          "tr": "O yemek yaparken ben okuyordum.",
+          "audio": "11631bd5529726ce"
+        },
+        {
+          "en": "I know that she is busy.",
+          "tr": "Onun meşgul olduğunu biliyorum.",
+          "audio": "16c96aedf398a1b0"
+        },
+        {
+          "en": "Call me when you arrive.",
+          "tr": "Varınca beni ara.",
+          "audio": "685212d3be4c72b1"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Why did you leave early?",
+          "tr": "Neden erken ayrıldın?",
+          "audio": "f904a2f422112196"
+        },
+        {
+          "en": "Because I was tired.",
+          "tr": "Çünkü yorgundum.",
+          "audio": "e1cbe1273bf0b4ef"
+        },
+        {
+          "en": "If you need help, call me.",
+          "tr": "Yardıma ihtiyacın olursa beni ara.",
+          "audio": "294bd1e6eeea328c"
+        },
+        {
+          "en": "I will call you when I get home.",
+          "tr": "Eve varınca seni arayacağım.",
+          "audio": "8c2d51f665bc961b"
+        }
+      ],
+      "trap": "Because ve so aynı neden-sonuç çiftinde birlikte gereksizdir. Gelecek koşulunda “If it will rain” yerine “If it rains” kullan.",
+      "exercises": [
+        {
+          "en": "I was tired, so I went home.",
+          "tr": "Yorgundum, bu yüzden eve gittim.",
+          "audio": "5df97815a3531be2",
+          "why": "So, yorgunluk nedeninden eve gitme sonucuna bağlar. İki olay da geçmiştedir."
+        },
+        {
+          "en": "I like tea, but he likes coffee.",
+          "tr": "Ben çayı severim ama o kahveyi sever.",
+          "audio": "ef3953575d2070d0",
+          "why": "But iki farklı tercihi karşılaştırır. He öznesiyle likes -s alır."
+        },
+        {
+          "en": "Wait here until I come back.",
+          "tr": "Ben dönene kadar burada bekle.",
+          "audio": "dca4fd2b1d0b2680",
+          "why": "Until bir zaman sınırı bildirir. Gelecek anlamına rağmen yan cümlede come kullanılır."
+        },
+        {
+          "en": "I know that she is busy.",
+          "tr": "Onun meşgul olduğunu biliyorum.",
+          "audio": "16c96aedf398a1b0",
+          "why": "That, bilinen şeyin içeriğini ayrı bir özne-fiil cümlesiyle bağlar."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I was tired, ____ I went home.",
+          "options": [
+            "so",
+            "because",
+            "although",
+            "until"
+          ],
+          "answer": "so",
+          "audio": "5df97815a3531be2",
+          "en": "I was tired, so I went home.",
+          "tr": "Yorgundum, bu yüzden eve gittim.",
+          "why": "And ekler, but karşıtlık, because neden, so sonuç bildirir. İki cümleyi ilişkilendirirken önce hangi ilişkiyi istediğini belirle."
+        },
+        {
+          "prompt": "She stayed home ____ it was raining.",
+          "options": [
+            "because",
+            "so",
+            "until",
+            "although"
+          ],
+          "answer": "because",
+          "audio": "f166874975c99c33",
+          "en": "She stayed home because it was raining.",
+          "tr": "Yağmur yağdığı için evde kaldı.",
+          "why": "And ekler, but karşıtlık, because neden, so sonuç bildirir. İki cümleyi ilişkilendirirken önce hangi ilişkiyi istediğini belirle."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "İç içe cümleler",
+      "subtitle": "Düşüncelerin ve söylenenlerin içi",
+      "group": 5,
+      "goal": "I think, I know, I said gibi yapıları parçalara ayırarak anlamak.",
+      "rules": [
+        [
+          "Ana cümle + içerik",
+          "I think, I know, she says gibi bir ana cümle arkasından başka bir cümle alabilir. İki özne ve iki fiil varsa paniğe kapılma; iki katmanı ayır."
+        ],
+        [
+          "Aktarılan söz",
+          "Geçmişten söz aktarırken zaman çoğunlukla geriye kayar: will → would, am/is → was. Ancak hâlâ geçerli veya gelecekteki bir söz bağlamında will korunabilir."
+        ],
+        [
+          "Dolaylı soru",
+          "Doğrudan sorudaki yardımcı fiil sırası, gömülü soruda kullanılmaz. “Where does she live?” sorusu “Do you know where she lives?” olur. Want + kişi + to kalıbı da aynı cümlede birden çok eylem kurar."
+        ]
+      ],
+      "forms": [
+        [
+          "Düşünce",
+          "I think (that) + cümle"
+        ],
+        [
+          "Aktarılan söz",
+          "She said (that) + cümle"
+        ],
+        [
+          "Dolaylı soru",
+          "Do you know + soru kelimesi + özne + fiil?"
+        ],
+        [
+          "Birinden istemek",
+          "want + kişi + to + fiil"
+        ]
+      ],
+      "words": [
+        [
+          "think",
+          "düşünmek"
+        ],
+        [
+          "know",
+          "bilmek"
+        ],
+        [
+          "said",
+          "söyledi"
+        ],
+        [
+          "told",
+          "birine söyledi"
+        ],
+        [
+          "mean",
+          "kastetmek"
+        ],
+        [
+          "believe",
+          "inanmak"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I think she is at home.",
+          "tr": "Sanırım o evde.",
+          "audio": "9398f9e2b25d9ccb"
+        },
+        {
+          "en": "I know that you are tired.",
+          "tr": "Yorgun olduğunu biliyorum.",
+          "audio": "2dd3d8b4e9c0fb6e"
+        },
+        {
+          "en": "She said she was busy.",
+          "tr": "Meşgul olduğunu söyledi.",
+          "audio": "791f2c924639e13b"
+        },
+        {
+          "en": "He told me he would call.",
+          "tr": "Bana arayacağını söyledi.",
+          "audio": "9c175ef58e52be2e"
+        },
+        {
+          "en": "Do you know where she lives?",
+          "tr": "Onun nerede yaşadığını biliyor musun?",
+          "audio": "a26fc74d36cf44cd"
+        },
+        {
+          "en": "What do you want me to do?",
+          "tr": "Ne yapmamı istiyorsun?",
+          "audio": "beedcaa607fd4c91"
+        },
+        {
+          "en": "I said I would take him shopping.",
+          "tr": "Onu alışverişe götüreceğimi söyledim.",
+          "audio": "388db133348426db"
+        },
+        {
+          "en": "I thought you were joking.",
+          "tr": "Şaka yaptığını sanmıştım.",
+          "audio": "d5366204e2cde63d"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "What did Emma say?",
+          "tr": "Emma ne dedi?",
+          "audio": "eb6bd2af114ea0ec"
+        },
+        {
+          "en": "She said she was tired.",
+          "tr": "Yorgun olduğunu söyledi.",
+          "audio": "5e8f240fa8b737f1"
+        },
+        {
+          "en": "Do you know where she is?",
+          "tr": "Onun nerede olduğunu biliyor musun?",
+          "audio": "b12299b3eaea2fd1"
+        },
+        {
+          "en": "I think she is at home.",
+          "tr": "Sanırım evde.",
+          "audio": "9398f9e2b25d9ccb"
+        }
+      ],
+      "trap": "“Do you know where does she live?” yerine “Do you know where she lives?” gerekir. İçteki cümle doğrudan soru sırasını korumaz.",
+      "exercises": [
+        {
+          "en": "I think she is at home.",
+          "tr": "Sanırım o evde.",
+          "audio": "9398f9e2b25d9ccb",
+          "why": "I think ana cümledir; she is at home içerik cümlesidir. İki özne ve iki fiil vardır."
+        },
+        {
+          "en": "She said she was busy.",
+          "tr": "Meşgul olduğunu söyledi.",
+          "audio": "791f2c924639e13b",
+          "why": "Geçmişten aktarılan sözde is çoğunlukla was biçimine kayar."
+        },
+        {
+          "en": "Do you know where she lives?",
+          "tr": "Onun nerede yaşadığını biliyor musun?",
+          "audio": "a26fc74d36cf44cd",
+          "why": "Dolaylı soruda she lives düz cümle sırası korunur; does she live kullanılmaz."
+        },
+        {
+          "en": "I said I would take him shopping.",
+          "tr": "Onu alışverişe götüreceğimi söyledim.",
+          "audio": "388db133348426db",
+          "why": "Aktarılan gelecekte will çoğunlukla would olur. Take him shopping ayrı bir fiil kalıbıdır."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I think she ____ at home.",
+          "options": [
+            "is",
+            "does",
+            "are",
+            "do"
+          ],
+          "answer": "is",
+          "audio": "9398f9e2b25d9ccb",
+          "en": "I think she is at home.",
+          "tr": "Sanırım o evde.",
+          "why": "I think, I know, she says gibi bir ana cümle arkasından başka bir cümle alabilir. İki özne ve iki fiil varsa paniğe kapılma; iki katmanı ayır."
+        },
+        {
+          "prompt": "I know that you ____ tired.",
+          "options": [
+            "are",
+            "do",
+            "does",
+            "is"
+          ],
+          "answer": "are",
+          "audio": "2dd3d8b4e9c0fb6e",
+          "en": "I know that you are tired.",
+          "tr": "Yorgun olduğunu biliyorum.",
+          "why": "I think, I know, she says gibi bir ana cümle arkasından başka bir cümle alabilir. İki özne ve iki fiil varsa paniğe kapılma; iki katmanı ayır."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Present Perfect",
+      "subtitle": "Geçmişin şimdiyle bağlantısı",
+      "group": 5,
+      "goal": "Deneyimleri, yeni sonuçları ve henüz bitmemiş zaman aralıklarını anlatmak.",
+      "rules": [
+        [
+          "Have/has + V3",
+          "Bu have sahiplik değil yardımcı fiildir. I/you/we/they have; he/she/it has alır. Fiilin üçüncü hâli gelir: go → gone, see → seen, do → done."
+        ],
+        [
+          "Deneyim ve sonuç",
+          "Ever ve never deneyim; just çok yakın geçmiş; already beklenenden önce/tamamlanmış; yet soru ve olumsuzda henüz anlamındadır. Zamanı kesinleşmiş olaylardan çok şimdiyle bağ önemlidir."
+        ],
+        [
+          "Past Simple farkı",
+          "Yesterday, last week, in 2020 gibi bitmiş zamanı belirtiyorsan genellikle Past Simple seç. Since başlangıç, for süre bildirir. Been ziyaret edip dönme, gone gidip henüz dönmeme anlamına gelebilir."
+        ]
+      ],
+      "forms": [
+        [
+          "Olumlu",
+          "Özne + have/has + V3"
+        ],
+        [
+          "Soru",
+          "Have/Has + özne + V3?"
+        ],
+        [
+          "Olumsuz",
+          "haven't/hasn't + V3"
+        ],
+        [
+          "Süre",
+          "since + başlangıç / for + süre"
+        ]
+      ],
+      "words": [
+        [
+          "ever",
+          "hiç (soruda)"
+        ],
+        [
+          "never",
+          "hiçbir zaman"
+        ],
+        [
+          "just",
+          "az önce"
+        ],
+        [
+          "already",
+          "zaten / çoktan"
+        ],
+        [
+          "yet",
+          "henüz"
+        ],
+        [
+          "since",
+          "...den beri"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I have never heard of it.",
+          "tr": "Bunu hiç duymadım.",
+          "audio": "75facf13f4ee4bc7"
+        },
+        {
+          "en": "Have you ever been to London?",
+          "tr": "Hiç Londra'ya gittin mi?",
+          "audio": "a6b72f9a39a22ef6"
+        },
+        {
+          "en": "She has just arrived.",
+          "tr": "O az önce geldi.",
+          "audio": "aec4734f1a204808"
+        },
+        {
+          "en": "We have already eaten.",
+          "tr": "Biz çoktan yemek yedik.",
+          "audio": "13443c34b8dd2427"
+        },
+        {
+          "en": "I have not finished yet.",
+          "tr": "Henüz bitirmedim.",
+          "audio": "f538656c1b47fb8e"
+        },
+        {
+          "en": "I saw her yesterday.",
+          "tr": "Onu dün gördüm.",
+          "audio": "1d1597c8851d6651"
+        },
+        {
+          "en": "He has lived here for two years.",
+          "tr": "İki yıldır burada yaşıyor.",
+          "audio": "c483dd04f1d1cb71"
+        },
+        {
+          "en": "She has gone to Paris.",
+          "tr": "Paris'e gitti ve henüz dönmedi.",
+          "audio": "3d1bd0907f8ff59b"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "Have you finished your homework yet?",
+          "tr": "Ödevini bitirdin mi?",
+          "audio": "6469bffc049fbe32"
+        },
+        {
+          "en": "Yes, I have just finished.",
+          "tr": "Evet, az önce bitirdim.",
+          "audio": "7b8c260ea9b74026"
+        },
+        {
+          "en": "Did you see Emma yesterday?",
+          "tr": "Dün Emma'yı gördün mü?",
+          "audio": "6fa4743a4c568e87"
+        },
+        {
+          "en": "No, I have not seen her this week.",
+          "tr": "Hayır, bu hafta onu görmedim.",
+          "audio": "d56d3c9b457cb785"
+        }
+      ],
+      "trap": "“I have seen her yesterday” yerine bitmiş zamanla “I saw her yesterday” kullan. “I have went” yanlış; V3 olan gone veya bağlama göre been gerekir.",
+      "exercises": [
+        {
+          "en": "I have never heard of it.",
+          "tr": "Bunu hiç duymadım.",
+          "audio": "75facf13f4ee4bc7",
+          "why": "Have + heard (V3). Never olumsuz anlam kattığı için ayrıca not kullanılmaz. Hear of kalıbını koru."
+        },
+        {
+          "en": "She has just arrived.",
+          "tr": "O az önce geldi.",
+          "audio": "aec4734f1a204808",
+          "why": "She ile has; just yardımcı fiilden sonra; arrive düzenli fiildir, V3 arrived."
+        },
+        {
+          "en": "I have not finished yet.",
+          "tr": "Henüz bitirmedim.",
+          "audio": "f538656c1b47fb8e",
+          "why": "Yet olumsuzda genellikle sonda gelir. Have not + finished kullanılır."
+        },
+        {
+          "en": "He has lived here for two years.",
+          "tr": "İki yıldır burada yaşıyor.",
+          "audio": "c483dd04f1d1cb71",
+          "why": "For two years bir süredir devam eden durumu anlatır; has lived geçmişle şimdiyi bağlar."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I have never ____ of it.",
+          "options": [
+            "heard",
+            "hear",
+            "hearing",
+            "hears"
+          ],
+          "answer": "heard",
+          "audio": "75facf13f4ee4bc7",
+          "en": "I have never heard of it.",
+          "tr": "Bunu hiç duymadım.",
+          "why": "Bu have sahiplik değil yardımcı fiildir. I/you/we/they have; he/she/it has alır. Fiilin üçüncü hâli gelir: go → gone, see → seen, do → done."
+        },
+        {
+          "prompt": "Have you ever ____ to London?",
+          "options": [
+            "been",
+            "went",
+            "go",
+            "going"
+          ],
+          "answer": "been",
+          "audio": "a6b72f9a39a22ef6",
+          "en": "Have you ever been to London?",
+          "tr": "Hiç Londra'ya gittin mi?",
+          "why": "Bu have sahiplik değil yardımcı fiildir. I/you/we/they have; he/she/it has alır. Fiilin üçüncü hâli gelir: go → gone, see → seen, do → done."
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "title": "Günlük konuşma kalıpları",
+      "subtitle": "Kelimelerin ötesindeki anlam",
+      "group": 6,
+      "goal": "Kısa tepkileri, önerileri ve konuşmayı sürdüren ifadeleri tanımak.",
+      "rules": [
+        [
+          "Bütün olarak anlam",
+          "Come on teşvik veya sabırsızlık, never mind vazgeçme veya teselli, of course onay olabilir. Anlamı konuşmacının tonundan ve durumdan çıkar."
+        ],
+        [
+          "Öneri ve emir",
+          "Let's + yalın fiil ortak öneri yapar. Don't + yalın fiil olumsuz emirdir. What about + isim veya -ing yeni seçenek sunar."
+        ],
+        [
+          "Konuşmayı düzenleme",
+          "I mean açıklama/düzeltme, you know ortak bilgiye gönderme, by the way konu ekleme için kullanılır. Bunlar kelime kelime çevrilince doğal durmayabilir."
+        ]
+      ],
+      "forms": [
+        [
+          "Öneri",
+          "Let's + fiil / What about + fiil-ing?"
+        ],
+        [
+          "Olumsuz emir",
+          "Don't + fiil"
+        ],
+        [
+          "Tepki",
+          "Never mind. / Of course. / That was close."
+        ],
+        [
+          "Açıklama",
+          "I mean... / By the way..."
+        ]
+      ],
+      "words": [
+        [
+          "come on",
+          "hadi / yapma"
+        ],
+        [
+          "never mind",
+          "boş ver / önemli değil"
+        ],
+        [
+          "of course",
+          "elbette"
+        ],
+        [
+          "what is wrong",
+          "sorun ne"
+        ],
+        [
+          "by the way",
+          "bu arada"
+        ],
+        [
+          "worth it",
+          "değmesine değer"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "Come on, we are late.",
+          "tr": "Hadi, geç kaldık.",
+          "audio": "a53e0718558ef558"
+        },
+        {
+          "en": "Never mind, it is fine.",
+          "tr": "Boş ver, sorun yok.",
+          "audio": "6b12586d9604efd0"
+        },
+        {
+          "en": "What is wrong?",
+          "tr": "Sorun ne?",
+          "audio": "d23f3cbd2d831985"
+        },
+        {
+          "en": "Of course, I will help.",
+          "tr": "Elbette, yardım edeceğim.",
+          "audio": "41a69bb0817b8ad3"
+        },
+        {
+          "en": "Let us go home.",
+          "tr": "Hadi eve gidelim.",
+          "audio": "182e4b6f57102733"
+        },
+        {
+          "en": "Do not worry.",
+          "tr": "Endişelenme.",
+          "audio": "400cd572bca181a7"
+        },
+        {
+          "en": "What about going for a walk?",
+          "tr": "Yürüyüşe çıkmaya ne dersin?",
+          "audio": "fcfc209cab9c1ea7"
+        },
+        {
+          "en": "That was close!",
+          "tr": "Ucuz atlattık!",
+          "audio": "801c4ddb48210bf1"
+        },
+        {
+          "en": "It was worth it.",
+          "tr": "Buna değdi.",
+          "audio": "9e3e18c34b157360"
+        },
+        {
+          "en": "I was just kidding.",
+          "tr": "Sadece şaka yapıyordum.",
+          "audio": "c3da7604a550b23e"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "What is wrong?",
+          "tr": "Sorun ne?",
+          "audio": "d23f3cbd2d831985"
+        },
+        {
+          "en": "I left my phone at home.",
+          "tr": "Telefonumu evde unuttum.",
+          "audio": "090b86892705cdbb"
+        },
+        {
+          "en": "Never mind, you can use mine.",
+          "tr": "Önemli değil, benimkini kullanabilirsin.",
+          "audio": "ac025afc3720a2ff"
+        },
+        {
+          "en": "Thank you. That is kind of you.",
+          "tr": "Teşekkürler. Çok naziksin.",
+          "audio": "04b58e02f506b6fe"
+        }
+      ],
+      "trap": "“Come on” her yerde “üzerine gel” değildir. “Let’s” bir öneridir; “lets” ise let fiilinin üçüncü tekil kişi biçimidir.",
+      "exercises": [
+        {
+          "en": "Come on, we are late.",
+          "tr": "Hadi, geç kaldık.",
+          "audio": "a53e0718558ef558",
+          "why": "Come on burada acele ettiren bir tepkidir; kelime kelime çevrilmez."
+        },
+        {
+          "en": "What is wrong?",
+          "tr": "Sorun ne?",
+          "audio": "d23f3cbd2d831985",
+          "why": "What is wrong? sorun ne sorusunun doğal kalıbıdır."
+        },
+        {
+          "en": "Let us go home.",
+          "tr": "Hadi eve gidelim.",
+          "audio": "182e4b6f57102733",
+          "why": "Let us (let's) ortak öneri yapar; ardından yalın go gelir."
+        },
+        {
+          "en": "What about going for a walk?",
+          "tr": "Yürüyüşe çıkmaya ne dersin?",
+          "audio": "fcfc209cab9c1ea7",
+          "why": "What about sonrasında bir eylem gelirse -ing kullanılır."
+        },
+        {
+          "en": "It was worth it.",
+          "tr": "Buna değdi.",
+          "audio": "9e3e18c34b157360",
+          "why": "Worth it değmesine değer anlamında bir kalıptır; geçmişte it was worth it olur."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "Come on, we ____ late.",
+          "options": [
+            "are",
+            "is",
+            "am",
+            "do"
+          ],
+          "answer": "are",
+          "audio": "a53e0718558ef558",
+          "en": "Come on, we are late.",
+          "tr": "Hadi, geç kaldık.",
+          "why": "Come on teşvik veya sabırsızlık, never mind vazgeçme veya teselli, of course onay olabilir. Anlamı konuşmacının tonundan ve durumdan çıkar."
+        },
+        {
+          "prompt": "Never mind, it ____ fine.",
+          "options": [
+            "is",
+            "are",
+            "am",
+            "does"
+          ],
+          "answer": "is",
+          "audio": "6b12586d9604efd0",
+          "en": "Never mind, it is fine.",
+          "tr": "Boş ver, sorun yok.",
+          "why": "Come on teşvik veya sabırsızlık, never mind vazgeçme veya teselli, of course onay olabilir. Anlamı konuşmacının tonundan ve durumdan çıkar."
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "title": "Dinleme ve genel tekrar",
+      "subtitle": "Artık parçaları birleştir",
+      "group": 6,
+      "goal": "Doğal konuşmayı küçük parçalara ayırmak ve öğrendiğin yapıları birlikte kullanmak.",
+      "rules": [
+        [
+          "Önce anlamı yakala",
+          "İlk dinlemede kim, nerede, ne istiyor sorularını cevapla. Her kelimeyi yazmaya çalışma. İkinci dinlemede zaman, olumsuzluk ve ana fiile odaklan."
+        ],
+        [
+          "Kısaltmalar ve bağlı konuşma",
+          "I'm, you're, didn't, I'll, I'd gibi kısaltmalar hızlı duyulur. I'd bağlama göre I would veya I had olabilir. Gonna ve wanna gündelik telaffuzlardır; resmi yazıda going to ve want to kullan."
+        ],
+        [
+          "Etkin tekrar",
+          "İngilizceyi gizle; dinle, anlamını söyle, sonra cümleyi aç. Kısa parçayı durdurup aynı ritimle tekrar et. Hatalı konuyu renkli işaretle ve başka konuların arasında yeniden çöz."
+        ]
+      ],
+      "forms": [
+        [
+          "Dinleme döngüsü",
+          "Dinle → anlamı tahmin et → aç → tekrar et"
+        ],
+        [
+          "Zaman ayrımı",
+          "rutin / şimdi / geçmiş / gelecek / şimdiyle bağlantı"
+        ],
+        [
+          "Kısaltmalar",
+          "I'm / didn't / I'll / I'd"
+        ]
+      ],
+      "words": [
+        [
+          "actually",
+          "aslında"
+        ],
+        [
+          "almost",
+          "neredeyse"
+        ],
+        [
+          "perhaps",
+          "belki"
+        ],
+        [
+          "anyway",
+          "her neyse"
+        ],
+        [
+          "at least",
+          "en azından"
+        ],
+        [
+          "in a hurry",
+          "acele içinde"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I thought you were at home.",
+          "tr": "Evde olduğunu sanmıştım.",
+          "audio": "ceb9c27956734343"
+        },
+        {
+          "en": "I have just got back.",
+          "tr": "Az önce döndüm.",
+          "audio": "a2bd760e03a09caf"
+        },
+        {
+          "en": "I was waiting when she called.",
+          "tr": "O aradığında bekliyordum.",
+          "audio": "9161782cb8011abf"
+        },
+        {
+          "en": "Could you tell him to call me?",
+          "tr": "Ona beni aramasını söyler misin?",
+          "audio": "cff4ddcb997f827e"
+        },
+        {
+          "en": "I will call you when I arrive.",
+          "tr": "Varınca seni arayacağım.",
+          "audio": "2703cbabf5e2fe1c"
+        },
+        {
+          "en": "I left my keys in the car.",
+          "tr": "Anahtarlarımı arabada unuttum.",
+          "audio": "6adcb66eb1dbbfc9"
+        },
+        {
+          "en": "What do you want me to do?",
+          "tr": "Ne yapmamı istiyorsun?",
+          "audio": "beedcaa607fd4c91"
+        },
+        {
+          "en": "I have never heard of it.",
+          "tr": "Bunu hiç duymadım.",
+          "audio": "75facf13f4ee4bc7"
+        }
+      ],
+      "dialogue": [
+        {
+          "en": "I called you, but you did not answer.",
+          "tr": "Seni aradım ama cevap vermedin.",
+          "audio": "63fdda79733b0b23"
+        },
+        {
+          "en": "Sorry, I was driving.",
+          "tr": "Üzgünüm, araba kullanıyordum.",
+          "audio": "7e2be76e87570fa8"
+        },
+        {
+          "en": "Have you got home yet?",
+          "tr": "Eve vardın mı?",
+          "audio": "a26b25fe06c405dd"
+        },
+        {
+          "en": "Yes, I have just arrived. I will call you later.",
+          "tr": "Evet, az önce vardım. Seni sonra arayacağım.",
+          "audio": "138d6e9a1b66499f"
+        }
+      ],
+      "trap": "Duyamadığın her sözcüğü bilmediğin bir dilbilgisi sanma. Önce yazıyı açmadan tekrar dinle; sonra eksik olanın kelime, ses bağlantısı veya yapı olup olmadığını belirle.",
+      "exercises": [
+        {
+          "en": "I thought you were at home.",
+          "tr": "Evde olduğunu sanmıştım.",
+          "audio": "ceb9c27956734343",
+          "why": "Ana cümle I thought geçmiştedir. İç cümlede you were at home geçmiş bir durumu anlatır."
+        },
+        {
+          "en": "I was waiting when she called.",
+          "tr": "O aradığında bekliyordum.",
+          "audio": "9161782cb8011abf",
+          "why": "Was waiting geçmişte süren arka plan; called araya giren kısa olaydır."
+        },
+        {
+          "en": "I will call you when I arrive.",
+          "tr": "Varınca seni arayacağım.",
+          "audio": "2703cbabf5e2fe1c",
+          "why": "Ana cümlede gelecek will call; when yan cümlesinde arrive yalın şimdiki zaman kullanılır."
+        },
+        {
+          "en": "What do you want me to do?",
+          "tr": "Ne yapmamı istiyorsun?",
+          "audio": "beedcaa607fd4c91",
+          "why": "Want + kişi + to + fiil: you want me to do. Başta what ile istenen eylem sorulur."
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "I thought you ____ at home.",
+          "options": [
+            "were",
+            "was",
+            "are",
+            "did"
+          ],
+          "answer": "were",
+          "audio": "ceb9c27956734343",
+          "en": "I thought you were at home.",
+          "tr": "Evde olduğunu sanmıştım.",
+          "why": "İlk dinlemede kim, nerede, ne istiyor sorularını cevapla. Her kelimeyi yazmaya çalışma. İkinci dinlemede zaman, olumsuzluk ve ana fiile odaklan."
+        },
+        {
+          "prompt": "I have just ____ back.",
+          "options": [
+            "got",
+            "get",
+            "getting",
+            "gets"
+          ],
+          "answer": "got",
+          "audio": "a2bd760e03a09caf",
+          "en": "I have just got back.",
+          "tr": "Az önce döndüm.",
+          "why": "İlk dinlemede kim, nerede, ne istiyor sorularını cevapla. Her kelimeyi yazmaya çalışma. İkinci dinlemede zaman, olumsuzluk ve ana fiile odaklan."
+        }
+      ]
+    }
+  ],
+  "inline": [
+    {
+      "en": "I am happy.",
+      "audio": "e4383618e44faf25"
+    },
+    {
+      "en": "I like tea.",
+      "audio": "a1826a1b123e58e8"
+    },
+    {
+      "en": "Does she like coffee?",
+      "audio": "d3be0656456928d9"
+    },
+    {
+      "en": "Do you like coffee?",
+      "audio": "316df3f4ea292c09"
+    },
+    {
+      "en": "Where do you live?",
+      "audio": "8a38c81b46381d26"
+    },
+    {
+      "en": "Who lives here?",
+      "audio": "5e5780668ea5744c"
+    },
+    {
+      "en": "I want to go.",
+      "audio": "55aba99fa9e04e40"
+    },
+    {
+      "en": "Let me help.",
+      "audio": "b2f12045e3f5d5f1"
+    },
+    {
+      "en": "If it rains.",
+      "audio": "89ce727c94931c38"
+    },
+    {
+      "en": "I know.",
+      "audio": "45b3c6001b6b9556"
+    },
+    {
+      "en": "I want.",
+      "audio": "1e2fca85b90937e2"
+    },
+    {
+      "en": "I like.",
+      "audio": "73bc929fba2dc326"
+    },
+    {
+      "en": "Yes, I am.",
+      "audio": "cc07850c5e922913"
+    },
+    {
+      "en": "Yes, I was.",
+      "audio": "66e0443898fb6118"
+    },
+    {
+      "en": "No, they were not.",
+      "audio": "50ad402e52246f39"
+    },
+    {
+      "en": "Do you have to?",
+      "audio": "ee16947c20095585"
+    },
+    {
+      "en": "She works.",
+      "audio": "083887f9232ac1be"
+    },
+    {
+      "en": "I went.",
+      "audio": "46d135a1ec59b811"
+    },
+    {
+      "en": "I was going.",
+      "audio": "f769f749fc4ac2ad"
+    },
+    {
+      "en": "I have a car.",
+      "audio": "f5be284a1c179609"
+    },
+    {
+      "en": "There is a car.",
+      "audio": "7ce935f00981020b"
+    },
+    {
+      "en": "She called me.",
+      "audio": "f50e1f9c547f762d"
+    },
+    {
+      "en": "She was called.",
+      "audio": "66c079242059995b"
+    },
+    {
+      "en": "I will be happy.",
+      "audio": "0874e4664cb417e4"
+    },
+    {
+      "en": "I am going to study.",
+      "audio": "51b3550897c19a4d"
+    },
+    {
+      "en": "When I get home, I will call.",
+      "audio": "2bd4968e2bf76cc9"
+    },
+    {
+      "en": "It is true.",
+      "audio": "c3035a89ba992245"
+    },
+    {
+      "en": "Where does she live?",
+      "audio": "d28167116c987d45"
+    },
+    {
+      "en": "Why didn’t you tell me the truth?",
+      "audio": "bd982380c3403f59"
+    },
+    {
+      "en": "I would like to go.",
+      "audio": "3d95f62395df1fc3"
+    },
+    {
+      "en": "Yes, I do.",
+      "audio": "27282b999a04ddc6"
+    },
+    {
+      "en": "No, she doesn't.",
+      "audio": "e283692ed2709feb"
+    },
+    {
+      "en": "I work every day.",
+      "audio": "0cb402df3324b33e"
+    },
+    {
+      "en": "I am working now.",
+      "audio": "e9e1bb4c49a91638"
+    },
+    {
+      "en": "No, they weren't.",
+      "audio": "76224c0b85e90c57"
+    },
+    {
+      "en": "Never mind.",
+      "audio": "7bb8184155cd76aa"
+    },
+    {
+      "en": "Of course.",
+      "audio": "404cba15a4acdcfe"
+    },
+    {
+      "en": "That was close.",
+      "audio": "9a2d16e7921cc516"
+    },
+    {
+      "en": "I mean.",
+      "audio": "698c9c931cd53487"
+    },
+    {
+      "en": "By the way.",
+      "audio": "17bd03e2b441f68b"
+    }
+  ],
+  "quoted": [
+    "I happy",
+    "I am happy",
+    "I tea like",
+    "I like tea",
+    "These is",
+    "these are",
+    "Me am happy",
+    "They know I",
+    "I am have",
+    "I have a car",
+    "There is a car",
+    "She is works",
+    "She works",
+    "Does she likes",
+    "Does she like",
+    "Are you like coffee?",
+    "Do you like coffee?",
+    "I cooking",
+    "I am cooking",
+    "I am cook",
+    "I am knowing",
+    "I know",
+    "Who lives here?",
+    "Where you live?",
+    "Where do you live?",
+    "Who lives here?",
+    "I was went",
+    "I went",
+    "I left my phone in the car.",
+    "Why didn’t say true to me?",
+    "Why didn’t you tell me the truth?",
+    "My phone was forget in the car",
+    "I left my phone in the car",
+    "She was called",
+    "She called me",
+    "I was sleeping",
+    "I was slept",
+    "Will goes",
+    "will go",
+    "I will happy",
+    "I will be happy",
+    "I going to study",
+    "I am going to study",
+    "When I will get home, I will call",
+    "When I get home, I will call",
+    "Can to go",
+    "she cans",
+    "I want go",
+    "I want to go",
+    "I would like going",
+    "I would like to go",
+    "Enjoy to read",
+    "enjoy reading",
+    "decide going",
+    "decide to go",
+    "Tell he to wait",
+    "Let me to help",
+    "Let me help",
+    "It is true",
+    "Tell me the truth",
+    "tell me",
+    "say to me",
+    "Listen me",
+    "wait you",
+    "Listen to me",
+    "wait for you",
+    "If it will rain",
+    "If it rains",
+    "Where does she live?",
+    "Do you know where she lives?",
+    "Do you know where does she live?",
+    "Do you know where she lives?",
+    "I have seen her yesterday",
+    "I saw her yesterday",
+    "I have went"
+  ]
+}

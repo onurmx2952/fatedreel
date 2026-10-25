@@ -46,3 +46,16 @@
 
 /o4/index.html
   Cache-Control: public, max-age=0, must-revalidate
+
+/o11/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/o11/*.js
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
+
+/o11/*.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+/o11/audio/*
+  Cache-Control: public, max-age=31536000, immutable
