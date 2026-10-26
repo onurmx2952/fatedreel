@@ -1,0 +1,61 @@
+{
+  "easily": {
+    "reason": "Üstünlük ve olasılık bildiren easily kullanımları, kolaylık anlamından ayrıldı.",
+    "entry": {
+      "w": "easily",
+      "uk": "/ˈiːzəli/",
+      "us": "/ˈiːzəli/",
+      "senses": [
+        {
+          "pos": "adv.",
+          "zh": "kolayca; zorlanmadan; fazla çaba harcamadan",
+          "en": "without difficulty or much effort"
+        },
+        {
+          "pos": "adv.",
+          "zh": "açık ara; belirgin bir farkla (özellikle karşılaştırmalarda)",
+          "en": "by a clear margin, especially in comparisons"
+        },
+        {
+          "pos": "adv.",
+          "zh": "pekâlâ; bir şeyin gerçekleşme ihtimalinin yüksek olduğunu belirtir",
+          "en": "with a strong possibility of something happening"
+        }
+      ],
+      "ex": [
+        {
+          "en": "This small suitcase fits easily beneath the train seat.",
+          "zh": "Bu küçük valiz tren koltuğunun altına rahatça sığar."
+        },
+        {
+          "en": "Public information should be presented clearly so that people with different literacy levels can easily understand it.",
+          "zh": "Halka yönelik bilgiler, farklı okuryazarlık düzeylerindeki kişilerin rahatça anlayabilmesi için açık bir dille sunulmalıdır."
+        }
+      ],
+      "col": [
+        "easily accessible｜kolayca erişilebilir",
+        "easily understood｜kolay anlaşılır",
+        "easily the best｜açık ara en iyisi",
+        "could easily happen｜pekâlâ olabilir"
+      ],
+      "fam": [
+        "easy (adj.)",
+        "ease (n.)",
+        "ease (v.)"
+      ],
+      "syn": [
+        "effortlessly",
+        "readily"
+      ],
+      "ant": [
+        "laboriously"
+      ],
+      "tip": "Easily her zaman “kolayca” anlamına gelmez. Easily the best, “açık ara en iyisi” demektir; karşılaştırmada belirgin bir üstünlük belirtir. Could easily happen ise “pekâlâ olabilir” anlamındadır ve olasılık bildirir.",
+      "cefr": "A2",
+      "topic": "daily",
+      "note": "",
+      "id": "easily",
+      "m": 31
+    }
+  }
+}
