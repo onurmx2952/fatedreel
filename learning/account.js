@@ -13,7 +13,7 @@
     if (!r.ok) { const e = new Error(data.error || 'Oturum bulunamadı. Yeniden giriş yap.'); e.status = r.status; throw e; }
     return data;
   };
-  const put = data => {const body=JSON.stringify(data);return api(`/api/learning/${app}`,{method:'PUT',keepalive:new TextEncoder().encode(body).length<60000,headers:{'Content-Type':'application/json'},body});};
+  const put = data => {const body=JSON.stringify({...data,userId:user.id});return api(`/api/learning/${app}`,{method:'PUT',keepalive:new TextEncoder().encode(body).length<60000,headers:{'Content-Type':'application/json'},body});};
   const panel = document.createElement('details');
   panel.id = 'learning-account';
   panel.innerHTML = '<summary>☁ Hesabım</summary><div class="learning-body"><strong>İlerlemen seninle gelsin</strong><p role="status" id="learning-status">Hesap kontrol ediliyor…</p><div id="learning-actions"></div><small>Google ile giriş iki uygulamada ortaktır. Çevrimdışı değişiklikler bu cihazda saklanır.</small></div>';
@@ -43,6 +43,7 @@
   async function connect() {
     ready=false;
     const remote=await api(`/api/learning/${app}`);revision=remote.revision;
+    if(remote.userId!==user.id)throw Object.assign(new Error('Hesap değişti. Hesabı yeniden kontrol et.'),{status:401});
     const local=snapshot();let meta;
     try{meta=JSON.parse(localStorage.getItem(metaKey));}catch{}
     const start=()=>{ready=true;signed();clearInterval(timer);timer=setInterval(()=>sync(),2000);};
