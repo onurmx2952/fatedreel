@@ -1,5 +1,5 @@
 /* Word Atlas offline cache: app shell network-first, everything else cache-first. */
-const VERSION = "o12-atlas-tr-v4";
+const VERSION = "o12-atlas-tr-v5";
 const SHELL = `${VERSION}-shell`;
 const MEDIA = `${VERSION}-media`;
 
@@ -23,6 +23,7 @@ self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET" || req.headers.has("range")) return;
   const url = new URL(req.url);
+  if (url.pathname.startsWith('/api/')) return;
   if (url.origin !== location.origin) return;
   const isShell = req.mode === "navigate" || url.pathname.endsWith("/index.json");
   if (isShell) {

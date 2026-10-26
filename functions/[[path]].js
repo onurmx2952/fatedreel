@@ -4,6 +4,8 @@ const SITE_DESCRIPTION = 'Roll through hand-picked movies, reviews, scenes, trai
 export async function onRequest(context) {
   const requestUrl = new URL(context.request.url);
 
+  if (requestUrl.pathname.startsWith('/api/learning/')) return handleLearningApi(context, requestUrl);
+
   if (requestUrl.pathname.startsWith('/api/program/')) {
     return handleProgramApi(context, requestUrl);
   }
@@ -727,4 +729,39 @@ function safeJson(value) {
     .replace(/</g, '\\u003c')
     .replace(/>/g, '\\u003e')
     .replace(/&/g, '\\u0026');
+}
+
+async function handleLearningApi(context, url) {
+  try {
+    const request = context.request;
+    if (!['GET', 'PUT'].includes(request.method)) return jsonResponse({error:'Method not allowed'},405);
+    if (request.method === 'PUT' && request.headers.get('Origin') !== url.origin) return jsonResponse({error:'Origin rejected'},403);
+    const app = url.pathname.replace(/\/+$/, '').split('/').pop();
+    if (!['o11','o12'].includes(app)) return jsonResponse({error:'Not found'},404);
+    requireProgramDb(context);
+    await ensureProgramSchema(context);
+    const user = await requireProgramUser(context);
+    const db = context.env.PROGRAM_DB;
+    await db.prepare(`CREATE TABLE IF NOT EXISTS learning_data (user_id INTEGER NOT NULL, app TEXT NOT NULL, data_json TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 1, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(user_id, app))`).run();
+    if (request.method === 'GET') {
+      const row = await db.prepare('SELECT data_json, revision FROM learning_data WHERE user_id=? AND app=?').bind(user.id,app).first();
+      const token = getCookie(request, 'program_session');
+      await db.prepare('UPDATE program_sessions SET expires_at=? WHERE token_hash=?').bind(sqliteDateTime(Date.now()+30*86400000),await hashToken(token)).run();
+      return jsonResponse({data:row ? JSON.parse(row.data_json):null,revision:row?.revision || 0},200,{'Set-Cookie':sessionCookie(token)});
+    }
+    const raw = await request.text();
+    if (raw.length > 4000000) return jsonResponse({error:'Kayıt çok büyük'},413);
+    const body = JSON.parse(raw);
+    if (!Number.isInteger(body.revision) || body.revision < 0 || !body.data || typeof body.data !== 'object' || Array.isArray(body.data)) return jsonResponse({error:'Geçersiz kayıt'},400);
+    for (const [key,value] of Object.entries(body.data)) {
+      if (!(app==='o11' ? key==='fatedreel-o11-book-v1' : key==='word-atlas-o12:settings' || /^word-atlas-o12:v2:[a-zA-Z0-9_-]+$/.test(key)) || typeof value!=='string') return jsonResponse({error:'Geçersiz anahtar'},400);
+      JSON.parse(value);
+    }
+    const data = JSON.stringify(body.data);
+    const result = body.revision === 0
+      ? await db.prepare('INSERT OR IGNORE INTO learning_data(user_id,app,data_json) VALUES(?,?,?)').bind(user.id,app,data).run()
+      : await db.prepare('UPDATE learning_data SET data_json=?,revision=revision+1,updated_at=CURRENT_TIMESTAMP WHERE user_id=? AND app=? AND revision=?').bind(data,user.id,app,body.revision).run();
+    if (!result.meta.changes) return jsonResponse({error:'Başka cihazda yeni kayıt var. Sayfayı yenileyip kullanılacak kaydı seç.'},409);
+    return jsonResponse({revision:body.revision+1});
+  } catch(error) { return jsonResponse({error:error.status ? error.message : 'Kayıt servisine ulaşılamadı'},error.status || 500); }
 }
