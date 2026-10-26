@@ -1,0 +1,20 @@
+{
+  "upstream": "https://github.com/designfuchen/word-atlas",
+  "upstreamCommit": "9eff300e5d5d0b31dcd9de2a4e040a89c78cbcc8",
+  "words": 7298,
+  "senses": 13733,
+  "examples": 14596,
+  "language": "tr",
+  "translation": "automatic; context-based definitions; not fully human-reviewed",
+  "codeLicense": "MIT",
+  "contentAttribution": "Word Atlas contributors — CC BY 4.0",
+  "changes": [
+    "Turkish UI",
+    "Turkish contextual definitions and examples",
+    "Turkish search and case folding",
+    "Turkish dates and intervals",
+    "isolated browser storage and cache",
+    "Chinese voiceovers disabled",
+    "local illustrations; upstream English audio"
+  ]
+}

@@ -59,3 +59,15 @@
 
 /o11/audio/*
   Cache-Control: public, max-age=31536000, immutable
+
+/o12/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/o12/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/o12/atlas/*.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+/o12/atlas/entries/*.json
+  Cache-Control: public, max-age=0, must-revalidate
