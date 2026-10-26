@@ -1,0 +1,2326 @@
+{
+  "version": 1,
+  "units": [
+    {
+      "id": 1,
+      "scene": "Kursun ilk günü",
+      "dialogue": {
+        "lines": [
+          "Hi, I am Nora.",
+          "Hello, Nora. I am Leo.",
+          "We are in the same class.",
+          "Yes! See you in class."
+        ],
+        "options": [
+          "We are in the same class.",
+          "They are my keys.",
+          "It is my lunch."
+        ],
+        "answer": "We are in the same class.",
+        "why": "İki konuşmacı kendilerinden birlikte söz ederken we kullanır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "Maya is my sister. ___ is a doctor.",
+          "answer": "She",
+          "why": "Maya bir kadın olduğu için özne zamiri she olur."
+        },
+        {
+          "type": "order",
+          "prompt": "Biz komşuyuz.",
+          "answer": "We are neighbours.",
+          "why": "Biz için we kullanılır."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "İsim yerine özne zamiri kullan: Tom → he",
+          "source": "Tom is tired.",
+          "answer": "He is tired.",
+          "why": "Bir erkek için he kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Leo and I için hangi özne zamiri gerekir?",
+          "options": [
+            "We",
+            "They",
+            "He"
+          ],
+          "answer": "We",
+          "why": "Konuşan kişi gruptaysa we kullanılır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "My keys are blue. ___ are on the desk.",
+          "answer": "They",
+          "why": "Birden çok nesne için they kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "The cat için bir özne zamiri seç.",
+          "options": [
+            "It",
+            "We",
+            "You"
+          ],
+          "answer": "It",
+          "why": "Cinsiyeti belirtilmeyen hayvan veya nesne için it kullanılabilir."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "scene": "Kafede boş sandalye",
+      "dialogue": {
+        "lines": [
+          "Excuse me. Is this seat free?",
+          "Yes, it is.",
+          "Thank you. I am very tired.",
+          "Please sit down."
+        ],
+        "options": [
+          "Thank you. I am very tired.",
+          "Thank you. I are very tired.",
+          "Thank you. I is very tired."
+        ],
+        "answer": "Thank you. I am very tired.",
+        "why": "I öznesiyle am kullanılır; yorgunluk bir durumdur."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "Our bags ___ heavy.",
+          "answer": "are",
+          "why": "Our bags çoğul olduğu için are gerekir."
+        },
+        {
+          "type": "order",
+          "prompt": "Müze bugün açık.",
+          "answer": "The museum is open today.",
+          "why": "Tekil özne the museum ile is kullanılır.",
+          "accept": [
+            "Today the museum is open."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Olumsuz yap.",
+          "source": "The kitchen is clean.",
+          "answer": "The kitchen isn't clean.",
+          "why": "Is fiilinden sonra not gelir; is not ve isn’t aynı anlamdadır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Soru yapısını seç.",
+          "options": [
+            "Are the windows open?",
+            "The windows are open?",
+            "Is the windows open?"
+          ],
+          "answer": "Are the windows open?",
+          "why": "Çoğul özneyle are başa alınır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "I ___ not cold.",
+          "answer": "am",
+          "why": "I am not kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Mina ve Ece evde mi?",
+          "options": [
+            "Are Mina and Ece at home?",
+            "Is Mina and Ece at home?",
+            "Do Mina and Ece at home?"
+          ],
+          "answer": "Are Mina and Ece at home?",
+          "why": "İki kişi çoğul özne oluşturur; are başa gelir."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "scene": "Öğle yemeği hazırlığı",
+      "dialogue": {
+        "lines": [
+          "What do you need?",
+          "Bread, please.",
+          "I need two plates too.",
+          "Here you are."
+        ],
+        "options": [
+          "I need two plates too.",
+          "Need I two plates too.",
+          "I two plates need too."
+        ],
+        "answer": "I need two plates too.",
+        "why": "Temel sıra özne + fiil + nesnedir: I + need + two plates."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "Doğru sırayla yaz: I / like / apples → ___",
+          "answer": "I like apples",
+          "why": "Özne I, fiil like ve nesne apples sıralanır."
+        },
+        {
+          "type": "order",
+          "prompt": "Annem çorba yapar.",
+          "answer": "My mother makes soup.",
+          "why": "Özne + fiil + nesne sırası korunur."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Kelime sırasını düzelt.",
+          "source": "Music I like.",
+          "answer": "I like music.",
+          "why": "Nesne music, like fiilinden sonra gelir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Standart olumlu cümleyi seç.",
+          "options": [
+            "The children play chess.",
+            "Play the children chess.",
+            "The children chess play."
+          ],
+          "answer": "The children play chess.",
+          "why": "The children özne, play fiil, chess nesnedir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Nesneyi sona taşı: We / need / water → ___",
+          "answer": "We need water",
+          "why": "İngilizcede temel olumlu sıra özne–fiil–nesnedir."
+        },
+        {
+          "type": "choice",
+          "prompt": "I / have / a bicycle sözcüklerinin doğru sırası hangisi?",
+          "options": [
+            "I have a bicycle.",
+            "Have I a bicycle.",
+            "I a bicycle have."
+          ],
+          "answer": "I have a bicycle.",
+          "why": "I öznesini have fiili ve a bicycle nesnesi izler."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "scene": "Pazarda alışveriş",
+      "dialogue": {
+        "lines": [
+          "What is in your bag?",
+          "An orange and a banana.",
+          "I need an apple too.",
+          "The apples are over there."
+        ],
+        "options": [
+          "I need an apple too.",
+          "I need a apple too.",
+          "I need apple an too."
+        ],
+        "answer": "I need an apple too.",
+        "why": "Apple sesli sesle başladığı için an apple denir."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "There is ___ umbrella by the door.",
+          "answer": "an",
+          "why": "Umbrella sesli sesle başlar; an gerekir."
+        },
+        {
+          "type": "order",
+          "prompt": "Rafta bir defter var.",
+          "answer": "There is a notebook on the shelf.",
+          "why": "Notebook sessiz sesle başladığı için a kullanılır.",
+          "accept": [
+            "On the shelf there is a notebook."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Tekil ismi çoğul yap.",
+          "source": "The box is red.",
+          "answer": "The boxes are red.",
+          "why": "Box çoğulda boxes olur; çoğul özneyle are kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Aşağıdakilerden hangisi doğru?",
+          "options": [
+            "a university",
+            "an university",
+            "university a"
+          ],
+          "answer": "a university",
+          "why": "University /juː/ sesiyle başlar; yazılı harfe değil sese bakılır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "I can see two ___ . (child)",
+          "answer": "children",
+          "why": "Child sözcüğünün düzensiz çoğulu children olur."
+        },
+        {
+          "type": "choice",
+          "prompt": "Daha önce bahsedilen belirli bir kitabı seç.",
+          "options": [
+            "the book",
+            "a book",
+            "an book"
+          ],
+          "answer": "the book",
+          "why": "Hangi kitap olduğu belliyse the kullanılır."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "scene": "Kaybolan şapka",
+      "dialogue": {
+        "lines": [
+          "Is this your hat?",
+          "No, mine is black.",
+          "Those hats are ours.",
+          "Then this one is Mia’s."
+        ],
+        "options": [
+          "Those hats are ours.",
+          "Those hats are our.",
+          "Those hats are us."
+        ],
+        "answer": "Those hats are ours.",
+        "why": "İsim tekrarlanmıyorsa bağımsız sahiplik zamiri ours kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "This is Ella. ___ bike is green.",
+          "answer": "Her",
+          "why": "Ella’ya ait bir ismin önünde her kullanılır."
+        },
+        {
+          "type": "order",
+          "prompt": "Şu çantalar bizim.",
+          "answer": "Those bags are ours.",
+          "why": "Uzaktaki çoğul için those; isimden bağımsız sahiplik için ours gelir."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Tekrar eden ismi sahiplik zamiriyle değiştir.",
+          "source": "This jacket is my jacket.",
+          "answer": "This jacket is mine.",
+          "why": "My jacket yerine mine kullanılabilir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Yakındaki tek bir fotoğrafı işaretle.",
+          "options": [
+            "this photo",
+            "these photo",
+            "those photo"
+          ],
+          "answer": "this photo",
+          "why": "Yakın ve tekil nesne için this kullanılır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "These are my shoes. They are ___ .",
+          "answer": "mine",
+          "why": "My + isim yerine mine kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Uzakta iki ev var. Hangisi doğru?",
+          "options": [
+            "those houses",
+            "that houses",
+            "this houses"
+          ],
+          "answer": "those houses",
+          "why": "Uzak ve çoğul isimle those kullanılır."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "scene": "Arkadaşına yardım",
+      "dialogue": {
+        "lines": [
+          "Where is Ben?",
+          "He is near the door.",
+          "Please give him this ticket.",
+          "Of course."
+        ],
+        "options": [
+          "Please give him this ticket.",
+          "Please give he this ticket.",
+          "Please give his this ticket."
+        ],
+        "answer": "Please give him this ticket.",
+        "why": "Give fiilinden etkilenen kişi için him gerekir."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "My parents call ___ every evening. (I)",
+          "answer": "me",
+          "why": "Call fiilinin nesnesi olduğundan I değil me gerekir."
+        },
+        {
+          "type": "order",
+          "prompt": "Bizi bekle.",
+          "answer": "Wait for us.",
+          "why": "For edatından sonra nesne zamiri us kullanılır."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Tekrar eden ismi nesne zamiriyle değiştir.",
+          "source": "I know Lisa.",
+          "answer": "I know her.",
+          "why": "Lisa, know fiilinin nesnesi olduğu için her ile değiştirilir."
+        },
+        {
+          "type": "choice",
+          "prompt": "The children can see Sarah and me. Nesne grubunu değiştir.",
+          "options": [
+            "The children can see us.",
+            "The children can see we.",
+            "The children can see our."
+          ],
+          "answer": "The children can see us.",
+          "why": "Sarah and me nesne konumunda us olur."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Can you help ___? (they)",
+          "answer": "them",
+          "why": "Help fiilinden sonra nesne zamiri them kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Bir erkekten söz ederken hangi cümle doğru?",
+          "options": [
+            "I can hear him.",
+            "I can hear he.",
+            "I can hear his."
+          ],
+          "answer": "I can hear him.",
+          "why": "Hear fiilinin nesnesi him olur."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "scene": "Yeni ev gezisi",
+      "dialogue": {
+        "lines": [
+          "Do you like the flat?",
+          "Yes. There is a balcony.",
+          "And there are two bedrooms.",
+          "Great! I have two children."
+        ],
+        "options": [
+          "And there are two bedrooms.",
+          "And there is two bedrooms.",
+          "And there have two bedrooms."
+        ],
+        "answer": "And there are two bedrooms.",
+        "why": "Bir yerde iki şey bulunduğunu söylerken there are kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "My cousin ___ a new camera.",
+          "answer": "has",
+          "why": "Tekil üçüncü kişi my cousin ile has kullanılır."
+        },
+        {
+          "type": "order",
+          "prompt": "Bahçede üç ağaç var.",
+          "answer": "There are three trees in the garden.",
+          "why": "Bir yerde çoğul bir şey bulunduğunu anlatırken there are kullanılır.",
+          "accept": [
+            "In the garden there are three trees."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Olumsuz yap.",
+          "source": "There is a lift.",
+          "answer": "There isn't a lift.",
+          "why": "There is yapısı is not ile olumsuz olur."
+        },
+        {
+          "type": "choice",
+          "prompt": "Sahipliği anlatan doğru cümleyi seç.",
+          "options": [
+            "We have a small dog.",
+            "We has a small dog.",
+            "We there are a small dog."
+          ],
+          "answer": "We have a small dog.",
+          "why": "We ile have kullanılır; there is sahiplik anlatmaz."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "There ___ some milk in the fridge.",
+          "answer": "is",
+          "why": "Milk sayılamayan isimdir; there is kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Odada sandalye var mı?",
+          "options": [
+            "Are there any chairs in the room?",
+            "Have there any chairs in the room?",
+            "Is there any chairs in the room?"
+          ],
+          "answer": "Are there any chairs in the room?",
+          "why": "Çoğul chairs ile are there soru yapısı gerekir."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "scene": "İş çıkışı sohbeti",
+      "dialogue": {
+        "lines": [
+          "My shop opens at eight.",
+          "Mine opens at nine.",
+          "I close the shop at six every day.",
+          "We finish at the same time."
+        ],
+        "options": [
+          "I close the shop at six every day.",
+          "I am close the shop at six every day.",
+          "I closes the shop at six every day."
+        ],
+        "answer": "I close the shop at six every day.",
+        "why": "Every day rutin bildirir; I ile fiil yalın kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "Her aunt ___ French. (teach)",
+          "answer": "teaches",
+          "why": "He/she/it ile teach fiiline -es eklenir."
+        },
+        {
+          "type": "order",
+          "prompt": "Tren her sabah erken gelir.",
+          "answer": "The train arrives early every morning.",
+          "why": "Rutin anlatılır; the train tekildir ve arrives kullanılır.",
+          "accept": [
+            "Every morning the train arrives early."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Özneyi she yap.",
+          "source": "I walk to school.",
+          "answer": "She walks to school.",
+          "why": "She ile olumlu fiile -s eklenir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Genel bir alışkanlığı seç.",
+          "options": [
+            "We cook dinner on Sundays.",
+            "We are cook dinner on Sundays.",
+            "We cooks dinner on Sundays."
+          ],
+          "answer": "We cook dinner on Sundays.",
+          "why": "We ile cook yalın kalır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Our neighbour ___ the bus to work. (take)",
+          "answer": "takes",
+          "why": "Tekil özneyle takes kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "My dad için doğru biçim hangisi?",
+          "options": [
+            "My dad fixes bicycles.",
+            "My dad fix bicycles.",
+            "My dad is fix bicycles."
+          ],
+          "answer": "My dad fixes bicycles.",
+          "why": "Fix, tekil üçüncü kişide fixes olur."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "scene": "Hafta sonu planı",
+      "dialogue": {
+        "lines": [
+          "Do you play tennis?",
+          "No, I don’t.",
+          "Does your sister play?",
+          "Yes, she does."
+        ],
+        "options": [
+          "Does your sister play?",
+          "Do your sister play?",
+          "Does your sister plays?"
+        ],
+        "answer": "Does your sister play?",
+        "why": "Soru yardımcı fiili does olduğunda ana fiil play yalın kalır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "___ your uncle drive a taxi?",
+          "answer": "Does",
+          "why": "Tekil üçüncü kişi sorularında does kullanılır."
+        },
+        {
+          "type": "order",
+          "prompt": "Onlar burada çalışmıyor.",
+          "answer": "They don’t work here.",
+          "why": "They ile don’t ve yalın work kullanılır."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Soru yap.",
+          "source": "Rita likes jazz.",
+          "answer": "Does Rita like jazz?",
+          "why": "Does başa gelir; likes yerine like kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Olumsuz cümleyi seç.",
+          "options": [
+            "He doesn’t eat meat.",
+            "He don’t eat meat.",
+            "He doesn’t eats meat."
+          ],
+          "answer": "He doesn’t eat meat.",
+          "why": "He ile doesn’t kullanılır, eat yalın kalır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "We ___ buy bread on Fridays. (olumsuz yardımcı fiil)",
+          "answer": "don’t",
+          "why": "We ile do not / don’t kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Does he need help? Kısa olumlu yanıtı seç.",
+          "options": [
+            "Yes, he does.",
+            "Yes, he do.",
+            "Yes, he needs."
+          ],
+          "answer": "Yes, he does.",
+          "why": "Kısa yanıtta sorudaki does yardımcı fiili kullanılır."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "scene": "Telefonda mutfak sohbeti",
+      "dialogue": {
+        "lines": [
+          "Can you talk now?",
+          "Just a moment.",
+          "I am making breakfast.",
+          "Call me when you are ready."
+        ],
+        "options": [
+          "I am making breakfast.",
+          "I making breakfast.",
+          "I am make breakfast."
+        ],
+        "answer": "I am making breakfast.",
+        "why": "Şu anda süren eylem am + making ile kurulur."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "Look! The dog is ___ . (run)",
+          "answer": "running",
+          "why": "Run fiilinde son ünsüz ikiye katlanır: running."
+        },
+        {
+          "type": "order",
+          "prompt": "Çocuklar şu anda bahçede oynuyor.",
+          "answer": "The children are playing in the garden now.",
+          "why": "Çoğul özneyle are + playing kullanılır.",
+          "accept": [
+            "Now the children are playing in the garden.",
+            "The children are playing now in the garden."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Olumsuz yap.",
+          "source": "Eva is sleeping.",
+          "answer": "Eva isn't sleeping.",
+          "why": "Be yardımcı fiiline not eklenir; sleeping korunur."
+        },
+        {
+          "type": "choice",
+          "prompt": "Şu anda olan bir eylemi sor.",
+          "options": [
+            "Are you listening?",
+            "Do you listening?",
+            "Are you listen?"
+          ],
+          "answer": "Are you listening?",
+          "why": "Present Continuous sorusu are + özne + -ing yapısındadır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Dad is ___ a letter at the moment. (write)",
+          "answer": "writing",
+          "why": "Write fiilinin son e harfi düşer ve -ing eklenir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Hangisi şu anda süren bir eylemdir?",
+          "options": [
+            "We are painting the room.",
+            "We painting the room.",
+            "We are paint the room."
+          ],
+          "answer": "We are painting the room.",
+          "why": "Are + painting gerekir."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "scene": "Rutin ile bugünü ayırma",
+      "dialogue": {
+        "lines": [
+          "You usually take the bus.",
+          "That’s right.",
+          "But today I am walking.",
+          "The weather is lovely."
+        ],
+        "options": [
+          "But today I am walking.",
+          "But today I walk every day.",
+          "But today I am walk."
+        ],
+        "answer": "But today I am walking.",
+        "why": "Bugünkü geçici eylem am walking ile anlatılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "I usually cycle, but today I ___ taking the train.",
+          "answer": "am",
+          "why": "Bugünkü geçici eylem am taking ile kurulur."
+        },
+        {
+          "type": "order",
+          "prompt": "Her gün okur ama şimdi uyuyor.",
+          "answer": "She reads every day but she is sleeping now.",
+          "why": "Rutin reads; şu anki eylem is sleeping olur.",
+          "accept": [
+            "She reads every day but now she is sleeping."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Şimdi oluyor anlamına getir; now ekle.",
+          "source": "They play cards.",
+          "answer": "They are playing cards now.",
+          "why": "Şu an için are + playing kullanılır.",
+          "accept": [
+            "Now they are playing cards."
+          ]
+        },
+        {
+          "type": "choice",
+          "prompt": "Durum fiiliyle doğru kullanım hangisi?",
+          "options": [
+            "I understand the question.",
+            "I am understanding the question.",
+            "I understanding the question."
+          ],
+          "answer": "I understand the question.",
+          "why": "Understand genellikle sürekli zamanda kullanılmayan bir durum fiilidir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "He ___ to music every evening. (listen)",
+          "answer": "listens",
+          "why": "Every evening rutin bildirir; listens kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Şu an geçici olarak otelde kalıyoruz.",
+          "options": [
+            "We are staying at a hotel.",
+            "We stay at a hotel every day.",
+            "We staying at a hotel."
+          ],
+          "answer": "We are staying at a hotel.",
+          "why": "Geçici durum için are staying uygundur."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "scene": "İstasyonda bilgi alma",
+      "dialogue": {
+        "lines": [
+          "Excuse me, where is platform four?",
+          "It is on your left.",
+          "What time does the train leave?",
+          "At half past five."
+        ],
+        "options": [
+          "What time does the train leave?",
+          "Where time does the train leave?",
+          "Who time does the train leave?"
+        ],
+        "answer": "What time does the train leave?",
+        "why": "Saat sorarken what time kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "___ is your birthday? — In July.",
+          "answer": "When",
+          "why": "Zaman sormak için when kullanılır."
+        },
+        {
+          "type": "order",
+          "prompt": "Bu anahtarlar kimin?",
+          "answer": "Whose keys are these?",
+          "why": "Sahiplik sormak için whose kullanılır.",
+          "accept": [
+            "Whose are these keys?"
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Yeri sor: in a bank yerine bir soru kelimesi kullan.",
+          "source": "He works in a bank.",
+          "answer": "Where does he work?",
+          "why": "Where + does + özne + yalın fiil sırası kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Bir kişiyi sormak için seç.",
+          "options": [
+            "Who is at the door?",
+            "When is at the door?",
+            "How many is at the door?"
+          ],
+          "answer": "Who is at the door?",
+          "why": "Who kişi sorar."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "___ much is this coat?",
+          "answer": "How",
+          "why": "Fiyat için how much kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Sayı sormak için hangisi doğru?",
+          "options": [
+            "How many apples do you need?",
+            "How much apples do you need?",
+            "Who apples do you need?"
+          ],
+          "answer": "How many apples do you need?",
+          "why": "Apples sayılabilir çoğuldur; how many kullanılır."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "scene": "Buluşma yeri",
+      "dialogue": {
+        "lines": [
+          "Let’s meet on Saturday.",
+          "Where?",
+          "In front of the cinema at seven.",
+          "See you there."
+        ],
+        "options": [
+          "In front of the cinema at seven.",
+          "On front of the cinema in seven.",
+          "At front of the cinema on seven."
+        ],
+        "answer": "In front of the cinema at seven.",
+        "why": "Yer için in front of; saat için at kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "The course starts ___ Monday.",
+          "answer": "on",
+          "why": "Günlerden önce on kullanılır."
+        },
+        {
+          "type": "order",
+          "prompt": "Anahtarlar masanın altında.",
+          "answer": "The keys are under the table.",
+          "why": "Bir nesnenin altında olmak under ile anlatılır."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Yanlış edatı düzelt.",
+          "source": "We meet in six o’clock.",
+          "answer": "We meet at six o’clock.",
+          "why": "Belirli saatlerden önce at kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Ayı doğru edatla seç.",
+          "options": [
+            "in September",
+            "on September",
+            "at September"
+          ],
+          "answer": "in September",
+          "why": "Ay adlarından önce in kullanılır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "The picture is ___ the wall.",
+          "answer": "on",
+          "why": "Duvar üzerindeki resim için on the wall denir."
+        },
+        {
+          "type": "choice",
+          "prompt": "İki nesnenin arasını anlat.",
+          "options": [
+            "between the chairs",
+            "under the chairs",
+            "behind the chairs"
+          ],
+          "answer": "between the chairs",
+          "why": "Between, iki nesnenin arasını ifade eder."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "scene": "Sabah rutini",
+      "dialogue": {
+        "lines": [
+          "What do you do after breakfast?",
+          "I get dressed.",
+          "Then I leave the house at eight.",
+          "I leave at eight too."
+        ],
+        "options": [
+          "Then I leave the house at eight.",
+          "Then I go the house at eight.",
+          "Then I make the house at eight."
+        ],
+        "answer": "Then I leave the house at eight.",
+        "why": "Bir yerden ayrılmak leave ile anlatılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "I ___ a shower before work.",
+          "answer": "take",
+          "why": "Duş almak için take a shower kalıbı kullanılır.",
+          "accept": [
+            "have"
+          ]
+        },
+        {
+          "type": "order",
+          "prompt": "Akşam yemeğinden sonra bulaşıkları yıkarım.",
+          "answer": "I wash the dishes after dinner.",
+          "why": "Bulaşıkları yıkamak wash the dishes kalıbıdır.",
+          "accept": [
+            "After dinner I wash the dishes."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Özneyi my brother yap; dişler ona ait olsun.",
+          "source": "I brush my teeth.",
+          "answer": "My brother brushes his teeth.",
+          "why": "Brush → brushes; sahiplik de my yerine his olur."
+        },
+        {
+          "type": "choice",
+          "prompt": "Yatağa gitmek anlamındaki kalıbı seç.",
+          "options": [
+            "go to bed",
+            "go to the sleep",
+            "make bed to"
+          ],
+          "answer": "go to bed",
+          "why": "Uyumak üzere yatağa gitmek go to bed kalıbıdır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "We ___ breakfast at seven.",
+          "answer": "have",
+          "why": "Kahvaltı etmek have breakfast ile anlatılır.",
+          "accept": [
+            "eat"
+          ]
+        },
+        {
+          "type": "choice",
+          "prompt": "Otobüse binmeyi anlatan doğru kalıp hangisi?",
+          "options": [
+            "get on the bus",
+            "get in the bus",
+            "get at the bus"
+          ],
+          "answer": "get on the bus",
+          "why": "Otobüs gibi toplu taşıma araçlarına binerken get on kullanılır."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "scene": "Dünkü gezi",
+      "dialogue": {
+        "lines": [
+          "How was your Sunday?",
+          "Very nice.",
+          "We visited a small village.",
+          "That sounds lovely."
+        ],
+        "options": [
+          "We visited a small village.",
+          "We visit a small village yesterday.",
+          "We did visited a small village."
+        ],
+        "answer": "We visited a small village.",
+        "why": "Geçmişte tamamlanan olumlu eylem visited ile anlatılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "Yesterday, Sam ___ his wallet. (lose)",
+          "answer": "lost",
+          "why": "Lose fiilinin geçmiş biçimi lost olur."
+        },
+        {
+          "type": "order",
+          "prompt": "Dün bir pasta yaptım.",
+          "answer": "I made a cake yesterday.",
+          "why": "Make fiilinin geçmiş biçimi made olur.",
+          "accept": [
+            "Yesterday I made a cake."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Geçmiş zamana getir; last night ekle.",
+          "source": "We watch a film.",
+          "answer": "We watched a film last night.",
+          "why": "Düzenli watch fiiline -ed eklenir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Geçmişte tamamlanmış eylemi seç.",
+          "options": [
+            "She bought a ticket yesterday.",
+            "She buys a ticket yesterday.",
+            "She was buy a ticket yesterday."
+          ],
+          "answer": "She bought a ticket yesterday.",
+          "why": "Buy fiilinin geçmiş biçimi bought olur."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "They ___ home late last night. (come)",
+          "answer": "came",
+          "why": "Come → came düzensiz geçmiş biçimidir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Dün iki e-posta gönderdim.",
+          "options": [
+            "I sent two emails yesterday.",
+            "I send two emails yesterday.",
+            "I was sent two emails yesterday."
+          ],
+          "answer": "I sent two emails yesterday.",
+          "why": "Send fiilinin geçmiş biçimi sent olur."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "scene": "Kaçırılan otobüs",
+      "dialogue": {
+        "lines": [
+          "Did you catch the bus?",
+          "No, I didn’t.",
+          "I didn’t leave home early enough.",
+          "Let’s take a taxi."
+        ],
+        "options": [
+          "I didn’t leave home early enough.",
+          "I didn’t left home early enough.",
+          "I don’t left home early enough."
+        ],
+        "answer": "I didn’t leave home early enough.",
+        "why": "Didn’t sonrasında leave yalın kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "Did Anna ___ the window? (open)",
+          "answer": "open",
+          "why": "Did geçmiş zamanı taşır; open yalın kalır."
+        },
+        {
+          "type": "order",
+          "prompt": "Dün seni görmedim.",
+          "answer": "I didn’t see you yesterday.",
+          "why": "Didn’t sonrasında see kullanılır, saw değil.",
+          "accept": [
+            "Yesterday I didn’t see you."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Soru yap.",
+          "source": "They found the address.",
+          "answer": "Did they find the address?",
+          "why": "Did başa gelir; found yerine find kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Geçmiş zaman olumsuzunu seç.",
+          "options": [
+            "He didn’t call the doctor.",
+            "He didn’t called the doctor.",
+            "He doesn’t called the doctor."
+          ],
+          "answer": "He didn’t call the doctor.",
+          "why": "Didn’t + yalın call gerekir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "We didn’t ___ the match. (win)",
+          "answer": "win",
+          "why": "Didn’t sonrasında won değil win gelir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Did you enjoy the concert? Kısa olumlu yanıtı seç.",
+          "options": [
+            "Yes, I did.",
+            "Yes, I enjoyed.",
+            "Yes, I do."
+          ],
+          "answer": "Yes, I did.",
+          "why": "Kısa yanıt did ile kurulur."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "scene": "Eski okul fotoğrafı",
+      "dialogue": {
+        "lines": [
+          "Is that your old classroom?",
+          "Yes, it is.",
+          "The walls were yellow then.",
+          "They are white now."
+        ],
+        "options": [
+          "The walls were yellow then.",
+          "The walls was yellow then.",
+          "The walls did yellow then."
+        ],
+        "answer": "The walls were yellow then.",
+        "why": "Geçmişteki durum; çoğul walls ile were kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "I ___ at the library yesterday.",
+          "answer": "was",
+          "why": "I ile be fiilinin geçmişi was olur."
+        },
+        {
+          "type": "order",
+          "prompt": "Dün akşam aç değildik.",
+          "answer": "We weren’t hungry last night.",
+          "why": "We ile were not / weren’t kullanılır.",
+          "accept": [
+            "Last night we weren’t hungry."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Soru yap.",
+          "source": "The museum was busy.",
+          "answer": "Was the museum busy?",
+          "why": "Was başa alınır; ayrıca did kullanılmaz."
+        },
+        {
+          "type": "choice",
+          "prompt": "Çoğul özneyle doğru cümleyi seç.",
+          "options": [
+            "The shops were closed.",
+            "The shops was closed.",
+            "The shops did closed."
+          ],
+          "answer": "The shops were closed.",
+          "why": "Çoğul shops ile were kullanılır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "___ your teacher ill yesterday?",
+          "answer": "Was",
+          "why": "Tekil teacher ile was soru başına gelir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Were you late? Kısa olumsuz yanıtı seç.",
+          "options": [
+            "No, I wasn’t.",
+            "No, I didn’t.",
+            "No, I weren’t."
+          ],
+          "answer": "No, I wasn’t.",
+          "why": "Yanıtın öznesi I olduğu için wasn’t kullanılır."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "scene": "Elektrik kesildiğinde",
+      "dialogue": {
+        "lines": [
+          "What happened last night?",
+          "The lights went out.",
+          "I was reading in bed.",
+          "I was cooking in the kitchen."
+        ],
+        "options": [
+          "I was reading in bed.",
+          "I was read in bed.",
+          "I reading in bed."
+        ],
+        "answer": "I was reading in bed.",
+        "why": "Geçmişte o anda süren eylem was reading ile anlatılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "At nine last night, we ___ watching a film.",
+          "answer": "were",
+          "why": "We ile were + -ing gerekir."
+        },
+        {
+          "type": "order",
+          "prompt": "Telefon çaldığında duş alıyordum.",
+          "answer": "I was taking a shower when the phone rang.",
+          "why": "Süren eylem was taking, araya giren olay rang olur.",
+          "accept": [
+            "When the phone rang I was taking a shower."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Olumsuz yap.",
+          "source": "Lena was driving.",
+          "answer": "Lena wasn't driving.",
+          "why": "Wasn’t + driving kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Geçmişte süren eylemi sor.",
+          "options": [
+            "Were they waiting outside?",
+            "Did they waiting outside?",
+            "Were they wait outside?"
+          ],
+          "answer": "Were they waiting outside?",
+          "why": "Were + özne + waiting sırası kullanılır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Dad was ___ when I arrived. (sleep)",
+          "answer": "sleeping",
+          "why": "Was sonrasında sleeping gerekir."
+        },
+        {
+          "type": "choice",
+          "prompt": "İki eylem aynı anda sürüyordu.",
+          "options": [
+            "I was drawing while she was reading.",
+            "I drew while she reads.",
+            "I was draw while she was read."
+          ],
+          "answer": "I was drawing while she was reading.",
+          "why": "While ile iki süren geçmiş eylem bağlanabilir."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "scene": "Çalan telefon",
+      "dialogue": {
+        "lines": [
+          "The phone is ringing.",
+          "I can hear it.",
+          "I’ll answer it.",
+          "Thank you."
+        ],
+        "options": [
+          "I’ll answer it.",
+          "I answer it yesterday.",
+          "I am answer it."
+        ],
+        "answer": "I’ll answer it.",
+        "why": "O anda verilen karar için will / ’ll kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "I promise I ___ forget your birthday. (will olumsuz)",
+          "answer": "won’t",
+          "why": "Will not kısaltması won’t olur."
+        },
+        {
+          "type": "order",
+          "prompt": "Sana sonra yardım edeceğim.",
+          "answer": "I will help you later.",
+          "why": "Will sonrasında help yalın kullanılır.",
+          "accept": [
+            "Later I will help you."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Soru yap.",
+          "source": "They will come tomorrow.",
+          "answer": "Will they come tomorrow?",
+          "why": "Will öznenin önüne alınır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Anlık yardım teklifini seç.",
+          "options": [
+            "I’ll carry your bag.",
+            "I carried your bag yesterday.",
+            "I carrying your bag."
+          ],
+          "answer": "I’ll carry your bag.",
+          "why": "Will / ’ll tekliflerde kullanılabilir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "She will ___ here soon. (be)",
+          "answer": "be",
+          "why": "Will sonrasında be yalın kalır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Geleceğe ilişkin tahmini seç.",
+          "options": [
+            "I think it will snow tonight.",
+            "I think it snowed yesterday.",
+            "I think it will snows tonight."
+          ],
+          "answer": "I think it will snow tonight.",
+          "why": "Will + yalın snow tahmin bildirir."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "scene": "Önceden hazırlanmış tatil",
+      "dialogue": {
+        "lines": [
+          "Why have you got a suitcase?",
+          "I have a ticket to Rome.",
+          "I’m going to travel tomorrow.",
+          "Have a great trip!"
+        ],
+        "options": [
+          "I’m going to travel tomorrow.",
+          "I going to travel tomorrow.",
+          "I’m going travel tomorrow."
+        ],
+        "answer": "I’m going to travel tomorrow.",
+        "why": "Önceden planlanan eylem am going to + travel ile kurulur."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "They ___ going to paint the kitchen.",
+          "answer": "are",
+          "why": "They ile are going to kullanılır."
+        },
+        {
+          "type": "order",
+          "prompt": "Bu akşam ders çalışacağım.",
+          "answer": "I am going to study this evening.",
+          "why": "Plan için am going to + study kullanılır.",
+          "accept": [
+            "This evening I am going to study."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Olumsuz yap.",
+          "source": "He is going to sell his car.",
+          "answer": "He isn't going to sell his car.",
+          "why": "Be fiili olumsuz olur; going to sell korunur."
+        },
+        {
+          "type": "choice",
+          "prompt": "Görünen kanıta dayalı tahmini seç.",
+          "options": [
+            "Look at those clouds. It is going to rain.",
+            "Look at those clouds. It going rain.",
+            "Look at those clouds. It is rain yesterday."
+          ],
+          "answer": "Look at those clouds. It is going to rain.",
+          "why": "Görünen bulutlar tahmini desteklediği için going to uygundur."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Are you going ___ call Mina?",
+          "answer": "to",
+          "why": "Going to sonrasında yalın fiil kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Planı soran doğru cümleyi seç.",
+          "options": [
+            "Is she going to join us?",
+            "Does she going to join us?",
+            "Is she going join us?"
+          ],
+          "answer": "Is she going to join us?",
+          "why": "Is başa gelir; going to yapısı korunur."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "scene": "Yeni iş ve eski alışkanlık",
+      "dialogue": {
+        "lines": [
+          "Do you work on Saturdays?",
+          "Not usually.",
+          "But I worked last Saturday.",
+          "Then enjoy your day off today."
+        ],
+        "options": [
+          "But I worked last Saturday.",
+          "But I work yesterday Saturday.",
+          "But I am worked last Saturday."
+        ],
+        "answer": "But I worked last Saturday.",
+        "why": "Last Saturday geçmişte tamamlanan zamandır; worked gerekir."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "We usually walk, but yesterday we ___ a taxi. (take)",
+          "answer": "took",
+          "why": "Yesterday geçmiş zaman gerektirir; take → took."
+        },
+        {
+          "type": "order",
+          "prompt": "Şimdi yemek yapıyorum ama dün dışarıda yedim.",
+          "answer": "I am cooking now but I ate out yesterday.",
+          "why": "Şu an am cooking; tamamlanan geçmiş eylem ate olur.",
+          "accept": [
+            "I ate out yesterday but I am cooking now."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Zaman hatasını düzelt.",
+          "source": "She goes to the dentist yesterday.",
+          "answer": "She went to the dentist yesterday.",
+          "why": "Yesterday ile go fiilinin geçmiş biçimi went gerekir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Yarın için önceden planı seç.",
+          "options": [
+            "We are going to move tomorrow.",
+            "We moved yesterday tomorrow.",
+            "We moves tomorrow."
+          ],
+          "answer": "We are going to move tomorrow.",
+          "why": "Going to önceden yapılan gelecek planını anlatır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "At the moment, Tom ___ fixing his bike.",
+          "answer": "is",
+          "why": "At the moment ile is fixing kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Hem rutin hem şu anı doğru anlatan cümleyi seç.",
+          "options": [
+            "I usually read, but now I am writing.",
+            "I usually am reading, but now I write yesterday.",
+            "I usually reads, but now I writing."
+          ],
+          "answer": "I usually read, but now I am writing.",
+          "why": "Usually rutin, now ise şu anda süren eylem bildirir."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "scene": "Kütüphane kuralları",
+      "dialogue": {
+        "lines": [
+          "Can I eat here?",
+          "No, you can’t.",
+          "You must leave your food outside.",
+          "All right."
+        ],
+        "options": [
+          "You must leave your food outside.",
+          "You must to leave your food outside.",
+          "You must leaving your food outside."
+        ],
+        "answer": "You must leave your food outside.",
+        "why": "Must sonrasında to olmadan yalın leave kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "You should ___ a doctor. (see)",
+          "answer": "see",
+          "why": "Modal fiilden sonra yalın fiil gelir."
+        },
+        {
+          "type": "order",
+          "prompt": "Burada yüzemezsin.",
+          "answer": "You can’t swim here.",
+          "why": "Yasak veya izin verilmeyen durum için can’t kullanılır."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Tavsiye ver; should kullan.",
+          "source": "You drink more water.",
+          "answer": "You should drink more water.",
+          "why": "Should tavsiye bildirir; drink yalın kalır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Zorunluluk olmadığını seç.",
+          "options": [
+            "You don’t have to come early.",
+            "You mustn’t come early.",
+            "You can’t come early."
+          ],
+          "answer": "You don’t have to come early.",
+          "why": "Don’t have to zorunlu değil demektir; mustn’t yasak bildirir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "May I ___ the window? (open)",
+          "answer": "open",
+          "why": "May sonrasında fiil yalın kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Geçmişte beceriyi doğru anlat.",
+          "options": [
+            "I could swim when I was six.",
+            "I could to swim when I was six.",
+            "I can swam when I was six."
+          ],
+          "answer": "I could swim when I was six.",
+          "why": "Could geçmişte genel bir beceriyi anlatır."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "scene": "Kafede sipariş",
+      "dialogue": {
+        "lines": [
+          "Are you ready to order?",
+          "Yes, please.",
+          "I’d like a bowl of soup.",
+          "Of course. Anything to drink?"
+        ],
+        "options": [
+          "I’d like a bowl of soup.",
+          "I’d like to a bowl of soup.",
+          "I like would soup a bowl."
+        ],
+        "answer": "I’d like a bowl of soup.",
+        "why": "İsim isterken would like + isim kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "I want ___ learn Spanish.",
+          "answer": "to",
+          "why": "Want sonrasında ikinci fiil to ile gelir."
+        },
+        {
+          "type": "order",
+          "prompt": "Biraz dinlenmem gerekiyor.",
+          "answer": "I need to rest.",
+          "why": "Need to + rest gereklilik bildirir."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Daha kibar bir isteğe çevir; would like kullan.",
+          "source": "I want some tea.",
+          "answer": "I would like some tea.",
+          "why": "Would like istekleri daha kibar ifade eder."
+        },
+        {
+          "type": "choice",
+          "prompt": "Birinin yardım etmesini istemeyi seç.",
+          "options": [
+            "I want you to stay.",
+            "I want you stay.",
+            "I want to you stay."
+          ],
+          "answer": "I want you to stay.",
+          "why": "Want + kişi + to + fiil sırası kullanılır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Would you like ___ join us?",
+          "answer": "to",
+          "why": "Bir eylem önerisinde would like to + fiil kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Bir şeye ihtiyacı olduğunu doğru söyle.",
+          "options": [
+            "She needs a new phone.",
+            "She needs to a new phone.",
+            "She need a new phone."
+          ],
+          "answer": "She needs a new phone.",
+          "why": "Need + isim; she ile needs gerekir."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "scene": "Yeni bir hobi",
+      "dialogue": {
+        "lines": [
+          "Do you like your dance class?",
+          "Yes, I do.",
+          "I enjoy meeting new people.",
+          "That’s a good reason to go."
+        ],
+        "options": [
+          "I enjoy meeting new people.",
+          "I enjoy to meet new people.",
+          "I enjoy meet new people."
+        ],
+        "answer": "I enjoy meeting new people.",
+        "why": "Enjoy sonrasında -ing biçimi gelir."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "We decided ___ leave early.",
+          "answer": "to",
+          "why": "Decide fiilinden sonra to + fiil kullanılır."
+        },
+        {
+          "type": "order",
+          "prompt": "Yemek yapmaktan hoşlanırım.",
+          "answer": "I enjoy cooking.",
+          "why": "Enjoy + -ing kullanılır."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Fiil biçimini düzelt.",
+          "source": "She wants buying a car.",
+          "answer": "She wants to buy a car.",
+          "why": "Want sonrasında to buy kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Let ile doğru cümleyi seç.",
+          "options": [
+            "Let me explain.",
+            "Let me to explain.",
+            "Let me explaining."
+          ],
+          "answer": "Let me explain.",
+          "why": "Let + kişi + yalın fiil gerekir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Please stop ___ that noise. (make)",
+          "answer": "making",
+          "why": "Stop making, yapılan eylemi bırakmak demektir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Birine bir işi yaptırma yapısını seç.",
+          "options": [
+            "The teacher made us wait.",
+            "The teacher made us to wait.",
+            "The teacher made we wait."
+          ],
+          "answer": "The teacher made us wait.",
+          "why": "Make + nesne + yalın fiil kullanılır."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "scene": "Bir mesaj iletme",
+      "dialogue": {
+        "lines": [
+          "I can’t reach Daniel.",
+          "His phone is off.",
+          "Tell him to call me, please.",
+          "I will."
+        ],
+        "options": [
+          "Tell him to call me, please.",
+          "Say him to call me, please.",
+          "Tell he to call me, please."
+        ],
+        "answer": "Tell him to call me, please.",
+        "why": "Tell + nesne zamiri + to + fiil kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "She told ___ to sit down. (we)",
+          "answer": "us",
+          "why": "Tell fiilinden sonra nesne zamiri us gelir."
+        },
+        {
+          "type": "order",
+          "prompt": "Benden kapıyı kapatmamı istedi.",
+          "answer": "She asked me to close the door.",
+          "why": "Ask + kişi + to + fiil kullanılır."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Yanlış yapıyı düzelt.",
+          "source": "He said me the news.",
+          "answer": "He told me the news.",
+          "why": "Birine bir şeyi anlatırken tell + kişi kullanılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Dolaylı aktarımı doğru kur.",
+          "options": [
+            "Mia said that she was tired.",
+            "Mia told that she was tired.",
+            "Mia said me she was tired."
+          ],
+          "answer": "Mia said that she was tired.",
+          "why": "Say sonrasında doğrudan kişi nesnesi kullanılmaz; that cümlesi gelebilir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Please ask Ali ___ wait outside.",
+          "answer": "to",
+          "why": "Ask + kişi + to wait gerekir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Olumsuz talimatı seç.",
+          "options": [
+            "They told us not to worry.",
+            "They told us to not worried.",
+            "They said us not worry."
+          ],
+          "answer": "They told us not to worry.",
+          "why": "Tell + kişi + not to + fiil olumsuz talimat verir."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "scene": "Telefon ve kapı",
+      "dialogue": {
+        "lines": [
+          "Someone is at the door.",
+          "I’m on the phone.",
+          "Can you answer the door?",
+          "Sure."
+        ],
+        "options": [
+          "Can you answer the door?",
+          "Can you reply the door?",
+          "Can you tell the door?"
+        ],
+        "answer": "Can you answer the door?",
+        "why": "Kapıya bakmak answer the door kalıbıyla söylenir."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "Please ___ me your address. (tell/say)",
+          "answer": "tell",
+          "why": "Kişi nesnesi me ile tell kullanılır."
+        },
+        {
+          "type": "order",
+          "prompt": "Bana kalemini ödünç verir misin?",
+          "answer": "Can you lend me your pen?",
+          "why": "Birine ödünç vermek lend ile anlatılır."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Yanlış fiili düzelt.",
+          "source": "I listen a strange sound.",
+          "answer": "I hear a strange sound.",
+          "why": "Bir sesi farkında olmadan algılamak hear; dikkatle dinlemek listen to olur."
+        },
+        {
+          "type": "choice",
+          "prompt": "Ödünç almak anlamını seç.",
+          "options": [
+            "Can I borrow your book?",
+            "Can I lend your book?",
+            "Can I take you your book?"
+          ],
+          "answer": "Can I borrow your book?",
+          "why": "Borrow almak, lend vermek yönünü anlatır."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "I ___ my glasses everywhere, but I couldn’t find them. (look for / look at)",
+          "answer": "looked for",
+          "why": "Aramak look for; geçmişte looked for olur."
+        },
+        {
+          "type": "choice",
+          "prompt": "Doğru kalıbı seç.",
+          "options": [
+            "Please look at the map.",
+            "Please watch at the map.",
+            "Please listen the map."
+          ],
+          "answer": "Please look at the map.",
+          "why": "Bir şeye bakmak look at ile anlatılır."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "scene": "Yolculuk öncesi",
+      "dialogue": {
+        "lines": [
+          "Are you ready for the trip?",
+          "Almost.",
+          "I’m waiting for the tickets.",
+          "They will arrive soon."
+        ],
+        "options": [
+          "I’m waiting for the tickets.",
+          "I’m waiting the tickets.",
+          "I’m waiting at the tickets."
+        ],
+        "answer": "I’m waiting for the tickets.",
+        "why": "Bir şeyi beklemek wait for ile kurulur."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "This bag belongs ___ my aunt.",
+          "answer": "to",
+          "why": "Belong to sahiplik ilişkisini bildirir."
+        },
+        {
+          "type": "order",
+          "prompt": "Tatili düşünüyoruz.",
+          "answer": "We are thinking about the holiday.",
+          "why": "Bir konu hakkında düşünmek think about ile anlatılır."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Eksik edatı ekle.",
+          "source": "Please listen me.",
+          "answer": "Please listen to me.",
+          "why": "Listen sonrasında nesne varsa to gerekir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Doğru fiil–edat eşleşmesini seç.",
+          "options": [
+            "She is looking for her passport.",
+            "She is looking her passport.",
+            "She is looking to her passport."
+          ],
+          "answer": "She is looking for her passport.",
+          "why": "Look for bir şeyi aramak demektir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Do you agree ___ me?",
+          "answer": "with",
+          "why": "Bir kişiyle aynı fikirde olmak agree with ile anlatılır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Bir konuda endişelenmeyi seç.",
+          "options": [
+            "Don’t worry about the test.",
+            "Don’t worry for the test.",
+            "Don’t worry to the test."
+          ],
+          "answer": "Don’t worry about the test.",
+          "why": "Worry about + konu kullanılır."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "scene": "Yağmurlu gün",
+      "dialogue": {
+        "lines": [
+          "Why are you staying inside?",
+          "It is raining.",
+          "I’ll go out if the rain stops.",
+          "Take your coat with you."
+        ],
+        "options": [
+          "I’ll go out if the rain stops.",
+          "I’ll go out if the rain will stop.",
+          "I’ll go out because the rain will stopped."
+        ],
+        "answer": "I’ll go out if the rain stops.",
+        "why": "Gelecek koşulunda if bölümünde Present Simple kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "Sonuç bağlacıyla tamamla: I was tired, ___ I went to bed early.",
+          "answer": "so",
+          "why": "Sonuç bildiren bağlaç so olur."
+        },
+        {
+          "type": "order",
+          "prompt": "Yağmur yağıyordu ama yürüdük.",
+          "answer": "It was raining but we walked.",
+          "why": "Karşıtlık but ile bağlanır.",
+          "accept": [
+            "We walked but it was raining."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Because kullanarak birleştir.",
+          "source": "I stayed home. I was ill.",
+          "answer": "I stayed home because I was ill.",
+          "why": "Because neden bildirir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Koşulu doğru kur.",
+          "options": [
+            "If you call me, I will answer.",
+            "If you will call me, I answer.",
+            "If you called me tomorrow, I answering."
+          ],
+          "answer": "If you call me, I will answer.",
+          "why": "If + Present Simple, ana cümle will ile kurulabilir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Karşıtlık bağlacıyla tamamla: ___ it was cold, we went swimming.",
+          "answer": "Although",
+          "why": "Ana cümleyle karşıt durum although ile verilir.",
+          "accept": [
+            "Though",
+            "Even though"
+          ]
+        },
+        {
+          "type": "choice",
+          "prompt": "İki seçenek sunan bağlacı seç.",
+          "options": [
+            "Would you like tea or coffee?",
+            "Would you like tea because coffee?",
+            "Would you like tea although coffee?"
+          ],
+          "answer": "Would you like tea or coffee?",
+          "why": "Or alternatif seçenekleri bağlar."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "scene": "Kitap önerisi",
+      "dialogue": {
+        "lines": [
+          "Can you recommend a book?",
+          "Try this one.",
+          "It is a story that I really like.",
+          "I’ll borrow it."
+        ],
+        "options": [
+          "It is a story that I really like.",
+          "It is a story who I really like.",
+          "It is a story what I really like it."
+        ],
+        "answer": "It is a story that I really like.",
+        "why": "Nesneyi tanımlayan ilgi cümlesinde that kullanılabilir; it tekrar edilmez."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "This is the nurse ___ helped my father. (who/where)",
+          "answer": "who",
+          "why": "Bir kişiyi tanımlarken who kullanılabilir."
+        },
+        {
+          "type": "order",
+          "prompt": "Onun nerede yaşadığını biliyorum.",
+          "answer": "I know where she lives.",
+          "why": "İç içe soruda düz cümle sırası she lives olur."
+        },
+        {
+          "type": "rewrite",
+          "prompt": "İç içe soru sırasını düzelt.",
+          "source": "Do you know where is the station?",
+          "answer": "Do you know where the station is?",
+          "why": "Dolaylı soru bölümünde yardımcı fiil başa alınmaz."
+        },
+        {
+          "type": "choice",
+          "prompt": "Doğru ilgi cümlesini seç.",
+          "options": [
+            "The man who lives next door is friendly.",
+            "The man which lives next door is friendly.",
+            "The man who he lives next door is friendly."
+          ],
+          "answer": "The man who lives next door is friendly.",
+          "why": "Who, kişi olan öznenin yerini alır; he tekrarlanmaz."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "The café ___ we met is closed.",
+          "answer": "where",
+          "why": "Yer belirten ilgi cümlesinde where kullanılabilir.",
+          "accept": [
+            "at which",
+            "in which"
+          ]
+        },
+        {
+          "type": "choice",
+          "prompt": "Dolaylı soruyu doğru kur.",
+          "options": [
+            "Can you tell me what this means?",
+            "Can you tell me what does this mean?",
+            "Can you tell me what is means this?"
+          ],
+          "answer": "Can you tell me what this means?",
+          "why": "Dolaylı bölümde this means düz sırası korunur."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "scene": "Bulunamayan anahtar",
+      "dialogue": {
+        "lines": [
+          "Why are you outside?",
+          "I can’t open the door.",
+          "I’ve lost my key.",
+          "Let’s call the landlord."
+        ],
+        "options": [
+          "I’ve lost my key.",
+          "I’ve lose my key.",
+          "I have lost my key yesterday."
+        ],
+        "answer": "I’ve lost my key.",
+        "why": "Geçmişteki kaybın sonucu şu anda sürüyor; have + lost kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "She has never ___ a horse. (ride)",
+          "answer": "ridden",
+          "why": "Have/has sonrasında fiilin üçüncü biçimi kullanılır: ridden."
+        },
+        {
+          "type": "order",
+          "prompt": "Ödevimi henüz bitirmedim.",
+          "answer": "I haven’t finished my homework yet.",
+          "why": "Have not + finished; olumsuzda yet kullanılabilir.",
+          "accept": [
+            "I haven’t yet finished my homework."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Özneyi he yap.",
+          "source": "I have visited Berlin.",
+          "answer": "He has visited Berlin.",
+          "why": "He ile has kullanılır; visited korunur."
+        },
+        {
+          "type": "choice",
+          "prompt": "Bitmiş zaman belirtilen doğru cümleyi seç.",
+          "options": [
+            "We saw that film last week.",
+            "We have seen that film last week.",
+            "We has seen that film last week."
+          ],
+          "answer": "We saw that film last week.",
+          "why": "Last week tamamlanmış zaman olduğu için Past Simple gerekir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "Have you ___ eaten sushi? (hayatında hiç)",
+          "answer": "ever",
+          "why": "Deneyim sorularında ever kullanılabilir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Şimdiye kadar süren süreyi seç.",
+          "options": [
+            "I have lived here for three years.",
+            "I have lived here since three years.",
+            "I lived here since three years now."
+          ],
+          "answer": "I have lived here for three years.",
+          "why": "For bir süreyi, since başlangıç noktasını belirtir."
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "scene": "Restoranda küçük bir sorun",
+      "dialogue": {
+        "lines": [
+          "Here is your soup.",
+          "Thank you, but there is no spoon.",
+          "Could I have a spoon, please?",
+          "Of course. Here you are."
+        ],
+        "options": [
+          "Could I have a spoon, please?",
+          "Never mind, I was a spoon.",
+          "I spoon please could have."
+        ],
+        "answer": "Could I have a spoon, please?",
+        "why": "Could I have ... please? gündelik ve kibar bir istektir."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "Could you say that ___, please?",
+          "answer": "again",
+          "why": "Anlamadığımız bir şeyi tekrar istemek için say that again kullanılır.",
+          "accept": [
+            "once more"
+          ]
+        },
+        {
+          "type": "order",
+          "prompt": "Bir dakika lütfen.",
+          "answer": "Just a moment, please.",
+          "why": "Bekletirken kullanılan doğal kalıp just a moment olur.",
+          "accept": [
+            "Please just a moment."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Daha kibar yap; could kullan.",
+          "source": "Give me a glass of water.",
+          "answer": "Could you give me a glass of water?",
+          "why": "Could you ...? rica yapısıdır."
+        },
+        {
+          "type": "choice",
+          "prompt": "Biri özür diledi; sorun olmadığını belirt.",
+          "options": [
+            "No problem.",
+            "Good luck.",
+            "Well done."
+          ],
+          "answer": "No problem.",
+          "why": "Özüre karşı sorun olmadığını belirtmek için no problem denir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "A: Thank you for your help. B: You’re ___ .",
+          "answer": "welcome",
+          "why": "Teşekküre karşı you’re welcome kullanılır.",
+          "accept": [
+            "very welcome"
+          ]
+        },
+        {
+          "type": "choice",
+          "prompt": "Birinin sınav öncesinde şansa ihtiyacı var. Ne dersin?",
+          "options": [
+            "Good luck!",
+            "Get well soon!",
+            "Welcome back!"
+          ],
+          "answer": "Good luck!",
+          "why": "Sınav veya zor bir iş öncesi iyi dilek good luck olur."
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "scene": "İstasyonda kaçan anons",
+      "dialogue": {
+        "lines": [
+          "Sorry, I didn’t hear the announcement.",
+          "The train is delayed.",
+          "Could you repeat the departure time?",
+          "Yes. It leaves at six forty."
+        ],
+        "options": [
+          "Could you repeat the departure time?",
+          "Could you repeat yesterday the time left?",
+          "Could you repeating the departure time?"
+        ],
+        "answer": "Could you repeat the departure time?",
+        "why": "Tekrar istemek için could you + yalın repeat kullanılır."
+      },
+      "practice": [
+        {
+          "type": "gap",
+          "prompt": "The train usually ___ at eight, but it is late today. (arrive)",
+          "answer": "arrives",
+          "why": "Usually rutin bildirir; tekil train ile arrives olur."
+        },
+        {
+          "type": "order",
+          "prompt": "Ben geldiğimde onlar bekliyordu.",
+          "answer": "They were waiting when I arrived.",
+          "why": "Süren geçmiş eylem were waiting; araya giren olay arrived olur.",
+          "accept": [
+            "When I arrived they were waiting."
+          ]
+        },
+        {
+          "type": "rewrite",
+          "prompt": "Geçmiş zaman sorusunu düzelt.",
+          "source": "Did you heard the news?",
+          "answer": "Did you hear the news?",
+          "why": "Did sonrasında yalın hear gerekir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Anlamadığında tekrar istemenin doğal yolu hangisi?",
+          "options": [
+            "Sorry, could you say that again?",
+            "Sorry, you say that yesterday again.",
+            "Sorry, could you to say again?"
+          ],
+          "answer": "Sorry, could you say that again?",
+          "why": "Could you + yalın say, kibar tekrar isteğidir."
+        }
+      ],
+      "review": [
+        {
+          "type": "gap",
+          "prompt": "We have already ___ the tickets. (buy)",
+          "answer": "bought",
+          "why": "Have sonrasında üçüncü biçim bought gerekir."
+        },
+        {
+          "type": "choice",
+          "prompt": "Yarın için planı doğru anlat.",
+          "options": [
+            "I am going to visit my cousin tomorrow.",
+            "I visited my cousin tomorrow.",
+            "I going visit my cousin tomorrow."
+          ],
+          "answer": "I am going to visit my cousin tomorrow.",
+          "why": "Am going to + yalın visit gelecek planıdır."
+        }
+      ]
+    }
+  ]
+}

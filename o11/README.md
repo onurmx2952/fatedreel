@@ -41,3 +41,22 @@ localStorage anahtarı: `fatedreel-o11-book-v1`. Yedekler aynı sürüm şeması
 ## Atölye görünümü
 
 Resimli ana sayfa, altı açılır bölüm, kaldığın ünite/sekmeden devam etme, kişisel not ve öğrenildi sayıları. `#unit-N` doğrudan ders açar; `#home` ana sayfaya döner. Yerel kayıt şeması, ders içeriği ve sesler değişmedi. Hesap paneli üst çubuktaki kişi düğmesinden açılır. Tema ve yazı boyutu ayarları korunur.
+
+
+## Aktif alıştırma akışı
+
+Önceki arayüzdeki 132 çeviri alıştırmasının tamamı örnek cümlelerle aynıydı. Bu sürümde 02–06 sekmeleri `activities.js` ile yürütülür. Eski `exercises`, `questions`, `quiz`, `exam` alanları eski yedekleri/kayıtları silmemek için korunur; yeni çalışma akışında kullanılmaz. Eski taslaklar dosyada durur; yeni cevaplar ayrı `activities` alanında saklanır.
+
+- 02 Kelimeler: mevcut 192 kelime/kalıp için anlamdan İngilizceye seçim. Sözcük listesi isteğe bağlı açılır.
+- 03 Dinle ve yaz: mevcut 264 sesli örnek, metin başlangıçta gizli. Kullanıcı yazdıktan sonra kontrollü cevap karşılaştırması; Türkçe ipucu ve isteğe bağlı sesli örnek arşivi.
+- 04 Diyalog: 32 yeni dört replikli konuşma; üçüncü repliği öğrenci seçer. Kontrolden sonra konuşma ve açıklama tamamlanır. Yeni diyaloglar yazılı etkinliktir; yeni Caro Davy sesleri üretilmedi.
+- 05 Alıştırma: ünite başına dört yeni görev: boşluk doldurma, sözcüklerden cümle kurma, istenen dönüşümü yapma ve seçim. Toplam 128 yeni görev.
+- 06 Karma tekrar: 64 ayrı yeni soru; mevcut ve önceki ünitelerden en fazla sekiz soru. İlk ünitede iki soru vardır; gelecek konular sorulmaz.
+
+Her tur ilk denemede doğru sayısını gösterir. Cevap kontrol edilmeden çözüm ve açıklama açılmaz. Tur sonunda yanlışlar ayrı turda yeniden çalışılabilir. Aynı tur yeniden açıldığında sorular, seçimler, yazılan cevap ve sıralanan sözcükler geri gelir. Kısaltmalar/açık biçimleri, büyük-küçük harf ve noktalama farkları kabul edilir; açıkça tanımlanan alternatif cevaplar da kabul edilir. Serbest çevirilerin tüm eş anlamlılarını veya açık uçlu yanıtları değerlendiren bir yapay zekâ yoktur. Sorular kontrollü yanıtlar ister; yaklaşık yazılmış yanlış dilbilgisi doğru sayılmaz.
+
+`activities.json`, `scripts/build-activities.py` içindeki özgün, elle yazılmış içerikten üretilir. Yeni soru cevaplarının eski kitap cümleleriyle birebir tekrar etmediği test edilir. Toplam 680 görev (mevcut sözcük ve dinleme malzemesi dahil). Her yeni tur aynı ünite havuzunu farklı sırayla sunar; sonsuz yeni soru üretildiği iddia edilmez.
+
+Kayıt, mevcut `fatedreel-o11-book-v1` anahtarına eklenen isteğe bağlı `activities` alanındadır; mevcut Google eşitlemesi ve yedek içine dahildir. Eski not, işaret ve yer imleri korunur. Karma tekrar tamamlanınca mevcut tekrar takvimi güncellenir; ünite otomatik olarak öğrenildi işaretlenmez.
+
+Kontroller: `node o11/scripts/test-activities.mjs` içerik, cevap normalleştirme, 32 ünite sınırı ve kayıt okuma; `node o11/scripts/check-browser.mjs <o11-adresi> edge|webkit` gerçek tarayıcı akışı. Playwright paketi sistemde çözümlenemiyorsa `PLAYWRIGHT_MODULE` tam paket yolunu alır. Edge’de ses isteği; Windows WebKit’in MP3 oynatma desteğine bağımlı olmamak için WebKit testinde ses dosyasının HTTP yanıtı denetlenir. Gerçek iPad donanım testi yapılmadı.
