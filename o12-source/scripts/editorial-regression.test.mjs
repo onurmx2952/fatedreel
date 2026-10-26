@@ -15,6 +15,7 @@ const phrase=(id,en)=>byId.get(id).col.find(c=>c.split('｜')[0]===en)?.split('�
 test('idioms retain their contextual meanings, not misleading literal translations',()=>{
  for(const [id,en,tr] of [
   ['minute','take the minutes','toplantı tutanağını tutmak'],
+  ['minute','minute details','çok ince ayrıntılar'],
   ['match','strike a match','kibrit yakmak'],
   ['lift','give someone a lift','birini aracıyla gideceği yere bırakmak'],
   ['coin','coin a term','yeni bir terim türetmek'],
@@ -23,6 +24,11 @@ test('idioms retain their contextual meanings, not misleading literal translatio
   ['polish','polish shoes','ayakkabı parlatmak'],
   ['rifle','rifle through drawers','çekmeceleri aceleyle ve karıştırarak aramak'],
   ['easily','easily the best','açık ara en iyisi'],
+  ['second','second a motion','bir önergeyi desteklemek'],
+  ['pound','a pound of butter','bir libre, yani yaklaşık 454 gram tereyağı'],
+  ['content','content with','bir şeyden memnun'],
+  ['neither','neither of them','ikisinden hiçbiri'],
+  ['grass','a blade of grass','bir ot yaprağı; bir çimen sapı'],
  ])assert.equal(phrase(id,en),tr,`${id}: ${en}`);
 });
 test('literal uses of the same words remain valid',()=>{

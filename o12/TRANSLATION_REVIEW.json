@@ -1,14 +1,14 @@
 {
-  "version": "tr-editorial-v3",
+  "version": "tr-editorial-v4",
   "entriesScanned": 7298,
   "collocationsScanned": 24722,
-  "collocationsWithReviewedTranslations": 423,
+  "collocationsWithReviewedTranslations": 648,
   "reviewedTeachingNotes": 216,
   "unreviewedTeachingNotesWithheld": 7082,
   "usageNotesManuallyRewritten": 37,
-  "uniquePhraseRulesMatched": 415,
+  "uniquePhraseRulesMatched": 629,
   "englishContentSha256": "68f3a42c0e528e706838bbc969916821fa717a5da083e7089e44e0e7b6e471ce",
   "englishContentPreserved": true,
   "manuallyProofreadEveryEntry": false,
-  "method": "Corpus-wide pattern scan, direct contextual review of high-risk phrases, and direct review of the displayed teaching notes. Unreviewed teaching notes are withheld; not every definition or example sentence has been individually proofread."
+  "method": "Corpus-wide pattern scan; contextual review of high-risk expressions, including all uses on affected and multi-part-of-speech cards; direct review of displayed teaching notes. Unreviewed teaching notes are withheld. Not every definition or example sentence has been individually proofread."
 }

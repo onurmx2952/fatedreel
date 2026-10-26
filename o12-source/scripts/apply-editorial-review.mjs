@@ -45,7 +45,7 @@ write(path.join(site,'word-atlas.tr.json'),data);
 write(path.join(site,'atlas/index.json'),idx);
 const ordered=idx.words.map(r=>byId.get(r[0]));
 for(let i=0;i<ordered.length;i+=idx.chunk)write(path.join(site,`atlas/entries/${Math.floor(i/idx.chunk)}.json`),ordered.slice(i,i+idx.chunk));
-const sw=path.join(site,'sw.js');fs.writeFileSync(sw,fs.readFileSync(sw,'utf8').replace(/o12-atlas-tr-v\d+/g,'o12-atlas-tr-v3'));
+const sw=path.join(site,'sw.js');fs.writeFileSync(sw,fs.readFileSync(sw,'utf8').replace(/o12-atlas-tr-v\d+/g,`o12-atlas-tr-v${plan.version.match(/v(\d+)$/)[1]}`));
 const report={version:plan.version,...counts,uniquePhraseRulesMatched:matched.size,englishContentSha256:before,englishContentPreserved:true,manuallyProofreadEveryEntry:false,method:plan.scope.method};
 fs.writeFileSync(path.join(site,'TRANSLATION_REVIEW.json'),JSON.stringify(report,null,2));
 console.log(JSON.stringify(report,null,2));

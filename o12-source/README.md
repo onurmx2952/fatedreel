@@ -39,9 +39,9 @@ Kod: MIT (LICENSE). İçerik: Word Atlas contributors — CC BY 4.0 (CONTENT_LIC
 
 Kelime verilerini güncellerken `o12/sw.js` içindeki uygulamaya özel önbellek sürümünü de artırın.
 
-## Türkçe içerik denetimi (v3)
+## Türkçe içerik denetimi (v4)
 
-- 7.298 kelimedeki 24.722 kullanım ifadesi örüntülerle tarandı; riskli deyim ve çok anlamlı ifadeler bağlamlarına göre incelendi. 415 ayrı kural, 423 kullanım karşılığını düzeltir.
+- 7.298 kelimedeki 24.722 kullanım ifadesi örüntülerle tarandı; riskli deyim ve çok anlamlı ifadeler bağlamlarına göre incelendi. 629 ayrı kural, 648 kullanım karşılığını düzeltir.
 - 216 ipucu doğrudan denetlendi. Diğer 7.082 otomatik ipucu öğrenme verisinde boş bırakılır; `tipReview: "withheld"` ile işaretlenir. Önceki metinler ve otomatik adaylar `unreviewed-tip-drafts.json` içinde **denetlenmemiş taslak** olarak saklanır; bunlar öğrenciye gösterilmez.
 - 37 kullanım/yazım notu yeniden yazıldı. İngilizce kelimeler, tanımlar, örnek cümleler ve kullanım ifadelerinin İngilizce tarafı değiştirilmedi.
 - Anlamlar ve örnek cümlelerin tamamı tek tek insan incelemesinden geçmemiştir. Bu çalışma her kaydın hatasız olduğuna ilişkin bir garanti değildir.
