@@ -12,7 +12,7 @@ for(const u of bank.units){
  for(const q of [...u.practice,...u.review]){
   assert.ok(q.answer&&q.why);assert.ok(answerMatches(q.answer,q));
   if(q.type==='choice'){assert.ok(q.options.includes(q.answer));assert.equal(new Set(q.options).size,q.options.length);}
-  if(q.answer.split(' ').length>3 && existing.has(q.answer.toLowerCase()))overlap.push([u.id,q.answer]);
+  if(existing.has(q.answer.toLowerCase()))overlap.push([u.id,q.answer]);
  }
  assert.equal(u.dialogue.lines[2],u.dialogue.answer);
 }

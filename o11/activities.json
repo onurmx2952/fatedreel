@@ -178,9 +178,9 @@
         {
           "type": "rewrite",
           "prompt": "Kelime sırasını düzelt.",
-          "source": "Music I like.",
-          "answer": "I like music.",
-          "why": "Nesne music, like fiilinden sonra gelir."
+          "source": "Bread I sell.",
+          "answer": "I sell bread.",
+          "why": "Nesne bread, sell fiilinden sonra gelir."
         },
         {
           "type": "choice",
@@ -689,11 +689,11 @@
           "type": "choice",
           "prompt": "Şu anda olan bir eylemi sor.",
           "options": [
-            "Are you listening?",
-            "Do you listening?",
-            "Are you listen?"
+            "Are we drawing?",
+            "Do we drawing?",
+            "Are we draw?"
           ],
-          "answer": "Are you listening?",
+          "answer": "Are we drawing?",
           "why": "Present Continuous sorusu are + özne + -ing yapısındadır."
         }
       ],
@@ -1150,13 +1150,13 @@
         },
         {
           "type": "choice",
-          "prompt": "Did you enjoy the concert? Kısa olumlu yanıtı seç.",
+          "prompt": "Did you and Leo enjoy the concert? Kısa olumlu yanıtı seç.",
           "options": [
-            "Yes, I did.",
-            "Yes, I enjoyed.",
-            "Yes, I do."
+            "Yes, we did.",
+            "Yes, we enjoyed.",
+            "Yes, we do."
           ],
-          "answer": "Yes, I did.",
+          "answer": "Yes, we did.",
           "why": "Kısa yanıt did ile kurulur."
         }
       ]
