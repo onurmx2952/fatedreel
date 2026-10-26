@@ -54,3 +54,14 @@ npm run review:check
 ```
 
 Denetlenen bir ipucunu `tips` alanına ekleyin; doğrudan onaylanmamış bir ipucunu öğrenme verisine eklemeyin. Kontrol, indeks, parçalar ve indirilebilir dosyanın tutarlılığını, yanlış deyimlere karşı regresyonları ve İngilizce kaynak içeriğin değişmediğini doğrular. Güncel yayın özeti `../o12/TRANSLATION_REVIEW.json` içindedir.
+## iPad Safari görüntü ve gezinme düzeltmesi (26 Ekim 2026)
+
+7.298 resim dosyası ve 73 içerik parçası / 7.298 içerik kaydı denetlendi; dizindeki hiçbir kelimenin resmi veya içeriği eksik değil. Atlas A2 filtresindeki cloud/alive/circle/pardon/succeed/easily görselleri yerindedir.
+
+Atlas kartlarında resim yüksekliği yalnızca aspect-ratio ile hesaplanıyordu. Bu özellik devre dışı bırakıldığında yükseklik sıfıra düştü ve fotoğraftaki boş kart görünümü yeniden üretildi. Kartın hesaplanmış genişliğinden açık resim yüksekliği atanır; resimlere doğal 512×512 boyutları ve eski Safari için height:auto desteği eklendi.
+
+WebKit testinde yerel View Transition ile Atlas → Alıştırma geçişinde tarayıcı hedefi kapandı; aynı test API devre dışıyken geçti. Sayfa yönlendirmesi ve kelime açma artık güncellemeyi doğrudan uygular; gezinme deneysel görsel geçişin callback'ini beklemez. Mevcut CSS geri bildirimleri korunur. Gerçek iPad donanım testi yapılmadı; tarayıcı motoru testi kullanıldı.
+
+Tekrar testi: `node scripts/check-browser.mjs http://127.0.0.1:8811/o12/ webkit` veya son parametre `edge`. Önce kök depoda statik sunucu açın; Playwright için ilgili tarayıcı kurulu olmalıdır. PLAYWRIGHT_MODULE ortam değişkeniyle hazır bir Playwright paketinin yolu verilebilir. Testler geçici, yalıtılmış tarayıcı verisi kullanır; kullanıcı hesabına giriş yapmaz.
+
+Test kapsamı: 810 ve 390 genişliklerinde resim alanı (aspect-ratio devre dışıyken de), Atlas → Alıştırma, yazma turu, Bugün → kelime çalışması, yenileme ve devam etme. Safari/WebKit ve Edge üzerinde geçti; 23 birim testi ve TypeScript kontrolü de geçti. Yayın yeni JS/CSS adlarını ve service worker v6'yı kullanır; ilerleme anahtarları değişmedi. Eski JS/CSS dosyaları açık eski sekmeler için tutulur.

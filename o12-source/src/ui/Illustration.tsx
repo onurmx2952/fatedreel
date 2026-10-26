@@ -25,6 +25,8 @@ export function Illustration({
       {showImg ? (
         <img
           src={src}
+          width={512}
+          height={512}
           alt={alt ?? ""}
           loading={eager ? "eager" : "lazy"}
           decoding="async"

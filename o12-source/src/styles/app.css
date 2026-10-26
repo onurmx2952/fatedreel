@@ -850,6 +850,7 @@ code {
   pointer-events: none;
 }
 .illo img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2021,6 +2022,8 @@ code {
   box-shadow: 0 22px 40px -24px rgba(30, 38, 64, 0.45);
 }
 .tile .illo {
+  width: 100%;
+  height: calc(var(--tile-size) - 16px);
   border-radius: 16px;
   flex: none;
 }
@@ -2105,6 +2108,7 @@ code {
     border-radius: 18px;
   }
   .tile .illo {
+    height: calc(var(--tile-size) - 12px);
     border-radius: 13px;
   }
   .tile-word {
@@ -4119,4 +4123,9 @@ a:hover .mark-needle,
 }
 .streak-panel .mini-stats div:first-child dd {
   color: var(--ochre);
+}
+
+/* Older iPad Safari cannot size a square from aspect-ratio alone. */
+@supports not (aspect-ratio: 1) {
+  .illo img { height: auto; }
 }

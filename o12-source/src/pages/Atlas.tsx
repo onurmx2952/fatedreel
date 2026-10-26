@@ -318,8 +318,9 @@ function VirtualGrid({
             style={{
               transform: `translate(${c * (cell + gap)}px, ${r * rowH}px)`,
               width: cell,
+              "--tile-size": `${cell}px`,
               height: rowH - gap,
-            }}
+            } as React.CSSProperties}
             onClick={(e) => morphFrom(e.currentTarget.querySelector<HTMLElement>(".illo"), () => openWord(w.id))}
           >
             <Illustration
