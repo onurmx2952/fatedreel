@@ -26,6 +26,8 @@ export interface Entry {
   syn: string[];
   ant: string[];
   tip: string;
+  /** Only editor-reviewed teaching notes are shown to learners. */
+  tipReview?: "reviewed" | "withheld";
   cefr: string;
   topic: string;
   /** Usage caution (register, offensiveness, spelling), shown with the entry. */

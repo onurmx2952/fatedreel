@@ -40,7 +40,7 @@ export function About() {
       </section>
       <section className="panel">
         <h3 className="eyebrow">Türkçe uyarlama ve çeviri</h3>
-        <p className="muted">Türkçe anlamlar, örnek cümle çevirileri, kullanımlar ve ipuçları otomatik çeviriyle hazırlanmıştır; tüm kelimeler tek tek insan incelemesinden geçmemiştir. İngilizce tanımlar ve cümleler karşılaştırma için korunmuştur. Özellikle çok anlamlı kelimelerde bağlamı ve İngilizce tanımı birlikte değerlendir.</p>
+        <p className="muted">Türkçe anlamlar ve örnek cümle çevirileri otomatik hazırlanmıştır; tüm cümleler tek tek editoryal incelemeden geçmemiştir. Deyim ve çok anlamlı kullanım hataları için incelenmiş düzeltmeler uygulanmıştır. İpucu bölümünde yalnızca doğrudan denetlenmiş notlar gösterilir. İngilizce tanımlar ve cümleler karşılaştırma için korunmuştur.</p>
         <p className="muted">Arayüz Türkçeleştirildi; Türkçe arama, tarih ve süre gösterimleri eklendi. Ses kayıtları İngilizcedir ve kaynak deponun sabit sürümünden yüklenir; ses için internet gerekir. Kayıt oynatılamazsa tarayıcının İngilizce seslendirmesi kullanılır.</p>
       </section>
       <section className="panel">

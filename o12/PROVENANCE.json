@@ -16,5 +16,8 @@
     "isolated browser storage and cache",
     "Chinese voiceovers disabled",
     "local illustrations; upstream English audio"
-  ]
+  ],
+  "editorialReview": "tr-editorial-v3",
+  "teachingNotesPolicy": "Only directly reviewed teaching notes are shown; unreviewed drafts are withheld.",
+  "reviewReport": "TRANSLATION_REVIEW.json"
 }

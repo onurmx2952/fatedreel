@@ -183,7 +183,7 @@ export function EntryView({ entry, mode = "detail", eager = true }: { entry: Ent
           </section>
         )}
 
-        {entry.tip && (
+        {entry.tip && entry.tipReview === "reviewed" && (
           <aside className="tip">
             <Lightbulb size={17} strokeWidth={1.8} />
             <p>{entry.tip}</p>

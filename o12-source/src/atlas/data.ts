@@ -5,6 +5,7 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 const url = (p: string) => `${BASE}/atlas/${p}`;
 
 interface IndexFile {
+  revision?: string;
   id: string;
   name: string;
   count: number;
@@ -38,7 +39,7 @@ export async function loadOpenAtlas(): Promise<Atlas> {
   const loadChunk = (n: number) => {
     let p = pending.get(n);
     if (!p) {
-      p = fetch(url(`entries/${n}.json`))
+      p = fetch(url(`entries/${n}.json`) + `?v=${encodeURIComponent(idx.revision ?? idx.id)}`)
         .then((r) => {
           if (!r.ok) throw new Error(`Giriş yükleme başarısız oldu (${r.status}）`);
           return r.json() as Promise<Entry[]>;
