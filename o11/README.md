@@ -1,4 +1,4 @@
-# English · Interactive Book / o11
+# Dil Atölyesi · Interactive Book / o11
 
 Türkçe konuşan öğrenciler için özgün elektronik İngilizce kitabı. Kullanıcının paylaştığı 32 üniteli plan ve son öğretim düzeltmeleri temel alınır. Past Simple ve Did, Was/Were'den önce gelir. Dizi transkriptlerinden alıntı içermez; tüm Extra English bölümlerinin doğrulandığı iddia edilmez.
 
@@ -26,9 +26,9 @@ Türkçe konuşan öğrenciler için özgün elektronik İngilizce kitabı. Kull
 
 ## Teknik
 
-Derleme, harici font, CDN, hesap ve ücretli API yoktur. Statik HTML/CSS/JS ve içerik JSON'u; mevcut Cloudflare Pages/Git yayını kullanılır. `/o11 /o11/ 301` yönlendirmesi eklenmiştir. Service worker yalnızca `/o11/` dosyalarını yönetir. Kitap kabuğu ilk bağlantıda, sesler dinlendikçe çevrimdışı önbelleğe alınır; tamamı ilk ziyarette indirilmez.
+Derleme veya harici font gerekmez. İsteğe bağlı Google girişi ve hesap eşitleme mevcut `/api/program/` ve `/api/learning/` uçlarını kullanır. Statik HTML/CSS/JS ve içerik JSON'u; mevcut Cloudflare Pages/Git yayını kullanılır. `/o11 /o11/ 301` yönlendirmesi eklenmiştir. Service worker yalnızca `/o11/` dosyalarını yönetir. Kitap kabuğu ilk bağlantıda, sesler dinlendikçe çevrimdışı önbelleğe alınır; tamamı ilk ziyarette indirilmez.
 
-localStorage anahtarı: `fatedreel-o11-book-v1`. Yedekler aynı sürüm şemasını kullanır. Yüklenecek dosya boyutu ve temel şema denetlenir; kullanıcı metni HTML'e kaçışlanarak yazılır. Ses hatası ve depolama hatası bildirilir. Mikrofon veya kişisel veri aktarımı yoktur.
+localStorage anahtarı: `fatedreel-o11-book-v1`. Yedekler aynı sürüm şemasını kullanır. Yüklenecek dosya boyutu ve temel şema denetlenir; kullanıcı metni HTML'e kaçışlanarak yazılır. Ses hatası ve depolama hatası bildirilir. Mikrofon kullanılmaz. Kullanıcı Google ile giriş yapıp cihaz kaydını hesabına kaydettiğinde ilerleme ve notları PROGRAM_DB üzerinde saklanır.
 
 ## Doğrulama
 
@@ -37,3 +37,7 @@ localStorage anahtarı: `fatedreel-o11-book-v1`. Yedekler aynı sürüm şeması
 ## Günlük olumsuzlar
 
 Örnekler ve diyaloglar do not/does not/did not yerine don't/doesn't/didn't; is not/are not/was not/were not yerine isn't/aren't/wasn't/weren't; will not için won't kullanır. I am not → I'm not; negatif sorular Why didn't you...? sırasındadır. Not to worry gibi kısaltılamayan yapılar korunur. Açıklamalardaki tam biçim → kısaltma eşleştirmeleri öğretim için kalır. Değişen metinlerin Caro Davy sesleri yeniden üretilmiştir. Eski kitap sürümünü açık tutan cihazlar için önceki ses dosyaları tutulur. Yerel ilerleme anahtarı değişmez.
+
+## Atölye görünümü
+
+Resimli ana sayfa, altı açılır bölüm, kaldığın ünite/sekmeden devam etme, kişisel not ve öğrenildi sayıları. `#unit-N` doğrudan ders açar; `#home` ana sayfaya döner. Yerel kayıt şeması, ders içeriği ve sesler değişmedi. Hesap paneli üst çubuktaki kişi düğmesinden açılır. Tema ve yazı boyutu ayarları korunur.
