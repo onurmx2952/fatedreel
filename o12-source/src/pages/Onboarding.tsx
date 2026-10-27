@@ -1,20 +1,28 @@
+import { go } from "../lib/router";
+import { startLevelSession } from "../store/session";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useAtlas } from "../atlas/context";
 import { store } from "../store/store";
 
 const LEVELS = [
+  ["A1", "Başlangıç", "En temel kelimelerden başlayarak öğren"],
   ["A2", "Temel", "Günlük kelimelerle sağlam bir temel"],
   ["B1", "Orta", "Hedef 5,5 – 6 puan"],
   ["B2", "Orta üstü", "Hedef 6,5 – 7 puan"],
   ["C1", "İleri", "Hedef IELTS 7,5 ve üzeri"],
+  ["C2", "Uzman", "İnce anlamlar ve gelişmiş kelimeler"],
 ];
 
 export function Onboarding() {
   const atlas = useAtlas();
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(0);
   const [goal, setGoal] = useState(10);
-  const finish = () => store.settings({ onboarded: true, startLevel: atlas.cefr.indexOf(LEVELS[level][0]), dailyNew: goal });
+  const finish = () => {
+    const startLevel = atlas.cefr.indexOf(LEVELS[level][0]);
+    store.settings({ onboarded: true, startLevel, dailyNew: goal });
+    if (startLevelSession(atlas, startLevel)) go({ page: "learn" });
+  };
   return (
     <div className="onboard" role="dialog" aria-modal="true" aria-label="Hoş geldin">
       <div className="onboard-card">

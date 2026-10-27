@@ -107,7 +107,7 @@ function Intro({ step }: { step: Step }) {
   return (
     <div className="intro">
       <p className="stage-label">
-        <span className="dot dot-new" /> Yeni kelime </p>
+        <span className="dot dot-new" /> Yeni kelime · ardından soru turu </p>
       <EntryView entry={entry} mode="intro" />
       <footer className="learn-actions">
         <button className="btn btn-primary btn-xl" onClick={next} autoFocus> Anladım <ArrowRight size={20} />

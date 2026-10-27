@@ -79,3 +79,7 @@ O11'de kullanılan Kyutai Pocket TTS `caro_davy` hazır sesiyle A1'in ilk 60 ve 
 Ses modeli: https://github.com/kyutai-labs/pocket-tts ; Caro Davy ses kataloğu: https://huggingface.co/kyutai/tts-voices . Aynı yerel hazır motor ve ses, o11 kayıtlarının üretiminde de kullanıldı. 240 dosyanın varlığı, MP3 olarak okunması ve 1.08–4.44 saniye süreleri ffprobe ile denetlendi.
 
 Test: `scripts/check-levels.mjs <adres> edge|webkit`, seviye düğmesinden gerçek soruya geçme, doğru yanıt geri bildirimi, tüm kelimelerin doğru seviyede olması, A1/A2 arasında geri dönme, yenileme ve Atlas başlangıç düğmesini denetler. Edge'de Caro MP3 isteği de denetlenir. 24 birim testi ve TypeScript kontrolü geçti. Testler yalıtılmış tarayıcı verisi kullanır; kullanıcının hesabına girmez. Fiziksel iPad donanım testi yapılmadı.
+
+İlk girişteki seviye seçimi ve Başla düğmesi de doğrudan seviye turu başlatır. Tanıma kartında ardından soru turu geleceği belirtilir. `check-levels.mjs`, ilk giriş → A1 → çalışma geçişini ayrı, temiz bir tarayıcı bağlamında da sınar.
+
+İlk girişte eksik olan A1 ve C2 seçenekleri eklendi. İlk seçimde A1 varsayılır; kullanıcı isterse diğer seviyeyi seçer. Başla doğrudan seçilen seviyeyi çalıştırır.

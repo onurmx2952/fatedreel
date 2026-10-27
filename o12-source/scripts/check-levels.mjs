@@ -20,5 +20,9 @@ try{
  await p.getByRole('button',{name:'duraklat ve geri dön',exact:true}).click();await p.getByRole('button',{name:'A1 çalışmasına başla',exact:true}).click();await waitScope('level:A1');assert.equal((await session()).id,a1.id);assert.equal((await session()).index,a1.index);
  await p.goto(base+'#/atlas?level=A2');await p.getByRole('button',{name:'A2 çalışmasına başla',exact:true}).click();await waitScope('level:A2');assert.equal((await session()).id,a2.id);
  if(engine==='edge'){const audio=p.waitForRequest(r=>r.url().includes('/o12/caro/')&&r.url().endsWith('.mp3'));await p.locator('.intro .speak').first().click();await audio;}
+ const fresh = await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});const first = await fresh.newPage();
+ await first.addInitScript(()=>localStorage.setItem('word-atlas-o12:settings',JSON.stringify({autoplay:false,sfx:false,ambience:'off'})));
+ await first.goto(base);await first.locator('.onboard .choice').filter({hasText:'A1'}).click();await first.locator('.onboard .btn-primary').click();await first.locator('.learn-stage').waitFor();
+ await first.waitForFunction(k=>JSON.parse(localStorage.getItem(k)||'{}').session?.scope==='level:A1',key);assert.equal(await first.locator('.learn-level').innerText(),'A1');await fresh.close();
  assert.deepEqual(errors,[]);console.log(engine+': A1/A2 direct learning, actual quiz feedback, exact level words, independent resume, reload and Atlas start passed');
 }finally{await b.close();}
