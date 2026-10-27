@@ -29,3 +29,14 @@ test("rejects other versions and unknown settings", () => {
   assert.equal(s.theme, "dark");
   assert.equal(s.retention, 0.9);
 });
+
+
+test("keeps suspended level sessions and the selected voice in saved progress", () => {
+  const session = {id:"a1",scope:"level:A1",started:1,steps:[{id:"apple",kind:"intro"}],index:0,graded:{},newIds:["apple"],reviewIds:[]};
+  const progress = sanitizeProgress({version:2,session,levelSessions:{"level:A1":session,"unexpected":session}},"word-atlas-tr-v1");
+  assert.equal(progress.session?.scope,"level:A1");
+  assert.equal(progress.levelSessions?.["level:A1"].id,"a1");
+  assert.equal(progress.levelSessions?.unexpected,undefined);
+  assert.equal(sanitizeSettings({voice:"original"}).voice,"original");
+  assert.equal(sanitizeSettings({voice:"caro"}).voice,"caro");
+});

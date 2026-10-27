@@ -5,6 +5,7 @@ import { useAtlas } from "../atlas/context";
 import type { WordRef } from "../atlas/types";
 import { morphFrom } from "../lib/motion";
 import { go, openWord, type Route } from "../lib/router";
+import { startLevelSession } from "../store/session";
 import { isMastered } from "../store/srs";
 import { useStore } from "../store/store";
 import { Illustration } from "../ui/Illustration";
@@ -215,6 +216,7 @@ export function AtlasPage({
         </div>
       </div>
 
+      {level && atlas.cefr.includes(level) && <div className="level-study-bar"><div><strong>{level} seviyesinde çalış</strong><p>Kelime kartları, anlam, dinleme ve yazım sorularıyla bir tur başlat.</p></div><button className="btn btn-primary" onClick={() => {if(startLevelSession(atlas,atlas.cefr.indexOf(level)))go({page:"learn"});}}>{level} çalışmasına başla</button></div>}
       {view === "galaxy" ? (
         <Galaxy mode="full" focus={q.trim() ? list[0]?.id : null} />
       ) : list.length === 0 ? (

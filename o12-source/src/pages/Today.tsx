@@ -4,7 +4,7 @@ import { prefetch, useAtlas, useEntry } from "../atlas/context";
 import { go, openWord } from "../lib/router";
 import { cue } from "../lib/sound";
 import { hashSeed } from "../lib/text";
-import { buildSession, masteredCount, todayPlan } from "../store/session";
+import { buildSession, masteredCount, todayPlan, startLevelSession } from "../store/session";
 import { isMastered } from "../store/srs";
 import { dayKey, store, useStore } from "../store/store";
 import { Galaxy } from "../galaxy/Galaxy";
@@ -124,6 +124,17 @@ export function Today() {
             </div>
           )}
           <div className="journey-actions">
+            {progress.levelSessions?.daily && !progress.levelSessions.daily.finished && <button className="btn btn-glass" onClick={() => {
+              store.progress(p => {
+                const daily = p.levelSessions?.daily;
+                if (!daily) return p;
+                const levelSessions = {...p.levelSessions};delete levelSessions.daily;
+                if (p.session && !p.session.finished) levelSessions[p.session.scope || 'daily'] = p.session;
+                return {...p,levelSessions,session:daily};
+              });
+              go({page:'learn'});
+            }}>Önceki günlük tura dön</button>}
+
             {active || total > 0 ? (
               <button className="btn btn-primary btn-xl" onClick={() => start()}>
                 {active ? "Çalışmaya devam et" : "Bugünün çalışmasına başla"} <ArrowRight size={20} />
@@ -279,7 +290,7 @@ function LevelPath() {
           const done = l.mastered / Math.max(1, l.total);
           return (
             <li key={l.name} className={`${i === start ? "is-start" : ""} ${l.seen ? "is-on" : ""}`}>
-              <button onClick={() => go({ page: "atlas", level: l.name })} aria-label={`${l.name} ${NAMES[i]}, öğrendim ${l.seen} / ${l.total}`}>
+              <button onClick={() => { if(startLevelSession(atlas, i)) go({page:"learn"}); }} aria-label={`${l.name} çalışmasına başla`}>
                 <span className="station" style={{ "--seen": seen, "--done": done } as React.CSSProperties}>
                   <b>{l.name}</b>
                 </span>

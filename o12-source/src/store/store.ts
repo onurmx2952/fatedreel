@@ -8,6 +8,7 @@ export type Step = { id: string; kind: "intro" } | { id: string; kind: QuizKind;
 export interface ActiveSession {
   id: string;
   started: number;
+  scope?: string;
   steps: Step[];
   index: number;
   /** First-attempt grade per word; retries never change it. */
@@ -42,12 +43,14 @@ export interface Progress {
   days: Record<string, DayStat>;
   typing: TypingRound[];
   session: ActiveSession | null;
+  levelSessions?: Record<string, ActiveSession>;
   /** Rolling list of recent mistakes, newest first. */
   mistakes: string[];
 }
 
 export interface Settings {
   accent: Accent;
+  voice: "caro" | "original";
   autoplay: boolean;
   dailyNew: number;
   retention: number;
@@ -64,6 +67,7 @@ export interface Settings {
 
 export const defaultSettings: Settings = {
   accent: "uk",
+  voice: "caro",
   autoplay: true,
   dailyNew: 10,
   retention: 0.9,
@@ -154,12 +158,19 @@ export function sanitizeProgress(v: unknown, datasetId: string): Progress {
   const s = v.session;
   if (isObj(s) && typeof s.id === "string" && Array.isArray(s.steps) && num(s.index, 0) && isObj(s.graded))
     out.session = s as unknown as ActiveSession;
+  if (isObj(v.levelSessions)) {
+    out.levelSessions = {};
+    for (const [key, value] of Object.entries(v.levelSessions).slice(0, 8)) {
+      if (/^(daily|level:[A-C][12])$/.test(key) && isObj(value) && typeof value.id === "string" && Array.isArray(value.steps) && num(value.index, 0) && isObj(value.graded)) out.levelSessions[key] = value as unknown as ActiveSession;
+    }
+  }
   return out;
 }
 
 export function sanitizeSettings(v: unknown): Settings {
   const s = { ...defaultSettings };
   if (!isObj(v)) return s;
+  if (v.voice === "original" || v.voice === "caro") s.voice = v.voice;
   if (v.accent === "uk" || v.accent === "us") s.accent = v.accent;
   if (typeof v.autoplay === "boolean") s.autoplay = v.autoplay;
   if (num(v.dailyNew, 0, 100)) s.dailyNew = Math.round(v.dailyNew as number);

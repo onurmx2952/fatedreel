@@ -167,3 +167,37 @@ export function sessionStats(s: ActiveSession) {
 }
 
 export const masteredCount = (p: Progress) => Object.values(p.cards).filter(isMastered).length;
+
+/** Explicit level practice is separate from browsing and the daily quota. */
+export function startLevelSession(atlas: Atlas, level: number) {
+  if (!Number.isInteger(level) || !atlas.cefr[level]) return false;
+  const { progress, settings } = store.get();
+  const scope = `level:${atlas.cefr[level]}`;
+  store.settings({ startLevel: level });
+  const belongs = (session: ActiveSession | null | undefined) => !!session && !session.finished && session.index < session.steps.length && session.steps.every(step => atlas.byId.get(step.id)?.cefr === level);
+  if (belongs(progress.session)) {
+    store.progress(p => ({ ...p, session: { ...p.session!, scope } }));
+    return true;
+  }
+  const saved = progress.levelSessions?.[scope];
+  let session: ActiveSession;
+  if (belongs(saved)) session = { ...saved!, scope };
+  else {
+    const words = atlas.words.filter(w => w.cefr === level);
+    const due = dueIds(progress).filter(id => atlas.byId.get(id)?.cefr === level);
+    const fresh = words.filter(w => !progress.cards[w.id]).map(w => w.id);
+    const count = Math.min(20, Math.max(5, settings.dailyNew));
+    let ids = [...new Set([...due, ...fresh])].slice(0, count);
+    if (!ids.length) ids = [...words].sort((a,b) => (progress.cards[a.id]?.seen || 0) - (progress.cards[b.id]?.seen || 0)).slice(0,count).map(w => w.id);
+    if (!ids.length) return false;
+    const built = buildSession(atlas, progress, settings, { ids });
+    session = { ...built, id: `${built.id}:${scope}`, scope };
+  }
+  store.progress(p => {
+    const levelSessions = { ...p.levelSessions };
+    delete levelSessions[scope];
+    if (p.session && !p.session.finished && p.session.index < p.session.steps.length) levelSessions[p.session.scope || 'daily'] = p.session;
+    return { ...p, levelSessions, session };
+  });
+  return true;
+}

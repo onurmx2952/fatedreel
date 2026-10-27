@@ -65,3 +65,17 @@ WebKit testinde yerel View Transition ile Atlas → Alıştırma geçişinde tar
 Tekrar testi: `node scripts/check-browser.mjs http://127.0.0.1:8811/o12/ webkit` veya son parametre `edge`. Önce kök depoda statik sunucu açın; Playwright için ilgili tarayıcı kurulu olmalıdır. PLAYWRIGHT_MODULE ortam değişkeniyle hazır bir Playwright paketinin yolu verilebilir. Testler geçici, yalıtılmış tarayıcı verisi kullanır; kullanıcı hesabına giriş yapmaz.
 
 Test kapsamı: 810 ve 390 genişliklerinde resim alanı (aspect-ratio devre dışıyken de), Atlas → Alıştırma, yazma turu, Bugün → kelime çalışması, yenileme ve devam etme. Safari/WebKit ve Edge üzerinde geçti; 23 birim testi ve TypeScript kontrolü de geçti. Yayın yeni JS/CSS adlarını ve service worker v6'yı kullanır; ilerleme anahtarları değişmedi. Eski JS/CSS dosyaları açık eski sekmeler için tutulur.
+
+## Seviye seçimi ve Caro Davy — 27 Ekim 2026
+
+Orijinal `designfuchen/word-atlas` reposunun güncel HEAD'i (99c0076) ve ilk yayın tabanı (9eff300) ile karşılaştırıldı: `Today.tsx / LevelPath` içindeki A1–C2 düğmeleri orijinalde `go({page: 'atlas', level})` çağırıyordu. Bu bir çalışma başlangıcı değildi; filtrelenmiş sözlük listesi açıyordu. Önceki sayfa geçişi testleri bu ürün davranışını değiştirmiyordu.
+
+Seviye rotası şimdi `startLevelSession` üzerinden tam o seviyeye ait kelimelerle öğrenme turu başlatır. Atlas filtrelerinde de açık bir “A1/A2 çalışmasına başla” düğmesi vardır. İlk tanışma kartlarından sonra gerçek seçmeli/dinleme/yazım soruları gelir. Seviye turu günlük yeni kelime kotası bittikten sonra da açılabilir; seviyede yeni kelime yoksa aynı seviyenin eski kelimeleri çalışılır, başka seviyeye taşmaz.
+
+Yarım kalan turlar `progress.levelSessions` altında saklanır. A1 → A2 → A1 akışında soru, sıra ve verilmiş yanıt geri gelir. Etkinleştirilen tur arşivden çıkarılır; bitmiş turun eski kopyası tekrar açılmaz. Önceki karma günlük tur varsa ona dönüş düğmesi sunulur. Kartların hafıza durumları ve Google kayıt anahtarları değiştirilmedi. Yeni seviye arşivleri normal yedek/Google kaydının içindedir.
+
+O11'de kullanılan Kyutai Pocket TTS `caro_davy` hazır sesiyle A1'in ilk 60 ve A2'nin ilk 60 kelimesi, her kelimenin ilk İngilizce örneği üretildi: 240 MP3, yaklaşık 4.7 MB. Dosyalar `o12/caro/` ve metin–ses eşlemesi `index.json` içindedir. Üretimde yerel sunucu gerekmez; bunlar önceden hazırlanmış statik kayıtlardır. Tüm 7.298 kelimenin sesi dönüştürülmüş değildir. Eksik Caro kaydında mevcut İngiliz/Amerikan kaydı ve cihaz sesi sırası korunur. İlerlemem → Okuma sesi bölümünden Caro veya orijinal kayıtlar seçilebilir; orijinal aksan tercihi ayrı kalır.
+
+Ses modeli: https://github.com/kyutai-labs/pocket-tts ; Caro Davy ses kataloğu: https://huggingface.co/kyutai/tts-voices . Aynı yerel hazır motor ve ses, o11 kayıtlarının üretiminde de kullanıldı. 240 dosyanın varlığı, MP3 olarak okunması ve 1.08–4.44 saniye süreleri ffprobe ile denetlendi.
+
+Test: `scripts/check-levels.mjs <adres> edge|webkit`, seviye düğmesinden gerçek soruya geçme, doğru yanıt geri bildirimi, tüm kelimelerin doğru seviyede olması, A1/A2 arasında geri dönme, yenileme ve Atlas başlangıç düğmesini denetler. Edge'de Caro MP3 isteği de denetlenir. 24 birim testi ve TypeScript kontrolü geçti. Testler yalıtılmış tarayıcı verisi kullanır; kullanıcının hesabına girmez. Fiziksel iPad donanım testi yapılmadı.

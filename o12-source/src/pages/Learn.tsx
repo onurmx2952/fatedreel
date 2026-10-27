@@ -74,6 +74,7 @@ function Runner({ session }: { session: ActiveSession }) {
           {session.index + 1}
           <small>/{total}</small>
         </span>
+        {session.scope?.startsWith("level:") && <span className="learn-level">{session.scope.slice(6)}</span>}
         <AmbiencePicker />
       </header>
       <main className="learn-stage" key={`${session.id}-${session.index}`}>

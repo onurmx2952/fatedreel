@@ -136,7 +136,10 @@ export function Me({ privateAvailable }: { privateAvailable: boolean }) {
               ))}
             </div>
           </Field>
-          <Field label="Telaffuz">
+          <Field label="Okuma sesi" hint="O11’deki Caro Davy: A1/A2’nin ilk 60 kelimesi ve ilk örnekleri hazır. Diğerlerinde seçili İngiliz/Amerikan kaydı kullanılır.">
+            <div className="segmented"><button className={settings.voice === "caro" ? "is-on" : ""} onClick={()=>set({voice:"caro"})}>O11 · Caro Davy</button><button className={settings.voice === "original" ? "is-on" : ""} onClick={()=>set({voice:"original"})}>Orijinal kayıtlar</button></div>
+          </Field>
+          <Field label="Orijinal kayıt aksanı">
             <div className="segmented">
               <button className={settings.accent === "uk" ? "is-on" : ""} onClick={() => set({ accent: "uk" })}> İngiliz </button>
               <button className={settings.accent === "us" ? "is-on" : ""} onClick={() => set({ accent: "us" })}> Amerikan </button>

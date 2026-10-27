@@ -4129,3 +4129,5 @@ a:hover .mark-needle,
 @supports not (aspect-ratio: 1) {
   .illo img { height: auto; }
 }
+
+.level-study-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px;margin:20px 0;border:1px solid var(--line);border-radius:18px;background:var(--card)}.level-study-bar strong{font-size:18px}.level-study-bar p{font-size:14px;color:var(--ink-3);margin:8px 0 0}.learn-level{padding:6px 10px;border-radius:20px;background:var(--card);color:var(--ink);font-size:13px}@media(max-width:600px){.level-study-bar{flex-direction:column;align-items:stretch}.level-study-bar .btn{width:100%}}
