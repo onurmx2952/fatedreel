@@ -1,4 +1,4 @@
-import {createSentencePractice} from './sentences.js?v=8';
+import {createSentencePractice} from './sentences.js?v=9';
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const KEY='fatedreel-o11-book-v1';
 const fresh=()=>({version:1,unit:1,tab:'lesson',hidden:false,size:19,night:false,focus:false,speed:1,marks:{},bookmarks:[],notes:{},drafts:{},reviews:{},activities:{},quiz:null,exam:null});

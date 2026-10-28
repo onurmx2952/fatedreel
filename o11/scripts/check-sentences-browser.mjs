@@ -24,13 +24,13 @@ try{
  if(engine==='webkit'){assert.equal((await page.request.get(new URL('audio/'+q.audio+'.mp3',base).href)).status(),200);await page.locator('.drill-listen').click();}
  else{const response=page.waitForResponse(r=>r.url().includes('/audio/'+q.audio+'.mp3')&&[200,206].includes(r.status()));await page.locator('.drill-listen').click();await response;}
  await page.locator('#drill-input').fill(q.answer.toLowerCase());await page.reload();await page.locator('#drill-input').waitFor();assert.equal(await page.locator('#drill-input').inputValue(),q.answer.toLowerCase());assert.equal(await page.locator('#practice-translation').isVisible(),true);
- await page.locator('.drill-check').click();assert.match(await page.locator('.drill-feedback').innerText(),/Doğru yazdın/);assert.equal(await page.locator('.drill-feedback p[lang=en]').innerText(),q.answer);
+ await page.locator('.drill-check').click();assert.equal(await page.locator('.sentence-correction').count(),0);assert.equal(await page.locator('.drill-feedback p[lang=en]').innerText(),q.answer);
  await page.reload();await page.locator('.drill-feedback').waitFor();
  await page.locator('[data-act-next]').click();assert.equal((await active()).s.pos,1);assert.equal(await page.locator('.drill-feedback').count(),0);assert.equal(await page.locator('#practice-translation').isVisible(),false);assert.equal(await page.locator('#drill-input').inputValue(),'');
- await page.locator('#drill-input').fill('I was going home');await page.locator('.drill-check').click();assert.match(await page.locator('.drill-feedback').innerText(),/Birlikte karşılaştıralım/);
+ await page.locator('#drill-input').fill('I was going home');await page.locator('.drill-check').click();assert.ok(await page.locator('.sentence-correction').count()>0);assert.equal(await page.locator('.drill-feedback b,.drill-feedback small').count(),0);
  for(let i=1;i<10;i++)await page.locator('[data-act-next]').click();assert.equal((await active()).s.pos,0);
  // Empty solution is allowed; there is no forced test or summary after a round.
- await page.locator('.drill-check').click();assert.match(await page.locator('.drill-feedback').innerText(),/Doğru cümle/);
+ await page.locator('.drill-check').click();assert.equal(await page.locator('.drill-feedback p').count(),1);
  await page.locator('[data-tab="notes"]').first().click();await page.locator('#note').fill('Notlarım korunuyor.');await page.reload();await page.locator('#note').waitFor();assert.equal(await page.locator('#note').inputValue(),'Notlarım korunuyor.');
  // Migrate old tabs while retaining old notes, answers and activity sessions.
  await page.evaluate(()=>{const k='fatedreel-o11-book-v1',s=JSON.parse(localStorage.getItem(k));s.tab='review';s.drafts.legacy='Eski cevap';s.activities.legacy={kept:true};localStorage.setItem(k,JSON.stringify(s));});
@@ -39,5 +39,19 @@ try{
   await page.setViewportSize({width,height});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Overflow '+width);
   if(width===820){await page.evaluate(()=>Promise.all(document.getAnimations().map(a=>a.finished)));await page.screenshot({path:process.env.TEMP+'/o11-practice-'+engine+'.png',fullPage:true});}
  }
+ // The user's screenshot must produce only the transcript and two specific fixes.
+ const thinking=[...pool.values()].find(q=>q.answer==='I am thinking about my holiday.');
+ await page.goto(base+'?feedback-test=1#unit-27');await page.locator('.chapter-head').waitFor();
+ await page.evaluate(({id})=>{const k='fatedreel-o11-book-v1',s=JSON.parse(localStorage.getItem(k));s.unit=27;s.tab='practice';s.sentencePractice[27]={version:2,refs:[id],pos:0,work:{[id]:{text:'I thinking my holiday',revealed:false,translated:false}}};localStorage.setItem(k,JSON.stringify(s));},{id:thinking.id});
+ await page.reload();await page.locator('#drill-input').waitFor();
+ await page.locator('.drill-check').click();assert.equal(await page.locator('.sentence-correction').count(),2);
+ assert.match(await page.locator('.sentence-correction').nth(0).innerText(),/“am” koymayı unutmuşsun/);
+ assert.match(await page.locator('.sentence-correction').nth(1).innerText(),/“about” koymayı unutmuşsun.*think about/);
+ assert.equal(await page.locator('.drill-feedback b,.drill-feedback small').count(),0);
+ assert.equal(await page.locator('.drill-feedback p').count(),3);
+ assert.ok(!/Birlikte karşılaştıralım|eşleşmiyor|Ünite 27/.test(await page.locator('.drill-feedback').innerText()));
+ await page.setViewportSize({width:820,height:1180});await page.locator('.drill-feedback').scrollIntoViewIfNeeded();
+ await page.evaluate(()=>Promise.all(document.getAnimations().map(a=>a.finished)));
+ await page.screenshot({path:process.env.TEMP+'/o11-feedback-'+engine+'.png'});
  assert.deepEqual(errors,[]);console.log(engine+': hidden answer/translation, recorded audio, correct/mismatched/empty solution, draft/solution reload, next round, notes, old-tab migration, 5 viewport sizes passed');
 }finally{await browser.close();}

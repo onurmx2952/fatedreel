@@ -1,3 +1,5 @@
+import {explainAnswer} from './feedback.js?v=9';
+export {explainAnswer};
 import {normalizeAnswer,answerMatches,shuffle} from './activities.js?v=1';
 export {answerMatches,normalizeAnswer};
 const html=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -12,7 +14,7 @@ export function buildSentences(book) {
    if(seen.has(normalized)||/^(yes|no|of course|because|sorry)\b/i.test(s.en)||normalized.split(' ').length<3)return;
    seen.add(normalized);
    const id=`${u.id}:${kind}:${i}`;
-   pool.set(id,{id,unit:u.id,answer:s.en,audio:s.audio,hint:s.tr,why:u.exercises.find(x=>normalizeAnswer(x.en)===normalized)?.why||sentenceRule(s.en,u)});
+   pool.set(id,{id,unit:u.id,answer:s.en,audio:s.audio,hint:s.tr,glossary:Object.fromEntries(u.words.map(([en,tr])=>[en.toLowerCase(),tr])),why:u.exercises.find(x=>normalizeAnswer(x.en)===normalized)?.why||sentenceRule(s.en,u)});
   });
  }
  return pool;
@@ -54,27 +56,6 @@ export function makeRound(pool,unit) {
  }
  return shuffle([...own.slice(0,review.length?7:10),...review]).map(q=>q.id);
 }
-export function explainAnswer(input,q) {
- if(!input.trim())return 'Cümleyi dinleyip örnek cevabı incele. Sonraki cümlede önce kendin yazmayı dene.';
- if(answerMatches(input,q))return 'Duyduğun cümleyi doğru yazdın. Büyük/küçük harf, noktalama ve kısaltmaların açık biçimleri sonucu değiştirmez.';
- const actual=normalizeAnswer(input),target=normalizeAnswer(q.answer);
- const ing=s=>(s.match(/\b\w+ing\b/g)||[]).filter(w=>!['thing','something','anything','everything','nothing','morning','evening','spring','king','ceiling','building'].includes(w));
- const actualIng=ing(actual),targetIng=ing(target);
- if(actualIng.length&&!targetIng.length){
-  if(/\b(was|were)\b/.test(target))return 'Bu cümlede geçmişte bir durum veya bulunulan yer anlatılıyor. Was/were burada “idi” anlamında; devam eden bir hareket yok, bu yüzden fiile -ing eklemiyoruz. “I was at home” evdeydim, “I was going home” eve gidiyordum demektir.';
-  if(tenseOf(target)==='past-simple')return 'Hedef cümlede geçmişte tamamlanan bir olay anlatılıyor. Olumlu cümlede fiilin geçmiş biçimi, did/didn’t varsa yalın biçimi kullanılır. Was/were + fiil-ing ise “yapıyordum” anlamı verir; aynı anlam değildir.';
-  if(/\b(will|can|could|should|must)\b/.test(target))return 'Bu cümlede will veya modal fiilden sonra hedefteki yalın fiil gelir. Buraya doğrudan -ing eklemiyoruz. Örneğin “can go” ve “will go”.';
-  return 'Yazdığın -ing biçimi dinlediğin cümlede yok. -ing her fiile eklenmez; zaman ve fiilin bağlı olduğu kalıp belirleyicidir. Doğru cümleyle aşağıdaki kuralı karşılaştır.';
- }
- if(targetIng.some(word=>!actual.split(' ').includes(word))){
-  if(['past-continuous','present-continuous'].includes(tenseOf(target)))return `Bu cümlede devam eden bir hareket anlatılıyor. ${tenseOf(target)==='past-continuous'?'Was/were':'Am/is/are'} ile fiilin -ing biçimi birlikte kullanılır. Burada “${targetIng.join(', ')}” biçimini korumalısın.`;
-  return `Bu cümlede “${targetIng.join(', ')}” kalıbın bir parçası. -ing yalnızca devam eden zamanlarda kullanılmaz; bazı fiillerden sonra veya isim görevinde de gelir. Aşağıdaki açıklamayla karşılaştır.`;
- }
- if(/\b(was|were)\s+(go|went|call|called|sleep|slept|work|worked)\b/.test(actual)&&!/\b(was|were)\b/.test(target))return 'Was/were her geçmiş zaman cümlesine eklenmez. Tamamlanan eylemi fiilin geçmiş biçimiyle kurarız: “I went home.” Devam eden eylem ise “I was going home.” olur.';
- if(/\b(did|does)\b/.test(actual)&&/\b(went|saw|called|works|likes|goes)\b/.test(actual))return 'Did veya does yardımcı fiili varsa asıl fiil yalın biçimde gelir: “did go”, “does work”. Zamanı ve kişiyi yardımcı fiil taşıdığı için asıl fiile bir kez daha ek gelmez.';
- return 'Yazdığın cümle dinlediğin cümleyle eşleşmiyor. Eksik veya farklı kelimeleri çözümle karşılaştır. Bu kontrol duyduğun cümleyi yazmaya yöneliktir; farklı bir çevirinin dilbilgisi açısından yanlış olduğunu tek başına söylemez.';
-}
-
 export function createSentencePractice({book,state,save,update,play,stop=()=>{}}) {
  const pool=buildSentences(book);
  if(!state.sentencePractice||typeof state.sentencePractice!=='object'||Array.isArray(state.sentencePractice))state.sentencePractice={};
@@ -85,7 +66,7 @@ export function createSentencePractice({book,state,save,update,play,stop=()=>{}}
  }
  function work(s,q){let w=s.work[q.id];if(!w||typeof w!=='object'||Array.isArray(w))w=s.work[q.id]={text:'',revealed:false,translated:false};if(typeof w.text!=='string')w.text='';return w;}
  function context(){if(state.tab!=='practice')return null;const s=session(),q=pool.get(s.refs[s.pos]);return {s,q,w:work(s,q)};}
- function content(){const s=session(),q=pool.get(s.refs[s.pos]),w=work(s,q);save();return `<div class="section-title"><span class="section-index">03</span><h2>Dinle. Yaz. Karşılaştır.</h2></div><p class="section-note">Duyduğun İngilizce cümleyi yaz. İstersen Türkçesini aç.</p><section class="drill sentence-practice" aria-label="Cümle alıştırması"><div class="progress-label"><span>CÜMLE ALIŞTIRMASI</span><span>${s.pos+1} / ${s.refs.length}</span></div><div class="track"><span style="width:${s.pos/s.refs.length*100}%"></span></div><div class="sentence-practice-tools"><button type="button" class="primary drill-listen" data-act-audio="${q.audio}">◖ Dinle</button><button type="button" class="outline" data-act-translation aria-expanded="${!!w.translated}" aria-controls="practice-translation">Türkçesi</button></div><p id="practice-translation" class="practice-translation" ${w.translated?'':'hidden'}>${html(q.hint)}</p><form id="drill-form"><label class="drill-label" for="drill-input">Senin cümlen</label><textarea id="drill-input" data-act-input autocomplete="off" autocapitalize="sentences" spellcheck="false" maxlength="1000" placeholder="Duyduğun cümleyi buraya yaz…" ${w.revealed?'readonly':''}>${html(w.text)}</textarea><div class="action-row"><button type="submit" class="outline drill-check" aria-expanded="${!!w.revealed}" aria-controls="practice-solution" ${w.revealed?'disabled':''}>Çözüm</button></div>${w.revealed?`<div id="practice-solution" class="drill-feedback" role="status"><b>${!w.text.trim()?'Doğru cümle':answerMatches(w.text,q)?'✓ Doğru yazdın':'Birlikte karşılaştıralım'}</b><p lang="en">${html(q.answer)}</p><p>${html(explainAnswer(w.text,q))}</p>${answerMatches(w.text,q)?'':`<p>${html(q.why)}</p>`}<small>Ünite ${q.unit} · ${html(book.units[q.unit-1].title)}</small></div>`:''}<div class="action-row practice-next"><button type="button" class="primary" data-act-next>Sonraki cümle →</button></div></form></section>`;}
+ function content(){const s=session(),q=pool.get(s.refs[s.pos]),w=work(s,q);save();return `<div class="section-title"><span class="section-index">03</span><h2>Dinle. Yaz. Karşılaştır.</h2></div><p class="section-note">Duyduğun İngilizce cümleyi yaz. İstersen Türkçesini aç.</p><section class="drill sentence-practice" aria-label="Cümle alıştırması"><div class="progress-label"><span>CÜMLE ALIŞTIRMASI</span><span>${s.pos+1} / ${s.refs.length}</span></div><div class="track"><span style="width:${s.pos/s.refs.length*100}%"></span></div><div class="sentence-practice-tools"><button type="button" class="primary drill-listen" data-act-audio="${q.audio}">◖ Dinle</button><button type="button" class="outline" data-act-translation aria-expanded="${!!w.translated}" aria-controls="practice-translation">Türkçesi</button></div><p id="practice-translation" class="practice-translation" ${w.translated?'':'hidden'}>${html(q.hint)}</p><form id="drill-form"><label class="drill-label" for="drill-input">Senin cümlen</label><textarea id="drill-input" data-act-input autocomplete="off" autocapitalize="sentences" spellcheck="false" maxlength="1000" placeholder="Duyduğun cümleyi buraya yaz…" ${w.revealed?'readonly':''}>${html(w.text)}</textarea><div class="action-row"><button type="submit" class="outline drill-check" aria-expanded="${!!w.revealed}" aria-controls="practice-solution" ${w.revealed?'disabled':''}>Çözüm</button></div>${w.revealed?`<div id="practice-solution" class="drill-feedback" role="status"><p lang="en">${html(q.answer)}</p>${explainAnswer(w.text,q).split('\n').filter(Boolean).map(line=>`<p class="sentence-correction">${html(line)}</p>`).join('')}</div>`:''}<div class="action-row practice-next"><button type="button" class="primary" data-act-next>Sonraki cümle →</button></div></form></section>`;}
  function click(event){const b=event.target.closest('button');if(!b)return;const ctx=context();if(!ctx)return;const {s,q,w}=ctx;
   if(b.dataset.actAudio){play(q.audio,b);return;}
   if(b.hasAttribute('data-act-translation')){w.translated=!w.translated;save();update('translation');return;}

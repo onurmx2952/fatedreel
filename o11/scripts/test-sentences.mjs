@@ -18,8 +18,8 @@ for(const q of pool.values()){
 }
 assert.match(explainAnswer('I was going home',{answer:'I went home.'}),/tamamlanan/);
 assert.match(explainAnswer('I was go home',{answer:'I was going home.'}),/-ing/);
-assert.match(explainAnswer('I was going home',{answer:'I was at home.'}),/durum/);
-assert.match(explainAnswer('I was went home',{answer:'I went home.'}),/her geçmiş/);
+assert.match(explainAnswer('I was going home',{answer:'I was at home.'}),/bulunulan yer/);
+assert.match(explainAnswer('I was went home',{answer:'I went home.'}),/fazla/);
 assert.match(explainAnswer('Does she works here',{answer:'Does she work here?'}),/yalın/);
 assert.ok(answerMatches("SHE ISN’T sleeping!",{answer:'She is not sleeping.'}));
 const state={unit:17,tab:'practice',notes:{17:'Korunsun'},activities:{old:true},reviews:{}};
@@ -28,7 +28,7 @@ const page=render();let s=state.sentencePractice[17],q=pool.get(s.refs[s.pos]);
 assert.ok(page.includes('Dinle'));assert.ok(!page.includes(q.answer));
 const event=attr=>({target:{closest:()=>({dataset:{},hasAttribute:k=>k===attr})}});
 runner.submit({target:{id:'drill-form'},preventDefault(){}});
-assert.ok(render().includes(q.answer));
+assert.ok(render().includes(q.answer.replace(/'/g,"&#39;").replace(/"/g,"&quot;")));
 runner.click(event('data-act-next'));assert.equal(s.pos,1);
 for(let i=1;i<10;i++)runner.click(event('data-act-next'));
 assert.equal(state.sentencePractice[17].pos,0);assert.ok(state.reviews[17].due>Date.now());

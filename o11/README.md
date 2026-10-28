@@ -2,7 +2,7 @@
 
 Türkçe konuşan öğrenciler için özgün elektronik İngilizce kitabı. Kullanıcının paylaştığı 32 üniteli plan ve son öğretim düzeltmeleri temel alınır. Past Simple ve Did, Was/Were'den önce gelir. Dizi transkriptlerinden alıntı içermez; tüm Extra English bölümlerinin doğrulandığı iddia edilmez.
 
-## İçerik ve kullanım — tek cümle akışı (v8)
+## İçerik ve kullanım — tek cümle akışı (v9)
 
 32 ünitenin konu anlatımı ve 192 kelime/kalıp listesi korunur. Sekmeler: Anlatım, Kelimeler, Alıştırma, Notlarım. Ayrı kelime sınavı, diyalog tamamlama, boşluk doldurma ve karma sınav ekranları kaldırıldı.
 
@@ -11,7 +11,7 @@ Alıştırmada yalnızca Dinle, Türkçesi, yazma alanı, Çözüm, Sonraki cüm
 - 344 farklı kaynak kaydı: mevcut sesli örnekler ve bağlam gerektirmeyen tam diyalog cümleleri. Aynı turda aynı cümle tekrarlanmaz.
 - Her turda 7 mevcut ünite + 3 önceki ünite cümlesi, karışık sırada. Önceki cümlelerde farklı zamanlara ve farklı ünitelere öncelik verilir. İlk ünitede önceki konu olmadığından 10 mevcut cümle gelir. Gelecek ünitelerden soru gelmez.
 - Caro Davy ses dosyaları korunur. Yeni ses üretimi veya tarayıcı sistem sesine geçiş yoktur.
-- Büyük/küçük harf, noktalama ve kısaltmaların açık biçimleri kabul edilir. Yaygın -ing, was/were ve did/does hataları için kurallı Türkçe geri bildirim; diğer farklarda hedef cümleyle karşılaştırma. Serbest çevirilerin tüm doğru alternatiflerini değerlendiren uzaktaki bir yapay zekâ yoktur.
+- Büyük/küçük harf, noktalama ve kısaltmaların açık biçimleri kabul edilir. Çözümde yalnızca doğru cümle ve cevaba özel kısa düzeltmeler görünür; başlık, genel uyarı, ünite etiketi ve konu özeti eklenmez. Kelime hizalaması eksik/fazla/değişmiş sözcükleri ve yer değiştiren sözcükleri belirler. Edat kalıpları, yardımcı fiiller, fiil biçimleri, zamirler, tanımlıklar ve bağlaçlar için bağlama uygun Türkçe gerekçeler eklenir. Doğru veya boş cevapta yalnızca doğru cümle gösterilir. Serbest çevirilerin tüm doğru alternatiflerini değerlendiren uzaktaki bir yapay zekâ yoktur.
 - 52 çeviri kaydı günlük Türkçeye göre düzenlendi; DeepL API kullanılmıyor. Türkçeler kitapta saklanır, çevrimdışı erişilebilir.
 - Yazılan cevap, açılmış Türkçe ve çözüm, mevcut cümle yerel kayda ve mevcut hesap eşitlemesine dahildir. Eski notlar, işaretler, taslaklar ve activities/quiz/exam verileri korunur. Eski examples/dialogue/review sekmeleri alıştırmaya yönlendirilir.
 - Tamamlanan tur mevcut tekrar takvimini günceller; atlanan veya çözümü boş açılan cümleler doğru sayılmaz. On cümle tamamen doğruysa tekrar aralığı uzar; diğer durumlarda ertesi gün tekrar önerilir.
@@ -35,9 +35,11 @@ localStorage anahtarı: `fatedreel-o11-book-v1`. Yedekler aynı sürüm şeması
 
 ## Doğrulama
 
+- `node o11/scripts/test-feedback.mjs`: 32 konuyu kapsayan 36 hata örneği, tüm 344 kayıtta 1.629 kelime eksiltme ve fazla kelime denemeleri, doğru/boş cevapta açıklama olmaması. Fotoğraftaki iki eksik ve yalnızca about eksikliği ayrı ayrı sınanır.
+
 - `node o11/scripts/test-sentences.mjs`: 32 ünite × 50 tur, 7/3 dağılımı, gelecek konu sınırı, tekrarsız sorular, ses dosyaları, yaygın hata açıklamaları, boş çözüm, atlama, yeni tur ve eski verinin korunması.
 - `node o11/scripts/check-browser.mjs <o11-adresi> edge|webkit`: gerçek tarayıcıda gizli cevap/Türkçe, ses isteği, doğru/farklı/boş cevap, yenileme sonrası kayıt, sonraki cümle/tur, notlar, eski sekme geçişi ve 320–1440 px arası beş ekran boyutu. Playwright yolu `PLAYWRIGHT_MODULE` ile belirtilebilir.
-- `node o11/scripts/test-startup.mjs`: modül hatasından kurtarma, çevrimdışı kabuk, dosya önbelleği, MIME, worker değişimi ve kısmi ses yanıtları. Kurtarma ilerlemeye dokunmaz. Worker sadece /o11/ kapsamındadır; v8 bağımlılıklarını önbellekler.
+- `node o11/scripts/test-startup.mjs`: modül hatasından kurtarma, çevrimdışı kabuk, dosya önbelleği, MIME, worker değişimi ve kısmi ses yanıtları. Kurtarma ilerlemeye dokunmaz. Worker sadece /o11/ kapsamındadır; v9 bağımlılıklarını önbellekler.
 - Eski görev bankası dosyaları mevcut istemciler ve eski kayıtlar için korunur, yeni akışta yüklenmez. `test-activities.mjs` eski bankanın tutarlılığını denetlemeye devam eder.
 
 Edge ve Windows WebKit testleri gerçek iPad donanım testi yerine geçmez. WebKit MP3 codec desteği ortama bağlı olduğundan bu testte dosyanın HTTP yanıtı kontrol edilir.
