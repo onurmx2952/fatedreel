@@ -98,6 +98,7 @@ function replacementReason(edit,t,q){
  if(aux.has(b))return wordReason(b,at,t,q);
  if(sameVerb(a,b)&&!be.has(b)&&(verbs.has(root(b))||verbs.has(root(b)+'e'))){
   if(b.endsWith('ing')&&!['thing','something','anything','nothing','morning','evening'].includes(b)){
+   if(b==='going'&&t[at+1]==='to'&&(q.unit===20||['visit','study','travel','call','buy','rain','move','save'].includes(t[at+2])))return 'Gelecek planı “am/is/are going to + yalın fiil” kalıbıyla kurulur; burada “going” gerekir.';
    if(/\b(?:am|is|are|was|were)\b/.test(t.slice(0,at).join(' ')))return `Devam eden hareket için yardımcı fiilden sonra -ing gerekir: ${quoted(b)}.`;
    return `Bu fiil kalıbında -ing biçimi kullanılır: ${quoted(b)}.`;
   }

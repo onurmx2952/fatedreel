@@ -29,6 +29,7 @@ const cases=[
  ['I was sleep','I was sleeping.',/-ing/],
  ['I will called you','I will call you.',/yalın/],
  ['I am going visit Emma','I am going to visit Emma.',/going to/],
+ ['I am go to visit Emma','I am going to visit Emma.',/Gelecek planı/],
  ['I will call you I get home','I will call you when I get home.',/olayın gerçekleştiği zamanı/],
  ['I can to help you','I can help you.',/“to” burada fazla/],
  ['I would a coffee','I would like a coffee.',/“like” koymayı unutmuşsun/],

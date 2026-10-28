@@ -35,7 +35,7 @@ localStorage anahtarı: `fatedreel-o11-book-v1`. Yedekler aynı sürüm şeması
 
 ## Doğrulama
 
-- `node o11/scripts/test-feedback.mjs`: 32 konuyu kapsayan 36 hata örneği, tüm 344 kayıtta 1.629 kelime eksiltme ve fazla kelime denemeleri, doğru/boş cevapta açıklama olmaması. Fotoğraftaki iki eksik ve yalnızca about eksikliği ayrı ayrı sınanır.
+- `node o11/scripts/test-feedback.mjs`: 32 konuyu kapsayan 37 hata örneği, tüm 344 kayıtta 1.629 kelime eksiltme ve fazla kelime denemeleri, doğru/boş cevapta açıklama olmaması. Fotoğraftaki iki eksik ve yalnızca about eksikliği ayrı ayrı sınanır.
 
 - `node o11/scripts/test-sentences.mjs`: 32 ünite × 50 tur, 7/3 dağılımı, gelecek konu sınırı, tekrarsız sorular, ses dosyaları, yaygın hata açıklamaları, boş çözüm, atlama, yeni tur ve eski verinin korunması.
 - `node o11/scripts/check-browser.mjs <o11-adresi> edge|webkit`: gerçek tarayıcıda gizli cevap/Türkçe, ses isteği, doğru/farklı/boş cevap, yenileme sonrası kayıt, sonraki cümle/tur, notlar, eski sekme geçişi ve 320–1440 px arası beş ekran boyutu. Playwright yolu `PLAYWRIGHT_MODULE` ile belirtilebilir.
