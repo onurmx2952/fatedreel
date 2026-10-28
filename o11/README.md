@@ -60,3 +60,10 @@ Her tur ilk denemede doğru sayısını gösterir. Cevap kontrol edilmeden çöz
 Kayıt, mevcut `fatedreel-o11-book-v1` anahtarına eklenen isteğe bağlı `activities` alanındadır; mevcut Google eşitlemesi ve yedek içine dahildir. Eski not, işaret ve yer imleri korunur. Karma tekrar tamamlanınca mevcut tekrar takvimi güncellenir; ünite otomatik olarak öğrenildi işaretlenmez.
 
 Kontroller: `node o11/scripts/test-activities.mjs` içerik, cevap normalleştirme, 32 ünite sınırı ve kayıt okuma; `node o11/scripts/check-browser.mjs <o11-adresi> edge|webkit` gerçek tarayıcı akışı. Playwright paketi sistemde çözümlenemiyorsa `PLAYWRIGHT_MODULE` tam paket yolunu alır. Edge’de ses isteği; Windows WebKit’in MP3 oynatma desteğine bağımlı olmamak için WebKit testinde ses dosyasının HTTP yanıtı denetlenir. Gerçek iPad donanım testi yapılmadı.
+
+
+## Açılış kurtarma (v7)
+
+`boot.js` uygulama modülünden bağımsız olarak service worker güncellemesini başlatır. Modül/JSON hatası veya açılış zaman aşımı görünür bir “Tekrar aç” düğmesi sunar. Bu düğme yalnızca `/o11/` worker kaydını ve `o11-book-*` dosya önbelleklerini yeniler; localStorage ilerlemesine dokunmaz ve ünite bağlantısını korur. JSON istekleri 12 saniyede sonlanır. Worker ağ isteğini 8 saniyeyle sınırlar ve mevcut dosyaya döner; HTML kabuğunu sadece gezinme istekleri için kullanır. Eksik JavaScript/JSON yerine HTML göndermez, hatalı MIME yanıtlarını saklamaz, 206 ses parçalarını tam dosya olarak önbelleğe almaz. Görsel indirme hatası worker değişimini engellemez.
+
+`node o11/scripts/test-startup.mjs`: modül yükleme hatası/kurtarma, çevrimdışı kabuk, dosya önbelleği, eksik JS/JSON, yanlış MIME, worker değişimi, başka uygulamanın önbelleğinin korunması ve kısmi ses yanıtları. Bu testler VM ortamındadır; gerçek tarayıcı/iPad testi yerine geçmez.

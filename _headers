@@ -71,3 +71,9 @@
 
 /o12/atlas/entries/*.json
   Cache-Control: public, max-age=0, must-revalidate
+
+/o11/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/o11/sw.js
+  Cache-Control: no-cache
