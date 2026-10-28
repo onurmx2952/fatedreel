@@ -1,5 +1,5 @@
-const CACHE='o11-book-v7';
-const CORE=['./','index.html','boot.js?v=7','style.css?v=1','atelier.css?v=2','app.js?v=7','book.json?v=2','activities.js?v=1','activities.json?v=2','icon.svg','manifest.webmanifest','art/atelier-hero.webp',...Array.from({length:6},(_,i)=>`art/chapter-${i+1}.webp`)];
+const CACHE='o11-book-v8';
+const CORE=['./','index.html','boot.js?v=8','style.css?v=1','atelier.css?v=8','app.js?v=8','book.json?v=8','activities.js?v=1','sentences.js?v=8','icon.svg','manifest.webmanifest','art/atelier-hero.webp',...Array.from({length:6},(_,i)=>`art/chapter-${i+1}.webp`)];
 function valid(response,url){
  if(!response?.ok)return false;
  const type=response.headers.get('content-type')||'';

@@ -76,7 +76,7 @@
       "examples": [
         {
           "en": "I am a student.",
-          "tr": "Ben bir öğrenciyim.",
+          "tr": "Öğrenciyim.",
           "audio": "0c00f6707d412bc9"
         },
         {
@@ -101,7 +101,7 @@
         },
         {
           "en": "We are happy.",
-          "tr": "Biz mutluyuz.",
+          "tr": "Mutluyuz.",
           "audio": "080244a28a9b7763"
         },
         {
@@ -111,7 +111,7 @@
         },
         {
           "en": "You are a teacher.",
-          "tr": "Siz bir öğretmensiniz.",
+          "tr": "Siz öğretmensiniz.",
           "audio": "5f5f6e2aed3812e6"
         }
       ],
@@ -141,7 +141,7 @@
       "exercises": [
         {
           "en": "I am a student.",
-          "tr": "Ben bir öğrenciyim.",
+          "tr": "Öğrenciyim.",
           "audio": "0c00f6707d412bc9",
           "why": "Ben öznesi I olur. I ile be fiili am biçimini alır."
         },
@@ -445,17 +445,17 @@
         },
         {
           "en": "You read books.",
-          "tr": "Sen kitap okursun.",
+          "tr": "Kitap okursun.",
           "audio": "9fcdb87fc2a9d82d"
         },
         {
           "en": "We drink water.",
-          "tr": "Biz su içeriz.",
+          "tr": "Su içeriz.",
           "audio": "b6fa9cd8d19f7249"
         },
         {
           "en": "They like music.",
-          "tr": "Onlar müziği sever.",
+          "tr": "Müziği severler.",
           "audio": "c19dfb3c02a1dc92"
         },
         {
@@ -465,7 +465,7 @@
         },
         {
           "en": "We are students.",
-          "tr": "Biz öğrenciyiz.",
+          "tr": "Öğrenciyiz.",
           "audio": "817f1f1b1d0bf57f"
         },
         {
@@ -475,7 +475,7 @@
         },
         {
           "en": "They are happy.",
-          "tr": "Onlar mutlu.",
+          "tr": "Mutlular.",
           "audio": "3a7d38275737ad36"
         }
       ],
@@ -487,7 +487,7 @@
         },
         {
           "en": "We like music.",
-          "tr": "Biz de müziği severiz.",
+          "tr": "Müziği severiz.",
           "audio": "ce4e88686cb6121e"
         },
         {
@@ -511,7 +511,7 @@
         },
         {
           "en": "We drink water.",
-          "tr": "Biz su içeriz.",
+          "tr": "Su içeriz.",
           "audio": "b6fa9cd8d19f7249",
           "why": "Özne we, fiil drink, nesne water: Türkçedeki fiili sona koyma sırasını taşıma."
         },
@@ -651,7 +651,7 @@
         },
         {
           "en": "We drink water.",
-          "tr": "Biz su içeriz.",
+          "tr": "Su içeriz.",
           "audio": "b6fa9cd8d19f7249"
         },
         {
@@ -1401,7 +1401,7 @@
         },
         {
           "en": "She is always busy.",
-          "tr": "O her zaman meşguldür.",
+          "tr": "Her zaman meşgul.",
           "audio": "4e62aa5850258633"
         }
       ],
@@ -1735,12 +1735,12 @@
         },
         {
           "en": "She is reading a book.",
-          "tr": "O bir kitap okuyor.",
+          "tr": "Kitap okuyor.",
           "audio": "c91b8cd6e157ed7a"
         },
         {
           "en": "They are waiting for us.",
-          "tr": "Onlar bizi bekliyor.",
+          "tr": "Bizi bekliyorlar.",
           "audio": "efe4936036ff2512"
         },
         {
@@ -1755,7 +1755,7 @@
         },
         {
           "en": "He is working right now.",
-          "tr": "O şu anda çalışıyor.",
+          "tr": "Şu anda çalışıyor.",
           "audio": "fce33a94876e4450"
         },
         {
@@ -1801,7 +1801,7 @@
         },
         {
           "en": "They are waiting for us.",
-          "tr": "Onlar bizi bekliyor.",
+          "tr": "Bizi bekliyorlar.",
           "audio": "efe4936036ff2512",
           "why": "They ile are gelir. Wait for birini beklemek kalıbıdır."
         },
@@ -2486,7 +2486,7 @@
         },
         {
           "en": "I get home at six.",
-          "tr": "Saat altıda eve varırım.",
+          "tr": "Saat altıda eve gelirim.",
           "audio": "2dce79e7a2a3f987"
         },
         {
@@ -2523,7 +2523,7 @@
         },
         {
           "en": "I get home at six.",
-          "tr": "Saat altıda eve varırım.",
+          "tr": "Saat altıda eve gelirim.",
           "audio": "2dce79e7a2a3f987"
         }
       ],
@@ -2543,7 +2543,7 @@
         },
         {
           "en": "I get home at six.",
-          "tr": "Saat altıda eve varırım.",
+          "tr": "Saat altıda eve gelirim.",
           "audio": "2dce79e7a2a3f987",
           "why": "Get home bir varış kalıbıdır. Home önüne to gelmez."
         },
@@ -2683,7 +2683,7 @@
         },
         {
           "en": "We got home late.",
-          "tr": "Eve geç vardık.",
+          "tr": "Eve geç geldik.",
           "audio": "d3b2c92a9cc184ae"
         }
       ],
@@ -3021,7 +3021,7 @@
         },
         {
           "en": "She was angry.",
-          "tr": "O kızgındı.",
+          "tr": "Kızgındı.",
           "audio": "3dcbd1e0e0a9c157"
         },
         {
@@ -3046,7 +3046,7 @@
         },
         {
           "en": "Why were you upset?",
-          "tr": "Neden üzgündün?",
+          "tr": "Canın neden sıkkındı?",
           "audio": "07571171b02cf472"
         },
         {
@@ -3061,7 +3061,7 @@
         },
         {
           "en": "The power was out last night.",
-          "tr": "Dün gece elektrikler kesikti.",
+          "tr": "Dün gece elektrikler kesilmişti.",
           "audio": "5d8099a0c371a130"
         },
         {
@@ -3119,7 +3119,7 @@
         },
         {
           "en": "Why were you upset?",
-          "tr": "Neden üzgündün?",
+          "tr": "Canın neden sıkkındı?",
           "audio": "07571171b02cf472",
           "why": "Soru kelimesi why başta, sonra were + you gelir. Upset bir durumdur."
         },
@@ -3469,7 +3469,7 @@
         },
         {
           "en": "Of course, I will.",
-          "tr": "Elbette, edeceğim.",
+          "tr": "Tabii, ederim.",
           "audio": "3843c60d7c87d068"
         }
       ],
@@ -3992,7 +3992,7 @@
         },
         {
           "en": "You mustn't park here.",
-          "tr": "Buraya park etmemelisin.",
+          "tr": "Buraya park etmek yasak.",
           "audio": "06b5324275955d26"
         },
         {
@@ -4009,7 +4009,7 @@
         },
         {
           "en": "Of course, I can.",
-          "tr": "Elbette, edebilirim.",
+          "tr": "Tabii, edebilirim.",
           "audio": "510906680313caa6"
         },
         {
@@ -4045,7 +4045,7 @@
         },
         {
           "en": "You mustn't park here.",
-          "tr": "Buraya park etmemelisin.",
+          "tr": "Buraya park etmek yasak.",
           "audio": "06b5324275955d26",
           "why": "Mustn't burada yasağı bildirir. Don't have to ile aynı anlam değildir."
         }
@@ -4158,7 +4158,7 @@
         },
         {
           "en": "I would like a coffee, please.",
-          "tr": "Bir kahve rica ediyorum.",
+          "tr": "Bir kahve alabilir miyim, lütfen?",
           "audio": "e7fcc7e648aba167"
         },
         {
@@ -4219,7 +4219,7 @@
         },
         {
           "en": "I would like a coffee, please.",
-          "tr": "Bir kahve rica ediyorum.",
+          "tr": "Bir kahve alabilir miyim, lütfen?",
           "audio": "e7fcc7e648aba167",
           "why": "Kibar sipariş için would like + isim kullanılır."
         },
@@ -5292,7 +5292,7 @@
         },
         {
           "en": "Do you know where she lives?",
-          "tr": "Onun nerede yaşadığını biliyor musun?",
+          "tr": "Nerede yaşadığını biliyor musun?",
           "audio": "a26fc74d36cf44cd"
         },
         {
@@ -5307,7 +5307,7 @@
         },
         {
           "en": "I thought you were joking.",
-          "tr": "Şaka yaptığını sanmıştım.",
+          "tr": "Şaka yapıyorsun sanmıştım.",
           "audio": "d5366204e2cde63d"
         }
       ],
@@ -5324,7 +5324,7 @@
         },
         {
           "en": "Do you know where she is?",
-          "tr": "Onun nerede olduğunu biliyor musun?",
+          "tr": "Nerede olduğunu biliyor musun?",
           "audio": "b12299b3eaea2fd1"
         },
         {
@@ -5349,7 +5349,7 @@
         },
         {
           "en": "Do you know where she lives?",
-          "tr": "Onun nerede yaşadığını biliyor musun?",
+          "tr": "Nerede yaşadığını biliyor musun?",
           "audio": "a26fc74d36cf44cd",
           "why": "Dolaylı soruda she lives düz cümle sırası korunur; does she live kullanılmaz."
         },
@@ -5458,7 +5458,7 @@
       "examples": [
         {
           "en": "I have never heard of it.",
-          "tr": "Bunu hiç duymadım.",
+          "tr": "Adını hiç duymadım.",
           "audio": "75facf13f4ee4bc7"
         },
         {
@@ -5468,12 +5468,12 @@
         },
         {
           "en": "She has just arrived.",
-          "tr": "O az önce geldi.",
+          "tr": "Daha yeni geldi.",
           "audio": "aec4734f1a204808"
         },
         {
           "en": "We have already eaten.",
-          "tr": "Biz çoktan yemek yedik.",
+          "tr": "Biz yemeğimizi yedik zaten.",
           "audio": "13443c34b8dd2427"
         },
         {
@@ -5523,13 +5523,13 @@
       "exercises": [
         {
           "en": "I have never heard of it.",
-          "tr": "Bunu hiç duymadım.",
+          "tr": "Adını hiç duymadım.",
           "audio": "75facf13f4ee4bc7",
           "why": "Have + heard (V3). Never olumsuz anlam kattığı için ayrıca not kullanılmaz. Hear of kalıbını koru."
         },
         {
           "en": "She has just arrived.",
-          "tr": "O az önce geldi.",
+          "tr": "Daha yeni geldi.",
           "audio": "aec4734f1a204808",
           "why": "She ile has; just yardımcı fiilden sonra; arrive düzenli fiildir, V3 arrived."
         },
@@ -5644,7 +5644,7 @@
       "examples": [
         {
           "en": "Come on, we are late.",
-          "tr": "Hadi, geç kaldık.",
+          "tr": "Hadi, geç kalıyoruz.",
           "audio": "a53e0718558ef558"
         },
         {
@@ -5654,7 +5654,7 @@
         },
         {
           "en": "What is wrong?",
-          "tr": "Sorun ne?",
+          "tr": "Ne oldu?",
           "audio": "d23f3cbd2d831985"
         },
         {
@@ -5689,14 +5689,14 @@
         },
         {
           "en": "I was just kidding.",
-          "tr": "Sadece şaka yapıyordum.",
+          "tr": "Şaka yapıyordum sadece.",
           "audio": "c3da7604a550b23e"
         }
       ],
       "dialogue": [
         {
           "en": "What is wrong?",
-          "tr": "Sorun ne?",
+          "tr": "Ne oldu?",
           "audio": "d23f3cbd2d831985"
         },
         {
@@ -5706,12 +5706,12 @@
         },
         {
           "en": "Never mind, you can use mine.",
-          "tr": "Önemli değil, benimkini kullanabilirsin.",
+          "tr": "Boş ver, benimkini kullanabilirsin.",
           "audio": "ac025afc3720a2ff"
         },
         {
           "en": "Thank you. That is kind of you.",
-          "tr": "Teşekkürler. Çok naziksin.",
+          "tr": "Sağ ol, çok naziksin.",
           "audio": "04b58e02f506b6fe"
         }
       ],
@@ -5719,13 +5719,13 @@
       "exercises": [
         {
           "en": "Come on, we are late.",
-          "tr": "Hadi, geç kaldık.",
+          "tr": "Hadi, geç kalıyoruz.",
           "audio": "a53e0718558ef558",
           "why": "Come on burada acele ettiren bir tepkidir; kelime kelime çevrilmez."
         },
         {
           "en": "What is wrong?",
-          "tr": "Sorun ne?",
+          "tr": "Ne oldu?",
           "audio": "d23f3cbd2d831985",
           "why": "What is wrong? sorun ne sorusunun doğal kalıbıdır."
         },
@@ -5842,12 +5842,12 @@
       "examples": [
         {
           "en": "I thought you were at home.",
-          "tr": "Evde olduğunu sanmıştım.",
+          "tr": "Evdesin sanmıştım.",
           "audio": "ceb9c27956734343"
         },
         {
           "en": "I have just got back.",
-          "tr": "Az önce döndüm.",
+          "tr": "Daha yeni döndüm.",
           "audio": "a2bd760e03a09caf"
         },
         {
@@ -5877,7 +5877,7 @@
         },
         {
           "en": "I have never heard of it.",
-          "tr": "Bunu hiç duymadım.",
+          "tr": "Adını hiç duymadım.",
           "audio": "75facf13f4ee4bc7"
         }
       ],
@@ -5907,7 +5907,7 @@
       "exercises": [
         {
           "en": "I thought you were at home.",
-          "tr": "Evde olduğunu sanmıştım.",
+          "tr": "Evdesin sanmıştım.",
           "audio": "ceb9c27956734343",
           "why": "Ana cümle I thought geçmiştedir. İç cümlede you were at home geçmiş bir durumu anlatır."
         },

@@ -2,16 +2,19 @@
 
 Türkçe konuşan öğrenciler için özgün elektronik İngilizce kitabı. Kullanıcının paylaştığı 32 üniteli plan ve son öğretim düzeltmeleri temel alınır. Past Simple ve Did, Was/Were'den önce gelir. Dizi transkriptlerinden alıntı içermez; tüm Extra English bölümlerinin doğrulandığı iddia edilmez.
 
-## İçerik ve kullanım
+## İçerik ve kullanım — tek cümle akışı (v8)
 
-- 6 bölüm, 32 ünite; her ünitede 3 anlatım bölümü, yapı tablosu, 6 kelime/kalıp, örnekler, dört replikli diyalog, açıklamalı çeviri alıştırmaları, karma tekrar/sınav ve notlar.
-- 392 örnek/diyalog cümlesi, 132 açıklamalı çeviri alıştırması, 64 dilbilgisi sorusu. Sınavda yalnızca mevcut ve önceki ünitelerden soru gelir; ilk ünitelerde mevcut havuz kadar soru, sonrasında 10 soru.
-- Puanlanan sınavda doğru/yanlış ve kurallar gösterilir. Ayrı hatırlama turu çeviri/dikte ve açıkça belirtilen öz değerlendirme kullanır. Resmi seviye belgesi verilmez.
-- Öğrendim / tekrar / önemli renkleri, yer imleri, notlar, taslak cevaplar, sınav ve hatırlama durumu yerel saklanır. Öğrenme durumu öğrencinin kendi işaretidir.
-- Tekrar takvimi iyi hatırlamada 1/2/4/8/14 gün, zorlanmada ertesi gün. Yanlış öz değerlendirme otomatik tekrar işareti koyar.
-- İngilizce gizleme, cümleye dokunarak dinleme ve ayrı göster/gizle. Türkçe çeviri başlangıçta kapalıdır. Anlatım içindeki tanınan İngilizce örnekler de gizlenir; yanlış cümle örnekleri seslendirilmeden açılabilir.
-- Okuma boyutu, gece sayfası, odak görünümü, dinleme hızı. iPad Air 5 hedef boyutları: 820×1180 ve 1180×820 CSS px. Safari ana ekrana ekleme desteklenir.
-- JSON yedek indir/yükle; yüklemeden önce mevcut verinin değiştirileceği belirtilir. Kayıt hatası görünürdür ve girilmiş taslak bellekte korunur.
+32 ünitenin konu anlatımı ve 192 kelime/kalıp listesi korunur. Sekmeler: Anlatım, Kelimeler, Alıştırma, Notlarım. Ayrı kelime sınavı, diyalog tamamlama, boşluk doldurma ve karma sınav ekranları kaldırıldı.
+
+Alıştırmada yalnızca Dinle, Türkçesi, yazma alanı, Çözüm, Sonraki cümle bulunur. İngilizce cevap çözüme kadar gösterilmez. Türkçe ayrı düğmeyle açılır. Çözüm boş cevapla da açılabilir, cümle atlanabilir. Onuncu cümleden sonra aynı ekranla yeni tur başlar; zorunlu sonuç ekranı yoktur.
+
+- 344 farklı kaynak kaydı: mevcut sesli örnekler ve bağlam gerektirmeyen tam diyalog cümleleri. Aynı turda aynı cümle tekrarlanmaz.
+- Her turda 7 mevcut ünite + 3 önceki ünite cümlesi, karışık sırada. Önceki cümlelerde farklı zamanlara ve farklı ünitelere öncelik verilir. İlk ünitede önceki konu olmadığından 10 mevcut cümle gelir. Gelecek ünitelerden soru gelmez.
+- Caro Davy ses dosyaları korunur. Yeni ses üretimi veya tarayıcı sistem sesine geçiş yoktur.
+- Büyük/küçük harf, noktalama ve kısaltmaların açık biçimleri kabul edilir. Yaygın -ing, was/were ve did/does hataları için kurallı Türkçe geri bildirim; diğer farklarda hedef cümleyle karşılaştırma. Serbest çevirilerin tüm doğru alternatiflerini değerlendiren uzaktaki bir yapay zekâ yoktur.
+- 52 çeviri kaydı günlük Türkçeye göre düzenlendi; DeepL API kullanılmıyor. Türkçeler kitapta saklanır, çevrimdışı erişilebilir.
+- Yazılan cevap, açılmış Türkçe ve çözüm, mevcut cümle yerel kayda ve mevcut hesap eşitlemesine dahildir. Eski notlar, işaretler, taslaklar ve activities/quiz/exam verileri korunur. Eski examples/dialogue/review sekmeleri alıştırmaya yönlendirilir.
+- Tamamlanan tur mevcut tekrar takvimini günceller; atlanan veya çözümü boş açılan cümleler doğru sayılmaz. On cümle tamamen doğruysa tekrar aralığı uzar; diğer durumlarda ertesi gün tekrar önerilir.
 
 ## Sesler
 
@@ -32,38 +35,9 @@ localStorage anahtarı: `fatedreel-o11-book-v1`. Yedekler aynı sürüm şeması
 
 ## Doğrulama
 
-32 ünitenin sırası, içerik alanları, soru seçenekleri/cevapları, cümle-ses SHA eşleşmeleri ve MP3 çözümlemesi kontrol edildi. Gerçek tarayıcıda iPad dikey/yatay görünüm, cümle gizleme/açma/dinleme, çeviri, işaretler, notlar, yenileme sonrası kayıt ve sınav sonucu kontrol edildi. Kayıt/yedek şeması ve kota hatası testleri üç kez; rastgele sınav bitirme akışı üç tur çalıştırıldı. Gerçek iPad Safari donanım testi yapılmadı.
+- `node o11/scripts/test-sentences.mjs`: 32 ünite × 50 tur, 7/3 dağılımı, gelecek konu sınırı, tekrarsız sorular, ses dosyaları, yaygın hata açıklamaları, boş çözüm, atlama, yeni tur ve eski verinin korunması.
+- `node o11/scripts/check-browser.mjs <o11-adresi> edge|webkit`: gerçek tarayıcıda gizli cevap/Türkçe, ses isteği, doğru/farklı/boş cevap, yenileme sonrası kayıt, sonraki cümle/tur, notlar, eski sekme geçişi ve 320–1440 px arası beş ekran boyutu. Playwright yolu `PLAYWRIGHT_MODULE` ile belirtilebilir.
+- `node o11/scripts/test-startup.mjs`: modül hatasından kurtarma, çevrimdışı kabuk, dosya önbelleği, MIME, worker değişimi ve kısmi ses yanıtları. Kurtarma ilerlemeye dokunmaz. Worker sadece /o11/ kapsamındadır; v8 bağımlılıklarını önbellekler.
+- Eski görev bankası dosyaları mevcut istemciler ve eski kayıtlar için korunur, yeni akışta yüklenmez. `test-activities.mjs` eski bankanın tutarlılığını denetlemeye devam eder.
 
-## Günlük olumsuzlar
-
-Örnekler ve diyaloglar do not/does not/did not yerine don't/doesn't/didn't; is not/are not/was not/were not yerine isn't/aren't/wasn't/weren't; will not için won't kullanır. I am not → I'm not; negatif sorular Why didn't you...? sırasındadır. Not to worry gibi kısaltılamayan yapılar korunur. Açıklamalardaki tam biçim → kısaltma eşleştirmeleri öğretim için kalır. Değişen metinlerin Caro Davy sesleri yeniden üretilmiştir. Eski kitap sürümünü açık tutan cihazlar için önceki ses dosyaları tutulur. Yerel ilerleme anahtarı değişmez.
-
-## Atölye görünümü
-
-Resimli ana sayfa, altı açılır bölüm, kaldığın ünite/sekmeden devam etme, kişisel not ve öğrenildi sayıları. `#unit-N` doğrudan ders açar; `#home` ana sayfaya döner. Yerel kayıt şeması, ders içeriği ve sesler değişmedi. Hesap paneli üst çubuktaki kişi düğmesinden açılır. Tema ve yazı boyutu ayarları korunur.
-
-
-## Aktif alıştırma akışı
-
-Önceki arayüzdeki 132 çeviri alıştırmasının tamamı örnek cümlelerle aynıydı. Bu sürümde 02–06 sekmeleri `activities.js` ile yürütülür. Eski `exercises`, `questions`, `quiz`, `exam` alanları eski yedekleri/kayıtları silmemek için korunur; yeni çalışma akışında kullanılmaz. Eski taslaklar dosyada durur; yeni cevaplar ayrı `activities` alanında saklanır.
-
-- 02 Kelimeler: mevcut 192 kelime/kalıp için anlamdan İngilizceye seçim. Sözcük listesi isteğe bağlı açılır.
-- 03 Dinle ve yaz: mevcut 264 sesli örnek, metin başlangıçta gizli. Kullanıcı yazdıktan sonra kontrollü cevap karşılaştırması; Türkçe ipucu ve isteğe bağlı sesli örnek arşivi.
-- 04 Diyalog: 32 yeni dört replikli konuşma; üçüncü repliği öğrenci seçer. Kontrolden sonra konuşma ve açıklama tamamlanır. Yeni diyaloglar yazılı etkinliktir; yeni Caro Davy sesleri üretilmedi.
-- 05 Alıştırma: ünite başına dört yeni görev: boşluk doldurma, sözcüklerden cümle kurma, istenen dönüşümü yapma ve seçim. Toplam 128 yeni görev.
-- 06 Karma tekrar: 64 ayrı yeni soru; mevcut ve önceki ünitelerden en fazla sekiz soru. İlk ünitede iki soru vardır; gelecek konular sorulmaz.
-
-Her tur ilk denemede doğru sayısını gösterir. Cevap kontrol edilmeden çözüm ve açıklama açılmaz. Tur sonunda yanlışlar ayrı turda yeniden çalışılabilir. Aynı tur yeniden açıldığında sorular, seçimler, yazılan cevap ve sıralanan sözcükler geri gelir. Kısaltmalar/açık biçimleri, büyük-küçük harf ve noktalama farkları kabul edilir; açıkça tanımlanan alternatif cevaplar da kabul edilir. Serbest çevirilerin tüm eş anlamlılarını veya açık uçlu yanıtları değerlendiren bir yapay zekâ yoktur. Sorular kontrollü yanıtlar ister; yaklaşık yazılmış yanlış dilbilgisi doğru sayılmaz.
-
-`activities.json`, `scripts/build-activities.py` içindeki özgün, elle yazılmış içerikten üretilir. Yeni soru cevaplarının eski kitap cümleleriyle birebir tekrar etmediği test edilir. Toplam 680 görev (mevcut sözcük ve dinleme malzemesi dahil). Her yeni tur aynı ünite havuzunu farklı sırayla sunar; sonsuz yeni soru üretildiği iddia edilmez.
-
-Kayıt, mevcut `fatedreel-o11-book-v1` anahtarına eklenen isteğe bağlı `activities` alanındadır; mevcut Google eşitlemesi ve yedek içine dahildir. Eski not, işaret ve yer imleri korunur. Karma tekrar tamamlanınca mevcut tekrar takvimi güncellenir; ünite otomatik olarak öğrenildi işaretlenmez.
-
-Kontroller: `node o11/scripts/test-activities.mjs` içerik, cevap normalleştirme, 32 ünite sınırı ve kayıt okuma; `node o11/scripts/check-browser.mjs <o11-adresi> edge|webkit` gerçek tarayıcı akışı. Playwright paketi sistemde çözümlenemiyorsa `PLAYWRIGHT_MODULE` tam paket yolunu alır. Edge’de ses isteği; Windows WebKit’in MP3 oynatma desteğine bağımlı olmamak için WebKit testinde ses dosyasının HTTP yanıtı denetlenir. Gerçek iPad donanım testi yapılmadı.
-
-
-## Açılış kurtarma (v7)
-
-`boot.js` uygulama modülünden bağımsız olarak service worker güncellemesini başlatır. Modül/JSON hatası veya açılış zaman aşımı görünür bir “Tekrar aç” düğmesi sunar. Bu düğme yalnızca `/o11/` worker kaydını ve `o11-book-*` dosya önbelleklerini yeniler; localStorage ilerlemesine dokunmaz ve ünite bağlantısını korur. JSON istekleri 12 saniyede sonlanır. Worker ağ isteğini 8 saniyeyle sınırlar ve mevcut dosyaya döner; HTML kabuğunu sadece gezinme istekleri için kullanır. Eksik JavaScript/JSON yerine HTML göndermez, hatalı MIME yanıtlarını saklamaz, 206 ses parçalarını tam dosya olarak önbelleğe almaz. Görsel indirme hatası worker değişimini engellemez.
-
-`node o11/scripts/test-startup.mjs`: modül yükleme hatası/kurtarma, çevrimdışı kabuk, dosya önbelleği, eksik JS/JSON, yanlış MIME, worker değişimi, başka uygulamanın önbelleğinin korunması ve kısmi ses yanıtları. Bu testler VM ortamındadır; gerçek tarayıcı/iPad testi yerine geçmez.
+Edge ve Windows WebKit testleri gerçek iPad donanım testi yerine geçmez. WebKit MP3 codec desteği ortama bağlı olduğundan bu testte dosyanın HTTP yanıtı kontrol edilir.
