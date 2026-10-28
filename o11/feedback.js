@@ -1,4 +1,4 @@
-import {normalizeAnswer,answerMatches} from './activities.js?v=1';
+import {normalizeAnswer,answerMatches,answerForms,normalizedTranscript} from './activities.js?v=2';
 
 // Align the learner's words with this recording's transcript. Feedback describes
 // only observed edits; lesson summaries and status headings are never appended.
@@ -72,7 +72,9 @@ function wordReason(word,at,t,q){
   return `${form} durum veya yer anlatılırken ${quoted(word)} kullanılır${subject&&pronouns.has(subject)?`; ${quoted(subject)} öznesine uygun biçim budur`:''}.`;
  }
  if(['do','does','did'].includes(word))return next==='not'||pronouns.has(next)||(/\?\s*$/.test(q.answer)&&at<3)?`${quoted(word)} bu ${/\?\s*$/.test(q.answer)?'sorunun':'olumsuz cümlenin'} yardımcı fiilidir; asıl fiil yalın biçimde kalır.`:'“Do” burada yapmak anlamındaki asıl fiildir.';
- if(['have','has'].includes(word)&&/\b(been|gone|done|seen|heard|finished|arrived|eaten|lived|got)\b/.test(after))return `Present Perfect, ${quoted(word)} + fiilin üçüncü biçimiyle kurulur.`;
+ if(['have','has'].includes(word)&&/\b(?:should|could|would|must|might)\s*$/.test(before))return 'Geçmişe yönelik bu yapıda modal fiilden sonra “have + fiilin üçüncü biçimi” kullanılır.';
+ if(['have','has'].includes(word)&&/^got\s+(?:a|an|the|enough|some|your|my|our|their)\b/.test(after))return '“Have/has got” burada sahip olmayı anlatır; “got” tek başına bu yapıyı kurmaz.';
+ if(['have','has'].includes(word)&&/\b(been|gone|done|seen|heard|finished|arrived|eaten|lived|got|put|lost|run|tried|had|fed|figured|paid|left|sent|booked|told|called|picked)\b/.test(after))return `Present Perfect, ${quoted(word)} + fiilin üçüncü biçimiyle kurulur.`;
  if(['have','has'].includes(word))return `${quoted(word)} burada sahip olmayı anlatır; he/she/it ile “has”, diğer öznelerle “have” kullanılır.`;
  if(['will','would','can','could','should','must','shall','cannot'].includes(word)){
   const meanings={will:'gelecek veya anlık karar',would:'bu cümledeki istek ya da geçmişten aktarılan gelecek',can:'yapabilme',could:'kibar rica veya yapabilme',should:'öneri',must:'zorunluluk',shall:'teklif',cannot:'yapamama'};
@@ -118,13 +120,9 @@ function replacementReason(edit,t,q){
 
 export function explainAnswer(input,q){
  if(!input.trim()||answerMatches(input,q))return '';
- // Resolve 's / 'd against the target, without penalizing accepted contractions.
- let best;
- for(const s of ['is','has'])for(const d of ['would','had']){
-  const actual=normalizeAnswer(input,s,d).split(' ').filter(Boolean),target=normalizeAnswer(q.answer,s,d).split(' ').filter(Boolean);
-  const alignment=alignWords(actual,target);
-  if(!best||alignment.cost<best.cost)best={...alignment,actual,target};
- }
+ // Resolve ambiguous contractions from the transcript, not from the mistake.
+ const actualWords=normalizeAnswer(input,...answerForms(q.answer)).split(' ').filter(Boolean),targetWords=normalizedTranscript(q.answer).split(' ').filter(Boolean);
+ const best={...alignWords(actualWords,targetWords),actual:actualWords,target:targetWords};
  const {actual,target:t,edits}=best;
  // Same words in a different order: report the actual misplaced span.
  if(actual.length===t.length&&[...actual].sort().join(' ')===[...t].sort().join(' ')){

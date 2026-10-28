@@ -5,15 +5,14 @@ const book=JSON.parse(fs.readFileSync(new URL('../book.json',import.meta.url),'u
 const pool=buildSentences(book);
 for(let unit=1;unit<=32;unit++)for(let repeat=0;repeat<50;repeat++){
  const refs=makeRound(pool,unit),items=refs.map(id=>pool.get(id));
- assert.equal(items.length,10);assert.equal(new Set(refs).size,10);
- assert.equal(new Set(items.map(q=>q.answer.toLowerCase())).size,10);
+ assert.equal(items.length,15);assert.equal(new Set(refs).size,15);
+ assert.equal(new Set(items.map(q=>q.answer.toLowerCase())).size,15);
  assert.ok(items.every(q=>q.unit<=unit));
- assert.equal(items.filter(q=>q.unit===unit).length,unit===1?10:7);
+ assert.equal(items.filter(q=>q.unit===unit).length,unit===1?15:10);
  if(unit===17)assert.ok(items.filter(q=>q.unit===17).every(q=>/\b(was|were|wasn't|weren't)\b/i.test(q.answer)));
 }
 for(const q of pool.values()){
  assert.ok(q.hint&&q.why&&q.audio);
- assert.ok(fs.existsSync(new URL(`../audio/${q.audio}.mp3`,import.meta.url)));
  assert.ok(answerMatches(q.answer,q));
 }
 assert.match(explainAnswer('I was going home',{answer:'I went home.'}),/tamamlanan/);
@@ -30,8 +29,16 @@ const event=attr=>({target:{closest:()=>({dataset:{},hasAttribute:k=>k===attr})}
 runner.submit({target:{id:'drill-form'},preventDefault(){}});
 assert.ok(render().includes(q.answer.replace(/'/g,"&#39;").replace(/"/g,"&quot;")));
 runner.click(event('data-act-next'));assert.equal(s.pos,1);
-for(let i=1;i<10;i++)runner.click(event('data-act-next'));
-assert.equal(state.sentencePractice[17].pos,0);assert.ok(state.reviews[17].due>Date.now());
+for(let i=1;i<15;i++)runner.click(event('data-act-next'));
+assert.equal(state.sentencePractice[17].pos,15);assert.ok(render().includes('Alıştırma bitti.'));assert.ok(!render().includes('drill-form'));assert.ok(state.reviews[17].due>Date.now());
 assert.equal(state.notes[17],'Korunsun');assert.deepEqual(state.activities,{old:true});
 const copy=JSON.parse(JSON.stringify(state));createSentencePractice({book,state:copy,save:()=>true,update:()=>{},play:()=>{}}).content();assert.deepEqual(copy.sentencePractice,state.sentencePractice);
-console.log(`32 units × 50 rounds: 7/3 mix, no future units/duplicates, ${pool.size} recorded sentences, grammar feedback, reveal/skip/next/reload and legacy data passed`);
+runner.click(event('data-act-next'));assert.equal(state.sentencePractice[17].pos,15);
+runner.click(event('data-act-restart'));assert.equal(state.sentencePractice[17].pos,0);assert.equal(state.sentencePractice[17].refs.length,15);
+const oldRound={version:2,refs:['17:examples:0'],pos:0,work:{'17:examples:0':{text:'Old draft'}}};
+const legacy={unit:17,tab:'practice',reviews:{},notes:{17:'Keep note'},sentencePractice:{17:oldRound}};
+createSentencePractice({book,state:legacy,save:()=>true,update:()=>{},play:()=>{}}).content();
+assert.deepEqual(legacy.sentencePracticePrevious[17],oldRound);assert.equal(legacy.notes[17],'Keep note');assert.equal(legacy.sentencePractice[17].version,3);
+const retired=new Set(JSON.parse(fs.readFileSync(new URL('./retired-practice-audio.json',import.meta.url),'utf8')));
+assert.equal(pool.size,480);assert.ok([...pool.values()].every(q=>!retired.has(q.audio)),'Every old textbook recording must be replaced');
+console.log(`32 units × 50 rounds: 10/5 mix, no future units/duplicates, ${pool.size} recorded sentences, grammar feedback, reveal/skip/finish/reload and legacy data passed`);

@@ -1,14 +1,22 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {explainAnswer} from '../feedback.js';
+import {normalizedTranscript} from '../activities.js';
 import {buildSentences,normalizeAnswer,answerMatches} from '../sentences.js';
 const book=JSON.parse(fs.readFileSync(new URL('../book.json',import.meta.url),'utf8'));
 const pool=buildSentences(book);
+assert.ok(answerMatches('Let us get a taxi instead', {answer:"Let's get a taxi instead."}));
+assert.ok(answerMatches('I think someone is at the door', {answer:"I think someone's at the door."}));
+assert.ok(answerMatches('She has been really busy lately', {answer:"She's been really busy lately."}));
+assert.ok(!answerMatches('She has looking for her bag', {answer:"She's looking for her bag."}));
+assert.match(explainAnswer('She been really busy lately',{answer:"She's been really busy lately."}),/“has” koymayı unutmuşsun/);
+assert.match(explainAnswer('You should told me',{answer:'You should have told me.'}),/modal fiilden sonra/);
 const example=explainAnswer('I thinking my holiday',{answer:'I am thinking about my holiday.'});
 assert.equal(example.split('\n').length,2);assert.match(example,/“am” koymayı unutmuşsun/);assert.match(example,/“about” koymayı unutmuşsun/);assert.match(example,/think about/);
 const onlyAbout=explainAnswer('I am thinking my holiday',{answer:'I am thinking about my holiday.'});
 assert.equal(onlyAbout.split('\n').length,1);assert.ok(!onlyAbout.includes('“am”'));
 const cases=[
+ ['Let us get a taxi instead',"Let's get a taxi instead.",/^$/],
  ['Me am a student','I am a student.',/“Me”|“me”/],
  ['I is tired','I am tired.',/“is” yerine “am”/],
  ['I tea','I like tea.',/“like” koymayı unutmuşsun/],
@@ -51,7 +59,7 @@ for(const [input,answer,pattern] of cases){const feedback=explainAnswer(input,{a
 let count=0;
 for(const q of pool.values()){
  assert.equal(explainAnswer(q.answer,q),'');assert.equal(explainAnswer('',q),'');
- const words=normalizeAnswer(q.answer).split(' ');
+ const words=normalizedTranscript(q.answer).split(' ');
  for(let i=0;i<words.length;i++){
   const input=words.filter((_,j)=>j!==i).join(' ');
   if(answerMatches(input,q))continue;
@@ -59,6 +67,6 @@ for(const q of pool.values()){
   assert.ok(result.includes(`“${word}”`),`${q.answer}, removed ${words[i]}: ${result}`);
   assert.ok(result.includes('koymayı unutmuşsun'),result);count++;
  }
- assert.match(explainAnswer(normalizeAnswer(q.answer)+' zzzextra',q),/“zzzextra” burada fazla/);
+ assert.match(explainAnswer(normalizedTranscript(q.answer)+' zzzextra',q),/“zzzextra” burada fazla/);
 }
 console.log(`Feedback: ${cases.length} targeted grammar cases across 32 topics, ${count} word omissions across all ${pool.size} recordings, extra words, blank/correct answers passed`);

@@ -1,0 +1,513 @@
+# All practice recordings, rewritten for everyday situations. EN | natural TR.
+@1
+I'm your new neighbor. | Ben sizin yeni komşunuzum.
+You're in the right place. | Doğru yerdesin.
+He's my flatmate. | O benim ev arkadaşım.
+She's our new manager. | O bizim yeni müdürümüz.
+It's your turn now. | Şimdi sıra sende.
+We're on the same team. | Aynı ekipteyiz.
+They're my neighbors upstairs. | Onlar üst kattaki komşularım.
+I'm still in my pajamas. | Hâlâ pijamalarımla duruyorum.
+You're on speaker. | Sesin hoparlörde.
+He's at the front door. | O giriş kapısında.
+She's in the group chat. | O gruptaki yazışmada var.
+It's in your jacket pocket. | Ceketinin cebinde.
+We're in the wrong queue. | Yanlış sıradayız.
+They're on their way. | Yoldalar.
+I'm the one in the blue jacket. | Mavi ceketli olan benim.
+@2
+I'm not ready to leave. | Çıkmaya hazır değilim.
+Is your phone on silent? | Telefonun sessizde mi?
+Are we too early? | Çok mu erken geldik?
+The Wi-Fi isn't very strong here. | Burada Wi-Fi pek iyi çekmiyor.
+You're on the wrong floor. | Yanlış kattasın.
+I'm free after lunch. | Öğle yemeğinden sonra boşum.
+Is this seat taken? | Burada oturan var mı?
+Your coffee is on the counter. | Kahven tezgâhın üzerinde.
+We're a bit short on time. | Biraz vaktimiz dar.
+Are these shoes yours? | Bu ayakkabılar senin mi?
+The shops are still open. | Dükkânlar hâlâ açık.
+I'm not in a rush. | Acelem yok.
+Is the lift out of order? | Asansör bozuk mu?
+Your bag is next to the sofa. | Çantan kanepenin yanında.
+Are you okay with pizza? | Pizza senin için uygun mu?
+@3
+I need a phone charger. | Telefon şarj aletine ihtiyacım var.
+She makes great coffee. | Çok güzel kahve yapıyor.
+We share the rent. | Kirayı bölüşüyoruz.
+My phone needs an update. | Telefonuma güncelleme gerekiyor.
+I keep my keys by the door. | Anahtarlarımı kapının yanında tutarım.
+He takes the last biscuit every time. | Her seferinde son bisküviyi o alıyor.
+We order dinner on Fridays. | Cuma günleri akşam yemeğini dışarıdan söyleriz.
+I check the weather before work. | İşe gitmeden havaya bakarım.
+She knows my usual order. | Her zaman ne sipariş verdiğimi biliyor.
+My alarm wakes the whole flat. | Alarmım bütün evi uyandırıyor.
+I save the receipts on my phone. | Fişleri telefonumda saklıyorum.
+He leaves his shoes in the hallway. | Ayakkabılarını koridorda bırakıyor.
+We split the bill. | Hesabı bölüşüyoruz.
+My laptop makes a strange noise. | Bilgisayarım tuhaf bir ses çıkarıyor.
+I use the same password everywhere. | Her yerde aynı şifreyi kullanıyorum.
+@4
+There's a parcel at the door. | Kapıda bir paket var.
+I need an umbrella today. | Bugün şemsiyeye ihtiyacım var.
+The receipt is in the bag. | Fiş poşetin içinde.
+We need some milk for breakfast. | Kahvaltı için biraz süte ihtiyacımız var.
+There's an empty seat over there. | Şurada boş bir yer var.
+I have a meeting in ten minutes. | On dakika sonra toplantım var.
+The batteries are in the drawer. | Piller çekmecede.
+I need a clean mug. | Temiz bir kupaya ihtiyacım var.
+The neighbors have two dogs. | Komşuların iki köpeği var.
+There's a hair in my soup. | Çorbamda saç var.
+I have an idea for tonight. | Bu akşam için bir fikrim var.
+The towels are still wet. | Havlular hâlâ ıslak.
+We need more chairs for tonight. | Bu akşam için daha fazla sandalyeye ihtiyacımız var.
+The bread is on the kitchen table. | Ekmek mutfak masasının üzerinde.
+There's an app for that. | Bunun için bir uygulama var.
+@5
+Is this your charger? | Bu şarj aleti senin mi?
+Those are my work shoes. | Şunlar iş ayakkabılarım.
+This isn't my coffee. | Bu benim kahvem değil.
+Her keys are on the fridge. | Onun anahtarları buzdolabının üzerinde.
+Our table is by the window. | Masamız pencere kenarında.
+These are your leftovers. | Bunlar senin kalan yemeğin.
+That jacket is my brother's. | Şu ceket erkek kardeşimin.
+Their car is outside our building. | Arabaları bizim binanın önünde.
+This is my usual stop. | Benim her zaman indiğim durak burası.
+His phone is almost dead. | Onun telefonunun şarjı bitmek üzere.
+Those aren't our seats. | Şunlar bizim yerlerimiz değil.
+Your delivery is downstairs. | Siparişin aşağıda.
+My sister's bag is still in the taxi. | Kız kardeşimin çantası hâlâ takside.
+These socks aren't mine. | Bu çoraplar benim değil.
+Our neighbors' lights are still on. | Komşularımızın ışıkları hâlâ açık.
+@6
+Can you send me the address? | Bana adresi gönderebilir misin?
+I'll text you the code. | Kodu sana mesajla atarım.
+She saved us a seat. | Bize yer ayırmış.
+I can pick him up after work. | İşten sonra onu alabilirim.
+Please leave it by the door. | Onu kapının yanına bırakır mısın?
+We can give them a lift. | Onları arabayla bırakabiliriz.
+Don't tell her about the party. | Partiden ona bahsetme.
+Can you hear me now? | Şimdi sesim geliyor mu?
+I owe you a coffee. | Sana bir kahve borcum var.
+He sent me the wrong link. | Bana yanlış bağlantıyı gönderdi.
+I'll bring it to you tomorrow. | Onu yarın sana getiririm.
+She gave him her number. | Ona numarasını verdi.
+Can you take us to the station? | Bizi istasyona götürebilir misin?
+I'll leave the keys with them. | Anahtarları onlara bırakırım.
+Please remind me after lunch. | Öğle yemeğinden sonra bana hatırlatır mısın?
+@7
+I've got a spare charger. | Bende fazladan bir şarj aleti var.
+There's no hot water again. | Yine sıcak su yok.
+She's got the Wi-Fi password. | Wi-Fi şifresi onda var.
+We've got enough food for everyone. | Herkese yetecek kadar yemeğimiz var.
+There are clean towels in the cupboard. | Dolapta temiz havlular var.
+My phone has a cracked screen. | Telefonumun ekranı çatlak.
+There's a queue outside the bakery. | Fırının önünde kuyruk var.
+I don't have any cash on me. | Yanımda hiç nakit yok.
+There's a spare key under the plant. | Saksının altında yedek anahtar var.
+He's got an early shift tomorrow. | Yarın sabah erken vardiyası var.
+There aren't any sockets near the bed. | Yatağın yakınında priz yok.
+We've got a table for four. | Dört kişilik masamız var.
+There's something in your hair. | Saçında bir şey var.
+Have you got a minute? | Bir dakikan var mı?
+There are too many tabs open. | Çok fazla sekme açık.
+@8
+I grab a coffee on the way to work. | İşe giderken bir kahve alırım.
+She works from home on Mondays. | Pazartesileri evden çalışıyor.
+We usually eat whatever is in the fridge. | Genelde dolapta ne varsa onu yeriz.
+He always forgets his reusable bag. | Bez çantasını hep unutuyor.
+I check my phone as soon as I wake up. | Uyanır uyanmaz telefonuma bakarım.
+The bus never comes on time. | Otobüs hiçbir zaman vaktinde gelmiyor.
+My neighbor plays loud music at night. | Komşum geceleri yüksek sesle müzik açıyor.
+I usually skip breakfast on weekdays. | Hafta içi genelde kahvaltıyı atlarım.
+She pays all her bills online. | Bütün faturalarını internetten ödüyor.
+We take turns washing the dishes. | Bulaşıkları sırayla yıkarız.
+He walks the dog before breakfast. | Kahvaltıdan önce köpeği gezdiriyor.
+I keep forgetting that password. | O şifreyi sürekli unutuyorum.
+This shop closes early on Sundays. | Bu dükkân pazarları erken kapanıyor.
+My phone battery lasts about a day. | Telefonumun şarjı yaklaşık bir gün gidiyor.
+She leaves work at half past five. | İşten beş buçukta çıkıyor.
+@9
+Do you want anything from the shop? | Marketten bir şey ister misin?
+Does this bus stop near the hospital? | Bu otobüs hastanenin yakınında duruyor mu?
+I don't check work emails at the weekend. | Hafta sonu iş e-postalarına bakmam.
+She doesn't take sugar in her coffee. | Kahvesine şeker koymuyor.
+Do we need to book a table? | Masa ayırtmamız gerekiyor mu?
+Does your phone have enough battery? | Telefonunun şarjı yeterli mi?
+I don't know the Wi-Fi password. | Wi-Fi şifresini bilmiyorum.
+He doesn't pick up unknown numbers. | Bilmediği numaraları açmıyor.
+Do you take your shoes off inside? | Evde ayakkabılarınızı çıkarıyor musunuz?
+Does the price include delivery? | Kargo fiyata dahil mi?
+We don't have any clean plates left. | Hiç temiz tabağımız kalmadı.
+Do you mind the window being open? | Pencerenin açık olması seni rahatsız eder mi?
+She doesn't like being late. | Geç kalmayı sevmiyor.
+Does anyone have a spare pen? | Fazladan kalemi olan var mı?
+I don't usually eat this late. | Normalde bu kadar geç yemem.
+@10
+I'm waiting for my food delivery. | Yemek siparişimin gelmesini bekliyorum.
+She's trying to find a parking space. | Arabayı park edecek yer arıyor.
+We're heading out in a minute. | Birazdan çıkıyoruz.
+He's checking the football score. | Maçın skoruna bakıyor.
+I'm just putting my shoes on. | Ayakkabılarımı giyiyorum, az kaldı.
+Are you using this charger? | Bu şarj aletini kullanıyor musun?
+The people upstairs are moving furniture. | Üst kattakiler mobilyaların yerini değiştiriyor.
+I'm not ignoring you. | Seni görmezden gelmiyorum.
+She's talking to the delivery driver. | Kurye ile konuşuyor.
+We're running out of milk. | Sütümüz bitiyor.
+I'm looking for somewhere to sit. | Oturacak bir yer arıyorum.
+Is your phone charging? | Telefonun şarj oluyor mu?
+He's getting ready for his interview. | İş görüşmesine hazırlanıyor.
+I'm trying not to wake the baby. | Bebeği uyandırmamaya çalışıyorum.
+They're fixing the lift again. | Asansörü yine tamir ediyorlar.
+@11
+I usually drive, but I'm taking the train today. | Normalde arabayla giderim ama bugün trene biniyorum.
+She works nights, so she's sleeping right now. | Gece çalışıyor, o yüzden şu anda uyuyor.
+I don't normally drink coffee this late. | Normalde bu saatte kahve içmem.
+We're staying with friends this week. | Bu hafta arkadaşlarımızda kalıyoruz.
+He always loses his keys, and he's looking for them again. | Anahtarlarını hep kaybeder; şimdi de yine onları arıyor.
+I need a break from this screen. | Ekrana bakmaya biraz ara vermem gerek.
+She usually cooks, but we're ordering tonight. | Genelde o yemek yapar ama bu akşam dışarıdan söylüyoruz.
+I'm working late today, so don't wait for me. | Bugün geç saate kadar çalışıyorum, beni beklemeyin.
+This coffee tastes a bit strange. | Bu kahvenin tadı biraz tuhaf.
+I know where the spare key is. | Yedek anahtarın nerede olduğunu biliyorum.
+We usually split the bill, but I'm paying today. | Normalde hesabı bölüşürüz ama bugün ben ödüyorum.
+She's taking a different route this morning. | Bu sabah başka bir yoldan gidiyor.
+I prefer somewhere a bit quieter. | Biraz daha sessiz bir yeri tercih ederim.
+He doesn't usually reply this slowly. | Normalde bu kadar geç cevap vermez.
+I'm using my old phone until Friday. | Cumaya kadar eski telefonumu kullanıyorum.
+@12
+Where did you park the car? | Arabayı nereye park ettin?
+What time does the last bus leave? | Son otobüs saat kaçta kalkıyor?
+Why is your phone on silent? | Telefonun neden sessizde?
+Who ordered the extra fries? | Fazladan patatesi kim söyledi?
+How long is the wait? | Ne kadar bekleyeceğiz?
+Which floor are you on? | Kaçıncı kattasın?
+How much do I owe you? | Sana ne kadar borcum var?
+Where can I charge my phone? | Telefonumu nerede şarj edebilirim?
+What are you in the mood for? | Canın ne istiyor?
+When does your shift finish? | Vardiyan ne zaman bitiyor?
+Whose jacket is on my chair? | Sandalyemdeki ceket kimin?
+How do you turn this thing off? | Bu şey nasıl kapatılıyor?
+Why didn't you say anything? | Neden hiçbir şey söylemedin?
+Who has the spare key? | Yedek anahtar kimde?
+How far is it from here? | Buraya ne kadar uzak?
+@13
+Your takeaway is on the kitchen counter. | Paket yemeğin mutfak tezgâhının üzerinde.
+I'm on the bus right now. | Şu anda otobüsteyim.
+We'll meet at the entrance. | Girişte buluşuruz.
+The charger is under your pillow. | Şarj aleti yastığının altında.
+I finish work at half past six. | İşim altı buçukta bitiyor.
+She's in a meeting until three. | Üçe kadar toplantıda.
+The café is next to the pharmacy. | Kafe eczanenin yanında.
+I left my umbrella by the door. | Şemsiyemi kapının yanına bıraktım.
+We can go on Saturday morning. | Cumartesi sabahı gidebiliriz.
+The money is in my other jacket. | Para diğer ceketimde.
+I'll be back in ten minutes. | On dakikaya dönerim.
+There's a supermarket across from the station. | İstasyonun karşısında bir süpermarket var.
+He's waiting outside the building. | Binanın dışında bekliyor.
+We usually get there by bus. | Oraya genelde otobüsle gideriz.
+The remote is between the sofa cushions. | Kumanda koltuk minderlerinin arasında.
+@14
+I need to get some cash out. | Biraz para çekmem gerekiyor.
+Can you bring your charger? | Şarj aletini getirir misin?
+I'll take the rubbish out. | Çöpü ben çıkarırım.
+She gets home before the kids. | Çocuklardan önce eve geliyor.
+Don't leave your bag on the floor. | Çantanı yere bırakma.
+I usually grab lunch near the office. | Öğle yemeğini genelde ofisin yakınından alırım.
+Can you give me a hand with this? | Şuna bir el atar mısın?
+Let's get a taxi instead. | Onun yerine taksiye binelim.
+I'll bring something for dessert. | Tatlı için bir şey getiririm.
+He takes his coffee to go. | Kahvesini paket alıyor.
+I'm coming down now. | Şimdi aşağı iniyorum.
+I need to go back for my wallet. | Cüzdanım için geri dönmem gerekiyor.
+Leave the dishes. I'll do them later. | Bulaşıkları bırak, sonra ben yıkarım.
+Can you get me a bottle of water? | Bana bir şişe su alır mısın?
+We take turns driving. | Arabayı sırayla kullanıyoruz.
+@15
+I missed my stop this morning. | Bu sabah ineceğim durağı kaçırdım.
+She left her phone in the taxi. | Telefonunu takside unuttu.
+We ordered way too much food. | Gereğinden çok fazla yemek söyledik.
+I ran into my old neighbor yesterday. | Dün eski komşuma rastladım.
+He sent the message to the wrong group. | Mesajı yanlış gruba gönderdi.
+My card got declined at the till. | Kasada kartımla ödeme geçmedi.
+I spilled coffee on my shirt. | Gömleğime kahve döktüm.
+We got stuck in traffic for an hour. | Bir saat trafikte kaldık.
+She booked the wrong date by mistake. | Yanlışlıkla farklı bir tarihe rezervasyon yaptı.
+I finally fixed that annoying noise. | O sinir bozucu sesin nedenini sonunda çözdüm.
+He ate the last slice of pizza. | Pizzanın son dilimini yedi.
+The delivery arrived while I was out. | Ben dışarıdayken sipariş geldi.
+I forgot to charge my phone overnight. | Gece telefonumu şarja takmayı unuttum.
+We ended up walking home. | Sonunda eve yürüyerek döndük.
+I bought the same thing twice. | Aynı şeyi iki kere almışım.
+@16
+Did you lock the front door? | Dış kapıyı kilitledin mi?
+I didn't hear my alarm. | Alarmımı duymadım.
+Why didn't you text me back? | Mesajıma neden dönmedin?
+Did the delivery driver call you? | Kurye seni aradı mı?
+She didn't realize it was my birthday. | Doğum günüm olduğunu fark etmedi.
+Where did you put the remote? | Kumandayı nereye koydun?
+I didn't mean to wake you up. | Seni uyandırmak istememiştim.
+Did you get a refund? | Paranı geri aldın mı?
+We didn't have time for breakfast. | Kahvaltıya vaktimiz olmadı.
+How did the interview go? | İş görüşmesi nasıl geçti?
+He didn't leave a tip. | Bahşiş bırakmadı.
+Did you take the bins out? | Çöpleri çıkardın mı?
+I didn't recognize you with your new haircut. | Yeni saçınla seni tanıyamadım.
+Why did you cancel at the last minute? | Neden son anda iptal ettin?
+Did anyone see where I put my glasses? | Gözlüğümü nereye koyduğumu gören var mı?
+@17
+I was on another call. | Başka biriyle telefondaydım.
+The queue was out the door. | Kuyruk kapının dışına kadar uzanıyordu.
+We were in the middle of dinner. | Akşam yemeğinin ortasındaydık.
+My phone was on silent all morning. | Telefonum bütün sabah sessizdeydi.
+You were right about that restaurant. | O restoran konusunda haklıymışsın.
+The lift was out of order again. | Asansör yine bozuktu.
+I wasn't in the mood to go out. | Dışarı çıkacak havamda değildim.
+Were you at the same café as us? | Siz de bizimle aynı kafede miydiniz?
+The delivery was half an hour late. | Sipariş yarım saat geç geldi.
+Her battery was completely dead. | Telefonunun şarjı tamamen bitmişti.
+We weren't sure which entrance to use. | Hangi girişten gireceğimizden emin değildik.
+It was much colder than I expected. | Beklediğimden çok daha soğuktu.
+Was your meeting really that long? | Toplantın gerçekten o kadar uzun muydu?
+I was the only one without an umbrella. | Şemsiyesi olmayan bir tek bendim.
+The seats near the window were all taken. | Pencere kenarındaki yerlerin hepsi doluydu.
+@18
+I was carrying the shopping when you called. | Aradığında market poşetlerini taşıyordum.
+She was trying to pay for parking. | Otopark ücretini ödemeye çalışıyordu.
+We were waiting for the rain to stop. | Yağmurun durmasını bekliyorduk.
+I wasn't looking at my phone. | Telefonuma bakmıyordum.
+He was putting the kids to bed. | Çocukları yatırıyordu.
+Were you talking to me just now? | Az önce benimle mi konuşuyordun?
+I was about to leave, but it was raining. | Tam çıkacaktım ama yağmur yağıyordu.
+They were doing roadworks outside our flat. | Evimizin önünde yol çalışması yapıyorlardı.
+She wasn't ignoring your messages. | Mesajlarını bilerek cevapsız bırakmıyordu.
+I was trying to find a quiet place. | Sessiz bir yer bulmaya çalışıyordum.
+We were watching the match at a friend's place. | Maçı bir arkadaşımızın evinde izliyorduk.
+What were you doing outside so late? | O kadar geç saatte dışarıda ne yapıyordun?
+The dog was barking all night. | Köpek bütün gece havlıyordu.
+I was making coffee when the power went out. | Elektrikler kesildiğinde kahve yapıyordum.
+He was looking for his ticket in every pocket. | Biletini bütün ceplerinde arıyordu.
+@19
+I'll send you my location. | Konumumu sana atarım.
+I'll grab a table while you order. | Sen sipariş verirken ben masa bulurum.
+It won't take more than five minutes. | Beş dakikadan fazla sürmez.
+I'll get the next round of drinks. | Sonraki içecekler benden.
+Will you be home before the delivery? | Sipariş gelmeden evde olur musun?
+I'll put the kettle on. | Çay için su koyayım.
+We won't make it in time. | Zamanında yetişemeyeceğiz.
+I'll leave the keys with the neighbor. | Anahtarları komşuya bırakırım.
+I'll have whatever you're having. | Sen ne alıyorsan ben de ondan alayım.
+She'll probably call during lunch. | Muhtemelen öğle arasında arar.
+I won't tell anyone about it. | Bunu kimseye söylemem.
+Will this fit in your car? | Bu senin arabaya sığar mı?
+I'll cover it. You can pay me back later. | Ben öderim, sen sonra bana verirsin.
+The traffic will be worse after five. | Beşten sonra trafik daha kötü olur.
+I'll remind you in the morning. | Sabah sana hatırlatırım.
+@20
+I'm going to order something for dinner. | Akşam yemeğine bir şey söyleyeceğim.
+She's going to work from home tomorrow. | Yarın evden çalışacak.
+Are you going to finish those chips? | O patateslerin hepsini yiyecek misin?
+We're going to try that new place downstairs. | Aşağıdaki yeni mekânı deneyeceğiz.
+I'm not going to queue for an hour. | Bir saat sırada beklemeyeceğim.
+He's going to pick us up at seven. | Yedide bizi almaya gelecek.
+I'm going to turn my phone off for a bit. | Telefonumu bir süre kapatacağım.
+Are we going to need a taxi? | Taksiye ihtiyacımız olacak mı?
+She's going to ask for a refund. | Para iadesi isteyecek.
+We're not going to make the last train. | Son trene yetişemeyeceğiz.
+I'm going to have an early night. | Bu gece erken yatacağım.
+That coffee is going to spill. | O kahve dökülecek.
+They're going to change the locks tomorrow. | Yarın kilitleri değiştirecekler.
+What are you going to do with the leftovers? | Kalan yemekleri ne yapacaksın?
+I'm going to book us a table. | Bize masa ayırtacağım.
+@21
+I was on the bus when you texted. | Mesaj attığında otobüsteydim.
+I'll call you once I'm outside. | Dışarı çıkınca seni ararım.
+She usually drives, but she took the train today. | Genelde arabayla gider ama bugün trene bindi.
+We're eating out tonight because the fridge is empty. | Dolap boş olduğu için bu akşam dışarıda yiyoruz.
+I forgot my umbrella, so I'm getting soaked. | Şemsiyemi unuttum, sırılsıklam oluyorum.
+He was still asleep when I left. | Ben çıktığımda hâlâ uyuyordu.
+I'll put the food in the fridge when it cools down. | Yemek soğuyunca dolaba koyarım.
+We didn't book, so we're waiting for a table. | Rezervasyon yapmadık, şimdi masa bekliyoruz.
+I'm using my sister's charger because mine broke. | Benimki bozulduğu için kız kardeşimin şarj aletini kullanıyorum.
+She'll be here soon. She just left the office. | Birazdan burada olur, ofisten yeni çıktı.
+I was looking for my glasses, but they were on my head. | Gözlüğümü arıyordum ama meğer başımdaymış.
+We usually stay in, but we're going out this Friday. | Genelde evde takılırız ama bu cuma dışarı çıkıyoruz.
+I didn't sleep well, so I'm having another coffee. | İyi uyuyamadım, o yüzden bir kahve daha içiyorum.
+He promised to call, but he hasn't called yet. | Arayacağına söz verdi ama henüz aramadı.
+I'll grab some milk on my way back. We ran out. | Dönüşte süt alırım, bizde bitmiş.
+@22
+Can you keep an eye on my bag? | Çantama göz kulak olur musun?
+Could you turn the music down a bit? | Müziği biraz kısar mısın?
+You should bring a jacket. | Yanına ceket alsan iyi olur.
+We have to leave in five minutes. | Beş dakika içinde çıkmamız gerek.
+You don't have to dress up. | Şık giyinmene gerek yok.
+I can't get the lid off. | Kapağı açamıyorum.
+Could I borrow your charger for a minute? | Şarj aletini bir dakikalığına ödünç alabilir miyim?
+You mustn't block this entrance. | Bu girişin önünü kapatmamalısın.
+Shall we just order a pizza? | Direkt pizza mı söylesek?
+I should probably get going. | Artık yavaş yavaş kalksam iyi olur.
+Can we split the bill? | Hesabı bölebilir miyiz?
+You can't leave your bike here. | Bisikletini buraya bırakamazsın.
+We don't have to decide right now. | Hemen şimdi karar vermek zorunda değiliz.
+Could you move your bag, please? | Çantanı çeker misin, lütfen?
+You should get that noise checked. | O sesi birine göstersen iyi olur.
+@23
+I'd like a table for two, please. | İki kişilik bir masa alabilir miyiz?
+Do you want the last slice? | Son dilimi ister misin?
+I need something to eat before we leave. | Çıkmadan bir şeyler yemem gerekiyor.
+Would you like a lift home? | Seni eve bırakmamı ister misin?
+I don't feel like cooking tonight. | Bu akşam canım yemek yapmak istemiyor.
+She wants to stop for coffee. | Kahve içmek için durmak istiyor.
+I'd like it without ice, please. | Buzsuz alabilir miyim, lütfen?
+We need to sort out the bills. | Fatura işlerini halletmemiz gerek.
+Do you want me to save you some? | Sana biraz ayırmamı ister misin?
+I'd rather stay in tonight. | Bu akşam evde kalmayı tercih ederim.
+I could do with a proper break. | Şöyle doğru dürüst bir mola iyi gelirdi.
+Would you like anything else? | Başka bir şey ister misiniz?
+I need a bit more time to decide. | Karar vermek için biraz daha zamana ihtiyacım var.
+She doesn't want to make a fuss. | Olay çıkarmak istemiyor.
+I'd like to pay by card. | Kartla ödemek istiyorum.
+@24
+I keep forgetting to bring my own bag. | Kendi çantamı getirmeyi sürekli unutuyorum.
+She suggested getting a taxi. | Taksiye binmeyi önerdi.
+I need to stop checking my phone so much. | Telefonuma bu kadar sık bakmayı bırakmam gerekiyor.
+We decided to get a takeaway instead. | Onun yerine dışarıdan yemek söylemeye karar verdik.
+He offered to pick me up. | Beni almayı teklif etti.
+I don't mind waiting a few minutes. | Birkaç dakika beklemek benim için sorun değil.
+She forgot to put the bins out. | Çöpleri dışarı çıkarmayı unuttu.
+I'm trying to spend less on coffee. | Kahveye daha az para harcamaya çalışıyorum.
+We ended up staying much longer. | Sonunda planladığımızdan çok daha uzun kaldık.
+I enjoy finding little cafés like this. | Böyle küçük kafeler keşfetmek hoşuma gidiyor.
+He promised to pay me back on Friday. | Cuma günü borcunu ödeyeceğine söz verdi.
+I avoid going shopping when I'm hungry. | Açken alışverişe gitmemeye çalışırım.
+She's thinking of moving closer to work. | İşine daha yakın bir yere taşınmayı düşünüyor.
+I managed to get the last seat. | Son boş yeri kapmayı başardım.
+We agreed to split the cost. | Masrafı bölüşmeye karar verdik.
+@25
+Can you ask him to call me back? | Ondan beni geri aramasını ister misin?
+She told me not to wait up. | Onu bekleyip uykusuz kalmamamı söyledi.
+Let me grab my jacket first. | Önce ceketimi alayım.
+They made us queue outside in the rain. | Bizi yağmurun altında dışarıda sıraya soktular.
+I asked her to save me a seat. | Bana yer ayırmasını istedim.
+Don't let the cat out. | Kediyi dışarı kaçırma.
+He told us to use the side entrance. | Yan girişten girmemizi söyledi.
+I'll get someone to look at the boiler. | Kombiye birini baktırırım.
+She asked me not to post the photo. | Fotoğrafı paylaşmamamı istedi.
+Let me know when you're downstairs. | Aşağıya gelince bana haber ver.
+I told him to bring the receipt. | Fişi getirmesini söyledim.
+Don't make me choose right now. | Beni hemen şimdi seçmek zorunda bırakma.
+Can you remind her to lock the door? | Kapıyı kilitlemesini ona hatırlatır mısın?
+They asked us to keep the noise down. | Daha az ses yapmamızı istediler.
+Let me carry one of those bags. | O poşetlerden birini ben taşıyayım.
+@26
+Tell me when you're ready to leave. | Çıkmaya hazır olunca bana söyle.
+She said she'd be ten minutes late. | On dakika gecikeceğini söyledi.
+Can you hear that buzzing noise? | O vızıltıyı duyuyor musun?
+I watched the last episode without you. | Son bölümü sensiz izledim.
+I left my wallet in my other coat. | Cüzdanımı diğer montumda unuttum.
+I forgot to send you the address. | Sana adresi göndermeyi unuttum.
+He's making us some sandwiches. | Bize sandviç hazırlıyor.
+I'll do the washing-up after dinner. | Yemekten sonra bulaşıkları ben yıkarım.
+Can you lend me a few pounds? | Bana birkaç sterlin borç verir misin?
+I need to borrow your car on Saturday. | Cumartesi arabanı ödünç almam gerekiyor.
+Look at the state of this kitchen. | Şu mutfağın hâline bak.
+I saw your message, but I couldn't reply. | Mesajını gördüm ama cevap veremedim.
+She speaks to her mum every evening. | Her akşam annesiyle konuşuyor.
+We talked for ages outside the shop. | Dükkânın önünde uzun uzun sohbet ettik.
+Bring the receipt when you come back. | Geri gelirken fişi getir.
+@27
+I'm looking for the email with the booking details. | Rezervasyon bilgilerinin olduğu e-postayı arıyorum.
+We're waiting for our takeaway. | Paket yemeğimizin hazırlanmasını bekliyoruz.
+I was thinking about taking Friday off. | Cuma günü izin almayı düşünüyordum.
+She's looking after her neighbor's dog. | Komşusunun köpeğine bakıyor.
+Can you listen to this voice message? | Şu sesli mesajı dinler misin?
+I need to ask for a different size. | Başka bir beden istemem gerekiyor.
+We were talking about that place near the station. | İstasyonun yakınındaki o mekândan konuşuyorduk.
+Don't worry about paying me back today. | Parayı bugün geri vermeyi dert etme.
+I'm trying to get used to the new app. | Yeni uygulamaya alışmaya çalışıyorum.
+That bag belongs to the woman over there. | O çanta şuradaki kadının.
+Can you look at this bill for a second? | Şu hesaba bir saniye bakar mısın?
+I heard about the delay this morning. | Gecikmeyi bu sabah duydum.
+She's been asking about you. | Seni sorup duruyor.
+We need to pay for parking before we leave. | Çıkmadan otopark ücretini ödememiz gerekiyor.
+I'm still waiting for a reply from the landlord. | Ev sahibinden hâlâ cevap bekliyorum.
+@28
+I took a taxi because I was running late. | Geç kaldığım için taksiye bindim.
+The kitchen was a mess, so we ordered food. | Mutfak darmadağındı, biz de yemek söyledik.
+I'll keep your coffee warm until you get here. | Sen gelene kadar kahveni sıcak tutarım.
+If you pass a shop, can you grab some milk? | Bir marketin önünden geçersen süt alır mısın?
+I was halfway home when I remembered my bag. | Çantamı hatırladığımda eve giden yolun yarısındaydım.
+We can sit outside if it stops raining. | Yağmur durursa dışarıda oturabiliriz.
+She kept calling while I was in the shower. | Ben duştayken durmadan aradı.
+I wanted to stay longer, but I had an early start. | Daha uzun kalmak istedim ama sabah erken kalkacaktım.
+Text me before you leave work. | İşten çıkmadan bana mesaj at.
+I'll feed the cat as soon as I get in. | Eve girer girmez kedinin mamasını veririm.
+Even though it was late, the place was packed. | Geç saat olmasına rağmen mekân tıklım tıklımdı.
+Take your charger in case your battery dies. | Şarjın biter diye şarj aletini yanına al.
+We stayed inside because the weather was awful. | Hava berbat olduğu için içeride kaldık.
+I cleaned up while she put the kids to bed. | O çocukları yatırırken ben ortalığı topladım.
+If you don't fancy it, we can do something else. | Canın istemiyorsa başka bir şey yapabiliriz.
+@29
+I thought you were picking me up. | Beni sen alacaksın sanıyordum.
+Do you know where I left my keys? | Anahtarlarımı nereye bıraktığımı biliyor musun?
+She said the delivery was on its way. | Siparişin yola çıktığını söyledi.
+I didn't realize you were already here. | Zaten burada olduğunu fark etmedim.
+Can you tell me what time they close? | Kaçta kapattıklarını söyler misin?
+He told me he'd sort it out tomorrow. | Yarın halledeceğini söyledi.
+I think someone's at the door. | Sanırım kapıda biri var.
+Do you remember which floor she's on? | Onun kaçıncı katta olduğunu hatırlıyor musun?
+She asked if we needed anything from the shop. | Marketten bir şeye ihtiyacımız olup olmadığını sordu.
+I wasn't sure whether you wanted coffee. | Kahve isteyip istemediğinden emin değildim.
+Can you check if the window is shut? | Pencerenin kapalı olup olmadığına bakar mısın?
+I thought we'd agreed to split the bill. | Hesabı bölüşmeye karar verdik sanıyordum.
+He said he couldn't find a parking space. | Park yeri bulamadığını söyledi.
+Do you know how much the taxi will cost? | Taksinin ne kadar tutacağını biliyor musun?
+I wondered why nobody was answering. | Neden kimse açmıyor diye merak ettim.
+@30
+I've already put the bins out. | Çöpleri çıkardım bile.
+Have you seen my other shoe? | Ayakkabımın diğer tekini gördün mü?
+She's just got back from the shops. | Alışverişten daha yeni döndü.
+We haven't booked anywhere yet. | Henüz hiçbir yere rezervasyon yapmadık.
+I've left my keys inside again. | Anahtarlarımı yine içeride bıraktım.
+Have you tried restarting your phone? | Telefonunu kapatıp açmayı denedin mi?
+I haven't had a proper break all day. | Bütün gün doğru dürüst mola vermedim.
+He's lost his bank card for the second time. | Banka kartını ikinci kez kaybetti.
+We've run out of washing-up liquid. | Bulaşık deterjanımız bitti.
+I've never been to that part of town. | Şehrin o tarafına hiç gitmedim.
+Has anyone fed the cat yet? | Kedinin mamasını veren oldu mu?
+She's been really busy lately. | Son zamanlarda çok yoğun.
+I've finally figured out how this works. | Bunun nasıl çalıştığını sonunda çözdüm.
+We haven't heard from the landlord since Monday. | Pazartesiden beri ev sahibinden haber alamadık.
+I've already paid you back. | Borcumu sana geri ödedim zaten.
+@31
+Give me a second. I'm nearly ready. | Bir saniye, hazırlanmak üzereyim.
+No worries. These things happen. | Dert etme, olur böyle şeyler.
+I'm not really in the mood. | Pek havamda değilim.
+That sounds good to me. | Bana uyar.
+It's up to you. I don't mind. | Sana kalmış, bana fark etmez.
+I could do with a coffee. | Bir kahve iyi giderdi.
+Let's call it a night. | Bu gecelik bu kadar olsun.
+I didn't catch the last bit. | Son kısmını kaçırdım.
+That was a close one. | Az kalsın kötü oluyordu.
+There's no rush. Take your time. | Acele yok, rahat rahat yap.
+I'll be with you in a minute. | Birazdan yanındayım.
+That's not quite what I meant. | Tam olarak onu demek istemedim.
+I'm just having a look, thanks. | Sadece bakıyorum, teşekkürler.
+We might as well walk from here. | Buradan yürüyelim bari.
+Fair enough. Let's do it your way. | Peki, senin dediğin gibi yapalım.
+@32
+I was halfway there when you changed the plan. | Sen planı değiştirdiğinde yolun yarısındaydım.
+I've sent you the address, but the entrance is around the back. | Adresi sana gönderdim ama giriş arka tarafta.
+Could you grab my parcel if it arrives while I'm out? | Ben dışarıdayken paket gelirse alır mısın?
+I thought you said the table was booked for eight. | Masanın sekize ayırtıldığını söyledin sanmıştım.
+We're running a bit late. Can you save us some food? | Biraz gecikiyoruz, bize yemek ayırır mısın?
+I've been trying to reach you all morning. | Bütün sabah sana ulaşmaya çalışıyorum.
+I'll let you know as soon as I hear back. | Cevap gelir gelmez sana haber veririm.
+She was going to drive, but her car wouldn't start. | Arabayla gelecekti ama arabası çalışmadı.
+I don't think we've got enough chairs for everyone. | Sanırım herkese yetecek kadar sandalyemiz yok.
+Can you remind me to pick up some bread on the way home? | Eve dönerken ekmek almamı bana hatırlatır mısın?
+I've already eaten, but I'll keep you company. | Ben yedim ama sana eşlik ederim.
+I would have called, but my battery was dead. | Arayacaktım ama telefonumun şarjı bitmişti.
+Let me check whether the last train has left. | Son tren kalkmış mı bir bakayım.
+We ended up ordering in because nobody felt like cooking. | Kimsenin canı yemek yapmak istemediği için sonunda dışarıdan söyledik.
+You should have told me. I could have picked you up. | Bana söyleseydin ya, seni alabilirdim.

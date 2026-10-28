@@ -1,4 +1,4 @@
-import {createSentencePractice} from './sentences.js?v=9';
+import {createSentencePractice} from './sentences.js?v=10';
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const KEY='fatedreel-o11-book-v1';
 const fresh=()=>({version:1,unit:1,tab:'lesson',hidden:false,size:19,night:false,focus:false,speed:1,marks:{},bookmarks:[],notes:{},drafts:{},reviews:{},activities:{},quiz:null,exam:null});
@@ -63,7 +63,7 @@ function showDue(){const due=dueUnits();modal(`<div class="modal-head"><h2>Tekra
 document.addEventListener('click',e=>{const b=e.target.closest('[data-due-unit]');if(b){$('#modal').close();gotoUnit(Number(b.dataset.dueUnit),'review');}});
 window.addEventListener('hashchange',()=>{if(location.hash==='#home'){home=true;render();return;}const id=Number(location.hash.match(/^#unit-(\d+)$/)?.[1]);if(id>=1&&id<=32)gotoUnit(id);});
 async function loadBookJSON(path){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);try{const res=await fetch(path,{signal:controller.signal});if(!res.ok||!res.headers.get('content-type')?.includes('json'))throw Error('Invalid book data');return await res.json();}finally{clearTimeout(timer);}}
-async function init(){try{book=await loadBookJSON('book.json?v=8');setupActivities();const hash=Number(location.hash.match(/^#unit-(\d+)$/)?.[1]);if(hash>=1&&hash<=32)state.unit=hash;render();window.dispatchEvent(new Event('o11-ready'));}catch(error){console.error('Book initialization',error);window.dispatchEvent(new Event('o11-failed'));}}
+async function init(){try{book=await loadBookJSON('book.json?v=10');setupActivities();const hash=Number(location.hash.match(/^#unit-(\d+)$/)?.[1]);if(hash>=1&&hash<=32)state.unit=hash;render();window.dispatchEvent(new Event('o11-ready'));}catch(error){console.error('Book initialization',error);window.dispatchEvent(new Event('o11-failed'));}}
 init();
 
 function shuffleArray(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -88,7 +88,7 @@ function renderHome(){
  <section class="atelier-tools"><button class="tool-review" data-due><span class="tool-symbol" aria-hidden="true">↻</span><span><b>Hatırladıkça yerleşir.</b><small>${due.length?due.length+' ünite yeniden seni bekliyor.':'Tekrarlarını buradan takip et.'}</small></span><span aria-hidden="true">→</span></button><a href="/o12/"><span class="tool-symbol" aria-hidden="true">Aa</span><span><b>Kelimelere de uğra.</b><small>Kelime Atlası’nı keşfet.</small></span><span aria-hidden="true">↗</span></a></section><footer class="atelier-footer"><span>Dil Atölyesi <i>by Fatedreel</i></span><span>Azar azar. Her gün biraz.</span></footer>`;
 }
 
-function setupActivities(){if(!book)return;learning=createSentencePractice({book,state,save,play,stop:stopAudio,update:reason=>{const panel=$('#tab-panel');if(panel){panel.innerHTML=learning.content();if(reason==='next')panel.querySelector('.drill-listen')?.focus({preventScroll:true});if(reason==='translation')panel.querySelector('[data-act-translation]')?.focus({preventScroll:true});if(reason==='solution')panel.querySelector('[data-act-next]')?.focus({preventScroll:true});}}});}
+function setupActivities(){if(!book)return;learning=createSentencePractice({book,state,save,play,stop:stopAudio,update:reason=>{const panel=$('#tab-panel');if(panel){panel.innerHTML=learning.content();if(reason==='next'||reason==='restart')panel.querySelector('.drill-listen,[data-act-restart]')?.focus({preventScroll:true});if(reason==='translation')panel.querySelector('[data-act-translation]')?.focus({preventScroll:true});if(reason==='solution')panel.querySelector('[data-act-next]')?.focus({preventScroll:true});}}});}
 document.addEventListener('click',event=>learning?.click(event));
 document.addEventListener('input',event=>learning?.input(event));
 document.addEventListener('submit',event=>learning?.submit(event));

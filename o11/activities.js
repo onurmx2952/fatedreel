@@ -1,10 +1,16 @@
 // Controlled-answer exercises. No fuzzy grading or remote model is involved.
 export function normalizeAnswer(text, apostropheS='is', apostropheD='would') {
- return String(text).normalize('NFKC').toLowerCase().replace(/[’‘`]/g,"'").replace(/\bcan't\b/g,'cannot').replace(/\bcan not\b/g,'cannot').replace(/\bwon't\b/g,'will not').replace(/\bshan't\b/g,'shall not').replace(/n't\b/g,' not').replace(/\bi'm\b/g,'i am').replace(/\b(you|we|they)'re\b/g,'$1 are').replace(/\b(i|you|we|they)'ve\b/g,'$1 have').replace(/\b(i|you|he|she|it|we|they)'ll\b/g,'$1 will').replace(/\b(i|you|he|she|it|we|they)'d\b/g,`$1 ${apostropheD}`).replace(/\b(he|she|it|that|there)'s\b/g,`$1 ${apostropheS}`).replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim();
+ return String(text).normalize('NFKC').toLowerCase().replace(/[’‘`]/g,"'").replace(/\bsomeone's(?=\s+(?:at|in|on|here|there)\b)/g,'someone is').replace(/\bcan't\b/g,'cannot').replace(/\bcan not\b/g,'cannot').replace(/\bwon't\b/g,'will not').replace(/\bshan't\b/g,'shall not').replace(/n't\b/g,' not').replace(/\blet's\b/g,'let us').replace(/\bi'm\b/g,'i am').replace(/\b(you|we|they)'re\b/g,'$1 are').replace(/\b(i|you|we|they)'ve\b/g,'$1 have').replace(/\b(i|you|he|she|it|we|they)'ll\b/g,'$1 will').replace(/\b(i|you|he|she|it|we|they)'d\b/g,`$1 ${apostropheD}`).replace(/\b(he|she|it|that|there)'s\b/g,`$1 ${apostropheS}`).replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim();
 }
+export function answerForms(text){
+ const s=String(text).toLowerCase().replace(/[’‘]/g,"'");
+ const participle='been|got|lost|visited|finished|arrived|eaten|gone|done|seen|heard|sent|paid|left|booked|tried|fed|figured|agreed|called|picked';
+ return [new RegExp("\\b(?:he|she|it|that|there)(?:'s| has)\\s+(?:(?:just|already|never|ever)\\s+)?(?:"+participle+")\\b").test(s)?'has':'is',new RegExp("(?:'d| had)\\s+(?:(?:just|already|never)\\s+)?(?:"+participle+")\\b").test(s)?'had':'would'];
+}
+export function normalizedTranscript(text){return normalizeAnswer(text,...answerForms(text));}
 export function answerMatches(input,question) {
  const expected=[question.answer,...(question.accept||[])];
- return expected.some(a=>['is','has'].some(form=>['would','had'].some(d=>normalizeAnswer(input,form,d)===normalizeAnswer(a,form,d))));
+ return expected.some(a=>normalizeAnswer(input,...answerForms(a))===normalizedTranscript(a));
 }
 export function shuffle(items) {const out=[...items];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;}
 export function buildQuestions(book,bank) {
