@@ -1,10 +1,10 @@
 import * as T from './vendor/three.module.js';
 import {RoadPath} from './full-path.js';
-import {RoadWorld} from './world.js';
-import {PhysicsCar,makePhysicsWorld} from './vehicle-physics.js';
-import {CarView} from './vehicle-view.js';
-import {RoadColliders} from './vehicle-colliders.js';
-import {FollowNavigation,nextTurn} from './navigation.js';
+import {RoadWorld} from './world.js?v=20261029b';
+import {PhysicsCar,makePhysicsWorld} from './vehicle-physics.js?v=20261029b';
+import {CarView} from './vehicle-view.js?v=20261029b';
+import {RoadColliders} from './vehicle-colliders.js?v=20261029b';
+import {FollowNavigation,nextTurn} from './navigation.js?v=20261029b';
 const $=id=>document.getElementById(id),canvas=$('view');
 const renderer=new T.WebGLRenderer({canvas,antialias:false,powerPreference:'low-power'});renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1;renderer.shadowMap.enabled=false;
 const scene=new T.Scene();scene.background=new T.Color(0xa8c9e4);scene.fog=new T.Fog(0xbdcfdb,125,320);
