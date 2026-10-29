@@ -2,7 +2,7 @@ import * as THREE from './vendor/three.module.js';
 import {centerValues,normalValues,groundHeight} from './path.js';
 const $=id=>document.getElementById(id),canvas=$('view');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:false,powerPreference:'low-power',alpha:false});
-renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.shadowMap.enabled=false;
+renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;renderer.shadowMap.enabled=false;
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x9abbd6);scene.fog=new THREE.Fog(0xb7ccd9,65,220);
 const camera=new THREE.PerspectiveCamera(67,innerWidth/innerHeight,.15,360);camera.rotation.order='YXZ';
 scene.add(new THREE.HemisphereLight(0xdbeeff,0x625b45,2.5));const sun=new THREE.DirectionalLight(0xfff3dd,2.4);sun.position.set(-40,75,25);scene.add(sun);
@@ -38,7 +38,7 @@ async function build(){
  scene.userData={lengthMetres:100,photoReferenceMetres:51.6,geometries:'all estimated',panoramaSwitching:false};$('loading').textContent='Hazır · 100 m sürekli yol · WASD kamera';$('start').textContent='Yola gir';$('start').disabled=false;
 }
 let yaw=0,pitch=-.025,eyeOffset=1.7,velocity=new THREE.Vector3(),keys=new Set(),nearestS=0,drag=null;
-function reset(){const p=point(2,1.6);camera.position.copy(p);camera.position.y=height(2,1.6)+1.7;eyeOffset=1.7;yaw=-.012;pitch=-.025;velocity.set(0,0,0);nearestS=2;}reset();
+function reset(){const p=point(2,1.6);camera.position.copy(p);camera.position.y=height(2,1.6)+1.7;eyeOffset=1.7;yaw=.012;pitch=-.025;velocity.set(0,0,0);nearestS=2;}reset();
 function nearest(x,z){let best=Infinity,sBest=0;for(let s=0;s<=100;s+=1){const p=center(s),d=(p.x-x)**2+(p.z-z)**2;if(d<best){best=d;sBest=s;}}let low=Math.max(0,sBest-1),high=Math.min(100,sBest+1);for(let i=0;i<8;i++){let a=low+(high-low)/3,b=high-(high-low)/3,pa=center(a),pb=center(b);if((pa.x-x)**2+(pa.z-z)**2<(pb.x-x)**2+(pb.z-z)**2)high=b;else low=a;}return (low+high)*.5;}
 function release(){keys.clear();velocity.set(0,0,0);drag=null;}
 const movement=new Set(['KeyW','KeyA','KeyS','KeyD','KeyQ','KeyE','ShiftLeft','ShiftRight']);
@@ -53,4 +53,3 @@ let last=performance.now(),frames=0,sample=last;
 function animate(now){requestAnimationFrame(animate);if(!running)return;const dt=Math.min(.04,(now-last)/1000);last=now;if(started){const forward=(keys.has('KeyW')?1:0)-(keys.has('KeyS')?1:0),side=(keys.has('KeyD')?1:0)-(keys.has('KeyA')?1:0);const desired=new THREE.Vector3(side,0,-forward);if(desired.lengthSq()>0)desired.normalize();desired.applyAxisAngle(yAxis,yaw).multiplyScalar(keys.has('ShiftLeft')||keys.has('ShiftRight')?9:3.4);velocity.lerp(desired,1-Math.exp(-12*dt));camera.position.addScaledVector(velocity,dt);nearestS=nearest(camera.position.x,camera.position.z);let cp=center(nearestS),n=normal(nearestS),off=new THREE.Vector3().subVectors(camera.position,cp).dot(n);off=THREE.MathUtils.clamp(off,-24,24);if(nearestS<.03||nearestS>99.97){camera.position.x=cp.x+n.x*off;camera.position.z=cp.z+n.z*off;velocity.set(0,0,0);}eyeOffset=THREE.MathUtils.clamp(eyeOffset+((keys.has('KeyE')?1:0)-(keys.has('KeyQ')?1:0))*dt*3,1.05,12);const ground=Math.abs(off)<3.95?nearestS*.025:height(nearestS,off);camera.position.y=THREE.MathUtils.damp(camera.position.y,ground+eyeOffset,15,dt);if(Math.abs(off)>=24){camera.position.x=cp.x+n.x*off;camera.position.z=cp.z+n.z*off;}}
 camera.rotation.set(pitch,yaw,0);renderer.render(scene,camera);frames++;if(now-sample>700){const fps=frames*1000/(now-sample);$('fps').textContent=Math.round(fps)+' FPS';$('position').textContent=nearestS.toFixed(1);$('region').textContent=nearestS<=51.6?'Görsel referans bölümü · geometri tahmini':'Tahmini uzatma bölümü · 51,6–100 m';$('metrics').textContent=`${renderer.info.render.calls} draw call · ${renderer.info.render.triangles.toLocaleString()} üçgen · ${renderer.domElement.width}×${renderer.domElement.height} · ${renderer.info.memory.textures} doku`;frames=0;sample=now;}}
 build().then(()=>requestAnimationFrame(animate)).catch(e=>{$('loading').textContent='Sahne yüklenemedi: '+e.message;console.error(e);});
-
