@@ -4,7 +4,7 @@
 
 ## Kullanım
 
-WASD hareket, fareyle sürükleme veya isteğe bağlı pointer lock ile bakış, F yola hizalama, Q/E göz yüksekliği, Shift 2× hız. Yürüyüş / keşif / hızlı keşif hızı seçilebilir. Kilometre seçici ve kaydırıcı açıkça istenen konuma gider; olağan kamera hareketinde panorama veya konum atlaması yoktur. Araba / sürüş fiziği eklenmemiştir.
+W/↑ gaz, S/↓ fren, A-D/←→ direksiyon, Boşluk el freni, dururken X ileri/geri vites, R aracı yol üzerinde toparlama, F takip kamerasını arkaya alma. Fare sürükleme üçüncü şahıs kamerayı döndürür; tekerlek yakınlaştırır. Kilometre seçici aracı o bölüme götürür. Sekme/odak kaybında fizik duraklatılır; devamda momentum korunur.
 
 ## Referans ve tahmin
 
@@ -31,3 +31,11 @@ Tarayıcı: WASD hareketi, 3/6/9 km ve bitiş seçimi, shader/WebGL hata kayıtl
 Fotoğraflar © Google; 1.106 adet Mart 2026, bir adet Temmuz 2024 referansı. Three.js MIT lisansı `vendor/THREE-LICENSE.txt` içindedir.
 
 Güzergâh uçlarındaki gökyüzü boşluğunu kapatan zemin etekleri, örneklenen yolun dışındaki tahmini arka plan geometrisidir; kamera güzergâh sınırını aşmaz.
+
+## Araba fiziği
+
+cannon-es 0.20.0 RaycastVehicle, 1.150 kg dinamik gövde, 9,81 m/s² yerçekimi, dört yay-sönümleyicili tekerlek, motor kuvveti, hava ve yuvarlanma direnci, hıza bağlı direksiyon sınırı. Gaz ve fren lastik normal yükü/tutuş kapasitesiyle sınırlıdır; kar ve toprak daha az tutar. Fizik sabit 30 Hz, görüntü kare hızından ayrı çalışır. Fren impulslu kuvvetleri fizik adımına göre ölçeklenir.
+
+Araç yol rayına kilitlenmez; yoldan çıkabilir, kayabilir ve devrilebilir. Yol çarpışmaları yakın çevrede eğime hizalı 4 m kutularla; yol dışı zemin üçgen meshlerle yaklaşık temsil edilir. Yakın ağaç gövdeleri, kayalar ve tahmini yapı kütleleri katı çarpışma gövdeleridir. İnce dallar ve çalılar için çarpışma yoktur. Asfalt üzerindeyken pahalı gövde/üçgen temasları filtrelenir; yol dışına çıkınca etkinleşir. Bu basitleştirilmiş lastik/süspansiyon modelidir; deformasyon veya ayrıntılı aktarma organı modeli yoktur.
+
+Araç modeli hafif geometrilerden oluşturulmuştur. Gerçek zamanlı gölge yerine basit temas gölgesi vardır. Lisans: vendor/CANNON-LICENSE.txt. Testler: check-car.mjs (gaz/fren/geri vites, direksiyon, yokuş, katı engel, düşük kar tutuşu, kare hızı tutarlılığı); check-car-road.mjs (beş kilometrede dört teker desteği ve sınırlı çarpışma gövdesi sayısı).
