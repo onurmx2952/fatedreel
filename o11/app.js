@@ -1,4 +1,4 @@
-import {createSentencePractice} from './sentences.js?v=10';
+import {createSentencePractice} from './sentences.js?v=11';
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const KEY='fatedreel-o11-book-v1';
 const fresh=()=>({version:1,unit:1,tab:'lesson',hidden:false,size:19,night:false,focus:false,speed:1,marks:{},bookmarks:[],notes:{},drafts:{},reviews:{},activities:{},quiz:null,exam:null});
@@ -63,7 +63,7 @@ function showDue(){const due=dueUnits();modal(`<div class="modal-head"><h2>Tekra
 document.addEventListener('click',e=>{const b=e.target.closest('[data-due-unit]');if(b){$('#modal').close();gotoUnit(Number(b.dataset.dueUnit),'review');}});
 window.addEventListener('hashchange',()=>{if(location.hash==='#home'){home=true;render();return;}const id=Number(location.hash.match(/^#unit-(\d+)$/)?.[1]);if(id>=1&&id<=32)gotoUnit(id);});
 async function loadBookJSON(path){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);try{const res=await fetch(path,{signal:controller.signal});if(!res.ok||!res.headers.get('content-type')?.includes('json'))throw Error('Invalid book data');return await res.json();}finally{clearTimeout(timer);}}
-async function init(){try{book=await loadBookJSON('book.json?v=10');setupActivities();const hash=Number(location.hash.match(/^#unit-(\d+)$/)?.[1]);if(hash>=1&&hash<=32)state.unit=hash;render();window.dispatchEvent(new Event('o11-ready'));}catch(error){console.error('Book initialization',error);window.dispatchEvent(new Event('o11-failed'));}}
+async function init(){try{book=await loadBookJSON('book.json?v=11');setupActivities();const hash=Number(location.hash.match(/^#unit-(\d+)$/)?.[1]);if(hash>=1&&hash<=32)state.unit=hash;render();window.dispatchEvent(new Event('o11-ready'));}catch(error){console.error('Book initialization',error);window.dispatchEvent(new Event('o11-failed'));}}
 init();
 
 function shuffleArray(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}

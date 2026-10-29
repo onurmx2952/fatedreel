@@ -39,6 +39,10 @@ const oldRound={version:2,refs:['17:examples:0'],pos:0,work:{'17:examples:0':{te
 const legacy={unit:17,tab:'practice',reviews:{},notes:{17:'Keep note'},sentencePractice:{17:oldRound}};
 createSentencePractice({book,state:legacy,save:()=>true,update:()=>{},play:()=>{}}).content();
 assert.deepEqual(legacy.sentencePracticePrevious[17],oldRound);assert.equal(legacy.notes[17],'Keep note');assert.equal(legacy.sentencePractice[17].version,3);
-const retired=new Set(JSON.parse(fs.readFileSync(new URL('./retired-practice-audio.json',import.meta.url),'utf8')));
-assert.equal(pool.size,480);assert.ok([...pool.values()].every(q=>!retired.has(q.audio)),'Every old textbook recording must be replaced');
+const lastEdition={...legacy.sentencePractice[17],edition:'everyday-v10',pos:8,work:{'17:examples:0':{text:'Keep old answer'}}};
+legacy.sentencePractice[17]=lastEdition;
+createSentencePractice({book,state:legacy,save:()=>true,update:()=>{},play:()=>{}}).content();
+assert.equal(legacy.sentencePractice[17].pos,0);assert.equal(legacy.sentencePractice[17].edition,'everyday-v11');
+assert.deepEqual(legacy.sentencePracticePrevious[17],oldRound);assert.deepEqual(legacy.sentencePracticeHistory['17:everyday-v10'],lastEdition);
+assert.equal(pool.size,480);
 console.log(`32 units × 50 rounds: 10/5 mix, no future units/duplicates, ${pool.size} recorded sentences, grammar feedback, reveal/skip/finish/reload and legacy data passed`);

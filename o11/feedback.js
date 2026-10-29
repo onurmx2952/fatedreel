@@ -30,7 +30,35 @@ export function alignWords(actual,target){
  return {edits:edits.reverse(),cost:dp[actual.length][target.length]};
 }
 
+function expressions(t){
+ const definitions=[
+  [['on','the','way','to'],'bir yere giderken',true],
+  [['on','the','phone'],'telefonda',false],
+  [['on','the','bus'],'otobüste yolculuk ederken',false],
+  [['on','the','train'],'trende yolculuk ederken',false],
+  [['on','time'],'vaktinde',false],
+  [['in','time'],'zamanında yetişerek',false],
+  [['in','a','meeting'],'toplantıda',false],
+  [['by','the','way'],'bu arada',false],
+  [['at','night'],'gece/geceleri',false],
+  [['on','foot'],'yürüyerek',false],
+  [['at','all'],'hiç',false],
+  [['by','card'],'kartla',false],
+  [['up','to','you'],'sana kalmış',false],
+  [['take','your','time'],'acele etme',false]
+ ];
+ const result=[];
+ for(const owner of ['my','your','his','her','our','their'])definitions.push([['on',owner,'way'],'yolda',false]);
+ for(const [words,meaning,extend] of definitions)for(let at=0;at<=t.length-words.length;at++)if(words.every((w,i)=>t[at+i]===w)){
+  const end=Math.min(t.length,at+words.length+(extend?1:0));
+  const translation=extend&&t[at+words.length]==='work'?'işe giderken':meaning;
+  result.push({start:at,end,phrase:t.slice(at,end).join(' '),meaning:translation});
+ }
+ return result;
+}
 function wordReason(word,at,t,q){
+ const expression=expressions(t).find(p=>at>=p.start&&at<p.end);
+ if(expression)return `“${expression.phrase}” bir kalıp olarak “${expression.meaning}” anlamına gelir; ${quoted(word)} bu kalıbın parçasıdır.`;
  const before=t.slice(0,at).join(' '),after=t.slice(at+1).join(' '),all=t.join(' '),next=t[at+1]||'';
  if(word==='about'){
   if(/\bthink(?:s|ing)?$/.test(before))return 'Bir şey hakkında düşünmek “think about + konu” kalıbıyla söylenir.';
@@ -130,7 +158,11 @@ export function explainAnswer(input,q){
   const reason=/\?\s*$/.test(q.answer)&&t.slice(start,end+1).some(w=>aux.has(w))?'Soruda yardımcı fiil özneden önce gelir.':/^(do you know|i know|i think)/.test(t.join(' '))?'İç cümlede özne fiilden önce gelir.':'Bu cümlede kelimeler bu sırayla kullanılır.';
   return `${quoted(actual.slice(start,end+1).join(' '))} yerine ${quoted(t.slice(start,end+1).join(' '))} sırası gerekir. ${reason}`;
  }
+ const groups=expressions(t).filter(p=>edits.filter(e=>e.at>=p.start&&e.at<p.end).length>1);
+ const consumed=new Set();
  return edits.map(e=>{
+  const group=groups.find(p=>e.at>=p.start&&e.at<p.end);
+  if(group){if(consumed.has(group))return '';consumed.add(group);return `“${group.phrase}” kalıbını kullanmalısın; “${group.meaning}” anlamına gelir.`;}
   if(e.kind==='missing'){const why=wordReason(e.expected,e.at,t,q);return `${quoted(e.expected)} koymayı unutmuşsun.${why?' '+why:''}`;}
   if(e.kind==='extra'){
    let why='';
@@ -141,5 +173,5 @@ export function explainAnswer(input,q){
    return `${quoted(e.actual)} burada fazla.${why?' '+why:''}`;
   }
   const why=replacementReason(e,t,q);return `${quoted(e.actual)} yerine ${quoted(e.expected)} kullanmalısın.${why?' '+why:''}`;
- }).join('\n');
+ }).filter(Boolean).join('\n');
 }

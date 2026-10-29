@@ -20,6 +20,6 @@ for u in book['units']:
  # Retired dialogue tasks must not add old textbook sentences to the new pool.
  u['dialogue']=[]
  u['exercises']=[{**s,'why':u['rules'][0][1]} for s in u['examples'][:4]]
-book['practiceEdition']='everyday-v10'
+book['practiceEdition']='everyday-v11'
 (site/'book.json').write_text(json.dumps(book,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print('Rebuilt every unit: 480 new everyday practice sentences')

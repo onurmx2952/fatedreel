@@ -12,6 +12,15 @@ assert.ok(!answerMatches('She has looking for her bag', {answer:"She's looking f
 assert.match(explainAnswer('She been really busy lately',{answer:"She's been really busy lately."}),/“has” koymayı unutmuşsun/);
 assert.match(explainAnswer('You should told me',{answer:'You should have told me.'}),/modal fiilden sonra/);
 const example=explainAnswer('I thinking my holiday',{answer:'I am thinking about my holiday.'});
+const way=explainAnswer('I get a coffee go for work',{answer:'I grab a coffee on the way to work.'});
+assert.match(way,/on the way to work.*işe giderken/);assert.ok(!way.includes('yüzey'));
+assert.equal(way.split('\n').length,2,'Treat the expression as a whole, not four unrelated grammar errors');
+const onlyOn=explainAnswer('I grab a coffee the way to work',{answer:'I grab a coffee on the way to work.'});
+assert.match(onlyOn,/on the way to work/);assert.ok(!onlyOn.includes('yüzey'));
+const busOn=explainAnswer('I am the bus',{answer:'I am on the bus.'});assert.match(busOn,/otobüste/);assert.ok(!busOn.includes('yüzey'));
+assert.match(explainAnswer("I'm my way",{answer:"I'm on my way."}),/yolda/);
+assert.match(explainAnswer('No problem all',{answer:'No problem at all.'}),/at all/);
+assert.match(explainAnswer("It's up you",{answer:"It's up to you."}),/sana kalmış/);
 assert.equal(example.split('\n').length,2);assert.match(example,/“am” koymayı unutmuşsun/);assert.match(example,/“about” koymayı unutmuşsun/);assert.match(example,/think about/);
 const onlyAbout=explainAnswer('I am thinking my holiday',{answer:'I am thinking about my holiday.'});
 assert.equal(onlyAbout.split('\n').length,1);assert.ok(!onlyAbout.includes('“am”'));
