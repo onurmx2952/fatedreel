@@ -55,4 +55,4 @@ Edge ve Windows WebKit testleri gerçek iPad donanım testi yerine geçmez. WebK
 
 ## Hazırlanan model tabanlı anlam kontrolü
 
-Kullanıcının verdiği prompt ve JSON şemasına dayanan yeni servis ve istemci hazırdır; gerçek model testleri henüz yapılamadığından ana ekranda etkin değildir. Bağlantı durumu, gizli anahtar kurulumu ve 20 cümlelik gerçek değerlendirme için [GRAMMAR-CHECK.md](GRAMMAR-CHECK.md) dosyasına bakın. Mevcut yerel kelime karşılaştırması bir anlam modeli olarak sunulmaz.
+Ana ekran hesapsız ve çevrimdışı yerel denetim kullanır. Bilinen doğru alternatifler kabul edilir; belirsiz ifadeler yanlış sayılmaz ve puanlanmaz. 20 örnek ve 480 özgün cevap `test-local-check.mjs` ile sınanır. Bu bir genel anlam modeli değildir. İsteğe bağlı model altyapısı ve mevcut sınırlamalar [GRAMMAR-CHECK.md](GRAMMAR-CHECK.md) dosyasındadır.

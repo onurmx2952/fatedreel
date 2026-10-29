@@ -1,12 +1,12 @@
-# Anlama göre İngilizce kontrolü — bağlantı bekliyor
+# İngilizce kontrolü — hesapsız yerel sürüm etkin
 
-Bu özellik henüz mevcut alıştırma ekranında etkin değildir. Mevcut yerel karşılaştırma gerçek bir anlam modeli olarak sunulmaz. Kullanıcının verdiği İngilizce prompt ve JSON şeması sunucu tarafına eklendi; gerçek model testi geçmeden yeni akış etkinleştirilmeyecek.
+Uygulama artık `local-check.js` ile hesapsız ve çevrimdışı denetim kullanır. Bu bir anlam modeli değildir: bilinen eşdeğerleri kabul eder, açık hataları kısa Türkçe açıklamayla gösterir. Değerlendiremediği farklı ifadeyi açıkça belirtir ve doğru/yanlış puanlamasına katmaz. 20 örnek, 480 özgün cevap ve belirsiz alternatifler gerçek yerel kodla sınanır (`node o11/scripts/test-local-check.mjs`). Model tabanlı servis aşağıda isteğe bağlı teknik altyapı olarak belgelenmiştir; uygulama ona istek göndermez.
 
 ## Hazır parçalar
 
 - `functions/_lib/o11-grammar.js`: verilen sistem prompt'u, strict JSON Schema, OpenAI Responses isteği (`temperature: 0`, `store: false`), sınırlandırılmış girdiler, yanıt doğrulama ve `correct = errors.length === 0` değişmezi. Geçerli cümle model tarafından başka bir üsluba çevrilirse kod öğrencinin kendi cümlesini korur.
 - `functions/api/o11/check.js`: `POST /api/o11/check` tam olarak `{turkish, accepted, student}` alır. GET yalnızca bağlantı durumunu döndürür. Anahtarlar hiçbir zaman istemciye gönderilmez. Geçersiz veya eksik model çıktısı hata olarak işlenir; yanlış öğrenci cevabı gibi gösterilmez.
-- `o11/meaning-check.js`: hazırlanmış istemci, güvenli kısa geri bildirim, isteğe bağlı notlar, uygun he/she/they ve cook/make/prepare örnekleri. `app.js` henüz bunu çağırmıyor. Hiçbir bağlantı hatası yerel model-cevap karşılaştırmasına sessizce düşmez. `createSentencePractice` motorundaki `check` ve `renderResult` seçenekleriyle gerçek akışa takılmaya hazırdır; bekleme, tekrar deneme, eski yanıtı iptal etme ve kontrol sonuçlarını kaydetme tamamlanmıştır. Ana uygulama bu seçenekleri henüz açmıyor.
+- `o11/meaning-check.js`: hazırlanmış istemci, güvenli kısa geri bildirim, isteğe bağlı notlar, uygun he/she/they ve cook/make/prepare örnekleri. `app.js` henüz bunu çağırmıyor. Hiçbir bağlantı hatası yerel model-cevap karşılaştırmasına sessizce düşmez. `createSentencePractice` motorundaki `check` ve `renderResult` seçenekleriyle gerçek akışa takılmaya hazırdır; bekleme, tekrar deneme, eski yanıtı iptal etme ve kontrol sonuçlarını kaydetme tamamlanmıştır. Ana uygulama bu seçenekleri yerel denetim ile kullanıyor.
 - `o11/scripts/grammar-cases.json`: 20 gerçek model değerlendirmesi. İlk 10 cümle doğru alternatifler, son 10 cümle yazım/dilbilgisi/anlam hataları içerir. `diner/dinner`, açık cinsiyet ve yanlış zaman örnekleri dahildir.
 
 ## Gerçek bağlantı

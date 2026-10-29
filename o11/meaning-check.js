@@ -7,7 +7,7 @@ const baseToThird=Object.fromEntries(Object.entries(thirdToBase).map(([a,b])=>[b
 export function referenceTranslations(turkish,reference){
  const refs=new Set([reference]);
  const explicit=/kadın|adam|erkek|kız|annem|annesi|babam|babası|abla|ağabey|ayşe|mehmet/i.test(turkish);
- if(!explicit){
+ if(!explicit&&!/onlar|onların/i.test(turkish)){
   const [s,d]=answerForms(reference);
   const expanded=reference.replace(/^(he|she)'s\s+/i,`$1 ${s} `).replace(/^(he|she)'d\s+/i,`$1 ${d} `).replace(/^they're\s+/i,'They are ').replace(/^they've\s+/i,'They have ');
   const match=expanded.match(/^(he|she|they)\s+(\S+)(.*)$/i);
