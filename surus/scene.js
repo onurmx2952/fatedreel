@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three.module.js';
-import {centerValues,normalValues,groundHeight} from './path.js';
+import {centerValues,normalValues,groundHeight,nearestStation} from './path.js';
 const $=id=>document.getElementById(id),canvas=$('view');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:false,powerPreference:'low-power',alpha:false});
 renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;renderer.shadowMap.enabled=false;
@@ -39,7 +39,7 @@ async function build(){
 }
 let yaw=0,pitch=-.025,eyeOffset=1.7,velocity=new THREE.Vector3(),keys=new Set(),nearestS=0,drag=null;
 function reset(){const p=point(2,1.6);camera.position.copy(p);camera.position.y=height(2,1.6)+1.7;eyeOffset=1.7;yaw=.012;pitch=-.025;velocity.set(0,0,0);nearestS=2;}reset();
-function nearest(x,z){let best=Infinity,sBest=0;for(let s=0;s<=100;s+=1){const p=center(s),d=(p.x-x)**2+(p.z-z)**2;if(d<best){best=d;sBest=s;}}let low=Math.max(0,sBest-1),high=Math.min(100,sBest+1);for(let i=0;i<8;i++){let a=low+(high-low)/3,b=high-(high-low)/3,pa=center(a),pb=center(b);if((pa.x-x)**2+(pa.z-z)**2<(pb.x-x)**2+(pb.z-z)**2)high=b;else low=a;}return (low+high)*.5;}
+const nearest=nearestStation;
 function release(){keys.clear();velocity.set(0,0,0);drag=null;}
 const movement=new Set(['KeyW','KeyA','KeyS','KeyD','KeyQ','KeyE','ShiftLeft','ShiftRight']);
 window.addEventListener('keydown',e=>{if(['INPUT','SELECT','BUTTON'].includes(e.target.tagName))return;if(movement.has(e.code)){e.preventDefault();keys.add(e.code);}});window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',release);document.addEventListener('visibilitychange',()=>{release();running=!document.hidden;last=performance.now();});
