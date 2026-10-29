@@ -1,0 +1,22 @@
+[
+ {"id":"he-neutral-cook","turkish":"O akşam yemeği hazırlıyor.","accepted":["She is making dinner.","He is cooking dinner.","They are preparing dinner."],"student":"He is cooking dinner","correct":true},
+ {"id":"she-neutral-prepare","turkish":"O akşam yemeği hazırlıyor.","accepted":["He is cooking dinner."],"student":"She is preparing dinner.","correct":true},
+ {"id":"they-neutral","turkish":"O akşam yemeği hazırlıyor.","accepted":["She is making dinner."],"student":"They are cooking dinner.","correct":true},
+ {"id":"make-synonym","turkish":"Akşam yemeği hazırlıyorum.","accepted":["I am cooking dinner."],"student":"I'm making dinner.","correct":true},
+ {"id":"work-gender","turkish":"O evden çalışıyor.","accepted":["She works from home."],"student":"He works from home.","correct":true},
+ {"id":"lowercase-no-period","turkish":"Şu anda evdeyim.","accepted":["I am at home now."],"student":"i'm at home now","correct":true},
+ {"id":"synonym-purchase","turkish":"İki bilet aldım.","accepted":["I bought two tickets."],"student":"I purchased two tickets.","correct":true},
+ {"id":"same-meaning-order","turkish":"Otobüsü şu anda bekliyorum.","accepted":["I am waiting for the bus now."],"student":"Right now, I'm waiting for the bus.","correct":true},
+ {"id":"different-place-form","turkish":"O şu anda evde.","accepted":["He is at home now."],"student":"She is home right now.","correct":true},
+ {"id":"short-question","turkish":"Biraz kahve ister misin?","accepted":["Do you want some coffee?"],"student":"Would you like some coffee?","correct":true},
+ {"id":"diner-real-word","turkish":"O akşam yemeği hazırlıyor.","accepted":["She is making dinner."],"student":"He is cooking diner","correct":false,"errorType":"spelling","fix":"dinner"},
+ {"id":"wrong-past","turkish":"Dün işe gittim.","accepted":["I went to work yesterday."],"student":"I go to work yesterday.","correct":false},
+ {"id":"wrong-ongoing","turkish":"Şu anda akşam yemeği hazırlıyorum.","accepted":["I am making dinner now."],"student":"I cooked dinner yesterday.","correct":false},
+ {"id":"explicit-woman","turkish":"Kadın evde.","accepted":["The woman is at home."],"student":"The man is at home.","correct":false,"errorType":"wrong_meaning"},
+ {"id":"agreement","turkish":"Ben açım.","accepted":["I am hungry."],"student":"I is hungry.","correct":false,"errorType":"grammar"},
+ {"id":"missing-preposition","turkish":"Otobüsü bekliyorum.","accepted":["I am waiting for the bus."],"student":"I am waiting the bus.","correct":false,"errorType":"grammar"},
+ {"id":"plural","turkish":"İki biletim var.","accepted":["I have two tickets."],"student":"I have two ticket.","correct":false,"errorType":"grammar"},
+ {"id":"wrong-temperature","turkish":"Bu kahve çok soğuk.","accepted":["This coffee is very cold."],"student":"This coffee is very hot.","correct":false,"errorType":"wrong_meaning"},
+ {"id":"spelling-phone","turkish":"Bu telefonu istiyorum.","accepted":["I want this phone."],"student":"I want this fone.","correct":false,"errorType":"spelling"},
+ {"id":"question-order","turkish":"Nerede yaşıyorsun?","accepted":["Where do you live?"],"student":"Where you do live?","correct":false,"errorType":"grammar"}
+]
