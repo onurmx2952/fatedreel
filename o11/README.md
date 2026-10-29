@@ -52,3 +52,7 @@ localStorage anahtarı: `fatedreel-o11-book-v1`. Yedekler aynı sürüm şeması
 - Eski görev bankası dosyaları mevcut istemciler ve eski kayıtlar için korunur, yeni akışta yüklenmez.
 
 Edge ve Windows WebKit testleri gerçek iPad donanım testi yerine geçmez. WebKit MP3 codec desteği ortama bağlı olduğundan bu testte dosyanın HTTP yanıtı kontrol edilir.
+
+## Hazırlanan model tabanlı anlam kontrolü
+
+Kullanıcının verdiği prompt ve JSON şemasına dayanan yeni servis ve istemci hazırdır; gerçek model testleri henüz yapılamadığından ana ekranda etkin değildir. Bağlantı durumu, gizli anahtar kurulumu ve 20 cümlelik gerçek değerlendirme için [GRAMMAR-CHECK.md](GRAMMAR-CHECK.md) dosyasına bakın. Mevcut yerel kelime karşılaştırması bir anlam modeli olarak sunulmaz.

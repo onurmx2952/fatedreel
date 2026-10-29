@@ -9,7 +9,9 @@ for(const c of cases){
   let verdict;
   if(endpoint){const response=await fetch(endpoint,{method:'POST',headers:{Origin:new URL(endpoint).origin,'Content-Type':'application/json'},body:JSON.stringify(input)});if(!response.ok)throw Error(`HTTP ${response.status}: ${JSON.stringify(await response.json())}`);verdict=normalizeVerdict(await response.json(),input);}
   else verdict=await checkTranslation(input,process.env);
-  const passed=verdict.correct===c.correct&&(!c.errorType||verdict.errors.some(e=>e.type===c.errorType))&&(!c.fix||verdict.errors.some(e=>e.fix.toLowerCase()===c.fix));
+  const tenseHint=/present (?:simple|continuous|perfect)|past (?:simple|continuous|perfect)|future (?:simple|continuous|perfect)|geniş zaman|şimdiki zaman|geçmiş zaman/i.test([...verdict.errors.map(e=>e.explanation_tr),...verdict.notes].join(' '));
+  const minimalCorrection=!c.corrected||verdict.corrected.toLowerCase().replace(/[.!?]$/,'')===c.corrected.toLowerCase().replace(/[.!?]$/,'');
+  const passed=minimalCorrection&&!tenseHint&&verdict.correct===c.correct&&(!c.errorType||verdict.errors.some(e=>e.type===c.errorType))&&(!c.fix||verdict.errors.some(e=>e.fix.toLowerCase()===c.fix));
   results.push({id:c.id,passed,expected:c.correct,verdict});console.log(`${passed?'PASS':'FAIL'} ${c.id}`);
  }catch(error){
   console.error(`NOT EVALUATED ${c.id}: ${error.message}`);

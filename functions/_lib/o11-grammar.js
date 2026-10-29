@@ -59,7 +59,7 @@ export function normalizeVerdict(value,input){
 }
 
 export function grammarConfiguration(env){
- return {ready:Boolean(env.OPENAI_API_KEY&&env.PROGRAM_DB),provider:env.OPENAI_API_KEY?'openai':null,model:env.O11_GRAMMAR_MODEL||'gpt-4.1-mini',workersAIAvailable:Boolean(env.AI?.run),reason:!env.OPENAI_API_KEY?'model_not_configured':!env.PROGRAM_DB?'limits_not_configured':null};
+ return {ready:Boolean(env.OPENAI_API_KEY&&env.PROGRAM_DB),provider:env.OPENAI_API_KEY?'openai':null,model:env.O11_GRAMMAR_MODEL||'gpt-4.1-mini',workersAIAvailable:Boolean(env.AI?.run),limitsAvailable:Boolean(env.PROGRAM_DB),reason:!env.OPENAI_API_KEY?'model_not_configured':!env.PROGRAM_DB?'limits_not_configured':null};
 }
 
 export async function checkTranslation(raw,env,fetcher=fetch){
