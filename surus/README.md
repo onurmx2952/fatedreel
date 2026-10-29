@@ -4,7 +4,7 @@
 
 ## Kullanım
 
-W/↑ gaz, S/↓ fren, A-D/←→ direksiyon, Boşluk el freni, dururken X ileri/geri vites, R aracı yol üzerinde toparlama, F takip kamerasını arkaya alma. Fare sürükleme üçüncü şahıs kamerayı döndürür; tekerlek yakınlaştırır. Kilometre seçici aracı o bölüme götürür. Sekme/odak kaybında fizik duraklatılır; devamda momentum korunur.
+W/↑ gaz, S/↓ fren; basılı tutulunca durduktan sonra otomatik geri, A-D/←→ direksiyon, Boşluk el freni, R aracı yol üzerinde toparlama, F takip kamerasını arkaya alma. Fare sürükleme üçüncü şahıs kamerayı döndürür; tekerlek yakınlaştırır. Kilometre seçici aracı o bölüme götürür. Sekme/odak kaybında fizik duraklatılır; devamda momentum korunur.
 
 ## Referans ve tahmin
 
@@ -39,3 +39,9 @@ cannon-es 0.20.0 RaycastVehicle, 1.150 kg dinamik gövde, 9,81 m/s² yerçekimi,
 Araç yol rayına kilitlenmez; yoldan çıkabilir, kayabilir ve devrilebilir. Yol çarpışmaları yakın çevrede eğime hizalı 4 m kutularla; yol dışı zemin üçgen meshlerle yaklaşık temsil edilir. Yakın ağaç gövdeleri, kayalar ve tahmini yapı kütleleri katı çarpışma gövdeleridir. İnce dallar ve çalılar için çarpışma yoktur. Asfalt üzerindeyken pahalı gövde/üçgen temasları filtrelenir; yol dışına çıkınca etkinleşir. Bu basitleştirilmiş lastik/süspansiyon modelidir; deformasyon veya ayrıntılı aktarma organı modeli yoktur.
 
 Araç modeli hafif geometrilerden oluşturulmuştur. Gerçek zamanlı gölge yerine basit temas gölgesi vardır. Lisans: vendor/CANNON-LICENSE.txt. Testler: check-car.mjs (gaz/fren/geri vites, direksiyon, yokuş, katı engel, düşük kar tutuşu, kare hızı tutarlılığı); check-car-road.mjs (beş kilometrede dört teker desteği ve sınırlı çarpışma gövdesi sayısı).
+
+## Sürüş güncellemesi
+
+Normal grafik varsayılandır; N100/Eko elle seçilebilir. Hızlı direksiyon tepkisi, Ackermann ön teker açıları, ön/arka ayrı fren dağılımı, yay-sönümleyici ayarı ve viraj denge çubukları kullanılır. Akslar ve süspansiyon kolları teker hareketini görsel olarak izler. Yakın navigasyon gerçek araç konumu ve yönüyle döner.
+
+Yol, banket ve arazi ortak 2 m istasyon ızgarasını kullanır; kenar etekleri ve örtüşme boşlukları kapatır. route/signs.json, fotoğraflarda kontrol edilmiş 49 viraj, bozuk yol, viraj dizisi ve sollama yasağı levhasını içerir. Levha konumları, boyutları ve yönleri yaklaşık; tüm gerçek tabelaların eksiksiz envanteri değildir.

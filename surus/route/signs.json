@@ -1,0 +1,688 @@
+{
+  "count": 49,
+  "source": "visually checked panorama crops with red/white chevron tracking; manual verified warnings and restrictions",
+  "placement": "approximate",
+  "signs": [
+    {
+      "s": 420.0,
+      "offset": 4.45,
+      "kind": "chevron-right",
+      "yaw": 0.6517,
+      "sources": [
+        42,
+        43
+      ],
+      "reference": "Rg1PsVFCXM_hzUELx26lFQ",
+      "crop": "0042-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 582.0,
+      "offset": 5.07,
+      "kind": "chevron-left",
+      "yaw": -0.2559,
+      "sources": [
+        55,
+        56
+      ],
+      "reference": "tCi0TDYiGmBKIVSBxCgCAA",
+      "crop": "0056-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 988.0,
+      "offset": 4.45,
+      "kind": "chevron-left",
+      "yaw": 2.0696,
+      "sources": [
+        98
+      ],
+      "reference": "VzQ4bCqow_r3lBTQDpwWkQ",
+      "crop": "0098-1.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 1504.0,
+      "offset": 5.63,
+      "kind": "chevron-right",
+      "yaw": 2.41,
+      "sources": [
+        148,
+        149
+      ],
+      "reference": "u_wpEu3iV_vI2v1ADOFO4g",
+      "crop": "0148-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 1690.0,
+      "offset": 5.21,
+      "kind": "chevron-left",
+      "yaw": -0.4597,
+      "sources": [
+        164,
+        165
+      ],
+      "reference": "Qjokko_T3fls38QXTxSEWg",
+      "crop": "0165-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 1788.0,
+      "offset": -7.0,
+      "kind": "chevron-left",
+      "yaw": 1.3273,
+      "sources": [
+        176,
+        177
+      ],
+      "reference": "is6POm2XQeipNobDuHpZQg",
+      "crop": "0176-1.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": true
+    },
+    {
+      "s": 2612.0,
+      "offset": -6.41,
+      "kind": "chevron-left",
+      "yaw": 0.4158,
+      "sources": [
+        256,
+        257
+      ],
+      "reference": "7mLhR8XyAKz9SHi9bNtaBg",
+      "crop": "0256-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 2676.0,
+      "offset": -7.0,
+      "kind": "chevron-left",
+      "yaw": 0.093,
+      "sources": [
+        262,
+        263
+      ],
+      "reference": "I3aXt7kMocKqB9QyA-0mhg",
+      "crop": "0262-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 3248.0,
+      "offset": 4.45,
+      "kind": "bumps",
+      "yaw": -0.7017,
+      "sources": [
+        316
+      ],
+      "reference": "NgS3vKchLsjnIjLzdvGtjQ",
+      "crop": "0316-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 3550.0,
+      "offset": -7.0,
+      "kind": "chevron-right",
+      "yaw": 1.3853,
+      "sources": [
+        344,
+        345
+      ],
+      "reference": "vxvce4FSHg_Fqy8sWXliCg",
+      "crop": "0345-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 3550.0,
+      "offset": -7.0,
+      "kind": "chevron-left",
+      "yaw": 2.9872,
+      "sources": [
+        346,
+        347
+      ],
+      "reference": "Jo7dzigoJyrdvNUCqHB4Qw",
+      "crop": "0346-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 3598.0,
+      "offset": -7.0,
+      "kind": "chevron-left",
+      "yaw": 2.2638,
+      "sources": [
+        351,
+        352
+      ],
+      "reference": "8TlSEJXtrAScTWhRK0porw",
+      "crop": "0351-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 3850.0,
+      "offset": -5.84,
+      "kind": "chevron-left",
+      "yaw": 1.0167,
+      "sources": [
+        377,
+        378
+      ],
+      "reference": "6jj2O2EwJS2uqzQirBbK6A",
+      "crop": "0377-2.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": true
+    },
+    {
+      "s": 3982.0,
+      "offset": 4.45,
+      "kind": "chevron-right",
+      "yaw": 3.1324,
+      "sources": [
+        389,
+        390
+      ],
+      "reference": "tUJWXIgYC-650w0iJGLitw",
+      "crop": "0389-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 4262.0,
+      "offset": 4.45,
+      "kind": "chevron-right",
+      "yaw": 1.8345,
+      "sources": [
+        417,
+        418
+      ],
+      "reference": "dPs3Dvy2vdSd0CR92W9vpA",
+      "crop": "0417-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 4414.0,
+      "offset": 4.84,
+      "kind": "chevron-left",
+      "yaw": -1.1644,
+      "sources": [
+        430,
+        431,
+        432
+      ],
+      "reference": "mUdKTkZPBXyhHONtFlVUPA",
+      "crop": "0431-2.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 4580.0,
+      "offset": 4.5,
+      "kind": "chevron-right",
+      "yaw": -0.6947,
+      "sources": [
+        445,
+        447
+      ],
+      "reference": "1f-RfMdL0YUvsRvLn2Ixog",
+      "crop": "0447-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 4902.0,
+      "offset": -7.0,
+      "kind": "chevron-left",
+      "yaw": 2.8685,
+      "sources": [
+        478,
+        479
+      ],
+      "reference": "ThT-s6dc3FaZc2PVDQz5dA",
+      "crop": "0478-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 5054.0,
+      "offset": 6.22,
+      "kind": "chevron-left",
+      "yaw": -1.2732,
+      "sources": [
+        492,
+        493
+      ],
+      "reference": "hGd7wh1il7JJhIsp7fR6gQ",
+      "crop": "0493-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 5218.0,
+      "offset": 4.45,
+      "kind": "chevron-right",
+      "yaw": 2.0702,
+      "sources": [
+        510,
+        511
+      ],
+      "reference": "0N7JP8cRqsORf457NEQgTQ",
+      "crop": "0510-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 5342.0,
+      "offset": 7.0,
+      "kind": "chevron-right",
+      "yaw": -1.3618,
+      "sources": [
+        521,
+        522
+      ],
+      "reference": "supaJUTPbqJLb6LFm1MuYg",
+      "crop": "0521-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 5378.0,
+      "offset": 6.38,
+      "kind": "chevron-right",
+      "yaw": -1.3004,
+      "sources": [
+        525,
+        526
+      ],
+      "reference": "O5IrM9sdQaRxOp2phQeRpQ",
+      "crop": "0525-2.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 5902.0,
+      "offset": 4.68,
+      "kind": "chevron-right",
+      "yaw": 2.6086,
+      "sources": [
+        576,
+        577
+      ],
+      "reference": "Fa9LldLuEP6r0YYLzsFaGQ",
+      "crop": "0576-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 6776.0,
+      "offset": 6.2,
+      "kind": "chevron-right",
+      "yaw": 2.663,
+      "sources": [
+        659,
+        661
+      ],
+      "reference": "8ISsWzs8lDIGY6GkFJjqTg",
+      "crop": "0661-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 6992.0,
+      "offset": 7.0,
+      "kind": "chevron-right",
+      "yaw": -2.1715,
+      "sources": [
+        682,
+        683
+      ],
+      "reference": "fkYOj56A6lNVx4IW-k1gzg",
+      "crop": "0682-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 7066.0,
+      "offset": 4.97,
+      "kind": "chevron-right",
+      "yaw": -0.8055,
+      "sources": [
+        687,
+        690
+      ],
+      "reference": "fsDZcfBAHOFQfjipJWX8oA",
+      "crop": "0690-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 7066.0,
+      "offset": 4.82,
+      "kind": "chevron-left",
+      "yaw": -0.0336,
+      "sources": [
+        688,
+        690
+      ],
+      "reference": "iqMqlLj2a8nvjPVtNHx6sQ",
+      "crop": "0688-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 7548.0,
+      "offset": -7.0,
+      "kind": "chevron-right",
+      "yaw": 1.2238,
+      "sources": [
+        735,
+        737
+      ],
+      "reference": "5DhchsCCfVGZyfFOeTwTDg",
+      "crop": "0737-1.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 7596.0,
+      "offset": 4.48,
+      "kind": "chevron-left",
+      "yaw": -1.1574,
+      "sources": [
+        739,
+        740
+      ],
+      "reference": "BIVoejKJoIlEkRqa-4xoag",
+      "crop": "0740-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 7672.0,
+      "offset": 5.05,
+      "kind": "chevron-right",
+      "yaw": -2.5091,
+      "sources": [
+        748,
+        749
+      ],
+      "reference": "0_w0KLALvUBwGjnVIXbCtw",
+      "crop": "0748-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 7706.0,
+      "offset": 4.45,
+      "kind": "winding",
+      "yaw": -0.9649,
+      "sources": [
+        751
+      ],
+      "reference": "yjKWhpX5cIK-rl8jjAmt1Q",
+      "crop": "0751-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 7850.0,
+      "offset": 7.0,
+      "kind": "chevron-right",
+      "yaw": -1.0498,
+      "sources": [
+        765,
+        766
+      ],
+      "reference": "oUbKBinq1s7-dLM_N_TGZA",
+      "crop": "0765-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 8226.0,
+      "offset": -7.0,
+      "kind": "chevron-right",
+      "yaw": 1.8014,
+      "sources": [
+        802,
+        803
+      ],
+      "reference": "mJoFmVMo26ZaFvbLbItqwg",
+      "crop": "0802-2.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": true
+    },
+    {
+      "s": 8278.0,
+      "offset": 4.45,
+      "kind": "no-overtaking",
+      "yaw": -2.5607,
+      "sources": [
+        807
+      ],
+      "reference": "OZv94bV8qHSk1utLW408gA",
+      "crop": "0807-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 8410.0,
+      "offset": 5.62,
+      "kind": "chevron-left",
+      "yaw": -0.5386,
+      "sources": [
+        818,
+        819
+      ],
+      "reference": "16zEMibdPvr4q_nspcDB3g",
+      "crop": "0819-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 8504.0,
+      "offset": 4.45,
+      "kind": "no-overtaking",
+      "yaw": -0.1473,
+      "sources": [
+        828
+      ],
+      "reference": "uWzLp9tMfJ79C90zMw3AJQ",
+      "crop": "0828-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 8808.0,
+      "offset": 4.98,
+      "kind": "chevron-left",
+      "yaw": -0.772,
+      "sources": [
+        856,
+        858
+      ],
+      "reference": "8rBPWk4Z2e311Eqd9f-iNA",
+      "crop": "0858-1.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 9254.0,
+      "offset": 4.82,
+      "kind": "chevron-left",
+      "yaw": -0.5113,
+      "sources": [
+        899,
+        900
+      ],
+      "reference": "8avVFbNBSgJPPw4sD-aGCw",
+      "crop": "0900-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 9334.0,
+      "offset": 6.89,
+      "kind": "chevron-left",
+      "yaw": -1.4781,
+      "sources": [
+        908,
+        909
+      ],
+      "reference": "HNAWKPtqVbH4ZYyMm5KVhg",
+      "crop": "0908-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": true
+    },
+    {
+      "s": 9400.0,
+      "offset": 4.45,
+      "kind": "chevron-left",
+      "yaw": -0.2326,
+      "sources": [
+        913,
+        914,
+        916
+      ],
+      "reference": "Z9FIAEuZmRQltPDHb-4L-w",
+      "crop": "0914-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": true
+    },
+    {
+      "s": 9978.0,
+      "offset": -7.0,
+      "kind": "chevron-right",
+      "yaw": 1.324,
+      "sources": [
+        968,
+        969
+      ],
+      "reference": "XZEzmi4QPTkM9_IlX6l2uA",
+      "crop": "0969-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": true
+    },
+    {
+      "s": 10080.0,
+      "offset": -7.0,
+      "kind": "chevron-left",
+      "yaw": 2.9171,
+      "sources": [
+        980,
+        981
+      ],
+      "reference": "i7LstGPlg0zRS9daYB8wJg",
+      "crop": "0980-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 10174.0,
+      "offset": -7.0,
+      "kind": "chevron-left",
+      "yaw": 2.5388,
+      "sources": [
+        989,
+        990
+      ],
+      "reference": "FDM18MBc-wG9NJhj2Ojt2g",
+      "crop": "0989-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 10236.0,
+      "offset": -7.0,
+      "kind": "chevron-right",
+      "yaw": 1.4069,
+      "sources": [
+        994,
+        995
+      ],
+      "reference": "N7NZ9QfoSYLlhrkO2QDcTw",
+      "crop": "0994-1.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 10236.0,
+      "offset": -7.0,
+      "kind": "chevron-left",
+      "yaw": 2.394,
+      "sources": [
+        995,
+        996
+      ],
+      "reference": "cQ5V2C4ftUAKqgUmoTlgzA",
+      "crop": "0995-2.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 10436.0,
+      "offset": 4.45,
+      "kind": "no-overtaking",
+      "yaw": -1.2938,
+      "sources": [
+        1013
+      ],
+      "reference": "kU7UTtuSzCjB_HDrCdrDsA",
+      "crop": "1013-1.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 10710.0,
+      "offset": 4.45,
+      "kind": "chevron-right",
+      "yaw": -1.5522,
+      "sources": [
+        1039,
+        1041
+      ],
+      "reference": "HSh7lo4ONc_rUuKuAQm8lA",
+      "crop": "1041-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 11150.0,
+      "offset": 4.45,
+      "kind": "chevron-left",
+      "yaw": -1.0675,
+      "sources": [
+        1081
+      ],
+      "reference": "fV5g4WRxCdo8r1y1ItCrtg",
+      "crop": "1081-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    },
+    {
+      "s": 11336.0,
+      "offset": 7.0,
+      "kind": "chevron-right",
+      "yaw": -2.0601,
+      "sources": [
+        1099,
+        1101
+      ],
+      "reference": "tMZHGF07s-JNoXaiQ4S_UA",
+      "crop": "1101-0.jpg",
+      "positionQuality": "estimated from panorama bearings and apparent size; approximate roadside placement",
+      "double": false
+    }
+  ]
+}
