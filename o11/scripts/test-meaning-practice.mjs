@@ -28,4 +28,9 @@ runner=createSentencePractice({book,state,save:()=>true,play:()=>{},update:()=>{
 input('Old request');const pending=submit();assert.ok(runner.content().includes('Kontrol ediliyor'));
 const oldId=s.refs[s.pos];click('data-act-next');resolve({correct:true,errors:[],notes:[],corrected:'Old request'});await pending;
 assert.ok(!s.work[oldId].result);assert.ok(!runner.content().includes('Old request'));assert.equal(state.notes[10],'Koru');
+const previous=JSON.parse(JSON.stringify(state.sentencePractice[10]));
+runner=createSentencePractice({book,state,save:()=>true,play:()=>{},update:()=>{},check,renderResult:meaningFeedback,checkerId:'workers-ai-v1'});runner.content();
+assert.equal(state.sentencePractice[10].checker,'workers-ai-v1');
+assert.deepEqual(state.sentencePracticePrevious[10],previous,'Local verdicts must be archived instead of reused as model verdicts');
+assert.equal(state.notes[10],'Koru');
 console.log('PASS: opt-in meaning workflow with mocked transport: alternate translations, saved verdicts, service failures, retries, corrected invariant, no reference fallback, stale response cancellation. Real model evaluation remains separate.');

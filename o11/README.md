@@ -53,6 +53,6 @@ localStorage anahtarı: `fatedreel-o11-book-v1`. Yedekler aynı sürüm şeması
 
 Edge ve Windows WebKit testleri gerçek iPad donanım testi yerine geçmez. WebKit MP3 codec desteği ortama bağlı olduğundan bu testte dosyanın HTTP yanıtı kontrol edilir.
 
-## Hazırlanan model tabanlı anlam kontrolü
+## Cloudflare Workers AI ile anlam kontrolü
 
-Ana ekran hesapsız ve çevrimdışı yerel denetim kullanır. Bilinen doğru alternatifler kabul edilir; belirsiz ifadeler yanlış sayılmaz ve puanlanmaz. 20 örnek ve 480 özgün cevap `test-local-check.mjs` ile sınanır. Bu bir genel anlam modeli değildir. İsteğe bağlı model altyapısı ve mevcut sınırlamalar [GRAMMAR-CHECK.md](GRAMMAR-CHECK.md) dosyasındadır.
+Ana ekran Workers AI kullanır; öğrencinin ayrı API hesabına ihtiyacı yoktur. Gerçek model testleri 30 Ekim 2026 tarihinde 20/20 geçti, doğru alternatiflerde yanlış hata bulunmadı. Servis sorunu yanlış öğrenci cevabı gibi gösterilmez. Yerel denetim sonuçları arşivlenir; notlar ve konu ilerlemesi korunur. Bağlantı, testler ve sınırlar [GRAMMAR-CHECK.md](GRAMMAR-CHECK.md) içindedir.

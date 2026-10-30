@@ -1,5 +1,5 @@
-// This module is prepared for the model-backed flow. It is not enabled in app.js
-// until the live 20-case evaluation passes; it never falls back to word matching.
+// Live Workers AI flow, enabled after the real 20-case evaluation passed.
+// Service failures never fall back to reference-word grading.
 import {answerForms} from './activities.js?v=2';
 const escape=text=>String(text??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const thirdToBase={is:'are',was:'were',has:'have',does:'do',cooks:'cook',makes:'make',prepares:'prepare',works:'work',calls:'call',needs:'need',wants:'want',likes:'like',knows:'know',lives:'live',goes:'go',comes:'come',takes:'take',gives:'give',leaves:'leave',uses:'use',drinks:'drink',eats:'eat',buys:'buy',pays:'pay',waits:'wait',looks:'look',hears:'hear',speaks:'speak',sends:'send',says:'say',tells:'tell',plays:'play',reads:'read',studies:'study',watches:'watch'};

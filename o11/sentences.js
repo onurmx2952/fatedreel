@@ -40,16 +40,16 @@ export function makeRound(pool,unit) {
  }
  return shuffle([...own.slice(0,review.length?10:15),...review]).map(q=>q.id);
 }
-export function createSentencePractice({book,state,save,update,play,stop=()=>{},check=null,renderResult=null}) {
+export function createSentencePractice({book,state,save,update,play,stop=()=>{},check=null,renderResult=null,checkerId="meaning-v1"}) {
  if(check&&typeof renderResult!=='function')throw Error('meaning_renderer_required');
  const pool=buildSentences(book);
  let inFlight=null;
  const cancelCheck=()=>{inFlight?.controller.abort();inFlight=null;};
  if(!state.sentencePractice||typeof state.sentencePractice!=='object'||Array.isArray(state.sentencePractice))state.sentencePractice={};
- function begin(){const s={version:3,edition:book.practiceEdition,checker:check?'meaning-v1':'dictation-v1',refs:makeRound(pool,state.unit),pos:0,work:{},started:Date.now()};state.sentencePractice[state.unit]=s;save();return s;}
+ function begin(){const s={version:3,edition:book.practiceEdition,checker:check?checkerId:'dictation-v1',refs:makeRound(pool,state.unit),pos:0,work:{},started:Date.now()};state.sentencePractice[state.unit]=s;save();return s;}
  function session(){let s=state.sentencePractice[state.unit];
-  if(!s||s.version!==3||s.edition!==book.practiceEdition||(check&&s.checker!=='meaning-v1')||!Array.isArray(s.refs)||s.refs.length!==15||new Set(s.refs).size!==s.refs.length||!s.refs.every(id=>pool.has(id)&&pool.get(id).unit<=state.unit)||!Number.isInteger(s.pos)||s.pos<0||s.pos>s.refs.length||!s.work||typeof s.work!=='object'||Array.isArray(s.work)){
-   if(s&&(s.version===2||s.edition!==book.practiceEdition||(check&&s.checker!=='meaning-v1'))){if(!state.sentencePracticePrevious||typeof state.sentencePracticePrevious!=='object'||Array.isArray(state.sentencePracticePrevious))state.sentencePracticePrevious={};if(!state.sentencePracticePrevious[state.unit])state.sentencePracticePrevious[state.unit]=s;else{if(!state.sentencePracticeHistory||typeof state.sentencePracticeHistory!=='object'||Array.isArray(state.sentencePracticeHistory))state.sentencePracticeHistory={};state.sentencePracticeHistory[state.unit+':'+(s.edition||'v'+s.version)]=s;}}
+  if(!s||s.version!==3||s.edition!==book.practiceEdition||(check&&s.checker!==checkerId)||!Array.isArray(s.refs)||s.refs.length!==15||new Set(s.refs).size!==s.refs.length||!s.refs.every(id=>pool.has(id)&&pool.get(id).unit<=state.unit)||!Number.isInteger(s.pos)||s.pos<0||s.pos>s.refs.length||!s.work||typeof s.work!=='object'||Array.isArray(s.work)){
+   if(s&&(s.version===2||s.edition!==book.practiceEdition||(check&&s.checker!==checkerId))){if(!state.sentencePracticePrevious||typeof state.sentencePracticePrevious!=='object'||Array.isArray(state.sentencePracticePrevious))state.sentencePracticePrevious={};if(!state.sentencePracticePrevious[state.unit])state.sentencePracticePrevious[state.unit]=s;else{if(!state.sentencePracticeHistory||typeof state.sentencePracticeHistory!=='object'||Array.isArray(state.sentencePracticeHistory))state.sentencePracticeHistory={};state.sentencePracticeHistory[state.unit+':'+(s.edition||'v'+s.version)]=s;}}
    s=begin();
   }
   return s;

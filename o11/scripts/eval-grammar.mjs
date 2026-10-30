@@ -11,7 +11,9 @@ for(const c of cases){
   else verdict=await checkTranslation(input,process.env);
   const tenseHint=/present (?:simple|continuous|perfect)|past (?:simple|continuous|perfect)|future (?:simple|continuous|perfect)|geniş zaman|şimdiki zaman|geçmiş zaman/i.test([...verdict.errors.map(e=>e.explanation_tr),...verdict.notes].join(' '));
   const minimalCorrection=!c.corrected||verdict.corrected.toLowerCase().replace(/[.!?]$/,'')===c.corrected.toLowerCase().replace(/[.!?]$/,'');
-  const passed=minimalCorrection&&!tenseHint&&verdict.correct===c.correct&&(!c.errorType||verdict.errors.some(e=>e.type===c.errorType))&&(!c.fix||verdict.errors.some(e=>e.fix.toLowerCase()===c.fix));
+  const comparable=s=>s.toLowerCase().replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim();
+  const specificFeedback=verdict.errors.every(e=>e.original!==e.fix&&(!e.original||comparable(c.student).includes(comparable(e.original)))&&(!e.fix||comparable(verdict.corrected).includes(comparable(e.fix)))&&e.explanation_tr.trim().length>=15&&!/^doğru cümle\s*$/i.test(e.explanation_tr.trim()));
+  const passed=specificFeedback&&minimalCorrection&&!tenseHint&&verdict.correct===c.correct&&(!c.errorType||verdict.errors.some(e=>e.type===c.errorType))&&(!c.fix||verdict.errors.some(e=>e.fix.toLowerCase()===c.fix));
   results.push({id:c.id,passed,expected:c.correct,verdict});console.log(`${passed?'PASS':'FAIL'} ${c.id}`);
  }catch(error){
   console.error(`NOT EVALUATED ${c.id}: ${error.message}`);

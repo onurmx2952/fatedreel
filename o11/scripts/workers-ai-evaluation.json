@@ -1,0 +1,303 @@
+{
+  "at": "2026-10-30T03:58:40.016Z",
+  "results": [
+    {
+      "id": "he-neutral-cook",
+      "passed": true,
+      "expected": true,
+      "verdict": {
+        "correct": true,
+        "errors": [],
+        "notes": [],
+        "corrected": "He is cooking dinner"
+      }
+    },
+    {
+      "id": "she-neutral-prepare",
+      "passed": true,
+      "expected": true,
+      "verdict": {
+        "correct": true,
+        "errors": [],
+        "notes": [],
+        "corrected": "She is preparing dinner."
+      }
+    },
+    {
+      "id": "they-neutral",
+      "passed": true,
+      "expected": true,
+      "verdict": {
+        "correct": true,
+        "errors": [],
+        "notes": [],
+        "corrected": "They are cooking dinner."
+      }
+    },
+    {
+      "id": "make-synonym",
+      "passed": true,
+      "expected": true,
+      "verdict": {
+        "correct": true,
+        "errors": [],
+        "notes": [],
+        "corrected": "I'm making dinner."
+      }
+    },
+    {
+      "id": "work-gender",
+      "passed": true,
+      "expected": true,
+      "verdict": {
+        "correct": true,
+        "errors": [],
+        "notes": [],
+        "corrected": "He works from home."
+      }
+    },
+    {
+      "id": "lowercase-no-period",
+      "passed": true,
+      "expected": true,
+      "verdict": {
+        "correct": true,
+        "errors": [],
+        "notes": [
+          "Cümlenin sonuna nokta eklenmesi gerebilir."
+        ],
+        "corrected": "i'm at home now"
+      }
+    },
+    {
+      "id": "synonym-purchase",
+      "passed": true,
+      "expected": true,
+      "verdict": {
+        "correct": true,
+        "errors": [],
+        "notes": [],
+        "corrected": "I purchased two tickets."
+      }
+    },
+    {
+      "id": "same-meaning-order",
+      "passed": true,
+      "expected": true,
+      "verdict": {
+        "correct": true,
+        "errors": [],
+        "notes": [],
+        "corrected": "Right now, I'm waiting for the bus."
+      }
+    },
+    {
+      "id": "different-place-form",
+      "passed": true,
+      "expected": true,
+      "verdict": {
+        "correct": true,
+        "errors": [],
+        "notes": [],
+        "corrected": "She is home right now."
+      }
+    },
+    {
+      "id": "short-question",
+      "passed": true,
+      "expected": true,
+      "verdict": {
+        "correct": true,
+        "errors": [],
+        "notes": [],
+        "corrected": "Would you like some coffee?"
+      }
+    },
+    {
+      "id": "diner-real-word",
+      "passed": true,
+      "expected": false,
+      "verdict": {
+        "correct": false,
+        "errors": [
+          {
+            "type": "spelling",
+            "original": "diner",
+            "fix": "dinner",
+            "explanation_tr": "\"diner\" lokanta demek. Akşam yemeği için \"dinner\" yazılır."
+          }
+        ],
+        "notes": [],
+        "corrected": "He is cooking dinner."
+      }
+    },
+    {
+      "id": "wrong-past",
+      "passed": true,
+      "expected": false,
+      "verdict": {
+        "correct": false,
+        "errors": [
+          {
+            "type": "grammar",
+            "original": "go",
+            "fix": "went",
+            "explanation_tr": "Dün olup bitmiş bir olay anlatılıyor; bu yüzden 'go' yerine 'went' kullanılır."
+          }
+        ],
+        "notes": [],
+        "corrected": "I went to work yesterday."
+      }
+    },
+    {
+      "id": "wrong-ongoing",
+      "passed": true,
+      "expected": false,
+      "verdict": {
+        "correct": false,
+        "errors": [
+          {
+            "type": "grammar",
+            "original": "cooked",
+            "fix": "am cooking",
+            "explanation_tr": "Şu anda diye belirtildiği için yemek hazırlama işlemi şu an devam ediyor; bu yüzden \"cooked\" yerine \"am cooking\" kullanılır."
+          },
+          {
+            "type": "grammar",
+            "original": "yesterday",
+            "fix": "now",
+            "explanation_tr": "Şu anda diye belirtildiği için yemek hazırlama işlemi şu an oluyor; bu yüzden \"yesterday\" yerine \"now\" kullanılır."
+          }
+        ],
+        "notes": [],
+        "corrected": "I am cooking dinner now."
+      }
+    },
+    {
+      "id": "explicit-woman",
+      "passed": true,
+      "expected": false,
+      "verdict": {
+        "correct": false,
+        "errors": [
+          {
+            "type": "wrong_meaning",
+            "original": "man",
+            "fix": "woman",
+            "explanation_tr": "Türkçe cümle \"Kadın\" diyor, yani kadın hakkında konuşuyoruz. Bu yüzden \"man\" yerine \"woman\" yazılmalı."
+          }
+        ],
+        "notes": [],
+        "corrected": "The woman is at home."
+      }
+    },
+    {
+      "id": "agreement",
+      "passed": true,
+      "expected": false,
+      "verdict": {
+        "correct": false,
+        "errors": [
+          {
+            "type": "grammar",
+            "original": "is",
+            "fix": "am",
+            "explanation_tr": "Cümle \"ben\" diye başlıyor, bu yüzden \"I\" için \"am\" kullanmalısın."
+          }
+        ],
+        "notes": [],
+        "corrected": "I am hungry."
+      }
+    },
+    {
+      "id": "missing-preposition",
+      "passed": true,
+      "expected": false,
+      "verdict": {
+        "correct": false,
+        "errors": [
+          {
+            "type": "grammar",
+            "original": "waiting the bus",
+            "fix": "waiting for the bus",
+            "explanation_tr": "Otobüsü beklerken \"for\" ön eki kullanılır."
+          }
+        ],
+        "notes": [],
+        "corrected": "I am waiting for the bus."
+      }
+    },
+    {
+      "id": "plural",
+      "passed": true,
+      "expected": false,
+      "verdict": {
+        "correct": false,
+        "errors": [
+          {
+            "type": "grammar",
+            "original": "ticket",
+            "fix": "tickets",
+            "explanation_tr": "İki bileti olduğunu söylediğin için çoğul olarak \"tickets\" yazılmalı."
+          }
+        ],
+        "notes": [],
+        "corrected": "I have two tickets."
+      }
+    },
+    {
+      "id": "wrong-temperature",
+      "passed": true,
+      "expected": false,
+      "verdict": {
+        "correct": false,
+        "errors": [
+          {
+            "type": "wrong_meaning",
+            "original": "hot",
+            "fix": "cold",
+            "explanation_tr": "Türkçe cümle \"soğuk\" diyor, öğrenci \"hot\" yazmış, bunlar zıttır."
+          }
+        ],
+        "notes": [],
+        "corrected": "This coffee is very cold."
+      }
+    },
+    {
+      "id": "spelling-phone",
+      "passed": true,
+      "expected": false,
+      "verdict": {
+        "correct": false,
+        "errors": [
+          {
+            "type": "spelling",
+            "original": "fone",
+            "fix": "phone",
+            "explanation_tr": "Telefon kelimesi yanlış yazılmış. Doğru yazımı \"phone\" olmalı."
+          }
+        ],
+        "notes": [],
+        "corrected": "I want this phone."
+      }
+    },
+    {
+      "id": "question-order",
+      "passed": true,
+      "expected": false,
+      "verdict": {
+        "correct": false,
+        "errors": [
+          {
+            "type": "grammar",
+            "original": "you do",
+            "fix": "do you",
+            "explanation_tr": "İngilizce'de soru cümleleri genellikle \"do\" veya yardımcı fiillerin cümle başlangıcında kullanılmasıyla oluşur."
+          }
+        ],
+        "notes": [],
+        "corrected": "Where do you live?"
+      }
+    }
+  ]
+}

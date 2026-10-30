@@ -1,5 +1,5 @@
-import {localMeaningCheck,localFeedback} from './local-check.js?v=12';
-import {createSentencePractice} from './sentences.js?v=12';
+import {requestMeaningCheck,meaningFeedback} from './meaning-check.js?v=13';
+import {createSentencePractice} from './sentences.js?v=13';
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const KEY='fatedreel-o11-book-v1';
 const fresh=()=>({version:1,unit:1,tab:'lesson',hidden:false,size:19,night:false,focus:false,speed:1,marks:{},bookmarks:[],notes:{},drafts:{},reviews:{},activities:{},quiz:null,exam:null});
@@ -89,7 +89,7 @@ function renderHome(){
  <section class="atelier-tools"><button class="tool-review" data-due><span class="tool-symbol" aria-hidden="true">↻</span><span><b>Hatırladıkça yerleşir.</b><small>${due.length?due.length+' ünite yeniden seni bekliyor.':'Tekrarlarını buradan takip et.'}</small></span><span aria-hidden="true">→</span></button><a href="/o12/"><span class="tool-symbol" aria-hidden="true">Aa</span><span><b>Kelimelere de uğra.</b><small>Kelime Atlası’nı keşfet.</small></span><span aria-hidden="true">↗</span></a></section><footer class="atelier-footer"><span>Dil Atölyesi <i>by Fatedreel</i></span><span>Azar azar. Her gün biraz.</span></footer>`;
 }
 
-function setupActivities(){if(!book)return;learning=createSentencePractice({book,state,save,play,check:localMeaningCheck,renderResult:localFeedback,stop:stopAudio,update:reason=>{const panel=$('#tab-panel');if(panel){panel.innerHTML=learning.content();if(reason==='next'||reason==='restart')panel.querySelector('.drill-listen,[data-act-restart]')?.focus({preventScroll:true});if(reason==='translation')panel.querySelector('[data-act-translation]')?.focus({preventScroll:true});if(reason==='solution')panel.querySelector('[data-act-next]')?.focus({preventScroll:true});}}});}
+function setupActivities(){if(!book)return;learning=createSentencePractice({book,state,save,play,check:requestMeaningCheck,renderResult:meaningFeedback,checkerId:"workers-ai-v1",stop:stopAudio,update:reason=>{const panel=$('#tab-panel');if(panel){panel.innerHTML=learning.content();if(reason==='next'||reason==='restart')panel.querySelector('.drill-listen,[data-act-restart]')?.focus({preventScroll:true});if(reason==='translation')panel.querySelector('[data-act-translation]')?.focus({preventScroll:true});if(reason==='solution')panel.querySelector('[data-act-next]')?.focus({preventScroll:true});}}});}
 document.addEventListener('click',event=>learning?.click(event));
 document.addEventListener('input',event=>learning?.input(event));
 document.addEventListener('submit',event=>learning?.submit(event));
