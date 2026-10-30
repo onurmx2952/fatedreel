@@ -58,12 +58,34 @@ export function normalizeVerdict(value,input){
  return {correct,errors,notes:[...new Set(value.notes)],corrected:correct?input.student:value.corrected.trim()};
 }
 
+export const WORKERS_AI_MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 export function grammarConfiguration(env){
- return {ready:Boolean(env.OPENAI_API_KEY&&env.PROGRAM_DB),provider:env.OPENAI_API_KEY?'openai':null,model:env.O11_GRAMMAR_MODEL||'gpt-4.1-mini',workersAIAvailable:Boolean(env.AI?.run),limitsAvailable:Boolean(env.PROGRAM_DB),reason:!env.OPENAI_API_KEY?'model_not_configured':!env.PROGRAM_DB?'limits_not_configured':null};
+ const workersAIAvailable=typeof env.AI?.run==='function';
+ const provider=workersAIAvailable?'workers-ai':env.OPENAI_API_KEY?'openai':null;
+ return {ready:Boolean(provider&&env.PROGRAM_DB),provider,model:workersAIAvailable?(env.O11_WORKERS_AI_MODEL||WORKERS_AI_MODEL):(env.O11_GRAMMAR_MODEL||'gpt-4.1-mini'),workersAIAvailable,limitsAvailable:Boolean(env.PROGRAM_DB),reason:!provider?'model_not_configured':!env.PROGRAM_DB?'limits_not_configured':null};
+}
+
+async function checkWorkersAI(input,env){
+ let timer;
+ try{
+  const body=await Promise.race([
+   env.AI.run(env.O11_WORKERS_AI_MODEL||WORKERS_AI_MODEL,{
+    messages:[{role:'system',content:SYSTEM_PROMPT},{role:'user',content:JSON.stringify(input)}],
+    temperature:0,max_tokens:1600,stream:false,
+    response_format:{type:'json_schema',json_schema:OUTPUT_SCHEMA}
+   }),
+   new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('upstream_timeout')),25000);})
+  ]);
+  // Cloudflare JSON Mode can return an object; some models return JSON text.
+  // Refusals, truncated JSON, and schema failures are service errors, not grades.
+  const value=body?.response;
+  return normalizeVerdict(typeof value==='string'?JSON.parse(value):value,input);
+ }finally{clearTimeout(timer);}
 }
 
 export async function checkTranslation(raw,env,fetcher=fetch){
  const input=validateInput(raw);
+ if(typeof env.AI?.run==='function')return checkWorkersAI(input,env);
  if(!env.OPENAI_API_KEY)throw Error('model_not_configured');
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),25000);
  try{

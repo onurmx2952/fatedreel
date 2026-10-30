@@ -9,7 +9,17 @@ Uygulama artık `local-check.js` ile hesapsız ve çevrimdışı denetim kullan�
 - `o11/meaning-check.js`: hazırlanmış istemci, güvenli kısa geri bildirim, isteğe bağlı notlar, uygun he/she/they ve cook/make/prepare örnekleri. `app.js` henüz bunu çağırmıyor. Hiçbir bağlantı hatası yerel model-cevap karşılaştırmasına sessizce düşmez. `createSentencePractice` motorundaki `check` ve `renderResult` seçenekleriyle gerçek akışa takılmaya hazırdır; bekleme, tekrar deneme, eski yanıtı iptal etme ve kontrol sonuçlarını kaydetme tamamlanmıştır. Ana uygulama bu seçenekleri yerel denetim ile kullanıyor.
 - `o11/scripts/grammar-cases.json`: 20 gerçek model değerlendirmesi. İlk 10 cümle doğru alternatifler, son 10 cümle yazım/dilbilgisi/anlam hataları içerir. `diner/dinner`, açık cinsiyet ve yanlış zaman örnekleri dahildir.
 
-## Gerçek bağlantı
+## Seçilen bağlantı: Cloudflare Workers AI
+
+Kullanıcı Workers AI seçti. Backend `env.AI.run` bağlantısını destekler ve varsa OpenAI yerine onu kullanır. Varsayılan model `@cf/meta/llama-3.3-70b-instruct-fp8-fast`; `temperature: 0`, `stream: false`, `response_format: {type: 'json_schema', json_schema: OUTPUT_SCHEMA}`. JSON metni ve nesne yanıtları doğrulanır; kota, zaman aşımı veya geçersiz yanıt öğrenci hatası olarak işlenmez.
+
+Mevcut Pages projesinde **Settings → Bindings → Add → Workers AI**, değişken adı **AI**, Production ortamı. Ardından projeyi yeniden dağıtın. Bu yol yeni OpenAI hesabı veya API anahtarı gerektirmez. Mevcut D1/Google bağlantılarını değiştirmeyin ve sırf AI eklemek için eksik bir Wrangler yapılandırması oluşturmayın.
+
+`GET /api/o11/check` sonucu `ready: true`, `provider: workers-ai` olunca gerçek 20 örnek `node o11/scripts/eval-grammar.mjs https://fatedreel.com/api/o11/check` ile sınanmalıdır. Bu testler geçene kadar ana ekran hesapsız yerel denetimde kalır. Backend taşıma/sözleşme testlerinin geçmesi, gerçek model değerlendirmesinin geçtiği anlamına gelmez.
+
+Belgeler: [Pages Workers AI bağlantıları](https://developers.cloudflare.com/pages/functions/bindings/#workers-ai), [Workers AI JSON Mode](https://developers.cloudflare.com/workers-ai/features/json-mode/).
+
+## İsteğe bağlı alternatif: OpenAI
 
 Cloudflare Pages → fatedreel → Settings → Variables and Secrets bölümüne `OPENAI_API_KEY` **secret** olarak eklenmelidir. Anahtarı sohbet mesajına veya depoya yazmayın. İsteğe bağlı `O11_GRAMMAR_MODEL`, varsayılan `gpt-4.1-mini` değerini değiştirir. Sonrasında yeni dağıtım gerekir. Mevcut `PROGRAM_DB` D1 bağı, anonim kullanımla uyumlu hız/kullanım sınırı için kullanılır; yeni ücretli kaynak alınmaz. Kontrol metinleri bu tabloya yazılmaz.
 
