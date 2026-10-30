@@ -18,5 +18,5 @@
  window.addEventListener('o11-failed',fail);
  const watchdog=setTimeout(fail,20000);
  if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js',{scope:'/o11/',updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
- import('./app.js?v=13').catch(error=>{console.error('Book startup',error);fail();});
+ import('./app.js?v=14').catch(error=>{console.error('Book startup',error);fail();});
 })();

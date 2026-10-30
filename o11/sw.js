@@ -1,5 +1,5 @@
-const CACHE='o11-book-v13';
-const CORE=['./','index.html','boot.js?v=13','style.css?v=1','atelier.css?v=11','app.js?v=13','book.json?v=11','activities.js?v=2','sentences.js?v=13','feedback.js?v=11','meaning-check.js?v=13','icon.svg','manifest.webmanifest','art/atelier-hero.webp',...Array.from({length:6},(_,i)=>`art/chapter-${i+1}.webp`)];
+const CACHE='o11-book-v14';
+const CORE=['./','index.html','boot.js?v=14','style.css?v=1','atelier.css?v=11','app.js?v=14','book.json?v=11','activities.js?v=2','sentences.js?v=14','practice-memory.js?v=14','feedback.js?v=11','meaning-check.js?v=13','icon.svg','manifest.webmanifest','art/atelier-hero.webp',...Array.from({length:6},(_,i)=>`art/chapter-${i+1}.webp`)];
 function valid(response,url){
  if(!response?.ok)return false;
  const type=response.headers.get('content-type')||'';
