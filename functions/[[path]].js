@@ -1,3 +1,4 @@
+import {isLearningApp,acceptsLearningKey} from './_lib/learning-apps.js';
 const MOVIE_PATH_PATTERN = /^\/(tt\d{6,12})\/?$/i;
 const SITE_DESCRIPTION = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
 
@@ -737,7 +738,7 @@ async function handleLearningApi(context, url) {
     if (!['GET', 'PUT'].includes(request.method)) return jsonResponse({error:'Method not allowed'},405);
     if (request.method === 'PUT' && request.headers.get('Origin') !== url.origin) return jsonResponse({error:'Origin rejected'},403);
     const app = url.pathname.replace(/\/+$/, '').split('/').pop();
-    if (!['o11','o12'].includes(app)) return jsonResponse({error:'Not found'},404);
+    if (!isLearningApp(app)) return jsonResponse({error:'Not found'},404);
     requireProgramDb(context);
     await ensureProgramSchema(context);
     const user = await requireProgramUser(context);
@@ -755,7 +756,7 @@ async function handleLearningApi(context, url) {
     if (body.userId !== user.id) return jsonResponse({error:'Hesap değişti. Hesabı yeniden kontrol et.'},401);
     if (!Number.isInteger(body.revision) || body.revision < 0 || !body.data || typeof body.data !== 'object' || Array.isArray(body.data)) return jsonResponse({error:'Geçersiz kayıt'},400);
     for (const [key,value] of Object.entries(body.data)) {
-      if (!(app==='o11' ? key==='fatedreel-o11-book-v1' : key==='word-atlas-o12:settings' || /^word-atlas-o12:v2:[a-zA-Z0-9_-]+$/.test(key)) || typeof value!=='string') return jsonResponse({error:'Geçersiz anahtar'},400);
+      if (!acceptsLearningKey(app,key) || typeof value!=='string') return jsonResponse({error:'Geçersiz anahtar'},400);
       JSON.parse(value);
     }
     const data = JSON.stringify(body.data);

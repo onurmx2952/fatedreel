@@ -1,0 +1,2388 @@
+{
+  "version": 1,
+  "voice": "Caro Davy · Pocket TTS",
+  "stories": [
+    {
+      "id": "coffee-stop",
+      "title": "A Small Coffee",
+      "tr": "Küçük bir kahve molası",
+      "level": "A1",
+      "topic": "Kafe",
+      "art": "coffee",
+      "units": [
+        4,
+        9
+      ],
+      "order": 1,
+      "sentences": [
+        {
+          "en": "Mina is on her way to work.",
+          "tr": "Mina işe gidiyor."
+        },
+        {
+          "en": "She has ten minutes before her bus comes.",
+          "tr": "Otobüsü gelene kadar on dakikası var."
+        },
+        {
+          "en": "There is a small cafe near the stop.",
+          "tr": "Durağın yakınında küçük bir kafe var."
+        },
+        {
+          "en": "She asks for a small coffee.",
+          "tr": "Küçük bir kahve istiyor."
+        },
+        {
+          "en": "The man at the counter smiles.",
+          "tr": "Tezgâhtaki adam gülümsüyor."
+        },
+        {
+          "en": "Do you want milk with that?",
+          "tr": "Süt ister misiniz?"
+        },
+        {
+          "en": "Just a little, please, says Mina.",
+          "tr": "Azıcık olsun, lütfen, diyor Mina."
+        },
+        {
+          "en": "She pays by card and takes her coffee.",
+          "tr": "Kartla ödüyor ve kahvesini alıyor."
+        },
+        {
+          "en": "The bus is here, and she is ready.",
+          "tr": "Otobüs geldi; Mina da hazır."
+        }
+      ],
+      "text": "Mina is on her way to work. She has ten minutes before her bus comes. There is a small cafe near the stop. She asks for a small coffee. The man at the counter smiles. Do you want milk with that? Just a little, please, says Mina. She pays by card and takes her coffee. The bus is here, and she is ready.",
+      "audio": "67db02f128c3dfc5",
+      "wordCount": 63,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "coffee-stop-q1",
+          "prompt": "Mina nereye gidiyor?",
+          "options": [
+            "To work",
+            "To the park",
+            "To a friend"
+          ],
+          "answer": 0,
+          "why": "İlk cümlede işe gittiği söyleniyor."
+        },
+        {
+          "id": "coffee-stop-q2",
+          "prompt": "Kahvesinde ne kadar süt istiyor?",
+          "options": [
+            "No milk",
+            "A little milk",
+            "A lot of milk"
+          ],
+          "answer": 1,
+          "why": "“Just a little” azıcık demek."
+        },
+        {
+          "id": "coffee-stop-q3",
+          "prompt": "Nasıl ödeme yapıyor?",
+          "options": [
+            "By card",
+            "With coins",
+            "She does not pay"
+          ],
+          "answer": 0,
+          "why": "“She pays by card” kartla ödediğini söylüyor."
+        }
+      ]
+    },
+    {
+      "id": "spare-key",
+      "title": "The Spare Key",
+      "tr": "Yedek anahtar",
+      "level": "A1",
+      "topic": "Ev",
+      "art": "my-day",
+      "units": [
+        5,
+        7
+      ],
+      "order": 2,
+      "sentences": [
+        {
+          "en": "Ali is at his front door.",
+          "tr": "Ali evinin kapısında."
+        },
+        {
+          "en": "His keys are not in his bag.",
+          "tr": "Anahtarları çantasında değil."
+        },
+        {
+          "en": "He looks in his coat, but they are not there.",
+          "tr": "Montuna bakıyor ama orada da yoklar."
+        },
+        {
+          "en": "His sister lives next door.",
+          "tr": "Kız kardeşi yan dairede oturuyor."
+        },
+        {
+          "en": "She has a spare key to his flat.",
+          "tr": "Ali'nin evinin yedek anahtarı onda."
+        },
+        {
+          "en": "Ali calls her and waits outside.",
+          "tr": "Ali onu arayıp dışarıda bekliyor."
+        },
+        {
+          "en": "Two minutes later, she opens the door.",
+          "tr": "İki dakika sonra kardeşi kapıyı açıyor."
+        },
+        {
+          "en": "His keys are on the kitchen table.",
+          "tr": "Anahtarları mutfak masasının üzerinde."
+        },
+        {
+          "en": "Ali laughs and puts them in his bag.",
+          "tr": "Ali gülüyor ve anahtarları çantasına koyuyor."
+        }
+      ],
+      "text": "Ali is at his front door. His keys are not in his bag. He looks in his coat, but they are not there. His sister lives next door. She has a spare key to his flat. Ali calls her and waits outside. Two minutes later, she opens the door. His keys are on the kitchen table. Ali laughs and puts them in his bag.",
+      "audio": "deeca8e403c2d42e",
+      "wordCount": 64,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "spare-key-q1",
+          "prompt": "Yedek anahtar kimde?",
+          "options": [
+            "His sister",
+            "His boss",
+            "His friend"
+          ],
+          "answer": 0,
+          "why": "Kız kardeşinin evin yedek anahtarı var."
+        },
+        {
+          "id": "spare-key-q2",
+          "prompt": "Kız kardeşi nerede oturuyor?",
+          "options": [
+            "In another city",
+            "Next door",
+            "Above a shop"
+          ],
+          "answer": 1,
+          "why": "“Next door” yan dairede anlamına geliyor."
+        },
+        {
+          "id": "spare-key-q3",
+          "prompt": "Ali anahtarlarını nerede buluyor?",
+          "options": [
+            "In his coat",
+            "On the kitchen table",
+            "At work"
+          ],
+          "answer": 1,
+          "why": "Anahtarlar mutfak masasının üzerinde."
+        }
+      ]
+    },
+    {
+      "id": "corner-shop",
+      "title": "At the Corner Shop",
+      "tr": "Köşedeki markette",
+      "level": "A1",
+      "topic": "Alışveriş",
+      "art": "new-job",
+      "units": [
+        4,
+        7
+      ],
+      "order": 3,
+      "sentences": [
+        {
+          "en": "Deniz needs some bread and milk.",
+          "tr": "Deniz'in ekmek ve süt alması gerekiyor."
+        },
+        {
+          "en": "The shop on her street is still open.",
+          "tr": "Sokağındaki market hâlâ açık."
+        },
+        {
+          "en": "She takes a bag from the kitchen.",
+          "tr": "Mutfaktan bir çanta alıyor."
+        },
+        {
+          "en": "At the shop, she finds the bread.",
+          "tr": "Markette ekmeği buluyor."
+        },
+        {
+          "en": "There is no milk in the fridge.",
+          "tr": "Dolapta süt yok."
+        },
+        {
+          "en": "The woman in the shop brings a new box.",
+          "tr": "Marketteki kadın yeni bir kutu getiriyor."
+        },
+        {
+          "en": "Here you are, she says.",
+          "tr": "Buyurun, diyor."
+        },
+        {
+          "en": "Deniz buys two bottles and goes home.",
+          "tr": "Deniz iki şişe alıp eve gidiyor."
+        },
+        {
+          "en": "Now she can make breakfast.",
+          "tr": "Artık kahvaltı hazırlayabilir."
+        }
+      ],
+      "text": "Deniz needs some bread and milk. The shop on her street is still open. She takes a bag from the kitchen. At the shop, she finds the bread. There is no milk in the fridge. The woman in the shop brings a new box. Here you are, she says. Deniz buys two bottles and goes home. Now she can make breakfast.",
+      "audio": "acaeabc47405c639",
+      "wordCount": 61,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "corner-shop-q1",
+          "prompt": "Deniz ilk başta ne almak istiyor?",
+          "options": [
+            "Bread and milk",
+            "Rice and tea",
+            "Coffee and cake"
+          ],
+          "answer": 0,
+          "why": "İlk cümlede ekmek ve süt gerektiği söyleniyor."
+        },
+        {
+          "id": "corner-shop-q2",
+          "prompt": "Sütü kim getiriyor?",
+          "options": [
+            "Deniz",
+            "The woman in the shop",
+            "Her sister"
+          ],
+          "answer": 1,
+          "why": "Marketteki kadın yeni bir kutu getiriyor."
+        },
+        {
+          "id": "corner-shop-q3",
+          "prompt": "Deniz kaç şişe süt alıyor?",
+          "options": [
+            "One",
+            "Two",
+            "Three"
+          ],
+          "answer": 1,
+          "why": "“Two bottles” iki şişe demek."
+        }
+      ]
+    },
+    {
+      "id": "new-neighbor",
+      "title": "A New Neighbor",
+      "tr": "Yeni komşu",
+      "level": "A1",
+      "topic": "Tanışma",
+      "art": "my-day",
+      "units": [
+        1,
+        6
+      ],
+      "order": 4,
+      "sentences": [
+        {
+          "en": "Someone is at the door.",
+          "tr": "Kapıda biri var."
+        },
+        {
+          "en": "It is a new neighbor with a big box.",
+          "tr": "Büyük bir kutu taşıyan yeni komşu gelmiş."
+        },
+        {
+          "en": "Hi, I am Alex. I live upstairs.",
+          "tr": "Merhaba, ben Alex. Üst katta oturuyorum."
+        },
+        {
+          "en": "Mina smiles and says her name.",
+          "tr": "Mina gülümsüyor ve adını söylüyor."
+        },
+        {
+          "en": "Alex asks her about the nearest shop.",
+          "tr": "Alex ona en yakın marketi soruyor."
+        },
+        {
+          "en": "It is next to the cafe, she says.",
+          "tr": "Kafenin yanında, diyor Mina."
+        },
+        {
+          "en": "She offers him a glass of water.",
+          "tr": "Ona bir bardak su ikram ediyor."
+        },
+        {
+          "en": "They talk for a few minutes.",
+          "tr": "Birkaç dakika sohbet ediyorlar."
+        },
+        {
+          "en": "Alex thanks her and carries his box upstairs.",
+          "tr": "Alex teşekkür edip kutusunu üst kata taşıyor."
+        }
+      ],
+      "text": "Someone is at the door. It is a new neighbor with a big box. Hi, I am Alex. I live upstairs. Mina smiles and says her name. Alex asks her about the nearest shop. It is next to the cafe, she says. She offers him a glass of water. They talk for a few minutes. Alex thanks her and carries his box upstairs.",
+      "audio": "f83d401b8b584a5f",
+      "wordCount": 63,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "new-neighbor-q1",
+          "prompt": "Alex nerede oturuyor?",
+          "options": [
+            "Upstairs",
+            "Across the city",
+            "At the cafe"
+          ],
+          "answer": 0,
+          "why": "“I live upstairs” üst katta oturuyorum demek."
+        },
+        {
+          "id": "new-neighbor-q2",
+          "prompt": "Alex neyin yerini soruyor?",
+          "options": [
+            "The nearest shop",
+            "The bus station",
+            "The kitchen"
+          ],
+          "answer": 0,
+          "why": "Alex en yakın marketi soruyor."
+        },
+        {
+          "id": "new-neighbor-q3",
+          "prompt": "Mina ona ne ikram ediyor?",
+          "options": [
+            "Coffee",
+            "A glass of water",
+            "Some bread"
+          ],
+          "answer": 1,
+          "why": "Mina bir bardak su ikram ediyor."
+        }
+      ]
+    },
+    {
+      "id": "lunch-break",
+      "title": "Lunch in the Park",
+      "tr": "Parkta öğle molası",
+      "level": "A1",
+      "topic": "İş ve mola",
+      "art": "family-picnic",
+      "units": [
+        8,
+        10
+      ],
+      "order": 5,
+      "sentences": [
+        {
+          "en": "It is one o'clock, and Ali is hungry.",
+          "tr": "Saat bir; Ali acıkmış."
+        },
+        {
+          "en": "He takes his lunch to the park.",
+          "tr": "Öğle yemeğini parka götürüyor."
+        },
+        {
+          "en": "His friend Sam is sitting on a bench.",
+          "tr": "Arkadaşı Sam bir bankta oturuyor."
+        },
+        {
+          "en": "There is a place next to him.",
+          "tr": "Yanında boş bir yer var."
+        },
+        {
+          "en": "Ali sits down and opens his bag.",
+          "tr": "Ali oturup çantasını açıyor."
+        },
+        {
+          "en": "He has a cheese sandwich and an apple.",
+          "tr": "Peynirli bir sandviçi ve bir elması var."
+        },
+        {
+          "en": "Sam has some soup in a cup.",
+          "tr": "Sam'in bardağında çorba var."
+        },
+        {
+          "en": "They eat and talk about their day.",
+          "tr": "Yemek yiyip günlerinin nasıl geçtiğini konuşuyorlar."
+        },
+        {
+          "en": "Then they walk back to work together.",
+          "tr": "Sonra birlikte işe geri dönüyorlar."
+        }
+      ],
+      "text": "It is one o'clock, and Ali is hungry. He takes his lunch to the park. His friend Sam is sitting on a bench. There is a place next to him. Ali sits down and opens his bag. He has a cheese sandwich and an apple. Sam has some soup in a cup. They eat and talk about their day. Then they walk back to work together.",
+      "audio": "d59b3b89b91a0177",
+      "wordCount": 66,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "lunch-break-q1",
+          "prompt": "Ali yemeğini nereye götürüyor?",
+          "options": [
+            "To the park",
+            "To a shop",
+            "To Sam’s house"
+          ],
+          "answer": 0,
+          "why": "Ali öğle yemeğini parka götürüyor."
+        },
+        {
+          "id": "lunch-break-q2",
+          "prompt": "Ali ne yiyor?",
+          "options": [
+            "Soup",
+            "A cheese sandwich and an apple",
+            "Bread and milk"
+          ],
+          "answer": 1,
+          "why": "Çantasından peynirli sandviç ve elma çıkarıyor."
+        },
+        {
+          "id": "lunch-break-q3",
+          "prompt": "Moladan sonra nereye gidiyorlar?",
+          "options": [
+            "Back to work",
+            "To a cafe",
+            "Home"
+          ],
+          "answer": 0,
+          "why": "“Back to work” işe geri dönmek demek."
+        }
+      ]
+    },
+    {
+      "id": "quiet-evening",
+      "title": "A Quiet Evening",
+      "tr": "Sakin bir akşam",
+      "level": "A1",
+      "topic": "Ev",
+      "art": "rainy-day",
+      "units": [
+        8,
+        10
+      ],
+      "order": 6,
+      "sentences": [
+        {
+          "en": "It is raining outside.",
+          "tr": "Dışarıda yağmur yağıyor."
+        },
+        {
+          "en": "Deniz is at home with her brother.",
+          "tr": "Deniz erkek kardeşiyle evde."
+        },
+        {
+          "en": "He is making tea in the kitchen.",
+          "tr": "Kardeşi mutfakta çay hazırlıyor."
+        },
+        {
+          "en": "She is looking for a good film.",
+          "tr": "Deniz güzel bir film arıyor."
+        },
+        {
+          "en": "They do not want to go out tonight.",
+          "tr": "Bu akşam dışarı çıkmak istemiyorlar."
+        },
+        {
+          "en": "Her brother brings two cups of tea.",
+          "tr": "Kardeşi iki fincan çay getiriyor."
+        },
+        {
+          "en": "Deniz finds a short, funny film.",
+          "tr": "Deniz kısa ve komik bir film buluyor."
+        },
+        {
+          "en": "They sit on the sofa and watch it.",
+          "tr": "Kanepeye oturup filmi izliyorlar."
+        },
+        {
+          "en": "Sometimes a quiet evening is just right.",
+          "tr": "Bazen sakin bir akşam tam da ihtiyacın olan şeydir."
+        }
+      ],
+      "text": "It is raining outside. Deniz is at home with her brother. He is making tea in the kitchen. She is looking for a good film. They do not want to go out tonight. Her brother brings two cups of tea. Deniz finds a short, funny film. They sit on the sofa and watch it. Sometimes a quiet evening is just right.",
+      "audio": "06b1e9832969ccf5",
+      "wordCount": 61,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "quiet-evening-q1",
+          "prompt": "Dışarıda hava nasıl?",
+          "options": [
+            "It is raining",
+            "It is sunny",
+            "It is snowing"
+          ],
+          "answer": 0,
+          "why": "İlk cümlede yağmur yağdığı söyleniyor."
+        },
+        {
+          "id": "quiet-evening-q2",
+          "prompt": "Deniz’in kardeşi ne hazırlıyor?",
+          "options": [
+            "Coffee",
+            "Tea",
+            "Dinner"
+          ],
+          "answer": 1,
+          "why": "Kardeşi mutfakta çay hazırlıyor."
+        },
+        {
+          "id": "quiet-evening-q3",
+          "prompt": "Nasıl bir film seçiyorlar?",
+          "options": [
+            "A long film",
+            "A scary film",
+            "A short, funny film"
+          ],
+          "answer": 2,
+          "why": "Deniz kısa ve komik bir film buluyor."
+        }
+      ]
+    },
+    {
+      "id": "missed-bus",
+      "title": "The Bus I Missed",
+      "tr": "Kaçan otobüs",
+      "level": "A2",
+      "topic": "Yolda",
+      "art": "london-weekend",
+      "units": [
+        15,
+        16
+      ],
+      "order": 7,
+      "sentences": [
+        {
+          "en": "Yesterday, Mina left home a little late.",
+          "tr": "Dün Mina evden biraz geç çıktı."
+        },
+        {
+          "en": "She ran to the bus stop, but the bus was gone.",
+          "tr": "Durağa koştu ama otobüs gitmişti."
+        },
+        {
+          "en": "The next one was in twenty minutes.",
+          "tr": "Sonraki otobüse yirmi dakika vardı."
+        },
+        {
+          "en": "She sent a message to her boss.",
+          "tr": "Patronuna mesaj gönderdi."
+        },
+        {
+          "en": "I am sorry. I missed the bus, she wrote.",
+          "tr": "Kusura bakmayın, otobüsü kaçırdım, diye yazdı."
+        },
+        {
+          "en": "Then she saw a small bakery across the street.",
+          "tr": "Sonra sokağın karşısındaki küçük fırını gördü."
+        },
+        {
+          "en": "She bought a warm roll and a bottle of water.",
+          "tr": "Küçük, sıcak bir ekmek ve bir şişe su aldı."
+        },
+        {
+          "en": "An older woman was also waiting for the bus.",
+          "tr": "Yaşlı bir kadın da otobüs bekliyordu."
+        },
+        {
+          "en": "They talked, and the time passed quickly.",
+          "tr": "Sohbet ettiler; zaman çabucak geçti."
+        },
+        {
+          "en": "Mina got to work late, but she was not upset.",
+          "tr": "Mina işe geç vardı ama canı sıkkın değildi."
+        }
+      ],
+      "text": "Yesterday, Mina left home a little late. She ran to the bus stop, but the bus was gone. The next one was in twenty minutes. She sent a message to her boss. I am sorry. I missed the bus, she wrote. Then she saw a small bakery across the street. She bought a warm roll and a bottle of water. An older woman was also waiting for the bus. They talked, and the time passed quickly. Mina got to work late, but she was not upset.",
+      "audio": "06bd3bc58a9ba05a",
+      "wordCount": 86,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "missed-bus-q1",
+          "prompt": "Mina neden işe geç kalıyor?",
+          "options": [
+            "She missed the bus",
+            "She lost her phone",
+            "She was ill"
+          ],
+          "answer": 0,
+          "why": "Patronuna otobüsü kaçırdığını yazıyor."
+        },
+        {
+          "id": "missed-bus-q2",
+          "prompt": "Sonraki otobüse ne kadar var?",
+          "options": [
+            "Ten minutes",
+            "Twenty minutes",
+            "An hour"
+          ],
+          "answer": 1,
+          "why": "“In twenty minutes” yirmi dakika sonra demek."
+        },
+        {
+          "id": "missed-bus-q3",
+          "prompt": "Beklerken kiminle sohbet ediyor?",
+          "options": [
+            "Her boss",
+            "An older woman",
+            "The driver"
+          ],
+          "answer": 1,
+          "why": "Durağa gelen yaşlı kadınla sohbet ediyor."
+        }
+      ]
+    },
+    {
+      "id": "first-day",
+      "title": "My First Day",
+      "tr": "Yeni işte ilk gün",
+      "level": "A2",
+      "topic": "İş ve mola",
+      "art": "new-job",
+      "units": [
+        15,
+        17
+      ],
+      "order": 8,
+      "sentences": [
+        {
+          "en": "Ali started a new job on Monday.",
+          "tr": "Ali pazartesi yeni bir işe başladı."
+        },
+        {
+          "en": "He was nervous when he walked into the office.",
+          "tr": "Ofise girerken heyecanlı ve biraz gergindi."
+        },
+        {
+          "en": "A woman called Sara showed him his desk.",
+          "tr": "Sara adında bir kadın ona masasını gösterdi."
+        },
+        {
+          "en": "There was a small plant next to the computer.",
+          "tr": "Bilgisayarın yanında küçük bir bitki vardı."
+        },
+        {
+          "en": "Sara explained the work slowly and answered his questions.",
+          "tr": "Sara işi yavaşça anlattı ve sorularını cevapladı."
+        },
+        {
+          "en": "At lunchtime, she invited him to eat with the team.",
+          "tr": "Öğle molasında onu ekiple yemek yemeye çağırdı."
+        },
+        {
+          "en": "Ali did not know anyone, but everyone was friendly.",
+          "tr": "Ali kimseyi tanımıyordu ama herkes sıcak davrandı."
+        },
+        {
+          "en": "In the afternoon, he finished his first small task.",
+          "tr": "Öğleden sonra ilk küçük işini bitirdi."
+        },
+        {
+          "en": "He still had a lot to learn.",
+          "tr": "Daha öğreneceği çok şey vardı."
+        },
+        {
+          "en": "But on the way home, he felt much better.",
+          "tr": "Ama eve dönerken kendini çok daha iyi hissediyordu."
+        }
+      ],
+      "text": "Ali started a new job on Monday. He was nervous when he walked into the office. A woman called Sara showed him his desk. There was a small plant next to the computer. Sara explained the work slowly and answered his questions. At lunchtime, she invited him to eat with the team. Ali did not know anyone, but everyone was friendly. In the afternoon, he finished his first small task. He still had a lot to learn. But on the way home, he felt much better.",
+      "audio": "978a63af49c33479",
+      "wordCount": 86,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "first-day-q1",
+          "prompt": "Ali yeni işine ne zaman başlıyor?",
+          "options": [
+            "On Monday",
+            "On Friday",
+            "At the weekend"
+          ],
+          "answer": 0,
+          "why": "İlk cümlede pazartesi başladığı söyleniyor."
+        },
+        {
+          "id": "first-day-q2",
+          "prompt": "Sara ona nasıl yardımcı oluyor?",
+          "options": [
+            "She explains the work",
+            "She drives him home",
+            "She gives him a phone"
+          ],
+          "answer": 0,
+          "why": "Sara işi anlatıp Ali’nin sorularını cevaplıyor."
+        },
+        {
+          "id": "first-day-q3",
+          "prompt": "Ali günün sonunda nasıl hissediyor?",
+          "options": [
+            "Much better",
+            "Very angry",
+            "More nervous"
+          ],
+          "answer": 0,
+          "why": "Son cümlede kendini çok daha iyi hissettiği söyleniyor."
+        }
+      ]
+    },
+    {
+      "id": "rainy-walk",
+      "title": "One Umbrella",
+      "tr": "Bir şemsiye, iki kişi",
+      "level": "A2",
+      "topic": "Yolda",
+      "art": "rainy-day",
+      "units": [
+        15,
+        18
+      ],
+      "order": 9,
+      "sentences": [
+        {
+          "en": "Deniz was walking home when it started to rain.",
+          "tr": "Yağmur başladığında Deniz eve yürüyordu."
+        },
+        {
+          "en": "She looked in her bag for her umbrella.",
+          "tr": "Şemsiyesini bulmak için çantasına baktı."
+        },
+        {
+          "en": "It was still at home, next to the door.",
+          "tr": "Şemsiye evde, kapının yanında kalmıştı."
+        },
+        {
+          "en": "A neighbor was standing outside the little bookshop.",
+          "tr": "Bir komşusu küçük kitapçının önünde duruyordu."
+        },
+        {
+          "en": "He had a large umbrella and saw Deniz in the rain.",
+          "tr": "Büyük bir şemsiyesi vardı; Deniz’i yağmurun altında gördü."
+        },
+        {
+          "en": "We are going the same way, he said.",
+          "tr": "Aynı yöne gidiyoruz, dedi."
+        },
+        {
+          "en": "They walked together and talked about the neighborhood.",
+          "tr": "Birlikte yürüyüp mahalle hakkında sohbet ettiler."
+        },
+        {
+          "en": "Deniz learned that he had a new puppy.",
+          "tr": "Deniz onun yeni bir yavru köpeği olduğunu öğrendi."
+        },
+        {
+          "en": "They reached their building before the rain got heavier.",
+          "tr": "Yağmur şiddetlenmeden binalarına vardılar."
+        },
+        {
+          "en": "The next day, Deniz put the umbrella in her bag.",
+          "tr": "Ertesi gün Deniz şemsiyesini çantasına koydu."
+        }
+      ],
+      "text": "Deniz was walking home when it started to rain. She looked in her bag for her umbrella. It was still at home, next to the door. A neighbor was standing outside the little bookshop. He had a large umbrella and saw Deniz in the rain. We are going the same way, he said. They walked together and talked about the neighborhood. Deniz learned that he had a new puppy. They reached their building before the rain got heavier. The next day, Deniz put the umbrella in her bag.",
+      "audio": "85bd653708d214a6",
+      "wordCount": 88,
+      "minutes": 5,
+      "questions": [
+        {
+          "id": "rainy-walk-q1",
+          "prompt": "Deniz’in şemsiyesi nerede?",
+          "options": [
+            "At home",
+            "At work",
+            "In her coat"
+          ],
+          "answer": 0,
+          "why": "Şemsiye evde, kapının yanında kalmış."
+        },
+        {
+          "id": "rainy-walk-q2",
+          "prompt": "Komşusu nerede duruyor?",
+          "options": [
+            "Outside a bookshop",
+            "At the bus stop",
+            "In the park"
+          ],
+          "answer": 0,
+          "why": "Komşusu küçük kitapçının önünde duruyor."
+        },
+        {
+          "id": "rainy-walk-q3",
+          "prompt": "Komşusunun yeni neyi var?",
+          "options": [
+            "A new car",
+            "A puppy",
+            "A bicycle"
+          ],
+          "answer": 1,
+          "why": "“A new puppy” yeni bir yavru köpek demek."
+        }
+      ]
+    },
+    {
+      "id": "wrong-order",
+      "title": "That Is Not My Lunch",
+      "tr": "Siparişte küçük bir karışıklık",
+      "level": "A2",
+      "topic": "Kafe",
+      "art": "coffee",
+      "units": [
+        16,
+        23
+      ],
+      "order": 10,
+      "sentences": [
+        {
+          "en": "Sam ordered a chicken sandwich at a busy cafe.",
+          "tr": "Sam kalabalık bir kafede tavuklu sandviç söyledi."
+        },
+        {
+          "en": "When his food arrived, it was a cheese sandwich.",
+          "tr": "Yemek geldiğinde peynirli sandviç olduğunu gördü."
+        },
+        {
+          "en": "He checked the menu and then called the waiter.",
+          "tr": "Menüye bakıp garsonu çağırdı."
+        },
+        {
+          "en": "Excuse me, I ordered the chicken sandwich, he said.",
+          "tr": "Affedersiniz, tavuklu sandviç söylemiştim, dedi."
+        },
+        {
+          "en": "The waiter looked at the plate and apologized.",
+          "tr": "Garson tabağa baktı ve özür diledi."
+        },
+        {
+          "en": "He took it back and brought the right sandwich.",
+          "tr": "Onu geri götürüp doğru sandviçi getirdi."
+        },
+        {
+          "en": "He also brought a glass of water.",
+          "tr": "Bir bardak su da getirdi."
+        },
+        {
+          "en": "Sam thanked him and enjoyed his lunch.",
+          "tr": "Sam teşekkür edip yemeğini yedi."
+        },
+        {
+          "en": "Sam felt better after the conversation.",
+          "tr": "Sam konuşmadan sonra kendini daha iyi hissetti."
+        },
+        {
+          "en": "It was a small mistake, and his food was good.",
+          "tr": "Küçük bir hataydı; yemeği de güzeldi."
+        }
+      ],
+      "text": "Sam ordered a chicken sandwich at a busy cafe. When his food arrived, it was a cheese sandwich. He checked the menu and then called the waiter. Excuse me, I ordered the chicken sandwich, he said. The waiter looked at the plate and apologized. He took it back and brought the right sandwich. He also brought a glass of water. Sam thanked him and enjoyed his lunch. Sam felt better after the conversation. It was a small mistake, and his food was good.",
+      "audio": "947a7bdd6083eed3",
+      "wordCount": 83,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "wrong-order-q1",
+          "prompt": "Sam ne sipariş ediyor?",
+          "options": [
+            "A cheese sandwich",
+            "A chicken sandwich",
+            "A bowl of soup"
+          ],
+          "answer": 1,
+          "why": "Sam tavuklu sandviç sipariş ediyor."
+        },
+        {
+          "id": "wrong-order-q2",
+          "prompt": "Karışıklığı nasıl çözüyor?",
+          "options": [
+            "He asks politely",
+            "He leaves the cafe",
+            "He calls a friend"
+          ],
+          "answer": 0,
+          "why": "Sam garsona nazikçe durumu anlatıyor."
+        },
+        {
+          "id": "wrong-order-q3",
+          "prompt": "Garson sandviç dışında ne getiriyor?",
+          "options": [
+            "A cup of tea",
+            "A glass of water",
+            "A piece of cake"
+          ],
+          "answer": 1,
+          "why": "Garson bir bardak su da getiriyor."
+        }
+      ]
+    },
+    {
+      "id": "saturday-plan",
+      "title": "A Different Saturday",
+      "tr": "Cumartesi planı değişince",
+      "level": "A2",
+      "topic": "Hafta sonu",
+      "art": "family-picnic",
+      "units": [
+        15,
+        17,
+        28
+      ],
+      "order": 11,
+      "sentences": [
+        {
+          "en": "Mina and Ali planned to have a picnic on Saturday.",
+          "tr": "Mina ve Ali cumartesi piknik yapmayı planladı."
+        },
+        {
+          "en": "They bought bread, cheese, tomatoes, and some fruit.",
+          "tr": "Ekmek, peynir, domates ve biraz meyve aldılar."
+        },
+        {
+          "en": "On Saturday morning, the sky was dark.",
+          "tr": "Cumartesi sabahı gökyüzü kapalıydı."
+        },
+        {
+          "en": "Then it started to rain, so they changed their plan.",
+          "tr": "Sonra yağmur başladı; onlar da planı değiştirdi."
+        },
+        {
+          "en": "We can have our picnic here, said Ali.",
+          "tr": "Pikniğimizi burada yapabiliriz, dedi Ali."
+        },
+        {
+          "en": "They put a blanket on the living room floor.",
+          "tr": "Salonun zeminine bir örtü serdiler."
+        },
+        {
+          "en": "Mina opened the window to hear the rain.",
+          "tr": "Mina yağmurun sesini duymak için pencereyi açtı."
+        },
+        {
+          "en": "They ate their food and played a simple game.",
+          "tr": "Yemeklerini yiyip basit bir oyun oynadılar."
+        },
+        {
+          "en": "The day was different, but it was still fun.",
+          "tr": "Gün farklı geçti ama yine de eğlenceliydi."
+        },
+        {
+          "en": "But they had a good time anyway.",
+          "tr": "Ama yine de güzel vakit geçirdiler."
+        }
+      ],
+      "text": "Mina and Ali planned to have a picnic on Saturday. They bought bread, cheese, tomatoes, and some fruit. On Saturday morning, the sky was dark. Then it started to rain, so they changed their plan. We can have our picnic here, said Ali. They put a blanket on the living room floor. Mina opened the window to hear the rain. They ate their food and played a simple game. The day was different, but it was still fun. But they had a good time anyway.",
+      "audio": "c2774126504ac532",
+      "wordCount": 85,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "saturday-plan-q1",
+          "prompt": "İlk planları ne?",
+          "options": [
+            "A picnic",
+            "A film at the cinema",
+            "A trip to the city"
+          ],
+          "answer": 0,
+          "why": "Cumartesi piknik yapmayı planlıyorlar."
+        },
+        {
+          "id": "saturday-plan-q2",
+          "prompt": "Planlarını neden değiştiriyorlar?",
+          "options": [
+            "Ali is ill",
+            "It starts to rain",
+            "The shop is closed"
+          ],
+          "answer": 1,
+          "why": "Yağmur başladığı için plan değişiyor."
+        },
+        {
+          "id": "saturday-plan-q3",
+          "prompt": "Sonunda nerede yemek yiyorlar?",
+          "options": [
+            "In the living room",
+            "At a cafe",
+            "In the park"
+          ],
+          "answer": 0,
+          "why": "Örtüyü salonun zeminine serip orada yemek yiyorlar."
+        }
+      ]
+    },
+    {
+      "id": "phone-call",
+      "title": "A Call Before Dinner",
+      "tr": "Yemekten önce bir telefon",
+      "level": "A2",
+      "topic": "Arkadaşlar",
+      "art": "london-weekend",
+      "units": [
+        15,
+        23,
+        27
+      ],
+      "order": 12,
+      "sentences": [
+        {
+          "en": "Deniz called her friend before she started cooking.",
+          "tr": "Deniz yemek yapmaya başlamadan arkadaşını aradı."
+        },
+        {
+          "en": "They last met a few weeks ago.",
+          "tr": "En son birkaç hafta önce görüşmüşlerdi."
+        },
+        {
+          "en": "Her friend was moving to a new flat nearby.",
+          "tr": "Arkadaşı yakındaki yeni bir eve taşınıyordu."
+        },
+        {
+          "en": "The kitchen was full of boxes, so she could not cook.",
+          "tr": "Mutfak kutularla doluydu; yemek yapamıyordu."
+        },
+        {
+          "en": "Come over for dinner, said Deniz.",
+          "tr": "Akşam yemeğine gelsene, dedi Deniz."
+        },
+        {
+          "en": "I am making soup, and there is enough for two.",
+          "tr": "Çorba yapıyorum; ikimize de yeter."
+        },
+        {
+          "en": "Her friend arrived with some bread from the bakery.",
+          "tr": "Arkadaşı fırından aldığı ekmekle geldi."
+        },
+        {
+          "en": "They ate at the small kitchen table.",
+          "tr": "Küçük mutfak masasında yemek yediler."
+        },
+        {
+          "en": "After dinner, they made a plan to move the boxes.",
+          "tr": "Yemekten sonra kutuları taşımak için plan yaptılar."
+        },
+        {
+          "en": "Sometimes helping a friend starts with a simple phone call.",
+          "tr": "Bazen bir arkadaşına yardım etmek basit bir telefonla başlar."
+        }
+      ],
+      "text": "Deniz called her friend before she started cooking. They last met a few weeks ago. Her friend was moving to a new flat nearby. The kitchen was full of boxes, so she could not cook. Come over for dinner, said Deniz. I am making soup, and there is enough for two. Her friend arrived with some bread from the bakery. They ate at the small kitchen table. After dinner, they made a plan to move the boxes. Sometimes helping a friend starts with a simple phone call.",
+      "audio": "e9a6e2699f5ff995",
+      "wordCount": 87,
+      "minutes": 4,
+      "questions": [
+        {
+          "id": "phone-call-q1",
+          "prompt": "Deniz arkadaşını ne zaman arıyor?",
+          "options": [
+            "Before cooking",
+            "After dinner",
+            "At midnight"
+          ],
+          "answer": 0,
+          "why": "Yemek yapmaya başlamadan arıyor."
+        },
+        {
+          "id": "phone-call-q2",
+          "prompt": "Arkadaşı neden yemek yapamıyor?",
+          "options": [
+            "Her kitchen is full of boxes",
+            "She has no bread",
+            "She is at work"
+          ],
+          "answer": 0,
+          "why": "Taşındığı için mutfağı kutularla dolu."
+        },
+        {
+          "id": "phone-call-q3",
+          "prompt": "Arkadaşı gelirken ne getiriyor?",
+          "options": [
+            "Some bread",
+            "Some soup",
+            "A cake"
+          ],
+          "answer": 0,
+          "why": "Fırından ekmek alıp geliyor."
+        }
+      ]
+    }
+  ],
+  "dictionary": {
+    "a": {
+      "tr": "bir",
+      "audio": "ca978112ca1bbdca"
+    },
+    "about": {
+      "tr": "hakkında",
+      "audio": "a4262e1c9bcbc172"
+    },
+    "across": {
+      "tr": "karşısında; karşıya",
+      "audio": "deb538b50cb6318b"
+    },
+    "after": {
+      "tr": "sonra",
+      "audio": "f39592393ef0859c"
+    },
+    "afternoon": {
+      "tr": "öğleden sonra",
+      "audio": "c8e07c1ac268eae0"
+    },
+    "ago": {
+      "tr": "önce",
+      "audio": "1d8e08fd63268284"
+    },
+    "alex": {
+      "tr": "Alex (kişi adı)",
+      "kind": "name",
+      "audio": "4135aa9dc1b842a6"
+    },
+    "ali": {
+      "tr": "Ali (kişi adı)",
+      "kind": "name",
+      "audio": "94419b99b12c1113"
+    },
+    "also": {
+      "tr": "de; ayrıca",
+      "audio": "bb8c8605c55dcc2d"
+    },
+    "am": {
+      "tr": "olmak (I ile)",
+      "audio": "ab6db599234d2636"
+    },
+    "an": {
+      "tr": "bir",
+      "audio": "ea325d761f98c6b7"
+    },
+    "and": {
+      "tr": "ve",
+      "audio": "6201111b83a0cb5b"
+    },
+    "answered": {
+      "tr": "cevapladı",
+      "audio": "68c780cd132a0299"
+    },
+    "anyone": {
+      "tr": "herhangi biri; kimse",
+      "audio": "12ed8d14a55fdb47"
+    },
+    "anyway": {
+      "tr": "yine de",
+      "audio": "97519f7c288b3602"
+    },
+    "apologized": {
+      "tr": "özür diledi",
+      "audio": "cd860ab53778af35"
+    },
+    "apple": {
+      "tr": "elma",
+      "audio": "3a7bd3e2360a3d29"
+    },
+    "are": {
+      "tr": "olmak (you, we, they ile)",
+      "audio": "ba78973ddcf98d4e"
+    },
+    "arrived": {
+      "tr": "geldi; vardı",
+      "audio": "4d1109bf78a883b5"
+    },
+    "asks": {
+      "tr": "soruyor; istiyor",
+      "audio": "c93e3896261ff86a"
+    },
+    "at": {
+      "tr": "bir yerde; bir saatte",
+      "audio": "b1d6b91b67c2afa5"
+    },
+    "ate": {
+      "tr": "yedi",
+      "audio": "6983e434cc382a05"
+    },
+    "back": {
+      "tr": "geri",
+      "audio": "3c482346f3750276"
+    },
+    "bag": {
+      "tr": "çanta",
+      "audio": "c018019b6a8b01ab"
+    },
+    "bakery": {
+      "tr": "fırın",
+      "audio": "144ac86d05c00f55"
+    },
+    "before": {
+      "tr": "önce",
+      "audio": "6db7d803e74f1ffa"
+    },
+    "bench": {
+      "tr": "bank; oturma sırası",
+      "audio": "1b32c28cb38c0548"
+    },
+    "better": {
+      "tr": "daha iyi",
+      "audio": "d7d5dcc369426e2e"
+    },
+    "big": {
+      "tr": "büyük",
+      "audio": "2a21fe6d592a19b7"
+    },
+    "blanket": {
+      "tr": "örtü; battaniye",
+      "audio": "7cd0fc6ee61e2a57"
+    },
+    "bookshop": {
+      "tr": "kitapçı",
+      "audio": "0299706ac912e1d4"
+    },
+    "boss": {
+      "tr": "patron",
+      "audio": "a5e7c002443743c5"
+    },
+    "bottle": {
+      "tr": "şişe",
+      "audio": "7def9c79e5be6d7a"
+    },
+    "bottles": {
+      "tr": "şişeler",
+      "audio": "c0db820c9e321538"
+    },
+    "bought": {
+      "tr": "satın aldı",
+      "audio": "39deaf7caa6bbb32"
+    },
+    "box": {
+      "tr": "kutu",
+      "audio": "26f8567f25691822"
+    },
+    "boxes": {
+      "tr": "kutular",
+      "audio": "ff1f51bdc88ddff1"
+    },
+    "bread": {
+      "tr": "ekmek",
+      "audio": "985604c2b6024312"
+    },
+    "breakfast": {
+      "tr": "kahvaltı",
+      "audio": "7c58ea253628feed"
+    },
+    "brings": {
+      "tr": "getiriyor",
+      "audio": "c74927dbdcd52d52"
+    },
+    "brother": {
+      "tr": "erkek kardeş",
+      "audio": "0b4bd77cec705cf5"
+    },
+    "brought": {
+      "tr": "getirdi",
+      "audio": "553f3e2340aa69a8"
+    },
+    "building": {
+      "tr": "bina",
+      "audio": "5167e9677e1fbc50"
+    },
+    "bus": {
+      "tr": "otobüs",
+      "audio": "04e027e4990a203f"
+    },
+    "busy": {
+      "tr": "kalabalık; meşgul",
+      "audio": "c9bc072f4fa81894"
+    },
+    "but": {
+      "tr": "ama",
+      "audio": "cdc29937887188ad"
+    },
+    "buys": {
+      "tr": "satın alıyor",
+      "audio": "6a26f90ee358f503"
+    },
+    "by": {
+      "tr": "ile; yoluyla",
+      "audio": "a7e2d26e8d15814d"
+    },
+    "cafe": {
+      "tr": "kafe",
+      "audio": "a860b858265b22da"
+    },
+    "call": {
+      "tr": "aramak; telefon görüşmesi",
+      "audio": "7edb360f06acaef2"
+    },
+    "called": {
+      "tr": "aradı; adında",
+      "audio": "8c90cbf5d27d61f5"
+    },
+    "calls": {
+      "tr": "arıyor",
+      "audio": "f46f5990ebfadcab"
+    },
+    "can": {
+      "tr": "yapabilmek",
+      "audio": "9f584196e7fe6de8"
+    },
+    "card": {
+      "tr": "kart",
+      "audio": "8367cd66fdd136bb"
+    },
+    "carries": {
+      "tr": "taşıyor",
+      "audio": "47e8d6fafa7e2200"
+    },
+    "changed": {
+      "tr": "değiştirdi",
+      "audio": "d67e2e944994496c"
+    },
+    "checked": {
+      "tr": "kontrol etti",
+      "audio": "e61a3d78c65133c7"
+    },
+    "cheese": {
+      "tr": "peynir",
+      "audio": "873ac9ffea4dd04f"
+    },
+    "chicken": {
+      "tr": "tavuk",
+      "audio": "811eb81b9d11d65a"
+    },
+    "coat": {
+      "tr": "mont; palto",
+      "audio": "8218f3d6780abf45"
+    },
+    "coffee": {
+      "tr": "kahve",
+      "audio": "37290d74ac4d186e"
+    },
+    "come": {
+      "tr": "gelmek",
+      "audio": "9c19636ddea25f0a"
+    },
+    "comes": {
+      "tr": "geliyor",
+      "audio": "10882c27c47753f2"
+    },
+    "computer": {
+      "tr": "bilgisayar",
+      "audio": "aa97302150fce811"
+    },
+    "conversation": {
+      "tr": "konuşma; sohbet",
+      "audio": "8b34dbc2c05eb4d7"
+    },
+    "cook": {
+      "tr": "yemek yapmak",
+      "audio": "03fb94180aa0ff2c"
+    },
+    "cooking": {
+      "tr": "yemek yapma; yemek yapıyor",
+      "audio": "82bd81ea4b030255"
+    },
+    "could": {
+      "tr": "yapabiliyordu",
+      "audio": "0e031e954a432055"
+    },
+    "counter": {
+      "tr": "tezgâh",
+      "audio": "efe899c74558f20b"
+    },
+    "cup": {
+      "tr": "fincan; bardak",
+      "audio": "c6171781d65f3ccc"
+    },
+    "cups": {
+      "tr": "fincanlar; bardaklar",
+      "audio": "43b69e82bee632b3"
+    },
+    "dark": {
+      "tr": "karanlık; kapalı",
+      "audio": "e6bb5689beec52c4"
+    },
+    "day": {
+      "tr": "gün",
+      "audio": "944c27e5b97ab779"
+    },
+    "deniz": {
+      "tr": "Deniz (kişi adı)",
+      "kind": "name",
+      "audio": "bb7c3c159685e879"
+    },
+    "desk": {
+      "tr": "çalışma masası",
+      "audio": "49be417ad74080a0"
+    },
+    "did": {
+      "tr": "geçmişte soru ve olumsuzluk yardımcısı",
+      "audio": "75ca3ca2ece24355"
+    },
+    "different": {
+      "tr": "farklı",
+      "audio": "9d6f965ac832e40a"
+    },
+    "dinner": {
+      "tr": "akşam yemeği",
+      "audio": "dda209044ad44962"
+    },
+    "do": {
+      "tr": "yapmak; soru yardımcısı",
+      "audio": "ac0b52a2ae6ef999"
+    },
+    "door": {
+      "tr": "kapı",
+      "audio": "2534e2de1dec24fe"
+    },
+    "down": {
+      "tr": "aşağı; sit down: oturmak",
+      "audio": "908aec4512d80ff4"
+    },
+    "eat": {
+      "tr": "yemek yemek",
+      "audio": "e57bd924047ef39d"
+    },
+    "enjoyed": {
+      "tr": "keyif aldı",
+      "audio": "629bee9da3fd6660"
+    },
+    "enough": {
+      "tr": "yeterli; yeterince",
+      "audio": "6f6465f9dd068585"
+    },
+    "evening": {
+      "tr": "akşam",
+      "audio": "e5bd0801d10e5965"
+    },
+    "everyone": {
+      "tr": "herkes",
+      "audio": "5d67991ae967994c"
+    },
+    "excuse": {
+      "tr": "affetmek (excuse me: affedersiniz)",
+      "audio": "b76c1db1f24b29fe"
+    },
+    "explained": {
+      "tr": "açıkladı; anlattı",
+      "audio": "c5006763e9daf0e4"
+    },
+    "felt": {
+      "tr": "hissetti",
+      "audio": "05970e30555fc7bf"
+    },
+    "few": {
+      "tr": "birkaç",
+      "audio": "fa95e5080882f52b"
+    },
+    "film": {
+      "tr": "film",
+      "audio": "d0607f7ad2628b2a"
+    },
+    "finds": {
+      "tr": "buluyor",
+      "audio": "2149c64d00134c01"
+    },
+    "finished": {
+      "tr": "bitirdi",
+      "audio": "05343e9845302eb7"
+    },
+    "first": {
+      "tr": "ilk",
+      "audio": "a7937b64b8caa58f"
+    },
+    "flat": {
+      "tr": "daire; ev",
+      "audio": "5dc27af287fa554a"
+    },
+    "floor": {
+      "tr": "zemin; kat",
+      "audio": "a3e1f4935b0919b3"
+    },
+    "food": {
+      "tr": "yemek; yiyecek",
+      "audio": "c1f026582fe6e8cb"
+    },
+    "for": {
+      "tr": "için",
+      "audio": "10c22bcf4c768b51"
+    },
+    "fridge": {
+      "tr": "buzdolabı",
+      "audio": "997bc249599b7419"
+    },
+    "friend": {
+      "tr": "arkadaş",
+      "audio": "cde48537ca2c2808"
+    },
+    "friendly": {
+      "tr": "sıcakkanlı; dostça",
+      "audio": "4c448a406dcdf064"
+    },
+    "from": {
+      "tr": "-den; -dan",
+      "audio": "75857a45899985be"
+    },
+    "front": {
+      "tr": "ön",
+      "audio": "2d8d693177ac4489"
+    },
+    "fruit": {
+      "tr": "meyve",
+      "audio": "9209526aaa61b070"
+    },
+    "full": {
+      "tr": "dolu",
+      "audio": "a18b869b2e81c0c5"
+    },
+    "fun": {
+      "tr": "eğlenceli; eğlence",
+      "audio": "00c4285274fcc5d6"
+    },
+    "funny": {
+      "tr": "komik",
+      "audio": "b22d1d8fe5752533"
+    },
+    "game": {
+      "tr": "oyun",
+      "audio": "6ca5cab77e702c78"
+    },
+    "glass": {
+      "tr": "bardak; cam",
+      "audio": "132a1a391cce181c"
+    },
+    "go": {
+      "tr": "gitmek",
+      "audio": "4cd0e21a9a0795a1"
+    },
+    "goes": {
+      "tr": "gidiyor",
+      "audio": "f1537d8de0bbe107"
+    },
+    "going": {
+      "tr": "gidiyor; gitme",
+      "audio": "c44d8605913ba4ad"
+    },
+    "gone": {
+      "tr": "gitmiş",
+      "audio": "283bb9deef02e684"
+    },
+    "good": {
+      "tr": "iyi; güzel",
+      "audio": "770e607624d68926"
+    },
+    "got": {
+      "tr": "vardı; oldu",
+      "audio": "0497db517ef058cb"
+    },
+    "had": {
+      "tr": "vardı; have fiilinin geçmişi",
+      "audio": "e02a753f0c060173"
+    },
+    "has": {
+      "tr": "var; sahip",
+      "audio": "9150c74c5f92d51a"
+    },
+    "have": {
+      "tr": "var; sahip olmak",
+      "audio": "193c45b5281908d2"
+    },
+    "he": {
+      "tr": "o (erkek)",
+      "audio": "372f7e2fd2d01ce2"
+    },
+    "hear": {
+      "tr": "duymak",
+      "audio": "49000c4444d51233"
+    },
+    "heavier": {
+      "tr": "daha şiddetli; daha ağır",
+      "audio": "61e44d5587aac95a"
+    },
+    "helping": {
+      "tr": "yardım etmek",
+      "audio": "39c42dbad94bee80"
+    },
+    "her": {
+      "tr": "onun; ona; onu (kadın)",
+      "audio": "354cbfc814262a7a"
+    },
+    "here": {
+      "tr": "burada; buraya",
+      "audio": "fcec91509759ad99"
+    },
+    "hi": {
+      "tr": "merhaba",
+      "audio": "8f434346648f6b96"
+    },
+    "him": {
+      "tr": "ona; onu (erkek)",
+      "audio": "5a7cf4ac138054a8"
+    },
+    "his": {
+      "tr": "onun (erkek)",
+      "audio": "73c9c98668a34c54"
+    },
+    "home": {
+      "tr": "ev; eve",
+      "audio": "4ea140588150773c"
+    },
+    "hungry": {
+      "tr": "aç; acıkmış",
+      "audio": "ca4176138ea4086f"
+    },
+    "i": {
+      "tr": "ben",
+      "audio": "de7d1b721a1e0632"
+    },
+    "in": {
+      "tr": "içinde; -de",
+      "audio": "582967534d0f909d"
+    },
+    "into": {
+      "tr": "içine",
+      "audio": "6b847a0ed0b2c484"
+    },
+    "invited": {
+      "tr": "davet etti",
+      "audio": "307128ff4d35a7e2"
+    },
+    "is": {
+      "tr": "olmak (he, she, it ile)",
+      "audio": "fa51fd49abf67705"
+    },
+    "it": {
+      "tr": "o; onu (nesne, durum)",
+      "audio": "2ad8a7049d7c5511"
+    },
+    "job": {
+      "tr": "iş",
+      "audio": "5e8c9902207afaeb"
+    },
+    "just": {
+      "tr": "sadece; tam",
+      "audio": "b2c66dfd45dd07f5"
+    },
+    "key": {
+      "tr": "anahtar",
+      "audio": "2c70e12b7a0646f9"
+    },
+    "keys": {
+      "tr": "anahtarlar",
+      "audio": "48a53f0774c8ceff"
+    },
+    "kitchen": {
+      "tr": "mutfak",
+      "audio": "3171d89ad00530ff"
+    },
+    "know": {
+      "tr": "bilmek; tanımak",
+      "audio": "cd1bb3012bcfaa0c"
+    },
+    "large": {
+      "tr": "büyük",
+      "audio": "d35c416a85b807e9"
+    },
+    "last": {
+      "tr": "en son; son",
+      "audio": "3547cb112ac4489a"
+    },
+    "late": {
+      "tr": "geç",
+      "audio": "089001a35679a33e"
+    },
+    "later": {
+      "tr": "sonra",
+      "audio": "1d9283d848ea941a"
+    },
+    "laughs": {
+      "tr": "gülüyor",
+      "audio": "bc541a32bca9df60"
+    },
+    "learn": {
+      "tr": "öğrenmek",
+      "audio": "6a8da52e920664ef"
+    },
+    "learned": {
+      "tr": "öğrendi",
+      "audio": "d78e3c38d98d17d7"
+    },
+    "left": {
+      "tr": "ayrıldı; çıktı",
+      "audio": "360f84035942243c"
+    },
+    "little": {
+      "tr": "küçük; az",
+      "audio": "180ca01b95f0dfdd"
+    },
+    "live": {
+      "tr": "yaşamak; oturmak",
+      "audio": "247610f4dedd4ab7"
+    },
+    "lives": {
+      "tr": "yaşıyor; oturuyor",
+      "audio": "12e5cd979ea8c282"
+    },
+    "living": {
+      "tr": "yaşama (living room: salon)",
+      "audio": "a93fcdf7dbae1c2f"
+    },
+    "looked": {
+      "tr": "baktı",
+      "audio": "90c4aee254cb95ab"
+    },
+    "looking": {
+      "tr": "bakıyor; arıyor",
+      "audio": "14f22c3ccfb754c8"
+    },
+    "looks": {
+      "tr": "bakıyor",
+      "audio": "95d09b6231e6627f"
+    },
+    "lot": {
+      "tr": "çok miktar (a lot: çok)",
+      "audio": "b7b30d6e4f8c8647"
+    },
+    "lunch": {
+      "tr": "öğle yemeği",
+      "audio": "f3bb79e48a7a8af1"
+    },
+    "lunchtime": {
+      "tr": "öğle yemeği saati",
+      "audio": "873de1250892a690"
+    },
+    "made": {
+      "tr": "yaptı; hazırladı",
+      "audio": "ea0890697a77af0a"
+    },
+    "make": {
+      "tr": "yapmak; hazırlamak",
+      "audio": "d05aa2a15fb3c40e"
+    },
+    "making": {
+      "tr": "yapıyor; hazırlıyor",
+      "audio": "febb9f32c94e238e"
+    },
+    "man": {
+      "tr": "adam; erkek",
+      "audio": "48b676e2b107da67"
+    },
+    "me": {
+      "tr": "bana; beni",
+      "audio": "2744ccd10c7533bd"
+    },
+    "menu": {
+      "tr": "menü",
+      "audio": "398991009da1d251"
+    },
+    "message": {
+      "tr": "mesaj",
+      "audio": "ab530a13e4591498"
+    },
+    "met": {
+      "tr": "görüştü; tanıştı",
+      "audio": "6efcbfb1f9f195ce"
+    },
+    "milk": {
+      "tr": "süt",
+      "audio": "8825e76530f87ff5"
+    },
+    "mina": {
+      "tr": "Mina (kişi adı)",
+      "kind": "name",
+      "audio": "9bb840df7f699d65"
+    },
+    "minutes": {
+      "tr": "dakika; dakikalar",
+      "audio": "90e63d85fa1ab2c8"
+    },
+    "missed": {
+      "tr": "kaçırdı",
+      "audio": "1c33629a937098ea"
+    },
+    "mistake": {
+      "tr": "hata",
+      "audio": "1b34ffb5e8ddb2c9"
+    },
+    "monday": {
+      "tr": "pazartesi",
+      "audio": "d618fb157a4b382e"
+    },
+    "morning": {
+      "tr": "sabah",
+      "audio": "c23b31a0179b550f"
+    },
+    "move": {
+      "tr": "taşımak; taşınmak",
+      "audio": "683a62ce15fbabb1"
+    },
+    "moving": {
+      "tr": "taşınıyor; taşıma",
+      "audio": "6e862940d0bf2eea"
+    },
+    "much": {
+      "tr": "çok",
+      "audio": "543b1c4bd4f6b184"
+    },
+    "name": {
+      "tr": "ad; isim",
+      "audio": "82a3537ff0dbce7e"
+    },
+    "near": {
+      "tr": "yakınında",
+      "audio": "46ba34770bccfde7"
+    },
+    "nearby": {
+      "tr": "yakındaki; yakınlarda",
+      "audio": "71ed8bd8993d761c"
+    },
+    "nearest": {
+      "tr": "en yakın",
+      "audio": "4ad71c2c3ecaf876"
+    },
+    "needs": {
+      "tr": "ihtiyacı var",
+      "audio": "266d1c70a4cbe7cd"
+    },
+    "neighbor": {
+      "tr": "komşu",
+      "audio": "c65f1ed1c4f4bf1b"
+    },
+    "neighborhood": {
+      "tr": "mahalle",
+      "audio": "5b361dfe3a8fc504"
+    },
+    "nervous": {
+      "tr": "gergin; heyecanlı",
+      "audio": "fb3a7850111f293b"
+    },
+    "new": {
+      "tr": "yeni",
+      "audio": "11507a0e2f5e69d5"
+    },
+    "next": {
+      "tr": "sonraki; next to: yanında",
+      "audio": "c6c1c9a9c8543f1e"
+    },
+    "no": {
+      "tr": "hayır; hiç yok",
+      "audio": "9390298f3fb0c5b1"
+    },
+    "not": {
+      "tr": "değil; olumsuzluk",
+      "audio": "254bb97b57f12e16"
+    },
+    "now": {
+      "tr": "şimdi; artık",
+      "audio": "ed5eb9a37e2d8231"
+    },
+    "o'clock": {
+      "tr": "saat belirtir (one o'clock: saat bir)",
+      "audio": "102ad29298b7b442"
+    },
+    "of": {
+      "tr": "-in; -ın (a glass of water: bir bardak su)",
+      "audio": "28391d3bc64ec15c"
+    },
+    "offers": {
+      "tr": "ikram ediyor; teklif ediyor",
+      "audio": "92ab364e8f439e2d"
+    },
+    "office": {
+      "tr": "ofis",
+      "audio": "5cc3f82838ba7260"
+    },
+    "older": {
+      "tr": "daha yaşlı",
+      "audio": "da925a30e31f7fda"
+    },
+    "on": {
+      "tr": "üzerinde; gün adlarından önce kullanılır",
+      "audio": "b8d31e852725afb1"
+    },
+    "one": {
+      "tr": "bir; bir tane",
+      "audio": "7692c3ad3540bb80"
+    },
+    "open": {
+      "tr": "açık; açmak",
+      "audio": "2348f99874421257"
+    },
+    "opened": {
+      "tr": "açtı",
+      "audio": "5023662705d96810"
+    },
+    "opens": {
+      "tr": "açıyor",
+      "audio": "3359963d8a8deb76"
+    },
+    "ordered": {
+      "tr": "sipariş etti",
+      "audio": "7fdbf2f7e97fe77a"
+    },
+    "our": {
+      "tr": "bizim",
+      "audio": "a6556e4852e26390"
+    },
+    "out": {
+      "tr": "dışarı",
+      "audio": "762069bc07a6e1b5"
+    },
+    "outside": {
+      "tr": "dışarıda; dışında",
+      "audio": "31207a2065f46a5b"
+    },
+    "over": {
+      "tr": "come over: uğramak; birinin evine gelmek",
+      "audio": "5fb6a47e368e12e5"
+    },
+    "park": {
+      "tr": "park",
+      "audio": "4d3971de62245c94"
+    },
+    "passed": {
+      "tr": "geçti",
+      "audio": "284d1e8c49182482"
+    },
+    "pays": {
+      "tr": "ödüyor",
+      "audio": "125058724ada049e"
+    },
+    "phone": {
+      "tr": "telefon",
+      "audio": "45569da57f4b7bf4"
+    },
+    "picnic": {
+      "tr": "piknik",
+      "audio": "e878b5219508b0e1"
+    },
+    "place": {
+      "tr": "yer",
+      "audio": "81df63580cc9ff15"
+    },
+    "plan": {
+      "tr": "plan",
+      "audio": "64879f7d6b960a01"
+    },
+    "planned": {
+      "tr": "planladı",
+      "audio": "9b0f1b10aff55228"
+    },
+    "plant": {
+      "tr": "bitki",
+      "audio": "96044d9734b60441"
+    },
+    "plate": {
+      "tr": "tabak",
+      "audio": "3b56c3520006aaeb"
+    },
+    "played": {
+      "tr": "oynadı",
+      "audio": "8000dce068b164c2"
+    },
+    "please": {
+      "tr": "lütfen",
+      "audio": "56ccc4dcfc96534b"
+    },
+    "puppy": {
+      "tr": "yavru köpek",
+      "audio": "6588ef4db6a357d6"
+    },
+    "put": {
+      "tr": "koymak; koydu",
+      "audio": "373cb2c6d4fe2778"
+    },
+    "puts": {
+      "tr": "koyuyor",
+      "audio": "1115728d9e501607"
+    },
+    "questions": {
+      "tr": "sorular",
+      "audio": "17d5efa695de036a"
+    },
+    "quickly": {
+      "tr": "çabucak; hızlıca",
+      "audio": "a093d3f5ecffec65"
+    },
+    "quiet": {
+      "tr": "sakin; sessiz",
+      "audio": "008f0747f4e27c84"
+    },
+    "rain": {
+      "tr": "yağmur",
+      "audio": "319b44c570a417ff"
+    },
+    "raining": {
+      "tr": "yağmur yağıyor",
+      "audio": "51652912b8f311dc"
+    },
+    "ran": {
+      "tr": "koştu",
+      "audio": "c8fc6bf296faa18d"
+    },
+    "reached": {
+      "tr": "ulaştı; vardı",
+      "audio": "52774637822c236d"
+    },
+    "ready": {
+      "tr": "hazır",
+      "audio": "b24d6d33736ecd56"
+    },
+    "right": {
+      "tr": "doğru; uygun",
+      "audio": "27042f4e6eca7d0b"
+    },
+    "roll": {
+      "tr": "küçük yuvarlak ekmek",
+      "audio": "acfe1fecda8bf79f"
+    },
+    "room": {
+      "tr": "oda",
+      "audio": "1f1c5b2fad778434"
+    },
+    "said": {
+      "tr": "dedi; söyledi",
+      "audio": "fb46c79b7eb7af17"
+    },
+    "sam": {
+      "tr": "Sam (kişi adı)",
+      "kind": "name",
+      "audio": "e96e02d8e47f2a7c"
+    },
+    "same": {
+      "tr": "aynı",
+      "audio": "0967115f2813a354"
+    },
+    "sandwich": {
+      "tr": "sandviç",
+      "audio": "8f5c570f55dd7921"
+    },
+    "sara": {
+      "tr": "Sara (kişi adı)",
+      "kind": "name",
+      "audio": "3a6d64c24cf80b69"
+    },
+    "saturday": {
+      "tr": "cumartesi",
+      "audio": "32f556c7248e9893"
+    },
+    "saw": {
+      "tr": "gördü",
+      "audio": "dfc1a1888f01d947"
+    },
+    "says": {
+      "tr": "diyor; söylüyor",
+      "audio": "8753d1703f15ada9"
+    },
+    "sent": {
+      "tr": "gönderdi",
+      "audio": "7afbb3347fb7252e"
+    },
+    "she": {
+      "tr": "o (kadın)",
+      "audio": "2cda85e504e155f3"
+    },
+    "shop": {
+      "tr": "dükkan; market",
+      "audio": "8d9001d32c6a703d"
+    },
+    "short": {
+      "tr": "kısa",
+      "audio": "f9b0078b5df596d2"
+    },
+    "showed": {
+      "tr": "gösterdi",
+      "audio": "a22f3a3eedf177e0"
+    },
+    "simple": {
+      "tr": "basit",
+      "audio": "a7a39b72f29718e6"
+    },
+    "sister": {
+      "tr": "kız kardeş",
+      "audio": "1980d3927f07fec9"
+    },
+    "sit": {
+      "tr": "oturmak",
+      "audio": "584178e5e3517ddc"
+    },
+    "sits": {
+      "tr": "oturuyor",
+      "audio": "f4b79d59e374772a"
+    },
+    "sitting": {
+      "tr": "oturuyor; oturma",
+      "audio": "558413b70f8c6bbb"
+    },
+    "sky": {
+      "tr": "gökyüzü",
+      "audio": "05f514fae7ca5710"
+    },
+    "slowly": {
+      "tr": "yavaşça",
+      "audio": "793080bb3a187fca"
+    },
+    "small": {
+      "tr": "küçük",
+      "audio": "81db8ebbbbc69c6c"
+    },
+    "smiles": {
+      "tr": "gülümsüyor",
+      "audio": "65083d8b183b313c"
+    },
+    "so": {
+      "tr": "bu yüzden; o yüzden",
+      "audio": "a1d9890884c1b4b9"
+    },
+    "sofa": {
+      "tr": "kanepe",
+      "audio": "d32ce7bf0277fd2c"
+    },
+    "some": {
+      "tr": "biraz; birkaç",
+      "audio": "a6b46dd0d1ae5e86"
+    },
+    "someone": {
+      "tr": "biri",
+      "audio": "2a59d59e3809f827"
+    },
+    "sometimes": {
+      "tr": "bazen",
+      "audio": "28e5c066055aeb3d"
+    },
+    "sorry": {
+      "tr": "üzgün; kusura bakma",
+      "audio": "484aab2f2cd0f77b"
+    },
+    "soup": {
+      "tr": "çorba",
+      "audio": "9014fac8184d7ba9"
+    },
+    "spare": {
+      "tr": "yedek",
+      "audio": "cf2d9706736982fb"
+    },
+    "standing": {
+      "tr": "ayakta duruyor",
+      "audio": "8accd64783894c6c"
+    },
+    "started": {
+      "tr": "başladı",
+      "audio": "03494afd4248c42f"
+    },
+    "starts": {
+      "tr": "başlıyor",
+      "audio": "89ae673c344bb1fb"
+    },
+    "still": {
+      "tr": "hâlâ; yine de",
+      "audio": "94e8566ddfc123ed"
+    },
+    "stop": {
+      "tr": "durak; durmak",
+      "audio": "6c45cb72a36e63d5"
+    },
+    "street": {
+      "tr": "sokak",
+      "audio": "6008c26f4452392a"
+    },
+    "table": {
+      "tr": "masa",
+      "audio": "0d4fc4a78d3706ed"
+    },
+    "takes": {
+      "tr": "alıyor; götürüyor",
+      "audio": "4e2b5722651bde00"
+    },
+    "talk": {
+      "tr": "konuşmak; sohbet etmek",
+      "audio": "ce7611e7481e75f0"
+    },
+    "talked": {
+      "tr": "konuştu",
+      "audio": "a5ebeda2fde7340e"
+    },
+    "task": {
+      "tr": "iş; görev",
+      "audio": "0ebb429fa86d481c"
+    },
+    "tea": {
+      "tr": "çay",
+      "audio": "a9f74d1ec36ebdeb"
+    },
+    "team": {
+      "tr": "ekip; takım",
+      "audio": "ca8b22d0db83a22d"
+    },
+    "ten": {
+      "tr": "on",
+      "audio": "e4432baa90819aae"
+    },
+    "thanked": {
+      "tr": "teşekkür etti",
+      "audio": "84c7fb6f8465fef2"
+    },
+    "thanks": {
+      "tr": "teşekkür ediyor",
+      "audio": "a6a2729cbf6bcadc"
+    },
+    "that": {
+      "tr": "o; şu; yan cümle bağlantısı",
+      "audio": "8e7fc0236af43df9"
+    },
+    "the": {
+      "tr": "belirli kişi veya şeyi gösterir",
+      "audio": "b9776d7ddf459c9a"
+    },
+    "their": {
+      "tr": "onların",
+      "audio": "fd963e4fd45949aa"
+    },
+    "them": {
+      "tr": "onları; onlara",
+      "audio": "c9a8dc336964db7f"
+    },
+    "then": {
+      "tr": "sonra; o zaman",
+      "audio": "21af6f1260f927f5"
+    },
+    "there": {
+      "tr": "orada (there is: var)",
+      "audio": "e244f187f696561d"
+    },
+    "they": {
+      "tr": "onlar",
+      "audio": "151e58a831306903"
+    },
+    "time": {
+      "tr": "zaman; vakit",
+      "audio": "336074805fc85398"
+    },
+    "to": {
+      "tr": "-e; -a; fiilleri bağlar",
+      "audio": "663ea1bfffe5038f"
+    },
+    "together": {
+      "tr": "birlikte",
+      "audio": "0c24734d7bf5954f"
+    },
+    "tomatoes": {
+      "tr": "domatesler; domates",
+      "audio": "20c526012014489e"
+    },
+    "tonight": {
+      "tr": "bu akşam",
+      "audio": "2769fc20451b5173"
+    },
+    "took": {
+      "tr": "aldı; götürdü",
+      "audio": "e0a6230e370d20de"
+    },
+    "twenty": {
+      "tr": "yirmi",
+      "audio": "7c2c4df740f720b0"
+    },
+    "two": {
+      "tr": "iki",
+      "audio": "3fc4ccfe745870e2"
+    },
+    "umbrella": {
+      "tr": "şemsiye",
+      "audio": "2974744982f08b20"
+    },
+    "upset": {
+      "tr": "canı sıkkın; üzgün",
+      "audio": "8b2f406339328a5d"
+    },
+    "upstairs": {
+      "tr": "üst katta; üst kata",
+      "audio": "ab5db4901670272a"
+    },
+    "waiter": {
+      "tr": "garson",
+      "audio": "9beb7c0bd91394a0"
+    },
+    "waiting": {
+      "tr": "bekliyor; bekleme",
+      "audio": "80cfa3e7f28dde4d"
+    },
+    "waits": {
+      "tr": "bekliyor",
+      "audio": "7c4a345722b40acb"
+    },
+    "walk": {
+      "tr": "yürümek",
+      "audio": "7a6c4fac6c5cd720"
+    },
+    "walked": {
+      "tr": "yürüdü",
+      "audio": "2c158582949f34c9"
+    },
+    "walking": {
+      "tr": "yürüyor; yürüme",
+      "audio": "37ff20583960759d"
+    },
+    "want": {
+      "tr": "istemek",
+      "audio": "8656aa55d393b032"
+    },
+    "warm": {
+      "tr": "ılık; sıcak",
+      "audio": "0f0aa408c1832abe"
+    },
+    "was": {
+      "tr": "idi (I, he, she, it ile)",
+      "audio": "b63b99f6383ba713"
+    },
+    "watch": {
+      "tr": "izlemek",
+      "audio": "baed831623943be3"
+    },
+    "water": {
+      "tr": "su",
+      "audio": "0f4168490e38b844"
+    },
+    "way": {
+      "tr": "yol; yön",
+      "audio": "44c5e7071f3a75a2"
+    },
+    "we": {
+      "tr": "biz",
+      "audio": "dc7c811b9561739d"
+    },
+    "weeks": {
+      "tr": "haftalar; hafta",
+      "audio": "eb0d2375b51859a3"
+    },
+    "when": {
+      "tr": "ne zaman; -dığında",
+      "audio": "15eaa75240aed625"
+    },
+    "window": {
+      "tr": "pencere",
+      "audio": "44ff7b02c80d38b2"
+    },
+    "with": {
+      "tr": "ile; birlikte",
+      "audio": "0695b563acde461f"
+    },
+    "woman": {
+      "tr": "kadın",
+      "audio": "cf2e5bff1ef03dcd"
+    },
+    "work": {
+      "tr": "iş; çalışmak",
+      "audio": "00e13ed7af55b276"
+    },
+    "wrote": {
+      "tr": "yazdı",
+      "audio": "5a3365e9b3ecf3ea"
+    },
+    "yesterday": {
+      "tr": "dün",
+      "audio": "9523d9fbe79bcf3e"
+    },
+    "you": {
+      "tr": "sen; siz",
+      "audio": "bb0347a468d97e98"
+    }
+  }
+}

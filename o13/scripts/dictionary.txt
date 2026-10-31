@@ -1,0 +1,317 @@
+a|bir
+about|hakkında
+across|karşısında; karşıya
+after|sonra
+afternoon|öğleden sonra
+ago|önce
+alex|Alex (kişi adı)|name
+ali|Ali (kişi adı)|name
+also|de; ayrıca
+am|olmak (I ile)
+an|bir
+and|ve
+answered|cevapladı
+anyone|herhangi biri; kimse
+anyway|yine de
+apologized|özür diledi
+apple|elma
+are|olmak (you, we, they ile)
+arrived|geldi; vardı
+asks|soruyor; istiyor
+at|bir yerde; bir saatte
+ate|yedi
+back|geri
+bag|çanta
+bakery|fırın
+before|önce
+bench|bank; oturma sırası
+better|daha iyi
+big|büyük
+blanket|örtü; battaniye
+bookshop|kitapçı
+boss|patron
+bottle|şişe
+bottles|şişeler
+bought|satın aldı
+box|kutu
+boxes|kutular
+bread|ekmek
+breakfast|kahvaltı
+brings|getiriyor
+brother|erkek kardeş
+brought|getirdi
+building|bina
+bus|otobüs
+busy|kalabalık; meşgul
+but|ama
+buys|satın alıyor
+by|ile; yoluyla
+cafe|kafe
+call|aramak; telefon görüşmesi
+called|aradı; adında
+calls|arıyor
+can|yapabilmek
+card|kart
+carries|taşıyor
+changed|değiştirdi
+checked|kontrol etti
+cheese|peynir
+chicken|tavuk
+coat|mont; palto
+coffee|kahve
+come|gelmek
+comes|geliyor
+computer|bilgisayar
+conversation|konuşma; sohbet
+cook|yemek yapmak
+cooking|yemek yapma; yemek yapıyor
+could|yapabiliyordu
+counter|tezgâh
+cup|fincan; bardak
+cups|fincanlar; bardaklar
+dark|karanlık; kapalı
+day|gün
+deniz|Deniz (kişi adı)|name
+desk|çalışma masası
+did|geçmişte soru ve olumsuzluk yardımcısı
+different|farklı
+dinner|akşam yemeği
+do|yapmak; soru yardımcısı
+door|kapı
+down|aşağı; sit down: oturmak
+eat|yemek yemek
+enjoyed|keyif aldı
+enough|yeterli; yeterince
+evening|akşam
+everyone|herkes
+excuse|affetmek (excuse me: affedersiniz)
+explained|açıkladı; anlattı
+felt|hissetti
+few|birkaç
+film|film
+finds|buluyor
+finished|bitirdi
+first|ilk
+flat|daire; ev
+floor|zemin; kat
+food|yemek; yiyecek
+for|için
+fridge|buzdolabı
+friend|arkadaş
+friendly|sıcakkanlı; dostça
+from|-den; -dan
+front|ön
+fruit|meyve
+full|dolu
+fun|eğlenceli; eğlence
+funny|komik
+game|oyun
+glass|bardak; cam
+go|gitmek
+goes|gidiyor
+going|gidiyor; gitme
+gone|gitmiş
+good|iyi; güzel
+got|vardı; oldu
+had|vardı; have fiilinin geçmişi
+has|var; sahip
+have|var; sahip olmak
+he|o (erkek)
+hear|duymak
+heavier|daha şiddetli; daha ağır
+helping|yardım etmek
+her|onun; ona; onu (kadın)
+here|burada; buraya
+hi|merhaba
+him|ona; onu (erkek)
+his|onun (erkek)
+home|ev; eve
+hungry|aç; acıkmış
+i|ben
+in|içinde; -de
+into|içine
+invited|davet etti
+is|olmak (he, she, it ile)
+it|o; onu (nesne, durum)
+job|iş
+just|sadece; tam
+key|anahtar
+keys|anahtarlar
+kitchen|mutfak
+know|bilmek; tanımak
+large|büyük
+last|en son; son
+late|geç
+later|sonra
+laughs|gülüyor
+learn|öğrenmek
+learned|öğrendi
+left|ayrıldı; çıktı
+little|küçük; az
+live|yaşamak; oturmak
+lives|yaşıyor; oturuyor
+living|yaşama (living room: salon)
+looked|baktı
+looking|bakıyor; arıyor
+looks|bakıyor
+lot|çok miktar (a lot: çok)
+lunch|öğle yemeği
+lunchtime|öğle yemeği saati
+made|yaptı; hazırladı
+make|yapmak; hazırlamak
+making|yapıyor; hazırlıyor
+man|adam; erkek
+me|bana; beni
+menu|menü
+message|mesaj
+met|görüştü; tanıştı
+milk|süt
+mina|Mina (kişi adı)|name
+minutes|dakika; dakikalar
+missed|kaçırdı
+mistake|hata
+monday|pazartesi
+morning|sabah
+move|taşımak; taşınmak
+moving|taşınıyor; taşıma
+much|çok
+name|ad; isim
+near|yakınında
+nearby|yakındaki; yakınlarda
+nearest|en yakın
+needs|ihtiyacı var
+neighbor|komşu
+neighborhood|mahalle
+nervous|gergin; heyecanlı
+new|yeni
+next|sonraki; next to: yanında
+no|hayır; hiç yok
+not|değil; olumsuzluk
+now|şimdi; artık
+o'clock|saat belirtir (one o'clock: saat bir)
+of|-in; -ın (a glass of water: bir bardak su)
+offers|ikram ediyor; teklif ediyor
+office|ofis
+older|daha yaşlı
+on|üzerinde; gün adlarından önce kullanılır
+one|bir; bir tane
+open|açık; açmak
+opened|açtı
+opens|açıyor
+ordered|sipariş etti
+our|bizim
+out|dışarı
+outside|dışarıda; dışında
+over|come over: uğramak; birinin evine gelmek
+park|park
+passed|geçti
+pays|ödüyor
+phone|telefon
+picnic|piknik
+place|yer
+plan|plan
+planned|planladı
+plant|bitki
+plate|tabak
+played|oynadı
+please|lütfen
+puppy|yavru köpek
+put|koymak; koydu
+puts|koyuyor
+questions|sorular
+quickly|çabucak; hızlıca
+quiet|sakin; sessiz
+rain|yağmur
+raining|yağmur yağıyor
+ran|koştu
+reached|ulaştı; vardı
+ready|hazır
+right|doğru; uygun
+roll|küçük yuvarlak ekmek
+room|oda
+said|dedi; söyledi
+sam|Sam (kişi adı)|name
+same|aynı
+sandwich|sandviç
+sara|Sara (kişi adı)|name
+saturday|cumartesi
+saw|gördü
+says|diyor; söylüyor
+sent|gönderdi
+she|o (kadın)
+shop|dükkan; market
+short|kısa
+showed|gösterdi
+simple|basit
+sister|kız kardeş
+sit|oturmak
+sits|oturuyor
+sitting|oturuyor; oturma
+sky|gökyüzü
+slowly|yavaşça
+small|küçük
+smiles|gülümsüyor
+so|bu yüzden; o yüzden
+sofa|kanepe
+some|biraz; birkaç
+someone|biri
+sometimes|bazen
+sorry|üzgün; kusura bakma
+soup|çorba
+spare|yedek
+standing|ayakta duruyor
+started|başladı
+starts|başlıyor
+still|hâlâ; yine de
+stop|durak; durmak
+street|sokak
+table|masa
+takes|alıyor; götürüyor
+talk|konuşmak; sohbet etmek
+talked|konuştu
+task|iş; görev
+tea|çay
+team|ekip; takım
+ten|on
+thanked|teşekkür etti
+thanks|teşekkür ediyor
+that|o; şu; yan cümle bağlantısı
+the|belirli kişi veya şeyi gösterir
+their|onların
+them|onları; onlara
+then|sonra; o zaman
+there|orada (there is: var)
+they|onlar
+time|zaman; vakit
+to|-e; -a; fiilleri bağlar
+together|birlikte
+tomatoes|domatesler; domates
+tonight|bu akşam
+took|aldı; götürdü
+twenty|yirmi
+two|iki
+umbrella|şemsiye
+upset|canı sıkkın; üzgün
+upstairs|üst katta; üst kata
+waiter|garson
+waiting|bekliyor; bekleme
+waits|bekliyor
+walk|yürümek
+walked|yürüdü
+walking|yürüyor; yürüme
+want|istemek
+warm|ılık; sıcak
+was|idi (I, he, she, it ile)
+watch|izlemek
+water|su
+way|yol; yön
+we|biz
+weeks|haftalar; hafta
+when|ne zaman; -dığında
+window|pencere
+with|ile; birlikte
+woman|kadın
+work|iş; çalışmak
+wrote|yazdı
+yesterday|dün
+you|sen; siz

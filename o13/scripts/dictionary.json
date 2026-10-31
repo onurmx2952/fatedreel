@@ -1,0 +1,959 @@
+{
+  "a": {
+    "tr": "bir"
+  },
+  "about": {
+    "tr": "hakkında"
+  },
+  "across": {
+    "tr": "karşısında; karşıya"
+  },
+  "after": {
+    "tr": "sonra"
+  },
+  "afternoon": {
+    "tr": "öğleden sonra"
+  },
+  "ago": {
+    "tr": "önce"
+  },
+  "alex": {
+    "tr": "Alex (kişi adı)",
+    "kind": "name"
+  },
+  "ali": {
+    "tr": "Ali (kişi adı)",
+    "kind": "name"
+  },
+  "also": {
+    "tr": "de; ayrıca"
+  },
+  "am": {
+    "tr": "olmak (I ile)"
+  },
+  "an": {
+    "tr": "bir"
+  },
+  "and": {
+    "tr": "ve"
+  },
+  "answered": {
+    "tr": "cevapladı"
+  },
+  "anyone": {
+    "tr": "herhangi biri; kimse"
+  },
+  "anyway": {
+    "tr": "yine de"
+  },
+  "apologized": {
+    "tr": "özür diledi"
+  },
+  "apple": {
+    "tr": "elma"
+  },
+  "are": {
+    "tr": "olmak (you, we, they ile)"
+  },
+  "arrived": {
+    "tr": "geldi; vardı"
+  },
+  "asks": {
+    "tr": "soruyor; istiyor"
+  },
+  "at": {
+    "tr": "bir yerde; bir saatte"
+  },
+  "ate": {
+    "tr": "yedi"
+  },
+  "back": {
+    "tr": "geri"
+  },
+  "bag": {
+    "tr": "çanta"
+  },
+  "bakery": {
+    "tr": "fırın"
+  },
+  "before": {
+    "tr": "önce"
+  },
+  "bench": {
+    "tr": "bank; oturma sırası"
+  },
+  "better": {
+    "tr": "daha iyi"
+  },
+  "big": {
+    "tr": "büyük"
+  },
+  "blanket": {
+    "tr": "örtü; battaniye"
+  },
+  "bookshop": {
+    "tr": "kitapçı"
+  },
+  "boss": {
+    "tr": "patron"
+  },
+  "bottle": {
+    "tr": "şişe"
+  },
+  "bottles": {
+    "tr": "şişeler"
+  },
+  "bought": {
+    "tr": "satın aldı"
+  },
+  "box": {
+    "tr": "kutu"
+  },
+  "boxes": {
+    "tr": "kutular"
+  },
+  "bread": {
+    "tr": "ekmek"
+  },
+  "breakfast": {
+    "tr": "kahvaltı"
+  },
+  "brings": {
+    "tr": "getiriyor"
+  },
+  "brother": {
+    "tr": "erkek kardeş"
+  },
+  "brought": {
+    "tr": "getirdi"
+  },
+  "building": {
+    "tr": "bina"
+  },
+  "bus": {
+    "tr": "otobüs"
+  },
+  "busy": {
+    "tr": "kalabalık; meşgul"
+  },
+  "but": {
+    "tr": "ama"
+  },
+  "buys": {
+    "tr": "satın alıyor"
+  },
+  "by": {
+    "tr": "ile; yoluyla"
+  },
+  "cafe": {
+    "tr": "kafe"
+  },
+  "call": {
+    "tr": "aramak; telefon görüşmesi"
+  },
+  "called": {
+    "tr": "aradı; adında"
+  },
+  "calls": {
+    "tr": "arıyor"
+  },
+  "can": {
+    "tr": "yapabilmek"
+  },
+  "card": {
+    "tr": "kart"
+  },
+  "carries": {
+    "tr": "taşıyor"
+  },
+  "changed": {
+    "tr": "değiştirdi"
+  },
+  "checked": {
+    "tr": "kontrol etti"
+  },
+  "cheese": {
+    "tr": "peynir"
+  },
+  "chicken": {
+    "tr": "tavuk"
+  },
+  "coat": {
+    "tr": "mont; palto"
+  },
+  "coffee": {
+    "tr": "kahve"
+  },
+  "come": {
+    "tr": "gelmek"
+  },
+  "comes": {
+    "tr": "geliyor"
+  },
+  "computer": {
+    "tr": "bilgisayar"
+  },
+  "conversation": {
+    "tr": "konuşma; sohbet"
+  },
+  "cook": {
+    "tr": "yemek yapmak"
+  },
+  "cooking": {
+    "tr": "yemek yapma; yemek yapıyor"
+  },
+  "could": {
+    "tr": "yapabiliyordu"
+  },
+  "counter": {
+    "tr": "tezgâh"
+  },
+  "cup": {
+    "tr": "fincan; bardak"
+  },
+  "cups": {
+    "tr": "fincanlar; bardaklar"
+  },
+  "dark": {
+    "tr": "karanlık; kapalı"
+  },
+  "day": {
+    "tr": "gün"
+  },
+  "deniz": {
+    "tr": "Deniz (kişi adı)",
+    "kind": "name"
+  },
+  "desk": {
+    "tr": "çalışma masası"
+  },
+  "did": {
+    "tr": "geçmişte soru ve olumsuzluk yardımcısı"
+  },
+  "different": {
+    "tr": "farklı"
+  },
+  "dinner": {
+    "tr": "akşam yemeği"
+  },
+  "do": {
+    "tr": "yapmak; soru yardımcısı"
+  },
+  "door": {
+    "tr": "kapı"
+  },
+  "down": {
+    "tr": "aşağı; sit down: oturmak"
+  },
+  "eat": {
+    "tr": "yemek yemek"
+  },
+  "enjoyed": {
+    "tr": "keyif aldı"
+  },
+  "enough": {
+    "tr": "yeterli; yeterince"
+  },
+  "evening": {
+    "tr": "akşam"
+  },
+  "everyone": {
+    "tr": "herkes"
+  },
+  "excuse": {
+    "tr": "affetmek (excuse me: affedersiniz)"
+  },
+  "explained": {
+    "tr": "açıkladı; anlattı"
+  },
+  "felt": {
+    "tr": "hissetti"
+  },
+  "few": {
+    "tr": "birkaç"
+  },
+  "film": {
+    "tr": "film"
+  },
+  "finds": {
+    "tr": "buluyor"
+  },
+  "finished": {
+    "tr": "bitirdi"
+  },
+  "first": {
+    "tr": "ilk"
+  },
+  "flat": {
+    "tr": "daire; ev"
+  },
+  "floor": {
+    "tr": "zemin; kat"
+  },
+  "food": {
+    "tr": "yemek; yiyecek"
+  },
+  "for": {
+    "tr": "için"
+  },
+  "fridge": {
+    "tr": "buzdolabı"
+  },
+  "friend": {
+    "tr": "arkadaş"
+  },
+  "friendly": {
+    "tr": "sıcakkanlı; dostça"
+  },
+  "from": {
+    "tr": "-den; -dan"
+  },
+  "front": {
+    "tr": "ön"
+  },
+  "fruit": {
+    "tr": "meyve"
+  },
+  "full": {
+    "tr": "dolu"
+  },
+  "fun": {
+    "tr": "eğlenceli; eğlence"
+  },
+  "funny": {
+    "tr": "komik"
+  },
+  "game": {
+    "tr": "oyun"
+  },
+  "glass": {
+    "tr": "bardak; cam"
+  },
+  "go": {
+    "tr": "gitmek"
+  },
+  "goes": {
+    "tr": "gidiyor"
+  },
+  "going": {
+    "tr": "gidiyor; gitme"
+  },
+  "gone": {
+    "tr": "gitmiş"
+  },
+  "good": {
+    "tr": "iyi; güzel"
+  },
+  "got": {
+    "tr": "vardı; oldu"
+  },
+  "had": {
+    "tr": "vardı; have fiilinin geçmişi"
+  },
+  "has": {
+    "tr": "var; sahip"
+  },
+  "have": {
+    "tr": "var; sahip olmak"
+  },
+  "he": {
+    "tr": "o (erkek)"
+  },
+  "hear": {
+    "tr": "duymak"
+  },
+  "heavier": {
+    "tr": "daha şiddetli; daha ağır"
+  },
+  "helping": {
+    "tr": "yardım etmek"
+  },
+  "her": {
+    "tr": "onun; ona; onu (kadın)"
+  },
+  "here": {
+    "tr": "burada; buraya"
+  },
+  "hi": {
+    "tr": "merhaba"
+  },
+  "him": {
+    "tr": "ona; onu (erkek)"
+  },
+  "his": {
+    "tr": "onun (erkek)"
+  },
+  "home": {
+    "tr": "ev; eve"
+  },
+  "hungry": {
+    "tr": "aç; acıkmış"
+  },
+  "i": {
+    "tr": "ben"
+  },
+  "in": {
+    "tr": "içinde; -de"
+  },
+  "into": {
+    "tr": "içine"
+  },
+  "invited": {
+    "tr": "davet etti"
+  },
+  "is": {
+    "tr": "olmak (he, she, it ile)"
+  },
+  "it": {
+    "tr": "o; onu (nesne, durum)"
+  },
+  "job": {
+    "tr": "iş"
+  },
+  "just": {
+    "tr": "sadece; tam"
+  },
+  "key": {
+    "tr": "anahtar"
+  },
+  "keys": {
+    "tr": "anahtarlar"
+  },
+  "kitchen": {
+    "tr": "mutfak"
+  },
+  "know": {
+    "tr": "bilmek; tanımak"
+  },
+  "large": {
+    "tr": "büyük"
+  },
+  "last": {
+    "tr": "en son; son"
+  },
+  "late": {
+    "tr": "geç"
+  },
+  "later": {
+    "tr": "sonra"
+  },
+  "laughs": {
+    "tr": "gülüyor"
+  },
+  "learn": {
+    "tr": "öğrenmek"
+  },
+  "learned": {
+    "tr": "öğrendi"
+  },
+  "left": {
+    "tr": "ayrıldı; çıktı"
+  },
+  "little": {
+    "tr": "küçük; az"
+  },
+  "live": {
+    "tr": "yaşamak; oturmak"
+  },
+  "lives": {
+    "tr": "yaşıyor; oturuyor"
+  },
+  "living": {
+    "tr": "yaşama (living room: salon)"
+  },
+  "looked": {
+    "tr": "baktı"
+  },
+  "looking": {
+    "tr": "bakıyor; arıyor"
+  },
+  "looks": {
+    "tr": "bakıyor"
+  },
+  "lot": {
+    "tr": "çok miktar (a lot: çok)"
+  },
+  "lunch": {
+    "tr": "öğle yemeği"
+  },
+  "lunchtime": {
+    "tr": "öğle yemeği saati"
+  },
+  "made": {
+    "tr": "yaptı; hazırladı"
+  },
+  "make": {
+    "tr": "yapmak; hazırlamak"
+  },
+  "making": {
+    "tr": "yapıyor; hazırlıyor"
+  },
+  "man": {
+    "tr": "adam; erkek"
+  },
+  "me": {
+    "tr": "bana; beni"
+  },
+  "menu": {
+    "tr": "menü"
+  },
+  "message": {
+    "tr": "mesaj"
+  },
+  "met": {
+    "tr": "görüştü; tanıştı"
+  },
+  "milk": {
+    "tr": "süt"
+  },
+  "mina": {
+    "tr": "Mina (kişi adı)",
+    "kind": "name"
+  },
+  "minutes": {
+    "tr": "dakika; dakikalar"
+  },
+  "missed": {
+    "tr": "kaçırdı"
+  },
+  "mistake": {
+    "tr": "hata"
+  },
+  "monday": {
+    "tr": "pazartesi"
+  },
+  "morning": {
+    "tr": "sabah"
+  },
+  "move": {
+    "tr": "taşımak; taşınmak"
+  },
+  "moving": {
+    "tr": "taşınıyor; taşıma"
+  },
+  "much": {
+    "tr": "çok"
+  },
+  "name": {
+    "tr": "ad; isim"
+  },
+  "near": {
+    "tr": "yakınında"
+  },
+  "nearby": {
+    "tr": "yakındaki; yakınlarda"
+  },
+  "nearest": {
+    "tr": "en yakın"
+  },
+  "needs": {
+    "tr": "ihtiyacı var"
+  },
+  "neighbor": {
+    "tr": "komşu"
+  },
+  "neighborhood": {
+    "tr": "mahalle"
+  },
+  "nervous": {
+    "tr": "gergin; heyecanlı"
+  },
+  "new": {
+    "tr": "yeni"
+  },
+  "next": {
+    "tr": "sonraki; next to: yanında"
+  },
+  "no": {
+    "tr": "hayır; hiç yok"
+  },
+  "not": {
+    "tr": "değil; olumsuzluk"
+  },
+  "now": {
+    "tr": "şimdi; artık"
+  },
+  "o'clock": {
+    "tr": "saat belirtir (one o'clock: saat bir)"
+  },
+  "of": {
+    "tr": "-in; -ın (a glass of water: bir bardak su)"
+  },
+  "offers": {
+    "tr": "ikram ediyor; teklif ediyor"
+  },
+  "office": {
+    "tr": "ofis"
+  },
+  "older": {
+    "tr": "daha yaşlı"
+  },
+  "on": {
+    "tr": "üzerinde; gün adlarından önce kullanılır"
+  },
+  "one": {
+    "tr": "bir; bir tane"
+  },
+  "open": {
+    "tr": "açık; açmak"
+  },
+  "opened": {
+    "tr": "açtı"
+  },
+  "opens": {
+    "tr": "açıyor"
+  },
+  "ordered": {
+    "tr": "sipariş etti"
+  },
+  "our": {
+    "tr": "bizim"
+  },
+  "out": {
+    "tr": "dışarı"
+  },
+  "outside": {
+    "tr": "dışarıda; dışında"
+  },
+  "over": {
+    "tr": "come over: uğramak; birinin evine gelmek"
+  },
+  "park": {
+    "tr": "park"
+  },
+  "passed": {
+    "tr": "geçti"
+  },
+  "pays": {
+    "tr": "ödüyor"
+  },
+  "phone": {
+    "tr": "telefon"
+  },
+  "picnic": {
+    "tr": "piknik"
+  },
+  "place": {
+    "tr": "yer"
+  },
+  "plan": {
+    "tr": "plan"
+  },
+  "planned": {
+    "tr": "planladı"
+  },
+  "plant": {
+    "tr": "bitki"
+  },
+  "plate": {
+    "tr": "tabak"
+  },
+  "played": {
+    "tr": "oynadı"
+  },
+  "please": {
+    "tr": "lütfen"
+  },
+  "puppy": {
+    "tr": "yavru köpek"
+  },
+  "put": {
+    "tr": "koymak; koydu"
+  },
+  "puts": {
+    "tr": "koyuyor"
+  },
+  "questions": {
+    "tr": "sorular"
+  },
+  "quickly": {
+    "tr": "çabucak; hızlıca"
+  },
+  "quiet": {
+    "tr": "sakin; sessiz"
+  },
+  "rain": {
+    "tr": "yağmur"
+  },
+  "raining": {
+    "tr": "yağmur yağıyor"
+  },
+  "ran": {
+    "tr": "koştu"
+  },
+  "reached": {
+    "tr": "ulaştı; vardı"
+  },
+  "ready": {
+    "tr": "hazır"
+  },
+  "right": {
+    "tr": "doğru; uygun"
+  },
+  "roll": {
+    "tr": "küçük yuvarlak ekmek"
+  },
+  "room": {
+    "tr": "oda"
+  },
+  "said": {
+    "tr": "dedi; söyledi"
+  },
+  "sam": {
+    "tr": "Sam (kişi adı)",
+    "kind": "name"
+  },
+  "same": {
+    "tr": "aynı"
+  },
+  "sandwich": {
+    "tr": "sandviç"
+  },
+  "sara": {
+    "tr": "Sara (kişi adı)",
+    "kind": "name"
+  },
+  "saturday": {
+    "tr": "cumartesi"
+  },
+  "saw": {
+    "tr": "gördü"
+  },
+  "says": {
+    "tr": "diyor; söylüyor"
+  },
+  "sent": {
+    "tr": "gönderdi"
+  },
+  "she": {
+    "tr": "o (kadın)"
+  },
+  "shop": {
+    "tr": "dükkan; market"
+  },
+  "short": {
+    "tr": "kısa"
+  },
+  "showed": {
+    "tr": "gösterdi"
+  },
+  "simple": {
+    "tr": "basit"
+  },
+  "sister": {
+    "tr": "kız kardeş"
+  },
+  "sit": {
+    "tr": "oturmak"
+  },
+  "sits": {
+    "tr": "oturuyor"
+  },
+  "sitting": {
+    "tr": "oturuyor; oturma"
+  },
+  "sky": {
+    "tr": "gökyüzü"
+  },
+  "slowly": {
+    "tr": "yavaşça"
+  },
+  "small": {
+    "tr": "küçük"
+  },
+  "smiles": {
+    "tr": "gülümsüyor"
+  },
+  "so": {
+    "tr": "bu yüzden; o yüzden"
+  },
+  "sofa": {
+    "tr": "kanepe"
+  },
+  "some": {
+    "tr": "biraz; birkaç"
+  },
+  "someone": {
+    "tr": "biri"
+  },
+  "sometimes": {
+    "tr": "bazen"
+  },
+  "sorry": {
+    "tr": "üzgün; kusura bakma"
+  },
+  "soup": {
+    "tr": "çorba"
+  },
+  "spare": {
+    "tr": "yedek"
+  },
+  "standing": {
+    "tr": "ayakta duruyor"
+  },
+  "started": {
+    "tr": "başladı"
+  },
+  "starts": {
+    "tr": "başlıyor"
+  },
+  "still": {
+    "tr": "hâlâ; yine de"
+  },
+  "stop": {
+    "tr": "durak; durmak"
+  },
+  "street": {
+    "tr": "sokak"
+  },
+  "table": {
+    "tr": "masa"
+  },
+  "takes": {
+    "tr": "alıyor; götürüyor"
+  },
+  "talk": {
+    "tr": "konuşmak; sohbet etmek"
+  },
+  "talked": {
+    "tr": "konuştu"
+  },
+  "task": {
+    "tr": "iş; görev"
+  },
+  "tea": {
+    "tr": "çay"
+  },
+  "team": {
+    "tr": "ekip; takım"
+  },
+  "ten": {
+    "tr": "on"
+  },
+  "thanked": {
+    "tr": "teşekkür etti"
+  },
+  "thanks": {
+    "tr": "teşekkür ediyor"
+  },
+  "that": {
+    "tr": "o; şu; yan cümle bağlantısı"
+  },
+  "the": {
+    "tr": "belirli kişi veya şeyi gösterir"
+  },
+  "their": {
+    "tr": "onların"
+  },
+  "them": {
+    "tr": "onları; onlara"
+  },
+  "then": {
+    "tr": "sonra; o zaman"
+  },
+  "there": {
+    "tr": "orada (there is: var)"
+  },
+  "they": {
+    "tr": "onlar"
+  },
+  "time": {
+    "tr": "zaman; vakit"
+  },
+  "to": {
+    "tr": "-e; -a; fiilleri bağlar"
+  },
+  "together": {
+    "tr": "birlikte"
+  },
+  "tomatoes": {
+    "tr": "domatesler; domates"
+  },
+  "tonight": {
+    "tr": "bu akşam"
+  },
+  "took": {
+    "tr": "aldı; götürdü"
+  },
+  "twenty": {
+    "tr": "yirmi"
+  },
+  "two": {
+    "tr": "iki"
+  },
+  "umbrella": {
+    "tr": "şemsiye"
+  },
+  "upset": {
+    "tr": "canı sıkkın; üzgün"
+  },
+  "upstairs": {
+    "tr": "üst katta; üst kata"
+  },
+  "waiter": {
+    "tr": "garson"
+  },
+  "waiting": {
+    "tr": "bekliyor; bekleme"
+  },
+  "waits": {
+    "tr": "bekliyor"
+  },
+  "walk": {
+    "tr": "yürümek"
+  },
+  "walked": {
+    "tr": "yürüdü"
+  },
+  "walking": {
+    "tr": "yürüyor; yürüme"
+  },
+  "want": {
+    "tr": "istemek"
+  },
+  "warm": {
+    "tr": "ılık; sıcak"
+  },
+  "was": {
+    "tr": "idi (I, he, she, it ile)"
+  },
+  "watch": {
+    "tr": "izlemek"
+  },
+  "water": {
+    "tr": "su"
+  },
+  "way": {
+    "tr": "yol; yön"
+  },
+  "we": {
+    "tr": "biz"
+  },
+  "weeks": {
+    "tr": "haftalar; hafta"
+  },
+  "when": {
+    "tr": "ne zaman; -dığında"
+  },
+  "window": {
+    "tr": "pencere"
+  },
+  "with": {
+    "tr": "ile; birlikte"
+  },
+  "woman": {
+    "tr": "kadın"
+  },
+  "work": {
+    "tr": "iş; çalışmak"
+  },
+  "wrote": {
+    "tr": "yazdı"
+  },
+  "yesterday": {
+    "tr": "dün"
+  },
+  "you": {
+    "tr": "sen; siz"
+  }
+}

@@ -1,8 +1,8 @@
 /* Shared Google session and durable learning progress. */
 (() => {
   const app = location.pathname.split('/')[1];
-  if (!['o11', 'o12'].includes(app)) return;
-  const accepts = k => app === 'o11' ? k === 'fatedreel-o11-book-v1' : k === 'word-atlas-o12:settings' || /^word-atlas-o12:v2:[a-zA-Z0-9_-]+$/.test(k);
+  if (!['o11', 'o12', 'o13'].includes(app)) return;
+  const accepts = k => app === 'o11' ? k === 'fatedreel-o11-book-v1' : app === 'o13' ? k === 'fatedreel-o13-v1' : k === 'word-atlas-o12:settings' || /^word-atlas-o12:v2:[a-zA-Z0-9_-]+$/.test(k);
   const metaKey = `learning-sync:${app}`;
   let user, revision = 0, ready = false, busy = false, last = '', timer, googleReady;
   const snapshot = () => Object.fromEntries(Object.keys(localStorage).filter(accepts).sort().map(k => [k, localStorage.getItem(k)]));
