@@ -7,7 +7,7 @@ const store=new Map(),listeners={},deleted=[];
 const key=x=>new URL(typeof x==='string'?x:x.url||x.href,scope).href;
 const cache={match:async x=>store.get(key(x))?.clone(),put:async(x,r)=>store.set(key(x),r.clone())};
 let network=async()=>{throw Error('offline');};
-const context={URL,Response,AbortController,setTimeout,clearTimeout,fetch:(...args)=>network(...args),caches:{open:async()=>cache,keys:async()=>['o11-book-v6','o11-book-v14','o12-atlas'],delete:async k=>deleted.push(k)},self:{registration:{scope},location:{origin},skipWaiting:async()=>{},clients:{claim:async()=>{}},addEventListener:(name,fn)=>listeners[name]=fn}};
+const context={URL,Response,AbortController,setTimeout,clearTimeout,fetch:(...args)=>network(...args),caches:{open:async()=>cache,keys:async()=>['o11-book-v6','o11-book-v14','o11-book-v15','o12-atlas'],delete:async k=>deleted.push(k)},self:{registration:{scope},location:{origin},skipWaiting:async()=>{},clients:{claim:async()=>{}},addEventListener:(name,fn)=>listeners[name]=fn}};
 vm.runInNewContext(code,context);
 async function request(path,mode='cors',headers={}){const tasks=[];let result;listeners.fetch({request:{url:origin+path,method:'GET',mode,headers:new Headers(headers)},respondWith:p=>result=p,waitUntil:p=>tasks.push(p)});const r=await result;await Promise.all(tasks);return r;}
 store.set(scope,new Response('<html>book</html>',{headers:{'Content-Type':'text/html'}}));
@@ -26,7 +26,7 @@ await request('/o11/audio/a.mp3','cors',{range:'bytes=0-5'});assert.ok(!store.ha
 network=async()=>{throw Error('offline');};
 let task;listeners.install({waitUntil:p=>task=p});await task;
 listeners.activate({waitUntil:p=>task=p});await task;
-assert.deepEqual(deleted,['o11-book-v6']);
+assert.deepEqual(deleted,['o11-book-v6','o11-book-v14']);
 // Startup recovery must be independent of the module import and leave records alone.
 const boot=await fs.readFile(new URL('../boot.js',import.meta.url),'utf8');
 const page={innerHTML:''},button={},events={},timers=[];let reload,unregistered=0;
@@ -34,7 +34,7 @@ const removed=[];
 const bootContext={URL,Date,console,document:{querySelector:s=>s==='#page'?page:button},navigator:{serviceWorker:{register:async()=>({update:async()=>{}}),getRegistrations:async()=>[{scope,unregister:async()=>unregistered++},{scope:origin+'/o12/',unregister:async()=>assert.fail('Other app unregistered')}]}},window:{addEventListener:(n,fn)=>events[n]=fn},caches:{keys:async()=>['o11-book-v6','o12-atlas'],delete:async k=>removed.push(k)},location:{href:scope+'#unit-8',replace:u=>reload=u},setTimeout:fn=>(timers.push(fn),timers.length),clearTimeout:()=>{}};
 // Replace only the import expression to simulate module download rejection in VM.
 bootContext.window.caches=bootContext.caches;
-vm.runInNewContext(boot.replace("import('./app.js?v=14')","Promise.reject(new Error('module offline'))"),bootContext);
+vm.runInNewContext(boot.replace("import('./app.js?v=15')","Promise.reject(new Error('module offline'))"),bootContext);
 await new Promise(r=>setImmediate(r));assert.match(page.innerHTML,/Tekrar aç/);
 await button.onclick({target:button});assert.equal(unregistered,1);assert.deepEqual(removed,['o11-book-v6']);assert.equal(new URL(reload).hash,'#unit-8');
 assert.ok(!/localStorage|indexedDB/.test(boot),'Recovery must not mutate progress');

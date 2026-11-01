@@ -1,3 +1,4 @@
+import {sentenceExplanation} from './sentence-explanation.js?v=15';
 import {explainAnswer} from './feedback.js?v=11';
 export {explainAnswer};
 import {normalizeAnswer,normalizedTranscript,answerMatches,shuffle} from './activities.js?v=2';
@@ -42,7 +43,7 @@ export function makeRound(pool,unit,{memory=null,now=Date.now()}={}) {
  }
  return shuffle([...own.slice(0,review.length?10:15),...review]).map(q=>q.id);
 }
-export function createSentencePractice({book,state,save,update,play,stop=()=>{},check=null,renderResult=null,checkerId="meaning-v1",now=()=>Date.now()}) {
+export function createSentencePractice({book,state,save,update,play,stop=()=>{},check=null,renderResult=null,checkerId="meaning-v1",explanationOnly=false,now=()=>Date.now()}) {
  if(check&&typeof renderResult!=='function')throw Error('meaning_renderer_required');
  const pool=buildSentences(book);
  const memory=seedPracticeMemory(state,pool,book.practiceEdition,now());
@@ -65,13 +66,14 @@ export function createSentencePractice({book,state,save,update,play,stop=()=>{},
   return s;
  }
  function work(s,q){
-  let w=s.work[q.id];if(!w||typeof w!=='object'||Array.isArray(w))w=s.work[q.id]={text:'',revealed:false,translated:s.modes[q.id]==='translation'};if(typeof w.text!=='string')w.text='';
+  let w=s.work[q.id];if(!w||typeof w!=='object'||Array.isArray(w))w=s.work[q.id]={text:'',revealed:false,translated:false};if(typeof w.text!=='string')w.text='';
+  if(explanationOnly&&w.solutionEdition!==15){w.translated=false;w.solutionEdition=15;delete w.checkError;}
   if(w.translated)w.seenTranslation=true;
-  if(check&&w.result){
+  if(!explanationOnly&&check&&w.result){
    if(!Array.isArray(w.result.errors)||!Array.isArray(w.result.notes)||w.result.notes.some(n=>typeof n!=='string')||typeof w.result.corrected!=='string'||w.result.errors.some(e=>!e||!['spelling','grammar','wrong_meaning'].includes(e.type)||['original','fix','explanation_tr'].some(k=>typeof e[k]!=='string'))){delete w.result;w.revealed=false;w.checkError=true;}
    else{w.result.correct=w.result.errors.length===0;if(w.result.correct)w.result.corrected=w.text;}
   }
-  if(check&&w.revealed&&w.text.trim()&&!w.result){w.revealed=false;w.checkError=true;}
+  if(!explanationOnly&&check&&w.revealed&&w.text.trim()&&!w.result){w.revealed=false;w.checkError=true;}
   return w;
  }
  function context(){if(state.tab!=='practice')return null;const s=session(),q=pool.get(s.refs[s.pos]);return {s,q,w:q?work(s,q):null};}
@@ -98,20 +100,20 @@ export function createSentencePractice({book,state,save,update,play,stop=()=>{},
    s.refs[slot.i]=candidate.id;s.modes[candidate.id]='translation';s.relearnedTags.push(tag);return;
   }
  }
- function content(){const s=session();if(s.pos===s.refs.length)return completed();const q=pool.get(s.refs[s.pos]),w=work(s,q),pending=inFlight?.s===s&&inFlight?.id===q.id;save();return `<div class="section-title"><span class="section-index">03</span><h2>Dinle. Yaz. Karşılaştır.</h2></div><p class="section-note">${check?'Dinle veya Türkçeden kendi cümleni kur. Sesi açarsan yanıtın dinleme olarak kaydedilir.':'Duyduğun cümleyi yaz.'} ${state.unit===1?'Bu turda 15 cümle bu konudan gelir.':'10 cümle bu konudan, 5 cümle önceki konulardan gelir; zamanı gelen ve zorlandığın yapılar önceliklidir.'}</p><section class="drill sentence-practice" aria-label="Cümle alıştırması"><div class="progress-label"><span>${check?s.modes[q.id]==='translation'?'TÜRKÇEDEN KUR':'DİNLE VE YAZ':'CÜMLE ALIŞTIRMASI'}</span><span>${s.pos+1} / ${s.refs.length}</span></div><div class="track"><span style="width:${s.pos/s.refs.length*100}%"></span></div><div class="sentence-practice-tools"><button type="button" class="primary drill-listen" data-act-audio="${q.audio}">◖ Dinle</button><button type="button" class="outline" data-act-translation aria-expanded="${!!w.translated}" aria-controls="practice-translation">Türkçesi</button></div><p id="practice-translation" class="practice-translation" ${w.translated?'':'hidden'}>${html(q.hint)}</p><form id="drill-form"><label class="drill-label" for="drill-input">Senin cümlen</label><textarea id="drill-input" data-act-input autocomplete="off" autocapitalize="sentences" spellcheck="false" maxlength="1000" placeholder="İngilizce cümleni yaz…" ${w.revealed||pending?'readonly':''}>${html(w.text)}</textarea><div class="action-row"><button type="submit" class="outline drill-check" aria-expanded="${!!w.revealed}" aria-controls="practice-solution" ${w.revealed||pending?'disabled':''}>${pending?'Kontrol ediliyor…':w.checkError?'Tekrar dene':'Çözüm'}</button></div>${w.revealed?`<div id="practice-solution" class="drill-feedback" role="status">${check?(w.result&&renderResult?renderResult(w.result):`<p lang="en">${html(q.answer)}</p>`):`<p lang="en">${html(q.answer)}</p>${explainAnswer(w.text,q).split('\n').filter(Boolean).map(line=>`<p class="sentence-correction">${html(line)}</p>`).join('')}`}</div>`:''}${w.checkError?`<p class="section-note" role="alert">Cümlen kontrol edilemedi. Yeniden deneyebilirsin.</p>`:''}<div class="action-row practice-next"><button type="button" class="primary" data-act-next>${s.pos===s.refs.length-1?'Alıştırmayı bitir':'Sonraki cümle →'}</button></div></form></section>`;}
+ function content(){const s=session();if(s.pos===s.refs.length)return completed();const q=pool.get(s.refs[s.pos]),w=work(s,q),pending=inFlight?.s===s&&inFlight?.id===q.id;save();return `<div class="section-title"><span class="section-index">03</span><h2>Dinle. Yaz. Karşılaştır.</h2></div><p class="section-note">${explanationOnly?'Dinle ve cümleni yaz. İstersen Türkçesini aç. Çözümde doğru cümleyi ve neden böyle kurulduğunu gör.':check?'Dinle veya Türkçeden kendi cümleni kur. Sesi açarsan yanıtın dinleme olarak kaydedilir.':'Duyduğun cümleyi yaz.'} ${state.unit===1?'Bu turda 15 cümle bu konudan gelir.':'10 cümle bu konudan, 5 cümle önceki konulardan gelir; zamanı gelen ve zorlandığın yapılar önceliklidir.'}</p><section class="drill sentence-practice" aria-label="Cümle alıştırması"><div class="progress-label"><span>${check?s.modes[q.id]==='translation'?'TÜRKÇEDEN KUR':'DİNLE VE YAZ':'CÜMLE ALIŞTIRMASI'}</span><span>${s.pos+1} / ${s.refs.length}</span></div><div class="track"><span style="width:${s.pos/s.refs.length*100}%"></span></div><div class="sentence-practice-tools"><button type="button" class="primary drill-listen" data-act-audio="${q.audio}">◖ Dinle</button><button type="button" class="outline" data-act-translation aria-expanded="${!!w.translated}" aria-controls="practice-translation">Türkçesi</button></div><p id="practice-translation" class="practice-translation" ${w.translated?'':'hidden'}>${html(q.hint)}</p><form id="drill-form"><label class="drill-label" for="drill-input">Senin cümlen</label><textarea id="drill-input" data-act-input autocomplete="off" autocapitalize="sentences" spellcheck="false" maxlength="1000" placeholder="İngilizce cümleni yaz…" ${w.revealed||pending?'readonly':''}>${html(w.text)}</textarea><div class="action-row"><button type="submit" class="outline drill-check" aria-expanded="${!!w.revealed}" aria-controls="practice-solution" ${w.revealed||pending?'disabled':''}>${pending?'Kontrol ediliyor…':w.checkError?'Tekrar dene':'Çözüm'}</button></div>${w.revealed?`<div id="practice-solution" class="drill-feedback" role="status">${explanationOnly?`<p lang="en">${html(q.answer)}</p><p class="sentence-correction">${html(sentenceExplanation(q))}</p>`:check?(w.result&&renderResult?renderResult(w.result):`<p lang="en">${html(q.answer)}</p>`):`<p lang="en">${html(q.answer)}</p>${explainAnswer(w.text,q).split('\n').filter(Boolean).map(line=>`<p class="sentence-correction">${html(line)}</p>`).join('')}`}</div>`:''}${w.checkError?`<p class="section-note" role="alert">Cümlen kontrol edilemedi. Yeniden deneyebilirsin.</p>`:''}<div class="action-row practice-next"><button type="button" class="primary" data-act-next>${s.pos===s.refs.length-1?'Alıştırmayı bitir':'Sonraki cümle →'}</button></div></form></section>`;}
  function click(event){const b=event.target.closest('button');if(!b)return;const ctx=context();if(!ctx)return;const {s,q,w}=ctx;
   if(b.hasAttribute('data-act-restart')){cancelCheck();stop();begin();update('restart');return;}
   if(!q)return;
   if(b.dataset.actAudio){if(!w.revealed){w.listened=true;save();}play(q.audio,b);return;}
   if(b.hasAttribute('data-act-translation')){w.translated=!w.translated;if(w.translated)w.seenTranslation=true;save();update('translation');return;}
-  if(b.hasAttribute('data-act-next')){cancelCheck();stop();w.skipped=!w.revealed;w.correct=check?(!isPracticeGrade(w.result)?null:(w.result?.correct??null)):!!w.text.trim()&&w.revealed&&answerMatches(w.text,q);s.pos++;if(s.pos===s.refs.length){const good=s.refs.every(id=>s.work[id]?.correct),old=state.reviews[state.unit]?.streak||0;const dates=Object.values(memory.items).filter(x=>x.unit===state.unit).flatMap(x=>Object.values(x.channels||{})).map(x=>x.due).filter(Number.isFinite);if(!check||dates.length)state.reviews[state.unit]={due:check?Math.min(...dates):now()+(good?Math.min(14,2**old):1)*86400000,streak:check?0:good?old+1:0,results:s.refs.map(id=>s.work[id]?.correct?'good':s.work[id]?.correct===null?'hard':'again')};s.finished=now();}save();update('next');}
+  if(b.hasAttribute('data-act-next')){cancelCheck();stop();w.skipped=!w.revealed;w.correct=explanationOnly?null:check?(!isPracticeGrade(w.result)?null:(w.result?.correct??null)):!!w.text.trim()&&w.revealed&&answerMatches(w.text,q);s.pos++;if(s.pos===s.refs.length){const good=s.refs.every(id=>s.work[id]?.correct),old=state.reviews[state.unit]?.streak||0;const dates=Object.values(memory.items).filter(x=>x.unit===state.unit).flatMap(x=>Object.values(x.channels||{})).map(x=>x.due).filter(Number.isFinite);if(!explanationOnly&&(!check||dates.length))state.reviews[state.unit]={due:check?Math.min(...dates):now()+(good?Math.min(14,2**old):1)*86400000,streak:check?0:good?old+1:0,results:s.refs.map(id=>s.work[id]?.correct?'good':s.work[id]?.correct===null?'hard':'again')};s.finished=now();}save();update('next');}
  }
  function input(event){if(!event.target.matches('[data-act-input]'))return;const ctx=context();if(!ctx?.w||ctx.w.revealed||(inFlight?.s===ctx.s&&inFlight?.id===ctx.q.id))return;ctx.w.text=event.target.value.slice(0,1000);save();}
  async function submit(event){
   if(event.target.id!=='drill-form')return;event.preventDefault();const ctx=context();
   if(!ctx?.w||ctx.w.revealed||(inFlight?.s===ctx.s&&inFlight?.id===ctx.q.id))return;
   const {s,q,w}=ctx;
-  if(!check||!w.text.trim()){w.revealed=true;save();update('solution');return;}
+  if(explanationOnly||!check||!w.text.trim()){w.revealed=true;save();update('solution');return;}
   cancelCheck();const unit=state.unit,token={s,id:q.id,student:w.text,mode:w.listened?'listening':w.seenTranslation?'translation':'unknown',at:now(),controller:new AbortController()};inFlight=token;delete w.checkError;update('checking');
   try{
    const result=await check(q,token.student,{signal:token.controller.signal});
