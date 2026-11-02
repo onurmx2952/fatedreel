@@ -1,0 +1,2416 @@
+{
+  "groups": [
+    "Cümle kurmanın temelleri",
+    "Günlük hayat ve şimdi"
+  ],
+  "units": [
+    {
+      "id": 1,
+      "title": "Kişi zamirleri",
+      "subtitle": "Cümlenin başrolü kim?",
+      "group": 1,
+      "goal": "Kişilerden ve nesnelerden doğru zamirle söz etmek.",
+      "rules": [
+        [
+          "Özne kim?",
+          "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır."
+        ],
+        [
+          "İsim yerine zamir",
+          "Bir erkek için he, bir kadın için she, bir nesne veya hayvan için it kullanılır. Evcil hayvanın cinsiyeti biliniyorsa he veya she de kullanılabilir."
+        ],
+        [
+          "Birden fazla kişi",
+          "Biz we, onlar they olur. You hem tekil hem çoğuldur. Zamirden sonra cümleyi tamamlayan bir fiil gerekir."
+        ]
+      ],
+      "forms": [
+        [
+          "Ben",
+          "I"
+        ],
+        [
+          "Sen / siz",
+          "you"
+        ],
+        [
+          "O (erkek / kadın / nesne)",
+          "he / she / it"
+        ],
+        [
+          "Biz / onlar",
+          "we / they"
+        ]
+      ],
+      "trap": "Türkçede özneyi söylemeden konuşabiliriz. İngilizcede bu tür cümlelerde özneyi belirt: yalnızca “am” ile başlama.",
+      "tasks": [
+        {
+          "prompt": "I ____ a student.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "be"
+          ],
+          "answer": "am",
+          "audio": "0c00f6707d412bc9",
+          "en": "I am a student.",
+          "tr": "Ben bir öğrenciyim.",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır.",
+          "id": "1-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "I ____ a student.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "be"
+          ],
+          "answer": "am",
+          "audio": "0c00f6707d412bc9",
+          "en": "I am a student.",
+          "tr": "Ben bir öğrenciyim.",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır.",
+          "id": "1-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "I ____ a student.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "be"
+          ],
+          "answer": "am",
+          "audio": "0c00f6707d412bc9",
+          "en": "I am a student.",
+          "tr": "Ben bir öğrenciyim.",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır.",
+          "id": "1-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "I is a student.",
+          "correct": false
+        },
+        {
+          "prompt": "You ____ my friend.",
+          "options": [
+            "are",
+            "am",
+            "is",
+            "be"
+          ],
+          "answer": "are",
+          "audio": "f6c62d59d00cb483",
+          "en": "You are my friend.",
+          "tr": "Sen benim arkadaşımsın.",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır.",
+          "id": "1-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "You ____ my friend.",
+          "options": [
+            "are",
+            "am",
+            "is",
+            "be"
+          ],
+          "answer": "are",
+          "audio": "f6c62d59d00cb483",
+          "en": "You are my friend.",
+          "tr": "Sen benim arkadaşımsın.",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır.",
+          "id": "1-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "You ____ my friend.",
+          "options": [
+            "are",
+            "am",
+            "is",
+            "be"
+          ],
+          "answer": "are",
+          "audio": "f6c62d59d00cb483",
+          "en": "You are my friend.",
+          "tr": "Sen benim arkadaşımsın.",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır.",
+          "id": "1-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "You are my friend.",
+          "correct": true
+        },
+        {
+          "en": "I'm your new neighbor.",
+          "tr": "Ben sizin yeni komşunuzum.",
+          "audio": "6e0fbe37de40af2f",
+          "id": "1-order-0",
+          "kind": "PickAnOrder",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır."
+        },
+        {
+          "en": "You're my best friend.",
+          "tr": "Sen benim en iyi arkadaşımsın.",
+          "audio": "180edb90af5f82c2",
+          "id": "1-order-1",
+          "kind": "PickAnOrder",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır."
+        },
+        {
+          "en": "He's my brother.",
+          "tr": "O benim erkek kardeşim.",
+          "audio": "6117afe971cab7c0",
+          "id": "1-order-2",
+          "kind": "PickAnOrder",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır."
+        },
+        {
+          "en": "She's my sister.",
+          "tr": "O benim kız kardeşim.",
+          "audio": "7cad28c0c5dca363",
+          "id": "1-order-3",
+          "kind": "PickAnOrder",
+          "why": "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Am / Is / Are",
+      "subtitle": "Kimlik, duygu ve bulunduğun yer",
+      "group": 1,
+      "goal": "Şimdiki durumları anlatmak, olumsuz cümle ve soru kurmak.",
+      "rules": [
+        [
+          "Üç biçim, tek fiil",
+          "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir."
+        ],
+        [
+          "Olumsuz ve soru",
+          "Olumsuzluk için am/is/are sonrasına not ekle. Soruda am/is/are öznenin önüne gelir. Bu cümlelerde do/does kullanılmaz."
+        ],
+        [
+          "Kısaltmalar ve cevaplar",
+          "I am → I'm; she is → she's; they are → they're. Olumsuz örneklerde günlük konuşmadaki isn't/aren't biçimlerini kullanıyoruz. Amn't kullanılmaz; I am not, I'm not olur. Kısa olumlu cevabın sonunda kısaltma yapma: Yes, I am. Olumsuz kısa cevap ise No, I'm not veya No, she isn't olabilir."
+        ]
+      ],
+      "forms": [
+        [
+          "Olumlu",
+          "Özne + am/is/are + durum"
+        ],
+        [
+          "Olumsuz",
+          "Özne + isn't/aren't + durum; I için I'm not"
+        ],
+        [
+          "Soru",
+          "Am/Is/Are + özne + durum?"
+        ]
+      ],
+      "trap": "“I happy” eksiktir; “I am happy” gerekir. Ama normal bir eylemden önce gelişigüzel am ekleme. Eylemleri 8. ünitede öğreneceksin.",
+      "tasks": [
+        {
+          "prompt": "I ____ tired.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "do"
+          ],
+          "answer": "am",
+          "audio": "f405fc9a481225d9",
+          "en": "I am tired.",
+          "tr": "Yorgunum.",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir.",
+          "id": "2-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "I ____ tired.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "do"
+          ],
+          "answer": "am",
+          "audio": "f405fc9a481225d9",
+          "en": "I am tired.",
+          "tr": "Yorgunum.",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir.",
+          "id": "2-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "I ____ tired.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "do"
+          ],
+          "answer": "am",
+          "audio": "f405fc9a481225d9",
+          "en": "I am tired.",
+          "tr": "Yorgunum.",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir.",
+          "id": "2-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "I am tired.",
+          "correct": true
+        },
+        {
+          "prompt": "She ____ busy.",
+          "options": [
+            "is",
+            "am",
+            "are",
+            "does"
+          ],
+          "answer": "is",
+          "audio": "3c80bc923f808865",
+          "en": "She is busy.",
+          "tr": "O meşgul.",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir.",
+          "id": "2-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "She ____ busy.",
+          "options": [
+            "is",
+            "am",
+            "are",
+            "does"
+          ],
+          "answer": "is",
+          "audio": "3c80bc923f808865",
+          "en": "She is busy.",
+          "tr": "O meşgul.",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir.",
+          "id": "2-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "She ____ busy.",
+          "options": [
+            "is",
+            "am",
+            "are",
+            "does"
+          ],
+          "answer": "is",
+          "audio": "3c80bc923f808865",
+          "en": "She is busy.",
+          "tr": "O meşgul.",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir.",
+          "id": "2-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "She am busy.",
+          "correct": false
+        },
+        {
+          "en": "I'm hungry now.",
+          "tr": "Şimdi acıktım.",
+          "audio": "16d28d499fb870c2",
+          "id": "2-order-0",
+          "kind": "PickAnOrder",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir."
+        },
+        {
+          "en": "Are you ready?",
+          "tr": "Hazır mısın?",
+          "audio": "ec5d2ded6e26b418",
+          "id": "2-order-1",
+          "kind": "PickAnOrder",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir."
+        },
+        {
+          "en": "Is your coffee cold?",
+          "tr": "Kahven soğuk mu?",
+          "audio": "e3324be77450eeaf",
+          "id": "2-order-2",
+          "kind": "PickAnOrder",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir."
+        },
+        {
+          "en": "The shop is closed.",
+          "tr": "Market kapalı.",
+          "audio": "d2b4ebb44349a491",
+          "id": "2-order-3",
+          "kind": "PickAnOrder",
+          "why": "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Cümle yapısı",
+      "subtitle": "Kelimelerin yerini bul",
+      "group": 1,
+      "goal": "Özne, fiil ve nesneyi ayırmak; İngilizcenin temel kelime sırasını kurmak.",
+      "rules": [
+        [
+          "Özne → fiil → nesne",
+          "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma."
+        ],
+        [
+          "Yer ve zaman",
+          "Basit bir cümlede yer ve zaman bilgisi çoğunlukla temel cümleden sonra gelir. Önce cümlenin omurgasını kur, sonra ayrıntıları ekle."
+        ],
+        [
+          "Her cümlede nesne yoktur",
+          "Uyumak, gelmek gibi bazı fiiller nesne istemez. Be ile kurulan cümlelerde fiilden sonraki kelime bir durum veya kimlik de olabilir."
+        ]
+      ],
+      "forms": [
+        [
+          "Temel sıra",
+          "Özne + fiil + nesne"
+        ],
+        [
+          "Ayrıntı ekle",
+          "Özne + fiil + nesne + yer + zaman"
+        ],
+        [
+          "Durum cümlesi",
+          "Özne + be + durum / kimlik"
+        ]
+      ],
+      "trap": "“I tea like” Türkçe sıraya yakındır ama İngilizcede “I like tea” gerekir. Özne, fiil ve nesneyi ayrı ayrı bul.",
+      "tasks": [
+        {
+          "prompt": "I ____ tea.",
+          "options": [
+            "like",
+            "likes",
+            "am like",
+            "liking"
+          ],
+          "answer": "like",
+          "audio": "a1826a1b123e58e8",
+          "en": "I like tea.",
+          "tr": "Çayı severim.",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma.",
+          "id": "3-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "I ____ tea.",
+          "options": [
+            "like",
+            "likes",
+            "am like",
+            "liking"
+          ],
+          "answer": "like",
+          "audio": "a1826a1b123e58e8",
+          "en": "I like tea.",
+          "tr": "Çayı severim.",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma.",
+          "id": "3-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "I ____ tea.",
+          "options": [
+            "like",
+            "likes",
+            "am like",
+            "liking"
+          ],
+          "answer": "like",
+          "audio": "a1826a1b123e58e8",
+          "en": "I like tea.",
+          "tr": "Çayı severim.",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma.",
+          "id": "3-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "I likes tea.",
+          "correct": false
+        },
+        {
+          "prompt": "You ____ books.",
+          "options": [
+            "read",
+            "reading",
+            "is read",
+            "reads"
+          ],
+          "answer": "read",
+          "audio": "9fcdb87fc2a9d82d",
+          "en": "You read books.",
+          "tr": "Sen kitap okursun.",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma.",
+          "id": "3-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "You ____ books.",
+          "options": [
+            "read",
+            "reading",
+            "is read",
+            "reads"
+          ],
+          "answer": "read",
+          "audio": "9fcdb87fc2a9d82d",
+          "en": "You read books.",
+          "tr": "Sen kitap okursun.",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma.",
+          "id": "3-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "You ____ books.",
+          "options": [
+            "read",
+            "reading",
+            "is read",
+            "reads"
+          ],
+          "answer": "read",
+          "audio": "9fcdb87fc2a9d82d",
+          "en": "You read books.",
+          "tr": "Sen kitap okursun.",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma.",
+          "id": "3-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "You read books.",
+          "correct": true
+        },
+        {
+          "en": "I need a charger.",
+          "tr": "Şarj aletine ihtiyacım var.",
+          "audio": "d2decc837493e801",
+          "id": "3-order-0",
+          "kind": "PickAnOrder",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma."
+        },
+        {
+          "en": "She makes good coffee.",
+          "tr": "Güzel kahve yapıyor.",
+          "audio": "341044dbcd8bc1ee",
+          "id": "3-order-1",
+          "kind": "PickAnOrder",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma."
+        },
+        {
+          "en": "We share a flat.",
+          "tr": "Aynı evi paylaşıyoruz.",
+          "audio": "53cf0d6adbc9d692",
+          "id": "3-order-2",
+          "kind": "PickAnOrder",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma."
+        },
+        {
+          "en": "I want some water.",
+          "tr": "Biraz su istiyorum.",
+          "audio": "598ed98ceb5fd436",
+          "id": "3-order-3",
+          "kind": "PickAnOrder",
+          "why": "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "İsimler ve tanımlıklar",
+      "subtitle": "A, an, the ve çoğullar",
+      "group": 1,
+      "goal": "Bir nesneyi ilk kez tanıtmak ve hangi nesneden söz ettiğini belirtmek.",
+      "rules": [
+        [
+          "Bir tane: a / an",
+          "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir."
+        ],
+        [
+          "Bilinen nesne: the",
+          "Dinleyen hangi şeyden söz ettiğini biliyorsa the kullanılır. Daha önce tanıtılmış nesne veya ortamda belirli olan şey buna örnektir."
+        ],
+        [
+          "Çoğul ve sayılamayan",
+          "Çoğullar genellikle -s alır; child → children gibi düzensizler de vardır. Water, music gibi sayılamayan isimlerle doğrudan a/an kullanma."
+        ]
+      ],
+      "forms": [
+        [
+          "İlk kez, tekil",
+          "a book / an apple"
+        ],
+        [
+          "Belirli",
+          "the book"
+        ],
+        [
+          "Çoğul",
+          "books / children"
+        ],
+        [
+          "Sayılamayan",
+          "water / music"
+        ]
+      ],
+      "trap": "“An” seçimi yazılı ilk harfe göre yapılmaz: “an hour”, “a university”. Ayrıca “a water” yerine bir bardak sudan söz edebilirsin.",
+      "tasks": [
+        {
+          "prompt": "It is ____ book.",
+          "options": [
+            "a",
+            "an",
+            "are",
+            "two"
+          ],
+          "answer": "a",
+          "audio": "74def1395003c46f",
+          "en": "It is a book.",
+          "tr": "Bu bir kitap.",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir.",
+          "id": "4-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "It is ____ book.",
+          "options": [
+            "a",
+            "an",
+            "are",
+            "two"
+          ],
+          "answer": "a",
+          "audio": "74def1395003c46f",
+          "en": "It is a book.",
+          "tr": "Bu bir kitap.",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir.",
+          "id": "4-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "It is ____ book.",
+          "options": [
+            "a",
+            "an",
+            "are",
+            "two"
+          ],
+          "answer": "a",
+          "audio": "74def1395003c46f",
+          "en": "It is a book.",
+          "tr": "Bu bir kitap.",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir.",
+          "id": "4-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "It is a book.",
+          "correct": true
+        },
+        {
+          "prompt": "It is ____ apple.",
+          "options": [
+            "an",
+            "a",
+            "are",
+            "two"
+          ],
+          "answer": "an",
+          "audio": "b0b9491febb9dd31",
+          "en": "It is an apple.",
+          "tr": "Bu bir elma.",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir.",
+          "id": "4-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "It is ____ apple.",
+          "options": [
+            "an",
+            "a",
+            "are",
+            "two"
+          ],
+          "answer": "an",
+          "audio": "b0b9491febb9dd31",
+          "en": "It is an apple.",
+          "tr": "Bu bir elma.",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir.",
+          "id": "4-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "It is ____ apple.",
+          "options": [
+            "an",
+            "a",
+            "are",
+            "two"
+          ],
+          "answer": "an",
+          "audio": "b0b9491febb9dd31",
+          "en": "It is an apple.",
+          "tr": "Bu bir elma.",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir.",
+          "id": "4-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "It is a apple.",
+          "correct": false
+        },
+        {
+          "en": "I need an umbrella.",
+          "tr": "Şemsiyeye ihtiyacım var.",
+          "audio": "2997d1ebcd834b0c",
+          "id": "4-order-0",
+          "kind": "PickAnOrder",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir."
+        },
+        {
+          "en": "The receipt is in the bag.",
+          "tr": "Fiş poşetin içinde.",
+          "audio": "10d5894e19477d2c",
+          "id": "4-order-1",
+          "kind": "PickAnOrder",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir."
+        },
+        {
+          "en": "I have a clean cup.",
+          "tr": "Temiz bir fincanım var.",
+          "audio": "21c01ed0fd155491",
+          "id": "4-order-2",
+          "kind": "PickAnOrder",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir."
+        },
+        {
+          "en": "The towels are wet.",
+          "tr": "Havlular ıslak.",
+          "audio": "e37e576f37f7bbf8",
+          "id": "4-order-3",
+          "kind": "PickAnOrder",
+          "why": "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "İşaret ve sahiplik",
+      "subtitle": "Bu, şu ve kime ait?",
+      "group": 1,
+      "goal": "Yakındaki ve uzaktaki nesneleri göstermek; sahiplik belirtmek.",
+      "rules": [
+        [
+          "Yakın / uzak",
+          "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir."
+        ],
+        [
+          "Kimin?",
+          "My, your, his, her, its, our, their bir ismin önüne gelir. His erkek, her kadın için sahiplik belirtir; nesnenin cinsiyetine göre seçilmez."
+        ],
+        [
+          "İsimle sahiplik",
+          "Bir kişinin adına 's ekleyerek ona ait bir şeyi anlatabilirsin. Çoğul ve sahiplik ekini karıştırma. It's, it is kısaltmasıdır; its ise sahipliktir."
+        ]
+      ],
+      "forms": [
+        [
+          "Yakın tekil / çoğul",
+          "this / these"
+        ],
+        [
+          "Uzak tekil / çoğul",
+          "that / those"
+        ],
+        [
+          "Sahiplik",
+          "my / your / his / her / its / our / their"
+        ],
+        [
+          "İsimle sahiplik",
+          "Emma's book"
+        ]
+      ],
+      "trap": "“These is” yerine “these are” kullan. “My” tek başına “benimki” demek değildir; ardından isim gelir. Benimki için mine kullanılır.",
+      "tasks": [
+        {
+          "prompt": "____ is my bag.",
+          "options": [
+            "This",
+            "These",
+            "Those",
+            "They"
+          ],
+          "answer": "This",
+          "audio": "df63101fed847354",
+          "en": "This is my bag.",
+          "tr": "Bu benim çantam.",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir.",
+          "id": "5-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "____ is my bag.",
+          "options": [
+            "This",
+            "These",
+            "Those",
+            "They"
+          ],
+          "answer": "This",
+          "audio": "df63101fed847354",
+          "en": "This is my bag.",
+          "tr": "Bu benim çantam.",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir.",
+          "id": "5-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "____ is my bag.",
+          "options": [
+            "This",
+            "These",
+            "Those",
+            "They"
+          ],
+          "answer": "This",
+          "audio": "df63101fed847354",
+          "en": "This is my bag.",
+          "tr": "Bu benim çantam.",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir.",
+          "id": "5-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "These is my bag.",
+          "correct": false
+        },
+        {
+          "prompt": "That is ____ phone.",
+          "options": [
+            "your",
+            "you",
+            "yours",
+            "yours are"
+          ],
+          "answer": "your",
+          "audio": "abfe1ebccf134caf",
+          "en": "That is your phone.",
+          "tr": "Şu senin telefonun.",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir.",
+          "id": "5-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "That is ____ phone.",
+          "options": [
+            "your",
+            "you",
+            "yours",
+            "yours are"
+          ],
+          "answer": "your",
+          "audio": "abfe1ebccf134caf",
+          "en": "That is your phone.",
+          "tr": "Şu senin telefonun.",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir.",
+          "id": "5-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "That is ____ phone.",
+          "options": [
+            "your",
+            "you",
+            "yours",
+            "yours are"
+          ],
+          "answer": "your",
+          "audio": "abfe1ebccf134caf",
+          "en": "That is your phone.",
+          "tr": "Şu senin telefonun.",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir.",
+          "id": "5-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "That is your phone.",
+          "correct": true
+        },
+        {
+          "en": "Is this your charger?",
+          "tr": "Bu şarj aleti senin mi?",
+          "audio": "5dd6307202616228",
+          "id": "5-order-0",
+          "kind": "PickAnOrder",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir."
+        },
+        {
+          "en": "Those are my shoes.",
+          "tr": "Şunlar benim ayakkabılarım.",
+          "audio": "8f116123b1210b73",
+          "id": "5-order-1",
+          "kind": "PickAnOrder",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir."
+        },
+        {
+          "en": "This isn't my coffee.",
+          "tr": "Bu benim kahvem değil.",
+          "audio": "7f792e834c72fb7b",
+          "id": "5-order-2",
+          "kind": "PickAnOrder",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir."
+        },
+        {
+          "en": "Her keys are here.",
+          "tr": "Onun anahtarları burada.",
+          "audio": "5c93dbb1002b838a",
+          "id": "5-order-3",
+          "kind": "PickAnOrder",
+          "why": "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Nesne zamirleri",
+      "subtitle": "Beni, sana, onunla",
+      "group": 1,
+      "goal": "Eylemden etkilenen kişileri zamirle ifade etmek.",
+      "rules": [
+        [
+          "İşi yapan ve etkilenen",
+          "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır."
+        ],
+        [
+          "Fiilden sonra",
+          "Birini görmek, sevmek veya aramak gibi eylemlerde nesne zamiri fiilden sonra gelir. Nesne yerinde I, he veya they kullanma."
+        ],
+        [
+          "Edatlardan sonra",
+          "With, for, to gibi edatların ardından da nesne biçimi kullanılır. With me birlikte, for us bizim için anlamındadır."
+        ]
+      ],
+      "forms": [
+        [
+          "Özne → nesne",
+          "I → me / he → him / she → her"
+        ],
+        [
+          "Özne → nesne",
+          "we → us / they → them"
+        ],
+        [
+          "Değişmeyenler",
+          "you → you / it → it"
+        ],
+        [
+          "Edat sonrası",
+          "with me / for them"
+        ]
+      ],
+      "trap": "“Me am happy” yanlış; özne I olmalı. “They know I” yanlış; fiilden etkilenen kişi me olur.",
+      "tasks": [
+        {
+          "prompt": "I know ____.",
+          "options": [
+            "him",
+            "he",
+            "his",
+            "himself"
+          ],
+          "answer": "him",
+          "audio": "f6c1c205498afd43",
+          "en": "I know him.",
+          "tr": "Onu tanıyorum.",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır.",
+          "id": "6-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "I know ____.",
+          "options": [
+            "him",
+            "he",
+            "his",
+            "himself"
+          ],
+          "answer": "him",
+          "audio": "f6c1c205498afd43",
+          "en": "I know him.",
+          "tr": "Onu tanıyorum.",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır.",
+          "id": "6-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "I know ____.",
+          "options": [
+            "him",
+            "he",
+            "his",
+            "himself"
+          ],
+          "answer": "him",
+          "audio": "f6c1c205498afd43",
+          "en": "I know him.",
+          "tr": "Onu tanıyorum.",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır.",
+          "id": "6-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "I know him.",
+          "correct": true
+        },
+        {
+          "prompt": "They like ____.",
+          "options": [
+            "us",
+            "we",
+            "our",
+            "ours"
+          ],
+          "answer": "us",
+          "audio": "5101684a37722e20",
+          "en": "They like us.",
+          "tr": "Onlar bizi sever.",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır.",
+          "id": "6-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "They like ____.",
+          "options": [
+            "us",
+            "we",
+            "our",
+            "ours"
+          ],
+          "answer": "us",
+          "audio": "5101684a37722e20",
+          "en": "They like us.",
+          "tr": "Onlar bizi sever.",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır.",
+          "id": "6-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "They like ____.",
+          "options": [
+            "us",
+            "we",
+            "our",
+            "ours"
+          ],
+          "answer": "us",
+          "audio": "5101684a37722e20",
+          "en": "They like us.",
+          "tr": "Onlar bizi sever.",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır.",
+          "id": "6-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "They like we.",
+          "correct": false
+        },
+        {
+          "en": "Please call me tonight.",
+          "tr": "Beni bu akşam ara, lütfen.",
+          "audio": "655d3d26fbf0b3b7",
+          "id": "6-order-0",
+          "kind": "PickAnOrder",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır."
+        },
+        {
+          "en": "I know her well.",
+          "tr": "Onu iyi tanıyorum.",
+          "audio": "a57a51159040b60b",
+          "id": "6-order-1",
+          "kind": "PickAnOrder",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır."
+        },
+        {
+          "en": "He needs us now.",
+          "tr": "Şimdi bize ihtiyacı var.",
+          "audio": "c545464e5d396403",
+          "id": "6-order-2",
+          "kind": "PickAnOrder",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır."
+        },
+        {
+          "en": "I like this photo of you.",
+          "tr": "Senin bu fotoğrafını beğendim.",
+          "audio": "2d50e70d6d4f230f",
+          "id": "6-order-3",
+          "kind": "PickAnOrder",
+          "why": "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Have / Has ve There is",
+      "subtitle": "Sahip olmak ve var olmak",
+      "group": 1,
+      "goal": "Birinin sahip olduğu şeylerle bir yerde bulunan şeyleri ayırmak.",
+      "rules": [
+        [
+          "Sahiplik",
+          "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder."
+        ],
+        [
+          "Bir yerde var",
+          "There is tekil veya sayılamayan, there are çoğul isimle kullanılır. Buradaki there, “orada” göstermekten çok varlık bildiren yapının parçasıdır."
+        ],
+        [
+          "Soru ve olumsuz",
+          "Have got sorusunda have/has öne gelir. There is/are sorusunda is/are öne gelir; olumsuzda not eklenir. Düz have ile do/does kullanımını 9. ünitede göreceğiz."
+        ]
+      ],
+      "forms": [
+        [
+          "Sahiplik",
+          "I have / she has"
+        ],
+        [
+          "Konuşmada",
+          "I have got / she has got"
+        ],
+        [
+          "Tekil varlık",
+          "There is + tekil isim"
+        ],
+        [
+          "Çoğul varlık",
+          "There are + çoğul isim"
+        ]
+      ],
+      "trap": "“I am have” kullanma. “I have a car” sahipliktir; “There is a car” bir arabanın bulunduğunu söyler.",
+      "tasks": [
+        {
+          "prompt": "I ____ a sister.",
+          "options": [
+            "have",
+            "has",
+            "am have",
+            "having"
+          ],
+          "answer": "have",
+          "audio": "5c5dd28d914bf962",
+          "en": "I have a sister.",
+          "tr": "Bir kız kardeşim var.",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder.",
+          "id": "7-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "I ____ a sister.",
+          "options": [
+            "have",
+            "has",
+            "am have",
+            "having"
+          ],
+          "answer": "have",
+          "audio": "5c5dd28d914bf962",
+          "en": "I have a sister.",
+          "tr": "Bir kız kardeşim var.",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder.",
+          "id": "7-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "I ____ a sister.",
+          "options": [
+            "have",
+            "has",
+            "am have",
+            "having"
+          ],
+          "answer": "have",
+          "audio": "5c5dd28d914bf962",
+          "en": "I have a sister.",
+          "tr": "Bir kız kardeşim var.",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder.",
+          "id": "7-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "I has a sister.",
+          "correct": false
+        },
+        {
+          "prompt": "She ____ a car.",
+          "options": [
+            "has",
+            "have",
+            "is have",
+            "having"
+          ],
+          "answer": "has",
+          "audio": "d360896124b044e2",
+          "en": "She has a car.",
+          "tr": "Onun bir arabası var.",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder.",
+          "id": "7-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "She ____ a car.",
+          "options": [
+            "has",
+            "have",
+            "is have",
+            "having"
+          ],
+          "answer": "has",
+          "audio": "d360896124b044e2",
+          "en": "She has a car.",
+          "tr": "Onun bir arabası var.",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder.",
+          "id": "7-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "She ____ a car.",
+          "options": [
+            "has",
+            "have",
+            "is have",
+            "having"
+          ],
+          "answer": "has",
+          "audio": "d360896124b044e2",
+          "en": "She has a car.",
+          "tr": "Onun bir arabası var.",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder.",
+          "id": "7-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "She has a car.",
+          "correct": true
+        },
+        {
+          "en": "I have a spare key.",
+          "tr": "Yedek anahtarım var.",
+          "audio": "df1d925bf9c4ec8e",
+          "id": "7-order-0",
+          "kind": "PickAnOrder",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder."
+        },
+        {
+          "en": "There's no milk.",
+          "tr": "Süt yok.",
+          "audio": "641757f230cf2f4b",
+          "id": "7-order-1",
+          "kind": "PickAnOrder",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder."
+        },
+        {
+          "en": "She has my number.",
+          "tr": "Numaram onda var.",
+          "audio": "41828481b080d67d",
+          "id": "7-order-2",
+          "kind": "PickAnOrder",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder."
+        },
+        {
+          "en": "We have enough food.",
+          "tr": "Yeterince yemeğimiz var.",
+          "audio": "942d76e81de1c01b",
+          "id": "7-order-3",
+          "kind": "PickAnOrder",
+          "why": "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Present Simple",
+      "subtitle": "Her gün olan şeyler",
+      "group": 2,
+      "goal": "Alışkanlıklar, rutinler ve genel doğrular hakkında konuşmak.",
+      "rules": [
+        [
+          "Rutin ve gerçek",
+          "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir."
+        ],
+        [
+          "Üçüncü tekil kişi",
+          "He, she, it ile olumlu cümlede fiile genellikle -s eklenir. Go → goes, watch → watches, study → studies. Have → has düzensizdir."
+        ],
+        [
+          "Sıklık",
+          "Always, usually, often, sometimes ana fiilden önce gelir. Be fiili varsa genellikle ondan sonra gelir. Every day gibi ifadeler çoğunlukla sonda bulunur."
+        ]
+      ],
+      "forms": [
+        [
+          "Ben / sen / biz / onlar",
+          "Özne + fiilin yalın hâli"
+        ],
+        [
+          "O",
+          "He/She/It + fiil-s"
+        ],
+        [
+          "Sıklık",
+          "Özne + usually + fiil"
+        ]
+      ],
+      "trap": "He/she/it ile olumlu cümlede -s unutma. “She is works” yerine “She works” kullan. Be ve normal eylem fiilini karıştırma.",
+      "tasks": [
+        {
+          "prompt": "I ____ at home.",
+          "options": [
+            "work",
+            "works",
+            "am work",
+            "working"
+          ],
+          "answer": "work",
+          "audio": "37cd00cb8b724134",
+          "en": "I work at home.",
+          "tr": "Evde çalışırım.",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir.",
+          "id": "8-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "I ____ at home.",
+          "options": [
+            "work",
+            "works",
+            "am work",
+            "working"
+          ],
+          "answer": "work",
+          "audio": "37cd00cb8b724134",
+          "en": "I work at home.",
+          "tr": "Evde çalışırım.",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir.",
+          "id": "8-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "I ____ at home.",
+          "options": [
+            "work",
+            "works",
+            "am work",
+            "working"
+          ],
+          "answer": "work",
+          "audio": "37cd00cb8b724134",
+          "en": "I work at home.",
+          "tr": "Evde çalışırım.",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir.",
+          "id": "8-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "I work at home.",
+          "correct": true
+        },
+        {
+          "prompt": "She ____ in London.",
+          "options": [
+            "lives",
+            "live",
+            "living",
+            "is live"
+          ],
+          "answer": "lives",
+          "audio": "e79d357dd5d165a7",
+          "en": "She lives in London.",
+          "tr": "Londra'da yaşıyor.",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir.",
+          "id": "8-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "She ____ in London.",
+          "options": [
+            "lives",
+            "live",
+            "living",
+            "is live"
+          ],
+          "answer": "lives",
+          "audio": "e79d357dd5d165a7",
+          "en": "She lives in London.",
+          "tr": "Londra'da yaşıyor.",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir.",
+          "id": "8-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "She ____ in London.",
+          "options": [
+            "lives",
+            "live",
+            "living",
+            "is live"
+          ],
+          "answer": "lives",
+          "audio": "e79d357dd5d165a7",
+          "en": "She lives in London.",
+          "tr": "Londra'da yaşıyor.",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir.",
+          "id": "8-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "She live in London.",
+          "correct": false
+        },
+        {
+          "en": "I buy coffee before work.",
+          "tr": "İşe gitmeden kahve alırım.",
+          "audio": "e23890e182ba685e",
+          "id": "8-order-0",
+          "kind": "PickAnOrder",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir."
+        },
+        {
+          "en": "She works from home.",
+          "tr": "Evden çalışıyor.",
+          "audio": "19331c408b046e04",
+          "id": "8-order-1",
+          "kind": "PickAnOrder",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir."
+        },
+        {
+          "en": "We eat dinner at seven.",
+          "tr": "Akşam yemeğini yedide yeriz.",
+          "audio": "5184e25d72b06f79",
+          "id": "8-order-2",
+          "kind": "PickAnOrder",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir."
+        },
+        {
+          "en": "He often forgets his keys.",
+          "tr": "Anahtarlarını sık sık unutur.",
+          "audio": "ac1c65c9c7d95e1f",
+          "id": "8-order-3",
+          "kind": "PickAnOrder",
+          "why": "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Do / Does",
+      "subtitle": "Rutinleri sor ve olumsuz yap",
+      "group": 2,
+      "goal": "Geniş zamanda soru, olumsuzluk ve kısa cevap kurmak.",
+      "rules": [
+        [
+          "Yardımcı fiil",
+          "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir."
+        ],
+        [
+          "Olumsuz cümle",
+          "Do not → don't; does not → doesn't. Does veya doesn't zaten kişi bilgisini taşır; ana fiildeki -s kaldırılır."
+        ],
+        [
+          "Be ile ayır",
+          "Kimlik, yer ve durum sorularında am/is/are kullanılır. Normal eylemlerde do/does kullanılır. Kısa cevapta sorunun yardımcı fiilini tekrar et."
+        ]
+      ],
+      "forms": [
+        [
+          "Soru",
+          "Do/Does + özne + yalın fiil?"
+        ],
+        [
+          "Olumsuz",
+          "Özne + don't/doesn't + yalın fiil"
+        ],
+        [
+          "Kısa cevap",
+          "Yes, I do. / No, she doesn't."
+        ]
+      ],
+      "trap": "“Does she likes” yanlış; “Does she like” gerekir. “Are you like coffee?” değil “Do you like coffee?” kullan.",
+      "tasks": [
+        {
+          "prompt": "____ you like coffee?",
+          "options": [
+            "Do",
+            "Does",
+            "Are",
+            "Is"
+          ],
+          "answer": "Do",
+          "audio": "316df3f4ea292c09",
+          "en": "Do you like coffee?",
+          "tr": "Kahveyi sever misin?",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir.",
+          "id": "9-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "____ you like coffee?",
+          "options": [
+            "Do",
+            "Does",
+            "Are",
+            "Is"
+          ],
+          "answer": "Do",
+          "audio": "316df3f4ea292c09",
+          "en": "Do you like coffee?",
+          "tr": "Kahveyi sever misin?",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir.",
+          "id": "9-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "____ you like coffee?",
+          "options": [
+            "Do",
+            "Does",
+            "Are",
+            "Is"
+          ],
+          "answer": "Do",
+          "audio": "316df3f4ea292c09",
+          "en": "Do you like coffee?",
+          "tr": "Kahveyi sever misin?",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir.",
+          "id": "9-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "Does you like coffee?",
+          "correct": false
+        },
+        {
+          "prompt": "____ she work here?",
+          "options": [
+            "Does",
+            "Do",
+            "Is",
+            "Are"
+          ],
+          "answer": "Does",
+          "audio": "472861eee9407b7b",
+          "en": "Does she work here?",
+          "tr": "O burada çalışıyor mu?",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir.",
+          "id": "9-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "____ she work here?",
+          "options": [
+            "Does",
+            "Do",
+            "Is",
+            "Are"
+          ],
+          "answer": "Does",
+          "audio": "472861eee9407b7b",
+          "en": "Does she work here?",
+          "tr": "O burada çalışıyor mu?",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir.",
+          "id": "9-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "____ she work here?",
+          "options": [
+            "Does",
+            "Do",
+            "Is",
+            "Are"
+          ],
+          "answer": "Does",
+          "audio": "472861eee9407b7b",
+          "en": "Does she work here?",
+          "tr": "O burada çalışıyor mu?",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir.",
+          "id": "9-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "Does she work here?",
+          "correct": true
+        },
+        {
+          "en": "Do you want some coffee?",
+          "tr": "Biraz kahve ister misin?",
+          "audio": "d18f1cb8a4d6b3c6",
+          "id": "9-order-0",
+          "kind": "PickAnOrder",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir."
+        },
+        {
+          "en": "Does this bus go downtown?",
+          "tr": "Bu otobüs merkeze gider mi?",
+          "audio": "b1b18f7fdf34a8f9",
+          "id": "9-order-1",
+          "kind": "PickAnOrder",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir."
+        },
+        {
+          "en": "I don't work on Sundays.",
+          "tr": "Pazar günleri çalışmam.",
+          "audio": "0a2e968785f954ce",
+          "id": "9-order-2",
+          "kind": "PickAnOrder",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir."
+        },
+        {
+          "en": "She doesn't drink coffee.",
+          "tr": "Kahve içmiyor.",
+          "audio": "967c9e976157fc25",
+          "id": "9-order-3",
+          "kind": "PickAnOrder",
+          "why": "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Present Continuous",
+      "subtitle": "Tam şu anda",
+      "group": 2,
+      "goal": "Şu anda devam eden işleri ve geçici durumları anlatmak.",
+      "rules": [
+        [
+          "İki parça birlikte",
+          "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz."
+        ],
+        [
+          "Yazım",
+          "Work → working. Make → making: sondaki sessiz e düşer. Run → running gibi kısa örneklerde son sessiz ikiye katlanır. Lie → lying olur."
+        ],
+        [
+          "Soru ve olumsuz",
+          "Not, am/is/are sonrasına gelir. Soruda am/is/are başa geçer. Bu yapıda do/does kullanılmaz. Now ve right now yardımcı zaman ipuçlarıdır."
+        ]
+      ],
+      "forms": [
+        [
+          "Olumlu",
+          "Özne + am/is/are + fiil-ing"
+        ],
+        [
+          "Olumsuz",
+          "Özne + isn't/aren't + fiil-ing; I için I'm not"
+        ],
+        [
+          "Soru",
+          "Am/Is/Are + özne + fiil-ing?"
+        ]
+      ],
+      "trap": "“I cooking” eksik; “I am cooking” gerekir. “I am cook” da doğru değildir; bu yapıda fiil -ing alır.",
+      "tasks": [
+        {
+          "prompt": "I ____ cooking.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "do"
+          ],
+          "answer": "am",
+          "audio": "251ea39f0b3d2517",
+          "en": "I am cooking.",
+          "tr": "Yemek yapıyorum.",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz.",
+          "id": "10-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "I ____ cooking.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "do"
+          ],
+          "answer": "am",
+          "audio": "251ea39f0b3d2517",
+          "en": "I am cooking.",
+          "tr": "Yemek yapıyorum.",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz.",
+          "id": "10-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "I ____ cooking.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "do"
+          ],
+          "answer": "am",
+          "audio": "251ea39f0b3d2517",
+          "en": "I am cooking.",
+          "tr": "Yemek yapıyorum.",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz.",
+          "id": "10-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "I am cooking.",
+          "correct": true
+        },
+        {
+          "prompt": "She ____ reading a book.",
+          "options": [
+            "is",
+            "are",
+            "am",
+            "does"
+          ],
+          "answer": "is",
+          "audio": "c91b8cd6e157ed7a",
+          "en": "She is reading a book.",
+          "tr": "O bir kitap okuyor.",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz.",
+          "id": "10-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "She ____ reading a book.",
+          "options": [
+            "is",
+            "are",
+            "am",
+            "does"
+          ],
+          "answer": "is",
+          "audio": "c91b8cd6e157ed7a",
+          "en": "She is reading a book.",
+          "tr": "O bir kitap okuyor.",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz.",
+          "id": "10-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "She ____ reading a book.",
+          "options": [
+            "is",
+            "are",
+            "am",
+            "does"
+          ],
+          "answer": "is",
+          "audio": "c91b8cd6e157ed7a",
+          "en": "She is reading a book.",
+          "tr": "O bir kitap okuyor.",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz.",
+          "id": "10-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "She are reading a book.",
+          "correct": false
+        },
+        {
+          "en": "I'm waiting for the bus.",
+          "tr": "Otobüsü bekliyorum.",
+          "audio": "a4a542accabc9f00",
+          "id": "10-order-0",
+          "kind": "PickAnOrder",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz."
+        },
+        {
+          "en": "She's making dinner.",
+          "tr": "Akşam yemeği hazırlıyor.",
+          "audio": "5df9103996cf430e",
+          "id": "10-order-1",
+          "kind": "PickAnOrder",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz."
+        },
+        {
+          "en": "We're going home now.",
+          "tr": "Şimdi eve gidiyoruz.",
+          "audio": "17199655d702c404",
+          "id": "10-order-2",
+          "kind": "PickAnOrder",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz."
+        },
+        {
+          "en": "He's washing his hands.",
+          "tr": "Ellerini yıkıyor.",
+          "audio": "f5a7d3fce14e5d97",
+          "id": "10-order-3",
+          "kind": "PickAnOrder",
+          "why": "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "İki şimdiki zaman",
+      "subtitle": "Rutin mi, şu an mı?",
+      "group": 2,
+      "goal": "Present Simple ile Present Continuous arasında anlamına göre seçim yapmak.",
+      "rules": [
+        [
+          "Genelde olan",
+          "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir."
+        ],
+        [
+          "Şu an veya geçici",
+          "Konuşma anında devam eden veya bu dönem geçici olan iş için Continuous kullan. Zaman sözcüğüne değil, anlatmak istediğin duruma da bak."
+        ],
+        [
+          "Durum fiilleri",
+          "Know, like, want, need gibi fiiller temel anlamlarında genellikle Simple ile kullanılır. Her “şimdi” fikri otomatik olarak -ing gerektirmez."
+        ]
+      ],
+      "forms": [
+        [
+          "Rutin",
+          "I work every day."
+        ],
+        [
+          "Şimdi",
+          "I am working now."
+        ],
+        [
+          "Durum fiili",
+          "I know. / I want. / I like."
+        ]
+      ],
+      "trap": "“I am knowing” yerine “I know” kullan. “Every day” rutin, “right now” devam eden iş için güçlü ipucudur; yine de anlamı kontrol et.",
+      "tasks": [
+        {
+          "prompt": "I usually ____ tea.",
+          "options": [
+            "drink",
+            "drinks",
+            "am drink",
+            "drinking"
+          ],
+          "answer": "drink",
+          "audio": "655b12fb16121f56",
+          "en": "I usually drink tea.",
+          "tr": "Genellikle çay içerim.",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir.",
+          "id": "11-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "I usually ____ tea.",
+          "options": [
+            "drink",
+            "drinks",
+            "am drink",
+            "drinking"
+          ],
+          "answer": "drink",
+          "audio": "655b12fb16121f56",
+          "en": "I usually drink tea.",
+          "tr": "Genellikle çay içerim.",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir.",
+          "id": "11-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "I usually ____ tea.",
+          "options": [
+            "drink",
+            "drinks",
+            "am drink",
+            "drinking"
+          ],
+          "answer": "drink",
+          "audio": "655b12fb16121f56",
+          "en": "I usually drink tea.",
+          "tr": "Genellikle çay içerim.",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir.",
+          "id": "11-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "I am drink coffee today.",
+          "correct": false
+        },
+        {
+          "prompt": "I ____ coffee today.",
+          "options": [
+            "am drinking",
+            "drink",
+            "drinks",
+            "am drink"
+          ],
+          "answer": "am drinking",
+          "audio": "1fc2672bbad717d9",
+          "en": "I am drinking coffee today.",
+          "tr": "Bugün kahve içiyorum.",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir.",
+          "id": "11-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "I ____ coffee today.",
+          "options": [
+            "am drinking",
+            "drink",
+            "drinks",
+            "am drink"
+          ],
+          "answer": "am drinking",
+          "audio": "1fc2672bbad717d9",
+          "en": "I am drinking coffee today.",
+          "tr": "Bugün kahve içiyorum.",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir.",
+          "id": "11-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "I ____ coffee today.",
+          "options": [
+            "am drinking",
+            "drink",
+            "drinks",
+            "am drink"
+          ],
+          "answer": "am drinking",
+          "audio": "1fc2672bbad717d9",
+          "en": "I am drinking coffee today.",
+          "tr": "Bugün kahve içiyorum.",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir.",
+          "id": "11-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "I am drinking coffee today.",
+          "correct": true
+        },
+        {
+          "en": "I usually walk to work.",
+          "tr": "Genelde işe yürüyerek giderim.",
+          "audio": "55c1b33f1449e6cb",
+          "id": "11-order-0",
+          "kind": "PickAnOrder",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir."
+        },
+        {
+          "en": "I'm taking the bus today.",
+          "tr": "Bugün otobüse biniyorum.",
+          "audio": "c49f7c27d95d7ad4",
+          "id": "11-order-1",
+          "kind": "PickAnOrder",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir."
+        },
+        {
+          "en": "She works in a café.",
+          "tr": "Bir kafede çalışıyor.",
+          "audio": "1fbcd0d1e12e63e8",
+          "id": "11-order-2",
+          "kind": "PickAnOrder",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir."
+        },
+        {
+          "en": "She's working at home today.",
+          "tr": "Bugün evde çalışıyor.",
+          "audio": "5052d3b976fc19e8",
+          "id": "11-order-3",
+          "kind": "PickAnOrder",
+          "why": "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Soru kelimeleri",
+      "subtitle": "Doğru soruyu sor",
+      "group": 2,
+      "goal": "Ne, nerede, ne zaman, neden ve nasıl sorularını kurmak.",
+      "rules": [
+        [
+          "Bilgi türü",
+          "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar."
+        ],
+        [
+          "Kelime sırası",
+          "Soru kelimesi başta, yardımcı fiil sonra gelir. Ardından özne ve ana fiil gelir. Be kullanılan sorularda be doğrudan soru kelimesini izler."
+        ],
+        [
+          "Özne sorusu",
+          "Who eylemi yapan kişiyi soruyorsa ayrıca do/does eklemeyiz. “Who lives here?” bu türdendir. Nesneyi soruyorsak yardımcı fiil gerekebilir."
+        ]
+      ],
+      "forms": [
+        [
+          "Durum sorusu",
+          "Soru kelimesi + be + özne?"
+        ],
+        [
+          "Eylem sorusu",
+          "Soru kelimesi + do/does + özne + fiil?"
+        ],
+        [
+          "Özneyi sor",
+          "Who + fiil?"
+        ]
+      ],
+      "trap": "“Where you live?” yerine “Where do you live?” gerekir. Ama “Who lives here?” sorusundaki who zaten öznedir.",
+      "tasks": [
+        {
+          "prompt": "Where ____ you?",
+          "options": [
+            "are",
+            "do",
+            "does",
+            "is"
+          ],
+          "answer": "are",
+          "audio": "0217318f31feb0d8",
+          "en": "Where are you?",
+          "tr": "Neredesin?",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar.",
+          "id": "12-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "Where ____ you?",
+          "options": [
+            "are",
+            "do",
+            "does",
+            "is"
+          ],
+          "answer": "are",
+          "audio": "0217318f31feb0d8",
+          "en": "Where are you?",
+          "tr": "Neredesin?",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar.",
+          "id": "12-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "Where ____ you?",
+          "options": [
+            "are",
+            "do",
+            "does",
+            "is"
+          ],
+          "answer": "are",
+          "audio": "0217318f31feb0d8",
+          "en": "Where are you?",
+          "tr": "Neredesin?",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar.",
+          "id": "12-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "Where are you?",
+          "correct": true
+        },
+        {
+          "prompt": "Why ____ you tired?",
+          "options": [
+            "are",
+            "do",
+            "does",
+            "is"
+          ],
+          "answer": "are",
+          "audio": "5628dabaeb468b28",
+          "en": "Why are you tired?",
+          "tr": "Neden yorgunsun?",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar.",
+          "id": "12-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "Why ____ you tired?",
+          "options": [
+            "are",
+            "do",
+            "does",
+            "is"
+          ],
+          "answer": "are",
+          "audio": "5628dabaeb468b28",
+          "en": "Why are you tired?",
+          "tr": "Neden yorgunsun?",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar.",
+          "id": "12-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "Why ____ you tired?",
+          "options": [
+            "are",
+            "do",
+            "does",
+            "is"
+          ],
+          "answer": "are",
+          "audio": "5628dabaeb468b28",
+          "en": "Why are you tired?",
+          "tr": "Neden yorgunsun?",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar.",
+          "id": "12-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "Why do you tired?",
+          "correct": false
+        },
+        {
+          "en": "Where is your phone?",
+          "tr": "Telefonun nerede?",
+          "audio": "144339676820d6a5",
+          "id": "12-order-0",
+          "kind": "PickAnOrder",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar."
+        },
+        {
+          "en": "What time do you finish work?",
+          "tr": "İşin saat kaçta bitiyor?",
+          "audio": "2c4ba581a5751f3c",
+          "id": "12-order-1",
+          "kind": "PickAnOrder",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar."
+        },
+        {
+          "en": "Why are you calling?",
+          "tr": "Neden arıyorsun?",
+          "audio": "09ab658c7bc032a7",
+          "id": "12-order-2",
+          "kind": "PickAnOrder",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar."
+        },
+        {
+          "en": "Who is at the door?",
+          "tr": "Kapıda kim var?",
+          "audio": "e1c779b09c5ac543",
+          "id": "12-order-3",
+          "kind": "PickAnOrder",
+          "why": "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Yer ve zaman edatları",
+      "subtitle": "In, on, at ve ötesi",
+      "group": 2,
+      "goal": "Bir şeyin nerede ve ne zaman olduğunu ifade etmek.",
+      "rules": [
+        [
+          "Yer",
+          "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır."
+        ],
+        [
+          "Zaman",
+          "In ay, yıl ve günün geniş bölümleriyle; on gün ve tarihlerle; at saatlerle kullanılır. At night ve in the morning kalıplarını birlikte öğren."
+        ],
+        [
+          "Hareket ve ilişki",
+          "To yön, from çıkış, with birliktelik, for amaç veya yararlanıcı, by ise bazı ulaşım yöntemlerini anlatır. Go home ifadesinde to yoktur."
+        ]
+      ],
+      "forms": [
+        [
+          "Yer",
+          "in the room / on the table / at home"
+        ],
+        [
+          "Zaman",
+          "in June / on Monday / at six"
+        ],
+        [
+          "Hareket",
+          "to school / from London"
+        ],
+        [
+          "Birliktelik",
+          "with me / for you / by bus"
+        ]
+      ],
+      "trap": "“In Monday” yerine “on Monday”, “at the morning” yerine “in the morning” kullan. Edatları tek bir Türkçe sözcükle eşleştirip her yere taşıma.",
+      "tasks": [
+        {
+          "prompt": "The keys are ____ the table.",
+          "options": [
+            "on",
+            "in",
+            "to",
+            "from"
+          ],
+          "answer": "on",
+          "audio": "495156bf6ccd679d",
+          "en": "The keys are on the table.",
+          "tr": "Anahtarlar masanın üzerinde.",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır.",
+          "id": "13-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "The keys are ____ the table.",
+          "options": [
+            "on",
+            "in",
+            "to",
+            "from"
+          ],
+          "answer": "on",
+          "audio": "495156bf6ccd679d",
+          "en": "The keys are on the table.",
+          "tr": "Anahtarlar masanın üzerinde.",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır.",
+          "id": "13-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "The keys are ____ the table.",
+          "options": [
+            "on",
+            "in",
+            "to",
+            "from"
+          ],
+          "answer": "on",
+          "audio": "495156bf6ccd679d",
+          "en": "The keys are on the table.",
+          "tr": "Anahtarlar masanın üzerinde.",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır.",
+          "id": "13-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "The keys are in the table.",
+          "correct": false
+        },
+        {
+          "prompt": "She is ____ the kitchen.",
+          "options": [
+            "in",
+            "on",
+            "to",
+            "from"
+          ],
+          "answer": "in",
+          "audio": "413dd9101f75aa60",
+          "en": "She is in the kitchen.",
+          "tr": "O mutfakta.",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır.",
+          "id": "13-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "She is ____ the kitchen.",
+          "options": [
+            "in",
+            "on",
+            "to",
+            "from"
+          ],
+          "answer": "in",
+          "audio": "413dd9101f75aa60",
+          "en": "She is in the kitchen.",
+          "tr": "O mutfakta.",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır.",
+          "id": "13-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "She is ____ the kitchen.",
+          "options": [
+            "in",
+            "on",
+            "to",
+            "from"
+          ],
+          "answer": "in",
+          "audio": "413dd9101f75aa60",
+          "en": "She is in the kitchen.",
+          "tr": "O mutfakta.",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır.",
+          "id": "13-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "She is in the kitchen.",
+          "correct": true
+        },
+        {
+          "en": "Your coffee is on the table.",
+          "tr": "Kahven masanın üzerinde.",
+          "audio": "e0c80fa590611d4d",
+          "id": "13-order-0",
+          "kind": "PickAnOrder",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır."
+        },
+        {
+          "en": "I'm on the bus.",
+          "tr": "Otobüsteyim.",
+          "audio": "6f3f26c0acec232d",
+          "id": "13-order-1",
+          "kind": "PickAnOrder",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır."
+        },
+        {
+          "en": "She's at the bus stop.",
+          "tr": "O durakta.",
+          "audio": "1fc6833f149391ba",
+          "id": "13-order-2",
+          "kind": "PickAnOrder",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır."
+        },
+        {
+          "en": "The charger is under the bed.",
+          "tr": "Şarj aleti yatağın altında.",
+          "audio": "9af47374d636b895",
+          "id": "13-order-3",
+          "kind": "PickAnOrder",
+          "why": "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Günlük eylemler",
+      "subtitle": "Go, come, take, bring, get",
+      "group": 2,
+      "goal": "Hareketin yönünü ve günlük fiillerin farklı anlamlarını anlamak.",
+      "rules": [
+        [
+          "Go ve come",
+          "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler."
+        ],
+        [
+          "Take ve bring",
+          "Take bir şeyi buradan başka yere götürmek; bring konuşmada referans alınan yere getirmektir. Give birine vermek, leave ise ayrılmak veya bir yerde bırakmaktır."
+        ],
+        [
+          "Get ve kalıplar",
+          "Get tek bir anlama sığmaz: get home eve varmak, get a message mesaj almak, get tired yorulmak. Fiili yanındaki sözcüklerle birlikte öğren."
+        ]
+      ],
+      "forms": [
+        [
+          "Yön",
+          "go to / come to"
+        ],
+        [
+          "Taşımak",
+          "take something / bring something"
+        ],
+        [
+          "Bir yerde bırakmak",
+          "leave something in/at..."
+        ],
+        [
+          "Kalıp",
+          "get home / get a message"
+        ]
+      ],
+      "trap": "Bir eşyayı bir yerde unutmak için leave kullanılır. Forget daha çok bir şeyi hatırlayamamaktır. Bu ayrımı geçmiş zaman örneklerinde yeniden çalışacağız.",
+      "tasks": [
+        {
+          "prompt": "I go to work ____ bus.",
+          "options": [
+            "by",
+            "with",
+            "on",
+            "from"
+          ],
+          "answer": "by",
+          "audio": "95f75063a4a0b2c4",
+          "en": "I go to work by bus.",
+          "tr": "İşe otobüsle giderim.",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler.",
+          "id": "14-PickAnOption-0",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "I go to work ____ bus.",
+          "options": [
+            "by",
+            "with",
+            "on",
+            "from"
+          ],
+          "answer": "by",
+          "audio": "95f75063a4a0b2c4",
+          "en": "I go to work by bus.",
+          "tr": "İşe otobüsle giderim.",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler.",
+          "id": "14-TextWithOptions-0",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "I go to work ____ bus.",
+          "options": [
+            "by",
+            "with",
+            "on",
+            "from"
+          ],
+          "answer": "by",
+          "audio": "95f75063a4a0b2c4",
+          "en": "I go to work by bus.",
+          "tr": "İşe otobüsle giderim.",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler.",
+          "id": "14-yes-0",
+          "kind": "YesNoQuestion",
+          "statement": "I go to work by bus.",
+          "correct": true
+        },
+        {
+          "prompt": "She ____ here every day.",
+          "options": [
+            "comes",
+            "come",
+            "coming",
+            "is come"
+          ],
+          "answer": "comes",
+          "audio": "0ab2ff9af1b33361",
+          "en": "She comes here every day.",
+          "tr": "O her gün buraya gelir.",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler.",
+          "id": "14-PickAnOption-1",
+          "kind": "PickAnOption"
+        },
+        {
+          "prompt": "She ____ here every day.",
+          "options": [
+            "comes",
+            "come",
+            "coming",
+            "is come"
+          ],
+          "answer": "comes",
+          "audio": "0ab2ff9af1b33361",
+          "en": "She comes here every day.",
+          "tr": "O her gün buraya gelir.",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler.",
+          "id": "14-TextWithOptions-1",
+          "kind": "TextWithOptions"
+        },
+        {
+          "prompt": "She ____ here every day.",
+          "options": [
+            "comes",
+            "come",
+            "coming",
+            "is come"
+          ],
+          "answer": "comes",
+          "audio": "0ab2ff9af1b33361",
+          "en": "She comes here every day.",
+          "tr": "O her gün buraya gelir.",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler.",
+          "id": "14-yes-1",
+          "kind": "YesNoQuestion",
+          "statement": "She come here every day.",
+          "correct": false
+        },
+        {
+          "en": "I go home at five.",
+          "tr": "Beşte eve giderim.",
+          "audio": "d9d0e0203803f73a",
+          "id": "14-order-0",
+          "kind": "PickAnOrder",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler."
+        },
+        {
+          "en": "She comes here on Mondays.",
+          "tr": "Pazartesileri buraya gelir.",
+          "audio": "d528c738bf0e9db6",
+          "id": "14-order-1",
+          "kind": "PickAnOrder",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler."
+        },
+        {
+          "en": "I take my bag to work.",
+          "tr": "Çantamı işe götürürüm.",
+          "audio": "6e69972205b39e33",
+          "id": "14-order-2",
+          "kind": "PickAnOrder",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler."
+        },
+        {
+          "en": "He brings lunch from home.",
+          "tr": "Öğle yemeğini evden getirir.",
+          "audio": "59e217b15b42ef6d",
+          "id": "14-order-3",
+          "kind": "PickAnOrder",
+          "why": "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler."
+        }
+      ]
+    }
+  ]
+}

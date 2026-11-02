@@ -77,3 +77,6 @@
 
 /o11/sw.js
   Cache-Control: no-cache
+
+/o14/*
+  Cache-Control: public, max-age=0, must-revalidate
