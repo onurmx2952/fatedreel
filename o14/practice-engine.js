@@ -1,0 +1,10 @@
+import {compareWords} from './vendor/comparison.js';
+import {normalizePracticeQuotes} from './vendor/punctuation.js';
+export const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+export function normalize(s){return normalizePracticeQuotes(s).toLowerCase().replace(/\bi'm\b/g,'i am').replace(/\b(he|she|it|that|there)'s\b/g,'$1 is').replace(/\b(we|they|you)'re\b/g,'$1 are').replace(/\b(is|are|was|were|do|does|did|could|would|should|has|have|had|must)n't\b/g,'$1 not').replace(/\bcan't\b/g,'cannot').replace(/[^a-z0-9'\s]/g,' ').replace(/\s+/g,' ').trim();}
+export function evaluateKnown(turn,text){if(turn.accepted.some(a=>normalize(a)===normalize(text)))return {correct:true,corrected:text.trim(),errors:[],notes:[]};return null;}
+// EchoType alignment shows reference differences, never a semantic or pronunciation score.
+export function compareDraft(reference,text){return compareWords(normalize(reference).split(' '),normalize(text).split(' '));}
+export async function checkMeaning(turn,student,{signal,fetcher=fetch}={}){const abort=new AbortController();const onAbort=()=>abort.abort();signal?.addEventListener('abort',onAbort,{once:true});if(signal?.aborted)abort.abort();const timer=setTimeout(()=>abort.abort(),28000);
+try{const response=await fetcher('/api/o14/check',{method:'POST',credentials:'same-origin',signal:abort.signal,headers:{'Content-Type':'application/json'},body:JSON.stringify({turnId:turn.id,student})});if(!response.ok)throw Error(response.status===429?'rate_limited':'unavailable');const v=await response.json();if(typeof v.correct!=='boolean'||!Array.isArray(v.errors)||!Array.isArray(v.notes)||typeof v.corrected!=='string'||!v.corrected.trim()||v.errors.some(e=>!e||typeof e.explanation_tr!=='string'))throw Error('invalid_response');const correct=v.errors.length===0;return {...v,correct,corrected:correct?student.trim():v.corrected};}finally{clearTimeout(timer);signal?.removeEventListener('abort',onAbort);}}

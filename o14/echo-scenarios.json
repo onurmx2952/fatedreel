@@ -1,0 +1,2191 @@
+{
+  "commit": "2b87b5825a79ccae7163626cada2f3c4c9375930",
+  "scenarios": [
+    {
+      "id": "sc_coffee",
+      "title": "Ordering Coffee",
+      "titleZh": "点咖啡",
+      "description": "Practice ordering your favorite drink at a cozy coffee shop.",
+      "descriptionZh": "在咖啡店练习点单",
+      "icon": "Coffee",
+      "category": "daily",
+      "difficulty": "beginner",
+      "goals": [
+        "Greet the barista",
+        "Order a drink with customizations",
+        "Ask about the price and pay"
+      ],
+      "goalsZh": [
+        "和咖啡师打招呼",
+        "点一杯定制饮品",
+        "询问价格并付款"
+      ],
+      "systemPrompt": "You are a friendly barista at a cozy coffee shop called \"Sunrise Coffee\". Greet the customer warmly and help them order.\n- Offer the menu when asked (espresso, latte, cappuccino, americano, mocha, tea)\n- Suggest popular items if they seem unsure\n- Ask about size (small/medium/large) and customizations (milk type, sugar, temperature)\n- Confirm the order and tell them the total (make up reasonable prices)\n- Keep it natural and friendly, like a real coffee shop interaction\n- Use simple English appropriate for beginners",
+      "openingMessage": "Hey there! Welcome to Sunrise Coffee. ☕ What can I get started for you today?",
+      "source": "builtin",
+      "createdAt": 0,
+      "updatedAt": 0
+    },
+    {
+      "id": "sc_grocery",
+      "title": "Grocery Shopping",
+      "titleZh": "超市购物",
+      "description": "Navigate a grocery store, find items, and check out.",
+      "descriptionZh": "在超市找商品、结账",
+      "icon": "ShoppingCart",
+      "category": "daily",
+      "difficulty": "beginner",
+      "goals": [
+        "Ask where to find an item",
+        "Ask about prices or deals",
+        "Complete the checkout"
+      ],
+      "goalsZh": [
+        "询问商品位置",
+        "询问价格或优惠",
+        "完成结账"
+      ],
+      "systemPrompt": "You are a helpful grocery store employee. You're stocking shelves when a customer approaches you.\n- Help them find items (fruits, vegetables, dairy, bread, snacks, drinks)\n- Tell them about any deals or specials today\n- If they ask about something you don't have, suggest alternatives\n- At checkout, tell them the total and ask about bags\n- Be friendly and patient, use simple English",
+      "openingMessage": "Hi! Can I help you find something today?",
+      "source": "builtin",
+      "createdAt": 0,
+      "updatedAt": 0
+    },
+    {
+      "id": "sc_directions",
+      "title": "Asking for Directions",
+      "titleZh": "问路",
+      "description": "Ask a local for directions to find your way around.",
+      "descriptionZh": "向路人问路",
+      "icon": "MapPin",
+      "category": "travel",
+      "difficulty": "beginner",
+      "goals": [
+        "Ask how to get to a specific place",
+        "Understand the directions given",
+        "Thank them and confirm the route"
+      ],
+      "goalsZh": [
+        "询问如何到达某个地方",
+        "理解对方给的方向",
+        "感谢并确认路线"
+      ],
+      "systemPrompt": "You are a friendly local walking down the street. A tourist stops you to ask for directions.\n- Give clear, simple directions using landmarks (turn left at the bank, go straight past the park)\n- Use basic direction words: left, right, straight, next to, across from, behind\n- If they seem confused, offer to walk them part of the way or simplify\n- Mention approximate walking time\n- Be warm and helpful",
+      "openingMessage": "Oh, hi! Are you looking for something? I know this area pretty well.",
+      "source": "builtin",
+      "createdAt": 0,
+      "updatedAt": 0
+    },
+    {
+      "id": "sc_hotel",
+      "title": "Hotel Check-in",
+      "titleZh": "酒店入住",
+      "description": "Check into a hotel, ask about amenities and services.",
+      "descriptionZh": "办理酒店入住，了解设施服务",
+      "icon": "Hotel",
+      "category": "travel",
+      "difficulty": "intermediate",
+      "goals": [
+        "Check in with your reservation",
+        "Ask about hotel amenities",
+        "Request something for your room"
+      ],
+      "goalsZh": [
+        "凭预订办理入住",
+        "询问酒店设施",
+        "为房间提出需求"
+      ],
+      "systemPrompt": "You are a professional and friendly hotel receptionist at \"The Grand Hotel\".\n- Greet the guest and ask for their reservation name or confirmation number\n- Confirm their booking details (room type, nights, check-out date)\n- Explain hotel amenities (pool, gym, restaurant, Wi-Fi password, breakfast hours)\n- Handle special requests (extra pillows, room change, late checkout)\n- Provide the room key and directions to the room\n- Use polite, professional English at an intermediate level",
+      "openingMessage": "Good evening! Welcome to The Grand Hotel. Do you have a reservation with us?",
+      "source": "builtin",
+      "createdAt": 0,
+      "updatedAt": 0
+    },
+    {
+      "id": "sc_restaurant",
+      "title": "Restaurant Ordering",
+      "titleZh": "餐厅点餐",
+      "description": "Order a meal at a restaurant, ask about the menu, and handle the bill.",
+      "descriptionZh": "在餐厅点餐、询问菜单、结账",
+      "icon": "UtensilsCrossed",
+      "category": "daily",
+      "difficulty": "intermediate",
+      "goals": [
+        "Ask about menu recommendations",
+        "Order food and drinks",
+        "Ask for the bill and pay"
+      ],
+      "goalsZh": [
+        "询问菜单推荐",
+        "点餐和饮品",
+        "要账单并付款"
+      ],
+      "systemPrompt": "You are an experienced waiter at an Italian restaurant called \"Bella Notte\".\n- Welcome the guests and offer menus\n- Describe daily specials with enthusiasm\n- Help with menu choices, explain dishes if asked (ingredients, portion size, spice level)\n- Take drink orders first, then food\n- Check back during the meal\n- Handle the bill, mention tip is not included\n- Use natural restaurant English at intermediate level",
+      "openingMessage": "Good evening! Welcome to Bella Notte. I'll be your server tonight. Can I start you off with something to drink?",
+      "source": "builtin",
+      "createdAt": 0,
+      "updatedAt": 0
+    },
+    {
+      "id": "sc_interview",
+      "title": "Job Interview",
+      "titleZh": "工作面试",
+      "description": "Practice a professional job interview with an HR manager.",
+      "descriptionZh": "和HR经理进行模拟面试",
+      "icon": "Briefcase",
+      "category": "work",
+      "difficulty": "advanced",
+      "goals": [
+        "Introduce yourself professionally",
+        "Answer behavioral questions",
+        "Ask thoughtful questions about the role"
+      ],
+      "goalsZh": [
+        "专业地自我介绍",
+        "回答行为面试问题",
+        "提出关于职位的深思熟虑的问题"
+      ],
+      "systemPrompt": "You are an HR manager conducting a job interview for a software developer position at a tech company.\n- Start with small talk to put the candidate at ease\n- Ask common interview questions: \"Tell me about yourself\", \"Why are you interested in this role?\", \"Describe a challenging project\"\n- Ask one behavioral question: \"Tell me about a time when...\"\n- Listen actively and ask follow-up questions\n- Give the candidate a chance to ask questions about the company\n- Be professional but approachable\n- Use business English at an advanced level",
+      "openingMessage": "Hi, thanks for coming in today! Please, have a seat. How was your commute?",
+      "source": "builtin",
+      "createdAt": 0,
+      "updatedAt": 0
+    },
+    {
+      "id": "sc_doctor",
+      "title": "Doctor's Appointment",
+      "titleZh": "看医生",
+      "description": "Describe your symptoms and understand medical advice.",
+      "descriptionZh": "描述症状，理解医嘱",
+      "icon": "Stethoscope",
+      "category": "daily",
+      "difficulty": "intermediate",
+      "goals": [
+        "Describe your symptoms clearly",
+        "Answer the doctor's questions",
+        "Understand the treatment plan"
+      ],
+      "goalsZh": [
+        "清楚描述症状",
+        "回答医生的问题",
+        "理解治疗方案"
+      ],
+      "systemPrompt": "You are a friendly and patient doctor at a general clinic.\n- Ask the patient what brings them in today\n- Ask follow-up questions about symptoms (when did it start, how severe, any other symptoms)\n- Explain your assessment in simple terms\n- Recommend treatment (rest, medication, follow-up visit)\n- Ask if they have any questions\n- Be reassuring and use clear medical English at intermediate level\n- Avoid overly technical jargon",
+      "openingMessage": "Hello! I'm Dr. Smith. Please come in and have a seat. What brings you in today?",
+      "source": "builtin",
+      "createdAt": 0,
+      "updatedAt": 0
+    },
+    {
+      "id": "sc_friends",
+      "title": "Making Friends",
+      "titleZh": "交朋友",
+      "description": "Meet someone new at a party and have a casual conversation.",
+      "descriptionZh": "在派对上认识新朋友",
+      "icon": "Users",
+      "category": "social",
+      "difficulty": "beginner",
+      "goals": [
+        "Introduce yourself",
+        "Find common interests",
+        "Suggest meeting again"
+      ],
+      "goalsZh": [
+        "自我介绍",
+        "找到共同兴趣",
+        "提议再次见面"
+      ],
+      "systemPrompt": "You are a friendly person at a house party. Someone you haven't met before comes up to talk to you.\n- Introduce yourself naturally\n- Ask about their name, what they do, hobbies\n- Share your own interests and find common ground\n- Be enthusiastic about shared interests\n- Suggest exchanging contacts or meeting up for a shared activity\n- Keep the conversation light and fun\n- Use casual, friendly English appropriate for beginners",
+      "openingMessage": "Hey! I don't think we've met. I'm Alex! Are you a friend of the host?",
+      "source": "builtin",
+      "createdAt": 0,
+      "updatedAt": 0
+    },
+    {
+      "id": "sc_presenting",
+      "title": "Presenting Ideas",
+      "titleZh": "展示想法",
+      "description": "Present your ideas in a team meeting and handle questions.",
+      "descriptionZh": "在团队会议中展示想法并回答问题",
+      "icon": "Presentation",
+      "category": "work",
+      "difficulty": "advanced",
+      "goals": [
+        "Present your idea clearly",
+        "Handle questions and pushback",
+        "Reach a conclusion or next steps"
+      ],
+      "goalsZh": [
+        "清晰地展示你的想法",
+        "处理问题和反对意见",
+        "达成结论或下一步计划"
+      ],
+      "systemPrompt": "You are a colleague in a team meeting. The other person is about to present an idea for a new project or feature.\n- Listen to their pitch and ask clarifying questions\n- Raise reasonable concerns or suggest improvements\n- Be supportive but also challenge weak points\n- Help them refine the idea through discussion\n- Agree on next steps at the end\n- Use professional but conversational business English at an advanced level",
+      "openingMessage": "Alright, the floor is yours! I heard you've been working on something interesting. What's the idea?",
+      "source": "builtin",
+      "createdAt": 0,
+      "updatedAt": 0
+    },
+    {
+      "id": "sc_airport",
+      "title": "Airport & Flights",
+      "titleZh": "机场与航班",
+      "description": "Navigate the airport — check in, go through security, and board.",
+      "descriptionZh": "在机场办理值机、过安检、登机",
+      "icon": "Plane",
+      "category": "travel",
+      "difficulty": "intermediate",
+      "goals": [
+        "Check in for your flight",
+        "Ask about gate and boarding time",
+        "Handle a flight issue (delay/change)"
+      ],
+      "goalsZh": [
+        "办理航班值机",
+        "询问登机口和登机时间",
+        "处理航班问题（延误/变更）"
+      ],
+      "systemPrompt": "You are an airline check-in agent at the airport counter.\n- Greet the passenger and ask for their passport and booking reference\n- Confirm flight details (destination, departure time)\n- Ask about luggage (checked bags, carry-on)\n- Assign a seat (window/aisle preference)\n- Provide boarding pass and gate information\n- If there's a delay or gate change, inform them clearly\n- Use clear, professional English at intermediate level",
+      "openingMessage": "Good morning! Welcome to SkyLine Airlines. May I see your passport and booking confirmation, please?",
+      "source": "builtin",
+      "createdAt": 0,
+      "updatedAt": 0
+    }
+  ],
+  "books": [
+    {
+      "id": "hotel",
+      "name": "酒店 / 住宿",
+      "nameEn": "Hotel & Accommodation",
+      "description": "Everything you need for hotel check-in, room service, complaints, and check-out in English.",
+      "kind": "scenario",
+      "emoji": "🏨",
+      "difficulty": "beginner",
+      "filterTag": "Travel",
+      "tags": [
+        "travel",
+        "hotel",
+        "accommodation"
+      ],
+      "items": [
+        {
+          "title": "Check in",
+          "text": "I have a reservation. My name is Zhang Wei.",
+          "type": "phrase",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "checkin"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Room type",
+          "text": "I booked a standard double room for three nights.",
+          "type": "phrase",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "checkin"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Early check-in",
+          "text": "Is it possible to check in a few hours early?",
+          "type": "phrase",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "checkin"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Room key",
+          "text": "Here are your key cards. Your room is on the fifth floor.",
+          "type": "sentence",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "room"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "WiFi password",
+          "text": "Could you give me the WiFi password, please?",
+          "type": "phrase",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "service"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Room service",
+          "text": "I would like to order room service. What is available now?",
+          "type": "sentence",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "service"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Extra towels",
+          "text": "Could you send up some extra towels to room five one two?",
+          "type": "sentence",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "housekeeping"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Noise complaint",
+          "text": "I am sorry to bother you, but the room next door is very noisy.",
+          "type": "sentence",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "complaint"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Air conditioning",
+          "text": "The air conditioning in my room does not seem to be working.",
+          "type": "sentence",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "complaint"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Breakfast time",
+          "text": "What time does breakfast start and end in the morning?",
+          "type": "phrase",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "dining"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Late checkout",
+          "text": "Is it possible to arrange a late checkout until two pm?",
+          "type": "phrase",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "checkout"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Check out",
+          "text": "I would like to check out. Could you prepare my bill please?",
+          "type": "sentence",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "checkout"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Luggage storage",
+          "text": "Could you store my luggage until my flight at six this evening?",
+          "type": "sentence",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "storage"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Airport shuttle",
+          "text": "Does the hotel provide an airport shuttle service?",
+          "type": "phrase",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "transport"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Local attraction",
+          "text": "Could you recommend some must-see attractions nearby?",
+          "type": "phrase",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "concierge"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Charging adapter",
+          "text": "Do you have a universal charging adapter I could borrow?",
+          "type": "phrase",
+          "category": "hotel",
+          "tags": [
+            "hotel",
+            "amenity"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "id": "shopping",
+      "name": "购物 / 商场",
+      "nameEn": "Shopping & Malls",
+      "description": "Browse, try on, bargain, and return items — master the full shopping experience in English.",
+      "kind": "scenario",
+      "emoji": "🛍️",
+      "difficulty": "beginner",
+      "filterTag": "Daily Life",
+      "tags": [
+        "shopping",
+        "retail",
+        "daily"
+      ],
+      "items": [
+        {
+          "title": "Looking around",
+          "text": "I am just browsing, thank you. I will let you know if I need help.",
+          "type": "sentence",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "greeting"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Item location",
+          "text": "Excuse me, where can I find the sports section?",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "navigation"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Size available",
+          "text": "Do you have this in a medium or large?",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "sizing"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Try on",
+          "text": "Could I try this on? Where is the fitting room?",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "fitting"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Different color",
+          "text": "Do you have this jacket in black or navy blue?",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "color"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Price check",
+          "text": "How much does this cost? Is the price tag still on it?",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "price"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "On sale",
+          "text": "Is this item on sale? I saw a sign for fifty percent off.",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "discount"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Bargain",
+          "text": "That is a little over my budget. Could you do a better price?",
+          "type": "sentence",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "bargain"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Gift wrap",
+          "text": "Could you gift wrap this for me? It is a present.",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "gift"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Payment method",
+          "text": "Do you accept Alipay or WeChat Pay here?",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "payment"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Return policy",
+          "text": "What is the return policy if the item does not fit?",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "return"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Exchange item",
+          "text": "I bought this yesterday but it is the wrong size. Can I exchange it?",
+          "type": "sentence",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "exchange"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Tax refund",
+          "text": "Can I claim a tax refund on this as a foreign visitor?",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "tax"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Closing time",
+          "text": "What time does the store close today?",
+          "type": "phrase",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "info"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Out of stock",
+          "text": "I am sorry, that item is currently out of stock.",
+          "type": "sentence",
+          "category": "shopping",
+          "tags": [
+            "shopping",
+            "stock"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "id": "directions",
+      "name": "问路 / 交通",
+      "nameEn": "Directions & Transport",
+      "description": "Ask for and understand directions, navigate public transport, and hail a taxi with ease.",
+      "kind": "scenario",
+      "emoji": "🗺️",
+      "difficulty": "beginner",
+      "filterTag": "Travel",
+      "tags": [
+        "travel",
+        "directions",
+        "transport"
+      ],
+      "items": [
+        {
+          "title": "Ask directions",
+          "text": "Excuse me, could you tell me how to get to the city center?",
+          "type": "phrase",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "asking"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Turn left",
+          "text": "Turn left at the traffic lights and walk for five minutes.",
+          "type": "sentence",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "giving"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Straight ahead",
+          "text": "Go straight ahead and then take the second right.",
+          "type": "sentence",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "giving"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "How far",
+          "text": "How far is it from here? Can I walk or should I take a bus?",
+          "type": "phrase",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "distance"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Nearest subway",
+          "text": "Where is the nearest subway station, please?",
+          "type": "phrase",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "metro"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Which bus",
+          "text": "Which bus do I take to get to the museum?",
+          "type": "phrase",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "bus"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Last stop",
+          "text": "Could you let me know when we reach the last stop?",
+          "type": "sentence",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "bus"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Transfer line",
+          "text": "I need to transfer at this station to line three.",
+          "type": "sentence",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "metro"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Hail a cab",
+          "text": "Can you hail a cab for me? I need to go to the airport.",
+          "type": "phrase",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "taxi"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Taxi address",
+          "text": "Please take me to this address. Here it is on my phone.",
+          "type": "sentence",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "taxi"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Too far to walk",
+          "text": "It is too far to walk. You should take the bus or subway.",
+          "type": "sentence",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "advice"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "On the right",
+          "text": "The post office is on your right, next to the pharmacy.",
+          "type": "sentence",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "landmark"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Missed stop",
+          "text": "I think I missed my stop. What should I do now?",
+          "type": "phrase",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "problem"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Map app",
+          "text": "Let me use a map app to find the best route for you.",
+          "type": "sentence",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "tech"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Ride-sharing",
+          "text": "I ordered a ride-sharing car. It should arrive in three minutes.",
+          "type": "sentence",
+          "category": "directions",
+          "tags": [
+            "directions",
+            "rideshare"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "name": "社交 / 聚会",
+      "nameEn": "Social & Gatherings",
+      "description": "Make friends, attend parties, and navigate social situations with natural, confident English.",
+      "kind": "scenario",
+      "emoji": "🎉",
+      "difficulty": "beginner",
+      "filterTag": "Social",
+      "tags": [
+        "social",
+        "friends",
+        "party"
+      ],
+      "items": [
+        {
+          "title": "Small talk",
+          "text": "What do you do for work? Have you lived here long?",
+          "type": "phrase",
+          "category": "social",
+          "tags": [
+            "social",
+            "smalltalk"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Introduce friend",
+          "text": "Let me introduce you to my colleague Tom. He is from Shanghai.",
+          "type": "sentence",
+          "category": "social",
+          "tags": [
+            "social",
+            "intro"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Nice to meet",
+          "text": "It is so nice to finally meet you in person!",
+          "type": "phrase",
+          "category": "social",
+          "tags": [
+            "social",
+            "greeting"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Compliment",
+          "text": "I love your outfit! Where did you get it?",
+          "type": "phrase",
+          "category": "social",
+          "tags": [
+            "social",
+            "compliment"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Invite to event",
+          "text": "We are having a small gathering on Saturday. Would you like to come?",
+          "type": "sentence",
+          "category": "social",
+          "tags": [
+            "social",
+            "invitation"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Accept invite",
+          "text": "That sounds great! I would love to come. What time should I arrive?",
+          "type": "sentence",
+          "category": "social",
+          "tags": [
+            "social",
+            "invitation"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Decline politely",
+          "text": "I really appreciate the invitation, but I already have plans that evening.",
+          "type": "sentence",
+          "category": "social",
+          "tags": [
+            "social",
+            "declining"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Common interest",
+          "text": "Oh, you like hiking too? We should go together sometime!",
+          "type": "sentence",
+          "category": "social",
+          "tags": [
+            "social",
+            "interest"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Exchange contact",
+          "text": "It was great meeting you. Can we exchange contact information?",
+          "type": "sentence",
+          "category": "social",
+          "tags": [
+            "social",
+            "networking"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Toast",
+          "text": "Let us raise a glass and toast to health and happiness!",
+          "type": "sentence",
+          "category": "social",
+          "tags": [
+            "social",
+            "party"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Catch up",
+          "text": "It has been so long! What have you been up to lately?",
+          "type": "phrase",
+          "category": "social",
+          "tags": [
+            "social",
+            "catchup"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Saying goodbye",
+          "text": "It was wonderful seeing you again. Let us not leave it so long next time.",
+          "type": "sentence",
+          "category": "social",
+          "tags": [
+            "social",
+            "farewell"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Thank host",
+          "text": "Thank you so much for having us. The food was amazing.",
+          "type": "sentence",
+          "category": "social",
+          "tags": [
+            "social",
+            "gratitude"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Weekend plans",
+          "text": "Any exciting plans for the weekend? Are you doing anything fun?",
+          "type": "phrase",
+          "category": "social",
+          "tags": [
+            "social",
+            "smalltalk"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Keep in touch",
+          "text": "Let us keep in touch! I will message you on WeChat.",
+          "type": "sentence",
+          "category": "social",
+          "tags": [
+            "social",
+            "networking"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "id": "coffee-shop",
+      "name": "咖啡馆",
+      "nameEn": "Coffee Shop",
+      "description": "Order your perfect coffee, customize your drink, and chat with baristas like a local.",
+      "kind": "scenario",
+      "emoji": "☕",
+      "difficulty": "beginner",
+      "filterTag": "Food & Drink",
+      "tags": [
+        "food",
+        "coffee",
+        "casual"
+      ],
+      "items": [
+        {
+          "title": "Order coffee",
+          "text": "Could I get a medium latte with oat milk, please?",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "ordering"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Customization",
+          "text": "Could you make that with less sugar and extra foam?",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "customization"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Hot or cold",
+          "text": "Would you like that hot or iced?",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "ordering"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Name for order",
+          "text": "Can I get a name for the order? It is for Li Ming.",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "ordering"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Eat in or takeout",
+          "text": "Is this to have here or to take away?",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "ordering"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Food pairing",
+          "text": "I will also have a blueberry muffin to go with that.",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "food"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Loyalty card",
+          "text": "Do you have a loyalty card? Every tenth coffee is free.",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "loyalty"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Table request",
+          "text": "Is it okay if I work here for a couple of hours?",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "workspace"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Wrong drink",
+          "text": "Excuse me, I ordered a cappuccino but I think this is an Americano.",
+          "type": "sentence",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "complaint"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Compliment barista",
+          "text": "This is the best coffee I have had in a long time. Thank you!",
+          "type": "sentence",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "compliment"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "WiFi request",
+          "text": "Do you have free WiFi here? What is the password?",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "wifi"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Closing time",
+          "text": "What time do you close today? I want to stay a bit longer.",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "hours"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Seasonal drink",
+          "text": "What is your seasonal special? Is there anything new on the menu?",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "menu"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Dairy free",
+          "text": "I am lactose intolerant. Do you offer any dairy-free milk options?",
+          "type": "sentence",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "dietary"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Refill request",
+          "text": "Could I get a refill on my drip coffee, please?",
+          "type": "phrase",
+          "category": "coffee-shop",
+          "tags": [
+            "coffee",
+            "service"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "id": "phone-call",
+      "name": "电话通话",
+      "nameEn": "Phone Calls",
+      "description": "Answer calls, transfer calls, leave voicemails, and run conference calls — all in fluent English.",
+      "kind": "scenario",
+      "emoji": "📞",
+      "difficulty": "beginner",
+      "filterTag": "Business",
+      "tags": [
+        "communication",
+        "phone",
+        "business"
+      ],
+      "items": [
+        {
+          "title": "Answer phone",
+          "text": "Hello, this is Li Ming speaking. How can I help you?",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "answering"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Wrong number",
+          "text": "I am sorry, I think you have the wrong number.",
+          "type": "phrase",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "mistake"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Hold please",
+          "text": "Could you please hold for a moment? I will transfer you now.",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "transfer"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Leave message",
+          "text": "I am afraid she is not available. Can I take a message?",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "message"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Call back",
+          "text": "Could you ask him to call me back at his earliest convenience?",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "callback"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Bad connection",
+          "text": "I am sorry, the line is not very clear. Could you repeat that?",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "clarity"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Spell name",
+          "text": "Could you spell your name for me, please?",
+          "type": "phrase",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "confirm"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Reason for call",
+          "text": "I am calling to enquire about your services and pricing.",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "purpose"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Conference call",
+          "text": "We are scheduling a conference call for all team members on Thursday.",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "business"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "End call politely",
+          "text": "Thank you so much for your time today. Have a great day!",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "closing"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Voicemail",
+          "text": "Hi, you have reached John. Please leave a message after the beep.",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "voicemail"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Confirm details",
+          "text": "Let me confirm your booking details. That is a table for four at seven pm.",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "confirmation"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "No answer",
+          "text": "I called several times but there was no answer. Could you try again?",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "follow-up"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Telephone number",
+          "text": "Could I get a direct telephone number where I can reach you?",
+          "type": "phrase",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "contact"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Mute and unmute",
+          "text": "Sorry, I was on mute. Could you repeat your last point?",
+          "type": "sentence",
+          "category": "phone-call",
+          "tags": [
+            "phone",
+            "meeting"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "id": "supermarket",
+      "name": "超市 / 购物",
+      "nameEn": "Supermarket & Grocery",
+      "description": "Navigate the aisles, ask for help, use self-checkout, and handle everyday grocery shopping in English.",
+      "kind": "scenario",
+      "emoji": "🛒",
+      "difficulty": "beginner",
+      "filterTag": "Food & Drink",
+      "tags": [
+        "food",
+        "grocery",
+        "daily"
+      ],
+      "items": [
+        {
+          "title": "Find an item",
+          "text": "Excuse me, where can I find the pasta and sauces aisle?",
+          "type": "phrase",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "navigation"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Fresh produce",
+          "text": "Are these tomatoes locally grown or imported?",
+          "type": "phrase",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "produce"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Expiry date",
+          "text": "Excuse me, all of these cartons have already expired. Do you have any fresh ones?",
+          "type": "sentence",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "freshness"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Price match",
+          "text": "I saw this item cheaper at another store. Do you do price matching?",
+          "type": "sentence",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "price"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Loyalty card",
+          "text": "Do you have a loyalty card? You can earn points on every purchase.",
+          "type": "sentence",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "loyalty"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Bag for life",
+          "text": "Would you like to buy a reusable bag? It is better for the environment.",
+          "type": "sentence",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "eco"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Self-checkout",
+          "text": "Please place your item in the bagging area.",
+          "type": "sentence",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "checkout"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Unexpected item",
+          "text": "Unexpected item in the bagging area. Please remove the item.",
+          "type": "sentence",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "checkout"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Cashier help",
+          "text": "Excuse me, this machine is not working. Could you help me?",
+          "type": "phrase",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "help"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Special offer",
+          "text": "This is on a buy one get one free offer this week.",
+          "type": "sentence",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "promotion"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Organic aisle",
+          "text": "Is there an organic or health food section in this store?",
+          "type": "phrase",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "organic"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Rain check",
+          "text": "The item is out of stock. Can I get a rain check for the sale price?",
+          "type": "sentence",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "stock"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Home delivery",
+          "text": "Do you offer same-day home delivery for online orders?",
+          "type": "phrase",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "delivery"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Deli counter",
+          "text": "Could I get two hundred grams of smoked salmon from the deli counter?",
+          "type": "phrase",
+          "category": "supermarket",
+          "tags": [
+            "supermarket",
+            "deli"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "id": "apartment",
+      "name": "租房 / 搬家",
+      "nameEn": "Renting an Apartment",
+      "description": "View flats, negotiate rent, sign leases, and communicate with landlords — essential for living abroad.",
+      "kind": "scenario",
+      "emoji": "🏠",
+      "difficulty": "intermediate",
+      "filterTag": "Daily Life",
+      "tags": [
+        "daily",
+        "housing",
+        "rental"
+      ],
+      "items": [
+        {
+          "title": "Viewing request",
+          "text": "I am interested in the apartment. Could I arrange a viewing this week?",
+          "type": "sentence",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "viewing"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Monthly rent",
+          "text": "What is the monthly rent, and does it include utilities?",
+          "type": "phrase",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "rent"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Security deposit",
+          "text": "How much is the security deposit, and when is it refunded?",
+          "type": "phrase",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "deposit"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Lease terms",
+          "text": "Is this a six-month or twelve-month lease? Is it renewable?",
+          "type": "phrase",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "lease"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Pets allowed",
+          "text": "I have a small dog. Are pets allowed in this building?",
+          "type": "phrase",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "pets"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Furnished flat",
+          "text": "Is the apartment fully furnished, or will I need to bring my own furniture?",
+          "type": "phrase",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "furnishings"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Nearby transport",
+          "text": "How far is it to the nearest subway station or bus stop?",
+          "type": "phrase",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "location"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Notice period",
+          "text": "If I decide to move out, what is the required notice period?",
+          "type": "phrase",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "contract"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Maintenance issue",
+          "text": "The heating system is not working. Could you arrange a repair?",
+          "type": "sentence",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "repair"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Noise complaint",
+          "text": "My upstairs neighbour is very noisy late at night. What can be done?",
+          "type": "sentence",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "complaint"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Rent negotiation",
+          "text": "The rent is slightly over my budget. Would you consider coming down a bit?",
+          "type": "sentence",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "negotiation"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Inventory check",
+          "text": "Could we go through the inventory together before I sign the contract?",
+          "type": "sentence",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "inventory"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Key handover",
+          "text": "Here are the keys. Please sign to confirm you have received them.",
+          "type": "sentence",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "keys"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Moving out",
+          "text": "I am moving out at the end of the month. When can we do the final inspection?",
+          "type": "sentence",
+          "category": "apartment",
+          "tags": [
+            "apartment",
+            "moveout"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        }
+      ]
+    },
+    {
+      "id": "office-meeting",
+      "name": "办公室 / 会议",
+      "nameEn": "Office & Meetings",
+      "description": "Run and join meetings, give presentations, set agendas, and follow up on action items in English.",
+      "kind": "scenario",
+      "emoji": "📊",
+      "difficulty": "intermediate",
+      "filterTag": "Business",
+      "tags": [
+        "business",
+        "meeting",
+        "office"
+      ],
+      "items": [
+        {
+          "title": "Meeting agenda",
+          "text": "Let us start with the agenda. We have three items to cover today.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "agenda"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Take minutes",
+          "text": "Could someone volunteer to take the minutes for this meeting?",
+          "type": "phrase",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "minutes"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Introduce self",
+          "text": "For those who do not know me, I am the product manager for the Asia-Pacific region.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "introduction"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Present findings",
+          "text": "As you can see from the slide, our revenue grew by thirty percent this quarter.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "presentation"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Ask question",
+          "text": "I have a quick question about the timeline. When is the expected launch date?",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "question"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Clarify point",
+          "text": "Could you clarify what you mean by scalable infrastructure?",
+          "type": "phrase",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "clarification"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Agree with idea",
+          "text": "That is a great point. I completely agree that we should prioritize mobile users.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "agreement"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Push back",
+          "text": "I see your point, but I have some concerns about the proposed budget.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "disagreement"
+          ],
+          "source": "builtin",
+          "difficulty": "advanced"
+        },
+        {
+          "title": "Action items",
+          "text": "To summarize: Sarah will handle the design and Tom will prepare the report by Friday.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "action"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Table discussion",
+          "text": "I suggest we table this discussion and revisit it at next week's meeting.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "defer"
+          ],
+          "source": "builtin",
+          "difficulty": "advanced"
+        },
+        {
+          "title": "Wrap up",
+          "text": "We are running short on time. Let us wrap up and continue over email.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "closing"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Meeting follow-up",
+          "text": "I will send the meeting notes and action items to everyone by end of day.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "followup"
+          ],
+          "source": "builtin",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": "Technical issue",
+          "text": "Apologies, I am having trouble sharing my screen. Give me a moment.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "tech"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Coffee break",
+          "text": "Let us take a ten-minute break and reconvene at half past three.",
+          "type": "sentence",
+          "category": "office-meeting",
+          "tags": [
+            "meeting",
+            "break"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "id": "small-talk",
+      "name": "日常闲聊",
+      "nameEn": "Small Talk & Chit-chat",
+      "description": "Master the art of casual conversation — weather, weekends, hobbies, and everything in between.",
+      "kind": "scenario",
+      "emoji": "💬",
+      "difficulty": "beginner",
+      "filterTag": "Social",
+      "tags": [
+        "social",
+        "casual",
+        "conversation"
+      ],
+      "items": [
+        {
+          "title": "Weather opener",
+          "text": "What terrible weather we are having! Has it been like this all week?",
+          "type": "sentence",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "weather"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Weekend plans",
+          "text": "Any exciting plans for the long weekend? Are you going anywhere?",
+          "type": "phrase",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "weekend"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "How was it",
+          "text": "How was your weekend? Did you do anything fun?",
+          "type": "phrase",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "weekend"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Watch any shows",
+          "text": "Have you been watching anything good on TV lately? Any recommendations?",
+          "type": "phrase",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "entertainment"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Sports talk",
+          "text": "Did you catch the game last night? What a match it was!",
+          "type": "sentence",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "sports"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Holiday plans",
+          "text": "Are you doing anything special for the holidays this year?",
+          "type": "phrase",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "holiday"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "How are you",
+          "text": "Not too bad, thanks! Keeping busy as always. How about yourself?",
+          "type": "sentence",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "greeting"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Local restaurant",
+          "text": "Have you tried that new Italian place that opened on the high street?",
+          "type": "phrase",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "food"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Hobby question",
+          "text": "What do you like to do to unwind after a long week at work?",
+          "type": "phrase",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "hobby"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Travel talk",
+          "text": "Have you done much travelling recently? I just got back from Japan.",
+          "type": "sentence",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "travel"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Agree and extend",
+          "text": "Oh I know exactly what you mean! I felt the same way when it happened to me.",
+          "type": "sentence",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "agreement"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Change subject",
+          "text": "Anyway, enough about that! Tell me — how have things been with you?",
+          "type": "sentence",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "transition"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "Wrap it up",
+          "text": "It has been great catching up! We should do this more often.",
+          "type": "sentence",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "farewell"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        },
+        {
+          "title": "News topic",
+          "text": "Did you hear about the big announcement this morning? What do you think?",
+          "type": "phrase",
+          "category": "small-talk",
+          "tags": [
+            "smalltalk",
+            "news"
+          ],
+          "source": "builtin",
+          "difficulty": "beginner"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1160 @@
+{
+  "version": "scenes-v2",
+  "source": "EchoType",
+  "units": [
+    {
+      "id": 1,
+      "title": "Kişi zamirleri",
+      "group": 1,
+      "rules": [
+        [
+          "Özne kim?",
+          "Cümlede işi yapan veya hakkında konuşulan kişi öznedir. Ben için I, sen veya siz için you kullanılır. I her zaman büyük harfle yazılır."
+        ],
+        [
+          "İsim yerine zamir",
+          "Bir erkek için he, bir kadın için she, bir nesne veya hayvan için it kullanılır. Evcil hayvanın cinsiyeti biliniyorsa he veya she de kullanılabilir."
+        ],
+        [
+          "Birden fazla kişi",
+          "Biz we, onlar they olur. You hem tekil hem çoğuldur. Zamirden sonra cümleyi tamamlayan bir fiil gerekir."
+        ]
+      ],
+      "trap": "Türkçede özneyi söylemeden konuşabiliriz. İngilizcede bu tür cümlelerde özneyi belirt: yalnızca “am” ile başlama."
+    },
+    {
+      "id": 2,
+      "title": "Am / Is / Are",
+      "group": 1,
+      "rules": [
+        [
+          "Üç biçim, tek fiil",
+          "Be fiili şimdiki zamanda özneye göre değişir: I am; he, she, it is; you, we, they are. Türkçedeki -im, -sin gibi ekler bazen bu fiilin görevini üstlenir."
+        ],
+        [
+          "Olumsuz ve soru",
+          "Olumsuzluk için am/is/are sonrasına not ekle. Soruda am/is/are öznenin önüne gelir. Bu cümlelerde do/does kullanılmaz."
+        ],
+        [
+          "Kısaltmalar ve cevaplar",
+          "I am → I'm; she is → she's; they are → they're. Olumsuz örneklerde günlük konuşmadaki isn't/aren't biçimlerini kullanıyoruz. Amn't kullanılmaz; I am not, I'm not olur. Kısa olumlu cevabın sonunda kısaltma yapma: Yes, I am. Olumsuz kısa cevap ise No, I'm not veya No, she isn't olabilir."
+        ]
+      ],
+      "trap": "“I happy” eksiktir; “I am happy” gerekir. Ama normal bir eylemden önce gelişigüzel am ekleme. Eylemleri 8. ünitede öğreneceksin."
+    },
+    {
+      "id": 3,
+      "title": "Cümle yapısı",
+      "group": 1,
+      "rules": [
+        [
+          "Özne → fiil → nesne",
+          "İngilizcede temel sıra kimin, ne yaptığının ve bundan etkilenen şeyin sırasıdır. Türkçedeki fiili sona koyma alışkanlığını aynen taşıma."
+        ],
+        [
+          "Yer ve zaman",
+          "Basit bir cümlede yer ve zaman bilgisi çoğunlukla temel cümleden sonra gelir. Önce cümlenin omurgasını kur, sonra ayrıntıları ekle."
+        ],
+        [
+          "Her cümlede nesne yoktur",
+          "Uyumak, gelmek gibi bazı fiiller nesne istemez. Be ile kurulan cümlelerde fiilden sonraki kelime bir durum veya kimlik de olabilir."
+        ]
+      ],
+      "trap": "“I tea like” Türkçe sıraya yakındır ama İngilizcede “I like tea” gerekir. Özne, fiil ve nesneyi ayrı ayrı bul."
+    },
+    {
+      "id": 4,
+      "title": "İsimler ve tanımlıklar",
+      "group": 1,
+      "rules": [
+        [
+          "Bir tane: a / an",
+          "Sayılabilen tekil bir ismi ilk kez söylerken a veya an kullan. Seçim harfe değil sese bağlıdır: ünlü sesle başlayan kelimeden önce an gelir."
+        ],
+        [
+          "Bilinen nesne: the",
+          "Dinleyen hangi şeyden söz ettiğini biliyorsa the kullanılır. Daha önce tanıtılmış nesne veya ortamda belirli olan şey buna örnektir."
+        ],
+        [
+          "Çoğul ve sayılamayan",
+          "Çoğullar genellikle -s alır; child → children gibi düzensizler de vardır. Water, music gibi sayılamayan isimlerle doğrudan a/an kullanma."
+        ]
+      ],
+      "trap": "“An” seçimi yazılı ilk harfe göre yapılmaz: “an hour”, “a university”. Ayrıca “a water” yerine bir bardak sudan söz edebilirsin."
+    },
+    {
+      "id": 5,
+      "title": "İşaret ve sahiplik",
+      "group": 1,
+      "rules": [
+        [
+          "Yakın / uzak",
+          "Yakındaki tek nesne this, uzaktaki tek nesne that olur. Çoğul karşılıkları these ve those kelimeleridir."
+        ],
+        [
+          "Kimin?",
+          "My, your, his, her, its, our, their bir ismin önüne gelir. His erkek, her kadın için sahiplik belirtir; nesnenin cinsiyetine göre seçilmez."
+        ],
+        [
+          "İsimle sahiplik",
+          "Bir kişinin adına 's ekleyerek ona ait bir şeyi anlatabilirsin. Çoğul ve sahiplik ekini karıştırma. It's, it is kısaltmasıdır; its ise sahipliktir."
+        ]
+      ],
+      "trap": "“These is” yerine “these are” kullan. “My” tek başına “benimki” demek değildir; ardından isim gelir. Benimki için mine kullanılır."
+    },
+    {
+      "id": 6,
+      "title": "Nesne zamirleri",
+      "group": 1,
+      "rules": [
+        [
+          "İşi yapan ve etkilenen",
+          "I özne, me nesne olur. He → him, she → her, we → us, they → them değişir. You ve it iki görevde de aynı kalır."
+        ],
+        [
+          "Fiilden sonra",
+          "Birini görmek, sevmek veya aramak gibi eylemlerde nesne zamiri fiilden sonra gelir. Nesne yerinde I, he veya they kullanma."
+        ],
+        [
+          "Edatlardan sonra",
+          "With, for, to gibi edatların ardından da nesne biçimi kullanılır. With me birlikte, for us bizim için anlamındadır."
+        ]
+      ],
+      "trap": "“Me am happy” yanlış; özne I olmalı. “They know I” yanlış; fiilden etkilenen kişi me olur."
+    },
+    {
+      "id": 7,
+      "title": "Have / Has ve There is",
+      "group": 1,
+      "rules": [
+        [
+          "Sahiplik",
+          "I, you, we, they ile have; he, she, it ile has kullanılır. Have got ve has got özellikle konuşmada sahiplik ifade eder."
+        ],
+        [
+          "Bir yerde var",
+          "There is tekil veya sayılamayan, there are çoğul isimle kullanılır. Buradaki there, “orada” göstermekten çok varlık bildiren yapının parçasıdır."
+        ],
+        [
+          "Soru ve olumsuz",
+          "Have got sorusunda have/has öne gelir. There is/are sorusunda is/are öne gelir; olumsuzda not eklenir. Düz have ile do/does kullanımını 9. ünitede göreceğiz."
+        ]
+      ],
+      "trap": "“I am have” kullanma. “I have a car” sahipliktir; “There is a car” bir arabanın bulunduğunu söyler."
+    },
+    {
+      "id": 8,
+      "title": "Present Simple",
+      "group": 2,
+      "rules": [
+        [
+          "Rutin ve gerçek",
+          "Present Simple düzenli yapılan işleri ve genel gerçekleri anlatır. I, you, we, they ile fiilin yalın hâli gelir."
+        ],
+        [
+          "Üçüncü tekil kişi",
+          "He, she, it ile olumlu cümlede fiile genellikle -s eklenir. Go → goes, watch → watches, study → studies. Have → has düzensizdir."
+        ],
+        [
+          "Sıklık",
+          "Always, usually, often, sometimes ana fiilden önce gelir. Be fiili varsa genellikle ondan sonra gelir. Every day gibi ifadeler çoğunlukla sonda bulunur."
+        ]
+      ],
+      "trap": "He/she/it ile olumlu cümlede -s unutma. “She is works” yerine “She works” kullan. Be ve normal eylem fiilini karıştırma."
+    },
+    {
+      "id": 9,
+      "title": "Do / Does",
+      "group": 2,
+      "rules": [
+        [
+          "Yardımcı fiil",
+          "I/you/we/they için do, he/she/it için does kullanılır. Soruda yardımcı fiil öne gelir; ardından özne ve yalın fiil gelir."
+        ],
+        [
+          "Olumsuz cümle",
+          "Do not → don't; does not → doesn't. Does veya doesn't zaten kişi bilgisini taşır; ana fiildeki -s kaldırılır."
+        ],
+        [
+          "Be ile ayır",
+          "Kimlik, yer ve durum sorularında am/is/are kullanılır. Normal eylemlerde do/does kullanılır. Kısa cevapta sorunun yardımcı fiilini tekrar et."
+        ]
+      ],
+      "trap": "“Does she likes” yanlış; “Does she like” gerekir. “Are you like coffee?” değil “Do you like coffee?” kullan."
+    },
+    {
+      "id": 10,
+      "title": "Present Continuous",
+      "group": 2,
+      "rules": [
+        [
+          "İki parça birlikte",
+          "Özneye uygun am/is/are ve fiilin -ing hâli birlikte gerekir. Yalnızca -ing eklemek tam bir cümle yapmaz."
+        ],
+        [
+          "Yazım",
+          "Work → working. Make → making: sondaki sessiz e düşer. Run → running gibi kısa örneklerde son sessiz ikiye katlanır. Lie → lying olur."
+        ],
+        [
+          "Soru ve olumsuz",
+          "Not, am/is/are sonrasına gelir. Soruda am/is/are başa geçer. Bu yapıda do/does kullanılmaz. Now ve right now yardımcı zaman ipuçlarıdır."
+        ]
+      ],
+      "trap": "“I cooking” eksik; “I am cooking” gerekir. “I am cook” da doğru değildir; bu yapıda fiil -ing alır."
+    },
+    {
+      "id": 11,
+      "title": "İki şimdiki zaman",
+      "group": 2,
+      "rules": [
+        [
+          "Genelde olan",
+          "Her gün veya düzenli yapılan iş için Present Simple kullan. Türkçede “Londra'da yaşıyorum” derken -yor kullanılsa da kalıcı durum İngilizcede Simple olabilir."
+        ],
+        [
+          "Şu an veya geçici",
+          "Konuşma anında devam eden veya bu dönem geçici olan iş için Continuous kullan. Zaman sözcüğüne değil, anlatmak istediğin duruma da bak."
+        ],
+        [
+          "Durum fiilleri",
+          "Know, like, want, need gibi fiiller temel anlamlarında genellikle Simple ile kullanılır. Her “şimdi” fikri otomatik olarak -ing gerektirmez."
+        ]
+      ],
+      "trap": "“I am knowing” yerine “I know” kullan. “Every day” rutin, “right now” devam eden iş için güçlü ipucudur; yine de anlamı kontrol et."
+    },
+    {
+      "id": 12,
+      "title": "Soru kelimeleri",
+      "group": 2,
+      "rules": [
+        [
+          "Bilgi türü",
+          "What ne, where nerede, when ne zaman, who kim, why neden, how nasıl, which hangisi demektir. How much miktar/fiyat, how many sayılabilir adet sorar."
+        ],
+        [
+          "Kelime sırası",
+          "Soru kelimesi başta, yardımcı fiil sonra gelir. Ardından özne ve ana fiil gelir. Be kullanılan sorularda be doğrudan soru kelimesini izler."
+        ],
+        [
+          "Özne sorusu",
+          "Who eylemi yapan kişiyi soruyorsa ayrıca do/does eklemeyiz. “Who lives here?” bu türdendir. Nesneyi soruyorsak yardımcı fiil gerekebilir."
+        ]
+      ],
+      "trap": "“Where you live?” yerine “Where do you live?” gerekir. Ama “Who lives here?” sorusundaki who zaten öznedir."
+    },
+    {
+      "id": 13,
+      "title": "Yer ve zaman edatları",
+      "group": 2,
+      "rules": [
+        [
+          "Yer",
+          "In bir alanın içinde, on bir yüzeyin üstünde, at bir nokta veya etkinlikte bulunmayı anlatır. At home ve at work yaygın kalıplardır."
+        ],
+        [
+          "Zaman",
+          "In ay, yıl ve günün geniş bölümleriyle; on gün ve tarihlerle; at saatlerle kullanılır. At night ve in the morning kalıplarını birlikte öğren."
+        ],
+        [
+          "Hareket ve ilişki",
+          "To yön, from çıkış, with birliktelik, for amaç veya yararlanıcı, by ise bazı ulaşım yöntemlerini anlatır. Go home ifadesinde to yoktur."
+        ]
+      ],
+      "trap": "“In Monday” yerine “on Monday”, “at the morning” yerine “in the morning” kullan. Edatları tek bir Türkçe sözcükle eşleştirip her yere taşıma."
+    },
+    {
+      "id": 14,
+      "title": "Günlük eylemler",
+      "group": 2,
+      "rules": [
+        [
+          "Go ve come",
+          "Go bir yerden başka yere gitmeyi; come konuşanın veya dinleyenin bulunduğu/yöneldiği yere gelmeyi anlatır. Yönü konuşmanın bağlamı belirler."
+        ],
+        [
+          "Take ve bring",
+          "Take bir şeyi buradan başka yere götürmek; bring konuşmada referans alınan yere getirmektir. Give birine vermek, leave ise ayrılmak veya bir yerde bırakmaktır."
+        ],
+        [
+          "Get ve kalıplar",
+          "Get tek bir anlama sığmaz: get home eve varmak, get a message mesaj almak, get tired yorulmak. Fiili yanındaki sözcüklerle birlikte öğren."
+        ]
+      ],
+      "trap": "Bir eşyayı bir yerde unutmak için leave kullanılır. Forget daha çok bir şeyi hatırlayamamaktır. Bu ayrımı geçmiş zaman örneklerinde yeniden çalışacağız."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "neighbor",
+      "title": "Yeni komşuyla ilk karşılaşma",
+      "place": "APARTMAN GİRİŞİ",
+      "role": "Alex · komşun",
+      "setup": "Elinde kolilerle yeni evine geliyorsun. Kapıda Alex ile tanışıp hangi dairede oturduğunu ve yanındaki arkadaşının kim olduğunu anlat.",
+      "goals": [
+        "Kendini tanıt",
+        "Daireni ve arkadaşını anlat",
+        "Anahtarların sahibini bul"
+      ],
+      "units": [
+        1,
+        2,
+        3,
+        5,
+        6
+      ],
+      "source": "social",
+      "turns": [
+        {
+          "id": "neighbor-1",
+          "npc": "Hi, I’m Alex. I live upstairs. Are you moving in?",
+          "tr": "Merhaba, ben Deniz. Yeni komşunum.",
+          "en": "Hi, I'm Deniz. I'm your new neighbor.",
+          "accepted": [
+            "Hi, I'm Deniz. I'm your new neighbor.",
+            "Hi, I am Deniz. I am your new neighbour."
+          ],
+          "why": "Kendini tanıtırken I’m, kim olduğunu anlatırken your new neighbor kullanılır."
+        },
+        {
+          "id": "neighbor-2",
+          "npc": "Nice to meet you, Deniz. Which flat is yours?",
+          "tr": "Ben ikinci kattaki dairedeyim.",
+          "en": "I'm in the flat on the second floor.",
+          "accepted": [
+            "I'm in the flat on the second floor.",
+            "I am in the apartment on the second floor."
+          ],
+          "why": "Kat için on kullanılır; the second floor belirli bir kattır."
+        },
+        {
+          "id": "neighbor-3",
+          "npc": "And is the person by the door your brother?",
+          "tr": "Hayır, o arkadaşım. Bana yardım ediyor.",
+          "en": "No, he's my friend. He's helping me.",
+          "accepted": [
+            "No, he's my friend. He's helping me.",
+            "No, he is my friend. He is helping me."
+          ],
+          "why": "He özne, yardım edilen kişi olan ben için me kullanılır."
+        },
+        {
+          "id": "neighbor-4",
+          "npc": "These boxes are heavy. Are all of them yours?",
+          "tr": "Şu iki koli benim. Diğerleri onun.",
+          "en": "These two boxes are mine. The others are his.",
+          "accepted": [
+            "These two boxes are mine. The others are his."
+          ],
+          "why": "İsim tekrarlamadan sahiplik belirtmek için mine ve his kullanılır."
+        },
+        {
+          "id": "neighbor-5",
+          "npc": "There are some keys on the stairs. Are they yours?",
+          "tr": "Hayır, benim anahtarlarım çantamda.",
+          "en": "No, my keys are in my bag.",
+          "accepted": [
+            "No, my keys are in my bag."
+          ],
+          "why": "Anahtarlar çoğul olduğu için are; çantanın içinde için in."
+        },
+        {
+          "id": "neighbor-6",
+          "npc": "Ah, they’re mine! Thanks. Do you need the lift?",
+          "tr": "Evet, teşekkürler. Asansör nerede?",
+          "en": "Yes, thanks. Where is the lift?",
+          "accepted": [
+            "Yes, thanks. Where is the lift?",
+            "Yes, thank you. Where is the elevator?"
+          ],
+          "why": "Where is ile bir yerin nerede olduğunu sorarsın."
+        }
+      ]
+    },
+    {
+      "id": "coffee",
+      "title": "Siparişin yanlış geldiğinde",
+      "place": "KÖŞEDEKİ KAFE",
+      "role": "Sam · barista",
+      "setup": "Bir kafede kahve alıyorsun. Süt seçeneğini sor, siparişini ver ve kahvenin sıcak geldiğini fark edince durumu açıkla.",
+      "goals": [
+        "İstediğin içeceği belirt",
+        "Yanlış gelen siparişi açıkla",
+        "Fiyatı sor ve öde"
+      ],
+      "units": [
+        2,
+        4,
+        7,
+        9,
+        10,
+        12
+      ],
+      "source": "coffee-shop",
+      "turns": [
+        {
+          "id": "coffee-1",
+          "npc": "Hi! What are you having today?",
+          "tr": "Bir buzlu latte lütfen.",
+          "en": "An iced latte, please.",
+          "accepted": [
+            "An iced latte, please."
+          ],
+          "why": "Iced ünlü sesle başladığı için an; siparişte bu kısa ifade doğaldır."
+        },
+        {
+          "id": "coffee-2",
+          "npc": "Any milk preferences?",
+          "tr": "Yulaf sütünüz var mı?",
+          "en": "Do you have oat milk?",
+          "accepted": [
+            "Do you have oat milk?",
+            "Is oat milk available?",
+            "Do you offer oat milk?",
+            "Have you got oat milk?"
+          ],
+          "why": "Bir işletmenin sunduğu genel seçenek için Do you have…? kullanılır."
+        },
+        {
+          "id": "coffee-3",
+          "npc": "Yes, we do. Small or large?",
+          "tr": "Küçük boy, şekersiz lütfen.",
+          "en": "A small one, without sugar, please.",
+          "accepted": [
+            "A small one, without sugar, please.",
+            "Small, no sugar, please."
+          ],
+          "why": "One içeceği tekrar etmeden belirtir. Without sugar şekersiz demektir."
+        },
+        {
+          "id": "coffee-4",
+          "npc": "Here’s your latte. Enjoy!",
+          "tr": "Kusura bakmayın, bu sıcak. Benim siparişim buzlu latte.",
+          "en": "Excuse me, this is hot. My order is an iced latte.",
+          "accepted": [
+            "Excuse me, this is hot. My order is an iced latte."
+          ],
+          "why": "This is hot ile elindeki içeceği tanımlarsın; geçmiş zaman kurmadan siparişini açıklayabilirsin."
+        },
+        {
+          "id": "coffee-5",
+          "npc": "Oh, sorry! I’m making your iced latte now.",
+          "tr": "Teşekkürler. Ne kadar?",
+          "en": "Thanks. How much is it?",
+          "accepted": [
+            "Thanks. How much is it?",
+            "Thank you. How much is it?"
+          ],
+          "why": "Fiyat sorarken How much is it kullanılır."
+        },
+        {
+          "id": "coffee-6",
+          "npc": "It’s four pounds. Cash or card?",
+          "tr": "Kartla ödüyorum.",
+          "en": "I'm paying by card.",
+          "accepted": [
+            "I'm paying by card.",
+            "I am paying by card."
+          ],
+          "why": "Şu anki ödeme için I’m paying; kartla ödeme kalıbı by card."
+        }
+      ]
+    },
+    {
+      "id": "grocery",
+      "title": "Markette eksik malzemeyi bul",
+      "place": "MAHALLE MARKETİ",
+      "role": "Jamie · market çalışanı",
+      "setup": "Akşam yemeği için makarna, domates ve süt alıyorsun. Rafları sor, kalmayan ürünün yerine başka birini seç ve kasada poşet durumunu açıkla.",
+      "goals": [
+        "Ürünlerin yerini sor",
+        "Alternatif ürünü seç",
+        "Kasada ihtiyacını belirt"
+      ],
+      "units": [
+        4,
+        5,
+        7,
+        9,
+        12,
+        13
+      ],
+      "source": "supermarket",
+      "turns": [
+        {
+          "id": "grocery-1",
+          "npc": "Hi! Are you looking for something?",
+          "tr": "Makarna nerede?",
+          "en": "Where is the pasta?",
+          "accepted": [
+            "Where is the pasta?"
+          ],
+          "why": "Pasta burada sayılamayan ürün adı; yerini Where is ile sorarsın."
+        },
+        {
+          "id": "grocery-2",
+          "npc": "Aisle three, next to the rice. Anything else?",
+          "tr": "Taze domatesiniz var mı?",
+          "en": "Do you have fresh tomatoes?",
+          "accepted": [
+            "Do you have fresh tomatoes?"
+          ],
+          "why": "Ürün bulunup bulunmadığını Do you have ile sorarsın. Tomatoes çoğuldur."
+        },
+        {
+          "id": "grocery-3",
+          "npc": "Only these small ones today.",
+          "tr": "Bu domatesler ne kadar?",
+          "en": "How much are these tomatoes?",
+          "accepted": [
+            "How much are these tomatoes?"
+          ],
+          "why": "Yakındaki çoğul ürünler için these; çoğul fiyat sorusunda are."
+        },
+        {
+          "id": "grocery-4",
+          "npc": "Two pounds a box. Do you need milk as well?",
+          "tr": "Evet, ama buzdolabında hiç süt yok.",
+          "en": "Yes, but there isn't any milk in the fridge.",
+          "accepted": [
+            "Yes, but there isn't any milk in the fridge."
+          ],
+          "why": "Bir yerde bulunmayan sayılamayan ürün: there isn’t any milk."
+        },
+        {
+          "id": "grocery-5",
+          "npc": "There’s more milk in the fridge by the checkout.",
+          "tr": "Tamam, iki şişe alıyorum.",
+          "en": "OK, I'm taking two bottles.",
+          "accepted": [
+            "OK, I'm taking two bottles."
+          ],
+          "why": "Şu anda verdiğin kararı I’m taking ile söylersin; iki şişe two bottles."
+        },
+        {
+          "id": "grocery-6",
+          "npc": "That’s everything. Do you need a bag?",
+          "tr": "Hayır, kendi çantam var. Teşekkürler.",
+          "en": "No, I have my own bag. Thanks.",
+          "accepted": [
+            "No, I have my own bag. Thanks.",
+            "No, I've got my own bag. Thank you."
+          ],
+          "why": "I have sahipliği belirtir; my own bag kendi çantam demektir."
+        }
+      ]
+    },
+    {
+      "id": "office",
+      "title": "İş arkadaşına durumu anlat",
+      "place": "ORTAK ÇALIŞMA ALANI",
+      "role": "Maya · iş arkadaşın",
+      "setup": "Maya seni ofiste görünce şaşırıyor: genelde evden çalışıyorsun. Bugünün neden farklı olduğunu anlat ve birlikte çalışmak için uygun bir yer bul.",
+      "goals": [
+        "Rutinini anlat",
+        "Bugün ne olduğunu açıkla",
+        "Sessiz bir yer bul"
+      ],
+      "units": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        13
+      ],
+      "source": "office-meeting",
+      "turns": [
+        {
+          "id": "office-1",
+          "npc": "Oh, hi! I don’t usually see you here.",
+          "tr": "Genellikle evden çalışıyorum.",
+          "en": "I usually work from home.",
+          "accepted": [
+            "I usually work from home."
+          ],
+          "why": "Düzenli çalışma alışkanlığı için work; usually ana fiilden önce gelir."
+        },
+        {
+          "id": "office-2",
+          "npc": "So, why are you in the office today?",
+          "tr": "Bugün evde internetim çalışmıyor.",
+          "en": "My internet isn't working at home today.",
+          "accepted": [
+            "My internet isn't working at home today.",
+            "My internet is not working at home today."
+          ],
+          "why": "Geçici olarak şu anda yaşanan sorun için isn’t working kullanılır."
+        },
+        {
+          "id": "office-3",
+          "npc": "That’s annoying. Is your team here too?",
+          "tr": "Hayır, onlar bugün evden çalışıyor.",
+          "en": "No, they're working from home today.",
+          "accepted": [
+            "No, they're working from home today.",
+            "No, they are working from home today."
+          ],
+          "why": "Bugünün geçici durumunu they’re working ile anlatırsın."
+        },
+        {
+          "id": "office-4",
+          "npc": "I see. What time do you normally start?",
+          "tr": "Genellikle dokuzda başlıyorum.",
+          "en": "I usually start at nine.",
+          "accepted": [
+            "I usually start at nine."
+          ],
+          "why": "Rutin için start; saatten önce at gelir."
+        },
+        {
+          "id": "office-5",
+          "npc": "Same here. I’m on a call in ten minutes.",
+          "tr": "Sessiz bir toplantı odası var mı?",
+          "en": "Is there a quiet meeting room?",
+          "accepted": [
+            "Is there a quiet meeting room?"
+          ],
+          "why": "Bir odanın bulunup bulunmadığını Is there a… ile sorarsın."
+        },
+        {
+          "id": "office-6",
+          "npc": "Yes, the one next to the kitchen is free.",
+          "tr": "Harika. Ben de orada çalışıyorum.",
+          "en": "Great. I'm working there too.",
+          "accepted": [
+            "Great. I'm working there too.",
+            "Great. I am working there too."
+          ],
+          "why": "Şu anki çalışma yerini I’m working there ile belirtirsin; too da/ de demektir."
+        }
+      ]
+    },
+    {
+      "id": "bus",
+      "title": "Doğru otobüste misin?",
+      "place": "OTOBÜS DURAĞI",
+      "role": "Lee · durakta bekleyen biri",
+      "setup": "İlk kez şehir merkezine gidiyorsun. 24 numaranın doğru otobüs olup olmadığını ve nerede inmen gerektiğini öğren.",
+      "goals": [
+        "Doğru hattı doğrula",
+        "Durağın yerini öğren",
+        "Varış noktanı netleştir"
+      ],
+      "units": [
+        7,
+        8,
+        9,
+        12,
+        13,
+        14
+      ],
+      "source": "directions",
+      "turns": [
+        {
+          "id": "bus-1",
+          "npc": "Hi. Are you waiting for the 24 as well?",
+          "tr": "Evet. Bu otobüs şehir merkezine gidiyor mu?",
+          "en": "Yes. Does this bus go to the city center?",
+          "accepted": [
+            "Yes. Does this bus go to the city center?",
+            "Yes. Does this bus go to the city centre?"
+          ],
+          "why": "This bus tekil olduğu için Does; ardından fiilin yalın biçimi go gelir."
+        },
+        {
+          "id": "bus-2",
+          "npc": "It does. Where in the center are you going?",
+          "tr": "Tren istasyonuna gidiyorum.",
+          "en": "I'm going to the train station.",
+          "accepted": [
+            "I'm going to the train station.",
+            "I am going to the train station."
+          ],
+          "why": "Bir yere gitmek için go to; şu anki yolculuk için I’m going."
+        },
+        {
+          "id": "bus-3",
+          "npc": "Then you need the stop after the bridge.",
+          "tr": "İstasyon köprünün yanında mı?",
+          "en": "Is the station next to the bridge?",
+          "accepted": [
+            "Is the station next to the bridge?"
+          ],
+          "why": "Next to hemen yanında demektir. Yer sorusunda Is the station… kullanılır."
+        },
+        {
+          "id": "bus-4",
+          "npc": "Yes. There’s a big clock outside.",
+          "tr": "Otobüste bilet alıyor muyuz?",
+          "en": "Do we buy tickets on the bus?",
+          "accepted": [
+            "Do we buy tickets on the bus?",
+            "Do we get tickets on the bus?"
+          ],
+          "why": "İşleyişi sorarken Do we + yalın fiil; otobüste için on the bus."
+        },
+        {
+          "id": "bus-5",
+          "npc": "Yes, from the driver. It’s two pounds.",
+          "tr": "Şoför kart kabul ediyor mu?",
+          "en": "Does the driver take cards?",
+          "accepted": [
+            "Does the driver take cards?",
+            "Does the driver accept cards?"
+          ],
+          "why": "Tekil the driver ile Does; take cards kart kabul etmek demektir."
+        },
+        {
+          "id": "bus-6",
+          "npc": "Train station! Anyone getting off?",
+          "tr": "Ben burada iniyorum.",
+          "en": "I'm getting off here.",
+          "accepted": [
+            "I'm getting off here.",
+            "I am getting off here."
+          ],
+          "why": "Otobüsten inmek get off; şu anki hareket I’m getting off here.",
+          "stage": "Yirmi dakika sonra · otobüste",
+          "speaker": "Otobüs şoförü"
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "title": "Arkadaşını kalabalıkta bul",
+      "place": "TELEFONDA BULUŞMA",
+      "role": "Alex · arkadaşın",
+      "setup": "İstasyonda buluşacaksınız ama birbirinizi göremiyorsunuz. Konumunu, ne giydiğini ve ne yaptığını anlatarak birbirinizi bulun.",
+      "goals": [
+        "Konumunu belirt",
+        "Kendini tarif et",
+        "Arkadaşına yön ver"
+      ],
+      "units": [
+        2,
+        5,
+        10,
+        11,
+        12,
+        13
+      ],
+      "source": "phone-call",
+      "turns": [
+        {
+          "id": "phone-1",
+          "npc": "Hey, I’m at the station. Where are you?",
+          "tr": "Ana girişin dışında bekliyorum.",
+          "en": "I'm waiting outside the main entrance.",
+          "accepted": [
+            "I'm waiting outside the main entrance.",
+            "I am waiting outside the main entrance."
+          ],
+          "why": "Şu anda bekliyorsun: I’m waiting. Outside girişin dışında demektir."
+        },
+        {
+          "id": "phone-2",
+          "npc": "I’m outside too, but I can’t see you.",
+          "tr": "Mavi bir ceket giyiyorum.",
+          "en": "I'm wearing a blue jacket.",
+          "accepted": [
+            "I'm wearing a blue jacket.",
+            "I am wearing a blue jacket."
+          ],
+          "why": "Üzerindeki kıyafeti tarif ederken I’m wearing kullanılır."
+        },
+        {
+          "id": "phone-3",
+          "npc": "There are two entrances. What’s next to you?",
+          "tr": "Yanımda bir kahve dükkânı var.",
+          "en": "There's a coffee shop next to me.",
+          "accepted": [
+            "There's a coffee shop next to me.",
+            "There is a coffee shop next to me."
+          ],
+          "why": "Bir şeyin varlığını there’s ile belirtirsin; next to me yanımda."
+        },
+        {
+          "id": "phone-4",
+          "npc": "Ah, I’m at the other entrance. Are you alone?",
+          "tr": "Hayır, kardeşim de benimle bekliyor.",
+          "en": "No, my brother is waiting with me too.",
+          "accepted": [
+            "No, my brother is waiting with me too."
+          ],
+          "why": "Kardeşin şu anda bekliyor: is waiting. With me benimle demektir."
+        },
+        {
+          "id": "phone-5",
+          "npc": "Okay, I’m walking over now. Are you in a hurry?",
+          "tr": "Evet, trenimiz on dakikaya kalkıyor.",
+          "en": "Yes, our train leaves in ten minutes.",
+          "accepted": [
+            "Yes, our train leaves in ten minutes."
+          ],
+          "why": "Tren tarifeleri için leaves; on dakika sonra için in ten minutes."
+        },
+        {
+          "id": "phone-6",
+          "npc": "I see you! I’m crossing the road.",
+          "tr": "Tamam, seni görüyorum. Buradayız.",
+          "en": "OK, I see you. We're here.",
+          "accepted": [
+            "OK, I see you. We're here.",
+            "Okay, I can see you. We are here."
+          ],
+          "why": "Görme durumunu see ile, bulunduğunuz yeri we’re here ile anlatırsın."
+        }
+      ]
+    },
+    {
+      "id": "home",
+      "title": "Ev arkadaşıyla akşam yemeği",
+      "place": "ORTAK MUTFAK",
+      "role": "Robin · ev arkadaşın",
+      "setup": "İkiniz de işten geldiniz. Buzdolabına bakıp eksikleri belirleyin, kimin ne yapacağını konuşun ve yemek hazırlığını paylaşın.",
+      "goals": [
+        "Evde ne olduğunu kontrol et",
+        "Eşyaların sahibini ayırt et",
+        "Hazırlığı paylaş"
+      ],
+      "units": [
+        5,
+        6,
+        7,
+        8,
+        10,
+        14
+      ],
+      "source": "apartment",
+      "turns": [
+        {
+          "id": "home-1",
+          "npc": "I’m hungry. What’s in the fridge?",
+          "tr": "Biraz makarna var ama hiç domates yok.",
+          "en": "There's some pasta, but there aren't any tomatoes.",
+          "accepted": [
+            "There's some pasta, but there aren't any tomatoes.",
+            "There is some pasta, but there are no tomatoes."
+          ],
+          "why": "Pasta sayılamaz: there’s some. Tomatoes çoğul: there aren’t any."
+        },
+        {
+          "id": "home-2",
+          "npc": "I have some tomatoes in my bag.",
+          "tr": "Harika. Sen genellikle ne pişirirsin?",
+          "en": "Great. What do you usually cook?",
+          "accepted": [
+            "Great. What do you usually cook?"
+          ],
+          "why": "Alışkanlık sorusu What do you usually + fiil biçimindedir."
+        },
+        {
+          "id": "home-3",
+          "npc": "Mostly pasta. Is this pan yours?",
+          "tr": "Hayır, o senin. Benimki lavabonun yanında.",
+          "en": "No, that one's yours. Mine is next to the sink.",
+          "accepted": [
+            "No, that one's yours. Mine is next to the sink."
+          ],
+          "why": "Yours ve mine isim yerine geçer; mine’s yerine mine is kullanılır."
+        },
+        {
+          "id": "home-4",
+          "npc": "Found it. What are you doing with the bread?",
+          "tr": "Onu dilimliyorum. Bize dört dilim lazım.",
+          "en": "I'm slicing it. We need four slices.",
+          "accepted": [
+            "I'm slicing it. We need four slices.",
+            "I am cutting it. We need four slices."
+          ],
+          "why": "Bread yerine it; şu anki iş slicing, ihtiyaç durumu need ile anlatılır."
+        },
+        {
+          "id": "home-5",
+          "npc": "Okay. I’m making the sauce now.",
+          "tr": "Ben de masayı hazırlıyorum.",
+          "en": "I'm setting the table.",
+          "accepted": [
+            "I'm setting the table.",
+            "I am setting the table."
+          ],
+          "why": "Masayı hazırlamak set the table kalıbıdır."
+        },
+        {
+          "id": "home-6",
+          "npc": "Great, dinner’s almost ready. Where are the plates?",
+          "tr": "Dolaptalar, bardakların üstünde.",
+          "en": "They're in the cupboard, above the glasses.",
+          "accepted": [
+            "They're in the cupboard, above the glasses.",
+            "They are in the cabinet, above the glasses."
+          ],
+          "why": "Plates yerine they; dolabın içinde in, bardakların üst tarafında above."
+        }
+      ]
+    },
+    {
+      "id": "shop",
+      "title": "Mağazada doğru bedeni bul",
+      "place": "GİYİM MAĞAZASI",
+      "role": "Taylor · satış danışmanı",
+      "setup": "Bir ceket beğendin ama askıdaki beden küçük. Daha büyük bedeni bul, rengini sor ve fiyat etiketindeki durumu netleştir.",
+      "goals": [
+        "Ürünü ve bedeni belirt",
+        "Renk seçeneğini sor",
+        "Fiyatı ve kartla ödemeyi sor"
+      ],
+      "units": [
+        4,
+        5,
+        6,
+        7,
+        9,
+        12
+      ],
+      "source": "shopping",
+      "turns": [
+        {
+          "id": "shop-1",
+          "npc": "Hi! Are you looking for anything in particular?",
+          "tr": "Bu ceket hoşuma gidiyor ama çok küçük.",
+          "en": "I like this jacket, but it's too small.",
+          "accepted": [
+            "I like this jacket, but it's too small.",
+            "I like this jacket, but it is too small."
+          ],
+          "why": "Yakındaki ürün this jacket; mevcut boyutunu it’s too small ile anlatırsın."
+        },
+        {
+          "id": "shop-2",
+          "npc": "What size do you usually wear?",
+          "tr": "Genellikle medium giyiyorum.",
+          "en": "I usually wear a medium.",
+          "accepted": [
+            "I usually wear a medium.",
+            "I usually wear medium."
+          ],
+          "why": "Genel beden alışkanlığı için usually wear; a medium bir medium beden ürünü belirtir."
+        },
+        {
+          "id": "shop-3",
+          "npc": "This one is a small. There’s a medium over here.",
+          "tr": "Bunun siyahı var mı?",
+          "en": "Do you have this in black?",
+          "accepted": [
+            "Do you have this in black?"
+          ],
+          "why": "Mağazada renk seçeneğini sormanın doğal kalıbı: Do you have this in + renk."
+        },
+        {
+          "id": "shop-4",
+          "npc": "Yes, the black jackets are on that rack.",
+          "tr": "Şu iki ceketin fiyatı aynı mı?",
+          "en": "Are those two jackets the same price?",
+          "accepted": [
+            "Are those two jackets the same price?"
+          ],
+          "why": "Uzakta gösterilen çoğul ürünler those; soru Are ile başlar."
+        },
+        {
+          "id": "shop-5",
+          "npc": "Yes, they’re both forty pounds today.",
+          "tr": "Bu iyi. Bunu alıyorum.",
+          "en": "That's good. I'm taking this one.",
+          "accepted": [
+            "That's good. I'm taking this one.",
+            "Great. I'll take this one."
+          ],
+          "why": "This one ile seçtiğin ceketi belirtirsin; I’m taking satın alma kararını anlatır."
+        },
+        {
+          "id": "shop-6",
+          "npc": "Lovely. The checkout is just over there.",
+          "tr": "Kart kabul ediyor musunuz?",
+          "en": "Do you take cards?",
+          "accepted": [
+            "Do you take cards?",
+            "Do you accept cards?"
+          ],
+          "why": "Genel ödeme seçeneği Do you take cards ile sorulur."
+        }
+      ]
+    },
+    {
+      "id": "hotel",
+      "title": "Otele yerleş ve ihtiyacını sor",
+      "place": "OTEL RESEPSİYONU",
+      "role": "Morgan · resepsiyon görevlisi",
+      "setup": "Otele ulaştın. Rezervasyonunu buldur, kahvaltıyı ve interneti sor, odanın konumunu öğren.",
+      "goals": [
+        "Rezervasyonunu belirt",
+        "Kahvaltı ve Wi-Fi bilgisini al",
+        "Odana giden yolu öğren"
+      ],
+      "units": [
+        2,
+        3,
+        7,
+        9,
+        12,
+        13
+      ],
+      "source": "hotel",
+      "turns": [
+        {
+          "id": "hotel-1",
+          "npc": "Good evening. Do you have a reservation?",
+          "tr": "Evet, Deniz adına bir rezervasyonum var.",
+          "en": "Yes, I have a reservation under the name Deniz.",
+          "accepted": [
+            "Yes, I have a reservation under the name Deniz.",
+            "Yes, I have a booking under the name Deniz."
+          ],
+          "why": "Rezervasyon adına işaret eden kalıp under the name + isimdir."
+        },
+        {
+          "id": "hotel-2",
+          "npc": "Yes, here it is. A single room for two nights.",
+          "tr": "Doğru. Kahvaltı dahil mi?",
+          "en": "That's right. Is breakfast included?",
+          "accepted": [
+            "That's right. Is breakfast included?",
+            "That is right. Is breakfast included?"
+          ],
+          "why": "Dahil olup olmadığını soran kullanışlı kalıp Is … included? olarak öğrenilebilir."
+        },
+        {
+          "id": "hotel-3",
+          "npc": "Yes, it is. It’s in the restaurant downstairs.",
+          "tr": "Kahvaltı saat kaçta başlıyor?",
+          "en": "What time does breakfast start?",
+          "accepted": [
+            "What time does breakfast start?"
+          ],
+          "why": "Tekil breakfast için does; start yalın kalır."
+        },
+        {
+          "id": "hotel-4",
+          "npc": "At seven. You have room 214.",
+          "tr": "Odalarda Wi-Fi var mı?",
+          "en": "Is there Wi-Fi in the rooms?",
+          "accepted": [
+            "Is there Wi-Fi in the rooms?"
+          ],
+          "why": "Bir yerde bir hizmet var mı: Is there…? Odaların içinde: in the rooms."
+        },
+        {
+          "id": "hotel-5",
+          "npc": "Yes, the password is on your key card.",
+          "tr": "Teşekkürler. Odam hangi katta?",
+          "en": "Thanks. What floor is my room on?",
+          "accepted": [
+            "Thanks. What floor is my room on?",
+            "Thank you. Which floor is my room on?"
+          ],
+          "why": "Kat sorarken What floor … on? kalıbı kullanılır."
+        },
+        {
+          "id": "hotel-6",
+          "npc": "The second floor. The lift is behind you.",
+          "tr": "Tamam. Asansörün yanında bir merdiven var mı?",
+          "en": "OK. Are there any stairs next to the lift?",
+          "accepted": [
+            "OK. Are there any stairs next to the lift?",
+            "Okay. Are there stairs next to the elevator?"
+          ],
+          "why": "Stairs çoğuldur; varlık sorusu Are there any… ile kurulur."
+        }
+      ]
+    },
+    {
+      "id": "friends",
+      "title": "Arkadaşlarla planı netleştir",
+      "place": "ARKADAŞ GRUBU",
+      "role": "Chris · arkadaşın",
+      "setup": "Akşam dışarıda yemek için konuşuyorsunuz. Ne yaptığını ve günlük alışkanlıklarını anlatıp uygun mekân ve buluşma yerini belirle.",
+      "goals": [
+        "Şu anki durumunu anlat",
+        "Tercihleri ve alışkanlıkları sor",
+        "Buluşma yerini netleştir"
+      ],
+      "units": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ],
+      "source": "small-talk",
+      "turns": [
+        {
+          "id": "friends-1",
+          "npc": "Hey! A few of us are going out for food. What are you doing?",
+          "tr": "Şu an işten eve yürüyorum.",
+          "en": "I'm walking home from work right now.",
+          "accepted": [
+            "I'm walking home from work right now.",
+            "I am walking home from work now."
+          ],
+          "why": "Şu anki eylem I’m walking; eve yönelirken home önüne to gelmez."
+        },
+        {
+          "id": "friends-2",
+          "npc": "Perfect timing. Are you hungry?",
+          "tr": "Evet. Genellikle bu saatte akşam yemeği yerim.",
+          "en": "Yes. I usually have dinner at this time.",
+          "accepted": [
+            "Yes. I usually have dinner at this time.",
+            "Yes. I usually eat dinner around this time."
+          ],
+          "why": "Alışkanlık usually have dinner; zaman için at this time."
+        },
+        {
+          "id": "friends-3",
+          "npc": "There’s a new place near the station.",
+          "tr": "Orada vejetaryen yemek var mı?",
+          "en": "Do they have vegetarian food there?",
+          "accepted": [
+            "Do they have vegetarian food there?"
+          ],
+          "why": "Mekânı işleten kişiler için they doğal kullanılır; Do they have…?"
+        },
+        {
+          "id": "friends-4",
+          "npc": "Yes, they do. Does your sister eat meat?",
+          "tr": "Hayır, et yemiyor ama balık yiyor.",
+          "en": "No, she doesn't eat meat, but she eats fish.",
+          "accepted": [
+            "No, she doesn't eat meat, but she eats fish.",
+            "No, she does not eat meat, but she eats fish."
+          ],
+          "why": "Doesn’t sonrası eat; olumlu kısımda she eats kullanılır."
+        },
+        {
+          "id": "friends-5",
+          "npc": "Good, there are fish dishes too. Where should we meet?",
+          "tr": "İstasyonun önünde buluşuyoruz.",
+          "en": "We're meeting in front of the station.",
+          "accepted": [
+            "We're meeting in front of the station.",
+            "We are meeting in front of the station."
+          ],
+          "why": "Kararlaştırılan buluşma we’re meeting; önünde için in front of."
+        },
+        {
+          "id": "friends-6",
+          "npc": "Great. I’m leaving home now. Where are you?",
+          "tr": "İstasyona geliyorum. Kardeşim de benimle geliyor.",
+          "en": "I'm coming to the station. My sister is coming with me too.",
+          "accepted": [
+            "I'm coming to the station. My sister is coming with me too.",
+            "I am coming to the station. My sister is coming with me too."
+          ],
+          "why": "Karşı tarafın buluşma yerine yaklaşırken coming doğaldır; with me benimle demektir."
+        }
+      ]
+    }
+  ]
+}
