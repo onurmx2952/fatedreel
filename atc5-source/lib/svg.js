@@ -38,9 +38,17 @@ export const svgPath = points => {
 };
 
 export const getStyle = settingsObj => `text {
-  font: 1em 'Helvetica';
+  font: 600 0.88em 'Helvetica', sans-serif;
+  paint-order: stroke fill;
+  stroke: ${settingsObj.radarColor};
+  stroke-width: 0.14em;
+  stroke-linejoin: round;
   fill: ${settingsObj.foregroundColor};
 }
+.airplane text { font-size: 1em; }
+.airplane text > tspan:first-child { font-weight: 800; }
+.waypoint text { font-size: 0.88em; }
+.rwy text { font-size: 0.72em; }
 .airplane .too-low-text {
   fill: ${settingsObj.dangerColor};
 }
@@ -67,14 +75,14 @@ export const getStyle = settingsObj => `text {
 }
 .sid text {
   text-anchor: middle;
-  fill: ${settingsObj.sidColor};
+  fill: #efd28a;
 }
 .star line {
   stroke: ${settingsObj.starColor}b3;
 }
 .star text {
   text-anchor: middle;
-  fill: ${settingsObj.starColor};
+  fill: #99d4ff;
 }
 .sid.focussed line, .star.focussed line {
   stroke-width: 3;

@@ -36,25 +36,28 @@ class SvgRadar extends Component {
   setRef = el => GameStore.setSvgEl(el);
 
   render() {
+    const innerWidth = window.innerWidth;
+    const innerHeight = window.innerHeight;
+    const barHeight = (document.querySelector('.flight-header')?.offsetHeight || 72) + (document.querySelector('.flight-hint')?.offsetHeight || 36);
+    const height = Math.max(300, innerHeight - barHeight);
+    const width = this.props.timelapse || innerWidth <= 900 ? innerWidth : innerWidth - 250;
+    const renderedHeight = innerWidth <= 900 ? Math.max(300, innerHeight * 0.55) : height;
+    const screenScale = Math.max(0.2, Math.min((width - 30) / config.width, (renderedHeight - 20) / config.height));
+    const fontSize = Math.max(21, SettingsStore.radarFontsize * 1.5) / screenScale;
     const airplanes = GameStore.traffic.map((airplane, i) => (
       <RadarTraffic
         stateEmitter={GameStore}
         key={i}
         index={i}
         airplane={airplane}
+        fontSize={fontSize}
         cmd={this.props.cmd}
       />
     ));
-    const innerWidth = typeof window !== 'undefined' ? window.innerWidth : 800;
-    const innerHeight =
-      typeof window !== 'undefined' ? window.innerHeight : 600;
-    const height = Math.max(300, innerHeight - ((document.querySelector('.flight-header')?.offsetHeight || 72) + (document.querySelector('.flight-hint')?.offsetHeight || 36)));
-    const width = this.props.timelapse ? innerWidth : innerWidth - 250;
     const transformScale =
       `translate(${config.width / 2} ${config.height / 2}) ` +
       `scale(${GameStore.zoom}) ` +
       `translate(-${config.width / 2} -${config.height / 2})`;
-    const fontSize = SettingsStore.radarFontsize;
     const styles = getStyle(SettingsStore);
 
     return (

@@ -50,7 +50,7 @@ class RadarTraffic extends Component {
       GameStore.sepDistanceVialotions[
         communications.getCallsign(airplane, true)
       ];
-    const textHeight = (airplane.outboundWaypoint ? 4 : 3) * 14;
+    const textHeight = (airplane.outboundWaypoint ? 4 : 3) * (this.props.fontSize || 21);
 
     const textLineX =
       airplane.textRotation === 1 || airplane.textRotation === 2
