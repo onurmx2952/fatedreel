@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "flights": 497,
+  "days": [
+    {
+      "day": "2026-11-10",
+      "records": 169
+    },
+    {
+      "day": "2026-11-11",
+      "records": 223
+    },
+    {
+      "day": "2026-11-12",
+      "records": 105
+    }
+  ],
+  "checks": [
+    "entry boundaries",
+    "no duplicates",
+    "departure waiting state",
+    "real flight identity",
+    "1x clock",
+    "save/restore scheduler"
+  ]
+}

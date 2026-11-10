@@ -1,0 +1,146 @@
+{
+  "id": "LTAC",
+  "name": "Ankara Esenboğa · LTAC",
+  "ta": 10,
+  "ga": 0,
+  "commercial": 1,
+  "inboundWaypoints": [
+    "ASTAL",
+    "BAKIR",
+    "GURBU",
+    "HALIL",
+    "HAY",
+    "KUBER"
+  ],
+  "outboundWaypoints": [
+    "ASTAL",
+    "BAKIR",
+    "GURBU",
+    "HALIL",
+    "HAY",
+    "KUBER"
+  ],
+  "waypoints": {
+    "ASTAL": {
+      "x": 660,
+      "y": 615,
+      "class": "intersection"
+    },
+    "BAKIR": {
+      "x": 715,
+      "y": 110,
+      "class": "intersection"
+    },
+    "GURBU": {
+      "x": 970,
+      "y": 440,
+      "class": "intersection"
+    },
+    "HALIL": {
+      "x": 380,
+      "y": 580,
+      "class": "intersection"
+    },
+    "HAY": {
+      "x": 350,
+      "y": 350,
+      "class": "intersection"
+    },
+    "KUBER": {
+      "x": 960,
+      "y": 250,
+      "class": "intersection"
+    },
+    "ANK": {
+      "x": 600,
+      "y": 300,
+      "class": "vor"
+    },
+    "FINAL03": {
+      "x": 570,
+      "y": 245,
+      "class": "intersection"
+    }
+  },
+  "sids": {
+    "ASTAL1D": "03R->ANK->ASTAL",
+    "BAKIR1D": "03R->ANK->BAKIR",
+    "GURBU1D": "03R->ANK->GURBU",
+    "HALIL1D": "03R->ANK->HALIL",
+    "HAY1D": "03R->ANK->HAY",
+    "KUBER1D": "03R->ANK->KUBER"
+  },
+  "stars": {
+    "ASTAL1A": "ASTAL->FINAL03/6000->03L",
+    "BAKIR1A": "BAKIR->FINAL03/6000->03L",
+    "GURBU1A": "GURBU->FINAL03/6000->03L",
+    "HALIL1A": "HALIL->FINAL03/6000->03L",
+    "HAY1A": "HAY->FINAL03/6000->03L",
+    "KUBER1A": "KUBER->FINAL03/6000->03L"
+  },
+  "msa": {
+    "base": [
+      {
+        "dir": 360,
+        "alt": 7000
+      }
+    ],
+    "polygons": []
+  },
+  "airport": {
+    "blacklist": [],
+    "elevation": 3125,
+    "name": "Ankara Esenboğa",
+    "callsign": "LTAC",
+    "x": 0,
+    "y": 0,
+    "class": "intersection",
+    "rwyusage": [
+      {
+        "dir": 360,
+        "rwys": [
+          "03L",
+          "03R"
+        ]
+      }
+    ],
+    "runways": [
+      {
+        "x": -7,
+        "y": 2,
+        "class": "intersection",
+        "length": 11155,
+        "length1": 11155,
+        "length2": 11155,
+        "surface": "asphalt",
+        "size": 150,
+        "hdg1": 32,
+        "hdg2": 212,
+        "labelSpread1": 1.8,
+        "labelSpread2": 1.8,
+        "elevation1": 3100,
+        "elevation2": 3125,
+        "name1": "03L",
+        "name2": "21R"
+      },
+      {
+        "x": 7,
+        "y": -2,
+        "class": "intersection",
+        "length": 12303,
+        "length1": 12303,
+        "length2": 12303,
+        "surface": "asphalt",
+        "size": 150,
+        "hdg1": 32,
+        "hdg2": 212,
+        "labelSpread1": 1.8,
+        "labelSpread2": 1.8,
+        "elevation1": 3100,
+        "elevation2": 3125,
+        "name1": "03R",
+        "name2": "21L"
+      }
+    ]
+  }
+}

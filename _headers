@@ -80,3 +80,9 @@
 
 /o14/*
   Cache-Control: public, max-age=0, must-revalidate
+
+/atc5/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/atc5/*.json
+  Cache-Control: public, max-age=0, must-revalidate
