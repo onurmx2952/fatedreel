@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#211c29">
+<title>Bir Bakış · Animasyon</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#211c29;color:#f8eee4;font-family:system-ui,sans-serif;min-height:100svh;display:grid;place-items:center;padding:clamp(16px,4vw,56px)}main{width:min(1120px,100%)}header{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:20px}h1{font-size:clamp(24px,4vw,38px);font-weight:600;letter-spacing:-.04em;margin:0}header p{color:#c8b5bf;font-size:14px;margin:0}video{display:block;width:100%;aspect-ratio:16/9;background:#342a3b;border-radius:14px;box-shadow:0 20px 70px #0005}footer{display:flex;gap:20px;justify-content:space-between;align-items:center;flex-wrap:wrap;color:#c8b5bf;font-size:14px;margin-top:22px}a{color:#f2d3ae;text-underline-offset:4px}a:hover{color:#fff}a:focus-visible{outline:2px solid #f2d3ae;outline-offset:5px}@media(max-width:500px){header{align-items:start;flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>Bir Bakış</h1><p>5 saniye · 24 FPS · 1080p</p></header>
+<video controls autoplay muted loop playsinline preload="auto" poster="poster.jpg" aria-label="İki çizgi film karakterinin başlarını birbirlerine çevirip baktığı animasyon">
+<source src="animation.mp4" type="video/mp4">
+Tarayıcınız video oynatmayı desteklemiyor. <a href="animation.mp4">Videoyu indirin.</a>
+</video>
+<footer><span>Oynatabilir, duraklatabilir veya tam ekran izleyebilirsiniz.</span><a href="animation.mp4" download>Videoyu indir</a></footer>
+</main>
+</body>
+</html>
