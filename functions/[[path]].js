@@ -18,35 +18,22 @@ export async function onRequest(context) {
   }
 
   const movieId = match[1].toLowerCase();
-  const [templateRes, moviesRes, trailersRes, qualityRes] = await Promise.all([
+  const bucket = Number(movieId.slice(2)) % 64;
+  const [templateRes, dataRes] = await Promise.all([
     fetchAsset(context, '/index.html'),
-    fetchAsset(context, '/movies.json'),
-    fetchAsset(context, '/trailers.json'),
-    fetchAsset(context, '/movie-quality.json')
+    fetchAsset(context, `/movie-data/${bucket}.json`)
   ]);
-
-  if (!templateRes.ok || !moviesRes.ok) {
-    return context.env.ASSETS.fetch(context.request);
+  if (!templateRes.ok || !dataRes.ok) {
+    return new Response('Movie data temporarily unavailable', {status:503});
   }
-
-  const [template, movies, trailers, qualityDoc] = await Promise.all([
-    templateRes.text(),
-    moviesRes.json(),
-    trailersRes.ok ? trailersRes.json() : {},
-    qualityRes.ok ? qualityRes.json() : {}
-  ]);
-
-  const movie = Array.isArray(movies)
-    ? movies.find((item) => String(item?.tt || '').toLowerCase() === movieId)
-    : null;
-
-  if (!movie || !isPublicMovie(movie, qualityDoc)) {
+  const [template, entries] = await Promise.all([templateRes.text(), dataRes.json()]);
+  const entry = entries[movieId];
+  if (!entry || !isPublicMovie(entry.movie, {movies:{[movieId]:entry.quality}})) {
     return movieNotFoundResponse(movieId);
   }
-
   const reviewsRes = await fetchAsset(context, `/reviews/${encodeURIComponent(movieId)}.json`);
   const reviews = reviewsRes.ok ? await reviewsRes.json() : [];
-  const html = renderMovieHtml(template, movie, Array.isArray(reviews) ? reviews : [], trailers?.[movieId], requestUrl.origin);
+  const html = renderMovieHtml(template, entry.movie, Array.isArray(reviews) ? reviews : [], entry.trailer, requestUrl.origin);
 
   return new Response(html, {
     headers: {

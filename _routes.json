@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "description": "Only dynamic APIs, vocabulary proxy and movie pages invoke Functions.",
+  "include": ["/api/*", "/voca", "/voca/*", "/tt*", "/TT*", "/tT*", "/Tt*"],
+  "exclude": []
+}
