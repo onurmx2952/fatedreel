@@ -9,7 +9,9 @@ async function upstream(context, target, ttl=60, extra={}) {
   const cache = caches.default;
   const hit = await cache.match(key);
   if (hit) return hit;
-  const res = await fetch(target, {headers:{Accept:'application/json,text/plain,*/*','User-Agent':'FatedreelGodEye/1.0 (https://fatedreel.com/godeye/)'}, signal:AbortSignal.timeout(18000), redirect:'manual'});
+  const headers={Accept:target.includes('celestrak.org')?'*/*':'application/json','User-Agent':'FatedreelGodEye/1.0 (https://fatedreel.com/godeye/)'};
+  if(target.includes('digitraffic.fi')){headers['Digitraffic-User']='fatedreel-godeye';headers.Accept=target.endsWith('.jpg')?'image/jpeg':'application/json';}
+  const res = await fetch(target, {headers, signal:AbortSignal.timeout(18000), redirect:'manual'});
   if (!res.ok) return json({error:'Upstream temporarily unavailable',status:res.status},res.status===429?429:502,{'Retry-After':'60'});
   const out = new Response(res.body,{headers:{'Content-Type':res.headers.get('content-type')||'application/json','Cache-Control':`public, max-age=${ttl}`,'X-Content-Type-Options':'nosniff',...extra}});
   context.waitUntil(cache.put(key,out.clone()));
