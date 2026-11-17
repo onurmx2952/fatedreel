@@ -41,7 +41,8 @@ export async function onRequest(context) {
       const res=await upstream(context,`https://api.adsb.lol/v2/lat/${lat}/lon/${lon}/dist/250`,15);
       if(!res.ok)return res;
       const feed=await res.json();
-      const now=Number(feed.now)||Date.now()/1000;
+      const rawTime=Number(feed.now)||Date.now()/1000;
+      const now=rawTime>100_000_000_000?rawTime/1000:rawTime;
       const states=(feed.ac||[]).filter(a=>Number.isFinite(a.lat)&&Number.isFinite(a.lon)).map(a=>[
         a.hex,a.flight||'',null,now-(a.seen_pos||0),now-(a.seen||0),a.lon,a.lat,
         Number.isFinite(a.alt_baro)?a.alt_baro*0.3048:null,a.alt_baro==='ground',
