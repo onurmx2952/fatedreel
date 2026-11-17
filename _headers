@@ -1,6 +1,13 @@
 /*
   Referrer-Policy: strict-origin-when-cross-origin
 
+/godeye/*
+  X-Content-Type-Options: nosniff
+  Permissions-Policy: camera=(), microphone=()
+
+/godeye/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /ingsub/*.mjs
   Content-Type: application/javascript; charset=utf-8
 
