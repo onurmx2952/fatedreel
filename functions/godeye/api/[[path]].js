@@ -12,7 +12,7 @@ async function upstream(context, target, ttl=60, extra={}) {
   if (hit) return hit;
   const headers={Accept:target.includes('celestrak.org')?'*/*':'application/json','User-Agent':'FatedreelGodEye/1.0 (https://fatedreel.com/godeye/)'};
   if(target.includes('digitraffic.fi')){headers['Digitraffic-User']='fatedreel-godeye';headers['Accept-Encoding']='gzip';headers.Accept=target.endsWith('.jpg')?'image/jpeg':'application/json';}
-  const res = await fetch(target, {headers, signal:AbortSignal.timeout(18000), redirect:'manual'});
+  const res = await fetch(target, {headers, signal:AbortSignal.timeout(8000), redirect:'manual'});
   if (!res.ok) return json({error:'Upstream temporarily unavailable',status:res.status},res.status===429?429:502,{'Retry-After':'60'});
   const out = new Response(res.body,{headers:{'Content-Type':res.headers.get('content-type')||'application/json','Cache-Control':`public, max-age=${ttl}`,'X-Content-Type-Options':'nosniff',...extra}});
   context.waitUntil(cache.put(key,out.clone()));
@@ -30,13 +30,14 @@ export async function onRequest(context) {
     if(path.startsWith('setup/')) return json({error:'Provider settings are available only in local installations'},404);
     if(path==='military') return await upstream(context,'https://api.adsb.lol/v2/mil',15,{'X-Feed-Source':'adsb.lol'});
     if(path==='flights') {
-      try {
-        const globalFeed=await upstream(context,'https://opensky-network.org/api/states/all',60,{'X-Flight-Source':'OpenSky Network','X-Flight-Coverage':'worldwide upstream snapshot','X-OpenSky-Auth':'anon'});
-        if(globalFeed.ok)return globalFeed;
-      }catch{}
       let lat=Number(url.searchParams.get('lat')??41.01),lon=Number(url.searchParams.get('lon')??28.97);
       if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180) return json({error:'Invalid coordinates'},400);
       lat=Math.round(lat*2)/2;lon=Math.round(lon*2)/2;
+      try {
+        const bounds=new URLSearchParams({lamin:String(Math.max(-90,lat-5)),lomin:String(Math.max(-180,lon-6)),lamax:String(Math.min(90,lat+5)),lomax:String(Math.min(180,lon+6))});
+        const globalFeed=await upstream(context,`https://opensky-network.org/api/states/all?${bounds}`,60,{'X-Flight-Source':'OpenSky Network','X-Flight-Coverage':'regional snapshot around current view','X-OpenSky-Auth':'anon'});
+        if(globalFeed.ok)return globalFeed;
+      }catch{}
       const res=await upstream(context,`https://api.adsb.lol/v2/lat/${lat}/lon/${lon}/dist/250`,15);
       if(!res.ok)return res;
       const feed=await res.json();
