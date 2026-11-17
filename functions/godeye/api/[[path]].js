@@ -1,4 +1,5 @@
 import {normalizeRadioBrowserStation,publicRadioStation} from '../../_lib/godeye/radioBrowser.js';
+import cameraCatalogFallback from '../../_lib/godeye/fintraffic.json';
 // Fixed upstreams only: this is deliberately not an arbitrary URL proxy.
 const groups = new Set('stations visual gps-ops glo-ops galileo geo starlink resource weather planet sar science active'.split(' '));
 const json = (body, status = 200, headers = {}) => Response.json(body, {status, headers: {'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...headers}});
@@ -10,7 +11,7 @@ async function upstream(context, target, ttl=60, extra={}) {
   const hit = await cache.match(key);
   if (hit) return hit;
   const headers={Accept:target.includes('celestrak.org')?'*/*':'application/json','User-Agent':'FatedreelGodEye/1.0 (https://fatedreel.com/godeye/)'};
-  if(target.includes('digitraffic.fi')){headers['Digitraffic-User']='fatedreel-godeye';headers.Accept=target.endsWith('.jpg')?'image/jpeg':'application/json';}
+  if(target.includes('digitraffic.fi')){headers['Digitraffic-User']='fatedreel-godeye';headers['Accept-Encoding']='gzip';headers.Accept=target.endsWith('.jpg')?'image/jpeg':'application/json';}
   const res = await fetch(target, {headers, signal:AbortSignal.timeout(18000), redirect:'manual'});
   if (!res.ok) return json({error:'Upstream temporarily unavailable',status:res.status},res.status===429?429:502,{'Retry-After':'60'});
   const out = new Response(res.body,{headers:{'Content-Type':res.headers.get('content-type')||'application/json','Cache-Control':`public, max-age=${ttl}`,'X-Content-Type-Options':'nosniff',...extra}});
@@ -64,12 +65,12 @@ export async function onRequest(context) {
     }
     if(path==='cctv/health')return json({cameras:[]});
     if(path==='cctv/sources') {
-      const res=await upstream(context,'https://tie.digitraffic.fi/api/weathercam/v1/stations',3600);
-      if(!res.ok)return res;
-      const data=await res.json();const sources=[];
+      let data=cameraCatalogFallback;
+      try{const res=await upstream(context,'https://tie.digitraffic.fi/api/weathercam/v1/stations',3600);if(res.ok)data=await res.json();}catch{}
+      const sources=[];
       for(const f of data.features||[]) {
         const p=f.properties||{},[lon,lat]=f.geometry?.coordinates||[];
-        if(!Number.isFinite(lat)||!Number.isFinite(lon))continue;
+        if(!Number.isFinite(lat)||!Number.isFinite(lon)||p.collectionStatus!=='GATHERING')continue;
         for(const preset of p.presets||[]) {
           if(preset.inCollection!==true||!/^C\d{7}$/.test(preset.id))continue;
           sources.push({id:`fi-${preset.id.toLowerCase()}`,pack:'fintraffic',name:p.name||preset.id,city:'Finland',cityId:'finland',provider:'Fintraffic',lat,lon,headingDeg:0,headingConfidence:'low',pitchDeg:-18,fovDeg:44,rangeM:145,mountHeightM:8,groundElevationM:0,feedType:'image',sourceKind:'fintraffic-open-data',frameRefreshMs:60000,accuracyM:100,poseSource:'estimated',license:'Fintraffic / digitraffic.fi (CC BY 4.0)'});
