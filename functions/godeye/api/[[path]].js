@@ -27,6 +27,10 @@ export async function onRequest(context) {
     if(path.startsWith('setup/')) return json({error:'Provider settings are available only in local installations'},404);
     if(path==='military') return await upstream(context,'https://api.adsb.lol/v2/mil',15,{'X-Feed-Source':'adsb.lol'});
     if(path==='flights') {
+      try {
+        const globalFeed=await upstream(context,'https://opensky-network.org/api/states/all',60,{'X-Flight-Source':'OpenSky Network','X-Flight-Coverage':'worldwide upstream snapshot','X-OpenSky-Auth':'anon'});
+        if(globalFeed.ok)return globalFeed;
+      }catch{}
       let lat=Number(url.searchParams.get('lat')??41.01),lon=Number(url.searchParams.get('lon')??28.97);
       if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180) return json({error:'Invalid coordinates'},400);
       lat=Math.round(lat*2)/2;lon=Math.round(lon*2)/2;
