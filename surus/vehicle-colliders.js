@@ -3,10 +3,18 @@ import * as T from './vendor/three.module.js';
 
 export class RoadColliders{
  constructor(physics,world){this.physics=physics;this.world=world;this.groups=new Map();this.items=new Map();this.matrix=new T.Matrix4();this.p=new T.Vector3();this.q=new T.Quaternion();this.scale=new T.Vector3();
+  for(const mesh of world.junctionRenderer?.meshes||[])this.addMesh(mesh,'asphalt').collisionFilterGroup=1;
   for(const mesh of world.boundaries.filter(x=>x.geometry?.getAttribute('snowMix')))this.addMesh(mesh,'soil');
  }
  addMesh(mesh,surface){const source=mesh.geometry.getAttribute('position').array,indices=mesh.geometry.index.array,center=mesh.geometry.boundingSphere.center;const positions=Array.from(source);for(let i=0;i<positions.length;i+=3){positions[i]-=center.x;positions[i+1]-=center.y;positions[i+2]-=center.z;}const shape=new C.Trimesh(positions,Array.from(indices)),body=new C.Body({mass:0,shape,position:new C.Vec3(center.x,center.y,center.z),collisionFilterGroup:2});body.surface=surface;this.physics.addBody(body);return body;}
- roadTiles(start,end){const bodies=[],count=Math.ceil((end-start)/4);for(let i=0;i<count;i++){const s0=start+(end-start)*i/count,s1=start+(end-start)*(i+1)/count,a=this.world.path.sample(s0),b=this.world.path.sample(s1),p=this.world.path.sample((s0+s1)/2),len=Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z),pitch=Math.atan2(b.y-a.y,Math.hypot(b.x-a.x,b.z-a.z));const body=new C.Body({mass:0,shape:new C.Box(new C.Vec3(3.95,.15,len/2+.025)),position:new C.Vec3(p.x,p.y+.045-.15,p.z),collisionFilterGroup:1});body.quaternion.setFromEuler(-pitch,Math.atan2(p.tx,p.tz),0,'YXZ');body.aabbNeedsUpdate=true;body.surface='asphalt';this.physics.addBody(body);bodies.push(body);}return bodies;}
+ roadTiles(start,end){
+  // One watertight ribbon per chunk: no overlapping box edges under the tires.
+  const vertices=[],indices=[],origin=this.world.path.sample(start);
+  const stations=[start];for(let s=Math.ceil((start+.00001)/2)*2;s<end;s+=2)stations.push(s);stations.push(end);
+  for(const s of stations)for(const side of [-1,1]){const p=this.world.path.point(s,side*3.95);vertices.push(p.x-origin.x,p.y+.045-origin.y,p.z-origin.z);}
+  for(let i=0;i<stations.length-1;i++){const a=i*2;indices.push(a,a+1,a+2,a+1,a+3,a+2);}
+  const body=new C.Body({mass:0,shape:new C.Trimesh(vertices,indices),position:new C.Vec3(origin.x,origin.y,origin.z),collisionFilterGroup:1});body.surface='asphalt';this.physics.addBody(body);return [body];
+ }
  sync(position,station){
   const wanted=new Set();for(const [i,g] of this.world.cache){const mid=this.world.path.sample(Math.min(this.world.path.length,i*160+80));if(Math.hypot(mid.x-position.x,mid.z-position.z)>150&&Math.abs(mid.s-station)>130)continue;wanted.add(i);if(!this.groups.has(i)){const start=i*160,end=Math.min(this.world.path.length,start+160),bodies=this.roadTiles(start,end);for(const mesh of g.children)if(mesh.userData.kind==='photo'&&!mesh.isInstancedMesh)bodies.push(this.addMesh(mesh,mid.snow>.5?'snow':'soil'));this.groups.set(i,bodies);}}
   for(const [i,bodies] of this.groups)if(!wanted.has(i)){for(const body of bodies)this.physics.removeBody(body);this.groups.delete(i);}

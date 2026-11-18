@@ -1,0 +1,247 @@
+{
+  "source": "Google Street View March 2026 panorama direct-link topology, visually checked at all six branch points; widths/heights and sign artwork estimated. Not a complete inventory of roads without panorama coverage.",
+  "junctions": [
+    {
+      "id": 7,
+      "s": 65.669,
+      "side": "left",
+      "label": "Yan yol",
+      "points": [
+        [
+          22.123,
+          -61.769
+        ],
+        [
+          -105.042,
+          -12.524
+        ]
+      ],
+      "sourcePano": "NQvpvDj0vH-XZBm2zkv7HA",
+      "branchPano": "w0ynJ4Gqo4KALxDn0MVfdg",
+      "bearing": 247.5199279785156
+    },
+    {
+      "id": 50,
+      "s": 511.872,
+      "side": "right",
+      "label": "Yan yol",
+      "points": [
+        [
+          132.462,
+          73.04
+        ],
+        [
+          145.571,
+          74.97
+        ],
+        [
+          154.693,
+          79.236
+        ],
+        [
+          164.58,
+          83.999
+        ],
+        [
+          174.933,
+          87.349
+        ],
+        [
+          185.441,
+          89.761
+        ],
+        [
+          195.664,
+          92.271
+        ],
+        [
+          205.624,
+          95.657
+        ]
+      ],
+      "sourcePano": "-sNKzRJkqUjK5JMFJ7Wt0A",
+      "branchPano": "1T73aJrA4KaBOgkO1lhz2g",
+      "bearing": 105.7435989379883
+    },
+    {
+      "id": 312,
+      "s": 3202.767,
+      "side": "right",
+      "label": "Yan yol",
+      "points": [
+        [
+          1681.757,
+          49.485
+        ],
+        [
+          1679.47,
+          36.737
+        ],
+        [
+          1678.163,
+          26.144
+        ],
+        [
+          1677.645,
+          15.595
+        ],
+        [
+          1677.89,
+          4.937
+        ],
+        [
+          1678.993,
+          -9.433
+        ],
+        [
+          1680.362,
+          -23.592
+        ],
+        [
+          1682.178,
+          -34.754
+        ],
+        [
+          1684.844,
+          -45.392
+        ],
+        [
+          1687.163,
+          -55.703
+        ],
+        [
+          1689.51,
+          -66.056
+        ],
+        [
+          1691.667,
+          -76.266
+        ],
+        [
+          1693.22,
+          -86.258
+        ]
+      ],
+      "sourcePano": "RuF4wlyXE6XTRlkkWvCxHA",
+      "branchPano": "kfbD1RYoKLwUUjEfPNuxxg",
+      "bearing": 348.4647521972656
+    },
+    {
+      "id": 848,
+      "s": 8707.885,
+      "side": "right",
+      "label": "Yan yol",
+      "points": [
+        [
+          1709.07,
+          -2912.627
+        ],
+        [
+          1697.207,
+          -2928.879
+        ]
+      ],
+      "sourcePano": "xxKVsyDh8xFZaUBhuCibug",
+      "branchPano": "aKXJFSgZGVgPOknqS4iSgA",
+      "bearing": 342.7037658691406
+    },
+    {
+      "id": 1038,
+      "s": 10685.212,
+      "side": "right",
+      "label": "Yan yol",
+      "points": [
+        [
+          888.977,
+          -4533.289
+        ],
+        [
+          898.341,
+          -4546.071
+        ],
+        [
+          901.854,
+          -4557.002
+        ],
+        [
+          903.345,
+          -4567.346
+        ],
+        [
+          905.345,
+          -4577.383
+        ],
+        [
+          907.445,
+          -4587.29
+        ],
+        [
+          910.082,
+          -4596.728
+        ],
+        [
+          913.212,
+          -4611.807
+        ],
+        [
+          915.746,
+          -4621.598
+        ],
+        [
+          919.387,
+          -4631.068
+        ],
+        [
+          924.435,
+          -4639.996
+        ],
+        [
+          931.015,
+          -4647.722
+        ],
+        [
+          938.181,
+          -4654.58
+        ]
+      ],
+      "sourcePano": "7jCH4gnUSsMbJFyeB18_ew",
+      "branchPano": "yLARtjQRmrTen50rLPHTYg",
+      "bearing": 35.06906509399414
+    },
+    {
+      "id": 1104,
+      "s": 11381.075,
+      "side": "right",
+      "label": "Yan yol",
+      "points": [
+        [
+          857.648,
+          -5217.248
+        ],
+        [
+          868.169,
+          -5212.367
+        ],
+        [
+          874.784,
+          -5207.079
+        ],
+        [
+          884.58,
+          -5205.049
+        ],
+        [
+          894.801,
+          -5203.613
+        ],
+        [
+          904.78,
+          -5201.575
+        ]
+      ],
+      "sourcePano": "0dFme3dHi0GJ4_lva6y8LA",
+      "branchPano": "FBk1wkvtZWYkHAzlGIc0Zg",
+      "bearing": 123.8797225952148
+    }
+  ]
+}

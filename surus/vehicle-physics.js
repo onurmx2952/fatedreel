@@ -3,7 +3,7 @@ import * as C from './vendor/cannon-es.js';
 export function makePhysicsWorld(){
  const world=new C.World({gravity:new C.Vec3(0,-9.81,0)});
  world.broadphase=new C.SAPBroadphase(world);
- world.solver.iterations=8;
+ world.solver.iterations=12;
  world.defaultContactMaterial.friction=.55;
  world.defaultContactMaterial.restitution=.025;
  world.defaultContactMaterial.contactEquationStiffness=1e7;

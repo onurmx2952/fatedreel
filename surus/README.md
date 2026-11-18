@@ -34,9 +34,9 @@ Güzergâh uçlarındaki gökyüzü boşluğunu kapatan zemin etekleri, örnekle
 
 ## Araba fiziği
 
-cannon-es 0.20.0 RaycastVehicle, 1.150 kg dinamik gövde, 9,81 m/s² yerçekimi, dört yay-sönümleyicili tekerlek, motor kuvveti, hava ve yuvarlanma direnci, hıza bağlı direksiyon sınırı. Gaz ve fren lastik normal yükü/tutuş kapasitesiyle sınırlıdır; kar ve toprak daha az tutar. Fizik sabit 30 Hz, görüntü kare hızından ayrı çalışır. Fren impulslu kuvvetleri fizik adımına göre ölçeklenir.
+cannon-es 0.20.0 RaycastVehicle, 1.150 kg dinamik gövde, 9,81 m/s² yerçekimi, dört yay-sönümleyicili tekerlek, motor kuvveti, hava ve yuvarlanma direnci, hıza bağlı direksiyon sınırı. Gaz ve fren lastik normal yükü/tutuş kapasitesiyle sınırlıdır; kar ve toprak daha az tutar. Fizik sabit 60 Hz, görüntü kare hızından ayrı çalışır. Fren impulslu kuvvetleri fizik adımına göre ölçeklenir.
 
-Araç yol rayına kilitlenmez; yoldan çıkabilir, kayabilir ve devrilebilir. Yol çarpışmaları yakın çevrede eğime hizalı 4 m kutularla; yol dışı zemin üçgen meshlerle yaklaşık temsil edilir. Yakın ağaç gövdeleri, kayalar ve tahmini yapı kütleleri katı çarpışma gövdeleridir. İnce dallar ve çalılar için çarpışma yoktur. Asfalt üzerindeyken pahalı gövde/üçgen temasları filtrelenir; yol dışına çıkınca etkinleşir. Bu basitleştirilmiş lastik/süspansiyon modelidir; deformasyon veya ayrıntılı aktarma organı modeli yoktur.
+Araç yol rayına kilitlenmez; yoldan çıkabilir, kayabilir ve devrilebilir. Yol çarpışmaları görsel yolun 2 m istasyonlarını paylaşan, örtüşmeyen kesintisiz üçgen yüzeylerle; yol dışı zemin üçgen meshlerle yaklaşık temsil edilir. Yakın ağaç gövdeleri, kayalar ve tahmini yapı kütleleri katı çarpışma gövdeleridir. İnce dallar ve çalılar için çarpışma yoktur. Asfalt üzerindeyken pahalı gövde/üçgen temasları filtrelenir; yol dışına çıkınca etkinleşir. Bu basitleştirilmiş lastik/süspansiyon modelidir; deformasyon veya ayrıntılı aktarma organı modeli yoktur.
 
 Araç modeli hafif geometrilerden oluşturulmuştur. Gerçek zamanlı gölge yerine basit temas gölgesi vardır. Lisans: vendor/CANNON-LICENSE.txt. Testler: check-car.mjs (gaz/fren/geri vites, direksiyon, yokuş, katı engel, düşük kar tutuşu, kare hızı tutarlılığı); check-car-road.mjs (beş kilometrede dört teker desteği ve sınırlı çarpışma gövdesi sayısı).
 
@@ -45,3 +45,14 @@ Araç modeli hafif geometrilerden oluşturulmuştur. Gerçek zamanlı gölge yer
 Normal grafik varsayılandır; N100/Eko elle seçilebilir. Hızlı direksiyon tepkisi, Ackermann ön teker açıları, ön/arka ayrı fren dağılımı, yay-sönümleyici ayarı ve viraj denge çubukları kullanılır. Akslar ve süspansiyon kolları teker hareketini görsel olarak izler. Yakın navigasyon gerçek araç konumu ve yönüyle döner.
 
 Yol, banket ve arazi ortak 2 m istasyon ızgarasını kullanır; kenar etekleri ve örtüşme boşlukları kapatır. route/signs.json, fotoğraflarda kontrol edilmiş 49 viraj, bozuk yol, viraj dizisi ve sollama yasağı levhasını içerir. Levha konumları, boyutları ve yönleri yaklaşık; tüm gerçek tabelaların eksiksiz envanteri değildir.
+
+
+## 18 Kasım 2026 düzeltmesi
+
+Fizik 60 Hz, araç ve takip kamerası aynı ara değerli gövde pozunu kullanır; tekerleklerin yerel pozu da bu gövdeye taşınır. Üst üste gelen 4 m yol kutuları, yolun gerçek istasyonlarını paylaşan üçgen şeritlerle değiştirildi.
+
+Navigasyon tüm 11,41 km güzergâhı tutar, kalan yolu mavi gösterir; hıza göre ölçeklenir. “Tüm güzergâh” düğmesi kuzey yukarı genel görünümü açar. Kalan süre mevcut hızdan yaklaşık hesaplanır, trafik verisi değildir.
+
+`route/junctions.json`: Mart 2026 panorama arşivinin doğrudan bağlantı grafiğinde bulunan ve fotoğrafları kontrol edilen 6 ayrım: 65,669; 511,872; 3202,767; 8707,885; 10685,212; 11381,075 m. Yan yolların yatay noktaları panorama GPS verisinden; genişlik ve yükseklikleri tahminidir. Yalnız bir komşu noktanın bulunduğu 2 ayrımda görünür yan yol uzantısı yaklaşık 55 m boyunca tahminle uzatılır. Her ayrımın iki yaklaşım yönüne birer tabela eklenir. Bunlar simülasyon için üretilmiş yön levhalarıdır, fotoğraftaki levhaların kopyası değildir. Panorama bağlantısı olmayan bütün tali yolların eksiksiz envanteri henüz doğrulanmamıştır.
+
+Doğrulama: `node surus/tests/check-car.mjs`, `node surus/tests/check-car-road.mjs`, `node surus/tests/check-surus.mjs` (depo kökünden). Altı kesimde gaz altında teker teması / düşey sıçrama, 6 ayrım / 12 levha, navigasyon son noktası ve genel görünüm kontrol edilir.
