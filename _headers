@@ -93,3 +93,12 @@
 
 /atc5/*.json
   Cache-Control: public, max-age=0, must-revalidate
+
+/surus/*.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/surus/*.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+/surus/route/*.json
+  Cache-Control: public, max-age=0, must-revalidate

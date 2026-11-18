@@ -3,7 +3,7 @@ import * as T from './vendor/three.module.js';
 import {RoadPath} from './full-path.js';
 import {RoadWorld} from './world.js?v=20261118a';
 import {PhysicsCar,makePhysicsWorld} from './vehicle-physics.js?v=20261118a';
-import {CarView} from './vehicle-view.js?v=20261118a';
+import {CarView} from './vehicle-view-20261118.js';
 import {RoadColliders} from './vehicle-colliders.js?v=20261118a';
 import {FollowNavigation,nextTurn} from './navigation.js?v=20261118a';
 const $=id=>document.getElementById(id),canvas=$('view');
