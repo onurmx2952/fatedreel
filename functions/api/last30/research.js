@@ -31,9 +31,9 @@ export async function collect(emit,now=Date.now()){
 
  const statuses=[];const results=await Promise.all(jobs.map(async([name,fn])=>{try{const rows=await fn();statuses.push({name,count:rows.length,ok:rows.length>0});emit({type:'source',name,count:rows.length,ok:rows.length>0});return rows;}catch{statuses.push({name,count:0,ok:false});emit({type:'source',name,count:0,ok:false});return [];}}));
 
- const unique=new Map();for(const row of results.flatMap(rows=>rows.slice(0,12))){if(Date.parse(row.date)<now-30*DAY||Date.parse(row.date)>now+DAY)continue;const key=row.title.toLocaleLowerCase().replace(/[^\p{L}\p{N}]/gu,'');if(!unique.has(key))unique.set(key,row);}
+ const balanced=[];for(let i=0;i<12;i++)for(const rows of results)if(rows[i])balanced.push(rows[i]);const unique=new Map();for(const row of balanced){if(Date.parse(row.date)<now-30*DAY||Date.parse(row.date)>now+DAY)continue;const key=row.title.toLocaleLowerCase().replace(/[^\p{L}\p{N}]/gu,'');if(!unique.has(key))unique.set(key,row);}
 
- return {items:[...unique.values()].map((x,i)=>({...x,id:i+1})),statuses};
+ return {items:[...unique.values()].slice(0,120).map((x,i)=>({...x,id:i+1})),statuses};
 
 }
 
