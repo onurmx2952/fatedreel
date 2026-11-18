@@ -7,3 +7,5 @@ Cloudflare Pages Functions, mevcut AI ve PROGRAM_DB bağlarını kullanır. Kayn
 Bu uygulama mvanhorn/last30days-skill keşif yaklaşımının Pages için bağımsız uyarlamasıdır; Python motoru çalıştırılmaz. X/YouTube/TikTok anahtarı veya oturumu kullanılmaz.
 
 Kontroller: node --check last30/app.js; node --check functions/api/last30/research.js; node --test tests/last30.test.mjs
+
+Kapsam yalnızca dünya gündemidir. Türkiye kaynakları ve Türkiye merkezli haberler araştırmaya dahil edilmez.
