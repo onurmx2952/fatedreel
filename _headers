@@ -102,3 +102,6 @@
 
 /surus/route/*.json
   Cache-Control: public, max-age=0, must-revalidate
+
+/last30/*
+  Cache-Control: public, max-age=0, must-revalidate
