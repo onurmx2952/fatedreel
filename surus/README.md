@@ -58,3 +58,5 @@ Navigasyon tüm 11,41 km güzergâhı tutar, kalan yolu mavi gösterir; hıza g�
 Doğrulama: `node surus/tests/check-car.mjs`, `node surus/tests/check-car-road.mjs`, `node surus/tests/check-surus.mjs` (depo kökünden). Altı kesimde gaz altında teker teması / düşey sıçrama, 6 ayrım / uydurma levha bulunmaması, navigasyon son noktası ve genel görünüm kontrol edilir.
 
 Mobil: güvenli ekran kenarları, dinamik ekran yüksekliği, ayrı sol direksiyon / sağ pedal alanları, açılır ayarlar paneli ve küçük yatay ekran düzeni. Aynı anda direksiyon ve gaz dokunuşları pointer capture ile bağımsız tutulur; iptal/odak kaybı kontrolleri bırakır.
+
+Araç oranları: gövde ölçeği 0,88, 0,38 m teker yarıçapı, 2,20 m aks mesafesi ve 1,60 m iz genişliği. Fizik çarpışma gövdesi de küçültüldü. Daha kısa ve sönümlü süspansiyon, ön/arka 2,2/2,45 asfalt tutuşu, hıza ve zemine göre yanal ivme sınırından türeyen direksiyon açısı. Kar/toprak tutuş farkı ve el freniyle kayma korunur. `node surus/tests/check-handling.mjs`: iki yönde 29/50/79 km/sa virajları, teker teması ve sarsıntı sonrası süspansiyonun yatışması.
