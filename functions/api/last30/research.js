@@ -10,7 +10,7 @@ const safeURL=s=>{try{const u=new URL(s);return u.protocol==='https:'?u.href:nul
 
 export function rss(xml,label,now=Date.now()){
 
- return [...xml.matchAll(/<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/gi)].map(m=>({title:tag(m[1],'title'),excerpt:tag(m[1],'description').slice(0,600),url:safeURL(tag(m[1],'link')),date:tag(m[1],'pubDate'),publisher:tag(m[1],'source')||label,platform:'Haber',category:label,score:null,comments:null})).filter(x=>x.url&&x.title&&Date.parse(x.date)>=now-30*DAY&&Date.parse(x.date)<=now+DAY).slice(0,18).map(x=>({...x,date:new Date(x.date).toISOString()}));
+ return [...xml.matchAll(/<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/gi)].map(m=>({title:tag(m[1],'title'),excerpt:tag(m[1],'description').slice(0,120),url:safeURL(tag(m[1],'link')),date:tag(m[1],'pubDate'),publisher:tag(m[1],'source')||label,platform:'Haber',category:label,score:null,comments:null})).filter(x=>x.url&&x.title&&Date.parse(x.date)>=now-30*DAY&&Date.parse(x.date)<=now+DAY).slice(0,12).map(x=>({...x,date:new Date(x.date).toISOString()}));
 
 }
 
@@ -25,13 +25,13 @@ export async function collect(emit,now=Date.now()){
  const direct=[['BBC D\u00fcnya','https://feeds.bbci.co.uk/news/world/rss.xml'],['BBC Ekonomi','https://feeds.bbci.co.uk/news/business/rss.xml'],['BBC Bilim','https://feeds.bbci.co.uk/news/science_and_environment/rss.xml'],['BBC K\u00fclt\u00fcr','https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml'],['BBC Sa\u011fl\u0131k','https://feeds.bbci.co.uk/news/health/rss.xml'],['BBC Spor','https://feeds.bbci.co.uk/sport/rss.xml'],['Guardian D\u00fcnya','https://www.theguardian.com/world/rss'],['TRT T\u00fcrkiye','https://www.trthaber.com/sondakika.rss']];
  for(const [label,url] of direct)jobs.push([label,async()=>rss(await(await get(url)).text(),label,now)]);
 
- jobs.push(['Hacker News',async()=>{const d=await(await get('https://hn.algolia.com/api/v1/search?tags=story&numericFilters='+encodeURIComponent('created_at_i>'+Math.floor((now-30*DAY)/1000)+',points>50')+'&hitsPerPage=40')).json();return d.hits.map(x=>({title:x.title,url:'https://news.ycombinator.com/item?id='+x.objectID,date:x.created_at,publisher:'Hacker News',platform:'Hacker News',category:'Teknoloji',score:x.points,comments:x.num_comments}));}]);
+ jobs.push(['Hacker News',async()=>{const d=await(await get('https://hn.algolia.com/api/v1/search?tags=story&numericFilters='+encodeURIComponent('created_at_i>'+Math.floor((now-30*DAY)/1000)+',points>50')+'&hitsPerPage=24')).json();return d.hits.map(x=>({title:x.title,url:'https://news.ycombinator.com/item?id='+x.objectID,date:x.created_at,publisher:'Hacker News',platform:'Hacker News',category:'Teknoloji',score:x.points,comments:x.num_comments}));}]);
 
  for(const sub of ['all','worldnews','Turkey'])jobs.push(['Reddit · '+sub,async()=>{const d=await(await get('https://www.reddit.com/r/'+sub+'/top.json?t=month&limit=25&raw_json=1')).json();return d.data.children.filter(x=>!x.data.over_18&&!x.data.is_self).map(({data:x})=>({title:x.title,url:'https://www.reddit.com'+x.permalink,date:new Date(x.created_utc*1000).toISOString(),publisher:'r/'+x.subreddit,platform:'Reddit',category:sub==='Turkey'?'Türkiye':'Topluluk',score:x.score,comments:x.num_comments}));}]);
 
  const statuses=[];const results=await Promise.all(jobs.map(async([name,fn])=>{try{const rows=await fn();statuses.push({name,count:rows.length,ok:rows.length>0});emit({type:'source',name,count:rows.length,ok:rows.length>0});return rows;}catch{statuses.push({name,count:0,ok:false});emit({type:'source',name,count:0,ok:false});return [];}}));
 
- const unique=new Map();for(const row of results.flat()){if(Date.parse(row.date)<now-30*DAY||Date.parse(row.date)>now+DAY)continue;const key=row.title.toLocaleLowerCase().replace(/[^\p{L}\p{N}]/gu,'');if(!unique.has(key))unique.set(key,row);}
+ const unique=new Map();for(const row of results.flatMap(rows=>rows.slice(0,12))){if(Date.parse(row.date)<now-30*DAY||Date.parse(row.date)>now+DAY)continue;const key=row.title.toLocaleLowerCase().replace(/[^\p{L}\p{N}]/gu,'');if(!unique.has(key))unique.set(key,row);}
 
  return {items:[...unique.values()].map((x,i)=>({...x,id:i+1})),statuses};
 
