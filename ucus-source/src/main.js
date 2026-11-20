@@ -1,4 +1,5 @@
 // EarthFlight — entry point. Boots Cesium, builds the sim, runs the game loop.
+import { TouchControls, isTouchDevice } from './touchControls.js';
 import { World } from './world.js';
 import { FlightModel } from './flightModel.js';
 import { Aircraft } from './aircraft.js';
@@ -19,7 +20,7 @@ class App {
   constructor() {
     this.settings = loadSettings();
     this.paused = false;
-    this.panelOn = true;
+    this.panelOn = !isTouchDevice;
     this.lastSpawn = null;
     this.fieldElev = 0;
     this._acc = 0;
@@ -69,6 +70,7 @@ class App {
     if (this.settings.invertY) this.input.invertY = true;
 
     this.ui = new UI(this, this.settings);
+    this.touchControls = new TouchControls(this);
 
     // if photoreal tiles can't load (ion token over quota / unauthorized), the
     // World layer falls back on its own — persist + reflect that so reloads don't
@@ -83,6 +85,7 @@ class App {
 
     // apply saved world look
     if (this.settings.quality) this.world.setQuality(this.settings.quality);
+    else if (isTouchDevice) this.world.setQuality('low');
     if (this.settings.time != null) this.world.setTimeOfDay(this.settings.time);
 
     // start audio on the first user gesture
@@ -167,6 +170,7 @@ class App {
     this._last = now;
     dt = Math.min(dt, 0.1);
 
+    this.touchControls?.sync();
     this.world.onFrame();   // render-error decay / quality recovery
     this.world.updateGroundSharpness(this.fm.agl, dt, now); // sharpen photoreal tiles near the ground
 
@@ -587,6 +591,7 @@ class App {
     const googleKey = keys.googleKey || this.settings.googleKey || DEFAULT_GOOGLE_KEY;
     const applied = await this.world.applyWorld(mode, { ionToken, googleKey });
     if (this.settings.quality) this.world.setQuality(this.settings.quality);
+    else if (isTouchDevice) this.world.setQuality('low');
     if (this.settings.time != null) this.world.setTimeOfDay(this.settings.time);
     this.world.resetGroundSample(this.lastSpawn?.airborne ? null : this.fieldElev);
     return applied;

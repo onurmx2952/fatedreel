@@ -253,3 +253,67 @@ body.view-hud .land-readout { top: 16px; }
   .airport-list { grid-template-columns: 1fr; }
   .keys, .help-grid { grid-template-columns: 1fr; }
 }
+/* Tablet cockpit: keep the view clear and controls within two-thumb reach. */
+#touchControls { position:fixed; inset:0; z-index:70; pointer-events:none; user-select:none; -webkit-user-select:none; }
+#touchControls[hidden] { display:none; }
+#touchControls button, #touchControls input, .touch-stick { pointer-events:auto; touch-action:none; -webkit-tap-highlight-color:transparent; }
+#touchControls button { min-height:46px; border:1px solid var(--panel-line); border-radius:12px; background:rgba(14,24,34,.9); color:var(--text); font:600 14px system-ui; transition:background .12s, border-color .12s; }
+#touchControls button:active, #touchControls button.held, #touchControls button[aria-pressed=true] { border-color:var(--accent); background:#164350; color:#fff; }
+.touch-left { position:absolute; bottom:max(18px, env(safe-area-inset-bottom)); left:max(18px, env(safe-area-inset-left)); width:180px; }
+.touch-stick { width:164px; height:164px; margin:auto; border-radius:50%; position:relative; border:1px solid rgba(56,225,255,.45); background:radial-gradient(circle, rgba(25,53,64,.8), rgba(8,15,23,.72)); }
+.touch-stick::before, .touch-stick::after { content:''; position:absolute; background:rgba(138,160,184,.25); }
+.touch-stick::before { left:50%; top:25%; height:50%; width:1px; }
+.touch-stick::after { top:50%; left:25%; width:50%; height:1px; }
+.stick-knob { position:absolute; z-index:1; width:62px; height:62px; left:calc(50% - 31px); top:calc(50% - 31px); border-radius:50%; border:2px solid var(--accent); background:rgba(28,67,80,.95); box-shadow:0 4px 15px #0008; }
+.touch-stick:not(.engaged) .stick-knob { transition:transform .16s ease-out; }
+.stick-up,.stick-down { position:absolute; width:100%; text-align:center; font-size:12px; font-weight:700; color:#c4d9e3; }
+.stick-up { top:10px; } .stick-down { bottom:10px; }
+.rudder-row { margin-top:10px; display:flex; gap:6px; align-items:center; justify-content:space-between; }
+.rudder-row button { width:58px; } .rudder-row span { font-size:11px; color:var(--muted); }
+.touch-right { position:absolute; width:164px; bottom:max(18px, env(safe-area-inset-bottom)); right:max(18px, env(safe-area-inset-right)); padding:12px; border-radius:16px; background:rgba(10,18,27,.88); border:1px solid var(--panel-line); }
+.touch-right label { display:flex; justify-content:space-between; color:var(--accent); font-size:14px; font-weight:700; }
+#touchThrottle { display:block; width:100%; height:54px; margin:8px 0; accent-color:var(--accent); }
+#touchThrottle::-webkit-slider-thumb { width:32px; height:32px; }
+.throttle-presets { display:flex; gap:8px; } .throttle-presets button { flex:1; }
+.touch-brake { width:100%; margin-top:10px; }
+.touch-actions { position:absolute; bottom:max(18px, env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%); width:min(330px, calc(100vw - 410px)); }
+.touch-action-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.touch-hint { display:block; text-align:center; color:#d3e2eb; font-size:12px; margin-bottom:10px; text-shadow:0 1px 4px #000; }
+.touch-device { overscroll-behavior:none; }
+.touch-device .toolbar { top:env(safe-area-inset-top); height:56px; padding-left:max(12px, env(safe-area-inset-left)); padding-right:max(12px, env(safe-area-inset-right)); }
+.touch-device .tb-btn { width:46px; height:46px; }
+.touch-device .tb-coords { display:none; }
+.touch-device .hud-corner { top:calc(68px + env(safe-area-inset-top)); }
+.touch-device .hud-wx { top:calc(207px + env(safe-area-inset-top)); }
+.touch-device .hud-bottom { bottom:260px; width:max-content; max-width:90vw; }
+.touch-device .panel { bottom:270px; max-width:94vw; gap:4px; padding:8px; }
+.touch-device .gauge { width:clamp(55px, 8vw, 80px); height:clamp(55px, 8vw, 80px); }
+.touch-device .throttle-quad { display:none; }
+.touch-device .menu-card { width:min(680px, 94vw); max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+.touch-device .menu button, .touch-device .help button { min-height:46px; }
+.touch-device input,.touch-device select { font-size:16px; min-height:44px; }
+.touch-device .menu-body, .touch-device .help-card { -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
+.touch-help { grid-column:1 / -1; font-size:16px; line-height:1.5; color:var(--text); padding-bottom:14px; border-bottom:1px solid var(--panel-line); }
+.touch-help p { margin:8px 0; }
+.touch-device .cesium-widget-credits { display:block !important; bottom:252px !important; max-width:70%; }
+.touch-device .hud-dest { top:calc(60px + env(safe-area-inset-top)); max-width:50vw; overflow:hidden; text-overflow:ellipsis; }
+@media (max-width:600px) {
+  .touch-left { width:140px; left:10px; } .touch-stick { width:132px; height:132px; }
+  .touch-right { width:134px; right:10px; padding:8px; }
+  .touch-actions { width:calc(100vw - 310px); min-width:64px; }
+  .touch-action-grid { grid-template-columns:1fr; gap:4px; }
+  #touchControls .touch-action-grid button { min-height:34px; font-size:10px; }
+  .touch-hint { display:none; }
+  .touch-device .hud-bottom { display:none; }
+  .touch-device .tb-title { font-size:14px; }
+  .touch-device .hud-dest { top:250px; max-width:90vw; }
+}
+@media (prefers-reduced-motion:reduce) { #touchControls * { transition:none !important; } }
+.touch-device #helpGrid > :not(.touch-help), .touch-device #help .hint { display:none; }
+.touch-device .help-card { max-height:calc(100dvh - 32px); overflow-y:auto; }
+.touch-device .cesium-viewer-bottom { bottom:250px; left:12px; }
+#touchThrottle { -webkit-appearance:none; appearance:none; background:transparent; }
+#touchThrottle::-webkit-slider-runnable-track { height:8px; background:#53727f; border-radius:4px; }
+#touchThrottle::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:32px; height:32px; margin-top:-12px; border-radius:50%; border:2px solid #d6f8ff; background:#38e1ff; }
+#touchThrottle::-moz-range-track { height:8px; background:#53727f; border-radius:4px; }
+#touchThrottle::-moz-range-thumb { width:28px; height:28px; border-radius:50%; border:2px solid #d6f8ff; background:#38e1ff; }

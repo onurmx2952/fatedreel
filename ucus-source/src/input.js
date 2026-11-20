@@ -11,6 +11,7 @@ export class Input {
                                      //   onThrottleSet(v), onCamera, onAutopilot, onPanel,
                                      //   onReset, onMenu, onHelp, onBrake(bool) }
     this.keys = new Set();
+    this.touch = { pitch: 0, roll: 0, yaw: 0 };
     this.cur = { pitch: 0, roll: 0, yaw: 0 };
     this.sensitivity = 1;
     this.invertY = false;
@@ -80,7 +81,7 @@ export class Input {
   // Called every frame. dt seconds.
   update(dt) {
     // ---- keyboard analog targets ----
-    let tRoll = 0, tPitch = 0, tYaw = 0;
+    let tRoll = this.touch.roll, tPitch = this.touch.pitch, tYaw = this.touch.yaw;
     if (this._has('a', 'ArrowLeft')) tRoll -= 1;
     if (this._has('d', 'ArrowRight')) tRoll += 1;
     if (this._has('w', 'ArrowUp')) tPitch -= 1;     // push: nose down
