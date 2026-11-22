@@ -16,3 +16,7 @@ Birinci şahıs serbest yürüyüş, sürükleyerek bakış, WASD/ok tuşları v
 İlerleme `everest-v1` anahtarıyla tarayıcının yerel depolamasında tutulur. Depolama engellenirse uyarı gösterilir ve yürüyüş oturum içinde sürer. Yenileme sonrası yürüyüş kendiliğinden başlamaz. Işınlanma enerji veya yürünen mesafeyi artırmaz. Fiziksel iPhone/iPad cihaz testi yapılmadı; responsive arayüz tarayıcıda kontrol edildi.
 
 Gerçek sefer planlaması veya navigasyon için uygun değildir.
+
+## Çizim sınırı
+
+Arazi örnekleri göz hizası için daha ince bir ağa enterpole edilir; bu işlem yeni coğrafi ayrıntı üretmez. Cesium 1.142'nin quadtree rafinasyonu 15. seviyede sınırlandırılır. Motorun normal geometrik hata ve etek yüksekliği hesapları korunur; bunları sıfırlamak uydu seçimini ve arazi parçası birleşimlerini bozabilir. Kamera, hem yüklenmiş yükseklik örneğini hem ekranda çizilen araziye aşağı yönlü ışın kesişimini kontrol eder. Cesium sürümü değiştirilirse bu sınırlandırmanın yeniden doğrulanması gerekir.

@@ -50,7 +50,14 @@ function camera(){
  if(!viewer||overhead)return;
  // Camera eye and terrain mesh use the same DEM; a small clearance covers mesh interpolation.
  const rendered=viewer.scene.globe.getHeight(Cesium.Cartographic.fromDegrees(pos.lon,pos.lat));
- const ground=Math.max(height(pos.lon,pos.lat),Number.isFinite(rendered)?rendered:-10000);
+ // getHeight can describe a loaded child while its coarser parent is still drawn.
+ // Pick the actual visible mesh too, so LOD transitions cannot put the eye below it.
+ const origin=Cesium.Cartesian3.fromDegrees(pos.lon,pos.lat,20000);
+ const target=Cesium.Cartesian3.fromDegrees(pos.lon,pos.lat,0);
+ const direction=Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(target,origin,new Cesium.Cartesian3()),new Cesium.Cartesian3());
+ const hit=viewer.scene.globe.pick(new Cesium.Ray(origin,direction),viewer.scene);
+ const visible=hit?Cesium.Cartographic.fromCartesian(hit).height:-10000;
+ const ground=Math.max(height(pos.lon,pos.lat),Number.isFinite(rendered)?rendered:-10000,visible);
  viewer.camera.setView({destination:Cesium.Cartesian3.fromDegrees(pos.lon,pos.lat,ground+3.2),orientation:{heading:pos.heading,pitch:pos.pitch,roll:0}});
 }
 function setWalking(value){auto=value;resting=false;$('rest').textContent='Mola ver';$('walk').textContent=auto?'Yürüyüşü durdur':'Yürüyüşe başla';$('walk').classList.toggle('primary',!auto)}
@@ -171,15 +178,18 @@ async function init(){
    return a;
   };
   const terrain=new Cesium.CustomHeightmapTerrainProvider({width:65,height:65,tilingScheme:scheme,credit:'Mapzen Terrain Tiles · SRTM / AWS Open Data',callback:terrainTile});
-  // The source is ~30 m. Stop subdividing at its useful resolution, especially at eye level.
+  // Interpolate the source only to a bounded eye-level mesh. Preserve normal error/skirt
+  // calculations: zeroing geometric error breaks imagery selection and opens tile seams.
   const requestGeometry=terrain.requestTileGeometry.bind(terrain);
-  terrain.requestTileGeometry=(x,y,level,request)=>level>=13?Promise.resolve(new Cesium.HeightmapTerrainData({buffer:terrainTile(x,y,level),width:65,height:65,childTileMask:0})):requestGeometry(x,y,level,request);
-  terrain.getTileDataAvailable=(x,y,level)=>level<=13;
-  const geometricError=terrain.getLevelMaximumGeometricError.bind(terrain);
-  // A positive epsilon also keeps Cesium's logarithmic imagery LOD finite.
-  terrain.getLevelMaximumGeometricError=level=>level>=13?.0001:geometricError(level);
+  terrain.requestTileGeometry=(x,y,level,request)=>level>=15?Promise.resolve(new Cesium.HeightmapTerrainData({buffer:terrainTile(x,y,level),width:65,height:65,childTileMask:0})):requestGeometry(x,y,level,request);
+  terrain.getTileDataAvailable=(x,y,level)=>level<=15;
   const imagery=new Cesium.UrlTemplateImageryProvider({url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',maximumLevel:17,credit:'Imagery © Esri, Maxar, Earthstar Geographics and contributors'});
   viewer=new Cesium.Viewer('world',{terrainProvider:terrain,baseLayer:new Cesium.ImageryLayer(imagery),animation:false,timeline:false,baseLayerPicker:false,geocoder:false,homeButton:false,sceneModePicker:false,navigationHelpButton:false,fullscreenButton:false,selectionIndicator:false,infoBox:false,scene3DOnly:true,skyBox:false,contextOptions:{webgl:{alpha:false}},shadows:false});
+  // Cesium 1.142 is pinned at /ucus/cesium. Its quadtree would otherwise upsample
+  // unavailable children indefinitely at walking height. Bound refinement directly.
+  const surfaceProvider=viewer.scene.globe._surface._tileProvider;
+  const canRefine=surfaceProvider.canRefine.bind(surfaceProvider);
+  surfaceProvider.canRefine=tile=>tile.level<15&&canRefine(tile);
   viewer.targetFrameRate=30;viewer.resolutionScale=Math.min(window.devicePixelRatio||1,1.25)/(window.devicePixelRatio||1);viewer.scene.globe.maximumScreenSpaceError=4;viewer.scene.globe.tileCacheSize=100;viewer.scene.globe.depthTestAgainstTerrain=true;viewer.scene.globe.enableLighting=false;
   viewer.scene.backgroundColor=Cesium.Color.fromCssColorString('#819ba7');viewer.scene.globe.showGroundAtmosphere=true;
   viewer.clock.currentTime=Cesium.JulianDate.fromIso8601('2026-05-01T04:00:00Z');
