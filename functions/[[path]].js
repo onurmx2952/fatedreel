@@ -1,9 +1,11 @@
 import {isLearningApp,acceptsLearningKey} from './_lib/learning-apps.js';
+import {pocketEndpoint} from './_lib/pocket-endpoint.js';
 const MOVIE_PATH_PATTERN = /^\/(tt\d{6,12})\/?$/i;
 const SITE_DESCRIPTION = 'Roll through hand-picked movies, reviews, scenes, trailers, and IMDb links.';
 
 export async function onRequest(context) {
   const requestUrl = new URL(context.request.url);
+  if (requestUrl.pathname === '/api/pocket-tts/endpoint') return pocketEndpoint(context);
 
   if (requestUrl.pathname.startsWith('/api/learning/')) return handleLearningApi(context, requestUrl);
 
