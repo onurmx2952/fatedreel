@@ -136,12 +136,29 @@
     L.control.zoom({position:'topright'}).remove();
     map.zoomControl.setPosition('bottomright');
 
-    const route=[
+    const waypoints=[
       [39.9198,32.8241],[39.9214,32.8270],[39.9238,32.8291],[39.9262,32.8318],
       [39.9278,32.8346],[39.9296,32.8375],[39.9321,32.8392],[39.9342,32.8425],
       [39.9360,32.8451],[39.9384,32.8472]
     ];
-    L.polyline(route,{color:'#b7ff3c',weight:2,opacity:.55,dashArray:'7 9'}).addTo(map);
+    let route=waypoints;
+    const routeGuide=L.polyline(route,{color:'#b7ff3c',weight:2,opacity:.55,dashArray:'7 9'}).addTo(map);
+    async function loadRoadRoute(){
+      const coordinates=waypoints.map(p=>p[1]+','+p[0]).join(';');
+      try{
+        const response=await fetch('https://router.project-osrm.org/route/v1/driving/'+coordinates+'?overview=full&geometries=geojson');
+        const data=await response.json();
+        if(data.code==='Ok'&&data.routes?.[0]){
+          route=data.routes[0].geometry.coordinates.map(c=>[c[1],c[0]]);
+          routeGuide.setLatLngs(route);
+          vehicle.setLatLng(route[0]);
+          document.querySelector('.mission p').textContent='Hedefi sokak ağı üzerinde takip et';
+        }
+      }catch(error){
+        document.querySelector('.mission p').textContent='Yerel rota kullanılıyor';
+      }
+    }
+    loadRoadRoute();
     const routeLayer=L.polyline([], {color:'#67dce2',weight:3,opacity:.9}).addTo(map);
 
     const droneIcon=L.divIcon({className:'',html:'<div class="drone-marker"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="#b7ff3c" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="#b7ff3c"/></svg></div>',iconSize:[38,38],iconAnchor:[19,19]});
@@ -150,7 +167,7 @@
     const vehicle=L.marker(route[0],{icon:vehicleIcon,zIndexOffset:900}).addTo(map);
     vehicle.bindTooltip('HEDEF // V-204',{permanent:false,direction:'top',className:'route-label',offset:[0,-8]});
 
-    let running=false,following=true,segment=0,fraction=0,last=performance.now();
+    let running=false,following=true,last=performance.now();
     let battery=96,score=0,elapsed=0;
     function lerp(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t]}
     function haversine(a,b){
@@ -162,8 +179,9 @@
       const dt=Math.min((now-last)/1000,.05);last=now;
       if(running){
         elapsed+=dt;
-        fraction+=dt*.055;
-        if(fraction>=1){fraction=0;segment=(segment+1)% (route.length-1)}
+        const routeProgress=Math.min(elapsed/28,1)*(route.length-1);
+        const segment=Math.min(Math.floor(routeProgress),route.length-2);
+        const fraction=routeProgress-segment;
         const pos=lerp(route[segment],route[segment+1],fraction);
         vehicle.setLatLng(pos);
         routeLayer.setLatLngs(route.slice(0,segment+1).concat([pos]));
@@ -188,7 +206,7 @@
 
     document.getElementById('startBtn').onclick=e=>{
       if(!running){
-        if(elapsed>=28){elapsed=0;segment=0;fraction=0;battery=96;routeLayer.setLatLngs([])}
+        if(elapsed>=28){elapsed=0;battery=96;routeLayer.setLatLngs([]);vehicle.setLatLng(route[0])}
         running=true;e.target.textContent='GÖREVDEVAM EDİYOR';
       }
     };
