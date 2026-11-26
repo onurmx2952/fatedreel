@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>DRONE / Ankara Takip Operasyonu</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    :root {
+      --ink:#e9f0ed; --muted:#91a09a; --panel:rgba(10,16,14,.92);
+      --lime:#b7ff3c; --cyan:#67dce2; --line:rgba(230,242,237,.12);
+    }
+    *{box-sizing:border-box}
+    html,body,#map{width:100%;height:100%;margin:0}
+    body{overflow:hidden;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:#111;color:var(--ink)}
+    #map{filter:saturate(.72) contrast(1.08) brightness(.78)}
+    .leaflet-control-attribution{background:rgba(8,12,11,.7)!important;color:#91a09a!important;font-size:9px}
+    .leaflet-control-attribution a{color:#bdcac5!important}
+    .leaflet-bar a{background:#111816;color:#e9f0ed;border-color:rgba(255,255,255,.12)}
+
+    .hud{position:fixed;z-index:500;pointer-events:none}
+    .topbar{left:18px;right:18px;top:18px;height:58px;display:flex;align-items:flex-start;justify-content:space-between}
+    .brand{pointer-events:auto;display:flex;align-items:center;gap:11px;height:52px;padding:7px 13px 7px 8px;background:var(--panel);border:1px solid var(--line);border-radius:5px;backdrop-filter:blur(12px)}
+    .brand-mark{width:36px;height:36px;border:1px solid var(--lime);border-radius:3px;display:grid;place-items:center;color:var(--lime);font-weight:900;font-size:14px}
+    .brand-name{font-size:12px;font-weight:800;letter-spacing:.16em}
+    .brand-sub{margin-top:3px;font-size:9px;color:var(--muted);letter-spacing:.12em}
+    .live{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;margin-top:10px;background:var(--panel);border:1px solid var(--line);border-radius:3px;font-size:10px;letter-spacing:.12em}
+    .live i{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
+
+    .left-panel{left:18px;bottom:18px;width:270px;pointer-events:auto}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:5px;backdrop-filter:blur(14px)}
+    .mission{padding:14px}
+    .eyebrow{color:var(--lime);font-size:9px;font-weight:800;letter-spacing:.16em}
+    .mission h1{margin:7px 0 4px;font-size:16px;font-weight:750;letter-spacing:.02em}
+    .mission p{margin:0;color:var(--muted);font-size:10px}
+    .stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:12px -14px -14px;border-top:1px solid var(--line)}
+    .stat{padding:11px 14px;border-right:1px solid var(--line)}
+    .stat:nth-child(2){border-right:0}
+    .stat label{display:block;color:var(--muted);font-size:8px;letter-spacing:.12em;margin-bottom:5px}
+    .stat strong{font-size:13px;font-variant-numeric:tabular-nums}
+    .progress{height:3px;background:rgba(255,255,255,.08);margin:12px 0 0}
+    .progress b{display:block;height:100%;width:0;background:var(--lime);box-shadow:0 0 8px rgba(183,255,60,.6)}
+
+    .controls{margin-top:8px;padding:8px;display:flex;gap:7px}
+    button{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);height:36px;border-radius:3px;font-size:10px;font-weight:800;letter-spacing:.08em;cursor:pointer}
+    button.primary{flex:1;background:var(--lime);color:#10140e;border-color:var(--lime)}
+    button.icon{width:36px;font-size:16px}
+    button:hover{filter:brightness(1.12)}
+
+    .right-panel{right:18px;top:88px;width:188px}
+    .data-box{padding:12px}
+    .row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:9px;color:var(--muted)}
+    .row:last-child{border:0}
+    .row strong{color:var(--ink);font-size:10px;font-variant-numeric:tabular-nums}
+    .bar{width:42px;height:3px;background:rgba(255,255,255,.09);margin-left:8px}
+    .bar i{display:block;height:100%;background:var(--cyan)}
+    .value{display:flex;align-items:center}
+
+    .layer-switch{right:18px;bottom:18px;display:flex;pointer-events:auto}
+    .layer-switch button{height:32px;padding:0 10px;border-radius:0;background:var(--panel)}
+    .layer-switch button:first-child{border-radius:3px 0 0 3px}
+    .layer-switch button:last-child{border-radius:0 3px 3px 0}
+    .layer-switch button.active{background:var(--lime);color:#10140e;border-color:var(--lime)}
+
+    .drone-marker{width:38px;height:38px;border:1px solid var(--lime);border-radius:50%;display:grid;place-items:center;background:rgba(183,255,60,.12);box-shadow:0 0 18px rgba(183,255,60,.38)}
+    .drone-marker:before,.drone-marker:after{content:"";position:absolute;border:1px solid rgba(183,255,60,.28);border-radius:50%;inset:-8px}
+    .drone-marker:after{inset:-16px;opacity:.45}
+    .drone-marker svg{position:relative;z-index:2}
+    .vehicle-marker{width:14px;height:14px;border:2px solid #fff;border-radius:50%;background:#f0b64b;box-shadow:0 0 12px #f0b64b}
+    .route-label{background:rgba(10,16,14,.86)!important;border:1px solid rgba(183,255,60,.25)!important;color:#cdd7d2!important;border-radius:2px!important;font-size:8px!important;padding:3px 5px!important}
+
+    .crosshair{position:fixed;z-index:499;width:24px;height:24px;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:.55}
+    .crosshair:before,.crosshair:after{content:"";position:absolute;background:rgba(233,240,237,.65)}
+    .crosshair:before{width:24px;height:1px;top:12px}
+    .crosshair:after{height:24px;width:1px;left:12px}
+
+    @media(max-width:700px){
+      .topbar{left:10px;right:10px;top:10px}.brand-sub{display:none}
+      .right-panel{display:none}.left-panel{left:10px;right:10px;bottom:10px;width:auto}
+      .mission{padding:10px}.mission h1{font-size:14px}.stats{margin:8px -10px -10px}
+      .layer-switch{right:10px;bottom:174px}
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="crosshair"></div>
+
+  <header class="hud topbar">
+    <div class="brand">
+      <div class="brand-mark">D1</div>
+      <div><div class="brand-name">FATEDREEL // DRONE</div><div class="brand-sub">ANKARA SECTOR CONTROL</div></div>
+    </div>
+    <div class="live"><i></i><span id="clock">LIVE 22:58:29</span></div>
+  </header>
+
+  <aside class="hud left-panel">
+    <section class="panel mission">
+      <div class="eyebrow">MISSION 01 // ACTIVE</div>
+      <h1>ARAÇ TAKİP OPERASYONU</h1>
+      <p>Hedefi sınırlı görüş alanında tut</p>
+      <div class="progress"><b id="progress"></b></div>
+      <div class="stats">
+        <div class="stat"><label>HEDEF MESAFESİ</label><strong id="distance">-- m</strong></div>
+        <div class="stat"><label>TAKİP SKORU</label><strong id="score">0%</strong></div>
+      </div>
+    </section>
+    <div class="panel controls">
+      <button class="primary" id="startBtn">BAŞLAT</button>
+      <button class="icon" id="followBtn" title="Takip modu">◎</button>
+      <button class="icon" id="recenterBtn" title="Ortala">⌖</button>
+    </div>
+  </aside>
+
+  <aside class="hud right-panel panel data-box">
+    <div class="eyebrow" style="margin-bottom:5px">DRONE TELEMETRİ</div>
+    <div class="row"><span>PİL</span><div class="value"><strong id="battery">96%</strong><div class="bar"><i id="batteryBar" style="width:96%"></i></div></div></div>
+    <div class="row"><span>SINYAL</span><div class="value"><strong id="signal">92%</strong><div class="bar"><i id="signalBar" style="width:92%"></i></div></div></div>
+    <div class="row"><span>YÜKSEKLİK</span><strong id="altitude">142 m</strong></div>
+    <div class="row"><span>RÜZGÂR</span><strong id="wind">3.2 kn</strong></div>
+    <div class="row"><span>KONUM</span><strong>39.93N</strong></div>
+  </aside>
+
+  <div class="hud layer-switch">
+    <button class="active" data-layer="satellite">UYDU</button>
+    <button data-layer="streets">HARİTA</button>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const ankara=[39.925,32.836];
+    const map=L.map('map',{zoomControl:true,attributionControl:true,minZoom:12,maxZoom:19}).setView(ankara,14);
+    const satellite=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Esri, Maxar, Earthstar Geographics'}).addTo(map);
+    const streets=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'} );
+    L.control.zoom({position:'topright'}).remove();
+    map.zoomControl.setPosition('bottomright');
+
+    const route=[
+      [39.919835,32.824256],[39.919086,32.823970],[39.917803,32.824541],[39.917433,32.824498],[39.917320,32.824455],[39.917195,32.824611],[39.917228,32.824771],[39.917235,32.825084],[39.917232,32.825732],[39.916987,32.827784],[39.916966,32.828184],[39.917091,32.828448],[39.917435,32.828184],[39.919508,32.827170],[39.920908,32.826617],[39.922328,32.827689],[39.922630,32.825956],[39.923443,32.826705],[39.923752,32.828881],[39.924897,32.830299],[39.926909,32.831703],[39.925294,32.832442],[39.923289,32.833565],[39.923931,32.833351],[39.929303,32.830937],[39.929553,32.831251],[39.929996,32.831581],[39.930608,32.831777],[39.930706,32.831854],[39.930674,32.832004],[39.930530,32.832144],[39.930447,32.832344],[39.929903,32.832744],[39.929404,32.832884],[39.929239,32.832980],[39.928867,32.833647],[39.928509,32.833669],[39.928009,32.833925],[39.927653,32.834475],[39.927651,32.834580],[39.927616,32.834709],[39.927484,32.834966],[39.927053,32.835467],[39.926995,32.835698],[39.926704,32.836508],[39.926559,32.837123],[39.926392,32.837935],[39.926432,32.837999],[39.926698,32.837818],[39.927096,32.837690],[39.927363,32.837485],[39.927385,32.837283],[39.927495,32.836546],[39.927930,32.835749],[39.928253,32.835363],[39.928405,32.835402],[39.928566,32.835816],[39.928754,32.836078],[39.929002,32.836242],[39.929409,32.836260],[39.929469,32.836599],[39.929754,32.836859],[39.930044,32.837028],[39.930311,32.837159],[39.930407,32.837190],[39.930169,32.837105],[39.929851,32.836902],[39.929715,32.836839],[39.929455,32.836561],[39.929459,32.836250],[39.929640,32.836168],[39.929800,32.836018],[39.929928,32.835817],[39.930057,32.835433],[39.930127,32.835255],[39.930623,32.836197],[39.930948,32.836715],[39.931327,32.837121],[39.931484,32.837535],[39.930607,32.839919],[39.931643,32.840233],[39.932880,32.838404],[39.932960,32.837651],[39.934907,32.837445],[39.935462,32.837687],[39.936119,32.838298],[39.936093,32.838890],[39.936163,32.839440],[39.935767,32.840543],[39.934647,32.841890],[39.933747,32.843328],[39.932717,32.845109],[39.932317,32.845961],[39.932539,32.845967],[39.934106,32.843139],[39.934843,32.841819],[39.935751,32.840896],[39.936437,32.840192],[39.937128,32.839457],[39.937510,32.839562],[39.938682,32.840632],[39.937876,32.841935],[39.937553,32.842388],[39.936730,32.843788],[39.936527,32.844132],[39.936360,32.844392],[39.935871,32.845322],[39.935675,32.846101],[39.935195,32.848708],[39.934592,32.851815],[39.934088,32.854480],[39.933860,32.855341],[39.933648,32.855263],[39.933639,32.854981],[39.933926,32.854579],[39.934085,32.853926],[39.934666,32.853921],[39.936200,32.854352],[39.937011,32.854372],[39.937444,32.854274],[39.938526,32.852574],[39.939880,32.850898],[39.940121,32.850609],[39.939820,32.850008],[39.938403,32.847197]
+    ];
+    const routeGuide=L.polyline(route,{color:'#b7ff3c',weight:2,opacity:.55,dashArray:'7 9'}).addTo(map);
+    document.querySelector('.mission p').textContent='Hedefi sokak ağı üzerinde takip et';
+    const routeLayer=L.polyline([], {color:'#67dce2',weight:3,opacity:.9}).addTo(map);
+
+    const droneIcon=L.divIcon({className:'',html:'<div class="drone-marker"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="#b7ff3c" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="#b7ff3c"/></svg></div>',iconSize:[38,38],iconAnchor:[19,19]});
+    const vehicleIcon=L.divIcon({className:'',html:'<div class="vehicle-marker"></div>',iconSize:[14,14],iconAnchor:[7,7]});
+    const drone=L.marker([39.9258,32.8340],{icon:droneIcon,zIndexOffset:1000}).addTo(map);
+    const vehicle=L.marker(route[0],{icon:vehicleIcon,zIndexOffset:900}).addTo(map);
+    vehicle.bindTooltip('HEDEF // V-204',{permanent:false,direction:'top',className:'route-label',offset:[0,-8]});
+
+    let running=false,following=true,last=performance.now();
+    let battery=96,score=0,elapsed=0;
+    function lerp(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t]}
+    function haversine(a,b){
+      const R=6371000,toRad=x=>x*Math.PI/180,dLat=toRad(b[0]-a[0]),dLon=toRad(b[1]-a[1]);
+      const x=Math.sin(dLat/2)**2+Math.cos(toRad(a[0]))*Math.cos(toRad(b[0]))*Math.sin(dLon/2)**2;
+      return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+    }
+    function tick(now){
+      const dt=Math.min((now-last)/1000,.05);last=now;
+      if(running){
+        elapsed+=dt;
+        const routeProgress=Math.min(elapsed/28,1)*(route.length-1);
+        const segment=Math.min(Math.floor(routeProgress),route.length-2);
+        const fraction=routeProgress-segment;
+        const pos=lerp(route[segment],route[segment+1],fraction);
+        vehicle.setLatLng(pos);
+        routeLayer.setLatLngs(route.slice(0,segment+1).concat([pos]));
+        const d=haversine(drone.getLatLng(),pos);
+        document.getElementById('distance').textContent=Math.round(d)+' m';
+        score=Math.max(0,Math.min(100,100-d*.55));
+        document.getElementById('score').textContent=Math.round(score)+'%';
+        document.getElementById('progress').style.width=Math.min(100,(elapsed/28)*100)+'%';
+        battery=Math.max(10,96-elapsed*.12);
+        document.getElementById('battery').textContent=Math.floor(battery)+'%';
+        document.getElementById('batteryBar').style.width=battery+'%';
+        const sig=Math.max(72,92-Math.round(d*.08));
+        document.getElementById('signal').textContent=sig+'%';
+        document.getElementById('signalBar').style.width=sig+'%';
+        document.getElementById('altitude').textContent=(142+Math.round(Math.sin(elapsed*.7)*4))+' m';
+        if(following) map.panTo(pos,{animate:true,duration:.25});
+        if(elapsed>=28){running=false;document.getElementById('startBtn').textContent='YENİDEN BAŞLAT';elapsed=28}
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    document.getElementById('startBtn').onclick=e=>{
+      if(!running){
+        if(elapsed>=28){elapsed=0;battery=96;routeLayer.setLatLngs([]);vehicle.setLatLng(route[0])}
+        running=true;e.target.textContent='GÖREVDEVAM EDİYOR';
+      }
+    };
+    document.getElementById('followBtn').onclick=e=>{
+      following=!following;e.target.style.color=following?'#b7ff3c':'';
+    };
+    document.getElementById('recenterBtn').onclick=()=>map.fitBounds([drone.getLatLng(),vehicle.getLatLng()],{padding:[100,100],maxZoom:16});
+    document.querySelectorAll('[data-layer]').forEach(btn=>btn.onclick=()=>{
+      document.querySelectorAll('[data-layer]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+      if(btn.dataset.layer==='satellite'){map.removeLayer(streets);map.addLayer(satellite)}
+      else{map.removeLayer(satellite);map.addLayer(streets)}
+    });
+    document.getElementById('recenterBtn').click();
+    setInterval(()=>{
+      const d=new Date();
+      document.getElementById('clock').textContent='LIVE '+d.toLocaleTimeString('tr-TR',{hour12:false});
+    },1000);
+  </script>
+</body>
+</html>
