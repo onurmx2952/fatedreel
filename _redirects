@@ -29,3 +29,5 @@
 
 /ucus /ucus/ 301
 /torrent /torrent/ 301
+/drone /drone/ 301
+/drone/* /drone/index.html 200
