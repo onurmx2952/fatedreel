@@ -42,7 +42,7 @@ export function normalize(item) {
   const hash = String(item.info_hash || '');
   if (!/^[a-f0-9]{40}$/i.test(hash) || !/^\d+$/.test(String(item.id))) return null;
   const category = Number(item.category);
-  if ((category >= 100 && category < 200) || (category >= 500 && category < 600) || isSeries(item)) return null;
+  if ((category >= 100 && category < 200) || category===203 || (category >= 500 && category < 600) || isSeries(item)) return null;
   const number = value => Math.max(0,Number(value)||0);
   return {id:String(item.id),hash:hash.toUpperCase(),name:String(item.name||'İsimsiz torrent').slice(0,600),
     seeders:number(item.seeders),leechers:number(item.leechers),size:number(item.size),files:number(item.num_files),
