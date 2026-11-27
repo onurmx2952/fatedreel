@@ -9,6 +9,12 @@ const size = bytes => {if(!bytes)return '0 B';const i=Math.min(4,Math.floor(Math
 const magnet=item=>`magnet:?xt=urn:btih:${item.hash}&dn=${encodeURIComponent(item.name)}&tr=${encodeURIComponent('udp://tracker.opentrackr.org:1337/announce')}&tr=${encodeURIComponent('udp://open.stealth.si:80/announce')}`;
 const node=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;};
 let items=[],busy=false,detailVersion=0,currentMagnet='';
+const metadataCache=new Map();
+function metadata(item){
+  const key=item.imdb||item.name;
+  if(!metadataCache.has(key))metadataCache.set(key,api({action:'detail',imdb:item.imdb,title:item.name,type:'movie'}).then(data=>data.meta).catch(()=>{metadataCache.delete(key);return null;}));
+  return metadataCache.get(key);
+}
 async function api(data){const response=await fetch('/api/torrent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(25000)});const body=await response.json();if(!response.ok)throw Error(body.error||'Veri alınamadı.');return body;}
 function status(title,description,error=false){const el=$('status');el.hidden=false;el.classList.toggle('error',error);el.replaceChildren(node('div','empty-mark',error?'!':'◎'),node('h3','',title),node('p','',description));}
 form.addEventListener('input',()=>{if(!busy)$('filter-hint').textContent='Filtreler hazır. Uygulamak için Listeyi getir’e bas.';});
@@ -33,21 +39,34 @@ form.addEventListener('submit',async event=>{
 });
 function render(){const fragment=document.createDocumentFragment();items.forEach((item,index)=>{
   const row=node('article','torrent-row');row.append(node('span','rank',String(index+1).padStart(2,'0')));
+  const thumbnail=node('button','thumbnail',Math.floor(item.category/100)===2?'▻':'◇');thumbnail.type='button';thumbnail.setAttribute('aria-label',`${item.name} detayları`);thumbnail.addEventListener('click',()=>openDetail(item));
   const title=node('div','row-title'),button=node('button','torrent-name',item.name);button.type='button';button.addEventListener('click',()=>openDetail(item));title.append(button,node('div','row-meta',`${categoryName(item)} · ${date(item.added)} · ${size(item.size)}`));
+  const rating=node('div','imdb-rating',Math.floor(item.category/100)===2?'IMDb · yükleniyor…':'IMDb · uygulanmaz');title.append(rating);
+  row._metadata={thumbnail,rating,item};
   const peers=node('div','peers');peers.append(node('b','',number(item.seeders)),node('small','','paylaşan'),node('small','',`${number(item.leechers)} indiren`));
   const bytes=node('div','size',size(item.size));bytes.append(node('small','',item.files?`${number(item.files)} dosya`:'Dosya sayısı yok'));
   const link=node('a','magnet','İndir');link.href=magnet(item);link.setAttribute('aria-label',`${item.name} magnet ile indir`);link.title='Torrent uygulamasında aç';
-  row.append(title,peers,bytes,link);fragment.append(row);
-});$('list').replaceChildren(fragment);}
+  row.append(thumbnail,title,peers,bytes,link);fragment.append(row);
+});$('list').replaceChildren(fragment);enrichRows([...$('list').children]);}
+async function enrichRows(rows){
+  const queue=rows.filter(row=>Math.floor(row._metadata.item.category/100)===2);
+  await Promise.all(Array.from({length:Math.min(4,queue.length)},async()=>{
+    while(queue.length){const row=queue.shift();if(!row.isConnected)continue;
+      const {item,thumbnail,rating}=row._metadata,meta=await metadata(item);if(!row.isConnected)continue;
+      rating.textContent=meta?.rating?`IMDb ${meta.rating} / 10`:'IMDb · puan bulunamadı';rating.classList.toggle('rated',Boolean(meta?.rating));
+      if(meta?.poster){const img=node('img');img.alt=`${meta.name||item.name} afişi`;img.referrerPolicy='no-referrer';img.addEventListener('error',()=>{thumbnail.replaceChildren(node('span','','▻'));thumbnail.title='Görsel bulunamadı';},{once:true});img.src=meta.poster;thumbnail.replaceChildren(img);}else thumbnail.title='Görsel bulunamadı';
+    }
+  }));
+}
 function fallbackArt(item){$('art').replaceChildren();const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');svg.innerHTML='<rect x="16" y="12" width="68" height="76" rx="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M30 12v76M70 12v76M16 30h14m-14 20h14m-14 20h14m40-40h14M70 50h14M70 70h14M44 38l17 12-17 12z" fill="none" stroke="currentColor" stroke-width="2"/>';$('art').append(svg,node('span','',categoryName(item)),node('span','','Görsel bulunamadı'));}
 async function openDetail(item){
-  const version=++detailVersion,hasVideo=Math.floor(item.category/100)===2;currentMagnet=magnet(item);$('detail-title').textContent=item.name;$('detail-category').textContent=categoryName(item);$('release-name').textContent='';$('description').textContent='';$('copy-status').textContent='';$('metadata-state').textContent=hasVideo?'Film / dizi bilgileri alınıyor…':'Bu torrent için film / dizi görseli bulunmuyor.';
+  const version=++detailVersion,hasVideo=Math.floor(item.category/100)===2;currentMagnet=magnet(item);$('detail-title').textContent=item.name;$('detail-category').textContent=categoryName(item);$('release-name').textContent='';$('description').textContent='';$('copy-status').textContent='';$('metadata-state').textContent=hasVideo?'Film bilgileri alınıyor…':'Bu torrent için film görseli bulunmuyor.';
   $('detail-magnet').href=currentMagnet;$('source-link').href=`https://thepiratebay.org/description.php?id=${item.id}`;$('info-hash').textContent=`Info hash: ${item.hash}`;fallbackArt(item);
   const facts=[['Paylaşan (seeder)',number(item.seeders)],['İndiren (leecher)',number(item.leechers)],['Boyut',size(item.size)],['Dosya sayısı',item.files?number(item.files):'Kaynak belirtmiyor'],['Eklenme tarihi',date(item.added)],['Yükleyen',item.uploader]];
   $('facts').replaceChildren(...facts.map(([key,value])=>{const fact=node('div','fact');fact.append(node('small','',key),node('span','',value));return fact;}));
   dialog.showModal();
   if(!hasVideo)return;
-  try{const {meta}=await api({action:'detail',imdb:item.imdb,title:item.name,type:[205,208,212].includes(item.category)||/\bS\d{1,2}(?:E\d{1,3})?\b/i.test(item.name)?'series':'movie'});if(version!==detailVersion||!dialog.open)return;if(!meta){$('metadata-state').textContent='Ek bilgi bulunamadı.';return;}
+  try{const meta=await metadata(item);if(version!==detailVersion||!dialog.open)return;if(!meta){$('metadata-state').textContent='Ek bilgi bulunamadı.';return;}
     $('detail-title').textContent=meta.name||item.name;$('release-name').textContent=item.name;$('description').textContent=meta.description||'Açıklama bulunamadı.';$('metadata-state').textContent=[meta.year,meta.rating?`IMDb ${meta.rating}`:'',meta.genres.join(' / ')].filter(Boolean).join(' · ');
     if(meta.poster){const img=node('img');img.alt=`${meta.name||item.name} afişi`;img.referrerPolicy='no-referrer';img.addEventListener('error',()=>{if(version===detailVersion)fallbackArt(item);},{once:true});img.src=meta.poster;$('art').replaceChildren(img);}
   }catch{if(version===detailVersion)$('metadata-state').textContent='Ek bilgi alınamadı. Torrent bilgileri ve magnet bağlantısı kullanılabilir.';}

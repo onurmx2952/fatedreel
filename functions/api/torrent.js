@@ -1,4 +1,8 @@
-const CATEGORIES = [100,101,102,104,199,200,201,202,205,207,208,209,211,212,299,300,301,302,400,401,600,601];
+const CATEGORIES = [100,101,102,104,199,200,201,202,207,209,211,299,300,301,302,400,401,600,601];
+export function isSeries(item) {
+  if (Math.floor(Number(item.category)/100)!==2) return false;
+  return [205,208,212].includes(Number(item.category)) || /\b(?:s\d{1,3}(?:[ ._-]*e\d{1,3})?|\d{1,2}x\d{2,3}|season[ ._-]*\d+|episode[ ._-]*\d+|complete[ ._-]*(?:series|seasons?)|mini[ ._-]*series)\b|\b\d+[ ._-]*(?:sezon|bölüm)\b/i.test(String(item.name||''));
+}
 const HEADERS = {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
 const json = (body,status=200) => new Response(JSON.stringify(body),{status,headers:HEADERS});
 async function upstream(url) {
@@ -10,7 +14,7 @@ export function normalize(item) {
   const hash = String(item.info_hash || '');
   if (!/^[a-f0-9]{40}$/i.test(hash) || !/^\d+$/.test(String(item.id))) return null;
   const category = Number(item.category);
-  if (category >= 500 && category < 600) return null;
+  if ((category >= 500 && category < 600) || isSeries(item)) return null;
   const number = value => Math.max(0,Number(value)||0);
   return {id:String(item.id),hash:hash.toUpperCase(),name:String(item.name||'İsimsiz torrent').slice(0,600),
     seeders:number(item.seeders),leechers:number(item.leechers),size:number(item.size),files:number(item.num_files),
@@ -35,7 +39,8 @@ export async function onRequestPost({request}) {
     if (Number(request.headers.get('content-length'))>4096) return json({error:'İstek çok büyük.'},413);
     const input = await request.json();
     if (input.action === 'detail') {
-      const type = input.type==='series'?'series':'movie';
+      if (input.type==='series' || isSeries({category:200,name:input.title})) return json({meta:null});
+      const type = 'movie';
       let imdb = input.imdb;
       if (!/^tt\d{6,12}$/.test(imdb||'')) {
         const title=String(input.title||'').slice(0,180).replace(/[._]/g,' ').split(/\b(?:s\d{1,2}(?:e\d{1,3})?|(?:19|20)\d{2}|2160p|1080p|720p|480p|WEB|BluRay|HDTV)\b/i)[0].replace(/\[[^\]]*\]/g,'').trim();
