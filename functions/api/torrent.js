@@ -1,4 +1,32 @@
-const CATEGORIES = [100,101,102,104,199,200,201,202,207,209,211,299,300,301,302,400,401,600,601];
+const CATEGORIES = [200,201,202,207,209,211,299,300,301,302,400,401,600,601];
+const ratingCache = new Map();
+export async function readRatings(stream, ids) {
+  const wanted=new Set(ids), found={}, reader=stream.pipeThrough(new TextDecoderStream()).getReader();
+  const pattern=new RegExp(`(?:^|\\n)(${ids.join('|')})\\t([0-9.]+)\\t([0-9]+)(?=\\n|$)`,'g');
+  let pending='',bytes=0;
+  try {
+    while(true){const {value,done}=await reader.read();pending+=value||'';bytes+=(value||'').length;
+      if(bytes>65000000)throw Error('Ratings data exceeds limit');
+      const end=done?pending.length:pending.lastIndexOf('\n')+1;
+      const complete=pending.slice(0,end);pending=pending.slice(end);pattern.lastIndex=0;
+      for(const match of complete.matchAll(pattern)){const rating=Number(match[2]);if(rating>0&&rating<=10){found[match[1]]={rating:String(rating),votes:Number(match[3])};wanted.delete(match[1]);}}
+      if(done||!wanted.size)break;
+    }
+  } finally {reader.cancel().catch(()=>{});}
+  return found;
+}
+async function officialRatings(ids) {
+  const now=Date.now(),ratings={},missing=ids.filter(id=>{const cached=ratingCache.get(id);if(cached&&now-cached.checkedAt<21600000){ratings[id]=cached;return false;}return true;});
+  if(missing.length){
+    const response=await fetch('https://datasets.imdbws.com/title.ratings.tsv.gz',{signal:AbortSignal.timeout(20000),cf:{cacheEverything:true,cacheTtl:21600}});
+    if(!response.ok||!response.body)throw Error('IMDb ratings unavailable');
+    const stream=response.body.pipeThrough(new DecompressionStream('gzip'));
+    const found=await readRatings(stream,missing),asOf=response.headers.get('last-modified');
+    if(ratingCache.size>1000)ratingCache.clear();
+    for(const id of missing){const entry={...(found[id]||{rating:null,votes:null}),asOf,checkedAt:now,source:'IMDb dataset'};ratings[id]=entry;ratingCache.set(id,entry);}
+  }
+  return ratings;
+}
 export function isSeries(item) {
   if (Math.floor(Number(item.category)/100)!==2) return false;
   return [205,208,212].includes(Number(item.category)) || /\b(?:s\d{1,3}(?:[ ._-]*e\d{1,3})?|\d{1,2}x\d{2,3}|season[ ._-]*\d+|episode[ ._-]*\d+|complete[ ._-]*(?:series|seasons?)|mini[ ._-]*series)\b|\b\d+[ ._-]*(?:sezon|bölüm)\b/i.test(String(item.name||''));
@@ -14,7 +42,7 @@ export function normalize(item) {
   const hash = String(item.info_hash || '');
   if (!/^[a-f0-9]{40}$/i.test(hash) || !/^\d+$/.test(String(item.id))) return null;
   const category = Number(item.category);
-  if ((category >= 500 && category < 600) || isSeries(item)) return null;
+  if ((category >= 100 && category < 200) || (category >= 500 && category < 600) || isSeries(item)) return null;
   const number = value => Math.max(0,Number(value)||0);
   return {id:String(item.id),hash:hash.toUpperCase(),name:String(item.name||'İsimsiz torrent').slice(0,600),
     seeders:number(item.seeders),leechers:number(item.leechers),size:number(item.size),files:number(item.num_files),
@@ -38,6 +66,10 @@ export async function onRequestPost({request}) {
   try {
     if (Number(request.headers.get('content-length'))>4096) return json({error:'İstek çok büyük.'},413);
     const input = await request.json();
+    if(input.action==='ratings'){
+      if(!Array.isArray(input.ids)||!input.ids.length||input.ids.length>20||input.ids.some(id=>typeof id!=='string'||!/^tt\d{6,12}$/.test(id)))return json({error:'Geçersiz IMDb kimlikleri.'},400);
+      return json({ratings:await officialRatings([...new Set(input.ids)])});
+    }
     if (input.action === 'detail') {
       if (input.type==='series' || isSeries({category:200,name:input.title})) return json({meta:null});
       const type = 'movie';
@@ -47,7 +79,8 @@ export async function onRequestPost({request}) {
         if (title.length<2) return json({meta:null});
         const search=await upstream(`https://v3-cinemeta.strem.io/catalog/${type}/top/search=${encodeURIComponent(title)}.json`);
         const simplify=value=>String(value||'').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
-        const matched=(search.metas||[]).find(x=>simplify(x.name)===simplify(title));
+        const year=String(input.title||'').match(/\b((?:19|20)\d{2})\b/)?.[1];
+        const matched=(search.metas||[]).find(x=>simplify(x.name)===simplify(title)&&(!year||String(x.releaseInfo||'').startsWith(year)));
         if (!matched || !/^tt\d{6,12}$/.test(matched.id)) return json({meta:null});
         imdb=matched.id;
       }
@@ -55,11 +88,11 @@ export async function onRequestPost({request}) {
       const meta = data.meta;
       if (!meta) return json({meta:null});
       const safeImage = url => {try {const parsed=new URL(url); return parsed.protocol==='https:'?parsed.href:null;} catch {return null;}};
-      return json({meta:{name:String(meta.name||''),description:String(meta.description||'').slice(0,6000),poster:safeImage(meta.poster),year:String(meta.releaseInfo||''),rating:String(meta.imdbRating||''),genres:Array.isArray(meta.genres)?meta.genres.slice(0,8):[]}});
+      return json({meta:{imdb,name:String(meta.name||''),description:String(meta.description||'').slice(0,6000),poster:safeImage(meta.poster),year:String(meta.releaseInfo||''),rating:String(meta.imdbRating||''),genres:Array.isArray(meta.genres)?meta.genres.slice(0,8):[]}});
     }
     const period = input.period || 'week';
     const category = String(input.category||'all');
-    if (!['day','week','month'].includes(period) || !['all','1','2','3','4','6'].includes(category)) return json({error:'Geçersiz filtre.'},400);
+    if (!['day','week','month'].includes(period) || !['all','2','3','4','6'].includes(category)) return json({error:'Geçersiz filtre.'},400);
     const query = String(input.query||'').trim();
     if (query.length>100) return json({error:'Arama en fazla 100 karakter olabilir.'},400);
     const urls = query ? [`https://apibay.org/q.php?q=${encodeURIComponent(query)}&cat=${category==='all'?'0':Number(category)*100}`] :

@@ -2,7 +2,7 @@ const $ = id => document.getElementById(id);
 const form=$('controls'), dialog=$('detail');
 const number = value => new Intl.NumberFormat('tr-TR').format(value);
 const date = value => new Intl.DateTimeFormat('tr-TR',{timeZone:'Europe/Istanbul',day:'numeric',month:'short',year:'numeric'}).format(new Date(value*1000));
-const labels={1:'Müzik / ses',2:'Video',3:'Yazılım',4:'Oyun',6:'Diğer'};
+const labels={2:'Video',3:'Yazılım',4:'Oyun',6:'Diğer'};
 const periodLabels={day:'Bugün',week:'Son 7 gün',month:'Son 30 gün'};
 const categoryName=item=>labels[Math.floor(item.category/100)]||'Diğer';
 const size = bytes => {if(!bytes)return '0 B';const i=Math.min(4,Math.floor(Math.log(bytes)/Math.log(1024)));return `${(bytes/1024**i).toLocaleString('tr-TR',{maximumFractionDigits:1})} ${['B','KB','MB','GB','TB'][i]}`;};
@@ -10,6 +10,13 @@ const magnet=item=>`magnet:?xt=urn:btih:${item.hash}&dn=${encodeURIComponent(ite
 const node=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;};
 let items=[],busy=false,detailVersion=0,currentMagnet='';
 const metadataCache=new Map();
+const ratingRequests=new Map();
+async function loadRatings(ids){
+  ids=[...new Set(ids)].filter(id=>/^tt\d{6,12}$/.test(id||''));
+  const missing=ids.filter(id=>!ratingRequests.has(id));
+  if(missing.length){const request=api({action:'ratings',ids:missing}).then(data=>data.ratings);for(const id of missing)ratingRequests.set(id,request.then(data=>data[id]).catch(()=>{ratingRequests.delete(id);return null;}));}
+  return Object.fromEntries(await Promise.all(ids.map(async id=>[id,await ratingRequests.get(id)])));
+}
 function metadata(item){
   const key=item.imdb||item.name;
   if(!metadataCache.has(key))metadataCache.set(key,api({action:'detail',imdb:item.imdb,title:item.name,type:'movie'}).then(data=>data.meta).catch(()=>{metadataCache.delete(key);return null;}));
@@ -53,10 +60,18 @@ async function enrichRows(rows){
   await Promise.all(Array.from({length:Math.min(4,queue.length)},async()=>{
     while(queue.length){const row=queue.shift();if(!row.isConnected)continue;
       const {item,thumbnail,rating}=row._metadata,meta=await metadata(item);if(!row.isConnected)continue;
-      rating.textContent=meta?.rating?`IMDb ${meta.rating} / 10`:'IMDb · puan bulunamadı';rating.classList.toggle('rated',Boolean(meta?.rating));
+      row._metadata.meta=meta;
+      rating.textContent=meta?.rating?`IMDb ${meta.rating} / 10`:meta?.imdb?'IMDb · puan kontrol ediliyor…':'IMDb · film eşleşmesi bulunamadı';rating.classList.toggle('rated',Boolean(meta?.rating));
       if(meta?.poster){const img=node('img');img.alt=`${meta.name||item.name} afişi`;img.referrerPolicy='no-referrer';img.addEventListener('error',()=>{thumbnail.replaceChildren(node('span','','▻'));thumbnail.title='Görsel bulunamadı';},{once:true});img.src=meta.poster;thumbnail.replaceChildren(img);}else thumbnail.title='Görsel bulunamadı';
     }
   }));
+  const unresolved=rows.filter(row=>row.isConnected&&row._metadata.meta?.imdb&&!row._metadata.meta.rating);
+  if(unresolved.length){const ratings=await loadRatings(unresolved.map(row=>row._metadata.meta.imdb));
+    for(const row of unresolved){if(!row.isConnected)continue;const {meta,rating}=row._metadata,official=ratings[meta.imdb];
+      if(official?.rating){meta.rating=official.rating;meta.ratingSource=official.source;meta.ratingAsOf=official.asOf;rating.textContent=`IMDb ${meta.rating} / 10`;rating.classList.add('rated');rating.title=`IMDb veri dosyası · ${new Date(official.asOf||official.checkedAt).toLocaleDateString('tr-TR')}`;}
+      else rating.textContent=official?'IMDb · veri dosyasında puan bulunamadı':'IMDb · puan kaynağına ulaşılamadı';
+    }
+  }
 }
 function fallbackArt(item){$('art').replaceChildren();const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');svg.innerHTML='<rect x="16" y="12" width="68" height="76" rx="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M30 12v76M70 12v76M16 30h14m-14 20h14m-14 20h14m40-40h14M70 50h14M70 70h14M44 38l17 12-17 12z" fill="none" stroke="currentColor" stroke-width="2"/>';$('art').append(svg,node('span','',categoryName(item)),node('span','','Görsel bulunamadı'));}
 async function openDetail(item){
@@ -69,6 +84,7 @@ async function openDetail(item){
   try{const meta=await metadata(item);if(version!==detailVersion||!dialog.open)return;if(!meta){$('metadata-state').textContent='Ek bilgi bulunamadı.';return;}
     $('detail-title').textContent=meta.name||item.name;$('release-name').textContent=item.name;$('description').textContent=meta.description||'Açıklama bulunamadı.';$('metadata-state').textContent=[meta.year,meta.rating?`IMDb ${meta.rating}`:'',meta.genres.join(' / ')].filter(Boolean).join(' · ');
     if(meta.poster){const img=node('img');img.alt=`${meta.name||item.name} afişi`;img.referrerPolicy='no-referrer';img.addEventListener('error',()=>{if(version===detailVersion)fallbackArt(item);},{once:true});img.src=meta.poster;$('art').replaceChildren(img);}
+    if(!meta.rating&&meta.imdb){const ratings=await loadRatings([meta.imdb]);if(version!==detailVersion||!dialog.open)return;const official=ratings[meta.imdb];if(official?.rating){meta.rating=official.rating;$('metadata-state').textContent=[meta.year,`IMDb ${meta.rating}`,meta.genres.join(' / ')].filter(Boolean).join(' · ');}else $('metadata-state').append(node('span','',official?' · IMDb veri dosyasında puan bulunamadı':' · IMDb puan kaynağına ulaşılamadı'));}
   }catch{if(version===detailVersion)$('metadata-state').textContent='Ek bilgi alınamadı. Torrent bilgileri ve magnet bağlantısı kullanılabilir.';}
 }
 $('close-detail').addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>detailVersion++);

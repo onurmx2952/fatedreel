@@ -6,15 +6,15 @@
   <title>Torrent Radar · FatedReel</title>
   <link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="style.css?v=2">
   <link rel="stylesheet" href="list.css?v=2">
-  <script src="app.js?v=2" defer></script>
+  <script src="app.js?v=3" defer></script>
 </head>
 <body>
   <header class="topbar"><a class="brand" href="/">fatedreel<span>/ torrent</span></a><a href="/icindekiler/">Tüm uygulamalar</a></header>
   <main>
-    <section class="intro"><div class="eyebrow"><span class="radar" aria-hidden="true"></span> TORRENT RADAR</div><h1>Paylaşılanları<br><span>keşfet.</span></h1><p>Yeni eklenen torrentler, en çok paylaşandan başlayarak.<br>Ne zaman taranacağına sen karar ver.</p><div class="mode">Diziler devre dışı · Otomatik tarama kapalı</div></section>
+    <section class="intro"><div class="eyebrow"><span class="radar" aria-hidden="true"></span> TORRENT RADAR</div><h1>Paylaşılanları<br><span>keşfet.</span></h1><p>Yeni eklenen torrentler, en çok paylaşandan başlayarak.<br>Ne zaman taranacağına sen karar ver.</p><div class="mode">Diziler ve müzikler devre dışı · Otomatik tarama kapalı</div></section>
     <form id="controls" class="controls">
       <fieldset><legend>Eklenme dönemi</legend><div class="periods"><label><input type="radio" name="period" value="day"><span>Bugün</span></label><label><input type="radio" name="period" value="week" checked><span>Bu hafta <small>7 gün</small></span></label><label><input type="radio" name="period" value="month"><span>Bu ay <small>30 gün</small></span></label></div></fieldset>
-      <div class="inputs"><label class="search-label" for="query">Torrent ara <span>isteğe bağlı</span><input id="query" type="search" maxlength="100" placeholder="Film, müzik, yazılım…" autocomplete="off"></label><label for="category">Kategori<select id="category"><option value="all">Tüm kategoriler</option><option value="2">Video</option><option value="1">Müzik / ses</option><option value="3">Yazılım</option><option value="4">Oyun</option><option value="6">Diğer</option></select></label><button id="fetch" class="primary" type="submit"><span class="button-icon" aria-hidden="true">◎</span><span id="fetch-label">Listeyi getir</span></button></div>
+      <div class="inputs"><label class="search-label" for="query">Torrent ara <span>isteğe bağlı</span><input id="query" type="search" maxlength="100" placeholder="Film, yazılım…" autocomplete="off"></label><label for="category">Kategori<select id="category"><option value="all">Tüm kategoriler</option><option value="2">Video</option><option value="3">Yazılım</option><option value="4">Oyun</option><option value="6">Diğer</option></select></label><button id="fetch" class="primary" type="submit"><span class="button-icon" aria-hidden="true">◎</span><span id="fetch-label">Listeyi getir</span></button></div>
       <p class="hint" id="filter-hint">Filtreler kendiliğinden veri çekmez. Hazır olduğunda Listeyi getir’e bas.</p>
     </form>
     <section class="results" aria-labelledby="results-title"><div class="section-heading"><div><div class="eyebrow">PAYLAŞAN SAYISINA GÖRE</div><h2 id="results-title">İlk 20 torrent</h2></div><span id="result-count">Henüz taranmadı</span></div>
@@ -22,7 +22,7 @@
       <div id="list" class="list"></div>
       <p id="source-note" class="source-note" hidden></p>
     </section>
-    <footer><p>Bu sıralama indirme sayısını değil, mevcut paylaşan (seeder) sayısını gösterir. Dünya genelinin tamamını kapsamaz; APIBay’in döndürdüğü sonuçlarla sınırlıdır. Bugün: Türkiye saatiyle gece yarısından itibaren.</p><p>Magnet bağlantıları cihazındaki torrent uygulamasını açar. Yalnızca indirme hakkına sahip olduğun içerikleri indir. Film afişleri ve IMDb puanları mevcutsa Cinemeta’dan gelir; eşleşme farklı bir sürüme ait olabilir.</p><span>FATEDREEL / TORRENT RADAR</span></footer>
+    <footer><p>Bu sıralama indirme sayısını değil, mevcut paylaşan (seeder) sayısını gösterir. Dünya genelinin tamamını kapsamaz; APIBay’in döndürdüğü sonuçlarla sınırlıdır. Bugün: Türkiye saatiyle gece yarısından itibaren.</p><p>Magnet bağlantıları cihazındaki torrent uygulamasını açar. Yalnızca indirme hakkına sahip olduğun içerikleri indir. Film afişleri Cinemeta’dan gelir. Eksik IMDb puanları IMDb’nin günlük veri dosyasıyla tamamlanır; eşleşme farklı bir sürüme ait olabilir.</p><span>FATEDREEL / TORRENT RADAR</span></footer>
   </main>
   <dialog id="detail" aria-labelledby="detail-title"><button id="close-detail" class="close" aria-label="Detayı kapat">×</button><div class="detail-grid"><div id="art" class="art"></div><div class="detail-copy"><div id="detail-category" class="eyebrow"></div><h2 id="detail-title"></h2><p id="release-name"></p><div id="metadata-state" role="status"></div><p id="description"></p><div id="facts" class="facts"></div><div class="detail-actions"><a id="detail-magnet" class="primary">Magnet ile indir</a><button id="copy-magnet">Magnet kopyala</button></div><p id="copy-status" role="status"></p><p class="download-hint">İndirmek için cihazında bir torrent uygulaması kurulu olmalı.</p><a id="source-link" target="_blank" rel="noopener noreferrer">Kaynak sayfası</a><p class="hash" id="info-hash"></p></div></div></dialog>
 </body>
